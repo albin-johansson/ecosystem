@@ -1,7 +1,7 @@
 using NUnit.Framework;
 using Assert = UnityEngine.Assertions.Assert;
 
-namespace Editor
+namespace Tests // Yes, this should be called Editor but that clashes with the assets
 {
   public sealed class DummyTest
   {
