@@ -1,13 +1,15 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.AI;
 
 public class RabbitBehaviour : MonoBehaviour
 {
     public Camera cam;
     public UnityEngine.AI.NavMeshAgent agent;
-    public Transform food;
+    public GameObject food;
     public LayerMask whatIsGround, whatIsFood;
+    public float hunger;
 
     public bool foodInSightRange;
     public float sightRange;
@@ -20,7 +22,7 @@ public class RabbitBehaviour : MonoBehaviour
 
     // Update is called once per frame
     private void ChaseFood(){
-        agent.SetDestination(food.position);
+        agent.SetDestination(food.transform.position);
     }
 
     // Update is called once per frame
@@ -39,4 +41,13 @@ public class RabbitBehaviour : MonoBehaviour
             }
         }
     }
+    private void OnTriggerEnter(Collider other){
+         if(other.tag =="Food"){
+             Debug.Log("Hit detected");
+              Destroy(other);
+         }
+         
+
+    }
+
 }

@@ -221,7 +221,7 @@ GameObject:
   - component: {fileID: 447044857}
   m_Layer: 6
   m_Name: Test Food
-  m_TagString: Untagged
+  m_TagString: Food
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -796,12 +796,26 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   cam: {fileID: 234426633}
   agent: {fileID: 1635138343}
-  food: {fileID: 447044853}
+  food: {fileID: 447044852}
   whatIsGround:
     serializedVersion: 2
     m_Bits: 24
   whatIsFood:
     serializedVersion: 2
     m_Bits: 64
+  hunger: 0
   foodInSightRange: 0
   sightRange: 5
+--- !u!65 &1635138345
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1635138342}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 0.2, y: 0.2, z: 0.2}
+  m_Center: {x: 0, y: 0.1, z: 0}
