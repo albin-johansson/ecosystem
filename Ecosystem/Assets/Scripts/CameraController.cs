@@ -1,66 +1,54 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
-public class CameraScript : MonoBehaviour
+public sealed class CameraController : MonoBehaviour
 {
-    // Update is called once per frame
-    private float x;
-    private float y;
-    private Vector3 rotateValue;
-    private float delta = 0.001f;
-    public float speed;
+  public float speed;
 
-    // Start is called before the first frame update
-    void Start()
+  private const float Delta = 0.001f;
+  private float _x;
+  private float _y;
+  private Vector3 _rotateValue;
+
+  private void Update()
+  {
+    if (Input.GetKey(KeyCode.Mouse1))
     {
-        
+      Rotate();
+      Translate();
+    }
+  }
+
+  private void Translate()
+  {
+    var currentTransform = transform;
+    if (Input.GetKey(KeyCode.W))
+    {
+      currentTransform.position += speed * Delta * currentTransform.forward;
     }
 
-    void Update()
+    if (Input.GetKey(KeyCode.S))
     {
-        if (Input.GetKey(KeyCode.Mouse1))
-        {
-            Rotate();
-            Translate();
-        }
-        
-        
+      currentTransform.position -= speed * Delta * currentTransform.forward;
     }
 
-    private void Translate()
+    if (Input.GetKey(KeyCode.D))
     {
-        // For efficiency reasons get transform once
-        var currentTransform = transform;
-        if (Input.GetKey(KeyCode.W))
-        {
-            currentTransform.position += speed * delta * currentTransform.forward;
-        }
-
-        if (Input.GetKey(KeyCode.S))
-        {
-            currentTransform.position -= speed * delta * currentTransform.forward;
-        }
-        
-        if (Input.GetKey(KeyCode.D))
-        {
-            currentTransform.position += speed * delta * currentTransform.right;
-        }
-
-        if (Input.GetKey(KeyCode.A))
-        {
-            currentTransform.position -= speed * delta * currentTransform.right;
-        }
+      currentTransform.position += speed * Delta * currentTransform.right;
     }
-    
-    private void Rotate()
+
+    if (Input.GetKey(KeyCode.A))
     {
-        y = Input.GetAxis("Mouse X");
-        x = Input.GetAxis("Mouse Y");
-        Debug.Log(x + ":" + y);
-        rotateValue = new Vector3(x, y * -1, 0);
-        // For efficiency reasons get transform once
-        var transform1 = transform;
-        transform1.eulerAngles = transform1.eulerAngles - rotateValue;
+      currentTransform.position -= speed * Delta * currentTransform.right;
     }
+  }
+
+  private void Rotate()
+  {
+    _y = Input.GetAxis("Mouse X");
+    _x = Input.GetAxis("Mouse Y");
+    _rotateValue = new Vector3(_x, _y * -1, 0);
+
+    var currentTransform = transform;
+    currentTransform.eulerAngles -= _rotateValue;
+  }
 }
