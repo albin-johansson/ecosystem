@@ -1,7 +1,7 @@
 using UnityEngine;
 using UnityEngine.AI;
 
-public class RabbitBehaviour : MonoBehaviour
+public sealed class RabbitBehaviour : MonoBehaviour
 {
   public NavMeshAgent navAgent;
   public GameObject food; // FIXME should not be hardcoded
