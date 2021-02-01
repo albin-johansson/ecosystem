@@ -2,7 +2,7 @@ using UnityEngine;
 
 public sealed class CameraController : MonoBehaviour
 {
-  public float speed = 8;
+  [SerializeField] private float speed = 8;
 
   private float _x;
   private float _y;
