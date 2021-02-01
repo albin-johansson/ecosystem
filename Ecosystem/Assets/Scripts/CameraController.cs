@@ -2,9 +2,8 @@ using UnityEngine;
 
 public sealed class CameraController : MonoBehaviour
 {
-  public float speed;
+  public float speed = 8;
 
-  private const float Delta = 0.001f;
   private float _x;
   private float _y;
   private Vector3 _rotateValue;
@@ -23,22 +22,22 @@ public sealed class CameraController : MonoBehaviour
     var currentTransform = transform;
     if (Input.GetKey(KeyCode.W))
     {
-      currentTransform.position += speed * Delta * currentTransform.forward;
+      currentTransform.position += speed * Time.deltaTime * currentTransform.forward;
     }
 
     if (Input.GetKey(KeyCode.S))
     {
-      currentTransform.position -= speed * Delta * currentTransform.forward;
+      currentTransform.position -= speed * Time.deltaTime * currentTransform.forward;
     }
 
     if (Input.GetKey(KeyCode.D))
     {
-      currentTransform.position += speed * Delta * currentTransform.right;
+      currentTransform.position += speed * Time.deltaTime * currentTransform.right;
     }
 
     if (Input.GetKey(KeyCode.A))
     {
-      currentTransform.position -= speed * Delta * currentTransform.right;
+      currentTransform.position -= speed * Time.deltaTime * currentTransform.right;
     }
   }
 
