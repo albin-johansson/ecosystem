@@ -40,19 +40,19 @@ public sealed class RabbitBehaviour : MonoBehaviour
     }
   }
 
-  private bool InSightRange(LayerMask mask)
+  private bool InSight(LayerMask mask)
   {
     return Physics.CheckSphere(transform.position, sightRange, mask);
   }
 
   private bool IsFoodInSight()
   {
-    return InSightRange(foodMask);
+    return InSight(foodMask);
   }
 
   private bool IsWaterInSight()
   {
-    return InSightRange(waterMask);
+    return InSight(waterMask);
   }
 
   private void SearchForFood()
