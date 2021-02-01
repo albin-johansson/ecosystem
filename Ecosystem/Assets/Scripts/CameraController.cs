@@ -7,6 +7,12 @@ public sealed class CameraController : MonoBehaviour
   private float _x;
   private float _y;
   private Vector3 _rotateValue;
+  private Transform _transform;
+
+  private void Start()
+  {
+    _transform = transform; // Cache reference for performance reasons
+  }
 
   private void Update()
   {
@@ -19,25 +25,24 @@ public sealed class CameraController : MonoBehaviour
 
   private void Translate()
   {
-    var currentTransform = transform;
     if (Input.GetKey(KeyCode.W))
     {
-      currentTransform.position += speed * Time.deltaTime * currentTransform.forward;
+      _transform.position += speed * Time.deltaTime * _transform.forward;
     }
 
     if (Input.GetKey(KeyCode.S))
     {
-      currentTransform.position -= speed * Time.deltaTime * currentTransform.forward;
+      _transform.position -= speed * Time.deltaTime * _transform.forward;
     }
 
     if (Input.GetKey(KeyCode.D))
     {
-      currentTransform.position += speed * Time.deltaTime * currentTransform.right;
+      _transform.position += speed * Time.deltaTime * _transform.right;
     }
 
     if (Input.GetKey(KeyCode.A))
     {
-      currentTransform.position -= speed * Time.deltaTime * currentTransform.right;
+      _transform.position -= speed * Time.deltaTime * _transform.right;
     }
   }
 
@@ -46,8 +51,6 @@ public sealed class CameraController : MonoBehaviour
     _y = Input.GetAxis("Mouse X");
     _x = Input.GetAxis("Mouse Y");
     _rotateValue = new Vector3(_x, _y * -1, 0);
-
-    var currentTransform = transform;
-    currentTransform.eulerAngles -= _rotateValue;
+    _transform.eulerAngles -= _rotateValue;
   }
 }
