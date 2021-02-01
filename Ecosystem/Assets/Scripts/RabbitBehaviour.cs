@@ -1,89 +1,109 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 
 public class RabbitBehaviour : MonoBehaviour
 {
-    public Camera cam;
-    public UnityEngine.AI.NavMeshAgent agent;
-    public GameObject food, water;
-    public LayerMask whatIsGround, whatIsFood, whatIsWater;
-    public double hunger, thirst;
-    public Vector3 walkPoint;
-    
-    
+  public NavMeshAgent navAgent;
+  public GameObject food; // FIXME should not be hardcoded
+  public GameObject water; // FIXME should not be hardcoded
 
-    public bool foodInSightRange, waterInSightRange;
-    public float sightRange;
+  [Tooltip("What is considered to be the ground")]
+  public LayerMask groundMask;
 
-    // Start is called before the first frame update
-    void Start()
+  [Tooltip("What is considered to be food")]
+  public LayerMask foodMask;
+
+  [Tooltip("What is considered to be water")]
+  public LayerMask waterMask;
+
+  public float sightRange = 5;
+
+  private double _hunger;
+  private double _thirst;
+
+  private void TargetRandomDestination()
+  {
+    if (navAgent.hasPath)
     {
-        hunger = 0;
-        thirst = 0;
+      return;
     }
 
-    
-    private void SearchFood(){
-        foodInSightRange = Physics.CheckSphere(transform.position, sightRange, whatIsFood);
-        if(foodInSightRange){
-            agent.SetDestination(food.transform.position);
-        } else {
-            Search();
-        }
-        
+    var randomX = Random.Range(-5f, 5f);
+    var randomZ = Random.Range(-5f, 5f);
+
+    var position = transform.position;
+    var destination = new Vector3(position.x + randomX, position.y, position.z + randomZ);
+
+    if (Physics.Raycast(destination, -transform.up, 2f, groundMask))
+    {
+      navAgent.SetDestination(destination);
+    }
+  }
+
+  private bool InSightRange(LayerMask mask)
+  {
+    return Physics.CheckSphere(transform.position, sightRange, mask);
+  }
+
+  private bool IsFoodInSight()
+  {
+    return InSightRange(foodMask);
+  }
+
+  private bool IsWaterInSight()
+  {
+    return InSightRange(waterMask);
+  }
+
+  private void SearchForFood()
+  {
+    if (IsFoodInSight())
+    {
+      navAgent.SetDestination(food.transform.position);
+    }
+    else
+    {
+      TargetRandomDestination();
+    }
+  }
+
+  private void SearchForWater()
+  {
+    if (IsWaterInSight())
+    {
+      navAgent.SetDestination(water.transform.position);
+    }
+    else
+    {
+      TargetRandomDestination();
+    }
+  }
+
+  private void Update()
+  {
+    _hunger += 0.1 * Time.deltaTime;
+    _thirst += 0.2 * Time.deltaTime;
+    if (_hunger > _thirst)
+    {
+      SearchForFood();
+    }
+    else
+    {
+      SearchForWater();
+    }
+  }
+
+  private void OnTriggerEnter(Collider other)
+  {
+    if (other.CompareTag("Food"))
+    {
+      Destroy(other);
+      _hunger = 0;
     }
 
-    private void SearchWater(){
-        waterInSightRange = Physics.CheckSphere(transform.position, sightRange, whatIsWater);
-        if(waterInSightRange){
-            agent.SetDestination(water.transform.position);
-        } else {
-            Search();
-        }
-         
+    if (other.CompareTag("Water"))
+    {
+      _thirst = 0;
     }
-
-    private void Search(){
-        if(!agent.hasPath){
-            float randomZ = Random.Range(-5f, 5f);
-            float randomX= Random.Range(-5f, 5f);
-
-            walkPoint = new Vector3(transform.position.x + randomX, transform.position.y, transform.position.z + randomZ);
-
-            if(Physics.Raycast(walkPoint, -transform.up, 2f, whatIsGround)){
-                agent.SetDestination(walkPoint);
-            }
-        }
-    }
-
-
-    
-    void Update()
-    {   
-        hunger += 0.1*Time.deltaTime;
-        thirst += 0.2*Time.deltaTime;
-        if(hunger > thirst){
-            SearchFood();
-        } else {
-            SearchWater();
-        }
-    }
-
-    private void OnTriggerEnter(Collider other){
-         if(other.tag =="Food"){
-             Debug.Log("Food detected");
-              Destroy(other);
-         }
-         
-          if(other.tag =="Water"){
-             Debug.Log("Water detected");
-             thirst = 0;
-         }
-
-        
-
-    }
-
+  }
 }
