@@ -8,6 +8,7 @@ public class CameraScript : MonoBehaviour
     private float x;
     private float y;
     private Vector3 rotateValue;
+    public float rotateSpeed;
     private float delta = 0.001f;
     public float speed;
 
@@ -61,6 +62,6 @@ public class CameraScript : MonoBehaviour
         rotateValue = new Vector3(x, y * -1, 0);
         // For efficiency reasons get transform once
         var transform1 = transform;
-        transform1.eulerAngles = transform1.eulerAngles - rotateValue;
+        transform1.eulerAngles = transform1.eulerAngles - rotateSpeed * rotateValue;
     }
 }
