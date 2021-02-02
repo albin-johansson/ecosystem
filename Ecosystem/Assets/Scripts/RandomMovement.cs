@@ -1,7 +1,7 @@
 using UnityEngine;
 using UnityEngine.AI;
 
-public sealed class RabbitBehaviour : MonoBehaviour
+public sealed class RandomMovement : MonoBehaviour
 {
   [SerializeField] private NavMeshAgent navAgent;
 
