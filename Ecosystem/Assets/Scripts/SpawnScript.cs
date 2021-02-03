@@ -14,17 +14,7 @@ public class SpawnScript : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        /*
-        if (Input.GetMouseButtonDown(0))
-        {
-            Vector3 mouseScreenPosition = Input.mousePosition;
-            Ray ray = Camera.main.ScreenPointToRay(mouseScreenPosition);
 
-            if (Physics.Raycast(ray, out RaycastHit hitInfo))
-            {
-                SpawnFoodAtPosition(hitInfo.point);
-            }
-        } */
         elapsedTime += Time.deltaTime;
         if (rate < elapsedTime)
         {
@@ -40,10 +30,5 @@ public class SpawnScript : MonoBehaviour
         }
 
     }
-/*
-    private void SpawnFoodAtPosition(Vector3 spawnPosition)
-    {
-        GameObject food = Instantiate(_foodPrefab, spawnPosition, Quaternion.identity);
-    }
-    */
+
 }
