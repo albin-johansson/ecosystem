@@ -438,6 +438,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1617623582}
     m_Modifications:
+    - target: {fileID: 4661445776295913065, guid: 00faeecdbe8954848879547c78257059, type: 3}
+      propertyPath: m_Layer
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 6765261209891845031, guid: 00faeecdbe8954848879547c78257059, type: 3}
       propertyPath: m_Name
       value: EcoRabbit
