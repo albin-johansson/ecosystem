@@ -2,14 +2,12 @@ using UnityEngine;
 
 public sealed class WaterConsumer : MonoBehaviour
 {
-  [SerializeField] private double rate = 0.02;
-  [SerializeField] private double threshold = 0.1;
-
+  [SerializeField] private Genom genom;
   private double Thirst { get; set; }
 
   private void Update()
   {
-    Thirst += rate * Time.deltaTime;
+    Thirst += genom.getThirstRate() * Time.deltaTime;
   }
 
   private void OnTriggerEnter(Collider other)
@@ -22,6 +20,6 @@ public sealed class WaterConsumer : MonoBehaviour
 
   internal bool IsThirsty()
   {
-    return Thirst > threshold;
+    return Thirst > genom.getThirstThreshold();
   }
 }

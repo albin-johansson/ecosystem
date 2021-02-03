@@ -1,6 +1,7 @@
+using UnityEditor;
 using UnityEngine;
 
-public abstract class Genom
+public abstract class Genom : MonoBehaviour
 {
     protected HungerGene hungerGene;
     protected ThirstGene thirstGene;

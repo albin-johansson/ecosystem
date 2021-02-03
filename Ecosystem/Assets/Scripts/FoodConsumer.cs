@@ -2,14 +2,13 @@ using UnityEngine;
 
 public sealed class FoodConsumer : MonoBehaviour
 {
-  [SerializeField] private double rate = 0.02;
-  [SerializeField] private double threshold = 0.1;
+  [SerializeField] private Genom genom;
 
   private double Hunger { get; set; }
 
   private void Update()
   {
-    Hunger += rate * Time.deltaTime;
+    Hunger += genom.getHungerRate() * Time.deltaTime;
   }
 
   private void OnTriggerEnter(Collider other)
@@ -23,6 +22,6 @@ public sealed class FoodConsumer : MonoBehaviour
 
   internal bool IsHungry()
   {
-    return Hunger > threshold;
+    return Hunger > genom.getHungerThreshold();
   }
 }
