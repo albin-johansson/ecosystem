@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Serialization;
 
-public class SpawnScript : MonoBehaviour
+public class SpawnOnTerrain : MonoBehaviour
 {
 
     [SerializeField] private GameObject prefab;

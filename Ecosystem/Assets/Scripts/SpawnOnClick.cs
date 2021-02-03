@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class OnClickSpawner : MonoBehaviour
+public class SpawnOnClick : MonoBehaviour
 {
 
     [SerializeField] private GameObject prefab;
