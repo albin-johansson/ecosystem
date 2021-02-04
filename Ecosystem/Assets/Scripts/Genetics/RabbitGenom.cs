@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Genetics;
 using UnityEngine;
 
 public class RabbitGenom : Genom
@@ -10,5 +11,6 @@ public class RabbitGenom : Genom
         thirstGene = new ThirstGene();
         visionGene = new VisionGene();
         speedGene = new SpeedGene();
+        sizeGene = new SizeGene();
     }
 }

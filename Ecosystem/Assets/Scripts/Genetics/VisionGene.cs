@@ -1,19 +1,23 @@
 using System.Collections;
 using System.Collections.Generic;
+using Genetics;
 using UnityEngine;
 
 public class VisionGene
 {
+    private double max;
+    private double min;
     private double radius;
 
-    public VisionGene()
+    public VisionGene() : this(5)
     {
-        radius = 1;
     }
 
-    public VisionGene(double radius)
+    public VisionGene(double r)
     {
-        this.radius = radius;
+        max = 10;
+        min = 1;
+        radius = GeneUtil.getValidVar(r, max, min);
     }
 
     public double getRadius()

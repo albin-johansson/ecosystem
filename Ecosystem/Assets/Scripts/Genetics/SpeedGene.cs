@@ -1,17 +1,21 @@
+using Genetics;
 using UnityEngine;
 
 public class SpeedGene
 {
+    private double max;
+    private double min;
     private double factor;
 
-    public SpeedGene()
+    public SpeedGene() : this(1)
     {
-        factor = 1;
     }
 
     public SpeedGene(double speedFactor)
     {
-        this.factor = speedFactor;
+        max = 2;
+        min = 1;
+        factor = GeneUtil.getValidVar(speedFactor, max, min);
     }
 
     public double getSpeedFactor()
