@@ -16,7 +16,6 @@ public sealed class PreyConsumer : MonoBehaviour
   {
     if (other.GetComponent<Prey>() != null)
     {
-      print("PreyConsumer collided with prey");
       Destroy(other.gameObject);
       Hunger = 0;
     }
