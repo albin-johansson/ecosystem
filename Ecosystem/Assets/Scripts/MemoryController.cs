@@ -2,9 +2,9 @@ using System;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class MemoryController : MonoBehaviour
+public sealed class MemoryController : MonoBehaviour
 {
-  private int capacity = 5;
+  private const int Capacity = 5;
 
   public enum Desire
   {
@@ -16,11 +16,11 @@ public class MemoryController : MonoBehaviour
   }
 
   private List<(Desire, GameObject)> _memory;
-  private int temp = 0;
+  private int _nextMemoryLocation;
 
   private void Start()
   {
-    _memory = new List<(Desire, GameObject)>(capacity);
+    _memory = new List<(Desire, GameObject)>(Capacity);
   }
 
   //Save gameobject and its "Desire" identifier as a tuple to _memory
@@ -40,20 +40,20 @@ public class MemoryController : MonoBehaviour
       res = Desire.Water;
     }
 
-    _memory.Insert(temp, (res, other.gameObject));
-    temp++;
-    if (temp > 4) temp = 0;
+    _memory.Insert(_nextMemoryLocation, (res, other.gameObject));
+    _nextMemoryLocation++;
+    if (_nextMemoryLocation > 4) _nextMemoryLocation = 0;
   }
 
   //Get a list of all objects with the same Desire as asked for in res
   public List<GameObject> GetFromMemory(Enum res)
   {
     List<GameObject> list = new List<GameObject>();
-    foreach ((Desire d, GameObject g) in _memory)
+    foreach (var (desire, memoryGameObject) in _memory)
     {
-      if (d.Equals(res))
+      if (desire.Equals(res))
       {
-        list.Add(g);
+        list.Add(memoryGameObject);
       }
     }
 

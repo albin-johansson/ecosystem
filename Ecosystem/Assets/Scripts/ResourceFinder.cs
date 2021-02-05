@@ -17,7 +17,7 @@ public sealed class ResourceFinder : MonoBehaviour
 
   private void Update()
   {
-    SetPriority();
+    UpdatePriority();
     CheckMemory();
   }
 
@@ -45,7 +45,7 @@ public sealed class ResourceFinder : MonoBehaviour
   }
 
   //Sets priority, needs to be worked on to get a better flow
-  private void SetPriority()
+  private void UpdatePriority()
   {
     // Hunger has implicit priority
     if (foodConsumer.IsHungry())
