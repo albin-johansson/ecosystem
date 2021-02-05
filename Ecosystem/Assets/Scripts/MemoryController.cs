@@ -5,15 +5,6 @@ public sealed class MemoryController : MonoBehaviour
 {
   private const int Capacity = 5;
 
-  public enum Desire
-  {
-    Water,
-    Food,
-    Prey,
-    Idle,
-    Nothing
-  }
-
   private List<(Desire, GameObject)> _memory;
   private int _nextMemoryLocation;
 

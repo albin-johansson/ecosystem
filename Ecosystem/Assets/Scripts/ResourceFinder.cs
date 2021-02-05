@@ -11,7 +11,7 @@ public sealed class ResourceFinder : MonoBehaviour
 
   private bool _hasTarget = false;
 
-  private MemoryController.Desire _priority = MemoryController.Desire.Idle;
+  private Desire _priority = Desire.Idle;
 
   private void Update()
   {
@@ -52,18 +52,18 @@ public sealed class ResourceFinder : MonoBehaviour
     // Hunger has implicit priority
     if (foodConsumer.IsHungry())
     {
-      _priority = MemoryController.Desire.Food;
+      _priority = Desire.Food;
     }
     else if (waterConsumer.IsThirsty())
     {
-      _priority = MemoryController.Desire.Water;
+      _priority = Desire.Water;
     }
     else
     {
-      _priority = MemoryController.Desire.Idle;
+      _priority = Desire.Idle;
     }
   }
-  
+
   /// <summary>
   /// When colliding with an object that object is saved to MemoryController and then set as a target in TargetTracker if the priority matches.
   /// Might be an improvment to only save the object and not set it as a target.
@@ -73,8 +73,8 @@ public sealed class ResourceFinder : MonoBehaviour
     memoryController.SaveToMemory(other.gameObject);
     if (!_hasTarget)
     {
-      if (_priority == MemoryController.Desire.Food && other.GetComponent<Food>() != null ||
-          _priority == MemoryController.Desire.Water && other.GetComponent<Water>() != null)
+      if (_priority == Desire.Food && other.GetComponent<Food>() != null ||
+          _priority == Desire.Water && other.GetComponent<Water>() != null)
       {
         _hasTarget = true;
         targetTracker.SetTarget(other.gameObject);
