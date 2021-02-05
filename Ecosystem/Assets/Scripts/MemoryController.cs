@@ -2,7 +2,7 @@ using System;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class MemoryController : MonoBehaviour
+public sealed class MemoryController : MonoBehaviour
 {
   private int capacity = 5;
 
