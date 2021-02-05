@@ -523,6 +523,17 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 6767025836947645007, guid: 00faeecdbe8954848879547c78257059, type: 3}
   m_PrefabInstance: {fileID: 593131635}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &593131637 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 7236225994731807996, guid: 00faeecdbe8954848879547c78257059, type: 3}
+  m_PrefabInstance: {fileID: 593131635}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8b0d8392b591c9448a6a95dfbc63639a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &753298810
 GameObject:
   m_ObjectHideFlags: 0
@@ -623,6 +634,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1617623582}
     m_Modifications:
+    - target: {fileID: 3272614797183415136, guid: 7de6955d42e4c704a8c7233ec476a74d, type: 3}
+      propertyPath: m_Name
+      value: WolfConsumerHelper
+      objectReference: {fileID: 0}
     - target: {fileID: 5153484287146945913, guid: 7de6955d42e4c704a8c7233ec476a74d, type: 3}
       propertyPath: m_RootOrder
       value: 1
@@ -671,6 +686,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: EcoWolf
       objectReference: {fileID: 0}
+    - target: {fileID: 5771766007550751720, guid: 7de6955d42e4c704a8c7233ec476a74d, type: 3}
+      propertyPath: foodConsumer
+      value: 
+      objectReference: {fileID: 593131637}
+    - target: {fileID: 5771766007550751720, guid: 7de6955d42e4c704a8c7233ec476a74d, type: 3}
+      propertyPath: waterConsumer
+      value: 
+      objectReference: {fileID: 775566958}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 7de6955d42e4c704a8c7233ec476a74d, type: 3}
 --- !u!4 &775566957 stripped
@@ -678,6 +701,17 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 5153484287146945913, guid: 7de6955d42e4c704a8c7233ec476a74d, type: 3}
   m_PrefabInstance: {fileID: 775566956}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &775566958 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 2767905003252926869, guid: 7de6955d42e4c704a8c7233ec476a74d, type: 3}
+  m_PrefabInstance: {fileID: 775566956}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5ecc989552950f6449739af04d52bf49, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &800402232
 GameObject:
   m_ObjectHideFlags: 0
