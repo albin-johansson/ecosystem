@@ -10,12 +10,6 @@ public sealed class PreyFinder : MonoBehaviour
   private void OnTriggerEnter(Collider other)
   {
     // Hunger has implicit priority
-    if (other.GetComponent<Prey>() != null)
-    {
-      print("PreyFinder collided with prey");
-    }
-
-    ;
     if (preyConsumer.IsHungry() && other.GetComponent<Prey>() != null ||
         waterConsumer.IsThirsty() && other.GetComponent<Water>() != null)
     {
