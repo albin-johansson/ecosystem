@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -26,37 +25,46 @@ public sealed class MemoryController : MonoBehaviour
   //Save gameobject and its "Desire" identifier as a tuple to _memory
   public void SaveToMemory(GameObject other)
   {
-    Desire res = Desire.Idle;
+    var desire = GetDesire(other);
+    _memory.Insert(_nextMemoryLocation, (desire, other.gameObject));
+    _nextMemoryLocation++;
+    if (_nextMemoryLocation > (Capacity - 1))
+    {
+      _nextMemoryLocation = 0;
+    }
+  }
+
+  private Desire GetDesire(GameObject other)
+  {
+    var desire = Desire.Idle;
     if (other.GetComponent<Food>())
     {
-      res = Desire.Food;
+      desire = Desire.Food;
     }
     else if (other.GetComponent<Prey>())
     {
-      res = Desire.Prey;
+      desire = Desire.Prey;
     }
     else if (other.GetComponent<Water>())
     {
-      res = Desire.Water;
+      desire = Desire.Water;
     }
 
-    _memory.Insert(_nextMemoryLocation, (res, other.gameObject));
-    _nextMemoryLocation++;
-    if (_nextMemoryLocation > 4) _nextMemoryLocation = 0;
+    return desire;
   }
 
   //Get a list of all objects with the same Desire as asked for in res
-  public List<GameObject> GetFromMemory(Enum res)
+  public List<GameObject> GetFromMemory(Desire currentDesire)
   {
-    List<GameObject> list = new List<GameObject>();
+    List<GameObject> gameObjects = new List<GameObject>();
     foreach (var (desire, memoryGameObject) in _memory)
     {
-      if (desire.Equals(res))
+      if (desire.Equals(currentDesire))
       {
-        list.Add(memoryGameObject);
+        gameObjects.Add(memoryGameObject);
       }
     }
 
-    return list;
+    return gameObjects;
   }
 }

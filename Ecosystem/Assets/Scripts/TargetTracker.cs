@@ -1,11 +1,7 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
-using UnityEditor.UIElements;
 using UnityEngine;
 using UnityEngine.AI;
 
-public class TargetTracker : MonoBehaviour
+public sealed class TargetTracker : MonoBehaviour
 {
   [SerializeField] private NavMeshAgent navAgent;
   [SerializeField] private ResourceFinder resourceFinder;
