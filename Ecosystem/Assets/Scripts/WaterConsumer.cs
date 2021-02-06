@@ -7,7 +7,7 @@ public sealed class WaterConsumer : MonoBehaviour
 
   private void Update()
   {
-    Thirst += genom.getThirstRate() * Time.deltaTime;
+    Thirst += genom.GetThirstRate() * Time.deltaTime;
   }
 
   private void OnTriggerEnter(Collider other)
@@ -20,6 +20,6 @@ public sealed class WaterConsumer : MonoBehaviour
 
   internal bool IsThirsty()
   {
-    return Thirst > genom.getThirstThreshold();
+    return Thirst > genom.GetThirstThreshold();
   }
 }

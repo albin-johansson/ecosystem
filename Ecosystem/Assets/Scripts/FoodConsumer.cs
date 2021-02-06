@@ -8,7 +8,7 @@ public sealed class FoodConsumer : MonoBehaviour
 
   private void Update()
   {
-    Hunger += genom.getHungerRate() * Time.deltaTime;
+    Hunger += genom.GetHungerRate() * Time.deltaTime;
   }
 
   private void OnTriggerEnter(Collider other)
@@ -22,6 +22,6 @@ public sealed class FoodConsumer : MonoBehaviour
 
   internal bool IsHungry()
   {
-    return Hunger > genom.getHungerThreshold();
+    return Hunger > genom.GetHungerThreshold();
   }
 }

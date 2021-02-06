@@ -9,7 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5631626993703738261}
-  - component: {fileID: 6999594582755407111}
+  - component: {fileID: 7071294903120187025}
   m_Layer: 0
   m_Name: Genom
   m_TagString: Untagged
@@ -31,7 +31,7 @@ Transform:
   m_Father: {fileID: 6767025836947645007}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &6999594582755407111
+--- !u!114 &7071294903120187025
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -40,7 +40,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 1016523483847645443}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 987714577f2719f4492d80c040d8fe14, type: 3}
+  m_Script: {fileID: 11500000, guid: a3fa7a713dfbafd44b75f7bb68c0f3f3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1 &4661445776295913065
@@ -161,7 +161,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8b0d8392b591c9448a6a95dfbc63639a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  genom: {fileID: 6999594582755407111}
+  genom: {fileID: 7071294903120187025}
 --- !u!114 &7073679156133121988
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -174,7 +174,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5ecc989552950f6449739af04d52bf49, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  genom: {fileID: 6999594582755407111}
+  genom: {fileID: 7071294903120187025}
 --- !u!114 &1667658273905614302
 MonoBehaviour:
   m_ObjectHideFlags: 0

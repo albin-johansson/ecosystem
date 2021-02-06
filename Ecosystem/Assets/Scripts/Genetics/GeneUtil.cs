@@ -4,7 +4,7 @@ namespace Genetics
 {
     public static class GeneUtil
     {
-        public static double getValidVar(double val, double max, double min)
+        public static double GetValidVar(double val, double max, double min)
         {
             if (val < min)
             {
@@ -18,13 +18,11 @@ namespace Genetics
             {
                 return val;
             }
-
-            //return Math.Max(Math.Min(val, max), min);
         }
 
         private static Random r = new Random();
 
-        public static bool shouldMutate(double percentage)
+        public static bool RandomWithChance(double percentage)
         {
             double roll = r.NextDouble() * 100;
             if (roll < percentage)
@@ -35,6 +33,12 @@ namespace Genetics
             {
                 return false;
             }
+        }
+
+
+        public static double MutatedInRange(double max, double min)
+        {
+            return r.NextDouble() * (max - min) + min;
         }
     }
 }
