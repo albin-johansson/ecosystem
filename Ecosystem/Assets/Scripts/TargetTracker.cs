@@ -1,17 +1,20 @@
+using System;
+using UnityEditor.SceneManagement;
 using UnityEngine;
 using UnityEngine.AI;
+using Random = UnityEngine.Random;
 
 public sealed class TargetTracker : MonoBehaviour
 {
   [SerializeField] private NavMeshAgent navAgent;
-  [SerializeField] private ResourceFinder resourceFinder;
+  
   private GameObject _target;
   private float _timeRemaining;
   private bool _hasTarget = false;
+  
+  private const double StopTrackingThreshold = 0.1f;
 
-  private const double StopTrackingThreshold = 0.5f;
-
-  //Runs a timer
+  //Runs a timer for when to stop looking for the target
   private void Update()
   {
     if (_hasTarget)
@@ -22,7 +25,6 @@ public sealed class TargetTracker : MonoBehaviour
         //When the timer runs out TargetTracker stops targeting letting ResourceFinder continue working.
         _timeRemaining = 0;
         _hasTarget = false;
-        resourceFinder.SetHasTarget(false);
       }
     }
   }
@@ -36,7 +38,9 @@ public sealed class TargetTracker : MonoBehaviour
     _hasTarget = true;
   }
 
-  //When a target i set the onTriggerStay will trigger each tick the object is in range and set the navAgent to go to it each tick
+  public bool HasTarget => _hasTarget;
+
+  //When a target is acquired the onTriggerStay will trigger each tick the object is in range and set the navAgent to go to it each tick
   private void OnTriggerStay(Collider other)
   {
     if (!_hasTarget)
@@ -49,7 +53,6 @@ public sealed class TargetTracker : MonoBehaviour
       navAgent.SetDestination(_target.transform.position);
       if (navAgent.remainingDistance < StopTrackingThreshold)
       {
-        resourceFinder.SetHasTarget(false);
         _hasTarget = false;
         _timeRemaining = 0;
       }

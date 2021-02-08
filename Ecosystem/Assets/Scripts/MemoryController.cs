@@ -27,33 +27,45 @@ public sealed class MemoryController : MonoBehaviour
 
   private Desire GetDesire(GameObject other)
   {
-    var desire = Desire.Idle;
     if (other.GetComponent<Food>())
     {
-      desire = Desire.Food;
+      return Desire.Food;
     }
     else if (other.GetComponent<Prey>())
     {
-      desire = Desire.Prey;
+      return Desire.Prey;
     }
     else if (other.GetComponent<Water>())
     {
-      desire = Desire.Water;
+      return Desire.Water;
     }
 
-    return desire;
+    return Desire.Idle;
   }
 
-  //Get a list of all objects with the same Desire as asked for in res
+  //Get a list of all objects with the same Desire as asked for in currentDesire
   public List<GameObject> GetFromMemory(Desire currentDesire)
   {
     List<GameObject> gameObjects = new List<GameObject>();
+    List<int> removeObjects = new List<int>();
     foreach (var (desire, memoryGameObject) in _memory)
     {
       if (desire.Equals(currentDesire))
       {
-        gameObjects.Add(memoryGameObject);
+        if (memoryGameObject.Equals(null))
+        {
+          removeObjects.Add(_memory.IndexOf((desire, memoryGameObject)));
+        }
+        else
+        {
+          gameObjects.Add(memoryGameObject);
+        }
       }
+    }
+    //Removes all objects that has been destroyed but still existed in memory with the same desire as currentDesire
+    foreach (var i in removeObjects)
+    {
+      _memory.Insert(i, (Desire.Nothing, gameObject));
     }
 
     return gameObjects;

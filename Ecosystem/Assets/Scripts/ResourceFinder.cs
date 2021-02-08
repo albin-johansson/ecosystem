@@ -9,8 +9,6 @@ public sealed class ResourceFinder : MonoBehaviour
   [SerializeField] private MemoryController memoryController;
   [SerializeField] private TargetTracker targetTracker;
 
-  private bool _hasTarget = false;
-
   private Desire _priority = Desire.Idle;
 
   private void Update()
@@ -19,18 +17,11 @@ public sealed class ResourceFinder : MonoBehaviour
     CheckMemory();
   }
 
-  //Public function to access the _hasTarget boolean. 
-  public void SetHasTarget(bool hasTarget)
-  {
-    _hasTarget = hasTarget;
-  }
-
   //Checks MemoryController for objects that matches the priority Desire
   private void CheckMemory()
   {
-    if (!_hasTarget)
+    if (!targetTracker.HasTarget)
     {
-      _hasTarget = true;
       var gameObjects = memoryController.GetFromMemory(_priority);
 
       //Selects a random object that matches priority, if non exist set hasTarget to false again.
@@ -39,14 +30,10 @@ public sealed class ResourceFinder : MonoBehaviour
         var target = gameObjects[Random.Range(0, gameObjects.Count - 1)];
         targetTracker.SetTarget(target);
       }
-      else
-      {
-        _hasTarget = false;
-      }
     }
   }
 
-  //Sets priority, needs to be worked on to get a better flow
+  //Sets priority, OBS. needs to be worked on to get a better flow
   private void UpdatePriority()
   {
     // Hunger has implicit priority
@@ -71,12 +58,11 @@ public sealed class ResourceFinder : MonoBehaviour
   private void OnTriggerEnter(Collider other)
   {
     memoryController.SaveToMemory(other.gameObject);
-    if (!_hasTarget)
+    if (!targetTracker.HasTarget)
     {
       if (_priority == Desire.Food && other.GetComponent<Food>() != null ||
           _priority == Desire.Water && other.GetComponent<Water>() != null)
       {
-        _hasTarget = true;
         targetTracker.SetTarget(other.gameObject);
       }
     }

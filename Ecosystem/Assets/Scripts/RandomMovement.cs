@@ -1,5 +1,7 @@
+using System;
 using UnityEngine;
 using UnityEngine.AI;
+using Random = UnityEngine.Random;
 
 public sealed class RandomMovement : MonoBehaviour
 {
@@ -10,23 +12,31 @@ public sealed class RandomMovement : MonoBehaviour
 
   private Transform _transform;
 
+  private float _timer;
+
   private void Start()
   {
-    _transform = transform;
+    _transform = navAgent.transform;
   }
 
+  //The TargetRandomDestination function is called if the agent has no path or the timer has run out
   private void Update()
   {
-    if (!navAgent.hasPath)
+    if (!navAgent.hasPath || _timer < 0)
     {
       TargetRandomDestination();
+      _timer = 10;
+    }
+    else
+    {
+      _timer -= Time.deltaTime;
     }
   }
 
-  private void TargetRandomDestination()
+  public void TargetRandomDestination()
   {
-    var randomX = Random.Range(-5f, 5f);
-    var randomZ = Random.Range(-5f, 5f);
+    var randomX = Random.Range(-8f, 8f);
+    var randomZ = Random.Range(-8f, 8f);
 
     var position = _transform.position;
     var destination = new Vector3(position.x + randomX, position.y, position.z + randomZ);
