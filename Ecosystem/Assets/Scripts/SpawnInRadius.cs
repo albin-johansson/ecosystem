@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+// Will spawn prefab inside the radius, taking no account to what is below
 public class SpawnInRadius : MonoBehaviour
 {
     [SerializeField] private GameObject prefab;

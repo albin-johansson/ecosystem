@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Serialization;
 
+// Will spawn given prefab on the terrain, with the risk of spawning under water.
 public class SpawnOnTerrain : MonoBehaviour
 {
 

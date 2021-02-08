@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+// Will spawn the given prefab where the user clicks. 
 public class SpawnOnClick : MonoBehaviour
 {
 
