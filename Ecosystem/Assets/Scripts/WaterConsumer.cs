@@ -1,13 +1,15 @@
 using UnityEngine;
+using UnityEngine.Serialization;
 
 public sealed class WaterConsumer : MonoBehaviour
 {
-  [SerializeField] private Genom genom;
+  //[SerializeField] private Genome genome;
+
   private double Thirst { get; set; }
 
   private void Update()
   {
-    Thirst += genom.GetThirstRate() * Time.deltaTime;
+    Thirst += 1 * Time.deltaTime; //genome.GetThirstRate()
   }
 
   private void OnTriggerEnter(Collider other)
@@ -20,6 +22,6 @@ public sealed class WaterConsumer : MonoBehaviour
 
   internal bool IsThirsty()
   {
-    return Thirst > genom.GetThirstThreshold();
+    return Thirst > 10; //genome.GetThirstThreshold();
   }
 }

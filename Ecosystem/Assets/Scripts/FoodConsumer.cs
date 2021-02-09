@@ -1,14 +1,15 @@
 using UnityEngine;
+using UnityEngine.Serialization;
 
 public sealed class FoodConsumer : MonoBehaviour
 {
-  [SerializeField] private Genom genom;
+  //[SerializeField] private Genome genome;
 
   private double Hunger { get; set; }
 
   private void Update()
   {
-    Hunger += genom.GetHungerRate() * Time.deltaTime;
+    Hunger += 1 * Time.deltaTime; //genome.GetHungerRate() 
   }
 
   private void OnTriggerEnter(Collider other)
@@ -22,6 +23,6 @@ public sealed class FoodConsumer : MonoBehaviour
 
   internal bool IsHungry()
   {
-    return Hunger > genom.GetHungerThreshold();
+    return Hunger > 10; //genome.GetHungerThreshold();
   }
 }
