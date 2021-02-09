@@ -48,7 +48,6 @@ public sealed class TargetTracker : MonoBehaviour
       return;
     }
 
-
     if (other.gameObject.Equals(_target))
     {
       navAgent.SetDestination(_target.transform.position);
