@@ -43,8 +43,6 @@ public sealed class TargetTracker : MonoBehaviour
   //When a target is acquired the onTriggerStay will trigger each tick the object is in range and set the navAgent to go to it each tick
   private void OnTriggerStay(Collider other)
   {
-    int i = 0;
-    /*
     if (!_hasTarget)
     {
       return;
@@ -60,6 +58,5 @@ public sealed class TargetTracker : MonoBehaviour
         _timeRemaining = 0;
       }
     }
-    */
   }
 }
