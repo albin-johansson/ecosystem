@@ -54,10 +54,18 @@ public sealed class ResourceFinder : MonoBehaviour
   /// <summary>
   /// When colliding with an object that object is saved to MemoryController and then set as a target in TargetTracker if the priority matches.
   /// Might be an improvment to only save the object and not set it as a target.
+  /// New feature added is checking for predators. If a predator is found the targetTracker resolves the fleeing mechanics.
   /// </summary>
   private void OnTriggerEnter(Collider other)
   {
+    if (other.GetComponent<Predator>())
+    {
+      targetTracker.FleeFromPredator(other.gameObject);
+      return;
+    }
+
     memoryController.SaveToMemory(other.gameObject);
+
     if (!targetTracker.HasTarget)
     {
       if (_priority == Desire.Food && other.GetComponent<Food>() != null ||
