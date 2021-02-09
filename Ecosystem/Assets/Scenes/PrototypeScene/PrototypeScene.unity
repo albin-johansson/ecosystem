@@ -800,6 +800,31 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 6765261209891845031, guid: 00faeecdbe8954848879547c78257059, type: 3}
   m_PrefabInstance: {fileID: 593131635}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &669831256
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 669831255}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 96e71057e187ca040b7e610e8f68d1ef, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  animStatesController: {fileID: 669831257}
+--- !u!114 &669831257
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 669831255}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4c2008d296c842b181f6c433da52ba6a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!65 &669831258
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -1483,9 +1508,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   navAgent: {fileID: 1643946006}
-  groundMask:
-    serializedVersion: 2
-    m_Bits: 8
 --- !u!114 &1283073873
 MonoBehaviour:
   m_ObjectHideFlags: 0

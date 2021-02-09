@@ -7,7 +7,6 @@ using Random = UnityEngine.Random;
 public sealed class TargetTracker : MonoBehaviour
 {
   [SerializeField] private NavMeshAgent navAgent;
-  
   private GameObject _target;
   private float _timeRemaining;
   private bool _hasTarget = false;
