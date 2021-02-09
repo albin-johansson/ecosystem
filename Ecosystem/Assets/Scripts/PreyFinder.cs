@@ -1,9 +1,9 @@
-using UnityEngine;
+﻿using UnityEngine;
 using Random = UnityEngine.Random;
 
-public sealed class ResourceFinder : MonoBehaviour
+public sealed class PreyFinder : MonoBehaviour
 {
-  [SerializeField] private FoodConsumer foodConsumer;
+  [SerializeField] private PreyConsumer preyConsumer;
   [SerializeField] private WaterConsumer waterConsumer;
 
   [SerializeField] private MemoryController memoryController;
@@ -33,13 +33,13 @@ public sealed class ResourceFinder : MonoBehaviour
     }
   }
 
-  //Sets priority, OBS. needs to be worked on to get a better flow
+  //Sets priority, needs to be worked on to get a better flow
   private void UpdatePriority()
   {
     // Hunger has implicit priority
-    if (foodConsumer.IsHungry())
+    if (preyConsumer.IsHungry())
     {
-      _priority = Desire.Food;
+      _priority = Desire.Prey;
     }
     else if (waterConsumer.IsThirsty())
     {
@@ -60,7 +60,7 @@ public sealed class ResourceFinder : MonoBehaviour
     memoryController.SaveToMemory(other.gameObject);
     if (!targetTracker.HasTarget)
     {
-      if (_priority == Desire.Food && other.GetComponent<Food>() != null ||
+      if (_priority == Desire.Prey && other.GetComponent<Prey>() != null ||
           _priority == Desire.Water && other.GetComponent<Water>() != null)
       {
         targetTracker.SetTarget(other.gameObject);
