@@ -4,19 +4,27 @@ namespace Stats
 {
   public class GeneUtil
   {
-    public static double GetValidVar(double val, double max, double min)
+    /// <summary>
+    /// Checks that the value is in the given range. If it is outside the range,
+    /// set it to the closest value. 
+    /// </summary>
+    /// <param name="value"></param>
+    /// <param name="max"></param>
+    /// <param name="min"></param>
+    /// <returns></returns>
+    public static double GetValidVar(double value, double max, double min)
     {
-      if (val < min)
+      if (value < min)
       {
         return min;
       }
-      else if (val > max)
+      else if (value > max)
       {
         return max;
       }
       else
       {
-        return val;
+        return value;
       }
     }
 

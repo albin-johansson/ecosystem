@@ -2,9 +2,9 @@
 {
   public class Gene
   {
-    protected double max;
-    protected double min;
-    protected double factor;
+    private double max;
+    private double min;
+    private double factor;
 
     public Gene(double f, double max, double min)
     {
@@ -29,6 +29,11 @@
     }
 
 
+    /// <summary>
+    /// Generate a mutated Gene in the given range. 
+    /// </summary>
+    /// <param name="max"></param>
+    /// <param name="min"></param>
     public Gene(double max, double min)
     {
       this.max = max;

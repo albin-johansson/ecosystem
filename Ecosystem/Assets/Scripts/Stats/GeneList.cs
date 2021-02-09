@@ -30,6 +30,29 @@ namespace Stats
       index.Add(DesireFactor);
     }
 
+    public GeneList(Gene hungerRateGene, Gene hungerThresholdGene, Gene thirstRateGene,
+      Gene thirstThresholdGene, Gene visionGene, Gene speedGene, Gene sizeGene, Gene desireGene)
+    {
+      genes = new List<Gene>();
+      genes.Add(hungerRateGene);
+      genes.Add(hungerThresholdGene);
+      genes.Add(thirstRateGene);
+      genes.Add(thirstThresholdGene);
+      genes.Add(visionGene);
+      genes.Add(speedGene);
+      genes.Add(sizeGene);
+      genes.Add(desireGene);
+    }
+
+    /// <summary>
+    /// Warning, genes must be ordered correctly. 
+    /// </summary>
+    /// <param name="genes"></param>
+    public GeneList(List<Gene> genes)
+    {
+      this.genes = genes;
+    }
+
     private int StringToIndex(string s)
     {
       return index.IndexOf(s);
@@ -48,28 +71,6 @@ namespace Stats
     public Gene GetGene(int i)
     {
       return genes[i];
-    }
-
-    public GeneList(Gene hungerRateGene, Gene hungerThresholdGene, Gene thirstRateGene,
-      Gene thirstThresholdGene, Gene visionGene, Gene speedGene, Gene sizeGene, Gene desireGene)
-    {
-      genes = new List<Gene>();
-      genes.Add(hungerRateGene);
-      genes.Add(hungerThresholdGene);
-      genes.Add(thirstRateGene);
-      genes.Add(thirstThresholdGene);
-      genes.Add(visionGene);
-      genes.Add(speedGene);
-      genes.Add(sizeGene);
-      genes.Add(desireGene);
-    }
-
-    /**
-         * Warning, must be ordered. 
-         */
-    public GeneList(List<Gene> genes)
-    {
-      this.genes = genes;
     }
 
     public GeneList Copy()

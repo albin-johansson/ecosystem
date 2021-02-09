@@ -5,6 +5,9 @@
     private static double defaultMutateChance;
     private static GeneList defaultGenelist;
 
+    /// <summary>
+    /// Default values, constant ranges. 
+    /// </summary>
     static RabbitGenome()
     {
       defaultMutateChance = 0.05;

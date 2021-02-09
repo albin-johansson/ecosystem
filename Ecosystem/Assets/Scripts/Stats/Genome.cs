@@ -6,9 +6,13 @@ namespace Stats
   public class Genome : MonoBehaviour
   {
     protected double mutateChance;
-
     protected GeneList genes;
 
+    /// <summary>
+    /// Generate a new (possibly mutated) genome based on the two parents' genome
+    /// </summary>
+    /// <param name="g1"></param>
+    /// <param name="g2"></param>
     public Genome(Genome g1, Genome g2)
     {
       List<Gene> list = new List<Gene>();
@@ -35,22 +39,13 @@ namespace Stats
 
         list.Add(g);
       }
+
+      this.genes = new GeneList(list);
+      this.mutateChance = g1.mutateChance;
     }
 
     public Genome()
     {
-      Gene hungerRateGene = new Gene(1, 10, 0.5);
-      Gene hungerThresholdGene = new Gene(5, 10, 0);
-      Gene thirstRateGene = new Gene(1, 10, 0.5);
-      Gene thirstThresholdGene = new Gene(5, 10, 0);
-      Gene visionGene = new Gene(25, 50, 1);
-      Gene speedGene = new Gene(1.5, 2, 1);
-      Gene sizeGene = new Gene(0.5, 1, 0.1);
-      Gene desireGene = new Gene(1, 10, 1);
-      genes = new GeneList(hungerRateGene, hungerThresholdGene,
-        thirstRateGene, thirstThresholdGene, visionGene, speedGene, sizeGene,
-        desireGene);
-      mutateChance = 0.05;
     }
 
     public Genome(GeneList geneList, double percentage)
@@ -59,6 +54,11 @@ namespace Stats
       mutateChance = percentage;
     }
 
+    /// <summary>
+    /// Speed depends on the metabolism (HungerRate), the speed (SpeedFactor),
+    /// and the size (SizeFactor)
+    /// </summary>
+    /// <returns></returns>
     public double GetSpeed()
     {
       double speed = genes.GetGene(GeneList.HungerRate).GetValue() * genes.GetGene(GeneList.SpeedFactor).GetValue() *
@@ -72,6 +72,10 @@ namespace Stats
       return genes.GetGene(GeneList.Vision).GetValue();
     }
 
+    /// <summary>
+    /// The metabolism depends on the rate it self and the size. 
+    /// </summary>
+    /// <returns></returns>
     public double GetHungerRate()
     {
       return genes.GetGene(GeneList.HungerRate).GetValue() * genes.GetGene(GeneList.SizeFactor).GetValue();
@@ -92,6 +96,11 @@ namespace Stats
       return genes.GetGene(GeneList.ThirstThreshold).GetValue();
     }
 
+    /// <summary>
+    /// Attractiveness depends solely on the desirability gene.
+    /// Could depend on more in the future. 
+    /// </summary>
+    /// <returns></returns>
     public double GetDesirability()
     {
       return genes.GetGene(GeneList.DesireFactor).GetValue();
