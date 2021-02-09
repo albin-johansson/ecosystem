@@ -16,7 +16,7 @@ public sealed class FoodConsumer : MonoBehaviour
   {
     if (other.GetComponent<Food>() != null)
     {
-      Destroy(other);
+      Destroy(other.gameObject);
       Hunger = 0;
     }
   }
