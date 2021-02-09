@@ -7,11 +7,11 @@ using Random = UnityEngine.Random;
 public sealed class TargetTracker : MonoBehaviour
 {
   [SerializeField] private NavMeshAgent navAgent;
-  
+
   private GameObject _target;
   private float _timeRemaining;
   private bool _hasTarget = false;
-  
+
   private const double StopTrackingThreshold = 0.1f;
 
   //Runs a timer for when to stop looking for the target
@@ -43,10 +43,13 @@ public sealed class TargetTracker : MonoBehaviour
   //When a target is acquired the onTriggerStay will trigger each tick the object is in range and set the navAgent to go to it each tick
   private void OnTriggerStay(Collider other)
   {
+    int i = 0;
+    /*
     if (!_hasTarget)
     {
       return;
-    } 
+    }
+
 
     if (other.gameObject.Equals(_target))
     {
@@ -57,5 +60,6 @@ public sealed class TargetTracker : MonoBehaviour
         _timeRemaining = 0;
       }
     }
+    */
   }
 }

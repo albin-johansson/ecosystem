@@ -1,15 +1,15 @@
-﻿using UnityEngine;
+﻿using Stats;
+using UnityEngine;
 
 public sealed class PreyConsumer : MonoBehaviour
 {
-  [SerializeField] private double rate = 0.02;
-  [SerializeField] private double threshold = 0.02;
+  [SerializeField] private Genome genome;
 
   private double Hunger { get; set; }
 
   private void Update()
   {
-    Hunger += rate * Time.deltaTime;
+    Hunger += genome.GetHungerRate() * Time.deltaTime;
   }
 
   private void OnTriggerEnter(Collider other)
@@ -20,9 +20,9 @@ public sealed class PreyConsumer : MonoBehaviour
       Hunger = 0;
     }
   }
-  
+
   internal bool IsHungry()
   {
-    return Hunger > threshold;
+    return Hunger > genome.GetHungerThreshold();
   }
 }
