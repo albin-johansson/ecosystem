@@ -16,6 +16,8 @@ public sealed class TargetTracker : MonoBehaviour
 
   private const double StopTrackingThreshold = 0.1f;
 
+  public bool HasTarget => _hasTarget;
+
   //Runs a timer for when to stop looking for the target
   private void Update()
   {
@@ -60,11 +62,9 @@ public sealed class TargetTracker : MonoBehaviour
   //Sets the _fleeDirection to be away from the predators position. The _fleeDirection works as a velocity and therefore we apply the navAgents speed to the vector. 
   private void SetFleeDirection(Vector3 predatorPosition)
   {
-    Vector3 velocityDirection = (navAgent.transform.position - predatorPosition).normalized;
+    var velocityDirection = (navAgent.transform.position - predatorPosition).normalized;
     _fleeDirection = velocityDirection * navAgent.speed;
   }
-
-  public bool HasTarget => _hasTarget;
 
   //When a target is acquired the onTriggerStay will trigger each tick the object is in range and set the navAgent to go to it each tick
   private void OnTriggerStay(Collider other)

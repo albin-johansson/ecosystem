@@ -54,7 +54,7 @@ public sealed class ResourceFinder : MonoBehaviour
   /// <summary>
   /// When colliding with an object that object is saved to MemoryController and then set as a target in TargetTracker if the priority matches.
   /// Might be an improvment to only save the object and not set it as a target.
-  /// New feature added is checking for predators. If a predator is found the targetTracker resolves the fleeing mechanics.
+  /// If a predator is found the targetTracker resolves the fleeing mechanics.
   /// </summary>
   private void OnTriggerEnter(Collider other)
   {
