@@ -1,52 +1,50 @@
 ﻿using System;
 
-namespace Stats
+
+public class GeneUtil
 {
-  public class GeneUtil
+  /// <summary>
+  /// Checks that the value is in the given range. If it is outside the range,
+  /// set it to the closest value. 
+  /// </summary>
+  /// <param name="value"></param>
+  /// <param name="max"></param>
+  /// <param name="min"></param>
+  /// <returns></returns>
+  public static double GetValidVar(double value, double max, double min)
   {
-    /// <summary>
-    /// Checks that the value is in the given range. If it is outside the range,
-    /// set it to the closest value. 
-    /// </summary>
-    /// <param name="value"></param>
-    /// <param name="max"></param>
-    /// <param name="min"></param>
-    /// <returns></returns>
-    public static double GetValidVar(double value, double max, double min)
+    if (value < min)
     {
-      if (value < min)
-      {
-        return min;
-      }
-      else if (value > max)
-      {
-        return max;
-      }
-      else
-      {
-        return value;
-      }
+      return min;
     }
-
-    private static Random r = new Random();
-
-    public static bool RandomWithChance(double percentage)
+    else if (value > max)
     {
-      double roll = r.NextDouble() * 100;
-      if (roll < percentage)
-      {
-        return true;
-      }
-      else
-      {
-        return false;
-      }
+      return max;
     }
-
-
-    public static double MutatedInRange(double max, double min)
+    else
     {
-      return r.NextDouble() * (max - min) + min;
+      return value;
     }
+  }
+
+  private static Random r = new Random();
+
+  public static bool RandomWithChance(double percentage)
+  {
+    double roll = r.NextDouble() * 100;
+    if (roll < percentage)
+    {
+      return true;
+    }
+    else
+    {
+      return false;
+    }
+  }
+
+
+  public static double MutatedInRange(double max, double min)
+  {
+    return r.NextDouble() * (max - min) + min;
   }
 }

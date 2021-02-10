@@ -1,5 +1,4 @@
-﻿using Stats;
-using UnityEngine;
+﻿using UnityEngine;
 
 public sealed class PreyConsumer : MonoBehaviour
 {

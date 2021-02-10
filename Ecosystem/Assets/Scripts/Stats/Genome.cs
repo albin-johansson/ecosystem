@@ -1,109 +1,107 @@
 ﻿using System.Collections.Generic;
 using UnityEngine;
 
-namespace Stats
-{
-  public class Genome : MonoBehaviour
-  {
-    protected double mutateChance;
-    protected GeneList genes;
 
-    /// <summary>
-    /// Generate a new (possibly mutated) genome based on the two parents' genome
-    /// </summary>
-    /// <param name="g1"></param>
-    /// <param name="g2"></param>
-    public Genome(Genome g1, Genome g2)
+public class Genome : MonoBehaviour
+{
+  protected double mutateChance;
+  protected GeneList genes;
+
+  /// <summary>
+  /// Generate a new (possibly mutated) genome based on the two parents' genome
+  /// </summary>
+  /// <param name="g1"></param>
+  /// <param name="g2"></param>
+  public Genome(Genome g1, Genome g2)
+  {
+    List<Gene> list = new List<Gene>();
+    for (int i = 0; i < g1.genes.GetSize(); i++)
     {
-      List<Gene> list = new List<Gene>();
-      for (int i = 0; i < g1.genes.GetSize(); i++)
+      Gene g;
+      if (GeneUtil.RandomWithChance(g1.mutateChance))
       {
-        Gene g;
-        if (GeneUtil.RandomWithChance(g1.mutateChance))
+        //mutate
+        g = new Gene(g1.genes.GetGene(i).Max, g1.genes.GetGene(i).Min);
+      }
+      else
+      {
+        //pick parent
+        if (GeneUtil.RandomWithChance(50))
         {
-          //mutate
-          g = new Gene(g1.genes.GetGene(i).GetMax(), g1.genes.GetGene(i).GetMin());
+          g = g1.genes.GetGene(i);
         }
         else
         {
-          //pick parent
-          if (GeneUtil.RandomWithChance(50))
-          {
-            g = g1.genes.GetGene(i);
-          }
-          else
-          {
-            g = g2.genes.GetGene(i);
-          }
+          g = g2.genes.GetGene(i);
         }
-
-        list.Add(g);
       }
 
-      this.genes = new GeneList(list);
-      this.mutateChance = g1.mutateChance;
+      list.Add(g);
     }
 
-    public Genome()
-    {
-    }
+    genes = new GeneList(list);
+    mutateChance = g1.mutateChance;
+  }
 
-    public Genome(GeneList geneList, double percentage)
-    {
-      genes = geneList;
-      mutateChance = percentage;
-    }
+  public Genome()
+  {
+  }
 
-    /// <summary>
-    /// Speed depends on the metabolism (HungerRate), the speed (SpeedFactor),
-    /// and the size (SizeFactor)
-    /// </summary>
-    /// <returns></returns>
-    public double GetSpeed()
-    {
-      double speed = genes.GetGene(GeneList.HungerRate).GetValue() * genes.GetGene(GeneList.SpeedFactor).GetValue() *
-                     ((genes.GetGene(GeneList.SizeFactor).GetMax() - genes.GetGene(GeneList.SizeFactor).GetMin()) -
-                      genes.GetGene(GeneList.SizeFactor).GetValue());
-      return speed;
-    }
+  public Genome(GeneList geneList, double percentage)
+  {
+    genes = geneList;
+    mutateChance = percentage;
+  }
 
-    public double GetVisionRange()
-    {
-      return genes.GetGene(GeneList.Vision).GetValue();
-    }
+  /// <summary>
+  /// Speed depends on the metabolism (HungerRate), the speed (SpeedFactor),
+  /// and the size (SizeFactor)
+  /// </summary>
+  /// <returns></returns>
+  public double GetSpeed()
+  {
+    double speed = genes.GetGene(GeneList.HungerRate).Value * genes.GetGene(GeneList.SpeedFactor).Value *
+                   ((genes.GetGene(GeneList.SizeFactor).Max - genes.GetGene(GeneList.SizeFactor).Min) -
+                    genes.GetGene(GeneList.SizeFactor).Value);
+    return speed;
+  }
 
-    /// <summary>
-    /// The metabolism depends on the rate it self and the size. 
-    /// </summary>
-    /// <returns></returns>
-    public double GetHungerRate()
-    {
-      return genes.GetGene(GeneList.HungerRate).GetValue() * genes.GetGene(GeneList.SizeFactor).GetValue();
-    }
+  public double GetVisionRange()
+  {
+    return genes.GetGene(GeneList.Vision).Value;
+  }
 
-    public double GetHungerThreshold()
-    {
-      return genes.GetGene(GeneList.HungerThreshold).GetValue();
-    }
+  /// <summary>
+  /// The metabolism depends on the rate it self and the size. 
+  /// </summary>
+  /// <returns></returns>
+  public double GetHungerRate()
+  {
+    return genes.GetGene(GeneList.HungerRate).Value * genes.GetGene(GeneList.SizeFactor).Value;
+  }
 
-    public double GetThirstRate()
-    {
-      return genes.GetGene(GeneList.ThirstRate).GetValue();
-    }
+  public double GetHungerThreshold()
+  {
+    return genes.GetGene(GeneList.HungerThreshold).Value;
+  }
 
-    public double GetThirstThreshold()
-    {
-      return genes.GetGene(GeneList.ThirstThreshold).GetValue();
-    }
+  public double GetThirstRate()
+  {
+    return genes.GetGene(GeneList.ThirstRate).Value;
+  }
 
-    /// <summary>
-    /// Attractiveness depends solely on the desirability gene.
-    /// Could depend on more in the future. 
-    /// </summary>
-    /// <returns></returns>
-    public double GetDesirability()
-    {
-      return genes.GetGene(GeneList.DesireFactor).GetValue();
-    }
+  public double GetThirstThreshold()
+  {
+    return genes.GetGene(GeneList.ThirstThreshold).Value;
+  }
+
+  /// <summary>
+  /// Attractiveness depends solely on the desirability gene.
+  /// Could depend on more in the future. 
+  /// </summary>
+  /// <returns></returns>
+  public double GetDesirability()
+  {
+    return genes.GetGene(GeneList.DesireFactor).Value;
   }
 }

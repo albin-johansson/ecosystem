@@ -1,6 +1,4 @@
-using Stats;
 using UnityEngine;
-using UnityEngine.Serialization;
 
 public sealed class WaterConsumer : MonoBehaviour
 {

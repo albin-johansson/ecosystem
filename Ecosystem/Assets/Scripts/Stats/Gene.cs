@@ -1,49 +1,30 @@
-﻿namespace Stats
+﻿public sealed class Gene
 {
-  public class Gene
+  public double Max { get; private set; }
+  public double Min { get; private set; }
+  public double Value { get; private set; }
+
+  public Gene(double value, double max, double min)
   {
-    private double max;
-    private double min;
-    private double factor;
+    Max = max;
+    Min = min;
+    Value = GeneUtil.GetValidVar(value, max, min);
+  }
 
-    public Gene(double f, double max, double min)
-    {
-      this.max = max;
-      this.min = min;
-      factor = GeneUtil.GetValidVar(f, max, min);
-    }
+  /// <summary>
+  /// Generate a mutated Gene in the given range. 
+  /// </summary>
+  /// <param name="max"></param>
+  /// <param name="min"></param>
+  public Gene(double max, double min)
+  {
+    this.Max = max;
+    this.Min = min;
+    GeneUtil.MutatedInRange(max, min);
+  }
 
-    public double GetValue()
-    {
-      return factor;
-    }
-
-    public double GetMax()
-    {
-      return max;
-    }
-
-    public double GetMin()
-    {
-      return min;
-    }
-
-
-    /// <summary>
-    /// Generate a mutated Gene in the given range. 
-    /// </summary>
-    /// <param name="max"></param>
-    /// <param name="min"></param>
-    public Gene(double max, double min)
-    {
-      this.max = max;
-      this.min = min;
-      GeneUtil.MutatedInRange(max, min);
-    }
-
-    public Gene Copy()
-    {
-      return new Gene(this.factor, this.max, this.min);
-    }
+  public Gene Copy()
+  {
+    return new Gene(this.Value, this.Max, this.Min);
   }
 }
