@@ -4,30 +4,19 @@ public class EcoAnimationController : MonoBehaviour
 {
   [SerializeField] private AnimationStatesController animationStatesController;
   private Animator _animator;
-  private int isWalkingHash;
-  private int isRunningHash;
-  private int isDeadHash;
-  private int isAttackingHash;
+  private int _isWalkingHash;
+  private int _isRunningHash;
+  private int _isDeadHash;
+  private int _isAttackingHash;
   private AnimationState animationState;
 
   private void Start()
   {
     _animator = GetComponent<Animator>();
-    switch (_animator.runtimeAnimatorController.name)
-    {
-      case "Wolf":
-        isWalkingHash = Animator.StringToHash("isWalking");
-        break;
-      case "Rabbit":
-        isWalkingHash = Animator.StringToHash("isJumping");
-        break;
-      default:
-        break;
-    }
-
-    isRunningHash = Animator.StringToHash("isRunning");
-    isDeadHash = Animator.StringToHash("isDead_0");
-    isAttackingHash = Animator.StringToHash("isAttacking");
+    _isWalkingHash = Animator.StringToHash("isWalking");
+    _isRunningHash = Animator.StringToHash("isRunning");
+    _isDeadHash = Animator.StringToHash("isDead");
+    _isAttackingHash = Animator.StringToHash("isAttacking");
     animationState = AnimationState.Idle;
   }
 
@@ -49,16 +38,16 @@ public class EcoAnimationController : MonoBehaviour
     switch (newAnimationState)
     {
       case AnimationState.Walking:
-        _animator.SetBool(isWalkingHash, true);
+        _animator.SetBool(_isWalkingHash, true);
         break;
       case AnimationState.Running:
-        _animator.SetBool(isRunningHash, true);
+        _animator.SetBool(_isRunningHash, true);
         break;
       case AnimationState.Dead:
-        _animator.SetBool(isDeadHash, true);
+        _animator.SetBool(_isDeadHash, true);
         break;
       case AnimationState.Attacking:
-        _animator.SetBool(isAttackingHash, true);
+        _animator.SetBool(_isAttackingHash, true);
         break;
       case AnimationState.Idle:
         break;
