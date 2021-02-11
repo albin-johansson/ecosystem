@@ -16,11 +16,12 @@ public sealed class PreyConsumer : MonoBehaviour
   {
     if (other.GetComponent<Prey>() != null)
     {
-      Destroy(other.gameObject);
+      other.gameObject.GetComponent<DeathHandler>().KillMe(CauseOfDeath.Hunted);
+      //Destroy(other.gameObject);
       Hunger = 0;
     }
   }
-  
+
   internal bool IsHungry()
   {
     return Hunger > threshold;
