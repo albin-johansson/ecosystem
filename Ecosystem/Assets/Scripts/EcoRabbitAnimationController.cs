@@ -1,11 +1,12 @@
 using UnityEditor;
 using UnityEngine;
 using UnityEngine.AI;
+using UnityEngine.Serialization;
 
 public class EcoRabbitAnimationController : MonoBehaviour
 
 {
-  [SerializeField] private AnimStatesController animStatesController;
+  [SerializeField] private AnimationStatesController animationStatesController;
   private Animator _animator;
   private int _isJumpingHash;
   private int _isRunningHash;
@@ -23,7 +24,7 @@ public class EcoRabbitAnimationController : MonoBehaviour
 
   private void Update()
   {
-    var incomingState = animStatesController.Animstate;
+    var incomingState = animationStatesController.Animstate;
     if (incomingState == _state)
     {
       return;

@@ -44,6 +44,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   navAgent: {fileID: 6868405535869523061}
+  animationStatesController: {fileID: 3408922285702357311}
   groundMask:
     serializedVersion: 2
     m_Bits: 8
@@ -135,7 +136,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   navAgent: {fileID: 6868405535869523061}
-  animStatesController: {fileID: 3408922285702357311}
+  animationStatesController: {fileID: 0}
 --- !u!1 &6145341749139187818
 GameObject:
   m_ObjectHideFlags: 0
@@ -234,7 +235,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 96e71057e187ca040b7e610e8f68d1ef, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  animStatesController: {fileID: 3408922285702357311}
+  animationStatesController: {fileID: 3408922285702357311}
 --- !u!114 &8163267136658496099
 MonoBehaviour:
   m_ObjectHideFlags: 0
