@@ -18,18 +18,14 @@ public sealed class RayPrefabSpawner : MonoBehaviour
       var terrainData = terrain.terrainData;
       var xPos = Random.Range(-terrainData.bounds.extents.x, terrainData.bounds.extents.x);
       var zPos = Random.Range(-terrainData.bounds.extents.z, terrainData.bounds.extents.z);
-
-
+      
       var position = terrainData.bounds.center + new Vector3(xPos, 0, zPos);
       var height = terrain.SampleHeight(terrainData.bounds.center + new Vector3(xPos, 0, zPos)) + 10;
 
-      RaycastHit hit;
-      if (Physics.Raycast(position + new Vector3(0, height, 0), Vector3.down, out hit, 200.0f))
+      if (!Physics.Raycast(position + new Vector3(0, height, 0), Vector3.down, out var hit, 200.0f)) return;
+      if (hit.transform.CompareTag("Ground"))
       {
-        if (hit.transform.CompareTag("Ground"))
-        {
-          Instantiate(prefab, hit.point, Quaternion.identity);
-        }
+        Instantiate(prefab, hit.point, Quaternion.identity);
       }
     }
   }
