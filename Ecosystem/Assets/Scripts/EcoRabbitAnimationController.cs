@@ -1,38 +1,60 @@
+using UnityEditor;
 using UnityEngine;
 using UnityEngine.AI;
 
 public class EcoRabbitAnimationController : MonoBehaviour
+
 {
   [SerializeField] private AnimStatesController animStatesController;
-  private NavMeshAgent navAgent;
-  private Animator animator;
-  private int isJumpingHash;
-  private int isLookingOutHash;
-  private int isRunningHash;
-  private int isDeadHash;
-  private int isJumpingUpHash;
+  private Animator _animator;
+  private int _isJumpingHash;
+  private int _isRunningHash;
+  private int _isDeadHash;
+  private State _state;
 
   private void Start()
   {
-    navAgent = GetComponent<NavMeshAgent>();
-    animator = GetComponent<Animator>();
-    isJumpingHash = Animator.StringToHash("isJumping");
-    isLookingOutHash = Animator.StringToHash("isLookingOut");
-    isRunningHash = Animator.StringToHash("isRunning");
-    isDeadHash = Animator.StringToHash("isDead_0");
-    isJumpingUpHash = Animator.StringToHash("isJumpingUp");
+    _animator = GetComponent<Animator>();
+    _isJumpingHash = Animator.StringToHash("isJumping");
+    _isRunningHash = Animator.StringToHash("isRunning");
+    _isDeadHash = Animator.StringToHash("isDead_0");
+    _state = State.Idle;
   }
 
   private void Update()
   {
-    switch (AnimStatesController.Animstate)
+    var incomingState = animStatesController.Animstate;
+    if (incomingState == _state)
     {
-      case State.Idle:
-        animator.SetBool(isJumpingHash, false);
-        break;
+      return;
+    }
+
+    _state = incomingState;
+    ClearParameters();
+    SetParameter(_state);
+  }
+
+  private void SetParameter(State newState)
+  {
+    switch (newState)
+    {
       case State.Walking:
-        animator.SetBool(isJumpingHash, true);
+        _animator.SetBool(_isJumpingHash, true);
         break;
+      case State.Running:
+        _animator.SetBool(_isRunningHash, true);
+        break;
+      case State.Dead:
+        _animator.SetBool(_isDeadHash, true);
+        break;
+    }
+  }
+
+  private void ClearParameters()
+  {
+    foreach (var parameter in _animator.parameters)
+    {
+      _animator.ResetTrigger(parameter.name);
     }
   }
 }

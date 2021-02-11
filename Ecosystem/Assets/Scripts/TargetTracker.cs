@@ -7,10 +7,11 @@ using Random = UnityEngine.Random;
 public sealed class TargetTracker : MonoBehaviour
 {
   [SerializeField] private NavMeshAgent navAgent;
+  [SerializeField] private AnimStatesController animStatesController;
   private GameObject _target;
   private float _timeRemaining;
   private bool _hasTarget = false;
-  
+
   private const double StopTrackingThreshold = 0.1f;
 
   //Runs a timer for when to stop looking for the target
@@ -31,6 +32,7 @@ public sealed class TargetTracker : MonoBehaviour
   //Sets a target to hone in on and start a timer
   public void SetTarget(GameObject target)
   {
+    animStatesController.Animstate = State.Walking;
     navAgent.SetDestination(target.transform.position);
     _target = target;
     _timeRemaining = 5;

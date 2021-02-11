@@ -1,10 +1,8 @@
 ﻿public enum State
 {
   Idle,
-  Eating,
-  Drinking,
-  Hunting,
   Running,
+  Attacking,
   Walking,
   Dead
 }

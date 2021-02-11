@@ -1,8 +1,7 @@
-﻿using UnityEngine;
+﻿using System.Runtime.InteropServices;
+using UnityEngine;
 
 public sealed class AnimStatesController : MonoBehaviour
 {
- private static State _animstate = State.Idle;
-
- public static State Animstate { get; set; }
+  public State Animstate { get; set; }
 }
