@@ -136,7 +136,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   navAgent: {fileID: 6868405535869523061}
-  animationStatesController: {fileID: 0}
 --- !u!1 &6145341749139187818
 GameObject:
   m_ObjectHideFlags: 0
@@ -211,32 +210,36 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   rate: 0.02
   threshold: 0.1
---- !u!114 &3408922285702357311
-MonoBehaviour:
+--- !u!54 &1022828079324828776
+Rigidbody:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6765261209891845031}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4c2008d296c842b181f6c433da52ba6a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!114 &8145578711301793012
-MonoBehaviour:
+  serializedVersion: 2
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_UseGravity: 0
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0
+--- !u!65 &433456279453254249
+BoxCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6765261209891845031}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
   m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 96e71057e187ca040b7e610e8f68d1ef, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  animationStatesController: {fileID: 3408922285702357311}
---- !u!114 &8163267136658496099
+  serializedVersion: 2
+  m_Size: {x: 1, y: 1, z: 1}
+  m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &39256655187426464
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
