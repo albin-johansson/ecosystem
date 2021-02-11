@@ -22,12 +22,9 @@ public sealed class ResourceFinder : MonoBehaviour
   {
     if (!targetTracker.HasTarget)
     {
-      var gameObjects = memoryController.GetFromMemory(_priority);
-
-      //Selects a random object that matches priority, if non exist set hasTarget to false again.
-      if (gameObjects.Count > 0)
+      var target = memoryController.RecallFromMemory(_priority);
+      if (target)
       {
-        var target = gameObjects[Random.Range(0, gameObjects.Count - 1)];
         targetTracker.SetTarget(target);
       }
     }
