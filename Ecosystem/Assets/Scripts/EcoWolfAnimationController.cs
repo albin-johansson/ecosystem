@@ -1,66 +1,66 @@
 ﻿using UnityEngine;
-using UnityEngine.Serialization;
 
-namespace DefaultNamespace
+public sealed class EcoWolfAnimationController : MonoBehaviour
 {
-  public class EcoWolfAnimationController : MonoBehaviour
+  [SerializeField] private AnimationStatesController animationStatesController;
+  private Animator _animator;
+  private int isWalkingHash;
+  private int isRunningHash;
+  private int isDeadHash;
+  private int isAttackingHash;
+  private AnimationState animationState;
+
+  private void Start()
   {
-    [SerializeField] private AnimationStatesController animationStatesController;
-    private Animator _animator;
-    private int _isWalkingHash;
-    private int _isRunningHash;
-    private int _isDeadHash;
-    private int _isAttackingHash;
-    private State _state;
+    _animator = GetComponent<Animator>();
+    isWalkingHash = Animator.StringToHash("isWalking");
+    isRunningHash = Animator.StringToHash("isRunning");
+    isDeadHash = Animator.StringToHash("isDead");
+    isAttackingHash = Animator.StringToHash("isAttack-Idle");
+    animationState = AnimationState.Idle;
+  }
 
-    private void Start()
+  private void Update()
+  {
+    var incomingState = animationStatesController.AnimAnimationState;
+    if (incomingState == animationState)
     {
-      _animator = GetComponent<Animator>();
-      _isWalkingHash = Animator.StringToHash("isWalking");
-      _isRunningHash = Animator.StringToHash("isRunning");
-      _isDeadHash = Animator.StringToHash("isDead");
-      _isAttackingHash = Animator.StringToHash("isAttack-Idle");
-      _state = State.Idle;
+      return;
     }
 
-    private void Update()
-    {
-      var incomingState = animationStatesController.Animstate;
-      if (incomingState == _state)
-      {
-        return;
-      }
+    animationState = incomingState;
+    ResetAnimatorParameters();
+    SetAnimatorParameter(animationState);
+  }
 
-      _state = incomingState;
-      ClearParameters();
-      SetParameter(_state);
+  private void SetAnimatorParameter(AnimationState newAnimationState)
+  {
+    switch (newAnimationState)
+    {
+      case AnimationState.Walking:
+        _animator.SetBool(isWalkingHash, true);
+        break;
+      case AnimationState.Running:
+        _animator.SetBool(isRunningHash, true);
+        break;
+      case AnimationState.Dead:
+        _animator.SetBool(isDeadHash, true);
+        break;
+      case AnimationState.Attacking:
+        _animator.SetBool(isAttackingHash, true);
+        break;
+      case AnimationState.Idle:
+        break;
+      default:
+        break;
     }
+  }
 
-    private void SetParameter(State newState)
+  private void ResetAnimatorParameters()
+  {
+    foreach (var parameter in _animator.parameters)
     {
-      switch (newState)
-      {
-        case State.Walking:
-          _animator.SetBool(_isWalkingHash, true);
-          break;
-        case State.Running:
-          _animator.SetBool(_isRunningHash, true);
-          break;
-        case State.Dead:
-          _animator.SetBool(_isDeadHash, true);
-          break;
-        case State.Attacking:
-          _animator.SetBool(_isAttackingHash, true);
-          break;
-      }
-    }
-
-    private void ClearParameters()
-    {
-      foreach (var parameter in _animator.parameters)
-      {
-        _animator.ResetTrigger(parameter.name);
-      }
+      _animator.ResetTrigger(parameter.name);
     }
   }
 }

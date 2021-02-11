@@ -1,7 +1,6 @@
 using System;
 using UnityEngine;
 using UnityEngine.AI;
-using UnityEngine.Serialization;
 using Random = UnityEngine.Random;
 
 public sealed class RandomMovement : MonoBehaviour
@@ -46,7 +45,7 @@ public sealed class RandomMovement : MonoBehaviour
     if (Physics.Raycast(destination, -_transform.up, 2f, groundMask))
     {
       navAgent.SetDestination(destination);
-      animationStatesController.Animstate = State.Walking;
+      animationStatesController.AnimAnimationState = AnimationState.Walking;
     }
   }
 }

@@ -1,57 +1,59 @@
-using UnityEditor;
 using UnityEngine;
-using UnityEngine.AI;
-using UnityEngine.Serialization;
 
-public class EcoRabbitAnimationController : MonoBehaviour
-
+public sealed class EcoRabbitAnimationController : MonoBehaviour
 {
   [SerializeField] private AnimationStatesController animationStatesController;
   private Animator _animator;
-  private int _isJumpingHash;
-  private int _isRunningHash;
-  private int _isDeadHash;
-  private State _state;
+  private int isJumpingHash;
+  private int isRunningHash;
+  private int isDeadHash;
+  private AnimationState animationState;
 
   private void Start()
   {
     _animator = GetComponent<Animator>();
-    _isJumpingHash = Animator.StringToHash("isJumping");
-    _isRunningHash = Animator.StringToHash("isRunning");
-    _isDeadHash = Animator.StringToHash("isDead_0");
-    _state = State.Idle;
+    isJumpingHash = Animator.StringToHash("isJumping");
+    isRunningHash = Animator.StringToHash("isRunning");
+    isDeadHash = Animator.StringToHash("isDead_0");
+    animationState = AnimationState.Idle;
   }
 
   private void Update()
   {
-    var incomingState = animationStatesController.Animstate;
-    if (incomingState == _state)
+    var incomingState = animationStatesController.AnimAnimationState;
+    if (incomingState == animationState)
     {
       return;
     }
 
-    _state = incomingState;
-    ClearParameters();
-    SetParameter(_state);
+    animationState = incomingState;
+    ResetAnimatorParameters();
+    SetAnimatorParameter(animationState);
   }
 
-  private void SetParameter(State newState)
+  private void SetAnimatorParameter(AnimationState newAnimationState)
   {
-    switch (newState)
+    switch (newAnimationState)
     {
-      case State.Walking:
-        _animator.SetBool(_isJumpingHash, true);
+      case AnimationState.Walking:
+        _animator.SetBool(isJumpingHash, true);
         break;
-      case State.Running:
-        _animator.SetBool(_isRunningHash, true);
+      case AnimationState.Running:
+        _animator.SetBool(isRunningHash, true);
         break;
-      case State.Dead:
-        _animator.SetBool(_isDeadHash, true);
+      case AnimationState.Dead:
+        _animator.SetBool(isDeadHash, true);
+        break;
+      case AnimationState.Idle:
+        break;
+      case AnimationState.Attacking:
+        break;
+      default:
         break;
     }
   }
 
-  private void ClearParameters()
+  private void ResetAnimatorParameters()
   {
     foreach (var parameter in _animator.parameters)
     {

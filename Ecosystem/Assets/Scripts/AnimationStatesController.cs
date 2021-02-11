@@ -1,7 +1,6 @@
-﻿using System.Runtime.InteropServices;
-using UnityEngine;
+﻿using UnityEngine;
 
 public sealed class AnimationStatesController : MonoBehaviour
 {
-  public State Animstate { get; set; }
+  public AnimationState AnimAnimationState { get; set; }
 }
