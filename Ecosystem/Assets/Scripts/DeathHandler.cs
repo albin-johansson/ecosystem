@@ -14,7 +14,7 @@ public sealed class DeathHandler : MonoBehaviour
   public void KillMe(CauseOfDeath cause)
   {
     // notify log of death. 
-    Debug.Log("Something is about to died");
+    Debug.Log("Something is about to died by: " + cause);
     DestroyObjectDelayed();
   }
 }

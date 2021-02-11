@@ -4,10 +4,11 @@ public sealed class PreyConsumer : MonoBehaviour
 {
   [SerializeField] private double rate = 0.02;
   [SerializeField] private double threshold = 0.02;
+  [SerializeField] private double maxHunger = 100;
+
 
   [SerializeField] private DeathHandler deathHandler;
   private double Hunger { get; set; }
-  private double maxHunger = 100;
 
   private void Update()
   {
