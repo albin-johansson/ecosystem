@@ -16,7 +16,7 @@ public sealed class ClickPrefabSpawner : MonoBehaviour
   {
     if (!Input.GetMouseButtonDown(0)) return;
 
-    if (Physics.Raycast(camera1.ScreenPointToRay(Input.mousePosition), out RaycastHit hitInfo))
+    if (Physics.Raycast(camera1.ScreenPointToRay(Input.mousePosition), out var hitInfo))
     {
       SpawnAtPosition(hitInfo.point);
     }
