@@ -1,5 +1,4 @@
 ﻿using UnityEngine;
-using Random = UnityEngine.Random;
 
 public sealed class PreyFinder : MonoBehaviour
 {

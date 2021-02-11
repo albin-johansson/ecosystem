@@ -5,7 +5,6 @@ public sealed class ResourceFinder : MonoBehaviour
 {
   [SerializeField] private FoodConsumer foodConsumer;
   [SerializeField] private WaterConsumer waterConsumer;
-
   [SerializeField] private MemoryController memoryController;
   [SerializeField] private TargetTracker targetTracker;
 
