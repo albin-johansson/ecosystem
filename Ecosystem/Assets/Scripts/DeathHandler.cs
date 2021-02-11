@@ -8,7 +8,7 @@ public class DeathHandler : MonoBehaviour
   void DestroyObjectDelayed()
   {
     //TODO: make the time depend on the death animation
-    Destroy(transform.parent.gameObject);
+    Destroy(gameObject.gameObject);
   }
 
   public void KillMe(CauseOfDeath cause)
