@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-public sealed class EcoWolfAnimationController : MonoBehaviour
+public class EcoAnimationController : MonoBehaviour
 {
   [SerializeField] private AnimationStatesController animationStatesController;
   private Animator _animator;
@@ -13,10 +13,21 @@ public sealed class EcoWolfAnimationController : MonoBehaviour
   private void Start()
   {
     _animator = GetComponent<Animator>();
-    isWalkingHash = Animator.StringToHash("isWalking");
+    switch (_animator.runtimeAnimatorController.name)
+    {
+      case "Wolf":
+        isWalkingHash = Animator.StringToHash("isWalking");
+        break;
+      case "Rabbit":
+        isWalkingHash = Animator.StringToHash("isJumping");
+        break;
+      default:
+        break;
+    }
+
     isRunningHash = Animator.StringToHash("isRunning");
-    isDeadHash = Animator.StringToHash("isDead");
-    isAttackingHash = Animator.StringToHash("isAttack-Idle");
+    isDeadHash = Animator.StringToHash("isDead_0");
+    isAttackingHash = Animator.StringToHash("isAttacking");
     animationState = AnimationState.Idle;
   }
 
