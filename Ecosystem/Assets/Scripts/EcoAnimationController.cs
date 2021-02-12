@@ -8,7 +8,7 @@ public class EcoAnimationController : MonoBehaviour
   private int _isRunningHash;
   private int _isDeadHash;
   private int _isAttackingHash;
-  private AnimationState animationState;
+  private AnimationState _animationState;
 
   private void Start()
   {
@@ -17,20 +17,20 @@ public class EcoAnimationController : MonoBehaviour
     _isRunningHash = Animator.StringToHash("isRunning");
     _isDeadHash = Animator.StringToHash("isDead");
     _isAttackingHash = Animator.StringToHash("isAttacking");
-    animationState = AnimationState.Idle;
+    _animationState = AnimationState.Idle;
   }
 
   private void Update()
   {
     var incomingState = animationStatesController.AnimAnimationState;
-    if (incomingState == animationState)
+    if (incomingState == _animationState)
     {
       return;
     }
 
-    animationState = incomingState;
+    _animationState = incomingState;
     ResetAnimatorParameters();
-    SetAnimatorParameter(animationState);
+    SetAnimatorParameter(_animationState);
   }
 
   private void SetAnimatorParameter(AnimationState newAnimationState)
