@@ -14,6 +14,6 @@ public class ThirstBar : MonoBehaviour
 
     public void SetThirst(float thirst)
     {
-        slider.value = thirst;
+        slider.value = slider.maxValue - thirst;
     }
 }
