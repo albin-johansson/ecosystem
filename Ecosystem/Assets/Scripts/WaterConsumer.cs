@@ -2,33 +2,33 @@ using UnityEngine;
 
 public sealed class WaterConsumer : MonoBehaviour
 {
-    [SerializeField] private double rate = 0.02;
-    [SerializeField] private double threshold = 0.1;
-    [SerializeField] private ThirstBar thirstBar;
+  [SerializeField] private double rate = 0.02;
+  [SerializeField] private double threshold = 0.1;
+  [SerializeField] private ResourceBar resourceBar;
 
-    private double Thirst { get; set; }
+  private double Thirst { get; set; }
 
-    private void Start()
+  private void Start()
+  {
+    resourceBar.SetMaxValue(1f);   //Should be set to max thirst before death
+  }
+
+  private void Update()
+  {
+    Thirst += rate * Time.deltaTime;
+    resourceBar.SetValue((float)Thirst);
+  }
+
+  private void OnTriggerEnter(Collider other)
+  {
+    if (other.GetComponent<Water>() != null)
     {
-        thirstBar.SetMaxThirst(1f);   //Should be set to max thirst before death
+      Thirst = 0;
     }
+  }
 
-    private void Update()
-    {
-        Thirst += rate * Time.deltaTime;
-        thirstBar.SetThirst((float)Thirst);
-    }
-
-    private void OnTriggerEnter(Collider other)
-    {
-        if (other.GetComponent<Water>() != null)
-        {
-            Thirst = 0;
-        }
-    }
-
-    internal bool IsThirsty()
-    {
-        return Thirst > threshold;
-    }
+  internal bool IsThirsty()
+  {
+    return Thirst > threshold;
+  }
 }
