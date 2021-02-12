@@ -7,13 +7,12 @@ public class ThirstBar : MonoBehaviour
 {
     [SerializeField] private Slider slider;
 
-    public void SetMaxThirst(int thirst)
+    public void SetMaxThirst(float thirst)
     {
         slider.maxValue = thirst;
-        slider.value = thirst;
     }
 
-    public void SetHealth(int thirst)
+    public void SetThirst(float thirst)
     {
         slider.value = thirst;
     }
