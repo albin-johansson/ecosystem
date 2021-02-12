@@ -25,7 +25,7 @@ public sealed class FoodConsumer : MonoBehaviour
     {
       Destroy(other);
       Hunger = 0;
-      }
+    }
   }
 
   internal bool IsHungry()

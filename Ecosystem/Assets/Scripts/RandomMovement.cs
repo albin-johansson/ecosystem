@@ -27,7 +27,7 @@ public sealed class RandomMovement : MonoBehaviour
       TargetRandomDestination();
       _timer = 10;
     }
-      else
+    else
     {
       _timer -= Time.deltaTime;
     }
