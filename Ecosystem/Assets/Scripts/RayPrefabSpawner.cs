@@ -22,7 +22,10 @@ public sealed class RayPrefabSpawner : MonoBehaviour
       var position = terrainData.bounds.center + new Vector3(xPos, 0, zPos);
       var height = terrain.SampleHeight(terrainData.bounds.center + new Vector3(xPos, 0, zPos)) + 10;
 
-      if (!Physics.Raycast(position + new Vector3(0, height, 0), Vector3.down, out var hit, 200.0f)) return;
+      if (!Physics.Raycast(position + new Vector3(0, height, 0), Vector3.down, out var hit, 200.0f))
+      {
+        return;
+      }
       if (hit.transform.CompareTag("Ground"))
       {
         Instantiate(prefab, hit.point, Quaternion.identity);

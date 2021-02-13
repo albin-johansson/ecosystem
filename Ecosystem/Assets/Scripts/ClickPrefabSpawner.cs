@@ -5,18 +5,21 @@ using UnityEngine;
 public sealed class ClickPrefabSpawner : MonoBehaviour
 {
   [SerializeField] private GameObject prefab;
-  private Camera camera1;
+  private Camera _mainCamera;
 
   private void Start()
   {
-    camera1 = Camera.main;
+    _mainCamera = Camera.main;
   }
 
   private void Update()
   {
-    if (!Input.GetMouseButtonDown(0)) return;
+    if (!Input.GetMouseButtonDown(0))
+    {
+      return;
+    }
 
-    if (Physics.Raycast(camera1.ScreenPointToRay(Input.mousePosition), out var hitInfo))
+    if (Physics.Raycast(_mainCamera.ScreenPointToRay(Input.mousePosition), out var hitInfo))
     {
       SpawnAtPosition(hitInfo.point);
     }
