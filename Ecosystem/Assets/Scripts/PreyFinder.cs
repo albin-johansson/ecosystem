@@ -50,7 +50,7 @@ public sealed class PreyFinder : MonoBehaviour
   /// When colliding with an object, that object is saved to the animals memory, and subsequently set as a target if the
   /// priority matches.
   /// </summary>
-  /// TODO Might be an improvment to only save the object and not set it as a target.
+  /// TODO Might be an improvement to only save the object and not set it as a target.
   private void OnTriggerEnter(Collider other)
   {
     memoryController.SaveToMemory(other.gameObject);
