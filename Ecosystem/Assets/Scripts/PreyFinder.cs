@@ -56,8 +56,8 @@ public sealed class PreyFinder : MonoBehaviour
     memoryController.SaveToMemory(other.gameObject);
     if (!targetTracker.HasTarget)
     {
-      if (_priority == Desire.Prey && other.GetComponent<Prey>() != null ||
-          _priority == Desire.Water && other.GetComponent<Water>() != null)
+      if (_priority == Desire.Prey && other.GetComponent<Prey>() ||
+          _priority == Desire.Water && other.GetComponent<Water>())
       {
         targetTracker.SetTarget(other.gameObject);
       }
