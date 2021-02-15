@@ -1,13 +1,11 @@
-using System;
-using UnityEditor.SceneManagement;
 using UnityEngine;
 using UnityEngine.AI;
-using Random = UnityEngine.Random;
+
 
 public sealed class TargetTracker : MonoBehaviour
 {
   [SerializeField] private NavMeshAgent navAgent;
-
+  [SerializeField] private AnimationStatesController animationStatesController;
   private GameObject _target;
   private float _timeRemaining;
   private bool _hasTarget = false;
@@ -43,6 +41,7 @@ public sealed class TargetTracker : MonoBehaviour
   //Sets a target to hone in on and start a timer
   public void SetTarget(GameObject target)
   {
+    animationStatesController.AnimAnimationState = AnimationState.Walking;
     navAgent.SetDestination(target.transform.position);
     _target = target;
     _timeRemaining = 5;
