@@ -16,7 +16,7 @@ public sealed class WaterConsumer : MonoBehaviour
 
     if (Thirst > maxThirst)
     {
-      deathHandler.KillMe(CauseOfDeath.Dehydration);
+      deathHandler.Die(CauseOfDeath.Dehydration);
     }
   }
 

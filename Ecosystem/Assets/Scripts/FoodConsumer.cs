@@ -1,5 +1,4 @@
 using UnityEngine;
-using UnityEngine.Serialization;
 
 public sealed class FoodConsumer : MonoBehaviour
 {
@@ -14,7 +13,7 @@ public sealed class FoodConsumer : MonoBehaviour
     Hunger += rate * Time.deltaTime;
     if (Hunger > maxHunger)
     {
-      deathHandler.KillMe(CauseOfDeath.Starvation);
+      deathHandler.Die(CauseOfDeath.Starvation);
     }
   }
 

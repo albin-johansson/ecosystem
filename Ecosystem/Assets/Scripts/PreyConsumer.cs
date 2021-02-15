@@ -15,7 +15,7 @@ public sealed class PreyConsumer : MonoBehaviour
     Hunger += rate * Time.deltaTime;
     if (Hunger > maxHunger)
     {
-      deathHandler.KillMe(CauseOfDeath.Starvation);
+      deathHandler.Die(CauseOfDeath.Starvation);
     }
   }
 
@@ -23,8 +23,7 @@ public sealed class PreyConsumer : MonoBehaviour
   {
     if (other.GetComponent<Prey>() != null)
     {
-      other.gameObject.GetComponent<DeathHandler>().KillMe(CauseOfDeath.Hunted);
-      //Destroy(other.gameObject);
+      other.gameObject.GetComponent<DeathHandler>().Die(CauseOfDeath.Hunted);
       Hunger = 0;
     }
   }

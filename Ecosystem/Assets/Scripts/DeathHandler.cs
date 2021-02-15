@@ -5,16 +5,15 @@
 /// </summary>
 public sealed class DeathHandler : MonoBehaviour
 {
-  void DestroyObjectDelayed()
+  private void DestroyObjectDelayed()
   {
     //TODO: make the time depend on the death animation
     Destroy(gameObject.gameObject, 5);
   }
 
-  public void KillMe(CauseOfDeath cause)
+  public void Die(CauseOfDeath cause)
   {
-    // notify log of death. 
-    Debug.Log("Something is about to died by: " + cause);
+    Debug.Log("Something is about to die due to: " + cause);
     DestroyObjectDelayed();
   }
 }
