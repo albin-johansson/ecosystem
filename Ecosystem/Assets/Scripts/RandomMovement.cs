@@ -6,6 +6,7 @@ using Random = UnityEngine.Random;
 public sealed class RandomMovement : MonoBehaviour
 {
   [SerializeField] private NavMeshAgent navAgent;
+  [SerializeField] private AnimationStatesController animationStatesController;
 
   [SerializeField, Tooltip("What is considered to be the ground")]
   private LayerMask groundMask;
@@ -44,6 +45,7 @@ public sealed class RandomMovement : MonoBehaviour
     if (Physics.Raycast(destination, -_transform.up, 2f, groundMask))
     {
       navAgent.SetDestination(destination);
+      animationStatesController.AnimAnimationState = AnimationState.Walking;
     }
   }
 }
