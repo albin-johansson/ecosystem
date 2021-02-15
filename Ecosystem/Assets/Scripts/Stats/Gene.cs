@@ -18,8 +18,8 @@
   /// <param name="min"></param>
   public Gene(double max, double min)
   {
-    this.Max = max;
-    this.Min = min;
+    Max = max;
+    Min = min;
     GeneUtil.MutatedInRange(max, min);
   }
 

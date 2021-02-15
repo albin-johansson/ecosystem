@@ -1,5 +1,4 @@
 ﻿using System.Collections.Generic;
-using NUnit.Framework;
 
 public sealed class GeneList
 {
