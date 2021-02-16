@@ -4,15 +4,22 @@ public sealed class PreyConsumer : MonoBehaviour
 {
   [SerializeField] private double rate = 0.02;
   [SerializeField] private double threshold = 0.02;
+  [SerializeField] private ResourceBar resourceBar;
   [SerializeField] private double maxHunger = 100;
 
 
   [SerializeField] private DeathHandler deathHandler;
   private double Hunger { get; set; }
 
+  private void Start()
+  {
+    resourceBar.SetMaxValue((float) maxHunger);
+  }
+
   private void Update()
   {
     Hunger += rate * Time.deltaTime;
+    resourceBar.SetValue((float)Hunger);
     if (Hunger > maxHunger)
     {
       deathHandler.Die(CauseOfDeath.Starvation);
@@ -25,7 +32,7 @@ public sealed class PreyConsumer : MonoBehaviour
     {
       other.gameObject.GetComponent<DeathHandler>().Die(CauseOfDeath.Hunted);
       Hunger = 0;
-    }
+      }
   }
 
   internal bool IsHungry()
