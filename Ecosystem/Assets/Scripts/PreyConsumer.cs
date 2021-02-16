@@ -3,19 +3,33 @@
 public sealed class PreyConsumer : MonoBehaviour
 {
   [SerializeField] private Genome genome;
+  [SerializeField] private ResourceBar resourceBar;
+  [SerializeField] private double maxHunger = 100;
 
+
+  [SerializeField] private DeathHandler deathHandler;
   private double Hunger { get; set; }
+
+  private void Start()
+  {
+    resourceBar.SetMaxValue((float) maxHunger);
+  }
 
   private void Update()
   {
     Hunger += genome.GetHungerRate() * Time.deltaTime;
+    resourceBar.SetValue((float) Hunger);
+    if (Hunger > maxHunger)
+    {
+      deathHandler.Die(CauseOfDeath.Starvation);
+    }
   }
 
   private void OnTriggerEnter(Collider other)
   {
     if (other.GetComponent<Prey>() != null)
     {
-      Destroy(other.gameObject);
+      other.gameObject.GetComponent<DeathHandler>().Die(CauseOfDeath.Hunted);
       Hunger = 0;
     }
   }

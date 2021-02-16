@@ -3,12 +3,27 @@ using UnityEngine;
 public sealed class WaterConsumer : MonoBehaviour
 {
   [SerializeField] private Genome genome;
+  [SerializeField] private ResourceBar resourceBar;
+  [SerializeField] private double maxThirst = 100;
 
+
+  [SerializeField] private DeathHandler deathHandler;
   private double Thirst { get; set; }
+
+  private void Start()
+  {
+    resourceBar.SetMaxValue((float) maxThirst);
+  }
 
   private void Update()
   {
     Thirst += genome.GetThirstRate() * Time.deltaTime;
+    resourceBar.SetValue((float) Thirst);
+
+    if (Thirst > maxThirst)
+    {
+      deathHandler.Die(CauseOfDeath.Dehydration);
+    }
   }
 
   private void OnTriggerEnter(Collider other)
