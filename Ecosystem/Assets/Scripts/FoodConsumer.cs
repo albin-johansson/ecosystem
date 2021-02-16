@@ -12,7 +12,7 @@ public sealed class FoodConsumer : MonoBehaviour
 
   private void Start()
   {
-    resourceBar.SetMaxValue(1f);   //Should be set to max hunger before death
+    resourceBar.SetMaxValue((float) maxHunger);
   }
 
   private void Update()

@@ -13,7 +13,7 @@ public sealed class WaterConsumer : MonoBehaviour
 
   private void Start()
   {
-    resourceBar.SetMaxValue(1f);   //Should be set to max thirst before death
+    resourceBar.SetMaxValue((float) maxThirst);
   }
 
   private void Update()
