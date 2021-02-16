@@ -6,6 +6,8 @@ public sealed class FoodConsumer : MonoBehaviour
   [SerializeField] private double threshold = 0.1;
   [SerializeField] private ResourceBar resourceBar;
 
+  [SerializeField] private DeathHandler deathHandler;
+  [SerializeField] private double maxHunger = 100;
   private double Hunger { get; set; }
 
   private void Start()
@@ -17,6 +19,10 @@ public sealed class FoodConsumer : MonoBehaviour
   {
     Hunger += rate * Time.deltaTime;
     resourceBar.SetValue((float)Hunger);
+    if (Hunger > maxHunger)
+    {
+      deathHandler.Die(CauseOfDeath.Starvation);
+    }
   }
 
   private void OnTriggerEnter(Collider other)

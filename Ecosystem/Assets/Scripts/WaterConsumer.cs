@@ -5,7 +5,10 @@ public sealed class WaterConsumer : MonoBehaviour
   [SerializeField] private double rate = 0.02;
   [SerializeField] private double threshold = 0.1;
   [SerializeField] private ResourceBar resourceBar;
+  [SerializeField] private double maxThirst = 100;
 
+
+  [SerializeField] private DeathHandler deathHandler;
   private double Thirst { get; set; }
 
   private void Start()
@@ -17,6 +20,11 @@ public sealed class WaterConsumer : MonoBehaviour
   {
     Thirst += rate * Time.deltaTime;
     resourceBar.SetValue((float)Thirst);
+
+    if (Thirst > maxThirst)
+    {
+      deathHandler.Die(CauseOfDeath.Dehydration);
+    }
   }
 
   private void OnTriggerEnter(Collider other)
