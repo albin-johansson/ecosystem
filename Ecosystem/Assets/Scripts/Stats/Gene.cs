@@ -4,27 +4,27 @@
   public double Min { get; private set; }
   public double Value { get; private set; }
 
-  public Gene(double value, double max, double min)
+  public Gene(double value, double min, double max)
   {
     Max = max;
     Min = min;
-    Value = GeneUtil.GetValidVar(value, max, min);
+    Value = GeneUtil.GetValidVar(value, min, max);
   }
 
-  /// <summary>
-  /// Generate a mutated Gene in the given range. 
-  /// </summary>
-  /// <param name="max"></param>
-  /// <param name="min"></param>
-  public Gene(double max, double min)
+  //Returns value as a number in [0,1]. 
+  public double ValueAsDecimal()
   {
-    Max = max;
-    Min = min;
-    GeneUtil.MutatedInRange(max, min);
+    return (Value - Min) / (Max - Min);
   }
 
-  public Gene Copy()
+  // Returns a new mutated gene based on the current genes range. 
+  public Gene MutatedGene()
   {
-    return new Gene(this.Value, this.Max, this.Min);
+    return new Gene(GeneUtil.MutatedInRange(Min, Max), Min, Max);
+  }
+
+  //Copy of gene
+  public Gene(Gene other) : this(other.Value, other.Min, other.Max)
+  {
   }
 }

@@ -1,30 +1,13 @@
-﻿using System;
+﻿using UnityEngine;
+using Random = System.Random;
 
 
 public class GeneUtil
 {
-  /// <summary>
-  /// Checks that the value is in the given range. If it is outside the range,
-  /// set it to the closest value. 
-  /// </summary>
-  /// <param name="value"></param>
-  /// <param name="max"></param>
-  /// <param name="min"></param>
-  /// <returns></returns>
-  public static double GetValidVar(double value, double max, double min)
+  //Clamps
+  public static double GetValidVar(double value, double min, double max)
   {
-    if (value < min)
-    {
-      return min;
-    }
-    else if (value > max)
-    {
-      return max;
-    }
-    else
-    {
-      return value;
-    }
+    return Mathf.Clamp((float) value, (float) min, (float) max);
   }
 
   private static Random r = new Random();
@@ -43,7 +26,7 @@ public class GeneUtil
   }
 
 
-  public static double MutatedInRange(double max, double min)
+  public static double MutatedInRange(double min, double max)
   {
     return r.NextDouble() * (max - min) + min;
   }
