@@ -108,6 +108,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   rate: 0.02
   threshold: 0.02
+  maxHunger: 100
+  deathHandler: {fileID: 4576550596966389264}
 --- !u!114 &2767905003252926869
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -122,6 +124,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   rate: 0.02
   threshold: 0.1
+  maxThirst: 100
+  deathHandler: {fileID: 4576550596966389264}
 --- !u!65 &2816614862631988519
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -157,7 +161,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 5156573530752757657}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 94d5dd74c44c6734883d5d455ef3a879, type: 3}
+  m_Script: {fileID: 11500000, guid: 04dec80f06674629b7366fcb55ec29f2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!114 &5449201025817228754
