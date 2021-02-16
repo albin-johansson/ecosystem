@@ -7,10 +7,18 @@ public sealed class TargetTracker : MonoBehaviour
   [SerializeField] private NavMeshAgent navAgent;
   [SerializeField] private AnimationStatesController animationStatesController;
   private GameObject _target;
+  private bool _targetInSight = false;
   private float _timeRemaining;
   private bool _hasTarget = false;
+  private Desire _targetType;
   private bool _chased = false;
   private Vector3 _fleeDirection;
+
+
+  int water = 4;
+  int food = 6;
+  int rabbit = 8;
+  int wolf = 7;
 
   private const double StopTrackingThreshold = 0.1f;
 
@@ -27,6 +35,7 @@ public sealed class TargetTracker : MonoBehaviour
         //When the timer runs out TargetTracker stops targeting letting ResourceFinder continue working.
         _timeRemaining = 0;
         _hasTarget = false;
+        _targetInSight = false;
         _chased = false;
       }
     }
@@ -39,12 +48,11 @@ public sealed class TargetTracker : MonoBehaviour
   }
 
   //Sets a target to hone in on and start a timer
-  public void SetTarget(GameObject target)
+  public void SetTarget(Vector3 target, Desire desire)
   {
-    animationStatesController.AnimAnimationState = AnimationState.Walking;
-    navAgent.SetDestination(target.transform.position);
-    _target = target;
-    _timeRemaining = 5;
+    navAgent.SetDestination(target);
+    _targetType = desire;
+    _timeRemaining = 10;
     _hasTarget = true;
   }
 
@@ -54,6 +62,7 @@ public sealed class TargetTracker : MonoBehaviour
     SetFleeDirection(predator.transform.position);
     _target = predator;
     _hasTarget = true;
+    _targetInSight = true;
     _chased = true;
     _timeRemaining = 5;
   }
@@ -73,7 +82,7 @@ public sealed class TargetTracker : MonoBehaviour
       return;
     }
 
-    if (other.gameObject.Equals(_target))
+    if (_targetInSight && other.gameObject.Equals(_target))
     {
       //if predator is still in range set the fleeing direction to match the predator. 
       if (_chased)
@@ -83,12 +92,47 @@ public sealed class TargetTracker : MonoBehaviour
         return;
       }
 
-      navAgent.SetDestination(_target.transform.position);
+      navAgent.SetDestination(other.transform.position);
       if (navAgent.remainingDistance < StopTrackingThreshold)
       {
         _hasTarget = false;
+        _targetInSight = false;
         _timeRemaining = 0;
       }
+    }
+
+    if (_targetInSight)
+    {
+      return;
+    }
+
+    switch (_targetType)
+    {
+      case Desire.Food:
+        if (other.gameObject.layer.Equals(food))
+        {
+          _target = other.gameObject;
+          _targetInSight = true;
+        }
+
+        break;
+      case Desire.Prey:
+        if (other.gameObject.layer.Equals(rabbit))
+        {
+          _target = other.gameObject;
+          _targetInSight = true;
+        }
+
+        break;
+      case Desire.Water:
+        if (other.gameObject.layer.Equals(water))
+        {
+          _target = other.gameObject;
+          _targetInSight = true;
+        }
+
+        break;
+      default: break;
     }
   }
 }

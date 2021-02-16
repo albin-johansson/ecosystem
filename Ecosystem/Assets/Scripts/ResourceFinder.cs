@@ -22,13 +22,9 @@ public sealed class ResourceFinder : MonoBehaviour
   {
     if (!targetTracker.HasTarget)
     {
-      var gameObjects = memoryController.GetFromMemory(_priority);
-
-      //Selects a random object that matches priority, if non exist set hasTarget to false again.
-      if (gameObjects.Count > 0)
+      if (memoryController.ExistInMemory(_priority))
       {
-        var target = gameObjects[Random.Range(0, gameObjects.Count - 1)];
-        targetTracker.SetTarget(target);
+        targetTracker.SetTarget(memoryController.GetFromMemory(_priority), _priority);
       }
     }
   }
@@ -58,7 +54,7 @@ public sealed class ResourceFinder : MonoBehaviour
   /// </summary>
   private void OnTriggerEnter(Collider other)
   {
-    if (other.GetComponent<Predator>())
+    if (other.gameObject.layer.Equals(7))
     {
       targetTracker.FleeFromPredator(other.gameObject);
       return;
@@ -68,10 +64,10 @@ public sealed class ResourceFinder : MonoBehaviour
 
     if (!targetTracker.HasTarget)
     {
-      if (_priority == Desire.Food && other.GetComponent<Food>() != null ||
-          _priority == Desire.Water && other.GetComponent<Water>() != null)
+      if (_priority == Desire.Food && other.gameObject.layer.Equals(6) ||
+          _priority == Desire.Water && other.gameObject.layer.Equals(4))
       {
-        targetTracker.SetTarget(other.gameObject);
+        targetTracker.SetTarget(other.gameObject.transform.position, _priority);
       }
     }
   }

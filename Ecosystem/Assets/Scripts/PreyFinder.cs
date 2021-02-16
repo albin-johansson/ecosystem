@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using UnityEditor.Experimental.GraphView;
+using UnityEngine;
 using Random = UnityEngine.Random;
 
 public sealed class PreyFinder : MonoBehaviour
@@ -22,13 +23,9 @@ public sealed class PreyFinder : MonoBehaviour
   {
     if (!targetTracker.HasTarget)
     {
-      var gameObjects = memoryController.GetFromMemory(_priority);
-
-      //Selects a random object that matches priority, if non exist set hasTarget to false again.
-      if (gameObjects.Count > 0)
+      if (memoryController.ExistInMemory(_priority))
       {
-        var target = gameObjects[Random.Range(0, gameObjects.Count - 1)];
-        targetTracker.SetTarget(target);
+        targetTracker.SetTarget(memoryController.GetFromMemory(_priority), _priority);
       }
     }
   }
@@ -54,16 +51,18 @@ public sealed class PreyFinder : MonoBehaviour
   /// <summary>
   /// When colliding with an object that object is saved to MemoryController and then set as a target in TargetTracker if the priority matches.
   /// Might be an improvment to only save the object and not set it as a target.
+  /// If a predator is found the targetTracker resolves the fleeing mechanics.
   /// </summary>
   private void OnTriggerEnter(Collider other)
   {
     memoryController.SaveToMemory(other.gameObject);
+
     if (!targetTracker.HasTarget)
     {
-      if (_priority == Desire.Prey && other.GetComponent<Prey>() != null ||
-          _priority == Desire.Water && other.GetComponent<Water>() != null)
+      if (_priority == Desire.Food && other.gameObject.layer.Equals(8) ||
+          _priority == Desire.Water && other.gameObject.layer.Equals(4))
       {
-        targetTracker.SetTarget(other.gameObject);
+        targetTracker.SetTarget(other.gameObject.transform.position, _priority);
       }
     }
   }
