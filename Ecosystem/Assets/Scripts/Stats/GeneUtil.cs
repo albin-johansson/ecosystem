@@ -1,16 +1,15 @@
 ﻿using UnityEngine;
 using Random = System.Random;
 
-
 public sealed class GeneUtil
 {
+  private static Random r = new Random();
+
   //Clamps
   public static double GetValidVar(double value, double min, double max)
   {
     return Mathf.Clamp((float) value, (float) min, (float) max);
   }
-
-  private static Random r = new Random();
 
   public static bool RandomWithChance(double percentage)
   {
@@ -24,7 +23,6 @@ public sealed class GeneUtil
       return false;
     }
   }
-
 
   public static double MutatedInRange(double min, double max)
   {

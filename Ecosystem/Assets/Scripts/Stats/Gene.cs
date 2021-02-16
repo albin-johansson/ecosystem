@@ -11,20 +11,19 @@
     Value = GeneUtil.GetValidVar(value, min, max);
   }
 
+  public Gene(Gene other) : this(other.Value, other.Min, other.Max)
+  {
+  }
+
   //Returns value as a number in [0,1]. 
   public double ValueAsDecimal()
   {
     return (Value - Min) / (Max - Min);
   }
 
-  // Returns a new mutated gene based on the current genes range. 
-  public Gene MutatedGene()
+  // Returns a new mutated gene based on the current Genes range. 
+  public Gene Mutate()
   {
     return new Gene(GeneUtil.MutatedInRange(Min, Max), Min, Max);
-  }
-
-  //Copy of gene
-  public Gene(Gene other) : this(other.Value, other.Min, other.Max)
-  {
   }
 }
