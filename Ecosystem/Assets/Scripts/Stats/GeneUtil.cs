@@ -2,7 +2,7 @@
 using Random = System.Random;
 
 
-public class GeneUtil
+public sealed class GeneUtil
 {
   //Clamps
   public static double GetValidVar(double value, double min, double max)
