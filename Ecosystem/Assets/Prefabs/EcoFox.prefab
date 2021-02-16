@@ -7,6 +7,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 5074868765905872009, guid: 7de6955d42e4c704a8c7233ec476a74d, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 3b2839cebc8bb4749997bd9abe13edb9, type: 2}
     - target: {fileID: 5153484287146945913, guid: 7de6955d42e4c704a8c7233ec476a74d, type: 3}
       propertyPath: m_RootOrder
       value: 0
@@ -51,9 +55,18 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5154866938600009141, guid: 7de6955d42e4c704a8c7233ec476a74d, type: 3}
+      propertyPath: m_Name
+      value: character_grpFox
+      objectReference: {fileID: 0}
+    - target: {fileID: 5156356055620465787, guid: 7de6955d42e4c704a8c7233ec476a74d, type: 3}
+      propertyPath: m_Name
+      value: fox
+      objectReference: {fileID: 0}
     - target: {fileID: 5156573530752757657, guid: 7de6955d42e4c704a8c7233ec476a74d, type: 3}
       propertyPath: m_Name
-      value: EcoWolf
+      value: EcoFox
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 5077544449918421929, guid: 7de6955d42e4c704a8c7233ec476a74d, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 7de6955d42e4c704a8c7233ec476a74d, type: 3}

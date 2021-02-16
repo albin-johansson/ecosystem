@@ -9,7 +9,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 1567582185033856, guid: ed4615b93521e4b46a0973aa03b94732, type: 3}
       propertyPath: m_Name
-      value: Deer Gray
+      value: EcoDeer
       objectReference: {fileID: 0}
     - target: {fileID: 4819606783095600, guid: ed4615b93521e4b46a0973aa03b94732, type: 3}
       propertyPath: m_RootOrder
@@ -55,5 +55,29 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    - target: {fileID: 82645965520743322, guid: ed4615b93521e4b46a0973aa03b94732, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 95511349741874662, guid: ed4615b93521e4b46a0973aa03b94732, type: 3}
+      propertyPath: m_Controller
+      value: 
+      objectReference: {fileID: 9100000, guid: 45ebb796d5fd82348b5ebff73bc047d1, type: 2}
+    - target: {fileID: 114964019524279002, guid: ed4615b93521e4b46a0973aa03b94732, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 137758561373161844, guid: ed4615b93521e4b46a0973aa03b94732, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: a1d564efbd5cda043af1533d3fd375a5, type: 2}
+    - target: {fileID: 143392860941281564, guid: ed4615b93521e4b46a0973aa03b94732, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents:
+    - {fileID: 114964019524279002, guid: ed4615b93521e4b46a0973aa03b94732, type: 3}
+    - {fileID: 114353642240258996, guid: ed4615b93521e4b46a0973aa03b94732, type: 3}
+    - {fileID: 143392860941281564, guid: ed4615b93521e4b46a0973aa03b94732, type: 3}
+    - {fileID: 82645965520743322, guid: ed4615b93521e4b46a0973aa03b94732, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: ed4615b93521e4b46a0973aa03b94732, type: 3}
