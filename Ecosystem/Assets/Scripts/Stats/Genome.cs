@@ -3,51 +3,51 @@ using UnityEngine;
 
 public class Genome : MonoBehaviour
 {
-  private readonly double MutateChance;
-  protected Dictionary<GeneType, Gene> Genes = new Dictionary<GeneType, Gene>();
+  private double _mutateChance = 0.05;
+  protected Dictionary<GeneType, Gene> Genes;
+
+  private void Awake()
+  {
+    Genes = new Dictionary<GeneType, Gene>
+    {
+            [GeneType.HungerRate] = new Gene(2, 1, 3),
+            [GeneType.HungerThreshold] = new Gene(10, 0, 50),
+            [GeneType.ThirstRate] = new Gene(3, 2, 5),
+            [GeneType.ThirstThreshold] = new Gene(10, 0, 50),
+            [GeneType.Vision] = new Gene(5, 1, 10),
+            [GeneType.SpeedFactor] = new Gene(2, 1, 3),
+            [GeneType.SizeFactor] = new Gene(2, 1, 3),
+            [GeneType.DesirabilityScore] = new Gene(1, 1, 10)
+    };
+  }
 
   /// <summary>
-  /// Generate a new (possibly mutated) genome based on the two parents' genome
+  /// Changes the genome and potentially mutates it based on two parent genomes.
   /// </summary>
-  /// <param name="g1"> First parent </param>
-  /// <param name="g2"> Second parent </param>
-  public Genome(Genome g1, Genome g2)
+  public void Merge(Genome first, Genome second)
   {
     var newGenes = new Dictionary<GeneType, Gene>();
 
-    foreach (var gene in g1.Genes)
+    foreach (var otherGene in first.Genes)
     {
-      Gene g;
-      if (GeneUtil.RandomWithChance(g1.MutateChance))
+      Gene gene;
+
+      if (GeneUtil.RandomWithChance(first._mutateChance))
       {
-        //mutate
-        g = gene.Value.Mutate();
+        gene = otherGene.Value.Mutate();
       }
       else
       {
-        //pick parent
-        g = GeneUtil.RandomWithChance(50) ? new Gene(gene.Value) : new Gene(g2.Genes[gene.Key]);
+        gene = GeneUtil.RandomWithChance(50)
+                ? new Gene(otherGene.Value)
+                : new Gene(second.Genes[otherGene.Key]);
       }
 
-      newGenes.Add(gene.Key, g);
+      newGenes[otherGene.Key] = gene;
     }
 
     Genes = newGenes;
-    MutateChance = g1.MutateChance;
-  }
-
-  //default genome, should only be used in development before an animal has its own default.  
-  public Genome(double mutateChance)
-  {
-    MutateChance = mutateChance;
-    Genes.Add(GeneType.HungerRate, new Gene(2, 1, 3));
-    Genes.Add(GeneType.HungerThreshold, new Gene(10, 0, 50));
-    Genes.Add(GeneType.ThirstRate, new Gene(3, 2, 5));
-    Genes.Add(GeneType.ThirstThreshold, new Gene(10, 0, 50));
-    Genes.Add(GeneType.Vision, new Gene(5, 1, 10));
-    Genes.Add(GeneType.SpeedFactor, new Gene(2, 1, 3));
-    Genes.Add(GeneType.SizeFactor, new Gene(2, 1, 3));
-    Genes.Add(GeneType.DesirabilityScore, new Gene(1, 1, 10));
+    _mutateChance = first._mutateChance;
   }
 
   /// <summary>
