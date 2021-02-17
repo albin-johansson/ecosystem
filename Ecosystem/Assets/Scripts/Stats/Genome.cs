@@ -104,7 +104,6 @@ public class Genome : MonoBehaviour
 
   public double GetThirstRate()
   {
-    Debug.Log("TR: " + Genes[GeneType.ThirstRate].Value);
     return Genes[GeneType.ThirstRate].Value;
   }
 

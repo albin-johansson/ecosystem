@@ -1,6 +1,4 @@
-﻿using System.Collections.Generic;
-
-public sealed class RabbitGenome : Genome
+﻿public sealed class RabbitGenome : Genome
 {
   private static readonly Gene HungerRate = new Gene(1, 0.5, 10);
   private static readonly Gene HungerThreshold = new Gene(5, 0, 10);
