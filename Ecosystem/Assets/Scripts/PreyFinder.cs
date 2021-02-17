@@ -1,11 +1,9 @@
 ﻿using UnityEngine;
-using Random = UnityEngine.Random;
 
 public sealed class PreyFinder : MonoBehaviour
 {
   [SerializeField] private PreyConsumer preyConsumer;
   [SerializeField] private WaterConsumer waterConsumer;
-
   [SerializeField] private MemoryController memoryController;
   [SerializeField] private TargetTracker targetTracker;
 
@@ -17,23 +15,20 @@ public sealed class PreyFinder : MonoBehaviour
     CheckMemory();
   }
 
-  //Checks MemoryController for objects that matches the priority Desire
+  // Checks the memory for objects that matches the prioritised desire
   private void CheckMemory()
   {
     if (!targetTracker.HasTarget)
     {
-      var gameObjects = memoryController.GetFromMemory(_priority);
-
-      //Selects a random object that matches priority, if non exist set hasTarget to false again.
-      if (gameObjects.Count > 0)
+      var target = memoryController.RecallFromMemory(_priority);
+      if (target)
       {
-        var target = gameObjects[Random.Range(0, gameObjects.Count - 1)];
         targetTracker.SetTarget(target);
       }
     }
   }
 
-  //Sets priority, needs to be worked on to get a better flow
+  // TODO needs to be worked on to get a better flow
   private void UpdatePriority()
   {
     // Hunger has implicit priority
@@ -52,16 +47,17 @@ public sealed class PreyFinder : MonoBehaviour
   }
 
   /// <summary>
-  /// When colliding with an object that object is saved to MemoryController and then set as a target in TargetTracker if the priority matches.
-  /// Might be an improvment to only save the object and not set it as a target.
+  /// When colliding with an object, that object is saved to the animals memory, and subsequently set as a target if the
+  /// priority matches.
   /// </summary>
+  /// TODO Might be an improvement to only save the object and not set it as a target.
   private void OnTriggerEnter(Collider other)
   {
     memoryController.SaveToMemory(other.gameObject);
     if (!targetTracker.HasTarget)
     {
-      if (_priority == Desire.Prey && other.GetComponent<Prey>() != null ||
-          _priority == Desire.Water && other.GetComponent<Water>() != null)
+      if (_priority == Desire.Prey && other.GetComponent<Prey>() ||
+          _priority == Desire.Water && other.GetComponent<Water>())
       {
         targetTracker.SetTarget(other.gameObject);
       }

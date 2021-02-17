@@ -1,4 +1,3 @@
-using System;
 using UnityEngine;
 using UnityEngine.AI;
 using Random = UnityEngine.Random;
@@ -11,7 +10,6 @@ public sealed class RandomMovement : MonoBehaviour
   private LayerMask groundMask;
 
   private Transform _transform;
-
   private float _timer;
 
   private void Start()
@@ -33,7 +31,7 @@ public sealed class RandomMovement : MonoBehaviour
     }
   }
 
-  public void TargetRandomDestination()
+  private void TargetRandomDestination()
   {
     var randomX = Random.Range(-8f, 8f);
     var randomZ = Random.Range(-8f, 8f);
