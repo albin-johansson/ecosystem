@@ -3,7 +3,12 @@ using UnityEngine;
 
 public class Genome : MonoBehaviour
 {
-  private readonly double MutateChance;
+  public void Awake()
+  {
+    Initialize();
+  }
+
+  protected double MutateChance;
   protected Dictionary<GeneType, Gene> Genes = new Dictionary<GeneType, Gene>();
 
   /// <summary>
@@ -11,7 +16,7 @@ public class Genome : MonoBehaviour
   /// </summary>
   /// <param name="g1"> First parent </param>
   /// <param name="g2"> Second parent </param>
-  public Genome(Genome g1, Genome g2)
+  public void Initialize(Genome g1, Genome g2)
   {
     var newGenes = new Dictionary<GeneType, Gene>();
 
@@ -36,8 +41,14 @@ public class Genome : MonoBehaviour
     MutateChance = g1.MutateChance;
   }
 
+
+  public virtual void Initialize()
+  {
+    Initialize(0.05);
+  }
+
   //default genome, should only be used in development before an animal has its own default.  
-  public Genome(double mutateChance)
+  public virtual void Initialize(double mutateChance)
   {
     MutateChance = mutateChance;
     Genes.Add(GeneType.HungerRate, new Gene(2, 1, 3));
@@ -84,6 +95,7 @@ public class Genome : MonoBehaviour
 
   public double GetThirstRate()
   {
+    Debug.Log("TR: " + Genes[GeneType.ThirstRate].Value);
     return Genes[GeneType.ThirstRate].Value;
   }
 

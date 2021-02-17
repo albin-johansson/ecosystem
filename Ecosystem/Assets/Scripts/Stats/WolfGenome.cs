@@ -2,11 +2,12 @@
 
 public sealed class WolfGenome : Genome
 {
-  public WolfGenome() : this(0.05)
+  public override void Initialize()
   {
+    Initialize(0.05);
   }
 
-  public WolfGenome(double mutateChance) : base(mutateChance)
+  public override void Initialize(double mutateChance)
   {
     Genes[GeneType.HungerRate] = new Gene(3, 0.5, 10);
     Genes[GeneType.HungerThreshold] = new Gene(5, 0, 10);
