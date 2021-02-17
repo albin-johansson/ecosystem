@@ -3,42 +3,51 @@ using UnityEngine;
 
 public class Genome : MonoBehaviour
 {
+  private static readonly Gene HungerRate = new Gene(1, 0.5, 10);
+  private static readonly Gene HungerThreshold = new Gene(5, 0, 10);
+  private static readonly Gene ThirstRate = new Gene(1, 0.5, 10);
+  private static readonly Gene ThirstThreshold = new Gene(5, 0, 10);
+  private static readonly Gene Vision = new Gene(25, 1, 50);
+  private static readonly Gene SpeedFactor = new Gene(1.5, 1, 2);
+  private static readonly Gene SizeFactor = new Gene(0.5, 0.1, 1);
+  private static readonly Gene DesirabilityFactor = new Gene(1, 1, 10);
+
+  protected double MutateChance;
+  protected Dictionary<GeneType, Gene> Genes = new Dictionary<GeneType, Gene>();
+
   public void Awake()
   {
     Initialize();
   }
 
-  protected double MutateChance;
-  protected Dictionary<GeneType, Gene> Genes = new Dictionary<GeneType, Gene>();
-
   /// <summary>
   /// Generate a new (possibly mutated) genome based on the two parents' genome
   /// </summary>
-  /// <param name="g1"> First parent </param>
-  /// <param name="g2"> Second parent </param>
-  public void Initialize(Genome g1, Genome g2)
+  /// <param name="first"> First parent </param>
+  /// <param name="second"> Second parent </param>
+  public void Initialize(Genome first, Genome second)
   {
     var newGenes = new Dictionary<GeneType, Gene>();
 
-    foreach (var gene in g1.Genes)
+    foreach (var otherGene in first.Genes)
     {
-      Gene g;
-      if (GeneUtil.RandomWithChance(g1.MutateChance))
+      Gene gene;
+      if (GeneUtil.RandomWithChance(first.MutateChance))
       {
         //mutate
-        g = gene.Value.Mutate();
+        gene = otherGene.Value.Mutate();
       }
       else
       {
         //pick parent
-        g = GeneUtil.RandomWithChance(50) ? new Gene(gene.Value) : new Gene(g2.Genes[gene.Key]);
+        gene = GeneUtil.RandomWithChance(50) ? new Gene(otherGene.Value) : new Gene(second.Genes[otherGene.Key]);
       }
 
-      newGenes.Add(gene.Key, g);
+      newGenes[otherGene.Key] = gene;
     }
 
     Genes = newGenes;
-    MutateChance = g1.MutateChance;
+    MutateChance = first.MutateChance;
   }
 
 
@@ -51,14 +60,14 @@ public class Genome : MonoBehaviour
   public virtual void Initialize(double mutateChance)
   {
     MutateChance = mutateChance;
-    Genes.Add(GeneType.HungerRate, new Gene(2, 1, 3));
-    Genes.Add(GeneType.HungerThreshold, new Gene(10, 0, 50));
-    Genes.Add(GeneType.ThirstRate, new Gene(3, 2, 5));
-    Genes.Add(GeneType.ThirstThreshold, new Gene(10, 0, 50));
-    Genes.Add(GeneType.Vision, new Gene(5, 1, 10));
-    Genes.Add(GeneType.SpeedFactor, new Gene(2, 1, 3));
-    Genes.Add(GeneType.SizeFactor, new Gene(2, 1, 3));
-    Genes.Add(GeneType.DesirabilityScore, new Gene(1, 1, 10));
+    Genes[GeneType.HungerRate] = HungerRate;
+    Genes[GeneType.HungerThreshold] = HungerThreshold;
+    Genes[GeneType.ThirstRate] = ThirstRate;
+    Genes[GeneType.ThirstThreshold] = ThirstThreshold;
+    Genes[GeneType.Vision] = Vision;
+    Genes[GeneType.SpeedFactor] = SpeedFactor;
+    Genes[GeneType.SizeFactor] = SizeFactor;
+    Genes[GeneType.DesirabilityScore] = DesirabilityFactor;
   }
 
   /// <summary>

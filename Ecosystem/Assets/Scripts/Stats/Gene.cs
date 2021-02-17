@@ -1,8 +1,8 @@
 ﻿public sealed class Gene
 {
-  public double Max { get; private set; }
-  public double Min { get; private set; }
-  public double Value { get; private set; }
+  private double Max { get; }
+  private double Min { get; }
+  public double Value { get; }
 
   public Gene(double value, double min, double max)
   {
