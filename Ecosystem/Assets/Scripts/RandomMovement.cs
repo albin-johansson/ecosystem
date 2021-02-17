@@ -6,7 +6,6 @@ public sealed class RandomMovement : MonoBehaviour
 {
   [SerializeField] private NavMeshAgent navAgent;
   [SerializeField] private AnimationStatesController animationStatesController;
-
   [SerializeField, Tooltip("What is considered to be the ground")]
   private LayerMask groundMask;
 
@@ -18,7 +17,7 @@ public sealed class RandomMovement : MonoBehaviour
     _transform = navAgent.transform;
   }
 
-  //The TargetRandomDestination function is called if the agent has no path or the timer has run out
+    //The TargetRandomDestination function is called if the agent has no path or the timer has run out
   private void Update()
   {
     if (!navAgent.hasPath || _timer < 0)
