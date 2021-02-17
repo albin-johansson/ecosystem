@@ -2,8 +2,7 @@ using UnityEngine;
 
 public sealed class WaterConsumer : MonoBehaviour
 {
-  [SerializeField] private double rate = 0.02;
-  [SerializeField] private double threshold = 0.1;
+  [SerializeField] private Genome genome;
   [SerializeField] private ResourceBar resourceBar;
   [SerializeField] private double maxThirst = 100;
 
@@ -18,8 +17,8 @@ public sealed class WaterConsumer : MonoBehaviour
 
   private void Update()
   {
-    Thirst += rate * Time.deltaTime;
-    resourceBar.SetValue((float)Thirst);
+    Thirst += genome.GetThirstRate() * Time.deltaTime;
+    resourceBar.SetValue((float) Thirst);
 
     if (Thirst > maxThirst)
     {
@@ -37,6 +36,6 @@ public sealed class WaterConsumer : MonoBehaviour
 
   internal bool IsThirsty()
   {
-    return Thirst > threshold;
+    return Thirst > genome.GetThirstThreshold();
   }
 }

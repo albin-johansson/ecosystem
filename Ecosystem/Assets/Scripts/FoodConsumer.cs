@@ -2,9 +2,9 @@ using UnityEngine;
 
 public sealed class FoodConsumer : MonoBehaviour
 {
-  [SerializeField] private double rate = 0.02;
-  [SerializeField] private double threshold = 0.1;
+  [SerializeField] private Genome genome;
   [SerializeField] private ResourceBar resourceBar;
+
 
   [SerializeField] private DeathHandler deathHandler;
   [SerializeField] private double maxHunger = 100;
@@ -17,8 +17,8 @@ public sealed class FoodConsumer : MonoBehaviour
 
   private void Update()
   {
-    Hunger += rate * Time.deltaTime;
-    resourceBar.SetValue((float)Hunger);
+    Hunger += genome.GetHungerRate() * Time.deltaTime;
+    resourceBar.SetValue((float) Hunger);
     if (Hunger > maxHunger)
     {
       deathHandler.Die(CauseOfDeath.Starvation);
@@ -36,6 +36,6 @@ public sealed class FoodConsumer : MonoBehaviour
 
   internal bool IsHungry()
   {
-    return Hunger > threshold;
+    return Hunger > genome.GetHungerThreshold();
   }
 }
