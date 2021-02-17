@@ -13,7 +13,6 @@ public sealed class DeathHandler : MonoBehaviour
 
   public void Die(CauseOfDeath cause)
   {
-    Debug.Log("Something is about to die due to: " + cause);
     DestroyObjectDelayed();
   }
 }
