@@ -16,16 +16,33 @@ public sealed class MemoryController : MonoBehaviour
   //Save gameobject and its "Desire" identifier as a tuple to _memory
   public void SaveToMemory(GameObject other)
   {
-    var desire = GetDesire(other);
-    _memory.Insert(_nextMemoryLocation, (desire, other.gameObject));
-    _nextMemoryLocation++;
-    if (_nextMemoryLocation > (Capacity - 1))
+    _memory.Insert(_nextMemoryLocation, (GetDesire(other), other.gameObject));
+    ++_nextMemoryLocation;
+    if (_nextMemoryLocation >= Capacity)
     {
       _nextMemoryLocation = 0;
     }
   }
 
-  private Desire GetDesire(GameObject other)
+  /// <summary>
+  /// Looks for a game object in the memory with the specified desire.
+  /// </summary>
+  /// <param name="desire">The desire to look for the in the memory</param>
+  /// <returns>The first game object associated with the specified desire; null if no such object exists.</returns>
+  public GameObject RecallFromMemory(Desire desire)
+  {
+    foreach (var (memoryDesire, memoryGameObject) in _memory)
+    {
+      if (desire == memoryDesire && memoryGameObject)
+      {
+        return memoryGameObject;
+      }
+    }
+
+    return null;
+  }
+
+  private static Desire GetDesire(GameObject other)
   {
     if (other.GetComponent<Food>())
     {
@@ -39,35 +56,9 @@ public sealed class MemoryController : MonoBehaviour
     {
       return Desire.Water;
     }
-
-    return Desire.Idle;
-  }
-
-  //Get a list of all objects with the same Desire as asked for in currentDesire
-  public List<GameObject> GetFromMemory(Desire currentDesire)
-  {
-    List<GameObject> gameObjects = new List<GameObject>();
-    List<int> removeObjects = new List<int>();
-    foreach (var (desire, memoryGameObject) in _memory)
+    else
     {
-      if (desire.Equals(currentDesire))
-      {
-        if (memoryGameObject.Equals(null))
-        {
-          removeObjects.Add(_memory.IndexOf((desire, memoryGameObject)));
-        }
-        else
-        {
-          gameObjects.Add(memoryGameObject);
-        }
-      }
+      return Desire.Idle;
     }
-    //Removes all objects that has been destroyed but still existed in memory with the same desire as currentDesire
-    foreach (var i in removeObjects)
-    {
-      _memory.Insert(i, (Desire.Nothing, gameObject));
-    }
-
-    return gameObjects;
   }
 }

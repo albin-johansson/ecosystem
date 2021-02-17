@@ -1,4 +1,3 @@
-using System;
 using UnityEngine;
 using UnityEngine.AI;
 using Random = UnityEngine.Random;
@@ -6,12 +5,11 @@ using Random = UnityEngine.Random;
 public sealed class RandomMovement : MonoBehaviour
 {
   [SerializeField] private NavMeshAgent navAgent;
-
+  [SerializeField] private AnimationStatesController animationStatesController;
   [SerializeField, Tooltip("What is considered to be the ground")]
   private LayerMask groundMask;
 
   private Transform _transform;
-
   private float _timer;
 
   private void Start()
@@ -19,7 +17,7 @@ public sealed class RandomMovement : MonoBehaviour
     _transform = navAgent.transform;
   }
 
-  //The TargetRandomDestination function is called if the agent has no path or the timer has run out
+    //The TargetRandomDestination function is called if the agent has no path or the timer has run out
   private void Update()
   {
     if (!navAgent.hasPath || _timer < 0)
@@ -33,7 +31,7 @@ public sealed class RandomMovement : MonoBehaviour
     }
   }
 
-  public void TargetRandomDestination()
+  private void TargetRandomDestination()
   {
     var randomX = Random.Range(-8f, 8f);
     var randomZ = Random.Range(-8f, 8f);
@@ -44,6 +42,7 @@ public sealed class RandomMovement : MonoBehaviour
     if (Physics.Raycast(destination, -_transform.up, 2f, groundMask))
     {
       navAgent.SetDestination(destination);
+      animationStatesController.AnimAnimationState = AnimationState.Walking;
     }
   }
 }
