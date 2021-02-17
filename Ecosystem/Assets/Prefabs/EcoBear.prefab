@@ -58,8 +58,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c2fa5581f03243c68b482d0030e00671, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  rate: 0.02
-  threshold: 0.02
+  genome: {fileID: 3705420681509110121}
+  resourceBar: {fileID: 0}
+  maxHunger: 100
+  deathHandler: {fileID: 941976366869483110}
 --- !u!114 &8666025027927895769
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -72,8 +74,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5ecc989552950f6449739af04d52bf49, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  rate: 0.02
-  threshold: 0.1
+  genome: {fileID: 3705420681509110121}
+  resourceBar: {fileID: 0}
+  maxThirst: 100
+  deathHandler: {fileID: 941976366869483110}
 --- !u!1 &1509949218462644464
 GameObject:
   m_ObjectHideFlags: 0
@@ -261,6 +265,30 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   animationStatesController: {fileID: -7686418651724940890}
+--- !u!114 &941976366869483110
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5806006842196838736}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 04dec80f06674629b7366fcb55ec29f2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &3705420681509110121
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5806006842196838736}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7a26cd465e2f4ee19d44bca9cd0607de, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &5806957549481359696
 PrefabInstance:
   m_ObjectHideFlags: 0
