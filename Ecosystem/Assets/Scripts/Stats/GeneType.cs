@@ -1,11 +1,14 @@
-﻿public enum GeneType
+﻿namespace Ecosystem.Stats
 {
-  HungerRate,
-  HungerThreshold,
-  ThirstRate,
-  ThirstThreshold,
-  Vision,
-  SpeedFactor,
-  SizeFactor,
-  DesirabilityScore
+  public enum GeneType
+  {
+    HungerRate,
+    HungerThreshold,
+    ThirstRate,
+    ThirstThreshold,
+    Vision,
+    SpeedFactor,
+    SizeFactor,
+    DesirabilityScore
+  }
 }

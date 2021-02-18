@@ -1,16 +1,19 @@
 using UnityEngine;
 
-public sealed class Billboard : MonoBehaviour
+namespace Ecosystem
 {
-  private Transform _cameraTransform;
-
-  private void Start()
+  public sealed class Billboard : MonoBehaviour
   {
-    _cameraTransform = GameObject.FindWithTag("MainCamera").transform;
-  }
+    private Transform _cameraTransform;
 
-  private void LateUpdate()
-  {
-    transform.LookAt(transform.position + _cameraTransform.forward);
+    private void Start()
+    {
+      _cameraTransform = GameObject.FindWithTag("MainCamera").transform;
+    }
+
+    private void LateUpdate()
+    {
+      transform.LookAt(transform.position + _cameraTransform.forward);
+    }
   }
 }

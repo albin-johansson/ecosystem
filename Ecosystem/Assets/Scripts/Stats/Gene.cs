@@ -1,29 +1,32 @@
-﻿public sealed class Gene
+﻿namespace Ecosystem.Stats
 {
-  private double Max { get; }
-  private double Min { get; }
-  public double Value { get; }
-
-  public Gene(double value, double min, double max)
+  public sealed class Gene
   {
-    Max = max;
-    Min = min;
-    Value = GeneUtil.GetValidVar(value, min, max);
-  }
+    private double Max { get; }
+    private double Min { get; }
+    public double Value { get; }
 
-  public Gene(Gene other) : this(other.Value, other.Min, other.Max)
-  {
-  }
+    public Gene(double value, double min, double max)
+    {
+      Max = max;
+      Min = min;
+      Value = GeneUtil.GetValidVar(value, min, max);
+    }
 
-  //Returns value as a number in [0,1]. 
-  public double ValueAsDecimal()
-  {
-    return (Value - Min) / (Max - Min);
-  }
+    public Gene(Gene other) : this(other.Value, other.Min, other.Max)
+    {
+    }
 
-  // Returns a new mutated gene based on the current Genes range. 
-  public Gene Mutate()
-  {
-    return new Gene(GeneUtil.MutatedInRange(Min, Max), Min, Max);
+    //Returns value as a number in [0,1]. 
+    public double ValueAsDecimal()
+    {
+      return (Value - Min) / (Max - Min);
+    }
+
+    // Returns a new mutated gene based on the current Genes range. 
+    public Gene Mutate()
+    {
+      return new Gene(GeneUtil.MutatedInRange(Min, Max), Min, Max);
+    }
   }
 }

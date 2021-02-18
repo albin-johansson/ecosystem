@@ -1,3 +1,5 @@
+using Ecosystem;
+using Ecosystem.Stats;
 using UnityEngine;
 
 public sealed class FoodConsumer : MonoBehaviour
