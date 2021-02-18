@@ -26,7 +26,7 @@
     // Returns a new mutated gene based on the current Genes range. 
     public Gene Mutate()
     {
-      return new Gene(GeneUtil.MutatedInRange(Min, Max), Min, Max);
+      return new Gene(GeneUtil.Mutate(Min, Max), Min, Max);
     }
   }
 }

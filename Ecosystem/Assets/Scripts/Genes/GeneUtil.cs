@@ -17,7 +17,7 @@ namespace Ecosystem.Genes
       return Random.NextDouble() * 100 < percentage;
     }
 
-    public static float MutatedInRange(float min, float max)
+    public static float Mutate(float min, float max)
     {
       return (float) Random.NextDouble() * (max - min) + min;
     }
