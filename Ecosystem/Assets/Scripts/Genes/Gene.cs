@@ -1,4 +1,6 @@
-﻿namespace Ecosystem.Genes
+﻿using UnityEngine;
+
+namespace Ecosystem.Genes
 {
   public sealed class Gene
   {
@@ -10,7 +12,7 @@
     {
       Max = max;
       Min = min;
-      Value = GeneUtil.GetValidVar(value, min, max);
+      Value = Mathf.Clamp(value, min, max);
     }
 
     public Gene(Gene other) : this(other.Value, other.Min, other.Max)
