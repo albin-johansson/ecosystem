@@ -55,7 +55,7 @@ namespace Ecosystem
     /// </summary>
     private void OnTriggerEnter(Collider other)
     {
-      if (other.GetComponent<Predator>())
+      if (other.CompareTag("Predator"))
       {
         targetTracker.FleeFromPredator(other.gameObject);
         return;
