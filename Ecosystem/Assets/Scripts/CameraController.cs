@@ -18,7 +18,11 @@ namespace Ecosystem
 
     private void Update()
     {
-      if (Input.GetKey(KeyCode.Mouse1))
+      if (Input.GetKeyUp(KeyCode.Escape))
+      {
+        Application.Quit();
+      }
+      else if (Input.GetKey(KeyCode.Mouse1))
       {
         Rotate();
         Translate();
