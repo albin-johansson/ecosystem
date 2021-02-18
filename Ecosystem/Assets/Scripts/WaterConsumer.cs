@@ -30,7 +30,7 @@ namespace Ecosystem
 
     private void OnTriggerEnter(Collider other)
     {
-      if (other.GetComponent<Water>() != null)
+      if (other.CompareTag("Water"))
       {
         Thirst = 0;
       }
