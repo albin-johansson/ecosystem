@@ -11,12 +11,12 @@
     private static readonly Gene SizeFactor = new Gene(0.5, 0.1, 1);
     private static readonly Gene DesirabilityFactor = new Gene(1, 1, 10);
 
-    public override void Initialize()
+    protected override void Initialize()
     {
       Initialize(0.05);
     }
 
-    public override void Initialize(double mutateChance)
+    protected override void Initialize(double mutateChance)
     {
       MutateChance = mutateChance;
       Genes[GeneType.HungerRate] = HungerRate;

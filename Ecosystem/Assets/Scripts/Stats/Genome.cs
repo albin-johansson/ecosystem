@@ -52,14 +52,12 @@ namespace Ecosystem.Stats
       MutateChance = first.MutateChance;
     }
 
-
-    public virtual void Initialize()
+    protected virtual void Initialize()
     {
       Initialize(0.05);
     }
 
-    //default genome, should only be used in development before an animal has its own default.  
-    public virtual void Initialize(double mutateChance)
+    protected virtual void Initialize(double mutateChance)
     {
       MutateChance = mutateChance;
       Genes[GeneType.HungerRate] = HungerRate;
