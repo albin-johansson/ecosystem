@@ -58,7 +58,7 @@ namespace Ecosystem
       memoryController.SaveToMemory(other.gameObject);
       if (!targetTracker.HasTarget)
       {
-        if (_priority == Desire.Prey && other.GetComponent<Prey>() ||
+        if (_priority == Desire.Prey && other.CompareTag("Prey") ||
             _priority == Desire.Water && other.GetComponent<Water>())
         {
           targetTracker.SetTarget(other.gameObject);

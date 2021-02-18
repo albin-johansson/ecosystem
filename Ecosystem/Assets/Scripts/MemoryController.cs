@@ -49,7 +49,7 @@ public sealed class MemoryController : MonoBehaviour
     {
       return Desire.Food;
     }
-    else if (other.GetComponent<Prey>())
+    else if (other.CompareTag("Prey"))
     {
       return Desire.Prey;
     }

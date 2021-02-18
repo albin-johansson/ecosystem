@@ -29,7 +29,7 @@ namespace Ecosystem
 
     private void OnTriggerEnter(Collider other)
     {
-      if (other.GetComponent<Prey>() != null)
+      if (other.CompareTag("Prey"))
       {
         other.gameObject.GetComponent<DeathHandler>().Die(CauseOfDeath.Hunted);
         Hunger = 0;
