@@ -45,7 +45,7 @@ public sealed class MemoryController : MonoBehaviour
 
   private static Desire GetDesire(GameObject other)
   {
-    if (other.GetComponent<Food>())
+    if (other.CompareTag("Food"))
     {
       return Desire.Food;
     }

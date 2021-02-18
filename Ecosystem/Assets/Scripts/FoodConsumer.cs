@@ -1,43 +1,44 @@
-using Ecosystem;
 using Ecosystem.Genes;
 using UnityEngine;
 
-public sealed class FoodConsumer : MonoBehaviour
+namespace Ecosystem
 {
-  [SerializeField] private Genome genome;
-  [SerializeField] private ResourceBar resourceBar;
-
-
-  [SerializeField] private DeathHandler deathHandler;
-  [SerializeField] private double maxHunger = 100;
-  private double Hunger { get; set; }
-
-  private void Start()
+  public sealed class FoodConsumer : MonoBehaviour
   {
-    resourceBar.SetMaxValue((float) maxHunger);
-  }
+    [SerializeField] private Genome genome;
+    [SerializeField] private ResourceBar resourceBar;
+    [SerializeField] private DeathHandler deathHandler;
+    [SerializeField] private double maxHunger = 100;
 
-  private void Update()
-  {
-    Hunger += genome.GetHungerRate() * Time.deltaTime;
-    resourceBar.SetValue((float) Hunger);
-    if (Hunger > maxHunger)
+    private double Hunger { get; set; }
+
+    private void Start()
     {
-      deathHandler.Die(CauseOfDeath.Starvation);
+      resourceBar.SetMaxValue((float) maxHunger);
     }
-  }
 
-  private void OnTriggerEnter(Collider other)
-  {
-    if (other.GetComponent<Food>() != null)
+    private void Update()
     {
-      Destroy(other.gameObject);
-      Hunger = 0;
+      Hunger += genome.GetHungerRate() * Time.deltaTime;
+      resourceBar.SetValue((float) Hunger);
+      if (Hunger > maxHunger)
+      {
+        deathHandler.Die(CauseOfDeath.Starvation);
+      }
     }
-  }
 
-  internal bool IsHungry()
-  {
-    return Hunger > genome.GetHungerThreshold();
+    private void OnTriggerEnter(Collider other)
+    {
+      if (other.CompareTag("Food"))
+      {
+        Destroy(other.gameObject);
+        Hunger = 0;
+      }
+    }
+
+    internal bool IsHungry()
+    {
+      return Hunger > genome.GetHungerThreshold();
+    }
   }
 }

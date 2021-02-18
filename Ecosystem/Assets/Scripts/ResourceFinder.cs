@@ -65,7 +65,7 @@ namespace Ecosystem
 
       if (!targetTracker.HasTarget)
       {
-        if (_priority == Desire.Food && other.GetComponent<Food>() != null ||
+        if (_priority == Desire.Food && other.CompareTag("Food") ||
             _priority == Desire.Water && other.GetComponent<Water>() != null)
         {
           targetTracker.SetTarget(other.gameObject);
