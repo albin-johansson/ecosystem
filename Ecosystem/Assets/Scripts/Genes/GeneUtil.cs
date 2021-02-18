@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using Random = System.Random;
 
-namespace Ecosystem.Stats
+namespace Ecosystem.Genes
 {
   public sealed class GeneUtil
   {

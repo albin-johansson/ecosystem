@@ -1,4 +1,4 @@
-﻿namespace Ecosystem.Stats
+﻿namespace Ecosystem.Genes
 {
   public sealed class Gene
   {

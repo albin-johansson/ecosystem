@@ -1,4 +1,4 @@
-﻿using Ecosystem.Stats;
+﻿using Ecosystem.Genes;
 using UnityEngine;
 
 namespace Ecosystem
