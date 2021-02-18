@@ -3,14 +3,13 @@ using Random = System.Random;
 
 namespace Ecosystem.Genes
 {
-  public sealed class GeneUtil
+  public static class GeneUtil
   {
     private static readonly Random Random = new Random();
 
-    //Clamps
-    public static double GetValidVar(double value, double min, double max)
+    public static float GetValidVar(float value, float min, float max)
     {
-      return Mathf.Clamp((float) value, (float) min, (float) max);
+      return Mathf.Clamp(value, min, max);
     }
 
     public static bool RandomWithChance(double percentage)
@@ -18,9 +17,9 @@ namespace Ecosystem.Genes
       return Random.NextDouble() * 100 < percentage;
     }
 
-    public static double MutatedInRange(double min, double max)
+    public static float MutatedInRange(float min, float max)
     {
-      return Random.NextDouble() * (max - min) + min;
+      return (float) Random.NextDouble() * (max - min) + min;
     }
   }
 }

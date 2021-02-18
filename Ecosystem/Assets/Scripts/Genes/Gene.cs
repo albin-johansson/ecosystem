@@ -2,11 +2,11 @@
 {
   public sealed class Gene
   {
-    private double Max { get; }
-    private double Min { get; }
-    public double Value { get; }
+    private float Max { get; }
+    private float Min { get; }
+    public float Value { get; }
 
-    public Gene(double value, double min, double max)
+    public Gene(float value, float min, float max)
     {
       Max = max;
       Min = min;

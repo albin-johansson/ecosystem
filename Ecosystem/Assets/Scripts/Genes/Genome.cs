@@ -5,13 +5,13 @@ namespace Ecosystem.Genes
 {
   public class Genome : MonoBehaviour
   {
-    private static readonly Gene HungerRate = new Gene(1, 0.5, 10);
+    private static readonly Gene HungerRate = new Gene(1, 0.5f, 10);
     private static readonly Gene HungerThreshold = new Gene(5, 0, 10);
-    private static readonly Gene ThirstRate = new Gene(1, 0.5, 10);
+    private static readonly Gene ThirstRate = new Gene(1, 0.5f, 10);
     private static readonly Gene ThirstThreshold = new Gene(5, 0, 10);
     private static readonly Gene Vision = new Gene(25, 1, 50);
-    private static readonly Gene SpeedFactor = new Gene(1.5, 1, 2);
-    private static readonly Gene SizeFactor = new Gene(0.5, 0.1, 1);
+    private static readonly Gene SpeedFactor = new Gene(1.5f, 1, 2);
+    private static readonly Gene SizeFactor = new Gene(0.5f, 0.1f, 1);
     private static readonly Gene DesirabilityFactor = new Gene(1, 1, 10);
 
     protected double MutateChance;
@@ -102,7 +102,7 @@ namespace Ecosystem.Genes
       return Genes[GeneType.HungerThreshold].Value;
     }
 
-    public double GetThirstRate()
+    public float GetThirstRate()
     {
       return Genes[GeneType.ThirstRate].Value;
     }

@@ -8,19 +8,19 @@ namespace Ecosystem
     [SerializeField] private Genome genome;
     [SerializeField] private ResourceBar resourceBar;
     [SerializeField] private DeathHandler deathHandler;
-    [SerializeField] private double maxThirst = 100;
+    [SerializeField] private float maxThirst = 100;
 
-    private double Thirst { get; set; }
+    private float Thirst { get; set; }
 
     private void Start()
     {
-      resourceBar.SetMaxValue((float) maxThirst);
+      resourceBar.SetMaxValue(maxThirst);
     }
 
     private void Update()
     {
       Thirst += genome.GetThirstRate() * Time.deltaTime;
-      resourceBar.SetValue((float) Thirst);
+      resourceBar.SetValue(Thirst);
 
       if (Thirst > maxThirst)
       {
