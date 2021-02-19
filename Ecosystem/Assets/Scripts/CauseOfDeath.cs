@@ -1,8 +1,11 @@
-﻿public enum CauseOfDeath
+﻿namespace Ecosystem
 {
-  Starvation,
-  Dehydration,
-  Hunted,
-  OldAge,
-  Other
+  public enum CauseOfDeath
+  {
+    Starvation,
+    Dehydration,
+    Hunted,
+    OldAge,
+    Other
+  }
 }

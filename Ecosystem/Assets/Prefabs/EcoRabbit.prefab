@@ -226,8 +226,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   genome: {fileID: 7338691026804306642}
   resourceBar: {fileID: 3518331895943715860}
-  maxThirst: 100
   deathHandler: {fileID: 5604703569485257513}
+  maxThirst: 100
 --- !u!54 &1022828079324828776
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -257,18 +257,6 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 0.21215802, y: 0.23956832, z: 0.33302435}
   m_Center: {x: 0, y: 0.13166885, z: 0}
---- !u!114 &39256655187426464
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6765261209891845031}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b0a02756cb2c4916a8c1c7ec22d3b944, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &3788875316471751425
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -424,6 +412,10 @@ PrefabInstance:
     - target: {fileID: 1262440479064932, guid: 829a5f61d90ac4c42b217bbfc1b3cea2, type: 3}
       propertyPath: m_Name
       value: EcoRabbit
+      objectReference: {fileID: 0}
+    - target: {fileID: 1262440479064932, guid: 829a5f61d90ac4c42b217bbfc1b3cea2, type: 3}
+      propertyPath: m_TagString
+      value: Prey
       objectReference: {fileID: 0}
     - target: {fileID: 4005735964643980, guid: 829a5f61d90ac4c42b217bbfc1b3cea2, type: 3}
       propertyPath: m_RootOrder

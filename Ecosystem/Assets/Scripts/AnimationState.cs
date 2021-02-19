@@ -1,8 +1,11 @@
-﻿public enum AnimationState
+﻿namespace Ecosystem
 {
-  Idle,
-  Running,
-  Attacking,
-  Walking,
-  Dead
+  public enum AnimationState
+  {
+    Idle,
+    Running,
+    Attacking,
+    Walking,
+    Dead
+  }
 }

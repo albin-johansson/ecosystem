@@ -60,8 +60,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   genome: {fileID: 3705420681509110121}
   resourceBar: {fileID: 0}
-  maxHunger: 100
   deathHandler: {fileID: 941976366869483110}
+  maxHunger: 100
 --- !u!114 &8666025027927895769
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -76,8 +76,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   genome: {fileID: 3705420681509110121}
   resourceBar: {fileID: 0}
-  maxThirst: 100
   deathHandler: {fileID: 941976366869483110}
+  maxThirst: 100
 --- !u!1 &1509949218462644464
 GameObject:
   m_ObjectHideFlags: 0
@@ -228,18 +228,6 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &-8344753538299728324
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5806006842196838736}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 94d5dd74c44c6734883d5d455ef3a879, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &-7686418651724940890
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -252,19 +240,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4c2008d296c842b181f6c433da52ba6a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &6763782041373470490
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5806006842196838736}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 184edc0ef7b34b1fae4d32870830ac3f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  animationStatesController: {fileID: -7686418651724940890}
 --- !u!114 &941976366869483110
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -289,6 +264,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7a26cd465e2f4ee19d44bca9cd0607de, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &6763782041373470490
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5806006842196838736}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 184edc0ef7b34b1fae4d32870830ac3f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  animationStatesController: {fileID: -7686418651724940890}
 --- !u!1001 &5806957549481359696
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -299,6 +287,10 @@ PrefabInstance:
     - target: {fileID: 1514481875857408, guid: fc3da0b1b2ade5f4b862ae549728831f, type: 3}
       propertyPath: m_Name
       value: EcoBear
+      objectReference: {fileID: 0}
+    - target: {fileID: 1514481875857408, guid: fc3da0b1b2ade5f4b862ae549728831f, type: 3}
+      propertyPath: m_TagString
+      value: Predator
       objectReference: {fileID: 0}
     - target: {fileID: 4909805588602726, guid: fc3da0b1b2ade5f4b862ae549728831f, type: 3}
       propertyPath: m_RootOrder

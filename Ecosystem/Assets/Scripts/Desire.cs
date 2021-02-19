@@ -1,8 +1,11 @@
-public enum Desire
+namespace Ecosystem
 {
-  Water,
-  Food,
-  Prey,
-  Idle,
-  Nothing
+  public enum Desire
+  {
+    Water,
+    Food,
+    Prey,
+    Idle,
+    Nothing
+  }
 }

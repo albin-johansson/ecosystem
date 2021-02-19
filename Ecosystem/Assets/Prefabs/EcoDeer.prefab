@@ -76,8 +76,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   genome: {fileID: 6717138812890425440}
   resourceBar: {fileID: 0}
-  maxThirst: 100
   deathHandler: {fileID: 4764468513203344704}
+  maxThirst: 100
 --- !u!1 &3963445139964788825
 GameObject:
   m_ObjectHideFlags: 0
@@ -168,6 +168,18 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   animationStatesController: {fileID: 8692857671328119037}
+--- !u!114 &4764468513203344704
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4768737484064110496}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 04dec80f06674629b7366fcb55ec29f2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &6717138812890425440
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -180,18 +192,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7a26cd465e2f4ee19d44bca9cd0607de, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &8099377005495506119
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4768737484064110496}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b0a02756cb2c4916a8c1c7ec22d3b944, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &8692857671328119037
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -202,18 +202,6 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 4c2008d296c842b181f6c433da52ba6a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!114 &4764468513203344704
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4768737484064110496}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 04dec80f06674629b7366fcb55ec29f2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1 &8553981379627378369
@@ -315,6 +303,10 @@ PrefabInstance:
     - target: {fileID: 1567582185033856, guid: ed4615b93521e4b46a0973aa03b94732, type: 3}
       propertyPath: m_Name
       value: EcoDeer
+      objectReference: {fileID: 0}
+    - target: {fileID: 1567582185033856, guid: ed4615b93521e4b46a0973aa03b94732, type: 3}
+      propertyPath: m_TagString
+      value: Prey
       objectReference: {fileID: 0}
     - target: {fileID: 4819606783095600, guid: ed4615b93521e4b46a0973aa03b94732, type: 3}
       propertyPath: m_RootOrder
