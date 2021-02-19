@@ -1,4 +1,7 @@
-﻿using UnityEngine;
+﻿using System.Collections.Generic;
+using UnityEngine;
+using UnityEngine.Analytics;
+using UnityEngine.SceneManagement;
 
 namespace Ecosystem
 {
@@ -15,6 +18,15 @@ namespace Ecosystem
 
     public void Die(CauseOfDeath cause)
     {
+      /*
+      IDictionary<string, object> d = new Dictionary<string, object>();
+      DeathData dd = new DeathData(cause,1);
+      d.Add("death", dd);
+      Analytics.CustomEvent("Death", d);
+      */
+
+      LoggingManager.OnDeath(new DeathData(cause, gameObject.gameObject));
+
       DestroyObjectDelayed();
     }
   }

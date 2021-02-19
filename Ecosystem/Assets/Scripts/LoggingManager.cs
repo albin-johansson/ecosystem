@@ -1,56 +1,35 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.Analytics;
 using UnityEngine.SceneManagement;
 
-public class LoggingManager : MonoBehaviour
+namespace Ecosystem
 {
-  private List<GameObject> trackedObjects = new List<GameObject>();
-
-  // called zero
-  private void Awake()
+  public sealed class LoggingManager : MonoBehaviour
   {
-    Debug.Log("Awake");
-  }
+    private static List<GameObject> _trackedObjects = new List<GameObject>();
+    private static List<DeathData> _deathData = new List<DeathData>();
+    private static GameObject[] _rootGameObjects = SceneManager.GetActiveScene().GetRootGameObjects();
 
-  // called first
-  private void OnEnable()
-  {
-    foreach (var gameObject
-      in SceneManager.GetActiveScene().GetRootGameObjects())
+
+    public void OnApplicationQuit()
     {
-      if (false)
-      {
-        trackedObjects.Add(gameObject);
-      }
+      //save data.  
+      throw new NotImplementedException();
     }
-  }
 
-  // called second
-  private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
-  {
-  }
+    public static void OnDeath(DeathData deathData)
+    {
+      //Save deathData. 
+      _deathData.Add(deathData);
+    }
 
-  // called third
-  private void Start()
-  {
-    Debug.Log("Start");
-    SceneManager.GetActiveScene().GetRootGameObjects();
-  }
+    public static void OnBirth(AnimalBirthData animalBirthData)
+    {
+      //TODO: what else should be done?
+      _trackedObjects.Add(animalBirthData.Animal);
+    }
 
-  void OnDisable()
-  {
-    int i = 0;
-    // Write to file/json/store data
-
-    /*
-    Debug.Log("OnDisable");
-    SceneManager.sceneLoaded -= OnSceneLoaded;
-    */
-  }
-
-  private void UpdateData()
-  {
-    var time = AnalyticsSessionInfo.sessionElapsedTime;
+    //TODO: track the food objects somehow. From _rootGameObjects is probably expensive. 
   }
 }
