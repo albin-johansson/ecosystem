@@ -1,6 +1,9 @@
 ﻿using UnityEngine;
 
-public sealed class AnimationStatesController : MonoBehaviour
+namespace Ecosystem
 {
-  public AnimationState AnimAnimationState { get; set; }
+  public sealed class AnimationStatesController : MonoBehaviour
+  {
+    public AnimationState AnimAnimationState { get; set; }
+  }
 }

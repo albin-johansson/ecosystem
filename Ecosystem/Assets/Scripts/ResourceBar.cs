@@ -1,19 +1,20 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public sealed class ResourceBar : MonoBehaviour
+namespace Ecosystem
 {
-  [SerializeField] private Slider slider;
-
-  public void SetMaxValue(float value)
+  public sealed class ResourceBar : MonoBehaviour
   {
-    slider.maxValue = value;
-  }
+    [SerializeField] private Slider slider;
 
-  public void SetValue(float value)
-  {
-    slider.value = slider.maxValue - value;
+    public void SetMaxValue(float value)
+    {
+      slider.maxValue = value;
+    }
+
+    public void SetValue(float value)
+    {
+      slider.value = slider.maxValue - value;
+    }
   }
 }

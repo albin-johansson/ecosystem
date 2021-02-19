@@ -1,42 +1,44 @@
-﻿using UnityEngine;
+﻿using Ecosystem.Genes;
+using UnityEngine;
 
-public sealed class PreyConsumer : MonoBehaviour
+namespace Ecosystem
 {
-  [SerializeField] private double rate = 0.02;
-  [SerializeField] private double threshold = 0.02;
-  [SerializeField] private ResourceBar resourceBar;
-  [SerializeField] private double maxHunger = 100;
-
-
-  [SerializeField] private DeathHandler deathHandler;
-  private double Hunger { get; set; }
-
-  private void Start()
+  public sealed class PreyConsumer : MonoBehaviour
   {
-    resourceBar.SetMaxValue((float) maxHunger);
-  }
+    [SerializeField] private Genome genome;
+    [SerializeField] private ResourceBar resourceBar;
+    [SerializeField] private DeathHandler deathHandler;
+    [SerializeField] private double maxHunger = 100;
 
-  private void Update()
-  {
-    Hunger += rate * Time.deltaTime;
-    resourceBar.SetValue((float)Hunger);
-    if (Hunger > maxHunger)
+    private double Hunger { get; set; }
+
+    private void Start()
     {
-      deathHandler.Die(CauseOfDeath.Starvation);
+      resourceBar.SetMaxValue((float) maxHunger);
     }
-  }
 
-  private void OnTriggerEnter(Collider other)
-  {
-    if (other.GetComponent<Prey>() != null)
+    private void Update()
     {
-      other.gameObject.GetComponent<DeathHandler>().Die(CauseOfDeath.Hunted);
-      Hunger = 0;
+      Hunger += genome.GetHungerRate() * Time.deltaTime;
+      resourceBar.SetValue((float) Hunger);
+      if (Hunger > maxHunger)
+      {
+        deathHandler.Die(CauseOfDeath.Starvation);
       }
-  }
+    }
 
-  internal bool IsHungry()
-  {
-    return Hunger > threshold;
+    private void OnTriggerEnter(Collider other)
+    {
+      if (other.CompareTag("Prey"))
+      {
+        other.gameObject.GetComponent<DeathHandler>().Die(CauseOfDeath.Hunted);
+        Hunger = 0;
+      }
+    }
+
+    internal bool IsHungry()
+    {
+      return Hunger > genome.GetHungerThreshold();
+    }
   }
 }
