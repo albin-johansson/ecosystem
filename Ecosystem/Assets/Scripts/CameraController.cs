@@ -1,56 +1,63 @@
 using UnityEngine;
 
-public sealed class CameraController : MonoBehaviour
+namespace Ecosystem
 {
-  [SerializeField] private float speed = 8;
-
-  private float _x;
-  private float _y;
-  private Vector3 _rotateValue;
-  private Transform _transform;
-
-  private void Start()
+  public sealed class CameraController : MonoBehaviour
   {
-    _transform = transform; // Cache reference for performance reasons
-  }
+    [SerializeField] private float speed = 8;
 
-  private void Update()
-  {
-    if (Input.GetKey(KeyCode.Mouse1))
-    {
-      Rotate();
-      Translate();
-    }
-  }
+    private float _x;
+    private float _y;
+    private Vector3 _rotateValue;
+    private Transform _transform;
 
-  private void Translate()
-  {
-    if (Input.GetKey(KeyCode.W))
+    private void Start()
     {
-      _transform.position += speed * Time.deltaTime * _transform.forward;
+      _transform = transform; // Cache reference for performance reasons
     }
 
-    if (Input.GetKey(KeyCode.S))
+    private void Update()
     {
-      _transform.position -= speed * Time.deltaTime * _transform.forward;
+      if (Input.GetKeyUp(KeyCode.Escape))
+      {
+        Application.Quit();
+      }
+      else if (Input.GetKey(KeyCode.Mouse1))
+      {
+        Rotate();
+        Translate();
+      }
     }
 
-    if (Input.GetKey(KeyCode.D))
+    private void Translate()
     {
-      _transform.position += speed * Time.deltaTime * _transform.right;
+      if (Input.GetKey(KeyCode.W))
+      {
+        _transform.position += speed * Time.deltaTime * _transform.forward;
+      }
+
+      if (Input.GetKey(KeyCode.S))
+      {
+        _transform.position -= speed * Time.deltaTime * _transform.forward;
+      }
+
+      if (Input.GetKey(KeyCode.D))
+      {
+        _transform.position += speed * Time.deltaTime * _transform.right;
+      }
+
+      if (Input.GetKey(KeyCode.A))
+      {
+        _transform.position -= speed * Time.deltaTime * _transform.right;
+      }
     }
 
-    if (Input.GetKey(KeyCode.A))
+    private void Rotate()
     {
-      _transform.position -= speed * Time.deltaTime * _transform.right;
+      _y = Input.GetAxis("Mouse X");
+      _x = Input.GetAxis("Mouse Y");
+      _rotateValue = new Vector3(_x, _y * -1, 0);
+      _transform.eulerAngles -= _rotateValue;
     }
-  }
-
-  private void Rotate()
-  {
-    _y = Input.GetAxis("Mouse X");
-    _x = Input.GetAxis("Mouse Y");
-    _rotateValue = new Vector3(_x, _y * -1, 0);
-    _transform.eulerAngles -= _rotateValue;
   }
 }

@@ -1,41 +1,44 @@
+using Ecosystem.Genes;
 using UnityEngine;
 
-public sealed class WaterConsumer : MonoBehaviour
+namespace Ecosystem
 {
-  [SerializeField] private Genome genome;
-  [SerializeField] private ResourceBar resourceBar;
-  [SerializeField] private double maxThirst = 100;
-
-
-  [SerializeField] private DeathHandler deathHandler;
-  private double Thirst { get; set; }
-
-  private void Start()
+  public sealed class WaterConsumer : MonoBehaviour
   {
-    resourceBar.SetMaxValue((float) maxThirst);
-  }
+    [SerializeField] private Genome genome;
+    [SerializeField] private ResourceBar resourceBar;
+    [SerializeField] private DeathHandler deathHandler;
+    [SerializeField] private float maxThirst = 100;
 
-  private void Update()
-  {
-    Thirst += genome.GetThirstRate() * Time.deltaTime;
-    resourceBar.SetValue((float) Thirst);
+    private float Thirst { get; set; }
 
-    if (Thirst > maxThirst)
+    private void Start()
     {
-      deathHandler.Die(CauseOfDeath.Dehydration);
+      resourceBar.SetMaxValue(maxThirst);
     }
-  }
 
-  private void OnTriggerEnter(Collider other)
-  {
-    if (other.GetComponent<Water>() != null)
+    private void Update()
     {
-      Thirst = 0;
-    }
-  }
+      Thirst += genome.GetThirstRate() * Time.deltaTime;
+      resourceBar.SetValue(Thirst);
 
-  internal bool IsThirsty()
-  {
-    return Thirst > genome.GetThirstThreshold();
+      if (Thirst > maxThirst)
+      {
+        deathHandler.Die(CauseOfDeath.Dehydration);
+      }
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+      if (other.CompareTag("Water"))
+      {
+        Thirst = 0;
+      }
+    }
+
+    internal bool IsThirsty()
+    {
+      return Thirst > genome.GetThirstThreshold();
+    }
   }
 }

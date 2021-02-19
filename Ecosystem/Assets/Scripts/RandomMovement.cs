@@ -2,47 +2,51 @@ using UnityEngine;
 using UnityEngine.AI;
 using Random = UnityEngine.Random;
 
-public sealed class RandomMovement : MonoBehaviour
+namespace Ecosystem
 {
-  [SerializeField] private NavMeshAgent navAgent;
-  [SerializeField] private AnimationStatesController animationStatesController;
-  [SerializeField, Tooltip("What is considered to be the ground")]
-  private LayerMask groundMask;
-
-  private Transform _transform;
-  private float _timer;
-
-  private void Start()
+  public sealed class RandomMovement : MonoBehaviour
   {
-    _transform = navAgent.transform;
-  }
+    [SerializeField] private NavMeshAgent navAgent;
+    [SerializeField] private AnimationStatesController animationStatesController;
+
+    [SerializeField, Tooltip("What is considered to be the ground")]
+    private LayerMask groundMask;
+
+    private Transform _transform;
+    private float _timer;
+
+    private void Start()
+    {
+      _transform = navAgent.transform;
+    }
 
     //The TargetRandomDestination function is called if the agent has no path or the timer has run out
-  private void Update()
-  {
-    if (!navAgent.hasPath || _timer < 0)
+    private void Update()
     {
-      TargetRandomDestination();
-      _timer = 10;
+      if (!navAgent.hasPath || _timer < 0)
+      {
+        TargetRandomDestination();
+        _timer = 10;
+      }
+      else
+      {
+        _timer -= Time.deltaTime;
+      }
     }
-    else
+
+    private void TargetRandomDestination()
     {
-      _timer -= Time.deltaTime;
-    }
-  }
+      var randomX = Random.Range(-8f, 8f);
+      var randomZ = Random.Range(-8f, 8f);
 
-  private void TargetRandomDestination()
-  {
-    var randomX = Random.Range(-8f, 8f);
-    var randomZ = Random.Range(-8f, 8f);
+      var position = _transform.position;
+      var destination = new Vector3(position.x + randomX, position.y, position.z + randomZ);
 
-    var position = _transform.position;
-    var destination = new Vector3(position.x + randomX, position.y, position.z + randomZ);
-
-    if (Physics.Raycast(destination, -_transform.up, 2f, groundMask))
-    {
-      navAgent.SetDestination(destination);
-      animationStatesController.AnimAnimationState = AnimationState.Walking;
+      if (Physics.Raycast(destination, -_transform.up, 2f, groundMask))
+      {
+        navAgent.SetDestination(destination);
+        animationStatesController.AnimAnimationState = AnimationState.Walking;
+      }
     }
   }
 }
