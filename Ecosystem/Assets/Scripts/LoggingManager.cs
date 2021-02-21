@@ -1,22 +1,17 @@
 ﻿using System;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 namespace Ecosystem
 {
-  public sealed class LoggingManager : MonoBehaviour
+  public class LoggingManager : MonoBehaviour
   {
+    [SerializeField] private Text textField;
     private static List<GameObject> _trackedObjects = new List<GameObject>();
+
     private static List<DeathData> _deathData = new List<DeathData>();
-    private static GameObject[] _rootGameObjects = SceneManager.GetActiveScene().GetRootGameObjects();
-
-
-    public void OnApplicationQuit()
-    {
-      //save data.  
-      throw new NotImplementedException();
-    }
+    //private GameObject[] _rootGameObjects = SceneManager.GetActiveScene().GetRootGameObjects();
 
     public static void OnDeath(DeathData deathData)
     {
@@ -30,6 +25,17 @@ namespace Ecosystem
       _trackedObjects.Add(animalBirthData.Animal);
     }
 
+    public void Update()
+    {
+      textField.text = "Number of dead:" + _deathData.Count;
+    }
+
     //TODO: track the food objects somehow. From _rootGameObjects is probably expensive. 
+
+    public void OnApplicationQuit()
+    {
+      //save data.  
+      //throw new NotImplementedException();
+    }
   }
 }

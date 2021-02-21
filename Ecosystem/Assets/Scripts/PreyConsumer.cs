@@ -31,6 +31,7 @@ namespace Ecosystem
     {
       if (other.CompareTag("Prey"))
       {
+        //deathHandler.Die(CauseOfDeath.Hunted, other.gameObject);
         other.gameObject.GetComponent<DeathHandler>().Die(CauseOfDeath.Hunted);
         Hunger = 0;
       }

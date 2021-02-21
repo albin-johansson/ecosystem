@@ -1,7 +1,4 @@
-﻿using System.Collections.Generic;
-using UnityEngine;
-using UnityEngine.Analytics;
-using UnityEngine.SceneManagement;
+﻿using UnityEngine;
 
 namespace Ecosystem
 {
@@ -10,10 +7,13 @@ namespace Ecosystem
   /// </summary>
   public sealed class DeathHandler : MonoBehaviour
   {
+    //[SerializeField] private LoggingManager loggingManager;
+
     private void DestroyObjectDelayed()
     {
       //TODO: make the time depend on the death animation
-      Destroy(gameObject.gameObject, 5);
+      Destroy(gameObject.gameObject);
+      Debug.Log("Something has died");
     }
 
     public void Die(CauseOfDeath cause)
@@ -25,8 +25,7 @@ namespace Ecosystem
       Analytics.CustomEvent("Death", d);
       */
 
-      LoggingManager.OnDeath(new DeathData(cause, gameObject.gameObject));
-
+      LoggingManager.OnDeath(new DeathData(cause, gameObject));
       DestroyObjectDelayed();
     }
   }
