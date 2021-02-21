@@ -23,7 +23,7 @@ namespace Ecosystem.UI
       _refreshRateRatio = 1.0f / refreshRate;
     }
 
-    private void Update()
+    private void LateUpdate()
     {
       if (Time.unscaledTime > _nextUpdateTime)
       {
