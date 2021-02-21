@@ -3,6 +3,7 @@ using UnityEngine.UI;
 
 namespace Ecosystem
 {
+  // TODO move this to UI namespace
   public sealed class ResourceBar : MonoBehaviour
   {
     [SerializeField] private Slider slider;
