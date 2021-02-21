@@ -2,6 +2,7 @@ using UnityEngine;
 
 namespace Ecosystem
 {
+  // TODO move this to UI namespace
   public sealed class Billboard : MonoBehaviour
   {
     private Transform _cameraTransform;
