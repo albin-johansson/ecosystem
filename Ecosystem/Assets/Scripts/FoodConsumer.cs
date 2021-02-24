@@ -36,6 +36,11 @@ namespace Ecosystem
       }
     }
 
+    internal double MyHunger()
+    {
+      return Hunger;
+    }
+    
     internal bool IsHungry()
     {
       return Hunger > genome.GetHungerThreshold();

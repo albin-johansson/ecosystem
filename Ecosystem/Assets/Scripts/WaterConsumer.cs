@@ -32,6 +32,10 @@ namespace Ecosystem
     {
       if (other.CompareTag("Water"))
       {
+        if (gameObject.transform.GetComponent<WolfGenome>())
+        {
+          print("drank water");
+        }
         Thirst = 0;
       }
     }
@@ -39,6 +43,11 @@ namespace Ecosystem
     internal bool IsThirsty()
     {
       return Thirst > genome.GetThirstThreshold();
+    }
+    
+    internal double MyThirst()
+    {
+      return Thirst;
     }
   }
 }

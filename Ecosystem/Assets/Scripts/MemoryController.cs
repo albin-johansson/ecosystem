@@ -1,76 +1,80 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public sealed class MemoryController : MonoBehaviour
+namespace Ecosystem
 {
-  private const int Capacity = 5;
-
-  private List<(Desire, Vector3)> _memory;
-  private int _nextMemoryLocation;
-
-  private void Start()
+  public sealed class MemoryController : MonoBehaviour
   {
-    _memory = new List<(Desire, Vector3)>(Capacity);
-  }
+    private const int Capacity = 5;
 
-  //Save gameobject and its "Desire" identifier as a tuple to _memory
-  public void SaveToMemory(GameObject other)
-  {
-    var desire = GetDesire(other);
-    _memory.Insert(_nextMemoryLocation, (desire, other.gameObject.transform.position));
-    _nextMemoryLocation++;
-    if (_nextMemoryLocation > (Capacity - 1))
-    {
-      _nextMemoryLocation = 0;
-    }
-  }
+    private List<(Desire, Vector3)> _memory;
+    private int _nextMemoryLocation;
 
-  private Desire GetDesire(GameObject other)
-  {
-    if (other.GetComponent<Food>())
+    private void Start()
     {
-      return Desire.Food;
-    }
-    else if (other.GetComponent<Prey>())
-    {
-      return Desire.Prey;
-    }
-    else if (other.GetComponent<Water>())
-    {
-      return Desire.Water;
+      _memory = new List<(Desire, Vector3)>(Capacity);
     }
 
-    return Desire.Idle;
-  }
-
-  public bool ExistInMemory(Desire currentDesire)
-  {
-    foreach (var (desire, position) in _memory)
+    //Save gameobject and its "Desire" identifier as a tuple to _memory
+    public void SaveToMemory(GameObject other)
     {
-      if (desire.Equals(currentDesire))
+      var desire = GetDesire(other);
+      _memory.Insert(_nextMemoryLocation, (desire, other.gameObject.transform.position));
+      _nextMemoryLocation++;
+      if (_nextMemoryLocation > (Capacity - 1))
       {
-        return true;
+        _nextMemoryLocation = 0;
       }
     }
 
-    return false;
-  }
-
-  //Get a position of an object with the same Type as the Desire asked for in currentDesire
-  public Vector3 GetFromMemory(Desire currentDesire)
-  {
-    foreach (var (desire, position) in _memory)
+    private Desire GetDesire(GameObject other)
     {
-      if (desire.Equals(currentDesire))
+      if (other.gameObject.layer.Equals(6))
       {
-        if (!currentDesire.Equals(Desire.Water))
+        return Desire.Food;
+      }
+      else if (other.gameObject.layer.Equals(8))
+      {
+        return Desire.Prey;
+      }
+      else if (other.gameObject.layer.Equals(4))
+      {
+        return Desire.Water;
+      }
+
+      return Desire.Idle;
+    }
+
+    public bool ExistInMemory(Desire currentDesire)
+    {
+      foreach (var (desire, position) in _memory)
+      {
+        if (desire.Equals(currentDesire))
         {
-          _memory.Insert(_memory.IndexOf((desire, position)), (Desire.Nothing, new Vector3()));
+          return true;
         }
-        return position;
       }
+
+      return false;
     }
 
-    return Vector3.zero;
+    //Get a position of an object with the same Type as the Desire asked for in currentDesire
+    public Vector3 GetFromMemory(Desire currentDesire)
+    {
+      foreach (var (desire, position) in _memory)
+      {
+        if (desire.Equals(currentDesire))
+        {
+          if (!currentDesire.Equals(Desire.Water))
+          {
+            _memory.Insert(_memory.IndexOf((desire, position)), (Desire.Nothing, new Vector3()));
+          }
+
+          return position;
+        }
+      }
+
+      return Vector3.zero;
+    }
   }
 }

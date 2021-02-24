@@ -15,6 +15,7 @@ namespace Ecosystem
 
     public void Die(CauseOfDeath cause)
     {
+      print("Died of cause " + cause);
       DestroyObjectDelayed();
     }
   }

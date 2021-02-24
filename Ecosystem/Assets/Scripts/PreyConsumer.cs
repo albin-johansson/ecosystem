@@ -31,11 +31,17 @@ namespace Ecosystem
     {
       if (other.CompareTag("Prey"))
       {
+        print("onTriggerEnter is here");
         other.gameObject.GetComponent<DeathHandler>().Die(CauseOfDeath.Hunted);
         Hunger = 0;
       }
     }
 
+    internal double MyHunger()
+    {
+      return Hunger;
+    }
+    
     internal bool IsHungry()
     {
       return Hunger > genome.GetHungerThreshold();
