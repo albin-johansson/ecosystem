@@ -92,7 +92,7 @@ BoxCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 1, y: 1, z: 1}
+  m_Size: {x: 2, y: 1, z: 2}
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!114 &981920773760349502
 MonoBehaviour:
@@ -106,6 +106,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c2fa5581f03243c68b482d0030e00671, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  animationStatesController: {fileID: 9024531024036364234}
   genome: {fileID: 4560422893000732806}
   resourceBar: {fileID: 2123506346985805905}
   deathHandler: {fileID: 4576550596966389264}

@@ -14,6 +14,7 @@ namespace Ecosystem
     private int _isDeadHash;
     private int _isAttackingHash;
     private int _animationSpeedMultiplier;
+    private float _navMeshAgentSpeed;
     private AnimationState _animationState;
 
     private void Start()
@@ -29,12 +30,18 @@ namespace Ecosystem
 
     private void Update()
     {
+      if (navMeshAgent.speed > 0)
+      {
+        _navMeshAgentSpeed = navMeshAgent.speed;
+      }
+
       _animator.SetFloat(_animationSpeedMultiplier, navMeshAgent.velocity.magnitude);
       var incomingState = animationStatesController.AnimationState;
       if (incomingState == _animationState)
       {
         return;
       }
+
       _animationState = incomingState;
       ResetAnimatorParameters();
       SetAnimatorParameter(_animationState);
@@ -45,6 +52,8 @@ namespace Ecosystem
       switch (newAnimationState)
       {
         case AnimationState.Walking:
+          //reset speed if coming from attack
+          navMeshAgent.speed = _navMeshAgentSpeed;
           _animator.SetBool(_isWalkingHash, true);
           break;
         case AnimationState.Running:
@@ -55,7 +64,8 @@ namespace Ecosystem
           _animator.SetBool(_isDeadHash, true);
           break;
         case AnimationState.Attacking:
-          _animator.SetBool(_isAttackingHash, true);
+          navMeshAgent.speed = 0;
+          _animator.SetTrigger(_isAttackingHash);
           break;
         case AnimationState.Idle:
           break;

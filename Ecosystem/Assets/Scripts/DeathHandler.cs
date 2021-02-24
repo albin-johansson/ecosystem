@@ -9,6 +9,7 @@ namespace Ecosystem
   public sealed class DeathHandler : MonoBehaviour
   {
     [SerializeField] private AnimationStatesController animationStatesController;
+
     private void DestroyObjectDelayed()
     {
       Destroy(gameObject.gameObject, 3);
