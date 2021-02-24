@@ -10,6 +10,10 @@ namespace Ecosystem
     private List<(Desire, Vector3)> _memory;
     private int _nextMemoryLocation;
 
+    const int WaterLayer = 4;
+    const int FoodLayer = 6;
+    const int RabbitLayer = 8;
+
     private void Start()
     {
       _memory = new List<(Desire, Vector3)>(Capacity);
@@ -29,15 +33,15 @@ namespace Ecosystem
 
     private Desire GetDesire(GameObject other)
     {
-      if (other.gameObject.layer.Equals(6))
+      if (other.gameObject.layer.Equals(FoodLayer))
       {
         return Desire.Food;
       }
-      else if (other.gameObject.layer.Equals(8))
+      else if (other.gameObject.layer.Equals(WaterLayer))
       {
         return Desire.Prey;
       }
-      else if (other.gameObject.layer.Equals(4))
+      else if (other.gameObject.layer.Equals(RabbitLayer))
       {
         return Desire.Water;
       }

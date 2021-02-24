@@ -51,6 +51,7 @@ namespace Ecosystem
       {
         return;
       }
+
       if (Physics.Raycast(destination, -_transform.up, 2f, groundMask))
       {
         _lastPos = position;
@@ -59,6 +60,11 @@ namespace Ecosystem
       }
     }
 
+    /// <summary>
+    ///Compares the new suggested destination with the position it had before it arrived at this one.
+    ///If the last is closer to the destination than how close destination is to its current position it will choose another one.
+    /// This is too avoid having the animal wander back and forth.
+    /// </summary>
     public bool IsNewPosGood(Vector3 current, Vector3 newPos)
     {
       Vector3 temp1 = new Vector3(current.x - newPos.x, 0, current.z - newPos.z);

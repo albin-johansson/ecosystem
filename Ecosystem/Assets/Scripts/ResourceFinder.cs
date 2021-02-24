@@ -15,6 +15,10 @@ namespace Ecosystem
 
     private Desire _priority = Desire.Idle;
 
+    const int WaterLayer = 4;
+    const int FoodLayer = 6;
+    const int WolfLayer = 7;
+
     private void Update()
     {
       UpdatePriority();
@@ -33,11 +37,9 @@ namespace Ecosystem
       }
     }
 
-    //Sets priority, OBS. needs to be worked on to get a better flow
+    //Sets priority, will set priority of what is currently most needed.
     private void UpdatePriority()
     {
-      
-      // Hunger has implicit priority
       if (foodConsumer.MyHunger() > waterConsumer.MyThirst() && foodConsumer.IsHungry())
       {
         _priority = Desire.Food;
@@ -59,7 +61,7 @@ namespace Ecosystem
     /// </summary>
     private void OnTriggerEnter(Collider other)
     {
-      if (other.GetComponent<WolfGenome>())
+      if (other.gameObject.layer.Equals(WolfLayer))
       {
         targetTracker.FleeFromPredator(other.gameObject);
         return;
@@ -69,8 +71,8 @@ namespace Ecosystem
 
       if (!targetTracker.HasTarget)
       {
-        if (_priority == Desire.Food && other.gameObject.layer.Equals(6) ||
-            _priority == Desire.Water && other.gameObject.layer.Equals(4))
+        if (_priority == Desire.Food && other.gameObject.layer.Equals(FoodLayer) ||
+            _priority == Desire.Water && other.gameObject.layer.Equals(WaterLayer))
         {
           targetTracker.SetTarget(other.gameObject.transform.position, _priority);
         }

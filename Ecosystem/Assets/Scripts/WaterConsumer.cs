@@ -31,12 +31,8 @@ namespace Ecosystem
 
     private void OnTriggerEnter(Collider other)
     {
-      if (other.CompareTag("Water"))
+      if (other.gameObject.CompareTag("Water"))
       {
-        if (gameObject.transform.GetComponent<WolfGenome>())
-        {
-          print("drank water");
-        }
         Thirst = 0;
       }
     }

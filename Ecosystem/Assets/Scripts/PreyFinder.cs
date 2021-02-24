@@ -14,6 +14,9 @@ namespace Ecosystem
 
     private Desire _priority = Desire.Idle;
 
+    const int WaterLayer = 4;
+    const int RabbitLayer = 8;
+
     private void Update()
     {
       UpdatePriority();
@@ -23,20 +26,18 @@ namespace Ecosystem
     //Checks MemoryController for objects that matches the priority Desire
     private void CheckMemory()
     {
-      if (!targetTracker.HasTarget)
+      if (!targetTracker.HasTarget && !_priority.Equals(Desire.Idle))
       {
         if (memoryController.ExistInMemory(_priority))
         {
-          print("wolf did something form memory " + _priority);
           targetTracker.SetTarget(memoryController.GetFromMemory(_priority), _priority);
         }
       }
     }
 
-    //Sets priority, needs to be worked on to get a better flow
+    //Sets priority, will set priority of what is currently most needed.
     private void UpdatePriority()
     {
-      // Hunger has implicit priority
       if (preyConsumer.MyHunger() > waterConsumer.MyThirst() && preyConsumer.IsHungry())
       {
         _priority = Desire.Prey;
@@ -62,8 +63,8 @@ namespace Ecosystem
 
       if (!targetTracker.HasTarget)
       {
-        if (preyConsumer.IsHungry() && other.gameObject.layer.Equals(8) ||
-            waterConsumer.IsThirsty() && other.gameObject.layer.Equals(4))
+        if (_priority == Desire.Food && other.gameObject.layer.Equals(RabbitLayer) ||
+            _priority == Desire.Water && other.gameObject.layer.Equals(WaterLayer))
         {
           targetTracker.SetTarget(other.gameObject.transform.position, _priority);
         }

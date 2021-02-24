@@ -32,7 +32,6 @@ namespace Ecosystem
     {
       if (other.CompareTag("Prey"))
       {
-        print("onTriggerEnter is here");
         other.gameObject.GetComponent<DeathHandler>().Die(CauseOfDeath.Hunted);
         Hunger = 0;
       }

@@ -15,11 +15,9 @@ namespace Ecosystem
     private bool _chased = false;
     private Vector3 _fleeDirection;
 
-
-    int water = 4;
-    int food = 6;
-    int rabbit = 8;
-    //int wolf = 7;
+    const int WaterLayer = 4;
+    const int FoodLayer = 6;
+    const int RabbitLayer = 8;
 
     private const double StopTrackingThreshold = 0.1f;
 
@@ -110,7 +108,7 @@ namespace Ecosystem
       switch (_targetType)
       {
         case Desire.Food:
-          if (other.gameObject.layer.Equals(food))
+          if (other.gameObject.layer.Equals(FoodLayer))
           {
             _target = other.gameObject;
             _targetInSight = true;
@@ -118,7 +116,7 @@ namespace Ecosystem
 
           break;
         case Desire.Prey:
-          if (other.gameObject.layer.Equals(rabbit))
+          if (other.gameObject.layer.Equals(RabbitLayer))
           {
             _target = other.gameObject;
             _targetInSight = true;
@@ -126,7 +124,7 @@ namespace Ecosystem
 
           break;
         case Desire.Water:
-          if (other.gameObject.layer.Equals(water))
+          if (other.gameObject.layer.Equals(WaterLayer))
           {
             _target = other.gameObject;
             _targetInSight = true;
