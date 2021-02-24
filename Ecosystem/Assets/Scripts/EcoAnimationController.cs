@@ -1,15 +1,18 @@
 ﻿using UnityEngine;
+using UnityEngine.AI;
 
 namespace Ecosystem
 {
   public class EcoAnimationController : MonoBehaviour
   {
     [SerializeField] private AnimationStatesController animationStatesController;
+    [SerializeField] private NavMeshAgent navMeshAgent;
     private Animator _animator;
     private int _isWalkingHash;
     private int _isRunningHash;
     private int _isDeadHash;
     private int _isAttackingHash;
+    private int _animationSpeedMultiplier;
     private AnimationState _animationState;
 
     private void Start()
@@ -19,6 +22,7 @@ namespace Ecosystem
       _isRunningHash = Animator.StringToHash("isRunning");
       _isDeadHash = Animator.StringToHash("isDead");
       _isAttackingHash = Animator.StringToHash("isAttacking");
+      _animationSpeedMultiplier = Animator.StringToHash("animationSpeedMultiplier");
       _animationState = AnimationState.Idle;
     }
 
@@ -29,10 +33,10 @@ namespace Ecosystem
       {
         return;
       }
-
       _animationState = incomingState;
       ResetAnimatorParameters();
       SetAnimatorParameter(_animationState);
+      _animator.SetFloat(_animationSpeedMultiplier, navMeshAgent.speed);
     }
 
     private void SetAnimatorParameter(AnimationState newAnimationState)

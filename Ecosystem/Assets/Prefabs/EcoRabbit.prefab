@@ -257,6 +257,20 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 0.21215802, y: 0.23956832, z: 0.33302435}
   m_Center: {x: 0, y: 0.13166885, z: 0}
+--- !u!114 &2529885084106510423
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6765261209891845031}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 184edc0ef7b34b1fae4d32870830ac3f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  animationStatesController: {fileID: 3788875316471751425}
+  navMeshAgent: {fileID: 6868405535869523061}
 --- !u!114 &3788875316471751425
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -293,19 +307,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 722870adf75749399b54d4edf4c101cf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &2529885084106510423
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6765261209891845031}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 184edc0ef7b34b1fae4d32870830ac3f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  animationStatesController: {fileID: 3788875316471751425}
 --- !u!1001 &3478715110397862799
 PrefabInstance:
   m_ObjectHideFlags: 0
