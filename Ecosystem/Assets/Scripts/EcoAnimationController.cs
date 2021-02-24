@@ -30,7 +30,7 @@ namespace Ecosystem
     private void Update()
     {
       _animator.SetFloat(_animationSpeedMultiplier, navMeshAgent.velocity.magnitude);
-      var incomingState = animationStatesController.AnimAnimationState;
+      var incomingState = animationStatesController.AnimationState;
       if (incomingState == _animationState)
       {
         return;
@@ -51,6 +51,7 @@ namespace Ecosystem
           _animator.SetBool(_isRunningHash, true);
           break;
         case AnimationState.Dead:
+          navMeshAgent.speed = 0;
           _animator.SetBool(_isDeadHash, true);
           break;
         case AnimationState.Attacking:

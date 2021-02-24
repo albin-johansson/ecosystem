@@ -42,7 +42,7 @@ namespace Ecosystem
     //Sets a target to hone in on and start a timer
     public void SetTarget(GameObject target)
     {
-      animationStatesController.AnimAnimationState = AnimationState.Walking;
+      animationStatesController.AnimationState = AnimationState.Walking;
       navAgent.SetDestination(target.transform.position);
       _target = target;
       _timeRemaining = 5;

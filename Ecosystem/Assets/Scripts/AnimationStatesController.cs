@@ -4,6 +4,6 @@ namespace Ecosystem
 {
   public sealed class AnimationStatesController : MonoBehaviour
   {
-    public AnimationState AnimAnimationState { get; set; }
+    public AnimationState AnimationState { get; set; }
   }
 }

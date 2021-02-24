@@ -45,7 +45,7 @@ namespace Ecosystem
       if (Physics.Raycast(destination, -_transform.up, 2f, groundMask))
       {
         navAgent.SetDestination(destination);
-        animationStatesController.AnimAnimationState = AnimationState.Walking;
+        animationStatesController.AnimationState = AnimationState.Walking;
       }
     }
   }

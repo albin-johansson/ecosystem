@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using UnityEngine.AI;
 
 namespace Ecosystem
 {
@@ -7,14 +8,15 @@ namespace Ecosystem
   /// </summary>
   public sealed class DeathHandler : MonoBehaviour
   {
+    [SerializeField] private AnimationStatesController animationStatesController;
     private void DestroyObjectDelayed()
     {
-      //TODO: make the time depend on the death animation
-      Destroy(gameObject.gameObject, 5);
+      Destroy(gameObject.gameObject, 3);
     }
 
     public void Die(CauseOfDeath cause)
     {
+      animationStatesController.AnimationState = AnimationState.Dead;
       DestroyObjectDelayed();
     }
   }
