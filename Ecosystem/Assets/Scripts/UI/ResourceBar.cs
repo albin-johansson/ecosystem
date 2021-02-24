@@ -1,7 +1,7 @@
 using UnityEngine;
 using UnityEngine.UI;
 
-namespace Ecosystem
+namespace Ecosystem.UI
 {
   public sealed class ResourceBar : MonoBehaviour
   {

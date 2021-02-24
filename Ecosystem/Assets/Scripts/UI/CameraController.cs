@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace Ecosystem
+namespace Ecosystem.UI
 {
   public sealed class CameraController : MonoBehaviour
   {
