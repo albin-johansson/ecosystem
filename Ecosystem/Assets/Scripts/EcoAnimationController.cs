@@ -6,7 +6,6 @@ namespace Ecosystem
 {
   public class EcoAnimationController : MonoBehaviour
   {
-    [SerializeField] private AnimationStatesController animationStatesController;
     [SerializeField] private NavMeshAgent navMeshAgent;
     private Animator _animator;
     private int _isWalkingHash;
@@ -15,7 +14,6 @@ namespace Ecosystem
     private int _isAttackingHash;
     private int _animationSpeedMultiplier;
     private float _navMeshAgentSpeed;
-    private AnimationState _animationState;
 
     private void Start()
     {
@@ -25,7 +23,6 @@ namespace Ecosystem
       _isDeadHash = Animator.StringToHash("isDead");
       _isAttackingHash = Animator.StringToHash("isAttacking");
       _animationSpeedMultiplier = Animator.StringToHash("animationSpeedMultiplier");
-      _animationState = AnimationState.Idle;
     }
 
     private void Update()
@@ -36,42 +33,6 @@ namespace Ecosystem
       }
 
       _animator.SetFloat(_animationSpeedMultiplier, navMeshAgent.velocity.magnitude);
-      var incomingState = animationStatesController.AnimationState;
-      if (incomingState == _animationState)
-      {
-        return;
-      }
-
-      _animationState = incomingState;
-      ResetAnimatorParameters();
-      SetAnimatorParameter(_animationState);
-    }
-
-    private void SetAnimatorParameter(AnimationState newAnimationState)
-    {
-      switch (newAnimationState)
-      {
-        case AnimationState.Walking:
-          //reset speed if coming from attack
-          navMeshAgent.speed = _navMeshAgentSpeed;
-          _animator.SetBool(_isWalkingHash, true);
-          break;
-        case AnimationState.Running:
-          _animator.SetBool(_isRunningHash, true);
-          break;
-        case AnimationState.Dead:
-          navMeshAgent.speed = 0;
-          _animator.SetBool(_isDeadHash, true);
-          break;
-        case AnimationState.Attacking:
-          navMeshAgent.speed = 0;
-          _animator.SetTrigger(_isAttackingHash);
-          break;
-        case AnimationState.Idle:
-          break;
-        default:
-          break;
-      }
     }
 
     private void ResetAnimatorParameters()
@@ -83,6 +44,31 @@ namespace Ecosystem
           _animator.ResetTrigger(parameter.name);
         }
       }
+    }
+
+    public void AttackAnimation()
+    {
+      ResetAnimatorParameters();
+      _animator.SetTrigger(_isAttackingHash);
+      IdleAnimation();
+    }
+
+    public void MoveAnimation()
+    {
+      ResetAnimatorParameters();
+      _animator.SetBool(_isWalkingHash, true);
+    }
+
+    public void DieAnimation()
+    {
+      ResetAnimatorParameters();
+      navMeshAgent.speed = 0;
+      _animator.SetBool(_isDeadHash, true);
+    }
+
+    public void IdleAnimation()
+    {
+      ResetAnimatorParameters();
     }
   }
 }

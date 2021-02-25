@@ -44,7 +44,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   navAgent: {fileID: 4989341916565700389}
-  animationStatesController: {fileID: 9024531024036364234}
+  ecoAnimationController: {fileID: -3203979379469668430}
   groundMask:
     serializedVersion: 2
     m_Bits: 8
@@ -106,11 +106,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c2fa5581f03243c68b482d0030e00671, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  animationStatesController: {fileID: 9024531024036364234}
   genome: {fileID: 4560422893000732806}
   resourceBar: {fileID: 2123506346985805905}
   deathHandler: {fileID: 4576550596966389264}
   maxHunger: 100
+  ecoAnimationController: {fileID: 0}
 --- !u!114 &2767905003252926869
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -152,7 +152,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 184edc0ef7b34b1fae4d32870830ac3f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  animationStatesController: {fileID: 9024531024036364234}
   navMeshAgent: {fileID: 4989341916565700389}
 --- !u!114 &4560422893000732806
 MonoBehaviour:
@@ -178,19 +177,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 04dec80f06674629b7366fcb55ec29f2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  animationStatesController: {fileID: 9024531024036364234}
---- !u!114 &9024531024036364234
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5156573530752757657}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4c2008d296c842b181f6c433da52ba6a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
+  ecoAnimationController: {fileID: -3203979379469668430}
 --- !u!1 &7251239230757861176
 GameObject:
   m_ObjectHideFlags: 0
@@ -279,7 +266,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   navAgent: {fileID: 4989341916565700389}
-  animationStatesController: {fileID: 9024531024036364234}
+  ecoAnimationController: {fileID: -3203979379469668430}
 --- !u!1001 &2602988955134470254
 PrefabInstance:
   m_ObjectHideFlags: 0

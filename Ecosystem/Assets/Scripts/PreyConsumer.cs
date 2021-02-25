@@ -6,11 +6,11 @@ namespace Ecosystem
 {
   public sealed class PreyConsumer : MonoBehaviour
   {
-    [SerializeField] private AnimationStatesController animationStatesController;
     [SerializeField] private Genome genome;
     [SerializeField] private ResourceBar resourceBar;
     [SerializeField] private DeathHandler deathHandler;
     [SerializeField] private double maxHunger = 100;
+    [SerializeField] private EcoAnimationController ecoAnimationController;
 
     private double Hunger { get; set; }
 
@@ -33,7 +33,7 @@ namespace Ecosystem
     {
       if (other.CompareTag("Prey"))
       {
-        animationStatesController.AnimationState = AnimationState.Attacking;
+        ecoAnimationController.AttackAnimation();
         other.gameObject.GetComponent<DeathHandler>().Die(CauseOfDeath.Hunted);
         Hunger = 0;
       }

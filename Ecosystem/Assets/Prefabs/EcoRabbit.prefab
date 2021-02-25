@@ -44,7 +44,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   navAgent: {fileID: 6868405535869523061}
-  animationStatesController: {fileID: 3788875316471751425}
+  ecoAnimationController: {fileID: 2529885084106510423}
   groundMask:
     serializedVersion: 2
     m_Bits: 8
@@ -149,7 +149,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   navAgent: {fileID: 6868405535869523061}
-  animationStatesController: {fileID: 3788875316471751425}
+  ecoAnimationController: {fileID: 2529885084106510423}
 --- !u!1 &6145341749139187818
 GameObject:
   m_ObjectHideFlags: 0
@@ -269,20 +269,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 184edc0ef7b34b1fae4d32870830ac3f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  animationStatesController: {fileID: 3788875316471751425}
   navMeshAgent: {fileID: 6868405535869523061}
---- !u!114 &3788875316471751425
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6765261209891845031}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4c2008d296c842b181f6c433da52ba6a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &5604703569485257513
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -295,7 +282,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 04dec80f06674629b7366fcb55ec29f2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  animationStatesController: {fileID: 3788875316471751425}
+  ecoAnimationController: {fileID: 2529885084106510423}
 --- !u!114 &7338691026804306642
 MonoBehaviour:
   m_ObjectHideFlags: 0

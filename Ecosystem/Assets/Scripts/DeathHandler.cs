@@ -8,7 +8,7 @@ namespace Ecosystem
   /// </summary>
   public sealed class DeathHandler : MonoBehaviour
   {
-    [SerializeField] private AnimationStatesController animationStatesController;
+    [SerializeField] private EcoAnimationController ecoAnimationController;
 
     private void DestroyObjectDelayed()
     {
@@ -17,7 +17,7 @@ namespace Ecosystem
 
     public void Die(CauseOfDeath cause)
     {
-      animationStatesController.AnimationState = AnimationState.Dead;
+      ecoAnimationController.DieAnimation();
       DestroyObjectDelayed();
     }
   }

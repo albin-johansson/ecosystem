@@ -8,7 +8,7 @@ namespace Ecosystem
     private const double StopTrackingThreshold = 0.1f;
 
     [SerializeField] private NavMeshAgent navAgent;
-    [SerializeField] private AnimationStatesController animationStatesController;
+    [SerializeField] private EcoAnimationController ecoAnimationController;
     private GameObject _target;
     private Vector3 _fleeDirection;
     private float _timeRemaining;
@@ -42,7 +42,7 @@ namespace Ecosystem
     //Sets a target to hone in on and start a timer
     public void SetTarget(GameObject target)
     {
-      animationStatesController.AnimationState = AnimationState.Walking;
+      ecoAnimationController.MoveAnimation();
       navAgent.SetDestination(target.transform.position);
       _target = target;
       _timeRemaining = 5;

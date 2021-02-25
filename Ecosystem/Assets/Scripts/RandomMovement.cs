@@ -7,7 +7,7 @@ namespace Ecosystem
   public sealed class RandomMovement : MonoBehaviour
   {
     [SerializeField] private NavMeshAgent navAgent;
-    [SerializeField] private AnimationStatesController animationStatesController;
+    [SerializeField] private EcoAnimationController ecoAnimationController;
 
     [SerializeField, Tooltip("What is considered to be the ground")]
     private LayerMask groundMask;
@@ -45,7 +45,7 @@ namespace Ecosystem
       if (Physics.Raycast(destination, -_transform.up, 2f, groundMask))
       {
         navAgent.SetDestination(destination);
-        animationStatesController.AnimationState = AnimationState.Walking;
+        ecoAnimationController.MoveAnimation();
       }
     }
   }

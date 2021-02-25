@@ -58,11 +58,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c2fa5581f03243c68b482d0030e00671, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  animationStatesController: {fileID: -7686418651724940890}
   genome: {fileID: 3705420681509110121}
   resourceBar: {fileID: 0}
   deathHandler: {fileID: 941976366869483110}
   maxHunger: 100
+  ecoAnimationController: {fileID: 0}
 --- !u!114 &8666025027927895769
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -123,7 +123,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   navAgent: {fileID: 5918121931022989158}
-  animationStatesController: {fileID: -7686418651724940890}
+  ecoAnimationController: {fileID: 6763782041373470490}
   groundMask:
     serializedVersion: 2
     m_Bits: 0
@@ -215,7 +215,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   navAgent: {fileID: 5918121931022989158}
-  animationStatesController: {fileID: -7686418651724940890}
+  ecoAnimationController: {fileID: 6763782041373470490}
 --- !u!65 &8123643448312260749
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -229,18 +229,6 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &-7686418651724940890
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5806006842196838736}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4c2008d296c842b181f6c433da52ba6a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &941976366869483110
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -253,7 +241,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 04dec80f06674629b7366fcb55ec29f2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  animationStatesController: {fileID: -7686418651724940890}
+  ecoAnimationController: {fileID: 6763782041373470490}
 --- !u!114 &3705420681509110121
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -278,7 +266,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 184edc0ef7b34b1fae4d32870830ac3f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  animationStatesController: {fileID: -7686418651724940890}
   navMeshAgent: {fileID: 5918121931022989158}
 --- !u!1001 &5806957549481359696
 PrefabInstance:
