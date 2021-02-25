@@ -13,6 +13,10 @@ namespace Ecosystem
 
     private double Hunger { get; set; }
 
+    public delegate void FoodEatenEvent();
+
+    public static event FoodEatenEvent OnFoodEaten;
+
     private void Start()
     {
       resourceBar.SetMaxValue((float) maxHunger);
@@ -32,6 +36,7 @@ namespace Ecosystem
     {
       if (other.CompareTag("Food"))
       {
+        OnFoodEaten?.Invoke();
         Destroy(other.gameObject);
         Hunger = 0;
       }

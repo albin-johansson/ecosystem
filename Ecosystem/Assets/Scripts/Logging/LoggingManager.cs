@@ -8,14 +8,25 @@ namespace Ecosystem.Logging
   {
     [SerializeField] private Text aliveCountText;
     [SerializeField] private Text deadCountText;
+    [SerializeField] private Text foodCountText;
     [SerializeField] private Text timePassedText;
 
     private int _aliveCount;
     private int _deadCount;
+    private int _foodCount;
     private long _nextUpdateTime;
 
     private void Start()
     {
+      // Yes, these are allocated once, it's fine
+      DeathHandler.OnDeath += LogDeath;
+      FoodConsumer.OnFoodEaten += LogFoodEaten;
+
+      /*
+       * The following counting logic assumes that only the root objects of our prefabs feature
+       * the identifying tags. If that wouldn't be the case, this approach will overestimate the amounts.
+       */
+
       foreach (var unused in GameObject.FindGameObjectsWithTag("Prey"))
       {
         ++_aliveCount;
@@ -26,10 +37,14 @@ namespace Ecosystem.Logging
         ++_aliveCount;
       }
 
-      aliveCountText.text = _aliveCount.ToString();
-      deadCountText.text = "0";
+      foreach (var unused in GameObject.FindGameObjectsWithTag("Food"))
+      {
+        ++_foodCount;
+      }
 
-      DeathHandler.OnDeath += LogDeath; // Yes this is allocated once, it's fine
+      aliveCountText.text = _aliveCount.ToString();
+      foodCountText.text = _foodCount.ToString();
+      deadCountText.text = "0";
     }
 
     private void Update()
@@ -56,9 +71,10 @@ namespace Ecosystem.Logging
       deadCountText.text = _deadCount.ToString();
     }
 
-    private void LogBirth(AnimalBirthData animalBirthData)
+    private void LogFoodEaten()
     {
-      ++_aliveCount;
+      --_foodCount;
+      foodCountText.text = _foodCount.ToString();
     }
   }
 }
