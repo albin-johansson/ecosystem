@@ -14,11 +14,13 @@ namespace Ecosystem.Logging
     [SerializeField] private Text aliveCountText;
     [SerializeField] private Text deadCountText;
     [SerializeField] private Text foodCountText;
+    [SerializeField] private Text preyConsumedCountText;
     [SerializeField] private Text timePassedText;
 
     private int _aliveCount;
     private int _deadCount;
     private int _foodCount;
+    private int _preyConsumedCount;
     private long _nextUpdateTime;
 
     private void Start()
@@ -26,6 +28,7 @@ namespace Ecosystem.Logging
       // Yes, these are allocated once, it's fine
       DeathHandler.OnDeath += LogDeath;
       FoodConsumer.OnFoodEaten += LogFoodEaten;
+      PreyConsumer.OnPreyConsumed += LogPreyConsumed;
 
       /*
        * The following counting logic assumes that only the root objects of our prefabs feature
@@ -39,6 +42,7 @@ namespace Ecosystem.Logging
 
       aliveCountText.text = _aliveCount.ToString();
       foodCountText.text = _foodCount.ToString();
+      preyConsumedCountText.text = "0";
       deadCountText.text = "0";
     }
 
@@ -70,6 +74,12 @@ namespace Ecosystem.Logging
     {
       --_foodCount;
       foodCountText.text = _foodCount.ToString();
+    }
+
+    private void LogPreyConsumed()
+    {
+      ++_preyConsumedCount;
+      preyConsumedCountText.text = _preyConsumedCount.ToString();
     }
   }
 }

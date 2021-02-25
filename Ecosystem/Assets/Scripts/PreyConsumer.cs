@@ -13,6 +13,13 @@ namespace Ecosystem
 
     private double Hunger { get; set; }
 
+    public delegate void PreyConsumedEvent();
+
+    /// <summary>
+    /// This event is emitted every time a prey is consumed.
+    /// </summary>
+    public static event PreyConsumedEvent OnPreyConsumed;
+
     private void Start()
     {
       resourceBar.SetMaxValue((float) maxHunger);
@@ -32,7 +39,7 @@ namespace Ecosystem
     {
       if (other.CompareTag("Prey"))
       {
-        //deathHandler.Die(CauseOfDeath.Hunted, other.gameObject);
+        OnPreyConsumed?.Invoke();
         other.gameObject.GetComponent<DeathHandler>().Die(CauseOfDeath.Hunted);
         Hunger = 0;
       }
