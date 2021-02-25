@@ -48,12 +48,12 @@ namespace Ecosystem.Logging
 
     private void Update()
     {
-      var nowMilliseconds = AnalyticsSessionInfo.sessionElapsedTime;
-      if (nowMilliseconds > _nextUpdateTime)
+      var milliseconds = AnalyticsSessionInfo.sessionElapsedTime;
+      if (milliseconds > _nextUpdateTime)
       {
-        var seconds = nowMilliseconds / 1_000;
+        var seconds = milliseconds / 1_000;
         timePassedText.text = seconds.ToString();
-        _nextUpdateTime = nowMilliseconds + 1_000;
+        _nextUpdateTime = milliseconds + 1_000;
       }
     }
 
