@@ -24,23 +24,13 @@ namespace Ecosystem.Logging
 
       /*
        * The following counting logic assumes that only the root objects of our prefabs feature
-       * the identifying tags. If that wouldn't be the case, this approach will overestimate the amounts.
+       * the identifying tags. If that wouldn't be the case, this approach would overestimate the
+       * amounts.
        */
+      _aliveCount = GameObject.FindGameObjectsWithTag("Prey").Length +
+                    GameObject.FindGameObjectsWithTag("Predator").Length;
 
-      foreach (var unused in GameObject.FindGameObjectsWithTag("Prey"))
-      {
-        ++_aliveCount;
-      }
-
-      foreach (var unused in GameObject.FindGameObjectsWithTag("Predator"))
-      {
-        ++_aliveCount;
-      }
-
-      foreach (var unused in GameObject.FindGameObjectsWithTag("Food"))
-      {
-        ++_foodCount;
-      }
+      _foodCount = GameObject.FindGameObjectsWithTag("Food").Length;
 
       aliveCountText.text = _aliveCount.ToString();
       foodCountText.text = _foodCount.ToString();
@@ -49,12 +39,12 @@ namespace Ecosystem.Logging
 
     private void Update()
     {
-      var now = AnalyticsSessionInfo.sessionElapsedTime;
-      if (now > _nextUpdateTime)
+      var nowMilliseconds = AnalyticsSessionInfo.sessionElapsedTime;
+      if (nowMilliseconds > _nextUpdateTime)
       {
-        var seconds = now / 1_000;
+        var seconds = nowMilliseconds / 1_000;
         timePassedText.text = seconds.ToString();
-        _nextUpdateTime = now + 1_000; // Update time label once every second
+        _nextUpdateTime = nowMilliseconds + 1_000;
       }
     }
 
