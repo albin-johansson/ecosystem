@@ -15,6 +15,9 @@ namespace Ecosystem
 
     public delegate void FoodEatenEvent();
 
+    /// <summary>
+    /// This event is emitted every time a food resource is consumed.
+    /// </summary>
     public static event FoodEatenEvent OnFoodEaten;
 
     private void Start()
