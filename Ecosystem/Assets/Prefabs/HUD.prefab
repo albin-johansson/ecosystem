@@ -9,7 +9,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5952729174949182683}
-  - component: {fileID: 4425391129199116430}
   - component: {fileID: 1268889971203407055}
   m_Layer: 5
   m_Name: Log
@@ -41,14 +40,6 @@ RectTransform:
   m_AnchoredPosition: {x: 6, y: -26}
   m_SizeDelta: {x: 200, y: 75}
   m_Pivot: {x: 0, y: 1}
---- !u!222 &4425391129199116430
-CanvasRenderer:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 58803421840116787}
-  m_CullTransparentMesh: 1
 --- !u!114 &1268889971203407055
 MonoBehaviour:
   m_ObjectHideFlags: 0
