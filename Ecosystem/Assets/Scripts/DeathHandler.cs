@@ -9,6 +9,9 @@ namespace Ecosystem
   {
     public delegate void DeathEvent(CauseOfDeath cause, GameObject gameObject);
 
+    /// <summary>
+    /// This event is emitted every time an entity dies.
+    /// </summary>
     public static event DeathEvent OnDeath;
 
     private void DestroyObjectDelayed()
