@@ -7,7 +7,9 @@ namespace Ecosystem.Logging
   /// <summary>
   /// This class is responsible for logging the state of the simulation.
   /// The intention is that this is assigned to a root game object in the scene,
-  /// and simply connected to the associated HUD elements.
+  /// and simply connected to the associated HUD elements. It will store the simulation
+  /// data in-memory during the entire simulation, then dump the data to a file upon
+  /// exit.
   /// </summary>
   public sealed class LoggingManager : MonoBehaviour
   {
