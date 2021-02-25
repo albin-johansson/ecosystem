@@ -38,7 +38,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
   m_AnchoredPosition: {x: 6, y: -26}
-  m_SizeDelta: {x: 200, y: 75}
+  m_SizeDelta: {x: 200, y: 100}
   m_Pivot: {x: 0, y: 1}
 --- !u!114 &1268889971203407055
 MonoBehaviour:
@@ -862,7 +862,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2467847810023755918, guid: d3203e6dfdceee34c8c1e7e0a4aab181, type: 3}
       propertyPath: m_SizeDelta.x
-      value: 50
+      value: 75
       objectReference: {fileID: 0}
     - target: {fileID: 2467847810023755918, guid: d3203e6dfdceee34c8c1e7e0a4aab181, type: 3}
       propertyPath: m_SizeDelta.y
@@ -922,7 +922,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8375053768736840361, guid: d3203e6dfdceee34c8c1e7e0a4aab181, type: 3}
       propertyPath: m_Text
-      value: 'Time: '
+      value: 'Time (s): '
       objectReference: {fileID: 0}
     - target: {fileID: 8375053768736840361, guid: d3203e6dfdceee34c8c1e7e0a4aab181, type: 3}
       propertyPath: m_Color.b
