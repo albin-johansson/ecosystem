@@ -1,5 +1,4 @@
-﻿using System;
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.AI;
 
 namespace Ecosystem
@@ -34,7 +33,6 @@ namespace Ecosystem
         _navMeshAgentSpeed = navMeshAgent.speed;
         _navMeshAgentVelocity = navMeshAgent.velocity.magnitude;
       }
-
       _animator.SetFloat(_animationSpeedMultiplier, _navMeshAgentVelocity);
     }
 
@@ -42,7 +40,7 @@ namespace Ecosystem
     {
       foreach (var parameter in _animator.parameters)
       {
-        if (parameter.type == UnityEngine.AnimatorControllerParameterType.Bool)
+        if (parameter.type == AnimatorControllerParameterType.Bool)
         {
           _animator.ResetTrigger(parameter.name);
         }
