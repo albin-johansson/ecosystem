@@ -14,6 +14,7 @@ namespace Ecosystem
     private int _isAttackingHash;
     private int _animationSpeedMultiplier;
     private float _navMeshAgentSpeed;
+    private float _navMeshAgentVelocity;
 
     private void Start()
     {
@@ -23,6 +24,7 @@ namespace Ecosystem
       _isDeadHash = Animator.StringToHash("isDead");
       _isAttackingHash = Animator.StringToHash("isAttacking");
       _animationSpeedMultiplier = Animator.StringToHash("animationSpeedMultiplier");
+      _navMeshAgentSpeed = navMeshAgent.speed;
     }
 
     private void Update()
@@ -30,9 +32,10 @@ namespace Ecosystem
       if (navMeshAgent.speed > 0)
       {
         _navMeshAgentSpeed = navMeshAgent.speed;
+        _navMeshAgentVelocity = navMeshAgent.velocity.magnitude;
       }
 
-      _animator.SetFloat(_animationSpeedMultiplier, navMeshAgent.velocity.magnitude);
+      _animator.SetFloat(_animationSpeedMultiplier, _navMeshAgentVelocity);
     }
 
     private void ResetAnimatorParameters()
@@ -49,6 +52,7 @@ namespace Ecosystem
     public void AttackAnimation()
     {
       ResetAnimatorParameters();
+      navMeshAgent.speed = 0;
       _animator.SetTrigger(_isAttackingHash);
       IdleAnimation();
     }
@@ -56,6 +60,7 @@ namespace Ecosystem
     public void MoveAnimation()
     {
       ResetAnimatorParameters();
+      navMeshAgent.speed = _navMeshAgentSpeed;
       _animator.SetBool(_isWalkingHash, true);
     }
 
