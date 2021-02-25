@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using UnityEngine.Analytics;
 
-namespace Ecosystem
+namespace Ecosystem.Logging
 {
   public struct AnimalBirthData
   {
@@ -10,8 +10,8 @@ namespace Ecosystem
 
     public AnimalBirthData(GameObject animal)
     {
-      Animal = animal;
       Time = AnalyticsSessionInfo.sessionElapsedTime;
+      Animal = animal;
     }
   }
 }
