@@ -1,4 +1,5 @@
 using Ecosystem.Genes;
+using Ecosystem.UI;
 using UnityEngine;
 
 namespace Ecosystem
