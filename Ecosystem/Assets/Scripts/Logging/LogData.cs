@@ -16,7 +16,7 @@ namespace Ecosystem.Logging
     public long time;
 
     /// <summary>
-    ///   The position of the animal that died.
+    ///   The position of the consumed food item.
     /// </summary>
     public Vector3 position;
   }
