@@ -9294,7 +9294,6 @@ GameObject:
   - component: {fileID: 1127527930}
   - component: {fileID: 1127527933}
   - component: {fileID: 1127527934}
-  - component: {fileID: 1127527935}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -9394,39 +9393,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   camera: {fileID: 1127527931}
   shader: {fileID: 4800000, guid: 4bfc5573bd1c1c443973a333104d5a5b, type: 3}
---- !u!114 &1127527935
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1127527929}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a78da3f00f3328541b4526c0b0b5ec5c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  lineThickness: 6
-  lineIntensity: 10
-  fillAmount: 1
-  lineColor0: {r: 1, g: 0, b: 0, a: 1}
-  lineColor1: {r: 0, g: 1, b: 0, a: 1}
-  lineColor2: {r: 0, g: 0, b: 1, a: 1}
-  additiveRendering: 0
-  backfaceCulling: 1
-  fillColor: {r: 0, g: 0, b: 1, a: 1}
-  useFillColor: 0
-  cornerOutlines: 0
-  addLinesBetweenColors: 0
-  scaleWithScreenSize: 1
-  alphaCutoff: 0.5
-  flipY: 0
-  sourceCamera: {fileID: 1127527931}
-  autoEnableOutlines: 0
-  outlineCamera: {fileID: 0}
-  outlineShaderMaterial: {fileID: 0}
-  renderTexture: {fileID: 0}
-  extraRenderTexture: {fileID: 0}
 --- !u!1001 &1133137639
 PrefabInstance:
   m_ObjectHideFlags: 0
