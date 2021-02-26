@@ -1,4 +1,5 @@
 using Ecosystem.Genes;
+using Ecosystem.Logging;
 using Ecosystem.UI;
 using UnityEngine;
 
@@ -13,7 +14,7 @@ namespace Ecosystem
 
     private double Hunger { get; set; }
 
-    public delegate void FoodEatenEvent();
+    public delegate void FoodEatenEvent(GameObject food);
 
     /// <summary>
     /// This event is emitted every time a food resource is consumed.
@@ -39,7 +40,7 @@ namespace Ecosystem
     {
       if (other.CompareTag("Food"))
       {
-        OnFoodEaten?.Invoke();
+        OnFoodEaten?.Invoke(other.gameObject);
         Destroy(other.gameObject);
         Hunger = 0;
       }

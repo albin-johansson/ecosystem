@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using Ecosystem.Logging;
+using UnityEngine;
 
 namespace Ecosystem
 {

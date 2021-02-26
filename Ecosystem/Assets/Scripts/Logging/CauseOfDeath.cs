@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Ecosystem
+namespace Ecosystem.Logging
 {
   /// <summary>
   /// Provides enumerators that represent different causes of death.
