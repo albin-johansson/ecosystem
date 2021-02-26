@@ -10,10 +10,6 @@ namespace Ecosystem
         [SerializeField] private TargetTracker targetTracker;
         [SerializeField] private Genome genome;
 
-        private Desire _priority = Desire.Idle;
-
-        private bool isMale;
-        
         void Start()
         {
         
