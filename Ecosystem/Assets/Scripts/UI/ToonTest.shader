@@ -1,4 +1,3 @@
-//Credit: todo
 Shader "Custom/ToonTest"
 {
     Properties
