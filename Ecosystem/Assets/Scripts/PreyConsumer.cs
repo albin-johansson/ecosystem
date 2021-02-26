@@ -40,7 +40,7 @@ namespace Ecosystem
       if (other.CompareTag("Prey"))
       {
         OnPreyConsumed?.Invoke();
-        other.gameObject.GetComponent<DeathHandler>().Die(CauseOfDeath.Hunted);
+        other.gameObject.GetComponent<DeathHandler>().Die(CauseOfDeath.Eaten);
         Hunger = 0;
       }
     }
