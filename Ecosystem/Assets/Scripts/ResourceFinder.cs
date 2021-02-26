@@ -33,8 +33,11 @@ namespace Ecosystem
     //Sets priority, OBS. needs to be worked on to get a better flow
     private void UpdatePriority()
     {
-      // Hunger has implicit priority
-      if (foodConsumer.IsHungry())
+      if (targetTracker.IsChased)
+      {
+        _priority = Desire.Flee;
+      }
+      else if (foodConsumer.IsHungry())
       {
         _priority = Desire.Food;
       }
@@ -46,6 +49,7 @@ namespace Ecosystem
       {
         _priority = Desire.Idle;
       }
+      
     }
 
     /// <summary>
@@ -57,6 +61,7 @@ namespace Ecosystem
     {
       if (other.CompareTag("Predator"))
       {
+        _priority = Desire.Flee;
         targetTracker.FleeFromPredator(other.gameObject);
         return;
       }

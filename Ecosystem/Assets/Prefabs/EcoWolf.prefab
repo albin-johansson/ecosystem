@@ -455,6 +455,14 @@ PrefabInstance:
       propertyPath: m_Enabled
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 195879434793580014, guid: 1159fbfcf2d66ee4b896abb3e41d47c4, type: 3}
+      propertyPath: m_Height
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 195879434793580014, guid: 1159fbfcf2d66ee4b896abb3e41d47c4, type: 3}
+      propertyPath: avoidancePriority
+      value: 51
+      objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 114891851917860678, guid: 1159fbfcf2d66ee4b896abb3e41d47c4, type: 3}
     - {fileID: 82399463388659280, guid: 1159fbfcf2d66ee4b896abb3e41d47c4, type: 3}

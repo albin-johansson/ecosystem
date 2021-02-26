@@ -5,6 +5,7 @@ namespace Ecosystem
     Water,
     Food,
     Prey,
+    Flee,
     Idle,
     Nothing
   }

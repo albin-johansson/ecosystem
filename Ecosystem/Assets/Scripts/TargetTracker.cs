@@ -16,6 +16,7 @@ namespace Ecosystem
     private bool _chased;
 
     public bool HasTarget => _hasTarget;
+    public bool IsChased => _chased;
 
     //Runs a timer for when to stop looking for the target
     private void Update()
