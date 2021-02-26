@@ -13,7 +13,7 @@ namespace Ecosystem.Genes
     private static readonly Gene SpeedFactor = new Gene(1.5f, 1, 2);
     private static readonly Gene SizeFactor = new Gene(0.5f, 0.1f, 1);
     private static readonly Gene DesirabilityFactor = new Gene(1, 1, 10);
-    private static bool isMale;
+    public bool isMale;
 
     protected double MutateChance;
     protected Dictionary<GeneType, Gene> Genes = new Dictionary<GeneType, Gene>();
@@ -53,12 +53,23 @@ namespace Ecosystem.Genes
       MutateChance = first.MutateChance;
     }
     
-    public bool matchesGenome(Genome other)
+    public bool MatchesGenome(Genome other)
     {
+      Debug.Log("Try match");
+      if (GetType() == other.GetType())
+      {
+        Debug.Log("Same type: true");
+      }
+      if (GetIsMale() != other.GetIsMale())
+      {
+        Debug.Log("Same gender: false");
+      }
       if (GetType() == other.GetType() && GetIsMale() != other.GetIsMale())
       {
+        Debug.Log("suceed match");
         return true;
       }
+      Debug.Log("fail match");
       return false;
     }
 

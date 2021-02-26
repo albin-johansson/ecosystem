@@ -57,15 +57,19 @@ namespace Ecosystem
         /// TODO Might be an improvement to only save the object and not set it as a target.
         private void OnTriggerEnter(Collider other)
         {
-            Debug.Log("Reproducer collider");
-            if (other.TryGetComponent(out Genome mateGenome) && CompareTag("Body"))
+            if (other.TryGetComponent(out Genome mateGenome) && other.CompareTag("Body"))
             {   
                 Debug.Log("Reached other creature");
-                if (genome.matchesGenome(genome) && !other.GetComponent<Reproducer>().isPregnant && !mateGenome.GetIsMale())
+                if (genome.MatchesGenome(genome))
                 {
-                    Debug.Log("Mating");
-                    other.GetComponent<Reproducer>().startPregnancy(genome);
+                    Debug.Log("Matching genome");
+                    if (!other.GetComponent<Reproducer>().isPregnant && !mateGenome.GetIsMale())
+                    {
+                        Debug.Log("Mating");
+                        other.GetComponent<Reproducer>().startPregnancy(genome);
+                    }
                 }
+
             }
         }
 

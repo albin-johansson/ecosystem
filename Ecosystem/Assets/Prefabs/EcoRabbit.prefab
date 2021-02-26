@@ -73,7 +73,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   targetTracker: {fileID: 8060017285181889208}
-  genome: {fileID: 0}
+  genome: {fileID: 7338691026804306642}
 --- !u!1 &2281433214613432264
 GameObject:
   m_ObjectHideFlags: 0
@@ -456,6 +456,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 722870adf75749399b54d4edf4c101cf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isMale: 0
 --- !u!1001 &3478715110397862799
 PrefabInstance:
   m_ObjectHideFlags: 0

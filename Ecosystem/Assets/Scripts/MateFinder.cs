@@ -26,16 +26,23 @@ namespace Ecosystem
         /// </summary>
         private void OnTriggerEnter(Collider other)
         {
-            Debug.Log("MateFinder collide");
+            if (genome == null)
+            {
+                Debug.Log("Fuuuck");
+            }
+            if (other.TryGetComponent(out Genome otherGenome1))
+            {
+                Debug.Log("Found other genome");
+            }
             if (other.TryGetComponent(out Genome otherGenome))
+            {
+                Debug.Log("Found other creature");
+                if (genome.MatchesGenome(otherGenome))
                 {
-                    Debug.Log("Found creature");
-                    if (genome.matchesGenome(otherGenome))
-                    {
-                        Debug.Log("Found valid mate");
-                        targetTracker.SetTarget(other.gameObject);
-                    }
+                    Debug.Log("Found creature is valid mate");
+                    targetTracker.SetTarget(other.gameObject);
                 }
+            }
             }
     }
 }
