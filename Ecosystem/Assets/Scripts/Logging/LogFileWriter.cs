@@ -16,7 +16,12 @@ namespace Ecosystem.Logging
     ///   Note, we cannot really use "Logs", because Unity already uses
     ///   that folder.
     /// </remarks>
-    private const string LogsDirectory = "SimulationLogs";
+    private static readonly string LogsDirectory;
+
+    static LogFileWriter()
+    {
+      LogsDirectory = $"{Directory.GetCurrentDirectory()}/SimulationLogs";
+    }
 
     /// <summary>
     ///   Saves the supplied simulation data. The data will be stored in a file named
