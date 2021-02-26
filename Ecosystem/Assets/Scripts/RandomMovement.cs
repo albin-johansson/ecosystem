@@ -67,8 +67,8 @@ namespace Ecosystem
     /// </summary>
     public bool IsNewPosGood(Vector3 current, Vector3 newPos)
     {
-      Vector3 temp1 = new Vector3(current.x - newPos.x, 0, current.z - newPos.z);
-      Vector3 temp2 = new Vector3(_lastPos.x - newPos.x, 0, _lastPos.z - newPos.z);
+      var temp1 = new Vector3(current.x - newPos.x, 0, current.z - newPos.z);
+      var temp2 = new Vector3(_lastPos.x - newPos.x, 0, _lastPos.z - newPos.z);
       return Vector3.SqrMagnitude(temp1) <= Vector3.SqrMagnitude(temp2);
     }
   }

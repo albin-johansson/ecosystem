@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 using UnityEngine.AI;
 
@@ -8,16 +9,12 @@ namespace Ecosystem
     [SerializeField] private NavMeshAgent navAgent;
     [SerializeField] private AnimationStatesController animationStatesController;
     private GameObject _target;
-    private bool _targetInSight = false;
+    private bool _targetInSight;
     private float _timeRemaining;
     private bool _hasTarget = false;
     private Desire _targetType;
     private bool _chased = false;
     private Vector3 _fleeDirection;
-
-    const int WaterLayer = 4;
-    const int FoodLayer = 6;
-    const int RabbitLayer = 8;
 
     private const double StopTrackingThreshold = 0.1f;
 
@@ -105,10 +102,15 @@ namespace Ecosystem
         return;
       }
 
+      CheckForTarget(other.gameObject);
+    }
+
+    private void CheckForTarget(GameObject other)
+    {
       switch (_targetType)
       {
         case Desire.Food:
-          if (other.gameObject.layer.Equals(FoodLayer))
+          if (other.layer == LayerMask.NameToLayer("Food"))
           {
             _target = other.gameObject;
             _targetInSight = true;
@@ -116,7 +118,7 @@ namespace Ecosystem
 
           break;
         case Desire.Prey:
-          if (other.gameObject.layer.Equals(RabbitLayer))
+          if (other.layer == LayerMask.NameToLayer("Prey"))
           {
             _target = other.gameObject;
             _targetInSight = true;
@@ -124,14 +126,19 @@ namespace Ecosystem
 
           break;
         case Desire.Water:
-          if (other.gameObject.layer.Equals(WaterLayer))
+          if (other.layer == LayerMask.NameToLayer("Water"))
           {
             _target = other.gameObject;
             _targetInSight = true;
           }
 
           break;
-        default: break;
+        case Desire.Idle:
+          break;
+        case Desire.Nothing:
+          break;
+        default:
+          throw new ArgumentOutOfRangeException();
       }
     }
   }

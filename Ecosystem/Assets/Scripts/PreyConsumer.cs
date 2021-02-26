@@ -11,7 +11,7 @@ namespace Ecosystem
     [SerializeField] private DeathHandler deathHandler;
     [SerializeField] private double maxHunger = 100;
 
-    private double Hunger { get; set; }
+    public double Hunger { get; private set; }
 
     private void Start()
     {
@@ -37,11 +37,7 @@ namespace Ecosystem
       }
     }
 
-    internal double MyHunger()
-    {
-      return Hunger;
-    }
-    
+
     internal bool IsHungry()
     {
       return Hunger > genome.GetHungerThreshold();

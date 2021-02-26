@@ -11,7 +11,7 @@ namespace Ecosystem
     [SerializeField] private DeathHandler deathHandler;
     [SerializeField] private float maxThirst = 100;
 
-    private float Thirst { get; set; }
+    public float Thirst { get; private set; }
 
     private void Start()
     {
@@ -40,11 +40,6 @@ namespace Ecosystem
     internal bool IsThirsty()
     {
       return Thirst > genome.GetThirstThreshold();
-    }
-    
-    internal double MyThirst()
-    {
-      return Thirst;
     }
   }
 }

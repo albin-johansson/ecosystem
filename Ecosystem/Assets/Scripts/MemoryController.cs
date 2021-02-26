@@ -10,22 +10,17 @@ namespace Ecosystem
     private List<(Desire, Vector3)> _memory;
     private int _nextMemoryLocation;
 
-    const int WaterLayer = 4;
-    const int FoodLayer = 6;
-    const int RabbitLayer = 8;
-
     private void Start()
     {
       _memory = new List<(Desire, Vector3)>(Capacity);
     }
 
-    //Save gameobject and its "Desire" identifier as a tuple to _memory
+    //Saves a game objects position and its desire to memory
     public void SaveToMemory(GameObject other)
     {
-      var desire = GetDesire(other);
-      _memory.Insert(_nextMemoryLocation, (desire, other.gameObject.transform.position));
-      _nextMemoryLocation++;
-      if (_nextMemoryLocation > (Capacity - 1))
+      _memory.Insert(_nextMemoryLocation, (GetDesire(other), other.gameObject.transform.position));
+      ++_nextMemoryLocation;
+      if (_nextMemoryLocation >= Capacity)
       {
         _nextMemoryLocation = 0;
       }
@@ -33,15 +28,15 @@ namespace Ecosystem
 
     private Desire GetDesire(GameObject other)
     {
-      if (other.gameObject.layer.Equals(FoodLayer))
+      if (other.gameObject.layer == LayerMask.NameToLayer("Food"))
       {
         return Desire.Food;
       }
-      else if (other.gameObject.layer.Equals(WaterLayer))
+      else if (other.gameObject.layer == LayerMask.NameToLayer("Prey"))
       {
         return Desire.Prey;
       }
-      else if (other.gameObject.layer.Equals(RabbitLayer))
+      else if (other.gameObject.layer == LayerMask.NameToLayer("Water"))
       {
         return Desire.Water;
       }
@@ -49,36 +44,26 @@ namespace Ecosystem
       return Desire.Idle;
     }
 
-    public bool ExistInMemory(Desire currentDesire)
-    {
-      foreach (var (desire, position) in _memory)
-      {
-        if (desire.Equals(currentDesire))
-        {
-          return true;
-        }
-      }
-
-      return false;
-    }
-
     //Get a position of an object with the same Type as the Desire asked for in currentDesire
-    public Vector3 GetFromMemory(Desire currentDesire)
+    public (bool, Vector3) GetFromMemory(Desire currentDesire)
     {
+      int i = 0;
       foreach (var (desire, position) in _memory)
       {
-        if (desire.Equals(currentDesire))
+        if (desire == currentDesire)
         {
-          if (!currentDesire.Equals(Desire.Water))
+          if (currentDesire != Desire.Water)
           {
-            _memory.Insert(_memory.IndexOf((desire, position)), (Desire.Nothing, new Vector3()));
+            _memory.Insert(i, (Desire.Nothing, new Vector3()));
           }
 
-          return position;
+          return (true, position);
         }
+
+        i++;
       }
 
-      return Vector3.zero;
+      return (false, Vector3.zero);
     }
   }
 }
