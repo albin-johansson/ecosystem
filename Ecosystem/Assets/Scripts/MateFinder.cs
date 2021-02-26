@@ -8,8 +8,11 @@ namespace Ecosystem
     public class MateFinder : MonoBehaviour
     {
         [SerializeField] private TargetTracker targetTracker;
+        [SerializeField] private Genome genome;
 
         private Desire _priority = Desire.Idle;
+
+        private bool isMale;
         
         void Start()
         {
@@ -23,15 +26,19 @@ namespace Ecosystem
 
         /// <summary>
         /// When colliding with an object, that object is saved to the animals memory, and subsequently set as a target if the
-        /// priority matches.
+        /// genome and sex matches.
         /// </summary>
-        /// TODO Might be an improvement to only save the object and not set it as a target.
         private void OnTriggerEnter(Collider other)
         {
-            if (other.TryGetComponent(out RabbitGenome genome))
+            Debug.Log("MateFinder collide");
+            if (other.TryGetComponent(out Genome otherGenome))
                 {
-                    Debug.Log("Found mate");
-                    targetTracker.SetTarget(other.gameObject);
+                    Debug.Log("Found creature");
+                    if (genome.matchesGenome(otherGenome))
+                    {
+                        Debug.Log("Found valid mate");
+                        targetTracker.SetTarget(other.gameObject);
+                    }
                 }
             }
     }

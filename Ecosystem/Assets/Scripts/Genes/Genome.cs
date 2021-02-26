@@ -13,6 +13,7 @@ namespace Ecosystem.Genes
     private static readonly Gene SpeedFactor = new Gene(1.5f, 1, 2);
     private static readonly Gene SizeFactor = new Gene(0.5f, 0.1f, 1);
     private static readonly Gene DesirabilityFactor = new Gene(1, 1, 10);
+    private static bool isMale;
 
     protected double MutateChance;
     protected Dictionary<GeneType, Gene> Genes = new Dictionary<GeneType, Gene>();
@@ -51,6 +52,15 @@ namespace Ecosystem.Genes
       Genes = newGenes;
       MutateChance = first.MutateChance;
     }
+    
+    public bool matchesGenome(Genome other)
+    {
+      if (GetType() == other.GetType() && GetIsMale() != other.GetIsMale())
+      {
+        return true;
+      }
+      return false;
+    }
 
     protected virtual void Initialize()
     {
@@ -68,6 +78,10 @@ namespace Ecosystem.Genes
       Genes[GeneType.SpeedFactor] = SpeedFactor;
       Genes[GeneType.SizeFactor] = SizeFactor;
       Genes[GeneType.DesirabilityScore] = DesirabilityFactor;
+      if(Random.value > 0.5)
+      {
+        isMale = true;
+      }
     }
 
     /// <summary>
@@ -122,6 +136,11 @@ namespace Ecosystem.Genes
     public double GetDesirability()
     {
       return Genes[GeneType.DesirabilityScore].Value;
+    }
+
+    public bool GetIsMale()
+    {
+      return isMale;
     }
   }
 }

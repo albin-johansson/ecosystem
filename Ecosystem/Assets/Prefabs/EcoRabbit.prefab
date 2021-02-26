@@ -73,6 +73,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   targetTracker: {fileID: 8060017285181889208}
+  genome: {fileID: 0}
 --- !u!1 &2281433214613432264
 GameObject:
   m_ObjectHideFlags: 0
@@ -314,7 +315,7 @@ GameObject:
   - component: {fileID: 112016053648776426}
   m_Layer: 0
   m_Name: ReproducerHelper
-  m_TagString: Untagged
+  m_TagString: Body
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -344,8 +345,8 @@ BoxCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 0.21215795, y: 0.23935686, z: 1.0146724}
-  m_Center: {x: -0.017996397, y: -0.099914484, z: 0.19931346}
+  m_Size: {x: 0.21215795, y: 0.23935686, z: 1.02154}
+  m_Center: {x: -0.017996397, y: -0.099914484, z: 0.124496326}
 --- !u!114 &112016053648776426
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -403,6 +404,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   targetTracker: {fileID: 0}
+  genome: {fileID: 0}
 --- !u!114 &3235836278516072829
 MonoBehaviour:
   m_ObjectHideFlags: 0
