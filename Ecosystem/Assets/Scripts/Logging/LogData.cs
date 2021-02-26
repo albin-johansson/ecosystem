@@ -38,6 +38,11 @@ namespace Ecosystem.Logging
     public CauseOfDeath cause;
 
     /// <summary>
+    ///   The tag associated with the animal that died.
+    /// </summary>
+    public string tag;
+
+    /// <summary>
     ///   The position of the animal that died.
     /// </summary>
     public Vector3 position;
@@ -64,6 +69,16 @@ namespace Ecosystem.Logging
     ///   The initial amount of alive animals.
     /// </summary>
     public int initialAliveCount;
+
+    /// <summary>
+    ///   The initial amount of alive predators.
+    /// </summary>
+    public int initialAlivePredatorCount;
+
+    /// <summary>
+    ///   The initial amount of alive prey.
+    /// </summary>
+    public int initialAlivePreyCount;
 
     /// <summary>
     ///   The final amount of available food items.

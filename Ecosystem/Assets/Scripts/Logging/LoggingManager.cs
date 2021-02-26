@@ -35,13 +35,15 @@ namespace Ecosystem.Logging
        * the identifying tags. If that wouldn't be the case, this approach would overestimate the
        * amounts.
        */
-      _data.aliveCount = GameObject.FindGameObjectsWithTag("Prey").Length +
-                         GameObject.FindGameObjectsWithTag("Predator").Length;
 
-      _data.foodCount = GameObject.FindGameObjectsWithTag("Food").Length;
+      _data.initialAlivePredatorCount = GameObject.FindGameObjectsWithTag("Predator").Length;
+      _data.initialAlivePreyCount = GameObject.FindGameObjectsWithTag("Prey").Length;
 
-      _data.initialAliveCount = _data.aliveCount;
-      _data.initialFoodCount = _data.foodCount;
+      _data.initialAliveCount = _data.initialAlivePreyCount + _data.initialAlivePredatorCount;
+      _data.aliveCount = _data.initialAliveCount;
+
+      _data.initialFoodCount = GameObject.FindGameObjectsWithTag("Food").Length;
+      _data.foodCount = _data.initialFoodCount;
 
       aliveCountText.text = _data.aliveCount.ToString();
       foodCountText.text = _data.foodCount.ToString();
@@ -73,6 +75,7 @@ namespace Ecosystem.Logging
       {
               time = AnalyticsSessionInfo.sessionElapsedTime,
               cause = cause,
+              tag = deadObject.tag,
               position = deadObject.transform.position
       });
 
