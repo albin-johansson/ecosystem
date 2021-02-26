@@ -1,6 +1,7 @@
 import json
 
 
+# A wrapper around simulation data obtained from a JSON file
 class LogData:
   data = {}
 
