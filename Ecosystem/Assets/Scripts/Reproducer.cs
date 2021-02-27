@@ -7,13 +7,17 @@ namespace Ecosystem
   {
     [SerializeField] private Genome genome;
     [SerializeField] private GameObject prefab;
-    [SerializeField] private double gestationPeriod;
-
+    
+    private double gestationPeriod;
     private bool IsPregnant { get; set; }
 
     private double _pregnancyElapsedTime;
     private Genome _mateGenome;
 
+    void Start()
+    {
+        gestationPeriod = genome.GetGestationPeriod();
+    }
     private void Update()
     {
       if (IsPregnant)
@@ -47,10 +51,9 @@ namespace Ecosystem
     private void OnTriggerEnter(Collider other)
     {
       if (other.CompareTag("Body") &&
-          other.TryGetComponent(out Genome otherGenome) &&
-          Genome.CompatibleAsParents(genome, otherGenome))
+          other.TryGetComponent(out Reproducer otherReproducer) &&
+          Genome.CompatibleAsParents(genome, otherReproducer.genome))
       {
-        var otherReproducer = other.gameObject.GetComponent<Reproducer>();
         if (genome.IsMale && !otherReproducer.IsPregnant)
         {
           otherReproducer.StartPregnancy(genome);

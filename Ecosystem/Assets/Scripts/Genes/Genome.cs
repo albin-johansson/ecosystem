@@ -13,6 +13,7 @@ namespace Ecosystem.Genes
     private static readonly Gene SpeedFactor = new Gene(1.5f, 1, 2);
     private static readonly Gene SizeFactor = new Gene(0.5f, 0.1f, 1);
     private static readonly Gene DesirabilityFactor = new Gene(1, 1, 10);
+    private static readonly Gene GestationPeriod = new Gene(60, 10, 120);
 
     public bool IsMale { get; protected set; }
     protected double MutateChance;
@@ -52,6 +53,26 @@ namespace Ecosystem.Genes
       Genes = newGenes;
       MutateChance = first.MutateChance;
     }
+    
+    public bool MatchesGenome(Genome other)
+    {
+      Debug.Log("Try match");
+      if (GetType() == other.GetType())
+      {
+        Debug.Log("Same type: true");
+      }
+      if (GetIsMale() != other.GetIsMale())
+      {
+        Debug.Log("Same gender: false");
+      }
+      if (GetType() == other.GetType() && GetIsMale() != other.GetIsMale())
+      {
+        Debug.Log("suceed match");
+        return true;
+      }
+      Debug.Log("fail match");
+      return false;
+    }
 
     protected virtual void Initialize()
     {
@@ -69,7 +90,8 @@ namespace Ecosystem.Genes
       Genes[GeneType.SpeedFactor] = SpeedFactor;
       Genes[GeneType.SizeFactor] = SizeFactor;
       Genes[GeneType.DesirabilityScore] = DesirabilityFactor;
-      if (Random.value > 0.5)
+      Genes[GeneType.GestationPeriod] = GestationPeriod;
+      if(Random.value > 0.5)
       {
         IsMale = true;
       }
@@ -132,6 +154,11 @@ namespace Ecosystem.Genes
     public double GetDesirability()
     {
       return Genes[GeneType.DesirabilityScore].Value;
+    }   
+
+    public double GetGestationPeriod()
+    {
+      return Genes[GeneType.GestationPeriod].Value;
     }
   }
 }
