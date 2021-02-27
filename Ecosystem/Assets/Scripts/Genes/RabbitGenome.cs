@@ -32,12 +32,7 @@ namespace Ecosystem.Genes
       
       if(Random.value > 0.5)
       {
-        Debug.Log("Created male");
-        isMale = true;
-      }
-      else
-      {
-        Debug.Log("Created female");
+        IsMale = true;
       }
     }
   }

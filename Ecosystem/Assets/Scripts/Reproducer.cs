@@ -1,78 +1,65 @@
-using System.Collections;
-using System.Collections.Generic;
 using Ecosystem.Genes;
 using UnityEngine;
 
 namespace Ecosystem
 {
-    public class Reproducer : MonoBehaviour
+  public sealed class Reproducer : MonoBehaviour
+  {
+    [SerializeField] private Genome genome;
+    [SerializeField] private GameObject prefab;
+    [SerializeField] private double gestationPeriod;
+
+    private bool IsPregnant { get; set; }
+
+    private double _pregnancyElapsedTime;
+    private Genome _mateGenome;
+
+    private void Update()
     {
-        [SerializeField] private Genome genome;
-        [SerializeField] private double gestationPeriod;
-        [SerializeField] private GameObject prefab;
-
-        private bool isPregnant = false;
-        private double pregnancyElapsedTime;
-
-        private Genome mateGenome;
-        //private Genome mateGenome;
-
-
-        // Start is called before the first frame update
-        void Start()
+      if (IsPregnant)
+      {
+        _pregnancyElapsedTime += Time.deltaTime;
+        if (_pregnancyElapsedTime >= gestationPeriod)
         {
-            isPregnant = false;
-            pregnancyElapsedTime = 0;
+          GiveBirth();
         }
-
-        // Update is called once per frame
-        void Update()
-        {
-            if (isPregnant)
-            {
-                pregnancyElapsedTime += Time.deltaTime;
-                if (pregnancyElapsedTime >= gestationPeriod)
-                {
-                    var transform1 = transform;
-                    Debug.Log("Childbirth" + pregnancyElapsedTime + isPregnant);
-
-                    isPregnant = false;
-                    pregnancyElapsedTime = 0;
-                    Instantiate(prefab, transform1.position, transform1.rotation).GetComponent<Genome>().Initialize(genome, mateGenome);
-                }
-            }
-        }
-
-        
-        public void startPregnancy(Genome mateGenome)
-        {
-            isPregnant = true;
-            this.mateGenome = mateGenome;
-        }
-        
-        /// <summary>
-        /// When colliding with an object, that object is saved to the animals memory, and subsequently set as a target if the
-        /// priority matches.
-        /// </summary>
-        /// TODO Might be an improvement to only save the object and not set it as a target.
-        private void OnTriggerEnter(Collider other)
-        {
-            if (other.TryGetComponent(out Genome mateGenome) && other.CompareTag("Body"))
-            {   
-                Debug.Log("Reached other creature");
-                if (genome.MatchesGenome(genome))
-                {
-                    Debug.Log("Matching genome");
-                    if (!other.GetComponent<Reproducer>().isPregnant && !mateGenome.GetIsMale())
-                    {
-                        Debug.Log("Mating");
-                        other.GetComponent<Reproducer>().startPregnancy(genome);
-                    }
-                }
-
-            }
-        }
-
-        public bool IsPregnant => isPregnant;
+      }
     }
+
+    private void GiveBirth()
+    {
+      var currentTransform = transform;
+
+      IsPregnant = false;
+      _pregnancyElapsedTime = 0;
+
+      var child = Instantiate(prefab, currentTransform.position, currentTransform.rotation);
+      var childGenome = child.GetComponent<Genome>();
+      childGenome.Initialize(genome, _mateGenome);
+    }
+
+    private void StartPregnancy(Genome mateGenome)
+    {
+      IsPregnant = true;
+      _mateGenome = mateGenome;
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+      if (other.CompareTag("Body") &&
+          other.TryGetComponent(out Genome otherGenome) &&
+          Genome.CompatibleAsParents(genome, otherGenome))
+      {
+        var otherReproducer = other.gameObject.GetComponent<Reproducer>();
+        if (genome.IsMale && !otherReproducer.IsPregnant)
+        {
+          otherReproducer.StartPregnancy(genome);
+        }
+        else if (!IsPregnant)
+        {
+          StartPregnancy(otherGenome);
+        }
+      }
+    }
+  }
 }

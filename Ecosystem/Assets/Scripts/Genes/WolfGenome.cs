@@ -29,17 +29,11 @@ namespace Ecosystem.Genes
       Genes[GeneType.SpeedFactor] = SpeedFactor;
       Genes[GeneType.SizeFactor] = SizeFactor;
       Genes[GeneType.DesirabilityScore] = DesirabilityFactor;
-      
-      if(Random.value > 0.5)
+
+      if (Random.value > 0.5)
       {
-        Debug.Log("Created male");
-        isMale = true;
+        IsMale = true;
       }
-      else
-      {
-        Debug.Log("Created female");
-      }
-      
     }
   }
 }
