@@ -4,7 +4,8 @@ import getopt
 from pathlib import Path
 
 from logdata import LogData
-from animalpopulations import visualise_animal_population_sizes
+from animalpopulation import visualise_animal_populations
+from foodconsumption import visualise_food_consumption
 
 
 # Runs all available visualisations on a simulation data file
@@ -15,7 +16,8 @@ def visualise(input_file: Path):
     os.mkdir(directory)
 
   data = LogData(input_file)
-  visualise_animal_population_sizes(data, directory)
+  visualise_animal_populations(data, directory)
+  visualise_food_consumption(data, directory)
 
 
 def main(argv):
