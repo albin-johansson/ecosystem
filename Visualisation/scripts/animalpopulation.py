@@ -1,3 +1,7 @@
+"""
+This module is responsible for visualising changes in the animal populations.
+"""
+
 import matplotlib.pyplot as plot
 from pathlib import Path
 from logdata import *
