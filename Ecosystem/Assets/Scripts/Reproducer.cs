@@ -8,21 +8,21 @@ namespace Ecosystem
     public class Reproducer : MonoBehaviour
     {
         [SerializeField] private Genome genome;
-        [SerializeField] private double gestationPeriod;
+        private double gestationPeriod;
         [SerializeField] private GameObject prefab;
 
         private bool isPregnant = false;
         private double pregnancyElapsedTime;
 
         private Genome mateGenome;
-        //private Genome mateGenome;
-
+    
 
         // Start is called before the first frame update
         void Start()
         {
             isPregnant = false;
             pregnancyElapsedTime = 0;
+            gestationPeriod = genome.GetGestationPeriod();
         }
 
         // Update is called once per frame
@@ -57,13 +57,13 @@ namespace Ecosystem
         /// TODO Might be an improvement to only save the object and not set it as a target.
         private void OnTriggerEnter(Collider other)
         {
-            if (other.TryGetComponent(out Genome mateGenome) && other.CompareTag("Body"))
+            if (other.TryGetComponent(out Reproducer mateReproducer))
             {   
                 Debug.Log("Reached other creature");
-                if (genome.MatchesGenome(genome))
+                if (genome.MatchesGenome(mateReproducer.genome))
                 {
                     Debug.Log("Matching genome");
-                    if (!other.GetComponent<Reproducer>().isPregnant && !mateGenome.GetIsMale())
+                    if (!mateReproducer.isPregnant && !mateReproducer.genome.GetIsMale())
                     {
                         Debug.Log("Mating");
                         other.GetComponent<Reproducer>().startPregnancy(genome);
