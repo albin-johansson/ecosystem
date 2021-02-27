@@ -1,3 +1,7 @@
+"""
+This module provides utilities related to handling the simulation log data.
+"""
+
 import json
 
 TimePoint = int
