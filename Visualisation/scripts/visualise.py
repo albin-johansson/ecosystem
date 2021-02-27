@@ -1,3 +1,10 @@
+"""
+This is the core module for the data visualisation of the simulation data. It provides the
+visualise-function which will run all available visualisations on a supplied log file. This module
+is meant to be used from the command line using "python visualise.py -i my_log_file.json", which will
+create a directory called "my_log_file" with all of the generated plots in it.
+"""
+
 import os
 import sys
 import getopt
