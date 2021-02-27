@@ -14,8 +14,8 @@ namespace Ecosystem.Genes
     private static readonly Gene SizeFactor = new Gene(0.5f, 0.1f, 1);
     private static readonly Gene DesirabilityFactor = new Gene(1, 1, 10);
     private static readonly Gene GestationPeriod = new Gene(60, 10, 120);
-    public bool isMale;
 
+    public bool IsMale { get; protected set; }
     protected double MutateChance;
     protected Dictionary<GeneType, Gene> Genes = new Dictionary<GeneType, Gene>();
 
@@ -52,27 +52,7 @@ namespace Ecosystem.Genes
 
       Genes = newGenes;
       MutateChance = first.MutateChance;
-    }
-    
-    public bool MatchesGenome(Genome other)
-    {
-      Debug.Log("Try match");
-      if (GetType() == other.GetType())
-      {
-        Debug.Log("Type matches");
-      }
-      if (GetIsMale() != other.GetIsMale())
-      {
-        Debug.Log("gender matches");
-      }
-      if (GetType() == other.GetType() && GetIsMale() != other.GetIsMale())
-      {
-        Debug.Log("suceed match");
-        return true;
-      }
-      Debug.Log("fail match");
-      return false;
-    }
+    } 
 
     protected virtual void Initialize()
     {
@@ -93,8 +73,13 @@ namespace Ecosystem.Genes
       Genes[GeneType.GestationPeriod] = GestationPeriod;
       if(Random.value > 0.5)
       {
-        isMale = true;
+        IsMale = true;
       }
+    }
+
+    public static bool CompatibleAsParents(Genome first, Genome second)
+    {
+      return first.GetType() == second.GetType() && first.IsMale != second.IsMale;
     }
 
     /// <summary>
@@ -149,12 +134,7 @@ namespace Ecosystem.Genes
     public double GetDesirability()
     {
       return Genes[GeneType.DesirabilityScore].Value;
-    }
-
-    public bool GetIsMale()
-    {
-      return isMale;
-    }
+    }   
 
     public double GetGestationPeriod()
     {
