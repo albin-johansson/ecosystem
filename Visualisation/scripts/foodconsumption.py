@@ -1,3 +1,7 @@
+"""
+This module is responsible for visualising food consumption.
+"""
+
 import matplotlib.pyplot as plot
 from pathlib import Path
 from logdata import *
