@@ -18,7 +18,7 @@ def visualise_animal_populations(data: LogData, directory: Path):
   figure, axes = plot.subplots()
 
   axes.plot(prey_history.keys(), prey_history.values(), label="Prey", color="green", **{"ls": "-"})
-  axes.plot(predator_history.keys(), predator_history.values(), label="Predator", color="red", **{"ls": "--"})
+  axes.plot(predator_history.keys(), predator_history.values(), label="Predators", color="red", **{"ls": "--"})
 
   axes.legend(loc="upper left")
   axes.set_xlim(0, data.duration_secs())
