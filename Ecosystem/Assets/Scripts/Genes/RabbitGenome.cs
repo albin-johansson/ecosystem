@@ -12,6 +12,7 @@ namespace Ecosystem.Genes
     private static readonly Gene SpeedFactor = new Gene(1.5f, 1, 2);
     private static readonly Gene SizeFactor = new Gene(0.5f, 0.1f, 1);
     private static readonly Gene DesirabilityFactor = new Gene(1, 1, 10);
+    private static readonly Gene GestationPeriod = new Gene(60, 10, 120);
 
     protected override void Initialize()
     {
@@ -29,6 +30,7 @@ namespace Ecosystem.Genes
       Genes[GeneType.SpeedFactor] = SpeedFactor;
       Genes[GeneType.SizeFactor] = SizeFactor;
       Genes[GeneType.DesirabilityScore] = DesirabilityFactor;
+      Genes[GeneType.GestationPeriod] = GestationPeriod;
       
       if(Random.value > 0.5)
       {

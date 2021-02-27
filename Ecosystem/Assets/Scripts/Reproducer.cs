@@ -17,6 +17,7 @@ namespace Ecosystem
     void Start()
     {
         gestationPeriod = genome.GetGestationPeriod();
+        Debug.Log("Gestation period:" + genome.GetGestationPeriod());
     }
     private void Update()
     {
@@ -60,7 +61,7 @@ namespace Ecosystem
         }
         else if (!IsPregnant)
         {
-          StartPregnancy(otherGenome);
+          StartPregnancy(otherReproducer.genome);
         }
       }
     }

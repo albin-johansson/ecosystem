@@ -52,27 +52,7 @@ namespace Ecosystem.Genes
 
       Genes = newGenes;
       MutateChance = first.MutateChance;
-    }
-    
-    public bool MatchesGenome(Genome other)
-    {
-      Debug.Log("Try match");
-      if (GetType() == other.GetType())
-      {
-        Debug.Log("Same type: true");
-      }
-      if (GetIsMale() != other.GetIsMale())
-      {
-        Debug.Log("Same gender: false");
-      }
-      if (GetType() == other.GetType() && GetIsMale() != other.GetIsMale())
-      {
-        Debug.Log("suceed match");
-        return true;
-      }
-      Debug.Log("fail match");
-      return false;
-    }
+    } 
 
     protected virtual void Initialize()
     {
