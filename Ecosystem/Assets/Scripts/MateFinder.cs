@@ -7,11 +7,13 @@ namespace Ecosystem
   {
     [SerializeField] private TargetTracker targetTracker;
     [SerializeField] private Genome genome;
-
+    [SerializeField] private Reproducer reproducer;
+    
     private void OnTriggerEnter(Collider other)
     {
-      if (other.TryGetComponent(out Genome otherGenome) && Genome.CompatibleAsParents(genome, otherGenome))
+      if (reproducer.CanMate() && other.TryGetComponent(out Genome otherGenome) && Genome.CompatibleAsParents(genome, otherGenome))
       {
+        Debug.Log("Going to mate");
         targetTracker.SetTarget(other.gameObject);
       }
     }
