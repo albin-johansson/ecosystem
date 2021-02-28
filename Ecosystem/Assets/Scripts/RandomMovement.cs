@@ -1,4 +1,3 @@
-using System;
 using UnityEngine;
 using UnityEngine.AI;
 using Random = UnityEngine.Random;
@@ -14,9 +13,7 @@ namespace Ecosystem
     private LayerMask groundMask;
 
     private Transform _transform;
-
     private Vector3 _lastPos;
-
     private float _timer;
 
     private void Start()
@@ -39,7 +36,7 @@ namespace Ecosystem
       }
     }
 
-    public void TargetRandomDestination()
+    private void TargetRandomDestination()
     {
       var randomX = Random.Range(-8f, 8f);
       var randomZ = Random.Range(-8f, 8f);

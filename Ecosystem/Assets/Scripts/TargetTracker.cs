@@ -11,26 +11,25 @@ namespace Ecosystem
     private GameObject _target;
     private bool _targetInSight;
     private float _timeRemaining;
-    private bool _hasTarget = false;
     private Desire _targetType;
-    private bool _chased = false;
+    private bool _chased;
     private Vector3 _fleeDirection;
 
     private const double StopTrackingThreshold = 0.1f;
 
-    public bool HasTarget => _hasTarget;
+    public bool HasTarget { get; private set; }
 
     //Runs a timer for when to stop looking for the target
     private void Update()
     {
-      if (_hasTarget)
+      if (HasTarget)
       {
         _timeRemaining -= Time.deltaTime;
         if (_timeRemaining < 0)
         {
           //When the timer runs out TargetTracker stops targeting letting ResourceFinder continue working.
           _timeRemaining = 0;
-          _hasTarget = false;
+          HasTarget = false;
           _targetInSight = false;
           _chased = false;
         }
@@ -49,7 +48,7 @@ namespace Ecosystem
       navAgent.SetDestination(target);
       _targetType = desire;
       _timeRemaining = 10;
-      _hasTarget = true;
+      HasTarget = true;
     }
 
     //Called from ResourceFinder when encountering a predator
@@ -57,7 +56,7 @@ namespace Ecosystem
     {
       SetFleeDirection(predator.transform.position);
       _target = predator;
-      _hasTarget = true;
+      HasTarget = true;
       _targetInSight = true;
       _chased = true;
       _timeRemaining = 5;
@@ -73,7 +72,7 @@ namespace Ecosystem
     //When a target is acquired the onTriggerStay will trigger each tick the object is in range and set the navAgent to go to it each tick
     private void OnTriggerStay(Collider other)
     {
-      if (!_hasTarget)
+      if (!HasTarget)
       {
         return;
       }
@@ -91,7 +90,7 @@ namespace Ecosystem
         navAgent.SetDestination(other.transform.position);
         if (navAgent.remainingDistance < StopTrackingThreshold)
         {
-          _hasTarget = false;
+          HasTarget = false;
           _targetInSight = false;
           _timeRemaining = 0;
         }
@@ -102,43 +101,17 @@ namespace Ecosystem
         return;
       }
 
-      CheckForTarget(other.gameObject);
+      LookForTarget(other.gameObject);
     }
-
-    private void CheckForTarget(GameObject other)
+    
+    private void LookForTarget(GameObject other)
     {
-      switch (_targetType)
+      if (_targetType == Desire.Food && other.layer == LayerUtil.FoodLayer ||
+          _targetType == Desire.Prey && other.layer == LayerUtil.PreyLayer ||
+          _targetType == Desire.Water && other.layer == LayerUtil.WaterLayer)
       {
-        case Desire.Food:
-          if (other.layer == LayerMask.NameToLayer("Food"))
-          {
-            _target = other.gameObject;
-            _targetInSight = true;
-          }
-
-          break;
-        case Desire.Prey:
-          if (other.layer == LayerMask.NameToLayer("Prey"))
-          {
-            _target = other.gameObject;
-            _targetInSight = true;
-          }
-
-          break;
-        case Desire.Water:
-          if (other.layer == LayerMask.NameToLayer("Water"))
-          {
-            _target = other.gameObject;
-            _targetInSight = true;
-          }
-
-          break;
-        case Desire.Idle:
-          break;
-        case Desire.Nothing:
-          break;
-        default:
-          throw new ArgumentOutOfRangeException();
+        _target = other.gameObject;
+        _targetInSight = true;
       }
     }
   }

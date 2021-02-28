@@ -26,17 +26,17 @@ namespace Ecosystem
       }
     }
 
-    private Desire GetDesire(GameObject other)
+    private static Desire GetDesire(GameObject other)
     {
-      if (other.gameObject.layer == LayerMask.NameToLayer("Food"))
+      if (other.gameObject.layer == LayerUtil.FoodLayer)
       {
         return Desire.Food;
       }
-      else if (other.gameObject.layer == LayerMask.NameToLayer("Prey"))
+      else if (other.gameObject.layer == LayerUtil.PreyLayer)
       {
         return Desire.Prey;
       }
-      else if (other.gameObject.layer == LayerMask.NameToLayer("Water"))
+      else if (other.gameObject.layer == LayerUtil.WaterLayer)
       {
         return Desire.Water;
       }
@@ -54,6 +54,7 @@ namespace Ecosystem
         {
           if (currentDesire != Desire.Water)
           {
+            //Removes food resource from memory to prevent animal from wandering back to food that has already been consumed. 
             _memory.Insert(i, (Desire.Nothing, new Vector3()));
           }
 

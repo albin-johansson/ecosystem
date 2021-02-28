@@ -1,7 +1,4 @@
-using System;
-using Ecosystem.Genes;
 using UnityEngine;
-using Random = UnityEngine.Random;
 
 namespace Ecosystem
 {
@@ -9,7 +6,6 @@ namespace Ecosystem
   {
     [SerializeField] private FoodConsumer foodConsumer;
     [SerializeField] private WaterConsumer waterConsumer;
-
     [SerializeField] private MemoryController memoryController;
     [SerializeField] private TargetTracker targetTracker;
 
@@ -58,7 +54,7 @@ namespace Ecosystem
     /// </summary>
     private void OnTriggerEnter(Collider other)
     {
-      if (other.gameObject.layer == LayerMask.NameToLayer("EcoWolf"))
+      if (LayerUtil.IsPredatorLayer(other.gameObject.layer))
       {
         targetTracker.FleeFromPredator(other.gameObject);
         return;
@@ -68,8 +64,8 @@ namespace Ecosystem
 
       if (!targetTracker.HasTarget)
       {
-        if (_priority == Desire.Food && other.gameObject.layer == LayerMask.NameToLayer("Food") ||
-            _priority == Desire.Water && other.gameObject.layer == LayerMask.NameToLayer("Water"))
+        if (_priority == Desire.Food && other.gameObject.layer == LayerUtil.FoodLayer ||
+            _priority == Desire.Water && other.gameObject.layer == LayerUtil.WaterLayer)
         {
           targetTracker.SetTarget(other.gameObject.transform.position, _priority);
         }

@@ -1,6 +1,4 @@
-﻿using UnityEditor.Experimental.GraphView;
-using UnityEngine;
-using Random = UnityEngine.Random;
+﻿using UnityEngine;
 
 namespace Ecosystem
 {
@@ -8,7 +6,6 @@ namespace Ecosystem
   {
     [SerializeField] private PreyConsumer preyConsumer;
     [SerializeField] private WaterConsumer waterConsumer;
-
     [SerializeField] private MemoryController memoryController;
     [SerializeField] private TargetTracker targetTracker;
 
@@ -60,8 +57,8 @@ namespace Ecosystem
 
       if (!targetTracker.HasTarget)
       {
-        if (_priority == Desire.Prey && other.gameObject.layer == LayerMask.NameToLayer("Prey") ||
-            _priority == Desire.Water && other.gameObject.layer == LayerMask.NameToLayer("Water"))
+        if (_priority == Desire.Prey && other.gameObject.layer == LayerUtil.PreyLayer ||
+            _priority == Desire.Water && other.gameObject.layer == LayerUtil.WaterLayer)
         {
           targetTracker.SetTarget(other.gameObject.transform.position, _priority);
         }
