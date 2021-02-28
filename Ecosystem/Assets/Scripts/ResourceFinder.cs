@@ -20,12 +20,14 @@ namespace Ecosystem
     //Checks MemoryController for objects that matches the priority Desire
     private void CheckMemory()
     {
-      if (!targetTracker.HasTarget)
+      if (!targetTracker.HasTarget && _priority != Desire.Drink)
       {
         var target = memoryController.RecallFromMemory(_priority);
         if (target)
         {
           targetTracker.SetTarget(target);
+        } else {
+          //TODO: Should start moving randomly!!!
         }
       }
     }
@@ -36,6 +38,11 @@ namespace Ecosystem
       if (targetTracker.IsChased)
       {
         _priority = Desire.Flee;
+        waterConsumer.stopDrinking();
+      }
+      else if (waterConsumer.IsDrinking)
+      {
+        _priority = Desire.Drink;
       }
       else if (foodConsumer.IsHungry())
       {
@@ -49,7 +56,6 @@ namespace Ecosystem
       {
         _priority = Desire.Idle;
       }
-      
     }
 
     /// <summary>
@@ -64,6 +70,10 @@ namespace Ecosystem
         _priority = Desire.Flee;
         targetTracker.FleeFromPredator(other.gameObject);
         return;
+      }
+
+      if (_priority == Desire.Drink){
+        targetTracker.StopTracking();
       }
 
       memoryController.SaveToMemory(other.gameObject);

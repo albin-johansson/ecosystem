@@ -6,6 +6,7 @@ namespace Ecosystem
     Food,
     Prey,
     Flee,
+    Drink,
     Idle,
     Nothing
   }
