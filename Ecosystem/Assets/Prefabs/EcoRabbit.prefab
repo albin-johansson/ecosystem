@@ -290,7 +290,7 @@ GameObject:
   - component: {fileID: 1609998855278463372}
   m_Layer: 0
   m_Name: Reproducer
-  m_TagString: Body
+  m_TagString: Reproducer
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -335,7 +335,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   genome: {fileID: 1438288584065220351}
-  gestationPeriod: 5
   prefab: {fileID: 3436557251021641289}
 --- !u!1 &1390759350902291101
 GameObject:
@@ -1045,7 +1044,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 722870adf75749399b54d4edf4c101cf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  isMale: 0
 --- !u!114 &3025539359171641749
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1980,6 +1978,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   targetTracker: {fileID: 6465032635382470205}
   genome: {fileID: 1438288584065220351}
+  reproducer: {fileID: 1609998855278463372}
 --- !u!1 &7274074492873787243
 GameObject:
   m_ObjectHideFlags: 0
