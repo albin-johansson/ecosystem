@@ -96,14 +96,12 @@ namespace Ecosystem
         }
       }
 
-      if (_targetInSight)
+      if (!_targetInSight)
       {
-        return;
+        LookForTarget(other.gameObject);
       }
-
-      LookForTarget(other.gameObject);
     }
-    
+
     private void LookForTarget(GameObject other)
     {
       if (_targetType == Desire.Food && other.layer == LayerUtil.FoodLayer ||
