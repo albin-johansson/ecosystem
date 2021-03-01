@@ -63,6 +63,39 @@ def attach_text_labels(rects, axes):
                   ha='center', va='bottom')
 
 
+def create_cause_of_death_grouped_bar_chart(predator_stats: list[int], prey_stats: list[int]):
+  """
+  Creates and returns a grouped bar chart with the death causes. The list parameters are expected
+  to feature an entry for each cause of death, where the value corresponds to how many specimens
+  died of that cause.
+
+  :param predator_stats: the stats associated with predators.
+  :param prey_stats: the stats associated with prey.
+  :return: the created figure.
+  """
+
+  figure, axes = plot.subplots()
+
+  labels = [str(e) for e in CauseOfDeath]
+  x = numpy.arange(len(labels))
+
+  width = 0.35
+  rects_1 = axes.bar(x - width / 2, predator_stats, width, label="Predators")
+  rects_2 = axes.bar(x + width / 2, prey_stats, width, label="Prey")
+
+  axes.set_title("Deaths arranged by cause and animal type")
+  axes.set_ylabel("Amount")
+  axes.set_xticks(x)
+  axes.set_xticklabels(labels)
+  axes.legend()
+
+  attach_text_labels(rects_1, axes)
+  attach_text_labels(rects_2, axes)
+
+  figure.tight_layout()
+  return figure
+
+
 def visualise_cause_of_death(data: LogData, directory: Path):
   """
   Produces a grouped bar chart of the different causes of deaths,
@@ -87,24 +120,6 @@ def visualise_cause_of_death(data: LogData, directory: Path):
       previous_value = predator_stats[cause]
       predator_stats[cause] = previous_value + 1
 
-  figure, axes = plot.subplots()
-
-  labels = [str(e) for e in CauseOfDeath]
-  x = numpy.arange(len(labels))
-
-  width = 0.35
-  rects_1 = axes.bar(x - width / 2, predator_stats, width, label="Predators")
-  rects_2 = axes.bar(x + width / 2, prey_stats, width, label="Prey")
-
-  axes.set_title("Deaths arranged by cause and animal type")
-  axes.set_ylabel("Amount")
-  axes.set_xticks(x)
-  axes.set_xticklabels(labels)
-  axes.legend()
-
-  attach_text_labels(rects_1, axes)
-  attach_text_labels(rects_2, axes)
-
-  figure.tight_layout()
+  figure = create_cause_of_death_grouped_bar_chart(predator_stats, prey_stats)
   figure.savefig(directory / Path("cause_of_death.png"))
   plot.close()
