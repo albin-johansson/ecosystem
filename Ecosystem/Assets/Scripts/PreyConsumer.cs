@@ -12,7 +12,7 @@ namespace Ecosystem
     [SerializeField] private double maxHunger = 100;
     [SerializeField] private EcoAnimationController ecoAnimationController;
 
-    private double Hunger { get; set; }
+    public double Hunger { get; private set; }
 
     private void Start()
     {
