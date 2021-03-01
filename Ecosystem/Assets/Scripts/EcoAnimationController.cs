@@ -33,6 +33,7 @@ namespace Ecosystem
         _navMeshAgentSpeed = navMeshAgent.speed;
         _navMeshAgentVelocity = navMeshAgent.velocity.magnitude;
       }
+
       _animator.SetFloat(_animationSpeedMultiplier, _navMeshAgentVelocity);
     }
 
@@ -47,7 +48,7 @@ namespace Ecosystem
       }
     }
 
-    public void AttackAnimation()
+    public void EnterAttackAnimation()
     {
       ResetAnimatorParameters();
       navMeshAgent.speed = 0;
@@ -62,7 +63,7 @@ namespace Ecosystem
       _animator.SetBool(_isWalkingHash, true);
     }
 
-    public void DieAnimation()
+    public void EnterDeathAnimation()
     {
       ResetAnimatorParameters();
       navMeshAgent.speed = 0;
