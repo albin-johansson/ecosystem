@@ -21,8 +21,6 @@ public class LightRotation : MonoBehaviour
     particleSystem.lights.light.intensity = 0;
     particleSystem.Stop();
   }
-
-  // Update is called once per frame
   void Update()
   {
     sun.transform.Rotate(CycleSpeed,0,0, Space.Self);
@@ -37,13 +35,11 @@ public class LightRotation : MonoBehaviour
     }
     if (rotation >= 175 && !isNight)
     {
-      print("Night");
       TransformToNight();
     }
 
     if (rotation >= 340 && isNight)
     {
-      print("daytime");
       TransformToDay();
     }
 

@@ -209,13 +209,13 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 107239032}
-  m_LocalRotation: {x: -0.0015840146, y: 0.29297036, z: -0.20024905, w: -0.9349151}
+  m_LocalRotation: {x: 0.01777232, y: 0.38193518, z: -0.1994652, w: -0.9022324}
   m_LocalPosition: {x: 39.515045, y: -246.9, z: 350.9}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 486680476}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 366.909, y: -33.448, z: 22.101}
+  m_LocalEulerAnglesHint: {x: 366.909, y: -44.537, z: 22.101}
 --- !u!1 &368668880
 GameObject:
   m_ObjectHideFlags: 0
@@ -569,6 +569,7 @@ MonoBehaviour:
   sun: {fileID: 107239033}
   cam: {fileID: 1170735246}
   particleSystem: {fileID: 1879225896}
+  mainText: {fileID: 474126289}
 --- !u!4 &486680476
 Transform:
   m_ObjectHideFlags: 0
@@ -687,8 +688,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 32.2, y: 208.1}
-  m_SizeDelta: {x: 20, y: 300}
+  m_AnchoredPosition: {x: 26.77, y: 205.1}
+  m_SizeDelta: {x: 20, y: 320}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &682274835
 MonoBehaviour:
@@ -897,7 +898,7 @@ Light:
   m_Shape: 0
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_Intensity: 1
-  m_Range: 100
+  m_Range: 500
   m_SpotAngle: 30
   m_InnerSpotAngle: 21.80208
   m_CookieSize: 10
