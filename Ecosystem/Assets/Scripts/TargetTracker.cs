@@ -65,7 +65,11 @@ namespace Ecosystem
       navAgent.isStopped = true;
       _hasTarget = false;
       _target = null;
+    }
 
+    public void ResumeTracking()
+    {
+      navAgent.isStopped = false;
     }
 
     //Sets the _fleeDirection to be away from the predators position. The _fleeDirection works as a velocity and therefore we apply the navAgents speed to the vector. 

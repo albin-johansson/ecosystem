@@ -34,13 +34,26 @@ namespace Ecosystem
     private void UpdatePriority()
     {
       // Hunger has implicit priority
-      if (preyConsumer.IsHungry())
+      if (waterConsumer.IsDrinking)
       {
-        _priority = Desire.Prey;
+        _priority = Desire.Drink;
+        Debug.Log("Wolf is drinking");
+        targetTracker.StopTracking();
+        return;
+      } 
+      else
+      {
+        targetTracker.ResumeTracking();
       }
-      else if (waterConsumer.IsThirsty())
+
+      
+      if (waterConsumer.IsThirsty())
       {
         _priority = Desire.Water;
+      }
+      else if (preyConsumer.IsHungry())
+      {
+        _priority = Desire.Prey;
       }
       else
       {
@@ -55,6 +68,7 @@ namespace Ecosystem
     /// TODO Might be an improvement to only save the object and not set it as a target.
     private void OnTriggerEnter(Collider other)
     {
+      if(other.CompareTag("Water")){Debug.Log("Wolf see water");}
       memoryController.SaveToMemory(other.gameObject);
       if (!targetTracker.HasTarget)
       {

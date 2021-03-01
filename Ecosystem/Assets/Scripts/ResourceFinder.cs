@@ -39,12 +39,21 @@ namespace Ecosystem
       {
         _priority = Desire.Flee;
         waterConsumer.stopDrinking();
+        targetTracker.ResumeTracking();
+        return;
       }
       else if (waterConsumer.IsDrinking)
       {
         _priority = Desire.Drink;
+        targetTracker.StopTracking();
+        return;
+      } 
+      else
+      {
+        targetTracker.ResumeTracking();
       }
-      else if (foodConsumer.IsHungry())
+      
+      if (foodConsumer.IsHungry())
       {
         _priority = Desire.Food;
       }
@@ -70,10 +79,6 @@ namespace Ecosystem
         _priority = Desire.Flee;
         targetTracker.FleeFromPredator(other.gameObject);
         return;
-      }
-
-      if (_priority == Desire.Drink){
-        targetTracker.StopTracking();
       }
 
       memoryController.SaveToMemory(other.gameObject);
