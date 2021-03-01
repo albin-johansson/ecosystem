@@ -1,4 +1,3 @@
-using System;
 using Ecosystem.Genes;
 using UnityEngine;
 
@@ -8,38 +7,38 @@ namespace Ecosystem
   {
     [SerializeField] private Genome genome;
     [SerializeField] private GameObject prefab;
+    
+    private bool _IsPregnant { get; set; }
+    private bool _IsSexuallyMature { get; set; }
 
-    private double gestationPeriod;
-    private double SexualMaturityTime;
-    private bool IsPregnant { get; set; }
-    private bool IsSexuallyMature { get; set; }
-
+    private double _gestationPeriod;
+    private double _SexualMaturityTime;
     private double _pregnancyElapsedTime;
     private double _maturityElapsedTime;
     private Genome _mateGenome;
 
-    void Start()
+    private void Start()
     {
-      SexualMaturityTime = genome.GetSexualMaturityTime();
-      gestationPeriod = genome.GetGestationPeriod();
+      _SexualMaturityTime = genome.GetSexualMaturityTime();
+      _gestationPeriod = genome.GetGestationPeriod();
       Debug.Log("Gestation period:" + genome.GetGestationPeriod());
     }
 
     private void Update()
     {
-      if (!IsSexuallyMature)
+      if (!_IsSexuallyMature)
       {
         _maturityElapsedTime += Time.deltaTime;
-        if (_maturityElapsedTime >= SexualMaturityTime)
+        if (_maturityElapsedTime >= _SexualMaturityTime)
         {
-          IsSexuallyMature = true;
+          _IsSexuallyMature = true;
         }
       }
 
-      if (IsPregnant)
+      if (_IsPregnant)
       {
         _pregnancyElapsedTime += Time.deltaTime;
-        if (_pregnancyElapsedTime >= gestationPeriod)
+        if (_pregnancyElapsedTime >= _gestationPeriod)
         {
           GiveBirth();
         }
@@ -50,7 +49,7 @@ namespace Ecosystem
     {
       var currentTransform = transform;
 
-      IsPregnant = false;
+      _IsPregnant = false;
       _pregnancyElapsedTime = 0;
 
       var child = Instantiate(prefab, currentTransform.position, currentTransform.rotation);
@@ -60,7 +59,7 @@ namespace Ecosystem
 
     private void StartPregnancy(Genome mateGenome)
     {
-      IsPregnant = true;
+      _IsPregnant = true;
       _mateGenome = mateGenome;
     }
 
@@ -69,14 +68,14 @@ namespace Ecosystem
       if (other.CompareTag("Reproducer") &&
           other.TryGetComponent(out Reproducer otherReproducer) &&
           Genome.CompatibleAsParents(genome, otherReproducer.genome) &&
-          otherReproducer.IsSexuallyMature)
+          otherReproducer._IsSexuallyMature)
       {
         Debug.Log("Try Mating");
-        if (genome.IsMale && !otherReproducer.IsPregnant)
+        if (genome.IsMale && !otherReproducer._IsPregnant)
         {
           otherReproducer.StartPregnancy(genome);
         }
-        else if (!IsPregnant)
+        else if (!_IsPregnant)
         {
           StartPregnancy(otherReproducer.genome);
         }
@@ -85,7 +84,7 @@ namespace Ecosystem
 
     public bool CanMate()
     {
-      return IsPregnant && IsSexuallyMature;
+      return _IsPregnant && _IsSexuallyMature;
     }
   }
 }
