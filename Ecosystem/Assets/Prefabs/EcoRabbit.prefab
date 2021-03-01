@@ -519,6 +519,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7268078574618211150}
   - component: {fileID: 6548548314612515429}
+  - component: {fileID: 8737520346852457035}
   m_Layer: 8
   m_Name: Movement
   m_TagString: Untagged
@@ -553,10 +554,24 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   navAgent: {fileID: 2689415282919559664}
-  animationStatesController: {fileID: 7888738178574641391}
+  ecoAnimationController: {fileID: 2656864231929346077}
   groundMask:
     serializedVersion: 2
     m_Bits: 8
+--- !u!114 &8737520346852457035
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2719731396375845655}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fb55c6559f397694e950bfc758d54331, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  navAgent: {fileID: 2689415282919559664}
+  ecoAnimationController: {fileID: 2656864231929346077}
 --- !u!1 &2757367380692593370
 GameObject:
   m_ObjectHideFlags: 0
@@ -854,7 +869,7 @@ GameObject:
   - component: {fileID: 1768703437601898298}
   - component: {fileID: 1438288584065220351}
   - component: {fileID: 3025539359171641749}
-  - component: {fileID: 7888738178574641391}
+  - component: {fileID: 2656864231929346077}
   m_Layer: 8
   m_Name: EcoRabbit
   m_TagString: Prey
@@ -995,7 +1010,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 04dec80f06674629b7366fcb55ec29f2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &7888738178574641391
+  ecoAnimationController: {fileID: 2656864231929346077}
+--- !u!114 &2656864231929346077
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -1004,9 +1020,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 3436557251021641289}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4c2008d296c842b181f6c433da52ba6a, type: 3}
+  m_Script: {fileID: 11500000, guid: 184edc0ef7b34b1fae4d32870830ac3f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  navMeshAgent: {fileID: 2689415282919559664}
 --- !u!1 &3579996788643659857
 GameObject:
   m_ObjectHideFlags: 0
@@ -2084,7 +2101,6 @@ GameObject:
   - component: {fileID: 6132990314379234639}
   - component: {fileID: 7194725648983189641}
   - component: {fileID: 8447711326330248734}
-  - component: {fileID: 6465032635382470205}
   - component: {fileID: 3915165533490199740}
   m_Layer: 8
   m_Name: ResourceFinder
@@ -2135,21 +2151,7 @@ MonoBehaviour:
   foodConsumer: {fileID: 2592824637093240721}
   waterConsumer: {fileID: 2647182948873053790}
   memoryController: {fileID: 3915165533490199740}
-  targetTracker: {fileID: 6465032635382470205}
---- !u!114 &6465032635382470205
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8398216545277643250}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fb55c6559f397694e950bfc758d54331, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  navAgent: {fileID: 2689415282919559664}
-  animationStatesController: {fileID: 7888738178574641391}
+  targetTracker: {fileID: 8737520346852457035}
 --- !u!114 &3915165533490199740
 MonoBehaviour:
   m_ObjectHideFlags: 0

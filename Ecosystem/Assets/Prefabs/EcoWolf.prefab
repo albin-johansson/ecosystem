@@ -813,7 +813,6 @@ GameObject:
   - component: {fileID: 8604382157504489542}
   - component: {fileID: 1055900954892002274}
   - component: {fileID: 4711121908547383436}
-  - component: {fileID: 5664458934757789768}
   - component: {fileID: 466637266297604821}
   m_Layer: 7
   m_Name: ResourceFinder
@@ -864,21 +863,7 @@ MonoBehaviour:
   preyConsumer: {fileID: 4792977970529093403}
   waterConsumer: {fileID: 4872432210245021957}
   memoryController: {fileID: 466637266297604821}
-  targetTracker: {fileID: 5664458934757789768}
---- !u!114 &5664458934757789768
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 812713823044452910}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fb55c6559f397694e950bfc758d54331, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  navAgent: {fileID: 8843502245496003322}
-  animationStatesController: {fileID: 127626441900989553}
+  targetTracker: {fileID: 6313841970686490677}
 --- !u!114 &466637266297604821
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5625,7 +5610,6 @@ GameObject:
   - component: {fileID: 2235924926955766996}
   - component: {fileID: 9176376325284403323}
   - component: {fileID: 5636651239509622512}
-  - component: {fileID: 127626441900989553}
   - component: {fileID: 231915566137505156}
   - component: {fileID: 8139687230505421166}
   m_Layer: 7
@@ -5895,19 +5879,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 184edc0ef7b34b1fae4d32870830ac3f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  animationStatesController: {fileID: 127626441900989553}
---- !u!114 &127626441900989553
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5311647281874787049}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4c2008d296c842b181f6c433da52ba6a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
+  navMeshAgent: {fileID: 8843502245496003322}
 --- !u!114 &231915566137505156
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5932,6 +5904,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 04dec80f06674629b7366fcb55ec29f2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  ecoAnimationController: {fileID: 5636651239509622512}
 --- !u!1 &5414967741974214314
 GameObject:
   m_ObjectHideFlags: 0
@@ -7177,6 +7150,7 @@ MonoBehaviour:
   resourceBar: {fileID: 8198160770960277909}
   deathHandler: {fileID: 8139687230505421166}
   maxHunger: 100
+  ecoAnimationController: {fileID: 5636651239509622512}
 --- !u!114 &4872432210245021957
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -8624,6 +8598,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6621205781111567310}
   - component: {fileID: 8695578196549015882}
+  - component: {fileID: 6313841970686490677}
   m_Layer: 7
   m_Name: Movement
   m_TagString: Untagged
@@ -8658,10 +8633,24 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   navAgent: {fileID: 8843502245496003322}
-  animationStatesController: {fileID: 127626441900989553}
+  ecoAnimationController: {fileID: 5636651239509622512}
   groundMask:
     serializedVersion: 2
     m_Bits: 8
+--- !u!114 &6313841970686490677
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7941565882367673383}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fb55c6559f397694e950bfc758d54331, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  navAgent: {fileID: 8843502245496003322}
+  ecoAnimationController: {fileID: 5636651239509622512}
 --- !u!1 &7963063404835319314
 GameObject:
   m_ObjectHideFlags: 0
