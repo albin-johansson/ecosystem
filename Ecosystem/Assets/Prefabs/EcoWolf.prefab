@@ -5904,7 +5904,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 04dec80f06674629b7366fcb55ec29f2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ecoAnimationController: {fileID: 5636651239509622512}
+  animationController: {fileID: 5636651239509622512}
 --- !u!1 &5414967741974214314
 GameObject:
   m_ObjectHideFlags: 0
@@ -7150,7 +7150,7 @@ MonoBehaviour:
   resourceBar: {fileID: 8198160770960277909}
   deathHandler: {fileID: 8139687230505421166}
   maxHunger: 100
-  ecoAnimationController: {fileID: 5636651239509622512}
+  animationController: {fileID: 5636651239509622512}
 --- !u!114 &4872432210245021957
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -8633,7 +8633,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   navAgent: {fileID: 8843502245496003322}
-  ecoAnimationController: {fileID: 5636651239509622512}
+  animationController: {fileID: 5636651239509622512}
   groundMask:
     serializedVersion: 2
     m_Bits: 8
@@ -8650,7 +8650,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   navAgent: {fileID: 8843502245496003322}
-  ecoAnimationController: {fileID: 5636651239509622512}
+  animationController: {fileID: 5636651239509622512}
 --- !u!1 &7963063404835319314
 GameObject:
   m_ObjectHideFlags: 0
