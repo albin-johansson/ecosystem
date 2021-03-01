@@ -45,11 +45,11 @@ namespace Ecosystem
     //Sets a target to hone in on and start a timer
     public void SetTarget(Vector3 target, Desire desire)
     {
+      ecoAnimationController.MoveAnimation();
       navAgent.SetDestination(target);
       _targetType = desire;
       _timeRemaining = 10;
       HasTarget = true;
-      ecoAnimationController.MoveAnimation();
     }
 
     //Called from ResourceFinder when encountering a predator
