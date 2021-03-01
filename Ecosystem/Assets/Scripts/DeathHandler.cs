@@ -15,16 +15,11 @@ namespace Ecosystem
     /// </summary>
     public static event DeathEvent OnDeath;
 
-    private void DestroyObjectDelayed()
-    {
-      //TODO: make the time depend on the death animation
-      Destroy(gameObject.gameObject);
-    }
-
     public void Die(CauseOfDeath cause)
     {
-      OnDeath?.Invoke(cause, gameObject);
-      DestroyObjectDelayed();
+      OnDeath?.Invoke(cause, gameObject.gameObject);
+      Destroy(gameObject.gameObject);
+      gameObject.gameObject.SetActive(false); // Without this, the animal will die more than once
     }
   }
 }
