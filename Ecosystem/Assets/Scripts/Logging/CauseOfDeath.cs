@@ -8,7 +8,8 @@ namespace Ecosystem.Logging
   /// <remarks>
   /// It's important to not change the order of any of the enumerators,
   /// as they are saved as raw integers in log files. When adding new enumerators,
-  /// add them to the end of the enum!
+  /// add them to the end of the enum <b>AND</b> remember to extend the associated enum
+  /// in the <c>causeofdeath.py</c> script.
   /// </remarks>
   [Serializable]
   public enum CauseOfDeath
