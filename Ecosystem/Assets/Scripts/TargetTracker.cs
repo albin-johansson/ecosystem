@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 using UnityEngine.AI;
 
@@ -5,35 +6,37 @@ namespace Ecosystem
 {
   public sealed class TargetTracker : MonoBehaviour
   {
-    private const double StopTrackingThreshold = 0.1f;
-
     [SerializeField] private NavMeshAgent navAgent;
     [SerializeField] private AnimationStatesController animationStatesController;
     private GameObject _target;
-    private Vector3 _fleeDirection;
+    private bool _targetInSight;
     private float _timeRemaining;
-    private bool _hasTarget;
+    private Desire _targetType;
     private bool _chased;
+    private Vector3 _fleeDirection;
 
-    public bool HasTarget => _hasTarget;
+    private const double StopTrackingThreshold = 0.1f;
+
+    public bool HasTarget { get; private set; }
     public bool IsChased => _chased;
 
     //Runs a timer for when to stop looking for the target
     private void Update()
     {
-      if (_hasTarget)
+      if (HasTarget)
       {
         _timeRemaining -= Time.deltaTime;
         if (_timeRemaining < 0)
         {
           //When the timer runs out TargetTracker stops targeting letting ResourceFinder continue working.
           _timeRemaining = 0;
-          _hasTarget = false;
+          HasTarget = false;
+          _targetInSight = false;
           _chased = false;
         }
       }
 
-      //When chased the velocity is constantly set to the fleeing direction while the timer for being chased is still running. 
+      //When chased the velocity is constantly set to the fleeing direction while the timer for being chased is still running.
       if (_chased)
       {
         navAgent.velocity = _fleeDirection;
@@ -41,13 +44,12 @@ namespace Ecosystem
     }
 
     //Sets a target to hone in on and start a timer
-    public void SetTarget(GameObject target)
+    public void SetTarget(Vector3 target, Desire desire)
     {
-      animationStatesController.AnimAnimationState = AnimationState.Walking;
-      navAgent.SetDestination(target.transform.position);
-      _target = target;
-      _timeRemaining = 5;
-      _hasTarget = true;
+      navAgent.SetDestination(target);
+      _targetType = desire;
+      _timeRemaining = 10;
+      HasTarget = true;
     }
 
     //Called from ResourceFinder when encountering a predator
@@ -55,7 +57,8 @@ namespace Ecosystem
     {
       SetFleeDirection(predator.transform.position);
       _target = predator;
-      _hasTarget = true;
+      HasTarget = true;
+      _targetInSight = true;
       _chased = true;
       _timeRemaining = 5;
     }
@@ -63,7 +66,6 @@ namespace Ecosystem
     public void StopTracking()
     {
       navAgent.isStopped = true;
-      _hasTarget = false;
       _target = null;
     }
 
@@ -72,7 +74,7 @@ namespace Ecosystem
       navAgent.isStopped = false;
     }
 
-    //Sets the _fleeDirection to be away from the predators position. The _fleeDirection works as a velocity and therefore we apply the navAgents speed to the vector. 
+    //Sets the _fleeDirection to be away from the predators position. The _fleeDirection works as a velocity and therefore we apply the navAgents speed to the vector.
     private void SetFleeDirection(Vector3 predatorPosition)
     {
       var velocityDirection = (navAgent.transform.position - predatorPosition).normalized;
@@ -82,14 +84,14 @@ namespace Ecosystem
     //When a target is acquired the onTriggerStay will trigger each tick the object is in range and set the navAgent to go to it each tick
     private void OnTriggerStay(Collider other)
     {
-      if (!_hasTarget)
+      if (!HasTarget)
       {
         return;
       }
 
-      if (other.gameObject.Equals(_target))
+      if (_targetInSight && other.gameObject.Equals(_target))
       {
-        //if predator is still in range set the fleeing direction to match the predator. 
+        //if predator is still in range set the fleeing direction to match the predator.
         if (_chased)
         {
           SetFleeDirection(other.transform.position);
@@ -97,12 +99,29 @@ namespace Ecosystem
           return;
         }
 
-        navAgent.SetDestination(_target.transform.position);
+        navAgent.SetDestination(other.transform.position);
         if (navAgent.remainingDistance < StopTrackingThreshold)
         {
-          _hasTarget = false;
+          HasTarget = false;
+          _targetInSight = false;
           _timeRemaining = 0;
         }
+      }
+
+      if (!_targetInSight)
+      {
+        LookForTarget(other.gameObject);
+      }
+    }
+
+    private void LookForTarget(GameObject other)
+    {
+      if (_targetType == Desire.Food && other.layer == LayerUtil.FoodLayer ||
+          _targetType == Desire.Prey && other.layer == LayerUtil.PreyLayer ||
+          _targetType == Desire.Water && other.layer == LayerUtil.WaterLayer)
+      {
+        _target = other.gameObject;
+        _targetInSight = true;
       }
     }
   }

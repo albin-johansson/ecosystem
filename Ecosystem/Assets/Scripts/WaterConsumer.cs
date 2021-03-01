@@ -13,10 +13,11 @@ namespace Ecosystem
     private bool _isDrinking;
     public bool IsDrinking => _isDrinking;
 
-    private float Thirst { get; set; }
+    public float Thirst { get; private set; }
 
     private void Start()
     {
+      _isDrinking = false;
       resourceBar.SetMaxValue(maxThirst);
     }
 
@@ -41,7 +42,7 @@ namespace Ecosystem
 
     private void OnTriggerEnter(Collider other)
     {
-      if (other.CompareTag("Water") && IsThirsty())
+      if (other.gameObject.CompareTag("Water") && IsThirsty())
       {
         _isDrinking = true;
       }
