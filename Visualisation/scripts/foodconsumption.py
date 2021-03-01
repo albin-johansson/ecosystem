@@ -29,6 +29,7 @@ def visualise_food_consumption(data: LogData, directory: Path):
   axes.set_ylim(0, data.initial_food_count() + 20)
   axes.set_xlabel("Time (seconds)")
   axes.set_ylabel("Amount")
+  axes.set_title("Food availability and consumer population")
 
   plot.savefig(directory / Path("food_consumption.png"))
   plot.close()

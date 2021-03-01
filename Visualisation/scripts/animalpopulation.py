@@ -29,6 +29,7 @@ def visualise_animal_populations_standard(data: LogData, directory: Path):
   axes.set_ylim(0, data.initial_total_alive_count())
   axes.set_xlabel("Time (seconds)")
   axes.set_ylabel("Population size")
+  axes.set_title("Population sizes")
 
   plot.savefig(directory / Path("animal_populations.png"))
   plot.close()
