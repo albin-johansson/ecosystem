@@ -6,6 +6,7 @@ namespace Ecosystem
   public sealed class Reproducer : MonoBehaviour
   {
     [SerializeField] private Genome genome;
+    [SerializeField] private FoodConsumer foodConsumer;
     [SerializeField] private GameObject prefab;
     
     private bool _IsPregnant { get; set; }
@@ -68,9 +69,8 @@ namespace Ecosystem
       if (other.CompareTag("Reproducer") &&
           other.TryGetComponent(out Reproducer otherReproducer) &&
           Genome.CompatibleAsParents(genome, otherReproducer.genome) &&
-          otherReproducer._IsSexuallyMature)
+          otherReproducer.CanMate() && CanMate())
       {
-        Debug.Log("Try Mating");
         if (genome.IsMale && !otherReproducer._IsPregnant)
         {
           otherReproducer.StartPregnancy(genome);
@@ -84,7 +84,7 @@ namespace Ecosystem
 
     public bool CanMate()
     {
-      return _IsPregnant && _IsSexuallyMature;
+      return !_IsPregnant && _IsSexuallyMature;
     }
   }
 }

@@ -6,6 +6,7 @@ namespace Ecosystem
   {
     [SerializeField] private FoodConsumer foodConsumer;
     [SerializeField] private WaterConsumer waterConsumer;
+    [SerializeField] private MateFinder mateFinder;
     [SerializeField] private MemoryController memoryController;
     [SerializeField] private TargetTracker targetTracker;
 
@@ -66,7 +67,8 @@ namespace Ecosystem
       if (!targetTracker.HasTarget)
       {
         if (_priority == Desire.Food && other.CompareTag("Food") ||
-            _priority == Desire.Water && other.CompareTag("Water"))
+            _priority == Desire.Water && other.CompareTag("Water") ||
+            _priority == Desire.Idle && mateFinder.CompatibleAsParents(other))
         {
           targetTracker.SetTarget(other.gameObject);
         }

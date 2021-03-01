@@ -597,7 +597,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 831424744415161892}
-  m_RootOrder: 5
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &6548548314612515429
 MonoBehaviour:
@@ -936,7 +936,6 @@ Transform:
   - {fileID: 201567338121193027}
   - {fileID: 6132990314379234639}
   - {fileID: 8745036721447421637}
-  - {fileID: 6017144121811023783}
   - {fileID: 7268078574618211150}
   - {fileID: 1175459564567131405}
   - {fileID: 2093779445486166218}
@@ -1763,7 +1762,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 831424744415161892}
-  m_RootOrder: 6
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &6415817589261490454
 GameObject:
@@ -1919,66 +1918,6 @@ Transform:
   m_Father: {fileID: 5023732459866704978}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &7186368899826660872
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 6017144121811023783}
-  - component: {fileID: 7855379013025675081}
-  - component: {fileID: 7289784860625914552}
-  m_Layer: 0
-  m_Name: MateFinder
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &6017144121811023783
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7186368899826660872}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 831424744415161892}
-  m_RootOrder: 4
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!135 &7855379013025675081
-SphereCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7186368899826660872}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 1
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Radius: 4
-  m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &7289784860625914552
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7186368899826660872}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 85b69fff4ae22bc438ab072e486351d2, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  targetTracker: {fileID: 6465032635382470205}
-  genome: {fileID: 1438288584065220351}
-  reproducer: {fileID: 1609998855278463372}
 --- !u!1 &7274074492873787243
 GameObject:
   m_ObjectHideFlags: 0
@@ -2207,6 +2146,7 @@ GameObject:
   - component: {fileID: 8447711326330248734}
   - component: {fileID: 6465032635382470205}
   - component: {fileID: 3915165533490199740}
+  - component: {fileID: 8548202879111627105}
   m_Layer: 0
   m_Name: ResourceFinder
   m_TagString: Untagged
@@ -2255,6 +2195,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   foodConsumer: {fileID: 2592824637093240721}
   waterConsumer: {fileID: 2647182948873053790}
+  mateFinder: {fileID: 8548202879111627105}
   memoryController: {fileID: 3915165533490199740}
   targetTracker: {fileID: 6465032635382470205}
 --- !u!114 &6465032635382470205
@@ -2283,6 +2224,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 61c23cb0a96b9f243b4a54dd181e22d4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &8548202879111627105
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8398216545277643250}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 85b69fff4ae22bc438ab072e486351d2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  genome: {fileID: 1438288584065220351}
+  reproducer: {fileID: 1609998855278463372}
 --- !u!1 &8456268486169713850
 GameObject:
   m_ObjectHideFlags: 0
@@ -2405,7 +2360,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7770376172294729736, guid: b11869fe3d5ecbf4b912f33fa4a312db, type: 3}
       propertyPath: m_RootOrder
-      value: 7
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 7770376172294729736, guid: b11869fe3d5ecbf4b912f33fa4a312db, type: 3}
       propertyPath: m_LocalPosition.x
