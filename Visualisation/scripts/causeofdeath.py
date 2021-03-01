@@ -63,7 +63,7 @@ def attach_text_labels(rects, axes):
                   ha='center', va='bottom')
 
 
-def create_cause_of_death_grouped_bar_chart(predator_stats: list[int], prey_stats: list[int]):
+def create_grouped_bar_chart(predator_stats: list[int], prey_stats: list[int]):
   """
   Creates and returns a grouped bar chart with the death causes. The list parameters are expected
   to feature an entry for each cause of death, where the value corresponds to how many specimens
@@ -120,6 +120,6 @@ def visualise_cause_of_death(data: LogData, directory: Path):
       previous_value = predator_stats[cause]
       predator_stats[cause] = previous_value + 1
 
-  figure = create_cause_of_death_grouped_bar_chart(predator_stats, prey_stats)
+  figure = create_grouped_bar_chart(predator_stats, prey_stats)
   figure.savefig(directory / Path("cause_of_death.png"))
   plot.close()
