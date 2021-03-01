@@ -34,13 +34,12 @@ def visualise_animal_populations_standard(data: LogData, directory: Path):
   plot.close()
 
 
-def visualise_animal_populations_stackplot(data: LogData, directory: Path):
+def create_stackplot_data(data: LogData) -> tuple[list[TimePoint], dict[str, list[Amount]]]:
   """
-  Produces a stackplot of how the predator and prey populations changed over the course
-  of the simulation.
-  :param data: the simulation data to read from.
-  :param directory:
-  :return: the directory to which the plot will be saved.
+  Creates the data required to produce a stackplot of the animal populations.
+
+  :param data: the wrapper around the data that will be read.
+  :return: the time points and labelled animal populations as a tuple.
   """
 
   prey_count = data.initial_prey_count()
@@ -75,6 +74,20 @@ def visualise_animal_populations_stackplot(data: LogData, directory: Path):
     "Prey": prey_history,
     "Predators": predator_history
   }
+
+  return times, population_by_tag
+
+
+def visualise_animal_populations_stackplot(data: LogData, directory: Path):
+  """
+  Produces a stackplot of how the predator and prey populations changed over the course
+  of the simulation.
+  :param data: the simulation data to read from.
+  :param directory:
+  :return: the directory to which the plot will be saved.
+  """
+
+  times, population_by_tag = create_stackplot_data(data)
 
   figure, axes = plot.subplots()
   axes.stackplot(times, population_by_tag.values(),
