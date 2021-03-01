@@ -12,7 +12,7 @@ namespace Ecosystem
     [SerializeField] private DeathHandler deathHandler;
     [SerializeField] private double maxHunger = 100;
 
-    private double Hunger { get; set; }
+    public double Hunger { get; private set; }
 
     public delegate void PreyConsumedEvent();
 
