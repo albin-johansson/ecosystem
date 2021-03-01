@@ -65,8 +65,8 @@ def attach_text_labels(rects, axes):
 
 def visualise_cause_of_death(data: LogData, directory: Path):
   """
-  Produces a plot of how the food availability changed over the course
-  of the simulation, along with the amount of food consumers.
+  Produces a grouped bar chart of the different causes of deaths,
+  arranged by the animal types.
 
   :param data: the simulation data to read from.
   :param directory: the directory to which the plot will be saved.
