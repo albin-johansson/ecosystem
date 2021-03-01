@@ -22,6 +22,9 @@
 Ecosystem/UserSettings
 Ecosystem/SimulationLogs
 
+# Ignore compiled Python files 
+*.pyc
+
 # Visual Studio cache directory
 .vs/
 
