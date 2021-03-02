@@ -6,7 +6,6 @@ namespace Ecosystem
     Food,
     Prey,
     Idle,
-    Nothing,
-    Mate
+    Nothing
   }
 }
