@@ -1,4 +1,5 @@
 using Ecosystem.Genes;
+using Ecosystem.Logging;
 using Ecosystem.UI;
 using UnityEngine;
 
@@ -12,6 +13,13 @@ namespace Ecosystem
     [SerializeField] private double maxHunger = 100;
 
     public double Hunger { get; private set; }
+
+    public delegate void FoodEatenEvent(GameObject food);
+
+    /// <summary>
+    /// This event is emitted every time a food resource is consumed.
+    /// </summary>
+    public static event FoodEatenEvent OnFoodEaten;
 
     private void Start()
     {
@@ -32,6 +40,7 @@ namespace Ecosystem
     {
       if (other.CompareTag("Food"))
       {
+        OnFoodEaten?.Invoke(other.gameObject);
         Destroy(other.gameObject);
         Hunger = 0;
       }
