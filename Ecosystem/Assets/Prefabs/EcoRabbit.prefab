@@ -868,8 +868,8 @@ GameObject:
   - component: {fileID: 2982864723375937118}
   - component: {fileID: 1768703437601898298}
   - component: {fileID: 1438288584065220351}
-  - component: {fileID: 3025539359171641749}
   - component: {fileID: 2656864231929346077}
+  - component: {fileID: 3025539359171641749}
   m_Layer: 8
   m_Name: EcoRabbit
   m_TagString: Prey
@@ -998,18 +998,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 722870adf75749399b54d4edf4c101cf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &3025539359171641749
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3436557251021641289}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 04dec80f06674629b7366fcb55ec29f2, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &2656864231929346077
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1023,6 +1011,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   navMeshAgent: {fileID: 2689415282919559664}
+--- !u!114 &3025539359171641749
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3436557251021641289}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 04dec80f06674629b7366fcb55ec29f2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  animationController: {fileID: 2656864231929346077}
 --- !u!1 &3579996788643659857
 GameObject:
   m_ObjectHideFlags: 0

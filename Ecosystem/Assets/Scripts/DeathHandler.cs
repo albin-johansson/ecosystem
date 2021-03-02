@@ -8,6 +8,8 @@ namespace Ecosystem
   /// </summary>
   public sealed class DeathHandler : MonoBehaviour
   {
+    [SerializeField] private EcoAnimationController animationController;
+
     public delegate void DeathEvent(CauseOfDeath cause, GameObject gameObject);
 
     /// <summary>
@@ -20,7 +22,7 @@ namespace Ecosystem
       OnDeath?.Invoke(cause, gameObject.gameObject);
       Destroy(gameObject.gameObject, 3); // Make sure that there's enough time to display the death animation
       gameObject.gameObject.SetActive(false); // Without this, the animal will die more than once
-      gameObject.gameObject.GetComponent<EcoAnimationController>().EnterDeathAnimation();
+      animationController.EnterDeathAnimation();
     }
   }
 }
