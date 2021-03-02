@@ -975,8 +975,8 @@ LODGroup:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3436557251021641289}
   serializedVersion: 2
-  m_LocalReferencePoint: {x: 0.000000044703484, y: 0.19119427, z: 0.0064973235}
-  m_Size: 0.49998248
+  m_LocalReferencePoint: {x: 0, y: 0, z: 0}
+  m_Size: 1
   m_FadeMode: 0
   m_AnimateCrossFading: 0
   m_LastLODIsBillboard: 0
@@ -1010,7 +1010,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 04dec80f06674629b7366fcb55ec29f2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  animationController: {fileID: 2656864231929346077}
 --- !u!114 &2656864231929346077
 MonoBehaviour:
   m_ObjectHideFlags: 0
