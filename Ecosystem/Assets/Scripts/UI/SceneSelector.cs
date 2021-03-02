@@ -3,11 +3,11 @@ using UnityEngine.SceneManagement;
 
 namespace Ecosystem.UI
 {
-  public class SceneSelector : MonoBehaviour
+  public sealed class SceneSelector : MonoBehaviour
   {
     public void SelectScene()
     {
-      switch (this.gameObject.name)
+      switch (gameObject.name)
       {
         case "ForestScene":
           SceneManager.LoadScene("Scenes/ForestScene/ForestScene");
