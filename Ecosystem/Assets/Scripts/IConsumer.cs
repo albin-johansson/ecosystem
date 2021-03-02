@@ -5,8 +5,8 @@ namespace Ecosystem
   /// </summary>
   public interface IConsumer
   {
-    public double Hunger { get; }
+    double Hunger { get; }
 
-    public bool IsHungry();
+    bool IsHungry();
   }
 }
