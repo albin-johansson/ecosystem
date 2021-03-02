@@ -648,7 +648,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   sun: {fileID: 107239033}
   particleSystem: {fileID: 1879225896}
-  buttonListColorChange: {fileID: 1361839758}
+  buttonListColor: {fileID: 0}
 --- !u!4 &486680476
 Transform:
   m_ObjectHideFlags: 0
@@ -815,7 +815,7 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1990503006}
   m_HandleRect: {fileID: 1990503005}
   m_Direction: 2
-  m_Value: 1.0000004
+  m_Value: 1
   m_Size: 0.71428573
   m_NumberOfSteps: 0
   m_OnValueChanged:
@@ -7136,7 +7136,7 @@ Terrain:
   m_DrawInstanced: 0
   m_DrawTreesAndFoliage: 1
   m_ReflectionProbeUsage: 1
-  m_MaterialTemplate: {fileID: 2100000, guid: 2a9bcab9060d28d468fc3c4d93775e7d, type: 2}
+  m_MaterialTemplate: {fileID: 2100000, guid: 15961feb1f124a84ba8baa78bd25546c, type: 2}
   m_BakeLightProbesForTrees: 1
   m_PreserveTreePrototypeLayers: 0
   m_DeringLightProbesForTrees: 1
