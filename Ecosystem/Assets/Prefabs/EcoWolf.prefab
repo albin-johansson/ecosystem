@@ -864,7 +864,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   preyConsumer: {fileID: 4792977970529093403}
   waterConsumer: {fileID: 4872432210245021957}
-  mateFinder: {fileID: 0}
+  mateFinder: {fileID: 8045031113907453110}
   memoryController: {fileID: 466637266297604821}
   targetTracker: {fileID: 5664458934757789768}
 --- !u!114 &5664458934757789768
@@ -906,7 +906,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   genome: {fileID: 231915566137505156}
-  reproducer: {fileID: 0}
+  reproducer: {fileID: 6679858075755707283}
 --- !u!1 &816713134717245334
 GameObject:
   m_ObjectHideFlags: 0
@@ -2669,6 +2669,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   genome: {fileID: 231915566137505156}
+  foodConsumer: {fileID: 0}
   prefab: {fileID: 5311647281874787049}
 --- !u!1 &2471846112465839574
 GameObject:
