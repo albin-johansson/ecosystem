@@ -20,6 +20,10 @@
 [Aa]ssets/Plugins/Editor/JetBrains*
 
 Ecosystem/UserSettings
+Ecosystem/SimulationLogs
+
+# Ignore compiled Python files 
+*.pyc
 
 # Visual Studio cache directory
 .vs/
@@ -62,4 +66,7 @@ sysinfo.txt
 
 # Crashlytics generated file
 crashlytics-build.properties
+
+# package.json
+*.json
 

@@ -1,4 +1,5 @@
 using Ecosystem.Genes;
+using Ecosystem.Logging;
 using Ecosystem.UI;
 using UnityEngine;
 
@@ -11,7 +12,7 @@ namespace Ecosystem
     [SerializeField] private DeathHandler deathHandler;
     [SerializeField] private float maxThirst = 100;
 
-    private float Thirst { get; set; }
+    public float Thirst { get; private set; }
 
     private void Start()
     {
@@ -31,7 +32,7 @@ namespace Ecosystem
 
     private void OnTriggerEnter(Collider other)
     {
-      if (other.CompareTag("Water"))
+      if (other.gameObject.CompareTag("Water"))
       {
         Thirst = 0;
       }

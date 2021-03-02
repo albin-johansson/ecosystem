@@ -7,18 +7,18 @@ namespace Ecosystem
   {
     private const int Capacity = 5;
 
-    private List<(Desire, GameObject)> _memory;
+    private List<(Desire, Vector3)> _memory;
     private int _nextMemoryLocation;
 
     private void Start()
     {
-      _memory = new List<(Desire, GameObject)>(Capacity);
+      _memory = new List<(Desire, Vector3)>(Capacity);
     }
 
-    // Saves a game object and its desire to memory
+    //Saves a game objects position and its desire to memory
     public void SaveToMemory(GameObject other)
     {
-      _memory.Insert(_nextMemoryLocation, (GetDesire(other), other.gameObject));
+      _memory.Insert(_nextMemoryLocation, (GetDesire(other), other.gameObject.transform.position));
       ++_nextMemoryLocation;
       if (_nextMemoryLocation >= Capacity)
       {
@@ -26,42 +26,45 @@ namespace Ecosystem
       }
     }
 
-    /// <summary>
-    /// Looks for a game object in the memory with the specified desire.
-    /// </summary>
-    /// <param name="desire">The desire to look for the in the memory</param>
-    /// <returns>The first game object associated with the specified desire; null if no such object exists.</returns>
-    public GameObject RecallFromMemory(Desire desire)
-    {
-      foreach (var (memoryDesire, memoryGameObject) in _memory)
-      {
-        if (desire == memoryDesire && memoryGameObject)
-        {
-          return memoryGameObject;
-        }
-      }
-
-      return null;
-    }
-
     private static Desire GetDesire(GameObject other)
     {
-      if (other.CompareTag("Food"))
+      if (other.gameObject.layer == LayerUtil.FoodLayer)
       {
         return Desire.Food;
       }
-      else if (other.CompareTag("Prey"))
+      else if (other.gameObject.layer == LayerUtil.PreyLayer)
       {
         return Desire.Prey;
       }
-      else if (other.CompareTag("Water"))
+      else if (other.gameObject.layer == LayerUtil.WaterLayer)
       {
         return Desire.Water;
       }
-      else
+
+      return Desire.Idle;
+    }
+
+    //Get a position of an object with the same Type as the Desire asked for in currentDesire
+    public (bool, Vector3) GetFromMemory(Desire currentDesire)
+    {
+      int i = 0;
+      foreach (var (desire, position) in _memory)
       {
-        return Desire.Idle;
+        if (desire == currentDesire)
+        {
+          if (currentDesire != Desire.Water)
+          {
+            //Removes food resource from memory to prevent animal from wandering back to food that has already been consumed. 
+            _memory.Insert(i, (Desire.Nothing, new Vector3()));
+          }
+
+          return (true, position);
+        }
+
+        i++;
       }
+
+      return (false, Vector3.zero);
     }
   }
 }

@@ -1,16 +1,19 @@
 ﻿using UnityEngine;
+using UnityEngine.AI;
 
 namespace Ecosystem
 {
   public class EcoAnimationController : MonoBehaviour
   {
-    [SerializeField] private AnimationStatesController animationStatesController;
+    [SerializeField] private NavMeshAgent navMeshAgent;
     private Animator _animator;
     private int _isWalkingHash;
     private int _isRunningHash;
     private int _isDeadHash;
     private int _isAttackingHash;
-    private AnimationState _animationState;
+    private int _animationSpeedMultiplier;
+    private float _navMeshAgentSpeed;
+    private float _navMeshAgentVelocity;
 
     private void Start()
     {
@@ -19,51 +22,57 @@ namespace Ecosystem
       _isRunningHash = Animator.StringToHash("isRunning");
       _isDeadHash = Animator.StringToHash("isDead");
       _isAttackingHash = Animator.StringToHash("isAttacking");
-      _animationState = AnimationState.Idle;
+      _animationSpeedMultiplier = Animator.StringToHash("animationSpeedMultiplier");
+      _navMeshAgentSpeed = navMeshAgent.speed;
     }
 
     private void Update()
     {
-      var incomingState = animationStatesController.AnimAnimationState;
-      if (incomingState == _animationState)
+      if (navMeshAgent.speed > 0)
       {
-        return;
+        _navMeshAgentSpeed = navMeshAgent.speed;
+        _navMeshAgentVelocity = navMeshAgent.velocity.magnitude;
       }
 
-      _animationState = incomingState;
-      ResetAnimatorParameters();
-      SetAnimatorParameter(_animationState);
-    }
-
-    private void SetAnimatorParameter(AnimationState newAnimationState)
-    {
-      switch (newAnimationState)
-      {
-        case AnimationState.Walking:
-          _animator.SetBool(_isWalkingHash, true);
-          break;
-        case AnimationState.Running:
-          _animator.SetBool(_isRunningHash, true);
-          break;
-        case AnimationState.Dead:
-          _animator.SetBool(_isDeadHash, true);
-          break;
-        case AnimationState.Attacking:
-          _animator.SetBool(_isAttackingHash, true);
-          break;
-        case AnimationState.Idle:
-          break;
-        default:
-          break;
-      }
+      _animator.SetFloat(_animationSpeedMultiplier, _navMeshAgentVelocity);
     }
 
     private void ResetAnimatorParameters()
     {
       foreach (var parameter in _animator.parameters)
       {
-        _animator.ResetTrigger(parameter.name);
+        if (parameter.type == AnimatorControllerParameterType.Bool)
+        {
+          _animator.ResetTrigger(parameter.name);
+        }
       }
+    }
+
+    public void EnterAttackAnimation()
+    {
+      ResetAnimatorParameters();
+      navMeshAgent.speed = 0;
+      _animator.SetTrigger(_isAttackingHash);
+      IdleAnimation();
+    }
+
+    public void MoveAnimation()
+    {
+      ResetAnimatorParameters();
+      navMeshAgent.speed = _navMeshAgentSpeed;
+      _animator.SetBool(_isWalkingHash, true);
+    }
+
+    public void EnterDeathAnimation()
+    {
+      ResetAnimatorParameters();
+      navMeshAgent.speed = 0;
+      _animator.SetBool(_isDeadHash, true);
+    }
+
+    public void IdleAnimation()
+    {
+      ResetAnimatorParameters();
     }
   }
 }
