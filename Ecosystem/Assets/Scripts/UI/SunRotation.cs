@@ -6,7 +6,7 @@ namespace Ecosystem.UI
   {
     [SerializeField] private Light sun;
     [SerializeField] private new ParticleSystem particleSystem;
-    [SerializeField] private ButtonListColorChange buttonListColorChange;
+    [SerializeField] private ButtonListColor buttonListColor;
 
     private bool _isNight;
     private float _rotation;
@@ -18,6 +18,11 @@ namespace Ecosystem.UI
       particleSystem.Stop();
     }
 
+    /// <summary>
+    /// On each tick the sun is moved across the sky and a variable keeps track of
+    /// it´s location to turn on stars when the sun has passed the horizon.
+    /// Possible improvement is to make the sun traverse the sky and be visible all the way to the horizon. 
+    /// </summary>
     void Update()
     {
       sun.transform.Rotate(CycleSpeed, 0, 0, Space.Self);
@@ -41,7 +46,10 @@ namespace Ecosystem.UI
         _rotation = 0;
       }
     }
-
+    
+    /// <summary>
+    /// Dims the brightness of the stars when turning to night and day to smooth the transition.  
+    /// </summary>
     private void AdjustStarBrightness()
     {
       if (_isNight && particleSystem.lights.light.intensity < 0.4f)
@@ -56,14 +64,14 @@ namespace Ecosystem.UI
 
     private void TransformToNight()
     {
-      buttonListColorChange.ChangeButtonListColor(Color.white);
+      buttonListColor.ChangeButtonListColor(Color.white);
       particleSystem.Play();
       _isNight = true;
     }
 
     private void TransformToDay()
     {
-      buttonListColorChange.ChangeButtonListColor(Color.black);
+      buttonListColor.ChangeButtonListColor(Color.black);
       particleSystem.Clear();
       particleSystem.Stop();
       _isNight = false;
