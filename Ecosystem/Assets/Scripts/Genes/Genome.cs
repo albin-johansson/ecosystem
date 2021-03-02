@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.AI;
 
 namespace Ecosystem.Genes
 {
@@ -10,8 +11,8 @@ namespace Ecosystem.Genes
     private static readonly Gene ThirstRate = new Gene(1, 0.5f, 10);
     private static readonly Gene ThirstThreshold = new Gene(5, 0, 10);
     private static readonly Gene Vision = new Gene(25, 1, 50);
-    private static readonly Gene SpeedFactor = new Gene(1.5f, 1, 2);
-    private static readonly Gene SizeFactor = new Gene(0.5f, 0.1f, 1);
+    private static readonly Gene SpeedFactor = new Gene(2f, 1, 2);
+    private static readonly Gene SizeFactor = new Gene(2f, 0.1f, 2);
     private static readonly Gene DesirabilityFactor = new Gene(1, 1, 10);
 
     protected double MutateChance;
@@ -50,6 +51,7 @@ namespace Ecosystem.Genes
 
       Genes = newGenes;
       MutateChance = first.MutateChance;
+      GenesToAttributes();
     }
 
     protected virtual void Initialize()
@@ -68,8 +70,27 @@ namespace Ecosystem.Genes
       Genes[GeneType.SpeedFactor] = SpeedFactor;
       Genes[GeneType.SizeFactor] = SizeFactor;
       Genes[GeneType.DesirabilityScore] = DesirabilityFactor;
+      GenesToAttributes();
     }
 
+    protected virtual void GenesToAttributes()
+    {
+      if (gameObject.TryGetComponent(out NavMeshAgent navMeshAgent))
+      {
+        navMeshAgent.speed *= SpeedFactor.Value;
+        Debug.Log("Speed: " + navMeshAgent.speed);
+      }
+
+      if (gameObject.TryGetComponent(out Animator animator))
+      {
+        animator.enabled = false;
+        gameObject.transform.localScale.Scale(SizeFactor.Value * new Vector3(1, 1, 1));
+        Debug.Log("Size: " + gameObject.transform.localScale);
+        Debug.Log("Scale" + SizeFactor.Value * new Vector3(1, 1, 1));
+        animator.enabled = true;
+      }
+    }
+    
     /// <summary>
     /// Speed depends on the metabolism (HungerRate), the speed (SpeedFactor),
     /// and the size (SizeFactor)

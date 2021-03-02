@@ -27,6 +27,7 @@
       Genes[GeneType.SpeedFactor] = SpeedFactor;
       Genes[GeneType.SizeFactor] = SizeFactor;
       Genes[GeneType.DesirabilityScore] = DesirabilityFactor;
+      GenesToAttributes();
     }
   }
 }
