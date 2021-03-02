@@ -34,6 +34,7 @@ namespace Ecosystem
     //Sets priority, will set priority of what is currently most needed.
     private void UpdatePriority()
     {
+      // TODO in the future, we might want to use Desire.Mate here
       if (foodConsumer.Hunger > waterConsumer.Thirst && foodConsumer.IsHungry())
       {
         _priority = Desire.Food;
