@@ -11,7 +11,6 @@ namespace Ecosystem
     [SerializeField] private EcoAnimationController animationController;
 
     public delegate void DeathEvent(CauseOfDeath cause, GameObject gameObject);
-    [SerializeField] private EcoAnimationController animationController;
 
     /// <summary>
     /// This event is emitted every time an entity dies.
