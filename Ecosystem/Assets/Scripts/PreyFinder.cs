@@ -6,6 +6,7 @@ namespace Ecosystem
   {
     [SerializeField] private PreyConsumer preyConsumer;
     [SerializeField] private WaterConsumer waterConsumer;
+    [SerializeField] private MateFinder mateFinder;
     [SerializeField] private MemoryController memoryController;
     [SerializeField] private TargetTracker targetTracker;
 
@@ -58,7 +59,8 @@ namespace Ecosystem
       if (!targetTracker.HasTarget)
       {
         if (_priority == Desire.Prey && other.gameObject.layer == LayerUtil.PreyLayer ||
-            _priority == Desire.Water && other.gameObject.layer == LayerUtil.WaterLayer)
+            _priority == Desire.Water && other.gameObject.layer == LayerUtil.WaterLayer ||
+            _priority == Desire.Idle && mateFinder.CompatibleAsParents(other))
         {
           targetTracker.SetTarget(other.gameObject.transform.position, _priority);
         }
