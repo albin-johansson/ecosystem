@@ -18,4 +18,5 @@ This codebase is part of a Bachelor thesis project in computer science and engin
 ## Requirements
 
 * Unity 2020.2.1f1. Note, other versions of Unity might work, but this is the recommended version.
+* We use Python 3.9.0 for visualisation of simulation data, see the `Visualisation` directory for more information.
 * An IDE of your choice, such as JetBrains Rider or Visual Studio.

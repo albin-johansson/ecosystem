@@ -7,7 +7,7 @@ namespace Ecosystem
   public sealed class TargetTracker : MonoBehaviour
   {
     [SerializeField] private NavMeshAgent navAgent;
-    [SerializeField] private AnimationStatesController animationStatesController;
+    [SerializeField] private EcoAnimationController animationController;
     private GameObject _target;
     private bool _targetInSight;
     private float _timeRemaining;
@@ -46,6 +46,7 @@ namespace Ecosystem
     //Sets a target to hone in on and start a timer
     public void SetTarget(Vector3 target, AnimalState state)
     {
+      animationController.MoveAnimation();
       navAgent.SetDestination(target);
       _targetType = state;
       _timeRemaining = 10;
