@@ -22,7 +22,6 @@ namespace Ecosystem
     {
       _SexualMaturityTime = genome.GetSexualMaturityTime();
       _gestationPeriod = genome.GetGestationPeriod();
-      Debug.Log("Gestation period:" + genome.GetGestationPeriod());
     }
 
     private void Update()
