@@ -10,11 +10,11 @@ namespace Ecosystem
     [SerializeField] private MemoryController memoryController;
     [SerializeField] private TargetTracker targetTracker;
 
-    private AnimalDelegate _delegate;
+    private AnimalBehaviourDelegate _delegate;
 
     private void Start()
     {
-      _delegate = new AnimalDelegate
+      _delegate = new AnimalBehaviourDelegate
       {
               MemoryController = memoryController,
               TargetTracker = targetTracker,

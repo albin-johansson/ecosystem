@@ -4,7 +4,7 @@ namespace Ecosystem
   ///   A delegate class used by animal behaviour scripts, which implements the common behaviour.
   ///   Note, this class is intentionally not a <c>MonoBehaviour</c>.
   /// </summary>
-  public sealed class AnimalDelegate
+  public sealed class AnimalBehaviourDelegate
   {
     public MemoryController MemoryController { get; set; }
     public TargetTracker TargetTracker { get; set; }
