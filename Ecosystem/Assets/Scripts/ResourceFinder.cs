@@ -67,7 +67,7 @@ namespace Ecosystem
       {
         if (_priority == Desire.Food && other.gameObject.layer == LayerUtil.FoodLayer ||
             _priority == Desire.Water && other.gameObject.layer == LayerUtil.WaterLayer ||
-            _priority == Desire.Idle && mateFinder.CompatibleAsParents(other))
+            _priority == Desire.Idle && mateFinder.CompatibleAsParents(other.gameObject))
         {
           targetTracker.SetTarget(other.gameObject.transform.position, _priority);
         }
