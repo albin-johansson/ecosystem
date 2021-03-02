@@ -9,6 +9,8 @@
     Vision,
     SpeedFactor,
     SizeFactor,
-    DesirabilityScore
+    DesirabilityScore,
+    GestationPeriod,
+    SexualMaturityTime
   }
 }

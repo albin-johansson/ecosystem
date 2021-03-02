@@ -14,7 +14,10 @@ namespace Ecosystem.Genes
     private static readonly Gene SpeedFactor = new Gene(2f, 1, 2);
     private static readonly Gene SizeFactor = new Gene(2f, 0.1f, 2);
     private static readonly Gene DesirabilityFactor = new Gene(1, 1, 10);
+    private static readonly Gene GestationPeriod = new Gene(10, 10, 120);
+    private static readonly Gene SexualMaturityTime = new Gene(10, 10, 120);
 
+    public bool IsMale { get; protected set; }
     protected double MutateChance;
     protected Dictionary<GeneType, Gene> Genes = new Dictionary<GeneType, Gene>();
 
@@ -70,7 +73,18 @@ namespace Ecosystem.Genes
       Genes[GeneType.SpeedFactor] = SpeedFactor;
       Genes[GeneType.SizeFactor] = SizeFactor;
       Genes[GeneType.DesirabilityScore] = DesirabilityFactor;
+      Genes[GeneType.GestationPeriod] = GestationPeriod;
+      Genes[GeneType.SexualMaturityTime] = SexualMaturityTime;
+      if (Random.value > 0.5)
+      {
+        IsMale = true;
+      }
       GenesToAttributes();
+    }
+
+    public static bool CompatibleAsParents(Genome first, Genome second)
+    {
+      return first.GetType() == second.GetType() && first.IsMale != second.IsMale;
     }
 
     protected virtual void GenesToAttributes()
@@ -143,6 +157,16 @@ namespace Ecosystem.Genes
     public double GetDesirability()
     {
       return Genes[GeneType.DesirabilityScore].Value;
+    }
+
+    public double GetGestationPeriod()
+    {
+      return Genes[GeneType.GestationPeriod].Value;
+    }
+
+    public double GetSexualMaturityTime()
+    {
+      return Genes[GeneType.SexualMaturityTime].Value;
     }
   }
 }

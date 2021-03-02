@@ -5,7 +5,7 @@ using UnityEngine;
 
 namespace Ecosystem
 {
-  public sealed class PreyConsumer : MonoBehaviour
+  public sealed class PreyConsumer : MonoBehaviour, IConsumer
   {
     [SerializeField] private Genome genome;
     [SerializeField] private ResourceBar resourceBar;
@@ -48,7 +48,7 @@ namespace Ecosystem
       }
     }
 
-    internal bool IsHungry()
+    public bool IsHungry()
     {
       return Hunger > genome.GetHungerThreshold();
     }
