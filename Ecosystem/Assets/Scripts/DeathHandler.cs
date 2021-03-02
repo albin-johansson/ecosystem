@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using Ecosystem.Logging;
+using UnityEngine;
 
 namespace Ecosystem
 {
@@ -7,15 +8,21 @@ namespace Ecosystem
   /// </summary>
   public sealed class DeathHandler : MonoBehaviour
   {
-    private void DestroyObjectDelayed()
-    {
-      //TODO: make the time depend on the death animation
-      Destroy(gameObject.gameObject, 5);
-    }
+    [SerializeField] private EcoAnimationController animationController;
+
+    public delegate void DeathEvent(CauseOfDeath cause, GameObject gameObject);
+
+    /// <summary>
+    /// This event is emitted every time an entity dies.
+    /// </summary>
+    public static event DeathEvent OnDeath;
 
     public void Die(CauseOfDeath cause)
     {
-      DestroyObjectDelayed();
+      OnDeath?.Invoke(cause, gameObject.gameObject);
+      Destroy(gameObject.gameObject, 3); // Make sure that there's enough time to display the death animation
+      gameObject.gameObject.SetActive(false); // Without this, the animal will die more than once
+      animationController.EnterDeathAnimation();
     }
   }
 }
