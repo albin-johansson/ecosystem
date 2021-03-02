@@ -815,7 +815,6 @@ GameObject:
   - component: {fileID: 4711121908547383436}
   - component: {fileID: 5664458934757789768}
   - component: {fileID: 466637266297604821}
-  - component: {fileID: 8045031113907453110}
   m_Layer: 7
   m_Name: ResourceFinder
   m_TagString: Untagged
@@ -864,7 +863,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   preyConsumer: {fileID: 4792977970529093403}
   waterConsumer: {fileID: 4872432210245021957}
-  mateFinder: {fileID: 8045031113907453110}
+  mateFinder: {fileID: 1770141781881399690}
   memoryController: {fileID: 466637266297604821}
   targetTracker: {fileID: 5664458934757789768}
 --- !u!114 &5664458934757789768
@@ -893,20 +892,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 61c23cb0a96b9f243b4a54dd181e22d4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &8045031113907453110
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 812713823044452910}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 85b69fff4ae22bc438ab072e486351d2, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  genome: {fileID: 231915566137505156}
-  reproducer: {fileID: 6679858075755707283}
 --- !u!1 &816713134717245334
 GameObject:
   m_ObjectHideFlags: 0
@@ -2669,7 +2654,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   genome: {fileID: 231915566137505156}
-  foodConsumer: {fileID: 0}
   prefab: {fileID: 5311647281874787049}
 --- !u!1 &2471846112465839574
 GameObject:
@@ -5704,6 +5688,7 @@ GameObject:
   - component: {fileID: 127626441900989553}
   - component: {fileID: 231915566137505156}
   - component: {fileID: 8139687230505421166}
+  - component: {fileID: 1770141781881399690}
   m_Layer: 7
   m_Name: EcoWolf
   m_TagString: Predator
@@ -6009,6 +5994,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 04dec80f06674629b7366fcb55ec29f2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &1770141781881399690
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5311647281874787049}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 85b69fff4ae22bc438ab072e486351d2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  genome: {fileID: 231915566137505156}
+  reproducer: {fileID: 6679858075755707283}
 --- !u!1 &5414967741974214314
 GameObject:
   m_ObjectHideFlags: 0

@@ -53,7 +53,7 @@ namespace Ecosystem.Genes
 
       Genes = newGenes;
       MutateChance = first.MutateChance;
-    } 
+    }
 
     protected virtual void Initialize()
     {
@@ -73,7 +73,7 @@ namespace Ecosystem.Genes
       Genes[GeneType.DesirabilityScore] = DesirabilityFactor;
       Genes[GeneType.GestationPeriod] = GestationPeriod;
       Genes[GeneType.SexualMaturityTime] = SexualMaturityTime;
-      if(Random.value > 0.5)
+      if (Random.value > 0.5)
       {
         IsMale = true;
       }
@@ -136,7 +136,7 @@ namespace Ecosystem.Genes
     public double GetDesirability()
     {
       return Genes[GeneType.DesirabilityScore].Value;
-    }   
+    }
 
     public double GetGestationPeriod()
     {
