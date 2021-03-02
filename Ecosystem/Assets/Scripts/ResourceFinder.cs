@@ -18,28 +18,27 @@ namespace Ecosystem
       CheckMemory();
     }
 
-    //Checks MemoryController for objects that matches the priority Desire
+    //Checks the memory for objects that matches the prioritised desire
     private void CheckMemory()
     {
-      if (!targetTracker.HasTarget)
+      if (!targetTracker.HasTarget && _priority != Desire.Idle)
       {
-        var target = memoryController.RecallFromMemory(_priority);
-        if (target)
+        var (match, vector3) = memoryController.GetFromMemory(_priority);
+        if (match)
         {
-          targetTracker.SetTarget(target);
+          targetTracker.SetTarget(vector3, _priority);
         }
       }
     }
 
-    //Sets priority, OBS. needs to be worked on to get a better flow
+    //Sets priority, will set priority of what is currently most needed.
     private void UpdatePriority()
     {
-      // Hunger has implicit priority
-      if (foodConsumer.IsHungry())
+      if (foodConsumer.Hunger > waterConsumer.Thirst && foodConsumer.IsHungry())
       {
         _priority = Desire.Food;
       }
-      else if (waterConsumer.IsThirsty())
+      else if (waterConsumer.Thirst > foodConsumer.Hunger && waterConsumer.IsThirsty())
       {
         _priority = Desire.Water;
       }
@@ -50,13 +49,13 @@ namespace Ecosystem
     }
 
     /// <summary>
-    /// When colliding with an object that object is saved to MemoryController and then set as a target in TargetTracker if the priority matches.
-    /// Might be an improvement to only save the object and not set it as a target.
-    /// If a predator is found the targetTracker resolves the fleeing mechanics.
+    /// When colliding with an object, that object is saved to the animals memory, and subsequently set as a target if the
+    /// priority matches.
+    /// If a predator is within field of view the animal will flee.
     /// </summary>
     private void OnTriggerEnter(Collider other)
     {
-      if (other.CompareTag("Predator"))
+      if (LayerUtil.IsPredatorLayer(other.gameObject.layer))
       {
         targetTracker.FleeFromPredator(other.gameObject);
         return;
@@ -66,11 +65,11 @@ namespace Ecosystem
 
       if (!targetTracker.HasTarget)
       {
-        if (_priority == Desire.Food && other.CompareTag("Food") ||
-            _priority == Desire.Water && other.CompareTag("Water") ||
+        if (_priority == Desire.Food && other.gameObject.layer == LayerUtil.FoodLayer ||
+            _priority == Desire.Water && other.gameObject.layer == LayerUtil.WaterLayer ||
             _priority == Desire.Idle && mateFinder.CompatibleAsParents(other))
         {
-          targetTracker.SetTarget(other.gameObject);
+          targetTracker.SetTarget(other.gameObject.transform.position, _priority);
         }
       }
     }

@@ -18,28 +18,27 @@ namespace Ecosystem
       CheckMemory();
     }
 
-    // Checks the memory for objects that matches the prioritised desire
+    //Checks the memory for objects that matches the prioritised desire
     private void CheckMemory()
     {
-      if (!targetTracker.HasTarget)
+      if (!targetTracker.HasTarget && _priority != Desire.Idle)
       {
-        var target = memoryController.RecallFromMemory(_priority);
-        if (target)
+        var (match, vector3) = memoryController.GetFromMemory(_priority);
+        if (match)
         {
-          targetTracker.SetTarget(target);
+          targetTracker.SetTarget(vector3, _priority);
         }
       }
     }
 
-    // TODO needs to be worked on to get a better flow
+    //Sets priority, will set priority of what is currently most needed.
     private void UpdatePriority()
     {
-      // Hunger has implicit priority
-      if (preyConsumer.IsHungry())
+      if (preyConsumer.Hunger > waterConsumer.Thirst && preyConsumer.IsHungry())
       {
         _priority = Desire.Prey;
       }
-      else if (waterConsumer.IsThirsty())
+      else if (waterConsumer.Thirst > preyConsumer.Hunger && waterConsumer.IsThirsty())
       {
         _priority = Desire.Water;
       }
@@ -51,19 +50,19 @@ namespace Ecosystem
 
     /// <summary>
     /// When colliding with an object, that object is saved to the animals memory, and subsequently set as a target if the
-    /// priority matches.
+    /// priority matches. 
     /// </summary>
-    /// TODO Might be an improvement to only save the object and not set it as a target.
     private void OnTriggerEnter(Collider other)
     {
       memoryController.SaveToMemory(other.gameObject);
+
       if (!targetTracker.HasTarget)
       {
-        if (_priority == Desire.Prey && other.CompareTag("Prey") ||
-            _priority == Desire.Water && other.CompareTag("Water") ||
+        if (_priority == Desire.Prey && other.gameObject.layer == LayerUtil.PreyLayer ||
+            _priority == Desire.Water && other.gameObject.layer == LayerUtil.WaterLayer ||
             _priority == Desire.Idle && mateFinder.CompatibleAsParents(other))
         {
-          targetTracker.SetTarget(other.gameObject);
+          targetTracker.SetTarget(other.gameObject.transform.position, _priority);
         }
       }
     }
