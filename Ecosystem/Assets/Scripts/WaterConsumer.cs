@@ -1,4 +1,5 @@
 using Ecosystem.Genes;
+using Ecosystem.Logging;
 using Ecosystem.UI;
 using UnityEngine;
 
