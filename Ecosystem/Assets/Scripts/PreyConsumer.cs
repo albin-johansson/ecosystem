@@ -11,6 +11,7 @@ namespace Ecosystem
     [SerializeField] private ResourceBar resourceBar;
     [SerializeField] private DeathHandler deathHandler;
     [SerializeField] private double maxHunger = 100;
+    [SerializeField] private EcoAnimationController animationController;
 
     public double Hunger { get; private set; }
 
@@ -40,6 +41,7 @@ namespace Ecosystem
     {
       if (other.CompareTag("Prey"))
       {
+        animationController.EnterAttackAnimation();
         OnPreyConsumed?.Invoke();
         other.gameObject.GetComponent<DeathHandler>().Die(CauseOfDeath.Eaten);
         Hunger = 0;
