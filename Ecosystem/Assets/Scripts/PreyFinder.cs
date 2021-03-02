@@ -9,7 +9,7 @@ namespace Ecosystem
     [SerializeField] private MemoryController memoryController;
     [SerializeField] private TargetTracker targetTracker;
 
-    private Desire _priority = Desire.Idle;
+    private AnimalState _state = AnimalState.Idle;
 
     private void Update()
     {
@@ -20,12 +20,12 @@ namespace Ecosystem
     //Checks the memory for objects that matches the prioritised desire
     private void CheckMemory()
     {
-      if (!targetTracker.HasTarget && _priority != Desire.Idle)
+      if (!targetTracker.HasTarget && _state != AnimalState.Idle)
       {
-        var (match, vector3) = memoryController.GetFromMemory(_priority);
+        var (match, vector3) = memoryController.GetFromMemory(_state);
         if (match)
         {
-          targetTracker.SetTarget(vector3, _priority);
+          targetTracker.SetTarget(vector3, _state);
         }
       }
     }
@@ -33,9 +33,9 @@ namespace Ecosystem
     //Sets priority, will set priority of what is currently most needed.
     private void UpdatePriority()
     {
-      if(waterConsumer.IsDrinking)
+      if (waterConsumer.IsDrinking)
       {
-        _priority = Desire.Drink;
+        _state = AnimalState.Drinking;
         targetTracker.StopTracking();
         return;
       }
@@ -46,15 +46,15 @@ namespace Ecosystem
 
       if (preyConsumer.Hunger > waterConsumer.Thirst && preyConsumer.IsHungry())
       {
-        _priority = Desire.Prey;
+        _state = AnimalState.LookingForPrey;
       }
       else if (waterConsumer.Thirst > preyConsumer.Hunger && waterConsumer.IsThirsty())
       {
-        _priority = Desire.Water;
+        _state = AnimalState.LookingForWater;
       }
       else
       {
-        _priority = Desire.Idle;
+        _state = AnimalState.Idle;
       }
     }
 
@@ -68,10 +68,10 @@ namespace Ecosystem
 
       if (!targetTracker.HasTarget)
       {
-        if (_priority == Desire.Prey && other.gameObject.layer == LayerUtil.PreyLayer ||
-            _priority == Desire.Water && other.gameObject.layer == LayerUtil.WaterLayer)
+        if (_state == AnimalState.LookingForPrey && other.gameObject.layer == LayerUtil.PreyLayer ||
+            _state == AnimalState.LookingForWater && other.gameObject.layer == LayerUtil.WaterLayer)
         {
-          targetTracker.SetTarget(other.gameObject.transform.position, _priority);
+          targetTracker.SetTarget(other.gameObject.transform.position, _state);
         }
       }
     }

@@ -10,14 +10,13 @@ namespace Ecosystem
     [SerializeField] private ResourceBar resourceBar;
     [SerializeField] private DeathHandler deathHandler;
     [SerializeField] private float maxThirst = 100;
-    private bool _isDrinking;
-    public bool IsDrinking => _isDrinking;
+   
+    public bool IsDrinking { get; private set; }
 
     public float Thirst { get; private set; }
 
     private void Start()
     {
-      _isDrinking = false;
       resourceBar.SetMaxValue(maxThirst);
     }
 
@@ -25,12 +24,13 @@ namespace Ecosystem
     {
       Thirst += genome.GetThirstRate() * Time.deltaTime;
       resourceBar.SetValue(Thirst);
-      if(IsDrinking){
-        Thirst -= 10f * Time.deltaTime; //Add drinkrate
-        if(Thirst <= 0)
+      if (IsDrinking)
+      {
+        Thirst -= 10f * Time.deltaTime; //TODO Add drinkrate
+        if (Thirst <= 0)
         {
           Thirst = 0;
-          _isDrinking = false;
+          IsDrinking = false;
         }
       }
 
@@ -44,12 +44,13 @@ namespace Ecosystem
     {
       if (other.gameObject.CompareTag("Water") && IsThirsty())
       {
-        _isDrinking = true;
+        IsDrinking = true;
       }
     }
 
-    public void stopDrinking(){
-      _isDrinking = false;
+    public void StopDrinking()
+    {
+      IsDrinking = false;
     }
 
     internal bool IsThirsty()
