@@ -231,7 +231,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   navAgent: {fileID: 6562256236261779254}
-  animationController: {fileID: 0}
+  animationController: {fileID: -4165548273840364118}
   groundMask:
     serializedVersion: 2
     m_Bits: 8
@@ -248,7 +248,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   navAgent: {fileID: 6562256236261779254}
-  animationController: {fileID: 0}
+  animationController: {fileID: -4165548273840364118}
 --- !u!1 &908306828785098365
 GameObject:
   m_ObjectHideFlags: 0
@@ -1167,7 +1167,7 @@ MonoBehaviour:
   resourceBar: {fileID: 3410853300184415869}
   deathHandler: {fileID: 5519717986162146221}
   maxHunger: 100
-  animationController: {fileID: 0}
+  animationController: {fileID: -4165548273840364118}
 --- !u!1 &6570557073577150055
 GameObject:
   m_ObjectHideFlags: 0
