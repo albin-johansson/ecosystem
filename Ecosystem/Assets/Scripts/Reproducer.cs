@@ -6,36 +6,36 @@ namespace Ecosystem
   public sealed class Reproducer : MonoBehaviour
   {
     [SerializeField] private Genome genome;
-    [SerializeField] private FoodConsumer foodConsumer;
     [SerializeField] private GameObject prefab;
-    
-    private bool _IsPregnant { get; set; }
-    private bool _IsSexuallyMature { get; set; }
 
+    private bool _isPregnant;
+    private bool _isSexuallyMature;
     private double _gestationPeriod;
-    private double _SexualMaturityTime;
+    private double _sexualMaturityTime;
     private double _pregnancyElapsedTime;
     private double _maturityElapsedTime;
     private Genome _mateGenome;
 
+    public bool CanMate => !_isPregnant && _isSexuallyMature;
+
     private void Start()
     {
-      _SexualMaturityTime = genome.GetSexualMaturityTime();
+      _sexualMaturityTime = genome.GetSexualMaturityTime();
       _gestationPeriod = genome.GetGestationPeriod();
     }
 
     private void Update()
     {
-      if (!_IsSexuallyMature)
+      if (!_isSexuallyMature)
       {
         _maturityElapsedTime += Time.deltaTime;
-        if (_maturityElapsedTime >= _SexualMaturityTime)
+        if (_maturityElapsedTime >= _sexualMaturityTime)
         {
-          _IsSexuallyMature = true;
+          _isSexuallyMature = true;
         }
       }
 
-      if (_IsPregnant)
+      if (_isPregnant)
       {
         _pregnancyElapsedTime += Time.deltaTime;
         if (_pregnancyElapsedTime >= _gestationPeriod)
@@ -49,7 +49,7 @@ namespace Ecosystem
     {
       var currentTransform = transform;
 
-      _IsPregnant = false;
+      _isPregnant = false;
       _pregnancyElapsedTime = 0;
 
       var child = Instantiate(prefab, currentTransform.position, currentTransform.rotation);
@@ -59,7 +59,7 @@ namespace Ecosystem
 
     private void StartPregnancy(Genome mateGenome)
     {
-      _IsPregnant = true;
+      _isPregnant = true;
       _mateGenome = mateGenome;
     }
 
@@ -68,22 +68,17 @@ namespace Ecosystem
       if (other.CompareTag("Reproducer") &&
           other.TryGetComponent(out Reproducer otherReproducer) &&
           Genome.CompatibleAsParents(genome, otherReproducer.genome) &&
-          otherReproducer.CanMate() && CanMate())
+          otherReproducer.CanMate && CanMate)
       {
-        if (genome.IsMale && !otherReproducer._IsPregnant)
+        if (genome.IsMale && !otherReproducer._isPregnant)
         {
           otherReproducer.StartPregnancy(genome);
         }
-        else if (!_IsPregnant)
+        else if (!_isPregnant)
         {
           StartPregnancy(otherReproducer.genome);
         }
       }
-    }
-
-    public bool CanMate()
-    {
-      return !_IsPregnant && _IsSexuallyMature;
     }
   }
 }

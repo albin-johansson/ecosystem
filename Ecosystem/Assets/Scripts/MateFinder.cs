@@ -7,10 +7,10 @@ namespace Ecosystem
   {
     [SerializeField] private Genome genome;
     [SerializeField] private Reproducer reproducer;
-    
-    public bool CompatibleAsParents(Collider other)
+
+    public bool CompatibleAsParents(GameObject other)
     {
-      return reproducer.CanMate() && other.TryGetComponent(out Genome otherGenome) &&
+      return reproducer.CanMate && other.TryGetComponent(out Genome otherGenome) &&
              Genome.CompatibleAsParents(genome, otherGenome);
     }
   }

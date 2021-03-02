@@ -2,7 +2,7 @@
 
 namespace Ecosystem
 {
-  public sealed class PreyFinder : MonoBehaviour
+  public sealed class PreyFinder : MonoBehaviour // TODO rename to PredatorBehaviour?
   {
     [SerializeField] private PreyConsumer preyConsumer;
     [SerializeField] private WaterConsumer waterConsumer;
@@ -10,42 +10,22 @@ namespace Ecosystem
     [SerializeField] private MemoryController memoryController;
     [SerializeField] private TargetTracker targetTracker;
 
-    private Desire _priority = Desire.Idle;
+    private AnimalBehaviourDelegate _delegate;
+
+    private void Start()
+    {
+      _delegate = new AnimalBehaviourDelegate
+      {
+              MemoryController = memoryController,
+              TargetTracker = targetTracker,
+              WaterConsumer = waterConsumer,
+              Consumer = preyConsumer
+      };
+    }
 
     private void Update()
     {
-      UpdatePriority();
-      CheckMemory();
-    }
-
-    //Checks the memory for objects that matches the prioritised desire
-    private void CheckMemory()
-    {
-      if (!targetTracker.HasTarget && _priority != Desire.Idle)
-      {
-        var (match, vector3) = memoryController.GetFromMemory(_priority);
-        if (match)
-        {
-          targetTracker.SetTarget(vector3, _priority);
-        }
-      }
-    }
-
-    //Sets priority, will set priority of what is currently most needed.
-    private void UpdatePriority()
-    {
-      if (preyConsumer.Hunger > waterConsumer.Thirst && preyConsumer.IsHungry())
-      {
-        _priority = Desire.Prey;
-      }
-      else if (waterConsumer.Thirst > preyConsumer.Hunger && waterConsumer.IsThirsty())
-      {
-        _priority = Desire.Water;
-      }
-      else
-      {
-        _priority = Desire.Idle;
-      }
+      _delegate.Update();
     }
 
     /// <summary>
@@ -58,11 +38,12 @@ namespace Ecosystem
 
       if (!targetTracker.HasTarget)
       {
-        if (_priority == Desire.Prey && other.gameObject.layer == LayerUtil.PreyLayer ||
-            _priority == Desire.Water && other.gameObject.layer == LayerUtil.WaterLayer ||
-            _priority == Desire.Idle && mateFinder.CompatibleAsParents(other))
+        var desire = _delegate.Desire;
+        if (desire == Desire.Prey && other.gameObject.layer == LayerUtil.PreyLayer ||
+            desire == Desire.Water && other.gameObject.layer == LayerUtil.WaterLayer ||
+            desire == Desire.Idle && mateFinder.CompatibleAsParents(other.gameObject))
         {
-          targetTracker.SetTarget(other.gameObject.transform.position, _priority);
+          targetTracker.SetTarget(other.gameObject.transform.position, desire);
         }
       }
     }

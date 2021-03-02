@@ -10,7 +10,7 @@
     SpeedFactor,
     SizeFactor,
     DesirabilityScore,
-    GestationPeriod, 
+    GestationPeriod,
     SexualMaturityTime
   }
 }
