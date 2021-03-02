@@ -20,6 +20,7 @@ namespace Ecosystem
       OnDeath?.Invoke(cause, gameObject.gameObject);
       Destroy(gameObject.gameObject, 3); // Make sure that there's enough time to display the death animation
       gameObject.gameObject.SetActive(false); // Without this, the animal will die more than once
+      animationController.EnterDeathAnimation();
     }
   }
 }
