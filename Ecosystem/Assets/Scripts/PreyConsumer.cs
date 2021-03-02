@@ -1,4 +1,5 @@
 ﻿using Ecosystem.Genes;
+using Ecosystem.Logging;
 using Ecosystem.UI;
 using UnityEngine;
 
@@ -13,6 +14,13 @@ namespace Ecosystem
     [SerializeField] private EcoAnimationController animationController;
 
     public double Hunger { get; private set; }
+
+    public delegate void PreyConsumedEvent();
+
+    /// <summary>
+    /// This event is emitted every time a prey is consumed.
+    /// </summary>
+    public static event PreyConsumedEvent OnPreyConsumed;
 
     private void Start()
     {
@@ -34,7 +42,8 @@ namespace Ecosystem
       if (other.CompareTag("Prey"))
       {
         animationController.EnterAttackAnimation();
-        other.gameObject.GetComponent<DeathHandler>().Die(CauseOfDeath.Hunted);
+        OnPreyConsumed?.Invoke();
+        other.gameObject.GetComponent<DeathHandler>().Die(CauseOfDeath.Eaten);
         Hunger = 0;
       }
     }
