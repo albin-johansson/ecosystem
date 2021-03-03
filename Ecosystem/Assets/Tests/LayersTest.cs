@@ -11,7 +11,7 @@ namespace Tests
     {
       Assert.IsTrue(Layers.IsPredatorLayer(Layers.WolfLayer));
       Assert.IsTrue(Layers.IsPredatorLayer(Layers.BearLayer));
-      
+
       Assert.IsFalse(Layers.IsPredatorLayer(Layers.PreyLayer));
       Assert.IsFalse(Layers.IsPredatorLayer(Layers.FoodLayer));
       Assert.IsFalse(Layers.IsPredatorLayer(Layers.WaterLayer));
