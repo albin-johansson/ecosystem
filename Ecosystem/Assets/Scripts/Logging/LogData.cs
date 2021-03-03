@@ -1,6 +1,5 @@
 using System;
 using System.Collections.Generic;
-using System.Runtime.Serialization;
 using UnityEngine;
 using UnityEngine.Analytics;
 
@@ -10,7 +9,7 @@ namespace Ecosystem.Logging
   ///   Provides information about a death event.
   /// </summary>
   [Serializable]
-  public class Death
+  public sealed class Death
   {
     /// <summary>
     ///   The cause of death.
@@ -18,15 +17,43 @@ namespace Ecosystem.Logging
     public CauseOfDeath cause;
   }
 
+  /// <summary>
+  ///   Represents an "event" in the simulation, such as animal births,
+  ///   deaths and food consumption. Certain aspects are common for all events,
+  ///   but there are aspects that are only relevant for specific event types.
+  /// </summary>
   [Serializable]
   public struct SimulationEvent
   {
+    /// <summary>
+    ///   The time of the event, relative to the start of the simulation, in milliseconds.
+    /// </summary>
     public long time;
+
+    /// <summary>
+    ///   The tag attached to the game object associated with the event. 
+    /// </summary>
     public string tag;
+
+    /// <summary>
+    ///   The type of the simulation event.
+    /// </summary>
     public string type;
+
+    /// <summary>
+    ///   The position of the event.
+    /// </summary>
     public Vector3 position;
 
-    public Death deathInfo; // Only set for death events 
+    /// <summary>
+    ///   Provides extra information about death events. This should only be used if
+    ///   the type of the event is <c>"death"</c>. 
+    /// </summary>
+    /// <remarks>
+    ///   The Unity JSON serializer will unfortunately always include a this information
+    ///   in the JSON file, even if the field is <c>null</c>. 
+    /// </remarks>
+    public Death deathInfo;
   }
 
   /// <summary>
@@ -61,9 +88,24 @@ namespace Ecosystem.Logging
     /// </summary>
     public int initialAlivePreyCount;
 
+    /// <summary>
+    ///   The initial amount of rabbits.
+    /// </summary>
     public int initialAliveRabbitsCount;
+
+    /// <summary>
+    ///   The initial amount of deer.
+    /// </summary>
     public int initialAliveDeerCount;
+
+    /// <summary>
+    ///   The initial amount of wolves.
+    /// </summary>
     public int initialAliveWolvesCount;
+
+    /// <summary>
+    ///   The initial amount of bears.
+    /// </summary>
     public int initialAliveBearsCount;
 
     /// <summary>
@@ -81,6 +123,9 @@ namespace Ecosystem.Logging
     /// </summary>
     public int deadCount;
 
+    /// <summary>
+    ///   The amount of animals that have been born.
+    /// </summary>
     public int birthCount;
 
     /// <summary>
@@ -88,46 +133,59 @@ namespace Ecosystem.Logging
     /// </summary>
     public int preyConsumedCount;
 
+    /// <summary>
+    ///   The history of simulation events, stored in chronological order. 
+    /// </summary>
     public List<SimulationEvent> events = new List<SimulationEvent>();
   }
 
+  /// <summary>
+  ///   A factory class for creating simulation events of different types.
+  /// </summary>
   public static class EventFactory
   {
-    public static SimulationEvent CreateBirth(GameObject animal)
+    /// <summary>
+    ///   Creates a simulation event that represents the birth of an animal.
+    /// </summary>
+    /// <param name="animal">the game object associated with the animal that was born.</param>
+    /// <returns>an event that describes the birth.</returns>
+    public static SimulationEvent CreateBirth(GameObject animal) => new SimulationEvent
     {
-      return new SimulationEvent
-      {
-              time = AnalyticsSessionInfo.sessionElapsedTime,
-              type = "birth",
-              tag = animal.tag,
-              position = animal.transform.position
-      };
-    }
+            time = AnalyticsSessionInfo.sessionElapsedTime,
+            type = "birth",
+            tag = animal.tag,
+            position = animal.transform.position
+    };
 
-    public static SimulationEvent CreateDeath(GameObject deadObject, CauseOfDeath cause)
+    /// <summary>
+    ///   Creates a simulation event that represents the death of an animal.
+    /// </summary>
+    /// <param name="deadObject">the game object associated with the animal that died.</param>
+    /// <param name="cause">the cause of death for the animal.</param>
+    /// <returns>an event that describes the death.</returns>
+    public static SimulationEvent CreateDeath(GameObject deadObject, CauseOfDeath cause) => new SimulationEvent
     {
-      return new SimulationEvent
-      {
-              time = AnalyticsSessionInfo.sessionElapsedTime,
-              type = "death",
-              tag = deadObject.tag,
-              position = deadObject.transform.position,
-              deathInfo = new Death
-              {
-                      cause = cause
-              }
-      };
-    }
+            time = AnalyticsSessionInfo.sessionElapsedTime,
+            type = "death",
+            tag = deadObject.tag,
+            position = deadObject.transform.position,
+            deathInfo = new Death
+            {
+                    cause = cause
+            }
+    };
 
-    public static SimulationEvent CreateConsumption(GameObject food)
+    /// <summary>
+    ///   Creates a simulation event that represents a food item being consumed.
+    /// </summary>
+    /// <param name="food">the game object associated with the food item that was consumed.</param>
+    /// <returns>an event that describes the food consumption.</returns>
+    public static SimulationEvent CreateConsumption(GameObject food) => new SimulationEvent
     {
-      return new SimulationEvent
-      {
-              time = AnalyticsSessionInfo.sessionElapsedTime,
-              type = "consumption",
-              tag = food.tag,
-              position = food.transform.position
-      };
-    }
+            time = AnalyticsSessionInfo.sessionElapsedTime,
+            type = "consumption",
+            tag = food.tag,
+            position = food.transform.position
+    };
   }
 }
