@@ -80,9 +80,12 @@ def create_grouped_bar_chart(stats: dict[str, list[int]]):
 
   bar_width = 0.15
 
+  max_value = 0
+
   rects = []
   i = 0
   for label, values in stats.items():
+    max_value = max(max_value, max(values))
     rects.append(axes.bar(x + (i * bar_width), values, bar_width, label=label))
     i = i + 1
 
@@ -90,6 +93,7 @@ def create_grouped_bar_chart(stats: dict[str, list[int]]):
   axes.set_ylabel("Amount")
   axes.set_xticks(x)
   axes.set_xticklabels(labels)
+  axes.set_ylim(0, max_value + 10)
   axes.legend()
 
   for rect in rects:

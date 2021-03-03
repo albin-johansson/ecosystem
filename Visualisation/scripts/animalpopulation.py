@@ -6,6 +6,11 @@ import matplotlib.pyplot as plot
 from pathlib import Path
 from logdata import *
 
+rabbit_color = "#1f77b4"
+deer_color = "#ff7f0e"
+wolf_color = "#2ca02c"
+bear_color = "#d62728"
+
 
 def visualise_animal_populations_standard(data: LogData, directory: Path):
   """
@@ -22,10 +27,10 @@ def visualise_animal_populations_standard(data: LogData, directory: Path):
 
   figure, axes = plot.subplots()
 
-  axes.plot(rabbit_history.keys(), rabbit_history.values(), label="Rabbits", color="green", **{"ls": "-."})
-  axes.plot(deer_history.keys(), deer_history.values(), label="Deer", color="blue", **{"ls": "--"})
-  axes.plot(wolf_history.keys(), wolf_history.values(), label="Wolves", color="red", **{"ls": "-."})
-  axes.plot(bear_history.keys(), bear_history.values(), label="Bears", color="orange", **{"ls": "--"})
+  axes.plot(rabbit_history.keys(), rabbit_history.values(), label="Rabbits", color=rabbit_color, **{"ls": "-."})
+  axes.plot(deer_history.keys(), deer_history.values(), label="Deer", color=deer_color, **{"ls": "--"})
+  axes.plot(wolf_history.keys(), wolf_history.values(), label="Wolves", color=wolf_color, **{"ls": "-."})
+  axes.plot(bear_history.keys(), bear_history.values(), label="Bears", color=bear_color, **{"ls": "--"})
 
   axes.legend(loc="upper left")
   axes.set_xlim(0, data.duration_secs())
@@ -130,14 +135,14 @@ def visualise_animal_populations_stackplot(data: LogData, directory: Path):
   times, population_by_tag = create_stackplot_data(data)
 
   figure, axes = plot.subplots()
-  axes.stackplot(times, population_by_tag.values(),
-                 labels=population_by_tag.keys())
-  axes.legend(loc='upper left')
+  colors = [rabbit_color, deer_color, wolf_color, bear_color]
+  axes.stackplot(times, population_by_tag.values(), labels=population_by_tag.keys(), colors=colors)
+  axes.legend(loc='lower left')
   axes.set_title("Population size changes")
   axes.set_xlabel("Time (seconds)")
   axes.set_ylabel("Population size")
   axes.set_xlim(0, data.duration_secs())
-  axes.set_ylim(0, max(data.initial_total_alive_count() + 20, data.alive_count() + 20))
+  axes.set_ylim(0, max(data.initial_total_alive_count(), data.alive_count()) + 20)
 
   plot.savefig(directory / Path("animal_populations_stackplot.png"))
   plot.close()
