@@ -9,7 +9,6 @@ namespace Ecosystem
     [SerializeField] private MateFinder mateFinder;
     [SerializeField] private MemoryController memoryController;
     [SerializeField] private TargetTracker targetTracker;
-
     private AnimalBehaviourDelegate _delegate;
 
     private void Start()
@@ -45,12 +44,12 @@ namespace Ecosystem
 
       if (!targetTracker.HasTarget)
       {
-        var desire = _delegate.Desire;
-        if (desire == Desire.Food && other.gameObject.layer == LayerUtil.FoodLayer ||
-            desire == Desire.Water && other.gameObject.layer == LayerUtil.WaterLayer ||
-            desire == Desire.Idle && mateFinder.CompatibleAsParents(other.gameObject))
+        var state = _delegate.AnimalState;
+        if (state == AnimalState.LookingForFood && other.gameObject.layer == LayerUtil.FoodLayer ||
+            state == AnimalState.LookingForWater && other.gameObject.layer == LayerUtil.WaterLayer||
+            state == AnimalState.Idle && mateFinder.CompatibleAsParents(other.gameObject))
         {
-          targetTracker.SetTarget(other.gameObject.transform.position, desire);
+          targetTracker.SetTarget(other.gameObject.transform.position, state);
         }
       }
     }
