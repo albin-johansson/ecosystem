@@ -1,6 +1,7 @@
 using Ecosystem.Util;
 using NUnit.Framework;
 using UnityEngine;
+using Assert = UnityEngine.Assertions.Assert;
 
 namespace Tests
 {
@@ -49,6 +50,28 @@ namespace Tests
     public void CountTest()
     {
       Assert.IsTrue(Tags.Count("Rabbit") > 0);
+      Assert.IsTrue(Tags.Count("Deer") > 0);
+      Assert.IsTrue(Tags.Count("Wolf") > 0);
+      Assert.IsTrue(Tags.Count("Bear") > 0);
+    }
+
+    [Test]
+    public void CountPredatorsTest()
+    {
+      Assert.AreEqual(Tags.Count("Wolf") + Tags.Count("Bear"), Tags.CountPredators());
+    }
+
+    [Test]
+    public void CountPreyTest()
+    {
+      Assert.AreEqual(Tags.Count("Rabbit") + Tags.Count("Deer"), Tags.CountPrey());
+    }
+
+    [Test]
+    public void CountFoodTest()
+    {
+      // We only have carrots as the as food items, for now at least
+      Assert.AreEqual(Tags.Count("Carrot"), Tags.CountFood());
     }
   }
 }
