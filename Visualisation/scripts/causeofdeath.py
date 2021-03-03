@@ -10,28 +10,6 @@ from logdata import *
 from enum import Enum
 
 
-def cause_of_death_index_to_string(index: int) -> str:
-  """
-  Converts a cause of death index to a human-readable string.
-
-  :param index: the cause of death index that will be converted.
-  :return: a human-readable string.
-  :raises ValueError: if the supplied index isn't recognized.
-  """
-
-  if index == 0:
-    return "Starvation"
-
-  elif index == 1:
-    return "Dehydration"
-
-  elif index == 2:
-    return "Eaten"
-
-  else:
-    raise ValueError("Did not recognize CauseOfDeath index!")
-
-
 class CauseOfDeath(Enum):
   """
   A simple enum that mirrors the *Ecosystem.Logging.CauseOfDeath* enum.
@@ -43,6 +21,28 @@ class CauseOfDeath(Enum):
 
   def __str__(self) -> str:
     return cause_of_death_index_to_string(self.value)
+
+
+def cause_of_death_index_to_string(index: int) -> str:
+  """
+  Converts a cause of death index to a human-readable string.
+
+  :param index: the cause of death index that will be converted.
+  :return: a human-readable string.
+  :raises ValueError: if the supplied index isn't recognized.
+  """
+
+  if index == CauseOfDeath.STARVATION.value:
+    return "Starvation"
+
+  elif index == CauseOfDeath.DEHYDRATION.value:
+    return "Dehydration"
+
+  elif index == CauseOfDeath.EATEN.value:
+    return "Eaten"
+
+  else:
+    raise ValueError("Did not recognize CauseOfDeath index!")
 
 
 def attach_text_labels(rects, axes):
