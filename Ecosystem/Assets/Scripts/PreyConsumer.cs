@@ -5,13 +5,14 @@ using UnityEngine;
 
 namespace Ecosystem
 {
-  public sealed class PreyConsumer : MonoBehaviour
+  public sealed class PreyConsumer : MonoBehaviour, IConsumer
   {
     [SerializeField] private Genome genome;
     [SerializeField] private ResourceBar resourceBar;
     [SerializeField] private DeathHandler deathHandler;
     [SerializeField] private double maxHunger = 100;
     [SerializeField] private EcoAnimationController animationController;
+    private bool _isDead;
 
     public double Hunger { get; private set; }
 
@@ -29,10 +30,16 @@ namespace Ecosystem
 
     private void Update()
     {
+      if (_isDead)
+      {
+        return;
+      }
+
       Hunger += genome.GetHungerRate() * Time.deltaTime;
       resourceBar.SetValue((float) Hunger);
       if (Hunger > maxHunger)
       {
+        _isDead = true;
         deathHandler.Die(CauseOfDeath.Starvation);
       }
     }
@@ -48,7 +55,7 @@ namespace Ecosystem
       }
     }
 
-    internal bool IsHungry()
+    public bool IsHungry()
     {
       return Hunger > genome.GetHungerThreshold();
     }
