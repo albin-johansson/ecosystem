@@ -4,12 +4,10 @@ namespace Ecosystem.Util
 {
   public static class Tags
   {
-    public static bool IsPredator(GameObject animal) => animal.CompareTag("Predator") ||
-                                                        animal.CompareTag("Wolf") ||
+    public static bool IsPredator(GameObject animal) => animal.CompareTag("Wolf") ||
                                                         animal.CompareTag("Bear");
 
-    public static bool IsPrey(GameObject animal) => animal.CompareTag("Prey") ||
-                                                    animal.CompareTag("Rabbit") ||
+    public static bool IsPrey(GameObject animal) => animal.CompareTag("Rabbit") ||
                                                     animal.CompareTag("Deer");
 
     public static bool IsFood(GameObject gameObject) => gameObject.CompareTag("Carrot");
@@ -18,7 +16,7 @@ namespace Ecosystem.Util
 
     public static int CountPredators() => Count("Predator") + Count("Wolf") + Count("Bear");
 
-    public static int CountPrey() => Count("Prey") + Count("Rabbit") + Count("Deer");
+    public static int CountPrey() => Count("Rabbit") + Count("Deer");
 
     public static int CountFood() => Count("Carrot");
   }
