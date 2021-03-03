@@ -6,7 +6,6 @@ namespace Ecosystem
     LookingForFood,
     LookingForPrey,
     Idle,
-    Nothing,
     Fleeing,
     Drinking,
   }

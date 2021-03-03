@@ -18,7 +18,7 @@ namespace Ecosystem
     //Saves a game objects position and its desire to memory
     public void SaveToMemory(GameObject other)
     {
-      _memory.Insert(_nextMemoryLocation, (GetDesire(other), other.gameObject.transform.position));
+      _memory.Insert(_nextMemoryLocation, (GetAnimalState(other), other.gameObject.transform.position));
       ++_nextMemoryLocation;
       if (_nextMemoryLocation >= Capacity)
       {
@@ -26,7 +26,7 @@ namespace Ecosystem
       }
     }
 
-    private static AnimalState GetDesire(GameObject other)
+    private static AnimalState GetAnimalState(GameObject other)
     {
       if (other.gameObject.layer == LayerUtil.FoodLayer)
       {
@@ -55,7 +55,7 @@ namespace Ecosystem
           if (currentDesire != AnimalState.LookingForWater)
           {
             //Removes food resource from memory to prevent animal from wandering back to food that has already been consumed. 
-            _memory.Insert(i, (AnimalState.Nothing, new Vector3()));
+            _memory.Insert(i, (AnimalState.Idle, new Vector3()));
           }
 
           return (true, position);
