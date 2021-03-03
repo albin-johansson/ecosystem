@@ -8,6 +8,8 @@ namespace Ecosystem
   /// </summary>
   public sealed class DeathHandler : MonoBehaviour
   {
+    [SerializeField] private EcoAnimationController animationController;
+
     public delegate void DeathEvent(CauseOfDeath cause, GameObject gameObject);
 
     /// <summary>

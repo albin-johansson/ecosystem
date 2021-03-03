@@ -2,60 +2,30 @@
 
 namespace Ecosystem
 {
-  public sealed class PreyFinder : MonoBehaviour
+  public sealed class PreyFinder : MonoBehaviour // TODO rename to PredatorBehaviour?
   {
     [SerializeField] private PreyConsumer preyConsumer;
     [SerializeField] private WaterConsumer waterConsumer;
+    [SerializeField] private MateFinder mateFinder;
     [SerializeField] private MemoryController memoryController;
     [SerializeField] private TargetTracker targetTracker;
 
-    private AnimalState _state = AnimalState.Idle;
+    private AnimalBehaviourDelegate _delegate;
+
+    private void Start()
+    {
+      _delegate = new AnimalBehaviourDelegate
+      {
+              MemoryController = memoryController,
+              TargetTracker = targetTracker,
+              WaterConsumer = waterConsumer,
+              Consumer = preyConsumer
+      };
+    }
 
     private void Update()
     {
-      UpdatePriority();
-      CheckMemory();
-    }
-
-    //Checks the memory for objects that matches the prioritised desire
-    private void CheckMemory()
-    {
-      if (!targetTracker.HasTarget && _state != AnimalState.Idle)
-      {
-        var (match, vector3) = memoryController.GetFromMemory(_state);
-        if (match)
-        {
-          targetTracker.SetTarget(vector3, _state);
-        }
-      }
-    }
-
-    //Sets priority, will set priority of what is currently most needed.
-    private void UpdatePriority()
-    {
-      if (waterConsumer.IsDrinking)
-      {
-        _state = AnimalState.Drinking;
-        targetTracker.StopTracking();
-        return;
-      }
-      else
-      {
-        targetTracker.ResumeTracking();
-      }
-
-      if (preyConsumer.Hunger > waterConsumer.Thirst && preyConsumer.IsHungry())
-      {
-        _state = AnimalState.LookingForPrey;
-      }
-      else if (waterConsumer.Thirst > preyConsumer.Hunger && waterConsumer.IsThirsty())
-      {
-        _state = AnimalState.LookingForWater;
-      }
-      else
-      {
-        _state = AnimalState.Idle;
-      }
+      _delegate.Update();
     }
 
     /// <summary>
@@ -68,10 +38,12 @@ namespace Ecosystem
 
       if (!targetTracker.HasTarget)
       {
-        if (_state == AnimalState.LookingForPrey && other.gameObject.layer == LayerUtil.PreyLayer ||
-            _state == AnimalState.LookingForWater && other.gameObject.layer == LayerUtil.WaterLayer)
+        var state = _delegate.AnimalState;
+        if (state == AnimalState.LookingForFood && other.gameObject.layer == LayerUtil.PreyLayer ||
+            state == AnimalState.LookingForWater && other.gameObject.layer == LayerUtil.WaterLayer ||
+            state == AnimalState.Idle && mateFinder.CompatibleAsParents(other.gameObject))
         {
-          targetTracker.SetTarget(other.gameObject.transform.position, _state);
+          targetTracker.SetTarget(other.gameObject.transform.position, state);
         }
       }
     }
