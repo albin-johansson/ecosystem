@@ -11,17 +11,17 @@ namespace Ecosystem
     public WaterConsumer WaterConsumer { get; set; }
     public IConsumer Consumer { get; set; } // The "food" consumer
 
-    public Desire Desire { get; private set; } = Desire.Idle;
+    public AnimalState AnimalState { get; private set; } = AnimalState.Idle;
 
     //Checks the memory for objects that matches the prioritised desire
     private void CheckMemory()
     {
-      if (!TargetTracker.HasTarget && Desire != Desire.Idle)
+      if (!TargetTracker.HasTarget && AnimalState != AnimalState.Idle)
       {
-        var (match, vector3) = MemoryController.GetFromMemory(Desire);
+        var (match, vector3) = MemoryController.GetFromMemory(AnimalState);
         if (match)
         {
-          TargetTracker.SetTarget(vector3, Desire);
+          TargetTracker.SetTarget(vector3, AnimalState);
         }
       }
     }
@@ -30,17 +30,37 @@ namespace Ecosystem
     private void UpdatePriority()
     {
       // TODO in the future, we might want to also check for Desire.Mate here
-      if (Consumer.Hunger > WaterConsumer.Thirst && Consumer.IsHungry())
+      if (TargetTracker.IsChased)
       {
-        Desire = Desire.Prey;
+        AnimalState = AnimalState.Fleeing;
+        WaterConsumer.StopDrinking();
+        TargetTracker.ResumeTracking();
+        return;
       }
-      else if (WaterConsumer.Thirst > Consumer.Hunger && WaterConsumer.IsThirsty())
+
+      if (WaterConsumer.IsDrinking)
       {
-        Desire = Desire.Water;
+        AnimalState = AnimalState.Drinking;
+        TargetTracker.StopTracking();
+        return;
       }
       else
       {
-        Desire = Desire.Idle;
+        TargetTracker.ResumeTracking();
+      }
+
+
+      if (Consumer.Hunger > WaterConsumer.Thirst && Consumer.IsHungry())
+      {
+        AnimalState = AnimalState.LookingForFood;
+      }
+      else if (WaterConsumer.Thirst > Consumer.Hunger && WaterConsumer.IsThirsty())
+      {
+        AnimalState = AnimalState.LookingForWater;
+      }
+      else
+      {
+        AnimalState = AnimalState.Idle;
       }
     }
 
