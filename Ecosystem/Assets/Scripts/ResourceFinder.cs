@@ -1,3 +1,4 @@
+using Ecosystem.Genes;
 using UnityEngine;
 
 namespace Ecosystem
@@ -9,6 +10,7 @@ namespace Ecosystem
     [SerializeField] private MateFinder mateFinder;
     [SerializeField] private MemoryController memoryController;
     [SerializeField] private TargetTracker targetTracker;
+    [SerializeField] private Genome genome;
 
     private AnimalBehaviourDelegate _delegate;
 
@@ -21,6 +23,8 @@ namespace Ecosystem
               WaterConsumer = waterConsumer,
               Consumer = foodConsumer
       };
+      var sp = GetComponent<SphereCollider>();
+      sp.radius = (float) genome.GetVisionRange() / sp.transform.lossyScale.magnitude;
     }
 
     private void Update()
