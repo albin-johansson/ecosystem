@@ -4,8 +4,8 @@ namespace Ecosystem.Genes
 {
   public sealed class Gene
   {
-    private float Max { get; }
-    private float Min { get; }
+    public float Min { get; }
+    public float Max { get; }
     public float Value { get; }
 
     public Gene(float value, float min, float max)
