@@ -11,7 +11,7 @@ namespace Ecosystem
     [SerializeField] private ResourceBar resourceBar;
     [SerializeField] private DeathHandler deathHandler;
     [SerializeField] private float maxThirst = 100;
-    private bool _isDead = false;
+    private bool _isDead;
 
     public float Thirst { get; private set; }
 
@@ -30,9 +30,11 @@ namespace Ecosystem
       Thirst += genome.GetThirstRate() * Time.deltaTime;
       resourceBar.SetValue(Thirst);
 
-      if (!(Thirst > maxThirst)) return;
-      _isDead = true;
-      deathHandler.Die(CauseOfDeath.Dehydration);
+      if (Thirst > maxThirst)
+      {
+        _isDead = true;
+        deathHandler.Die(CauseOfDeath.Dehydration);
+      }
     }
 
     private void OnTriggerEnter(Collider other)

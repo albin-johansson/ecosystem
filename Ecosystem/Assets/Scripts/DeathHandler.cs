@@ -22,13 +22,9 @@ namespace Ecosystem
     public void Die(CauseOfDeath cause)
     {
       _cause = cause;
+      OnDeath?.Invoke(_cause, gameObject.gameObject);
       Destroy(gameObject.gameObject, 3); // Make sure that there's enough time to display the death animation 
       animationController.EnterDeathAnimation();
-    }
-
-    private void OnDestroy()
-    {
-      OnDeath?.Invoke(_cause, gameObject.gameObject);
     }
   }
 }

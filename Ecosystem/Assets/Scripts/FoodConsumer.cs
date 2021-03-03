@@ -11,7 +11,7 @@ namespace Ecosystem
     [SerializeField] private ResourceBar resourceBar;
     [SerializeField] private DeathHandler deathHandler;
     [SerializeField] private double maxHunger = 100;
-    private bool _isDead = false;
+    private bool _isDead;
 
     public double Hunger { get; private set; }
 
@@ -36,9 +36,11 @@ namespace Ecosystem
 
       Hunger += genome.GetHungerRate() * Time.deltaTime;
       resourceBar.SetValue((float) Hunger);
-      if (!(Hunger > maxHunger)) return;
-      _isDead = true;
-      deathHandler.Die(CauseOfDeath.Starvation);
+      if (Hunger > maxHunger)
+      {
+        _isDead = true;
+        deathHandler.Die(CauseOfDeath.Starvation);
+      }
     }
 
     private void OnTriggerEnter(Collider other)
