@@ -1,73 +1,32 @@
 using System;
 using System.Collections.Generic;
+using System.Runtime.Serialization;
 using UnityEngine;
+using UnityEngine.Analytics;
 
 namespace Ecosystem.Logging
 {
   /// <summary>
-  ///   Provides information about a food consumption event.
-  /// </summary>
-  [Serializable]
-  public struct FoodConsumption
-  {
-    /// <summary>
-    ///   The time of death, in milliseconds since the start of the simulation.
-    /// </summary>
-    public long time;
-
-    /// <summary>
-    ///   The position of the consumed food item.
-    /// </summary>
-    public Vector3 position;
-  }
-
-  /// <summary>
-  ///   Provides information about a birth event.
-  /// </summary>
-  [Serializable]
-  public struct Birth
-  {
-    /// <summary>
-    ///   The time of birth, in milliseconds since the start of the simulation.
-    /// </summary>
-    public long time;
-
-    /// <summary>
-    ///   The tag associated with the animal that was born.
-    /// </summary>
-    public string tag;
-
-    /// <summary>
-    ///   The position of the born animal.
-    /// </summary>
-    public Vector3 position;
-  }
-
-  /// <summary>
   ///   Provides information about a death event.
   /// </summary>
   [Serializable]
-  public struct Death
+  public class Death
   {
-    /// <summary>
-    ///   The time of death, in milliseconds since the start of the simulation.
-    /// </summary>
-    public long time;
-
     /// <summary>
     ///   The cause of death.
     /// </summary>
     public CauseOfDeath cause;
+  }
 
-    /// <summary>
-    ///   The tag associated with the animal that died.
-    /// </summary>
+  [Serializable]
+  public struct SimulationEvent
+  {
+    public long time;
     public string tag;
-
-    /// <summary>
-    ///   The position of the animal that died.
-    /// </summary>
+    public string type;
     public Vector3 position;
+
+    public Death deathInfo; // Only set for death events 
   }
 
   /// <summary>
@@ -102,6 +61,11 @@ namespace Ecosystem.Logging
     /// </summary>
     public int initialAlivePreyCount;
 
+    public int initialAliveRabbitsCount;
+    public int initialAliveDeerCount;
+    public int initialAliveWolvesCount;
+    public int initialAliveBearsCount;
+
     /// <summary>
     ///   The final amount of available food items.
     /// </summary>
@@ -117,24 +81,53 @@ namespace Ecosystem.Logging
     /// </summary>
     public int deadCount;
 
+    public int birthCount;
+
     /// <summary>
     ///   The amount of prey that were consumed.
     /// </summary>
     public int preyConsumedCount;
 
-    /// <summary>
-    ///   The history of all food consumptions.
-    /// </summary>
-    public List<FoodConsumption> foodConsumptions = new List<FoodConsumption>();
+    public List<SimulationEvent> events = new List<SimulationEvent>();
+  }
 
-    /// <summary>
-    ///   The history of all births.
-    /// </summary>
-    public List<Birth> births = new List<Birth>();
+  public static class EventFactory
+  {
+    public static SimulationEvent CreateBirth(GameObject animal)
+    {
+      return new SimulationEvent
+      {
+              time = AnalyticsSessionInfo.sessionElapsedTime,
+              type = "birth",
+              tag = animal.tag,
+              position = animal.transform.position
+      };
+    }
 
-    /// <summary>
-    ///   The history of all deaths.
-    /// </summary>
-    public List<Death> deaths = new List<Death>();
+    public static SimulationEvent CreateDeath(GameObject deadObject, CauseOfDeath cause)
+    {
+      return new SimulationEvent
+      {
+              time = AnalyticsSessionInfo.sessionElapsedTime,
+              type = "death",
+              tag = deadObject.tag,
+              position = deadObject.transform.position,
+              deathInfo = new Death
+              {
+                      cause = cause
+              }
+      };
+    }
+
+    public static SimulationEvent CreateConsumption(GameObject food)
+    {
+      return new SimulationEvent
+      {
+              time = AnalyticsSessionInfo.sessionElapsedTime,
+              type = "consumption",
+              tag = food.tag,
+              position = food.transform.position
+      };
+    }
   }
 }

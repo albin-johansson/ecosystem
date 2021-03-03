@@ -38,13 +38,17 @@ namespace Ecosystem.Logging
        * amounts.
        */
 
+      _data.initialAliveRabbitsCount = GameObject.FindGameObjectsWithTag("Rabbit").Length;
+      _data.initialAliveDeerCount = GameObject.FindGameObjectsWithTag("Deer").Length;
+      _data.initialAliveWolvesCount = GameObject.FindGameObjectsWithTag("Wolf").Length;
+      _data.initialAliveBearsCount = GameObject.FindGameObjectsWithTag("Bear").Length;
+      _data.initialFoodCount = GameObject.FindGameObjectsWithTag("Food").Length;
+
       _data.initialAlivePredatorCount = TagUtil.CountPredators();
       _data.initialAlivePreyCount = TagUtil.CountPrey();
-
       _data.initialAliveCount = _data.initialAlivePreyCount + _data.initialAlivePredatorCount;
-      _data.aliveCount = _data.initialAliveCount;
 
-      _data.initialFoodCount = GameObject.FindGameObjectsWithTag("Food").Length;
+      _data.aliveCount = _data.initialAliveCount;
       _data.foodCount = _data.initialFoodCount;
 
       aliveCountText.text = _data.aliveCount.ToString();
@@ -74,28 +78,18 @@ namespace Ecosystem.Logging
 
     private void LogBirth(GameObject animal)
     {
-      _data.births.Add(new Birth
-      {
-              time = AnalyticsSessionInfo.sessionElapsedTime,
-              tag = animal.tag,
-              position = animal.transform.position
-      });
+      _data.events.Add(EventFactory.CreateBirth(animal));
 
+      ++_data.birthCount;
       ++_data.aliveCount;
 
       aliveCountText.text = _data.aliveCount.ToString();
-      birthCountText.text = _data.births.Count.ToString();
+      birthCountText.text = _data.birthCount.ToString();
     }
 
     private void LogDeath(CauseOfDeath cause, GameObject deadObject)
     {
-      _data.deaths.Add(new Death
-      {
-              time = AnalyticsSessionInfo.sessionElapsedTime,
-              cause = cause,
-              tag = deadObject.tag,
-              position = deadObject.transform.position
-      });
+      _data.events.Add(EventFactory.CreateDeath(deadObject, cause));
 
       --_data.aliveCount;
       ++_data.deadCount;
@@ -106,13 +100,10 @@ namespace Ecosystem.Logging
 
     private void LogFoodEaten(GameObject food)
     {
-      _data.foodConsumptions.Add(new FoodConsumption
-      {
-              time = AnalyticsSessionInfo.sessionElapsedTime,
-              position = food.transform.position
-      });
+      _data.events.Add(EventFactory.CreateConsumption(food));
 
       --_data.foodCount;
+
       foodCountText.text = _data.foodCount.ToString();
     }
 

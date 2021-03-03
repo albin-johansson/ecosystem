@@ -9,24 +9,27 @@ from logdata import *
 
 def visualise_animal_populations_standard(data: LogData, directory: Path):
   """
-  Produces a plot of how the predator and prey populations changed over the course
-  of the simulation.
+  Produces an ordinary plot of how the animal populations changed over the course of the simulation.
 
   :param data: the simulation data to read from.
   :param directory: the directory to which the plot will be saved.
   """
 
-  prey_history = get_population_history(data, "Prey", data.initial_prey_count())
-  predator_history = get_population_history(data, "Predator", data.initial_predator_count())
+  rabbit_history = get_population_history(data, ["Rabbit"], data.initial_rabbit_count())
+  deer_history = get_population_history(data, ["Deer"], data.initial_deer_count())
+  wolf_history = get_population_history(data, ["Wolf"], data.initial_wolf_count())
+  bear_history = get_population_history(data, ["Bear"], data.initial_bear_count())
 
   figure, axes = plot.subplots()
 
-  axes.plot(prey_history.keys(), prey_history.values(), label="Prey", color="green", **{"ls": "-"})
-  axes.plot(predator_history.keys(), predator_history.values(), label="Predators", color="red", **{"ls": "--"})
+  axes.plot(rabbit_history.keys(), rabbit_history.values(), label="Rabbits", color="green", **{"ls": "-."})
+  axes.plot(deer_history.keys(), deer_history.values(), label="Deer", color="blue", **{"ls": "--"})
+  axes.plot(wolf_history.keys(), wolf_history.values(), label="Wolves", color="red", **{"ls": "-."})
+  axes.plot(bear_history.keys(), bear_history.values(), label="Bears", color="orange", **{"ls": "--"})
 
   axes.legend(loc="upper left")
   axes.set_xlim(0, data.duration_secs())
-  axes.set_ylim(0, data.initial_total_alive_count())
+  axes.set_ylim(0, max(data.initial_total_alive_count() + 20, data.alive_count() + 20))
   axes.set_xlabel("Time (seconds)")
   axes.set_ylabel("Population size")
   axes.set_title("Population sizes")
@@ -43,37 +46,73 @@ def create_stackplot_data(data: LogData) -> tuple[list[TimePoint], dict[str, lis
   :return: the time points and labelled animal populations as a tuple.
   """
 
-  prey_count = data.initial_prey_count()
-  predator_count = data.initial_predator_count()
+  rabbit_count = data.initial_rabbit_count()
+  deer_count = data.initial_deer_count()
+  wolf_count = data.initial_wolf_count()
+  bear_count = data.initial_bear_count()
 
   times: list[TimePoint] = []
-  prey_history: list[Amount] = []
-  predator_history: list[Amount] = []
+
+  rabbit_history: list[Amount] = []
+  deer_history: list[Amount] = []
+  wolf_history: list[Amount] = []
+  bear_history: list[Amount] = []
 
   times.append(0)
-  prey_history.append(prey_count)
-  predator_history.append(predator_count)
+  rabbit_history.append(rabbit_count)
+  deer_history.append(deer_count)
+  wolf_history.append(wolf_count)
+  bear_history.append(bear_count)
 
-  for death in data.deaths():
-    time: TimePoint = death["time"] / 1_000
+  for event in data.events():
+    event_type: str = event["type"]
+    tag: str = event["tag"]
+
+    time: TimePoint = event["time"] / 1_000
     times.append(time)
 
-    if death["tag"] == "Predator":
-      predator_count = predator_count - 1
+    if event_type == "birth":
+      if tag == "Rabbit":
+        rabbit_count = rabbit_count + 1
 
-    elif death["tag"] == "Prey":
-      prey_count = prey_count - 1
+      elif tag == "Deer":
+        deer_count = deer_count + 1
 
-    prey_history.append(prey_count)
-    predator_history.append(predator_count)
+      elif tag == "Wolf":
+        wolf_count = wolf_count + 1
+
+      elif tag == "Bear":
+        bear_count = bear_count + 1
+
+    elif event_type == "death":
+      if tag == "Rabbit":
+        rabbit_count = rabbit_count - 1
+
+      elif tag == "Deer":
+        deer_count = deer_count - 1
+
+      elif tag == "Wolf":
+        wolf_count = wolf_count - 1
+
+      elif tag == "Bear":
+        bear_count = bear_count - 1
+
+    rabbit_history.append(rabbit_count)
+    deer_history.append(deer_count)
+    wolf_history.append(wolf_count)
+    bear_history.append(bear_count)
 
   times.append(data.duration_secs())
-  predator_history.append(predator_count)
-  prey_history.append(prey_count)
+  rabbit_history.append(rabbit_count)
+  deer_history.append(deer_count)
+  wolf_history.append(wolf_count)
+  bear_history.append(bear_count)
 
   population_by_tag = {
-    "Prey": prey_history,
-    "Predators": predator_history
+    "Rabbits": rabbit_history,
+    "Deer": deer_history,
+    "Wolves": wolf_history,
+    "Bears": bear_history
   }
 
   return times, population_by_tag
@@ -81,8 +120,8 @@ def create_stackplot_data(data: LogData) -> tuple[list[TimePoint], dict[str, lis
 
 def visualise_animal_populations_stackplot(data: LogData, directory: Path):
   """
-  Produces a stackplot of how the predator and prey populations changed over the course
-  of the simulation.
+  Produces a stackplot of how the animals populations changed over the course of the simulation.
+
   :param data: the simulation data to read from.
   :param directory:
   :return: the directory to which the plot will be saved.
@@ -98,7 +137,7 @@ def visualise_animal_populations_stackplot(data: LogData, directory: Path):
   axes.set_xlabel("Time (seconds)")
   axes.set_ylabel("Population size")
   axes.set_xlim(0, data.duration_secs())
-  axes.set_ylim(0, data.initial_total_alive_count() + 20)
+  axes.set_ylim(0, max(data.initial_total_alive_count() + 20, data.alive_count() + 20))
 
   plot.savefig(directory / Path("animal_populations_stackplot.png"))
   plot.close()
