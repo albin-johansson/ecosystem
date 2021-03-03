@@ -10,7 +10,7 @@ namespace Ecosystem.UI
 
     private bool _isNight;
     private float _rotation;
-    private const float CycleSpeed = 0.04f;
+    private const float CycleSpeed = 0.02f;
 
     private void Start()
     {
@@ -26,7 +26,7 @@ namespace Ecosystem.UI
     void Update()
     {
       sun.transform.Rotate(CycleSpeed, 0, 0, Space.Self);
-      particles.transform.Rotate(0, 0, CycleSpeed * 0.5f, Space.Self);
+      particles.transform.Rotate(0, 0, CycleSpeed * 0.25f, Space.Self);
       _rotation += CycleSpeed;
 
       AdjustStarBrightness();
