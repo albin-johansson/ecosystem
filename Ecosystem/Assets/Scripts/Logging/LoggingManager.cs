@@ -38,8 +38,8 @@ namespace Ecosystem.Logging
        * amounts.
        */
 
-      _data.initialAlivePredatorCount = GameObject.FindGameObjectsWithTag("Predator").Length;
-      _data.initialAlivePreyCount = GameObject.FindGameObjectsWithTag("Prey").Length;
+      _data.initialAlivePredatorCount = TagUtil.CountPredators();
+      _data.initialAlivePreyCount = TagUtil.CountPrey();
 
       _data.initialAliveCount = _data.initialAlivePreyCount + _data.initialAlivePredatorCount;
       _data.aliveCount = _data.initialAliveCount;
