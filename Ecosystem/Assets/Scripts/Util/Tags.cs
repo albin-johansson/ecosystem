@@ -14,7 +14,7 @@ namespace Ecosystem.Util
 
     public static int Count(string tag) => GameObject.FindGameObjectsWithTag(tag).Length;
 
-    public static int CountPredators() => Count("Predator") + Count("Wolf") + Count("Bear");
+    public static int CountPredators() => Count("Wolf") + Count("Bear");
 
     public static int CountPrey() => Count("Rabbit") + Count("Deer");
 
