@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace Ecosystem
+namespace Ecosystem.Util
 {
   public static class LayerUtil
   {
