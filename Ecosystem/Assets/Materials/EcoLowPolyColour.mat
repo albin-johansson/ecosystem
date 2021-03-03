@@ -133,7 +133,7 @@ Material:
     - _BumpScaleMatcap: 1
     - _CameraRolling_Stabilizer: 0
     - _ColorShift_Speed: 0
-    - _CullMode: 2
+    - _CullMode: 0
     - _Cutoff: 0.5
     - _DetailNormalMapScale: 1
     - _DstBlend: 0
@@ -186,7 +186,7 @@ Material:
     - _Offset_Z: 0
     - _Outline_Width: 25
     - _Parallax: 0.02
-    - _RimLight: 0
+    - _RimLight: 1
     - _RimLight_FeatherOff: 0
     - _RimLight_InsideMask: 0.0001
     - _RimLight_Power: 0.1
@@ -213,9 +213,9 @@ Material:
     - _UVSec: 0
     - _Unlit_Intensity: 1
     - _Use_1stAs2nd: 0
-    - _Use_BaseAs1st: 0
+    - _Use_BaseAs1st: 1
     - _ZWrite: 1
-    - _simpleUI: 0
+    - _simpleUI: 1
     - _utsTechnique: 1
     - _utsVersion: 2.075
     m_Colors:
