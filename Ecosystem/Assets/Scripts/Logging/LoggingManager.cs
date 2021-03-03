@@ -39,14 +39,14 @@ namespace Ecosystem.Logging
        * amounts.
        */
 
-      _data.initialAliveRabbitsCount = GameObject.FindGameObjectsWithTag("Rabbit").Length;
-      _data.initialAliveDeerCount = GameObject.FindGameObjectsWithTag("Deer").Length;
-      _data.initialAliveWolvesCount = GameObject.FindGameObjectsWithTag("Wolf").Length;
-      _data.initialAliveBearsCount = GameObject.FindGameObjectsWithTag("Bear").Length;
-      _data.initialFoodCount = GameObject.FindGameObjectsWithTag("Food").Length;
+      _data.initialAliveRabbitsCount = Tags.Count("Rabbit");
+      _data.initialAliveDeerCount = Tags.Count("Deer");
+      _data.initialAliveWolvesCount = Tags.Count("Wolf");
+      _data.initialAliveBearsCount = Tags.Count("Bear");
 
       _data.initialAlivePredatorCount = Tags.CountPredators();
       _data.initialAlivePreyCount = Tags.CountPrey();
+      _data.initialFoodCount = Tags.CountFood();
       _data.initialAliveCount = _data.initialAlivePreyCount + _data.initialAlivePredatorCount;
 
       _data.aliveCount = _data.initialAliveCount;

@@ -1,6 +1,7 @@
 using Ecosystem.Genes;
 using Ecosystem.Logging;
 using Ecosystem.UI;
+using Ecosystem.Util;
 using UnityEngine;
 
 namespace Ecosystem
@@ -38,7 +39,7 @@ namespace Ecosystem
 
     private void OnTriggerEnter(Collider other)
     {
-      if (other.CompareTag("Food"))
+      if (Tags.IsFood(other.gameObject))
       {
         OnFoodEaten?.Invoke(other.gameObject);
         Destroy(other.gameObject);
