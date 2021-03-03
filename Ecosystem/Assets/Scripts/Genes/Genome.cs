@@ -10,7 +10,7 @@ namespace Ecosystem.Genes
     private static readonly Gene HungerThreshold = new Gene(5, 0, 10);
     private static readonly Gene ThirstRate = new Gene(1, 0.5f, 10);
     private static readonly Gene ThirstThreshold = new Gene(5, 0, 10);
-    private static readonly Gene Vision = new Gene(10, 20, 30);
+    private static readonly Gene Vision = new Gene(2, 7, 20);
     private static readonly Gene SpeedFactor = new Gene(1.5f, 1, 2);
     private static readonly Gene SizeFactor = new Gene(1.5f, 0.1f, 2);
     private static readonly Gene DesirabilityFactor = new Gene(1, 1, 10);
