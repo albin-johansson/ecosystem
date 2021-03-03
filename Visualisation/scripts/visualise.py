@@ -26,7 +26,7 @@ def visualise(input_file: Path):
   data = LogData(input_file)
   visualise_animal_populations(data, directory)
   # visualise_food_consumption(data, directory)
-  # visualise_cause_of_death(data, directory)
+  visualise_cause_of_death(data, directory)
 
 
 def main(argv):

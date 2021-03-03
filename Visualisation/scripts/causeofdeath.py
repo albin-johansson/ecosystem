@@ -63,14 +63,13 @@ def attach_text_labels(rects, axes):
                   ha='center', va='bottom')
 
 
-def create_grouped_bar_chart(predator_stats: list[int], prey_stats: list[int]):
+def create_grouped_bar_chart(stats: dict[str, list[int]]):
   """
-  Creates and returns a grouped bar chart with the death causes. The list parameters are expected
+  Creates and returns a grouped bar chart with the death causes. The lists are expected
   to feature an entry for each cause of death, where the value corresponds to how many specimens
   died of that cause.
 
-  :param predator_stats: the stats associated with predators.
-  :param prey_stats: the stats associated with prey.
+  :param stats: the stats associated with predators, maps labels to the corresponding stats.
   :return: the created figure.
   """
 
@@ -79,9 +78,13 @@ def create_grouped_bar_chart(predator_stats: list[int], prey_stats: list[int]):
   labels = [str(e) for e in CauseOfDeath]
   x = numpy.arange(len(labels))
 
-  width = 0.35
-  rects_1 = axes.bar(x - width / 2, predator_stats, width, label="Predators")
-  rects_2 = axes.bar(x + width / 2, prey_stats, width, label="Prey")
+  bar_width = 0.15
+
+  rects = []
+  i = 0
+  for label, values in stats.items():
+    rects.append(axes.bar(x + (i * bar_width), values, bar_width, label=label))
+    i = i + 1
 
   axes.set_title("Deaths arranged by cause and animal type")
   axes.set_ylabel("Amount")
@@ -89,8 +92,8 @@ def create_grouped_bar_chart(predator_stats: list[int], prey_stats: list[int]):
   axes.set_xticklabels(labels)
   axes.legend()
 
-  attach_text_labels(rects_1, axes)
-  attach_text_labels(rects_2, axes)
+  for rect in rects:
+    attach_text_labels(rect, axes)
 
   figure.tight_layout()
   return figure
@@ -105,21 +108,33 @@ def visualise_cause_of_death(data: LogData, directory: Path):
   :param directory: the directory to which the plot will be saved.
   """
 
-  prey_stats: list[int] = [0 for _ in CauseOfDeath]
-  predator_stats: list[int] = [0 for _ in CauseOfDeath]
+  rabbit_stats: list[int] = [0 for _ in CauseOfDeath]
+  deer_stats: list[int] = [0 for _ in CauseOfDeath]
+  wolf_stats: list[int] = [0 for _ in CauseOfDeath]
+  bear_stats: list[int] = [0 for _ in CauseOfDeath]
 
-  for death in data.deaths():
-    tag: str = death["tag"]
-    cause: int = death["cause"]
+  for event in data.events():
+    event_type: str = event["type"]
 
-    if tag == "Prey":
-      previous_value = prey_stats[cause]
-      prey_stats[cause] = previous_value + 1
+    if event_type == "death":
+      tag: str = event["tag"]
+      cause: int = event["deathInfo"]["cause"]
 
-    elif tag == "Predator":
-      previous_value = predator_stats[cause]
-      predator_stats[cause] = previous_value + 1
+      if tag == "Rabbit":
+        rabbit_stats[cause] = rabbit_stats[cause] + 1
 
-  figure = create_grouped_bar_chart(predator_stats, prey_stats)
+      elif tag == "Deer":
+        deer_stats[cause] = deer_stats[cause] + 1
+
+      elif tag == "Wolf":
+        wolf_stats[cause] = wolf_stats[cause] + 1
+
+      elif tag == "Bear":
+        bear_stats[cause] = bear_stats[cause] + 1
+
+  figure = create_grouped_bar_chart({"Rabbits": rabbit_stats,
+                                     "Deer": deer_stats,
+                                     "Wolves": wolf_stats,
+                                     "Bears": bear_stats})
   figure.savefig(directory / Path("cause_of_death.png"))
   plot.close()
