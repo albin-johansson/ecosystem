@@ -21,11 +21,25 @@ namespace Ecosystem.Logging
     public Vector3 position;
   }
 
+  /// <summary>
+  ///   Provides information about a birth event.
+  /// </summary>
   [Serializable]
   public struct Birth
   {
+    /// <summary>
+    ///   The time of birth, in milliseconds since the start of the simulation.
+    /// </summary>
     public long time;
+
+    /// <summary>
+    ///   The tag associated with the animal that was born.
+    /// </summary>
     public string tag;
+
+    /// <summary>
+    ///   The position of the born animal.
+    /// </summary>
     public Vector3 position;
   }
 
