@@ -45,8 +45,8 @@ namespace Ecosystem.Logging
       _data.initialAliveBearsCount = GameObject.FindGameObjectsWithTag("Bear").Length;
       _data.initialFoodCount = GameObject.FindGameObjectsWithTag("Food").Length;
 
-      _data.initialAlivePredatorCount = TagUtil.CountPredators();
-      _data.initialAlivePreyCount = TagUtil.CountPrey();
+      _data.initialAlivePredatorCount = Tags.CountPredators();
+      _data.initialAlivePreyCount = Tags.CountPrey();
       _data.initialAliveCount = _data.initialAlivePreyCount + _data.initialAlivePredatorCount;
 
       _data.aliveCount = _data.initialAliveCount;

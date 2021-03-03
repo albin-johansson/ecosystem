@@ -40,7 +40,7 @@ namespace Ecosystem
 
     private void OnTriggerEnter(Collider other)
     {
-      if (TagUtil.IsPrey(other.gameObject))
+      if (Tags.IsPrey(other.gameObject))
       {
         animationController.EnterAttackAnimation();
         OnPreyConsumed?.Invoke();
