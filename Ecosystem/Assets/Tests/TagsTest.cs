@@ -14,7 +14,7 @@ namespace Tests
     private readonly GameObject _carrot = new GameObject {tag = "Carrot"};
 
     [Test]
-    public void IsPredator()
+    public void IsPredatorTest()
     {
       Assert.IsTrue(Tags.IsPredator(_wolf));
       Assert.IsTrue(Tags.IsPredator(_bear));
@@ -25,7 +25,7 @@ namespace Tests
     }
 
     [Test]
-    public void IsPrey()
+    public void IsPreyTest()
     {
       Assert.IsTrue(Tags.IsPrey(_rabbit));
       Assert.IsTrue(Tags.IsPrey(_deer));
