@@ -29,6 +29,9 @@ class LogData:
   def alive_count(self) -> int:
     return self.data["aliveCount"]
 
+  def food_count(self) -> int:
+    return self.data["foodCount"]
+
   def initial_food_count(self) -> int:
     return self.data["initialFoodCount"]
 
@@ -105,8 +108,8 @@ def get_food_history(data: LogData) -> dict[TimePoint, Amount]:
   food_history: dict[TimePoint, Amount] = {0: initial_food_count}
   food_count: Amount = initial_food_count
 
-  for consumption in data.food_consumptions():
-    time: TimePoint = consumption["time"] / 1_000
+  for event in data.events():
+    time: TimePoint = event["time"] / 1_000
 
     food_count = food_count - 1
     food_history[time] = food_count
