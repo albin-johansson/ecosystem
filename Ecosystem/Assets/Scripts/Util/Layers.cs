@@ -4,6 +4,7 @@ namespace Ecosystem.Util
 {
   public static class Layers
   {
+    // TODO should WolfLayer and BearLayer be merged into a single "PredatorLayer"?
     public static readonly int WolfLayer = LayerMask.NameToLayer("Wolf");
     public static readonly int BearLayer = LayerMask.NameToLayer("Bear");
     public static readonly int WaterLayer = LayerMask.NameToLayer("Water");
