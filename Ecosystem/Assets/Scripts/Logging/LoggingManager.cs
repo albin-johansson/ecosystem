@@ -81,6 +81,9 @@ namespace Ecosystem.Logging
               position = animal.transform.position
       });
 
+      ++_data.aliveCount;
+
+      aliveCountText.text = _data.aliveCount.ToString();
       birthCountText.text = _data.births.Count.ToString();
     }
 
