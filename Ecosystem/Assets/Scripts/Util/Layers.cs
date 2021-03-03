@@ -2,7 +2,7 @@ using UnityEngine;
 
 namespace Ecosystem.Util
 {
-  public static class LayerUtil
+  public static class Layers
   {
     public static readonly int WolfLayer = LayerMask.NameToLayer("Wolf");
     public static readonly int BearLayer = LayerMask.NameToLayer("Bear");

@@ -40,8 +40,8 @@ namespace Ecosystem
       if (!targetTracker.HasTarget)
       {
         var desire = _delegate.Desire;
-        if (desire == Desire.Prey && other.gameObject.layer == LayerUtil.PreyLayer ||
-            desire == Desire.Water && other.gameObject.layer == LayerUtil.WaterLayer ||
+        if (desire == Desire.Prey && other.gameObject.layer == Layers.PreyLayer ||
+            desire == Desire.Water && other.gameObject.layer == Layers.WaterLayer ||
             desire == Desire.Idle && mateFinder.CompatibleAsParents(other.gameObject))
         {
           targetTracker.SetTarget(other.gameObject.transform.position, desire);

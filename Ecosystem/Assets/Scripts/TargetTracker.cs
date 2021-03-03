@@ -106,9 +106,9 @@ namespace Ecosystem
 
     private void LookForTarget(GameObject other)
     {
-      if (_targetType == Desire.Food && other.layer == LayerUtil.FoodLayer ||
-          _targetType == Desire.Prey && other.layer == LayerUtil.PreyLayer ||
-          _targetType == Desire.Water && other.layer == LayerUtil.WaterLayer)
+      if (_targetType == Desire.Food && other.layer == Layers.FoodLayer ||
+          _targetType == Desire.Prey && other.layer == Layers.PreyLayer ||
+          _targetType == Desire.Water && other.layer == Layers.WaterLayer)
       {
         _target = other.gameObject;
         _targetInSight = true;

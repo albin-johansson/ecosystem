@@ -36,7 +36,7 @@ namespace Ecosystem
     /// </summary>
     private void OnTriggerEnter(Collider other)
     {
-      if (LayerUtil.IsPredatorLayer(other.gameObject.layer))
+      if (Layers.IsPredatorLayer(other.gameObject.layer))
       {
         targetTracker.FleeFromPredator(other.gameObject);
         return;
@@ -47,8 +47,8 @@ namespace Ecosystem
       if (!targetTracker.HasTarget)
       {
         var desire = _delegate.Desire;
-        if (desire == Desire.Food && other.gameObject.layer == LayerUtil.FoodLayer ||
-            desire == Desire.Water && other.gameObject.layer == LayerUtil.WaterLayer ||
+        if (desire == Desire.Food && other.gameObject.layer == Layers.FoodLayer ||
+            desire == Desire.Water && other.gameObject.layer == Layers.WaterLayer ||
             desire == Desire.Idle && mateFinder.CompatibleAsParents(other.gameObject))
         {
           targetTracker.SetTarget(other.gameObject.transform.position, desire);

@@ -29,15 +29,15 @@ namespace Ecosystem
 
     private static Desire GetDesire(GameObject other)
     {
-      if (other.gameObject.layer == LayerUtil.FoodLayer)
+      if (other.gameObject.layer == Layers.FoodLayer)
       {
         return Desire.Food;
       }
-      else if (other.gameObject.layer == LayerUtil.PreyLayer)
+      else if (other.gameObject.layer == Layers.PreyLayer)
       {
         return Desire.Prey;
       }
-      else if (other.gameObject.layer == LayerUtil.WaterLayer)
+      else if (other.gameObject.layer == Layers.WaterLayer)
       {
         return Desire.Water;
       }
