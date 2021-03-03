@@ -21,6 +21,14 @@ namespace Ecosystem.Logging
     public Vector3 position;
   }
 
+  [Serializable]
+  public struct Birth
+  {
+    public long time;
+    public string tag;
+    public Vector3 position;
+  }
+
   /// <summary>
   ///   Provides information about a death event.
   /// </summary>
@@ -104,6 +112,11 @@ namespace Ecosystem.Logging
     ///   The history of all food consumptions.
     /// </summary>
     public List<FoodConsumption> foodConsumptions = new List<FoodConsumption>();
+
+    /// <summary>
+    ///   The history of all births.
+    /// </summary>
+    public List<Birth> births = new List<Birth>();
 
     /// <summary>
     ///   The history of all deaths.

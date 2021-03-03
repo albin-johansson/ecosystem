@@ -15,6 +15,7 @@ namespace Ecosystem.Logging
   public sealed class LoggingManager : MonoBehaviour
   {
     [SerializeField] private Text aliveCountText;
+    [SerializeField] private Text birthCountText;
     [SerializeField] private Text deadCountText;
     [SerializeField] private Text foodCountText;
     [SerializeField] private Text preyConsumedCountText;
@@ -29,6 +30,7 @@ namespace Ecosystem.Logging
       DeathHandler.OnDeath += LogDeath;
       FoodConsumer.OnFoodEaten += LogFoodEaten;
       PreyConsumer.OnPreyConsumed += LogPreyConsumed;
+      Reproducer.OnBirth += LogBirth;
 
       /*
        * The following counting logic assumes that only the root objects of our prefabs feature
@@ -48,8 +50,9 @@ namespace Ecosystem.Logging
       aliveCountText.text = _data.aliveCount.ToString();
       foodCountText.text = _data.foodCount.ToString();
 
-      preyConsumedCountText.text = "0";
+      birthCountText.text = "0";
       deadCountText.text = "0";
+      preyConsumedCountText.text = "0";
     }
 
     private void Update()
@@ -67,6 +70,18 @@ namespace Ecosystem.Logging
     {
       _data.duration = AnalyticsSessionInfo.sessionElapsedTime;
       LogFileWriter.Save(_data);
+    }
+
+    private void LogBirth(GameObject animal)
+    {
+      _data.births.Add(new Birth
+      {
+              time = AnalyticsSessionInfo.sessionElapsedTime,
+              tag = animal.tag,
+              position = animal.transform.position
+      });
+
+      birthCountText.text = _data.births.Count.ToString();
     }
 
     private void LogDeath(CauseOfDeath cause, GameObject deadObject)

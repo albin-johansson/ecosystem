@@ -5,6 +5,14 @@ namespace Ecosystem
 {
   public sealed class Reproducer : MonoBehaviour
   {
+
+    public delegate void BirthEvent(GameObject animal);
+
+    /// <summary>
+    ///   This event is emitted every time an animal is born.
+    /// </summary>
+    public static event BirthEvent OnBirth;
+
     [SerializeField] private Genome genome;
     [SerializeField] private GameObject prefab;
 
@@ -55,6 +63,8 @@ namespace Ecosystem
       var child = Instantiate(prefab, currentTransform.position, currentTransform.rotation);
       var childGenome = child.GetComponent<Genome>();
       childGenome.Initialize(genome, _mateGenome);
+
+      OnBirth?.Invoke(child);
     }
 
     private void StartPregnancy(Genome mateGenome)
