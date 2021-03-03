@@ -5,7 +5,6 @@ namespace Ecosystem
 {
   public sealed class Reproducer : MonoBehaviour
   {
-
     public delegate void BirthEvent(GameObject animal);
 
     /// <summary>
