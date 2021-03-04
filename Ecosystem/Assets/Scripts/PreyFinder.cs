@@ -31,7 +31,7 @@ namespace Ecosystem
 
     /// <summary>
     /// When colliding with an object, that object is saved to the animals memory, and subsequently set as a target if the
-    /// priority matches. 
+    /// priority matches.
     /// </summary>
     private void OnTriggerEnter(Collider other)
     {
@@ -39,12 +39,12 @@ namespace Ecosystem
 
       if (!targetTracker.HasTarget)
       {
-        var desire = _delegate.Desire;
-        if (desire == Desire.Prey && other.gameObject.layer == Layers.PreyLayer ||
-            desire == Desire.Water && other.gameObject.layer == Layers.WaterLayer ||
-            desire == Desire.Idle && mateFinder.CompatibleAsParents(other.gameObject))
+        var state = _delegate.AnimalState;
+        if (state == AnimalState.LookingForFood && other.gameObject.layer == LayerUtil.PreyLayer ||
+            state == AnimalState.LookingForWater && other.gameObject.layer == LayerUtil.WaterLayer ||
+            state == AnimalState.Idle && mateFinder.CompatibleAsParents(other.gameObject))
         {
-          targetTracker.SetTarget(other.gameObject.transform.position, desire);
+          targetTracker.SetTarget(other.gameObject.transform.position, state);
         }
       }
     }

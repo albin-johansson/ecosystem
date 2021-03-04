@@ -12,13 +12,14 @@ namespace Ecosystem
     private GameObject _target;
     private bool _targetInSight;
     private float _timeRemaining;
-    private Desire _targetType;
-    private bool _chased;
+    private AnimalState _targetType;
+  
     private Vector3 _fleeDirection;
 
     private const double StopTrackingThreshold = 0.1f;
 
     public bool HasTarget { get; private set; }
+    public bool IsChased { get; private set; }
 
     //Runs a timer for when to stop looking for the target
     private void Update()
@@ -32,23 +33,23 @@ namespace Ecosystem
           _timeRemaining = 0;
           HasTarget = false;
           _targetInSight = false;
-          _chased = false;
+          IsChased = false;
         }
       }
 
-      //When chased the velocity is constantly set to the fleeing direction while the timer for being chased is still running. 
-      if (_chased)
+      //When chased the velocity is constantly set to the fleeing direction while the timer for being chased is still running.
+      if (IsChased)
       {
         navAgent.velocity = _fleeDirection;
       }
     }
 
     //Sets a target to hone in on and start a timer
-    public void SetTarget(Vector3 target, Desire desire)
+    public void SetTarget(Vector3 target, AnimalState state)
     {
       animationController.MoveAnimation();
       navAgent.SetDestination(target);
-      _targetType = desire;
+      _targetType = state;
       _timeRemaining = 10;
       HasTarget = true;
     }
@@ -60,11 +61,22 @@ namespace Ecosystem
       _target = predator;
       HasTarget = true;
       _targetInSight = true;
-      _chased = true;
+      IsChased = true;
       _timeRemaining = 5;
     }
 
-    //Sets the _fleeDirection to be away from the predators position. The _fleeDirection works as a velocity and therefore we apply the navAgents speed to the vector. 
+    public void StopTracking()
+    {
+      navAgent.isStopped = true;
+      _target = null;
+    }
+
+    public void ResumeTracking()
+    {
+      navAgent.isStopped = false;
+    }
+
+    //Sets the _fleeDirection to be away from the predators position. The _fleeDirection works as a velocity and therefore we apply the navAgents speed to the vector.
     private void SetFleeDirection(Vector3 predatorPosition)
     {
       var velocityDirection = (navAgent.transform.position - predatorPosition).normalized;
@@ -81,8 +93,8 @@ namespace Ecosystem
 
       if (_targetInSight && other.gameObject.Equals(_target))
       {
-        //if predator is still in range set the fleeing direction to match the predator. 
-        if (_chased)
+        //if predator is still in range set the fleeing direction to match the predator.
+        if (IsChased)
         {
           SetFleeDirection(other.transform.position);
           _timeRemaining = 5;
@@ -106,9 +118,9 @@ namespace Ecosystem
 
     private void LookForTarget(GameObject other)
     {
-      if (_targetType == Desire.Food && other.layer == Layers.FoodLayer ||
-          _targetType == Desire.Prey && other.layer == Layers.PreyLayer ||
-          _targetType == Desire.Water && other.layer == Layers.WaterLayer)
+      if (_targetType == AnimalState.LookingForFood && other.layer == LayerUtil.FoodLayer ||
+          _targetType == AnimalState.LookingForPrey && other.layer == LayerUtil.PreyLayer ||
+          _targetType == AnimalState.LookingForWater && other.layer == LayerUtil.WaterLayer)
       {
         _target = other.gameObject;
         _targetInSight = true;
