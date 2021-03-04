@@ -5,9 +5,10 @@ namespace Ecosystem.UI
 {
   public sealed class SceneSelector : MonoBehaviour
   {
+    [SerializeField] private string button;
     public void SelectScene()
     {
-      switch (gameObject.name)
+      switch (button)
       {
         case "ForestScene":
           SceneManager.LoadScene("Scenes/ForestScene/ForestScene");
