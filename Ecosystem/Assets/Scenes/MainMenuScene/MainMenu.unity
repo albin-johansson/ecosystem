@@ -349,7 +349,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 148d95c806ee61a4ab3a196645d609ca, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  button: 
+  button: SampleScene
 --- !u!114 &368668883
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -459,7 +459,7 @@ MonoBehaviour:
   m_Content: {fileID: 1679864746}
   m_Horizontal: 0
   m_Vertical: 1
-  m_MovementType: 1
+  m_MovementType: 2
   m_Elasticity: 0.1
   m_Inertia: 1
   m_DecelerationRate: 0.135
