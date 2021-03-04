@@ -13,7 +13,7 @@ namespace Ecosystem
     private bool _targetInSight;
     private float _timeRemaining;
     private AnimalState _targetType;
-  
+
     private Vector3 _fleeDirection;
 
     private const double StopTrackingThreshold = 0.1f;
@@ -118,9 +118,9 @@ namespace Ecosystem
 
     private void LookForTarget(GameObject other)
     {
-      if (_targetType == AnimalState.LookingForFood && other.layer == LayerUtil.FoodLayer ||
-          _targetType == AnimalState.LookingForPrey && other.layer == LayerUtil.PreyLayer ||
-          _targetType == AnimalState.LookingForWater && other.layer == LayerUtil.WaterLayer)
+      if (_targetType == AnimalState.LookingForFood && other.layer == Layers.FoodLayer ||
+          _targetType == AnimalState.LookingForPrey && other.layer == Layers.PreyLayer ||
+          _targetType == AnimalState.LookingForWater && other.layer == Layers.WaterLayer)
       {
         _target = other.gameObject;
         _targetInSight = true;
