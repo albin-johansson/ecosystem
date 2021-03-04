@@ -34,7 +34,7 @@ def visualise_animal_populations_standard(data: LogData, directory: Path):
 
   axes.legend(loc="upper left")
   axes.set_xlim(0, data.duration_secs())
-  axes.set_ylim(0, max(data.initial_total_alive_count() + 20, data.alive_count() + 20))
+  axes.set_ylim(0, max(data.initial_total_alive_count(), data.alive_count()) + 20)
   axes.set_xlabel("Time (seconds)")
   axes.set_ylabel("Population size")
   axes.set_title("Population sizes")
