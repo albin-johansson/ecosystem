@@ -8,7 +8,7 @@ namespace Ecosystem
   /// Will spawn a specified food on a selected spawner. Needs a gameObject with specific location were the food should be instantiated.
   /// Works well on the berry bush were there is loads of locations to spawn berries. 
   /// </summary>
-  public class StaticFoodGenerator : MonoBehaviour
+  public class StationaryFoodGeneration : MonoBehaviour
   {
     [SerializeField] private GameObject spawner;
     [SerializeField] private GameObject foodObject;
