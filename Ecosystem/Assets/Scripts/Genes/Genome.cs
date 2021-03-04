@@ -90,8 +90,8 @@ namespace Ecosystem.Genes
     /// </summary>
     public double GetSpeed()
     {
-      return Genes[GeneType.HungerRate].Value
-             * Genes[GeneType.SpeedFactor].Value *
+      return Genes[GeneType.HungerRate].Value *
+             Genes[GeneType.SpeedFactor].Value *
              Genes[GeneType.SizeFactor].ValueAsDecimal();
     }
 
