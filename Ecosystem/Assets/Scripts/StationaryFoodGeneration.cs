@@ -18,14 +18,14 @@ namespace Ecosystem
     private int _spawningLocations;
     private Transform _spawnLocation;
     private Transform _spawnLocationParent;
-    
+
     //An extra child object was added to the original berry bush prefab to create some order to which berries in it´s hierarchy are locations and which are consumable. 
     private void Start()
     {
       _spawnLocationParent = spawner.transform.GetChild(0);
       _spawningLocations = _spawnLocationParent.childCount;
     }
-    
+
     /// <summary>
     /// The berry bush prefab has now a child with multiple invisible berries in it´s hierarchy.
     /// These invisible berries act as spawning locations for actual berries which can be eaten by animals.
