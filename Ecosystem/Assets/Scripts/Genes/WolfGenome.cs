@@ -15,11 +15,6 @@ namespace Ecosystem.Genes
     private static readonly Gene GestationPeriod = new Gene(10, 10, 120);
     private static readonly Gene SexualMaturityTime = new Gene(10, 10, 120);
 
-    protected override void Initialize()
-    {
-      Initialize(0.05);
-    }
-
     protected override void Initialize(double mutateChance)
     {
       MutateChance = mutateChance;

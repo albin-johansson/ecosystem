@@ -55,10 +55,7 @@ namespace Ecosystem.Genes
       MutateChance = first.MutateChance;
     }
 
-    protected virtual void Initialize()
-    {
-      Initialize(0.05);
-    }
+    protected virtual void Initialize() => Initialize(0.05);
 
     protected virtual void Initialize(double mutateChance)
     {
