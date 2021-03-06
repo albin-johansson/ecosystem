@@ -62,6 +62,9 @@ class LogData:
   def death_info(self, index: int):
     return self.data["deaths"][index]
 
+  def mating_info(self, index: int):
+    return self.data["matings"][index]
+
   def __getitem__(self, item):  # operator[]
     return self.data[item]
 
