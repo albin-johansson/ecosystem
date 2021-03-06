@@ -39,10 +39,6 @@ namespace Ecosystem.Logging
 
       aliveCountText.text = _data.AliveCount().ToString();
       foodCountText.text = _data.FoodCount().ToString();
-
-      birthCountText.text = "0";
-      deadCountText.text = "0";
-      preyConsumedCountText.text = "0";
     }
 
     private void Update()
