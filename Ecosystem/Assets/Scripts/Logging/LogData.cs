@@ -91,17 +91,17 @@ namespace Ecosystem.Logging
     /// <summary>
     ///   The history of simulation events, stored in chronological order. 
     /// </summary>
-    [SerializeField] private List<SimulationEvent> events = new List<SimulationEvent>();
+    [SerializeField] private List<SimulationEvent> events = new List<SimulationEvent>(256);
 
     /// <summary>
     ///   Additional information about mating events.
     /// </summary>
-    [SerializeField] private List<Mating> matings = new List<Mating>();
+    [SerializeField] private List<Mating> matings = new List<Mating>(64);
 
     /// <summary>
     ///   Additional information about death events.
     /// </summary>
-    [SerializeField] private List<Death> deaths = new List<Death>();
+    [SerializeField] private List<Death> deaths = new List<Death>(64);
 
     /// <summary>
     ///   Prepares the data with the initial simulation state. Used to determine the
