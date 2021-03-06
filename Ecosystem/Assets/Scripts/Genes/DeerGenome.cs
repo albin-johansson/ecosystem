@@ -1,5 +1,4 @@
 using System.Collections.Generic;
-using UnityEngine;
 
 namespace Ecosystem.Genes
 {
@@ -32,19 +31,7 @@ namespace Ecosystem.Genes
 
     protected override void Initialize()
     {
-      Pack = new GenomePack
-      {
-              HungerRate = HungerRate,
-              HungerThreshold = HungerThreshold,
-              ThirstRate = ThirstRate,
-              ThirstThreshold = ThirstThreshold,
-              Vision = Vision,
-              SpeedFactor = SpeedFactor,
-              SizeFactor = SizeFactor,
-              DesirabilityFactor = DesirabilityFactor,
-              GestationPeriod = GestationPeriod,
-              SexualMaturityTime = SexualMaturityTime
-      };
+      Pack = GenomePack.Create(DefaultGenes);
     }
 
     public override Dictionary<GeneType, Gene> GetInitialGenes()
