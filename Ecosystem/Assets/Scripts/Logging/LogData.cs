@@ -18,45 +18,6 @@ namespace Ecosystem.Logging
   }
 
   /// <summary>
-  ///   Represents an "event" in the simulation, such as animal births,
-  ///   deaths and food consumption. Certain aspects are common for all events,
-  ///   but there are aspects that are only relevant for specific event types.
-  /// </summary>
-  [Serializable]
-  public struct SimulationEvent
-  {
-    /// <summary>
-    ///   The time of the event, relative to the start of the simulation, in milliseconds.
-    /// </summary>
-    public long time;
-
-    /// <summary>
-    ///   The tag attached to the game object associated with the event. 
-    /// </summary>
-    public string tag;
-
-    /// <summary>
-    ///   The type of the simulation event.
-    /// </summary>
-    public string type;
-
-    /// <summary>
-    ///   The position of the event.
-    /// </summary>
-    public Vector3 position;
-
-    /// <summary>
-    ///   Provides extra information about death events. This should only be used if
-    ///   the type of the event is <c>"death"</c>. 
-    /// </summary>
-    /// <remarks>
-    ///   The Unity JSON serializer will unfortunately always include a this information
-    ///   in the JSON file, even if the field is <c>null</c>. 
-    /// </remarks>
-    public Death deathInfo;
-  }
-
-  /// <summary>
   ///   The in-memory storage of simulation data, which can be serialized
   ///   when the simulation has finished.
   /// </summary>
