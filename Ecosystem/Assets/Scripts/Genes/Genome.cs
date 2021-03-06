@@ -18,7 +18,7 @@ namespace Ecosystem.Genes
 
     public bool IsMale { get; protected set; }
     protected double MutateChance;
-    protected Dictionary<GeneType, Gene> Genes = new Dictionary<GeneType, Gene>();
+    public Dictionary<GeneType, Gene> Genes { get; private set; } = new Dictionary<GeneType, Gene>();
 
     public void Awake()
     {
