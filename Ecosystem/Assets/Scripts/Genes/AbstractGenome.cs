@@ -1,5 +1,4 @@
-﻿using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 namespace Ecosystem.Genes
 {
@@ -14,11 +13,9 @@ namespace Ecosystem.Genes
 
     protected abstract void Initialize();
 
-    public abstract Dictionary<GeneType, Gene> GetInitialGenes();
-
     public void Initialize(IGenome first, IGenome second)
     {
-      Data = Genomes.Merge(first.GetGenes(), second.GetGenes());
+      Data = Genomes.Merge(first, second);
     }
 
     public bool IsMale => Data.IsMale;

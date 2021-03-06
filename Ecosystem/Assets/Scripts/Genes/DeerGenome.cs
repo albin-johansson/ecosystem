@@ -33,10 +33,5 @@ namespace Ecosystem.Genes
     {
       Data = GenomeData.Create(DefaultGenes);
     }
-
-    public override Dictionary<GeneType, Gene> GetInitialGenes()
-    {
-      return DefaultGenes;
-    }
   }
 }
