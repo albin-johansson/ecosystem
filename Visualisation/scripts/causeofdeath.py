@@ -79,7 +79,6 @@ def create_grouped_bar_chart(stats: dict[str, list[int]]):
   x = numpy.arange(len(labels))
 
   bar_width = 0.15
-
   max_value = 0
 
   rects = []
@@ -122,7 +121,9 @@ def visualise_cause_of_death(data: LogData, directory: Path):
 
     if event_type == "death":
       tag: str = event["tag"]
-      cause: int = event["deathInfo"]["cause"]
+
+      info = data.death_info(event["deathIndex"])
+      cause: int = info["cause"]
 
       if tag == "Rabbit":
         rabbit_stats[cause] = rabbit_stats[cause] + 1

@@ -59,6 +59,9 @@ class LogData:
   def events(self):
     return self.data["events"]
 
+  def death_info(self, index: int):
+    return self.data["deaths"][index]
+
   def __getitem__(self, item):  # operator[]
     return self.data[item]
 

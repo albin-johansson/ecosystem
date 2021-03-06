@@ -1,6 +1,6 @@
-﻿using Ecosystem.Util;
+﻿using Ecosystem.Genes;
+using Ecosystem.Util;
 using UnityEngine;
-using UnityEngine.Analytics;
 using UnityEngine.UI;
 
 namespace Ecosystem.Logging
@@ -32,28 +32,12 @@ namespace Ecosystem.Logging
       FoodConsumer.OnFoodEaten += LogFoodEaten;
       PreyConsumer.OnPreyConsumed += LogPreyConsumed;
       Reproducer.OnBirth += LogBirth;
+      Reproducer.OnReproduction += LogReproduction;
 
-      /*
-       * The following counting logic assumes that only the root objects of our prefabs feature
-       * the identifying tags. If that wouldn't be the case, this approach would overestimate the
-       * amounts.
-       */
+      _data.CountInitialStats();
 
-      _data.initialAliveRabbitsCount = Tags.Count("Rabbit");
-      _data.initialAliveDeerCount = Tags.Count("Deer");
-      _data.initialAliveWolvesCount = Tags.Count("Wolf");
-      _data.initialAliveBearsCount = Tags.Count("Bear");
-
-      _data.initialAlivePredatorCount = Tags.CountPredators();
-      _data.initialAlivePreyCount = Tags.CountPrey();
-      _data.initialFoodCount = Tags.CountFood();
-      _data.initialAliveCount = _data.initialAlivePreyCount + _data.initialAlivePredatorCount;
-
-      _data.aliveCount = _data.initialAliveCount;
-      _data.foodCount = _data.initialFoodCount;
-
-      aliveCountText.text = _data.aliveCount.ToString();
-      foodCountText.text = _data.foodCount.ToString();
+      aliveCountText.text = _data.AliveCount().ToString();
+      foodCountText.text = _data.FoodCount().ToString();
 
       birthCountText.text = "0";
       deadCountText.text = "0";
@@ -62,7 +46,7 @@ namespace Ecosystem.Logging
 
     private void Update()
     {
-      var milliseconds = AnalyticsSessionInfo.sessionElapsedTime;
+      var milliseconds = SessionTime.Now();
       if (milliseconds > _nextUpdateTime)
       {
         var seconds = milliseconds / 1_000;
@@ -73,47 +57,43 @@ namespace Ecosystem.Logging
 
     private void OnApplicationQuit()
     {
-      _data.duration = AnalyticsSessionInfo.sessionElapsedTime;
+      _data.MarkAsDone();
       LogFileWriter.Save(_data);
     }
 
     private void LogBirth(GameObject animal)
     {
-      _data.events.Add(EventFactory.CreateBirth(animal));
+      _data.AddBirth(animal);
 
-      ++_data.birthCount;
-      ++_data.aliveCount;
+      aliveCountText.text = _data.AliveCount().ToString();
+      birthCountText.text = _data.BirthCount().ToString();
+    }
 
-      aliveCountText.text = _data.aliveCount.ToString();
-      birthCountText.text = _data.birthCount.ToString();
+    private void LogReproduction(Vector3 position, string animalTag, Genome male, Genome female)
+    {
+      _data.AddMating(position, animalTag, male, female);
     }
 
     private void LogDeath(CauseOfDeath cause, GameObject deadObject)
     {
-      _data.events.Add(EventFactory.CreateDeath(deadObject, cause));
+      _data.AddDeath(deadObject, cause);
 
-      --_data.aliveCount;
-      ++_data.deadCount;
-
-      aliveCountText.text = _data.aliveCount.ToString();
-      deadCountText.text = _data.deadCount.ToString();
+      aliveCountText.text = _data.AliveCount().ToString();
+      deadCountText.text = _data.DeadCount().ToString();
     }
 
     private void LogFoodEaten(GameObject food)
     {
-      _data.events.Add(EventFactory.CreateConsumption(food));
+      _data.AddConsumption(food);
 
-      --_data.foodCount;
-
-      foodCountText.text = _data.foodCount.ToString();
+      foodCountText.text = _data.FoodCount().ToString();
     }
 
     private void LogPreyConsumed()
     {
-      // We only count the number of consumed prey, more information will be logged as 
-      // a death event
-      ++_data.preyConsumedCount;
-      preyConsumedCountText.text = _data.preyConsumedCount.ToString();
+      _data.AddPreyConsumption();
+
+      preyConsumedCountText.text = _data.PreyConsumedCount().ToString();
     }
   }
 }

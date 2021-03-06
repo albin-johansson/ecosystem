@@ -1,22 +1,11 @@
 using System;
 using System.Collections.Generic;
+using Ecosystem.Genes;
+using Ecosystem.Util;
 using UnityEngine;
-using UnityEngine.Analytics;
 
 namespace Ecosystem.Logging
 {
-  /// <summary>
-  ///   Provides information about a death event.
-  /// </summary>
-  [Serializable]
-  public sealed class Death
-  {
-    /// <summary>
-    ///   The cause of death.
-    /// </summary>
-    public CauseOfDeath cause;
-  }
-
   /// <summary>
   ///   The in-memory storage of simulation data, which can be serialized
   ///   when the simulation has finished.
@@ -27,126 +16,192 @@ namespace Ecosystem.Logging
     /// <summary>
     ///   Duration of simulation, in milliseconds.
     /// </summary>
-    public long duration;
+    [SerializeField] private long duration;
 
     /// <summary>
     ///   The initial amount of food items.
     /// </summary>
-    public int initialFoodCount;
+    [SerializeField] private int initialFoodCount;
 
     /// <summary>
     ///   The initial amount of alive animals.
     /// </summary>
-    public int initialAliveCount;
+    [SerializeField] private int initialAliveCount;
 
     /// <summary>
     ///   The initial amount of alive predators.
     /// </summary>
-    public int initialAlivePredatorCount;
+    [SerializeField] private int initialAlivePredatorCount;
 
     /// <summary>
     ///   The initial amount of alive prey.
     /// </summary>
-    public int initialAlivePreyCount;
+    [SerializeField] private int initialAlivePreyCount;
 
     /// <summary>
     ///   The initial amount of rabbits.
     /// </summary>
-    public int initialAliveRabbitsCount;
+    [SerializeField] private int initialAliveRabbitsCount;
 
     /// <summary>
     ///   The initial amount of deer.
     /// </summary>
-    public int initialAliveDeerCount;
+    [SerializeField] private int initialAliveDeerCount;
 
     /// <summary>
     ///   The initial amount of wolves.
     /// </summary>
-    public int initialAliveWolvesCount;
+    [SerializeField] private int initialAliveWolvesCount;
 
     /// <summary>
     ///   The initial amount of bears.
     /// </summary>
-    public int initialAliveBearsCount;
+    [SerializeField] private int initialAliveBearsCount;
 
     /// <summary>
     ///   The final amount of available food items.
     /// </summary>
-    public int foodCount;
+    [SerializeField] private int foodCount;
 
     /// <summary>
     ///   The final amount of alive animals.
     /// </summary>
-    public int aliveCount;
+    [SerializeField] private int aliveCount;
 
     /// <summary>
     ///   The amount of animals that have died.
     /// </summary>
-    public int deadCount;
+    [SerializeField] private int deadCount;
 
     /// <summary>
     ///   The amount of animals that have been born.
     /// </summary>
-    public int birthCount;
+    [SerializeField] private int birthCount;
 
     /// <summary>
     ///   The amount of prey that were consumed.
     /// </summary>
-    public int preyConsumedCount;
+    [SerializeField] private int preyConsumedCount;
 
     /// <summary>
     ///   The history of simulation events, stored in chronological order. 
     /// </summary>
-    public List<SimulationEvent> events = new List<SimulationEvent>();
-  }
+    [SerializeField] private List<SimulationEvent> events = new List<SimulationEvent>();
 
-  /// <summary>
-  ///   A factory class for creating simulation events of different types.
-  /// </summary>
-  public static class EventFactory
-  {
+    [SerializeField] private List<Death> deaths = new List<Death>();
+
     /// <summary>
-    ///   Creates a simulation event that represents the birth of an animal.
+    ///   Counts the current amount of animals and food sources. Used to determine the initial population sizes.
+    /// </summary>
+    /// <remarks>
+    ///   The counting logic assumes that only the root objects of our prefabs feature the
+    ///   identifying tags. If that wouldn't be the case, this approach would overestimate the amounts.
+    /// </remarks>
+    public void CountInitialStats()
+    {
+      initialAliveRabbitsCount = Tags.Count("Rabbit");
+      initialAliveDeerCount = Tags.Count("Deer");
+      initialAliveWolvesCount = Tags.Count("Wolf");
+      initialAliveBearsCount = Tags.Count("Bear");
+
+      initialAlivePredatorCount = Tags.CountPredators();
+      initialAlivePreyCount = Tags.CountPrey();
+      initialFoodCount = Tags.CountFood();
+      initialAliveCount = initialAlivePreyCount + initialAlivePredatorCount;
+
+      aliveCount = initialAliveCount;
+      foodCount = initialFoodCount;
+    }
+
+    /// <summary>
+    ///   Marks the simulation as finished. This is used to determine the duration of the simulation.
+    /// </summary>
+    public void MarkAsDone()
+    {
+      duration = SessionTime.Now();
+    }
+
+
+    /// <summary>
+    ///   Adds a simulation event that represents the birth of an animal.
     /// </summary>
     /// <param name="animal">the game object associated with the animal that was born.</param>
-    /// <returns>an event that describes the birth.</returns>
-    public static SimulationEvent CreateBirth(GameObject animal) => new SimulationEvent
+    public void AddBirth(GameObject animal)
     {
-            time = AnalyticsSessionInfo.sessionElapsedTime,
-            type = "birth",
-            tag = animal.tag,
-            position = animal.transform.position
-    };
+      events.Add(new SimulationEvent
+      {
+              time = SessionTime.Now(),
+              type = "birth",
+              tag = animal.tag,
+              position = animal.transform.position,
+              matingIndex = -1,
+              deathIndex = -1
+      });
+
+      ++birthCount;
+      ++aliveCount;
+    }
 
     /// <summary>
-    ///   Creates a simulation event that represents the death of an animal.
+    ///   Adds a simulation event that represents the death of an animal.
     /// </summary>
     /// <param name="deadObject">the game object associated with the animal that died.</param>
     /// <param name="cause">the cause of death for the animal.</param>
-    /// <returns>an event that describes the death.</returns>
-    public static SimulationEvent CreateDeath(GameObject deadObject, CauseOfDeath cause) => new SimulationEvent
+    public void AddDeath(GameObject deadObject, CauseOfDeath cause)
     {
-            time = AnalyticsSessionInfo.sessionElapsedTime,
-            type = "death",
-            tag = deadObject.tag,
-            position = deadObject.transform.position,
-            deathInfo = new Death
-            {
-                    cause = cause
-            }
-    };
+      events.Add(new SimulationEvent
+      {
+              time = SessionTime.Now(),
+              type = "death",
+              tag = deadObject.tag,
+              position = deadObject.transform.position,
+              matingIndex = -1,
+              deathIndex = deaths.Count
+      });
+
+      deaths.Add(new Death
+      {
+              cause = cause
+      });
+
+      --aliveCount;
+      ++deadCount;
+    }
 
     /// <summary>
-    ///   Creates a simulation event that represents a food item being consumed.
+    ///   Adds a simulation event that represents a food item being consumed.
     /// </summary>
     /// <param name="food">the game object associated with the food item that was consumed.</param>
-    /// <returns>an event that describes the food consumption.</returns>
-    public static SimulationEvent CreateConsumption(GameObject food) => new SimulationEvent
+    public void AddConsumption(GameObject food)
     {
-            time = AnalyticsSessionInfo.sessionElapsedTime,
-            type = "consumption",
-            tag = food.tag,
-            position = food.transform.position
-    };
+      events.Add(new SimulationEvent
+      {
+              time = SessionTime.Now(),
+              type = "consumption",
+              tag = food.tag,
+              position = food.transform.position,
+              matingIndex = -1,
+              deathIndex = -1
+      });
+
+      --foodCount;
+    }
+
+    public void AddPreyConsumption()
+    {
+      // We only count the number of consumed prey, more information will be logged as 
+      // a death event
+      ++preyConsumedCount;
+    }
+
+    public int AliveCount() => aliveCount;
+
+    public int DeadCount() => deadCount;
+
+    public int BirthCount() => birthCount;
+
+    public int FoodCount() => foodCount;
+
+    public int PreyConsumedCount() => preyConsumedCount;
   }
 }
