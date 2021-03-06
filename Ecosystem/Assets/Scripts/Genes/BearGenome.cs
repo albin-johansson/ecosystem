@@ -1,6 +1,8 @@
+using System.Collections.Generic;
+
 namespace Ecosystem.Genes
 {
-  public sealed class BearGenome : Genome
+  public sealed class BearGenome : AbstractGenome
   {
     private static readonly Gene HungerRate = new Gene(1.2f, 0.5f, 10);
     private static readonly Gene HungerThreshold = new Gene(4, 0, 10);
@@ -13,19 +15,40 @@ namespace Ecosystem.Genes
     private static readonly Gene GestationPeriod = new Gene(14, 10, 120);
     private static readonly Gene SexualMaturityTime = new Gene(15, 10, 150);
 
-    protected override void Initialize(double mutateChance)
+    private static readonly Dictionary<GeneType, Gene> DefaultGenes = new Dictionary<GeneType, Gene>
     {
-      MutateChance = mutateChance;
-      Genes[GeneType.HungerRate] = HungerRate;
-      Genes[GeneType.HungerThreshold] = HungerThreshold;
-      Genes[GeneType.ThirstRate] = ThirstRate;
-      Genes[GeneType.ThirstThreshold] = ThirstThreshold;
-      Genes[GeneType.Vision] = Vision;
-      Genes[GeneType.SpeedFactor] = SpeedFactor;
-      Genes[GeneType.SizeFactor] = SizeFactor;
-      Genes[GeneType.DesirabilityScore] = DesirabilityFactor;
-      Genes[GeneType.GestationPeriod] = GestationPeriod;
-      Genes[GeneType.SexualMaturityTime] = SexualMaturityTime;
+            {GeneType.HungerRate, HungerRate},
+            {GeneType.HungerThreshold, HungerThreshold},
+            {GeneType.ThirstRate, ThirstRate},
+            {GeneType.ThirstThreshold, ThirstThreshold},
+            {GeneType.Vision, Vision},
+            {GeneType.SpeedFactor, SpeedFactor},
+            {GeneType.SizeFactor, SizeFactor},
+            {GeneType.DesirabilityScore, DesirabilityFactor},
+            {GeneType.GestationPeriod, GestationPeriod},
+            {GeneType.SexualMaturityTime, SexualMaturityTime},
+    };
+
+    protected override void Initialize()
+    {
+      Pack = new GenomePack
+      {
+              HungerRate = HungerRate,
+              HungerThreshold = HungerThreshold,
+              ThirstRate = ThirstRate,
+              ThirstThreshold = ThirstThreshold,
+              Vision = Vision,
+              SpeedFactor = SpeedFactor,
+              SizeFactor = SizeFactor,
+              DesirabilityFactor = DesirabilityFactor,
+              GestationPeriod = GestationPeriod,
+              SexualMaturityTime = SexualMaturityTime
+      };
+    }
+
+    public override Dictionary<GeneType, Gene> GetInitialGenes()
+    {
+      return DefaultGenes;
     }
   }
 }

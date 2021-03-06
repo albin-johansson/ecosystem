@@ -104,26 +104,17 @@ namespace Ecosystem.Logging
     [SerializeField] private List<Death> deaths = new List<Death>();
 
     /// <summary>
-    ///   Counts the current amount of animals and food sources. Used to determine the initial population sizes.
+    ///   Prepares the data with the initial simulation state. Used to determine the
+    ///   initial population sizes, etc.
     /// </summary>
     /// <remarks>
     ///   The counting logic assumes that only the root objects of our prefabs feature the
     ///   identifying tags. If that wouldn't be the case, this approach would overestimate the amounts.
     /// </remarks>
-    public void CountInitialStats()
+    public void PrepareData()
     {
-      initialAliveRabbitsCount = Tags.Count("Rabbit");
-      initialAliveDeerCount = Tags.Count("Deer");
-      initialAliveWolvesCount = Tags.Count("Wolf");
-      initialAliveBearsCount = Tags.Count("Bear");
-
-      initialAlivePredatorCount = Tags.CountPredators();
-      initialAlivePreyCount = Tags.CountPrey();
-      initialFoodCount = Tags.CountFood();
-      initialAliveCount = initialAlivePreyCount + initialAlivePredatorCount;
-
-      aliveCount = initialAliveCount;
-      foodCount = initialFoodCount;
+      CountPopulationSizes();
+      CaptureInitialGenomes();
     }
 
     /// <summary>
@@ -141,7 +132,7 @@ namespace Ecosystem.Logging
     /// <param name="animalTag">the tag associated with the animals.</param>
     /// <param name="male">the genome associated with the male.</param>
     /// <param name="female">the genome associated with the female.</param>
-    public void AddMating(Vector3 position, string animalTag, Genome male, Genome female)
+    public void AddMating(Vector3 position, string animalTag, IGenome male, IGenome female)
     {
       events.Add(new SimulationEvent
       {
@@ -153,23 +144,6 @@ namespace Ecosystem.Logging
               deathIndex = -1
       });
 
-      var info = new Mating
-      {
-              male = new List<GeneInfo>(),
-              female = new List<GeneInfo>()
-      };
-
-      foreach (var pair in male.Genes)
-      {
-        AddGene(info.male, pair);
-      }
-
-      foreach (var pair in female.Genes)
-      {
-        AddGene(info.female, pair);
-      }
-
-      matings.Add(info);
       ++matingCount;
     }
 
@@ -286,16 +260,35 @@ namespace Ecosystem.Logging
     /// <returns>the amount of consumed prey.</returns>
     public int PreyConsumedCount() => preyConsumedCount;
 
+    private void CountPopulationSizes()
+    {
+      initialAliveRabbitsCount = Tags.Count("Rabbit");
+      initialAliveDeerCount = Tags.Count("Deer");
+      initialAliveWolvesCount = Tags.Count("Wolf");
+      initialAliveBearsCount = Tags.Count("Bear");
+
+      initialAlivePredatorCount = Tags.CountPredators();
+      initialAlivePreyCount = Tags.CountPrey();
+      initialFoodCount = Tags.CountFood();
+      initialAliveCount = initialAlivePreyCount + initialAlivePredatorCount;
+
+      aliveCount = initialAliveCount;
+      foodCount = initialFoodCount;
+    }
+    private void CaptureInitialGenomes()
+    {
+    }
     private static void AddGene(ICollection<GeneInfo> genes, KeyValuePair<GeneType, Gene> pair)
     {
-      var gene = pair.Value;
-      genes.Add(new GeneInfo
-      {
-              type = pair.Key,
-              min = gene.Min,
-              max = gene.Max,
-              value = gene.Value
-      });
+      genes.Add(CreateGeneInfo(pair.Key, pair.Value));
     }
+
+    private static GeneInfo CreateGeneInfo(GeneType type, Gene gene) => new GeneInfo
+    {
+            type = type,
+            min = gene.Min,
+            max = gene.Max,
+            value = gene.Value
+    };
   }
 }

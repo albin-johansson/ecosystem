@@ -35,7 +35,7 @@ namespace Ecosystem.Logging
       Reproducer.OnBirth += LogBirth;
       Reproducer.OnMating += LogMating;
 
-      _data.CountInitialStats();
+      _data.PrepareData();
 
       aliveCountText.text = _data.AliveCount().ToString();
       foodCountText.text = _data.FoodCount().ToString();
@@ -66,7 +66,7 @@ namespace Ecosystem.Logging
       birthCountText.text = _data.BirthCount().ToString();
     }
 
-    private void LogMating(Vector3 position, string animalTag, Genome male, Genome female)
+    private void LogMating(Vector3 position, string animalTag, IGenome male, IGenome female)
     {
       _data.AddMating(position, animalTag, male, female);
       

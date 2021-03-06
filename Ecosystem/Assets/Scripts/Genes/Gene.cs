@@ -20,7 +20,7 @@ namespace Ecosystem.Genes
     }
 
     //Returns value as a number in [0,1]. 
-    public double ValueAsDecimal()
+    public float ValueAsDecimal()
     {
       return (Value - Min) / (Max - Min);
     }

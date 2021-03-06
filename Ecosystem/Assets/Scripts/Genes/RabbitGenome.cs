@@ -1,8 +1,9 @@
-﻿using UnityEngine;
+﻿using System.Collections.Generic;
+using UnityEngine;
 
 namespace Ecosystem.Genes
 {
-  public sealed class RabbitGenome : Genome
+  public sealed class RabbitGenome : AbstractGenome
   {
     private static readonly Gene HungerRate = new Gene(1, 0.5f, 10);
     private static readonly Gene HungerThreshold = new Gene(5, 0, 10);
@@ -15,24 +16,40 @@ namespace Ecosystem.Genes
     private static readonly Gene GestationPeriod = new Gene(10, 10, 120);
     private static readonly Gene SexualMaturityTime = new Gene(10, 10, 150);
 
-    protected override void Initialize(double mutateChance)
+    private static readonly Dictionary<GeneType, Gene> DefaultGenes = new Dictionary<GeneType, Gene>
     {
-      MutateChance = mutateChance;
-      Genes[GeneType.HungerRate] = HungerRate;
-      Genes[GeneType.HungerThreshold] = HungerThreshold;
-      Genes[GeneType.ThirstRate] = ThirstRate;
-      Genes[GeneType.ThirstThreshold] = ThirstThreshold;
-      Genes[GeneType.Vision] = Vision;
-      Genes[GeneType.SpeedFactor] = SpeedFactor;
-      Genes[GeneType.SizeFactor] = SizeFactor;
-      Genes[GeneType.DesirabilityScore] = DesirabilityFactor;
-      Genes[GeneType.GestationPeriod] = GestationPeriod;
-      Genes[GeneType.SexualMaturityTime] = SexualMaturityTime;
+            {GeneType.HungerRate, HungerRate},
+            {GeneType.HungerThreshold, HungerThreshold},
+            {GeneType.ThirstRate, ThirstRate},
+            {GeneType.ThirstThreshold, ThirstThreshold},
+            {GeneType.Vision, Vision},
+            {GeneType.SpeedFactor, SpeedFactor},
+            {GeneType.SizeFactor, SizeFactor},
+            {GeneType.DesirabilityScore, DesirabilityFactor},
+            {GeneType.GestationPeriod, GestationPeriod},
+            {GeneType.SexualMaturityTime, SexualMaturityTime},
+    };
 
-      if (Random.value > 0.5)
+    protected override void Initialize()
+    {
+      Pack = new GenomePack
       {
-        IsMale = true;
-      }
+              HungerRate = HungerRate,
+              HungerThreshold = HungerThreshold,
+              ThirstRate = ThirstRate,
+              ThirstThreshold = ThirstThreshold,
+              Vision = Vision,
+              SpeedFactor = SpeedFactor,
+              SizeFactor = SizeFactor,
+              DesirabilityFactor = DesirabilityFactor,
+              GestationPeriod = GestationPeriod,
+              SexualMaturityTime = SexualMaturityTime
+      };
+    }
+
+    public override Dictionary<GeneType, Gene> GetInitialGenes()
+    {
+      return DefaultGenes;
     }
   }
 }

@@ -8,7 +8,7 @@ namespace Ecosystem
 {
   public sealed class FoodConsumer : MonoBehaviour, IConsumer
   {
-    [SerializeField] private Genome genome;
+    [SerializeField] private AbstractGenome genome;
     [SerializeField] private ResourceBar resourceBar;
     [SerializeField] private DeathHandler deathHandler;
     [SerializeField] private double maxHunger = 100;
@@ -35,7 +35,7 @@ namespace Ecosystem
         return;
       }
 
-      Hunger += genome.GetHungerRate() * Time.deltaTime;
+      Hunger += genome.Metabolism * Time.deltaTime;
       resourceBar.SetValue((float) Hunger);
       if (Hunger > maxHunger)
       {
@@ -56,7 +56,7 @@ namespace Ecosystem
 
     public bool IsHungry()
     {
-      return Hunger > genome.GetHungerThreshold();
+      return Hunger > genome.GetHungerThreshold().Value;
     }
   }
 }
