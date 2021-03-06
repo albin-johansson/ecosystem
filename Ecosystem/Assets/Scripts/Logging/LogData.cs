@@ -93,7 +93,14 @@ namespace Ecosystem.Logging
     /// </summary>
     [SerializeField] private List<SimulationEvent> events = new List<SimulationEvent>();
 
+    /// <summary>
+    ///   Additional information about mating events.
+    /// </summary>
     [SerializeField] private List<Mating> matings = new List<Mating>();
+
+    /// <summary>
+    ///   Additional information about death events.
+    /// </summary>
     [SerializeField] private List<Death> deaths = new List<Death>();
 
     /// <summary>
@@ -231,23 +238,52 @@ namespace Ecosystem.Logging
       --foodCount;
     }
 
+    /// <summary>
+    ///   Increments the count of consumed prey.
+    /// </summary>
+    /// <remarks>
+    ///   This isn't recorded as a simulation event, more information is meant to be logged
+    ///   in the associated death event. 
+    /// </remarks>
     public void AddPreyConsumption()
     {
-      // We only count the number of consumed prey, more information will be logged as 
-      // a death event
       ++preyConsumedCount;
     }
 
+    /// <summary>
+    ///   Returns the current count of alive animals.
+    /// </summary>
+    /// <returns>the amount of alive animals.</returns>
     public int AliveCount() => aliveCount;
 
+    /// <summary>
+    ///   Returns the current count of dead animals.
+    /// </summary>
+    /// <returns>the amount of dead animals.</returns>
     public int DeadCount() => deadCount;
 
+    /// <summary>
+    ///   Returns the current count of born animals.
+    /// </summary>
+    /// <returns>the amount of born animals.</returns>
     public int BirthCount() => birthCount;
 
+    /// <summary>
+    ///   Returns the current count of food items.
+    /// </summary>
+    /// <returns>the amount of food items.</returns>
     public int FoodCount() => foodCount;
 
+    /// <summary>
+    ///   Returns the current count of matings.
+    /// </summary>
+    /// <returns>the amount of matings.</returns>
     public int MatingCount() => matingCount;
 
+    /// <summary>
+    ///   Returns the current count consumed prey.
+    /// </summary>
+    /// <returns>the amount of consumed prey.</returns>
     public int PreyConsumedCount() => preyConsumedCount;
 
     private static void AddGene(ICollection<GeneInfo> genes, KeyValuePair<GeneType, Gene> pair)
