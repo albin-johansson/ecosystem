@@ -15,7 +15,7 @@ namespace Ecosystem.Genes
     private static readonly Gene GestationPeriod = new Gene(10, 10, 120);
     private static readonly Gene SexualMaturityTime = new Gene(10, 10, 150);
 
-    private static readonly Dictionary<GeneType, Gene> DefaultGenes = new Dictionary<GeneType, Gene>
+    public static readonly Dictionary<GeneType, Gene> DefaultGenes = new Dictionary<GeneType, Gene>
     {
             {GeneType.HungerRate, HungerRate},
             {GeneType.HungerThreshold, HungerThreshold},

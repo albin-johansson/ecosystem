@@ -11,8 +11,10 @@ namespace Ecosystem.Logging
   ///   when the simulation has finished.
   /// </summary>
   [Serializable]
-  public sealed class LogData
+  public sealed partial class LogData
   {
+    private static readonly int GeneCount = Enum.GetValues(typeof(GeneType)).Length;
+
     /// <summary>
     ///   Duration of simulation, in milliseconds.
     /// </summary>
@@ -88,6 +90,11 @@ namespace Ecosystem.Logging
     /// </summary>
     [SerializeField] private int preyConsumedCount;
 
+    [SerializeField] private GenomeInfo rabbitGenome;
+    [SerializeField] private GenomeInfo deerGenome;
+    [SerializeField] private GenomeInfo wolfGenome;
+    [SerializeField] private GenomeInfo bearGenome;
+
     /// <summary>
     ///   The history of simulation events, stored in chronological order. 
     /// </summary>
@@ -117,6 +124,30 @@ namespace Ecosystem.Logging
       CaptureInitialGenomes();
     }
 
+    private void CountPopulationSizes()
+    {
+      initialAliveRabbitsCount = Tags.Count("Rabbit");
+      initialAliveDeerCount = Tags.Count("Deer");
+      initialAliveWolvesCount = Tags.Count("Wolf");
+      initialAliveBearsCount = Tags.Count("Bear");
+
+      initialAlivePredatorCount = Tags.CountPredators();
+      initialAlivePreyCount = Tags.CountPrey();
+      initialFoodCount = Tags.CountFood();
+      initialAliveCount = initialAlivePreyCount + initialAlivePredatorCount;
+
+      aliveCount = initialAliveCount;
+      foodCount = initialFoodCount;
+    }
+
+    private void CaptureInitialGenomes()
+    {
+      rabbitGenome = CaptureGenome(RabbitGenome.DefaultGenes);
+      deerGenome = CaptureGenome(DeerGenome.DefaultGenes);
+      wolfGenome = CaptureGenome(WolfGenome.DefaultGenes);
+      bearGenome = CaptureGenome(BearGenome.DefaultGenes);
+    }
+
     /// <summary>
     ///   Marks the simulation as finished. This is used to determine the duration of the simulation.
     /// </summary>
@@ -144,6 +175,7 @@ namespace Ecosystem.Logging
               deathIndex = -1
       });
 
+      matings.Add(CreateMatingInfo(male, female));
       ++matingCount;
     }
 
@@ -260,34 +292,46 @@ namespace Ecosystem.Logging
     /// <returns>the amount of consumed prey.</returns>
     public int PreyConsumedCount() => preyConsumedCount;
 
-    private void CountPopulationSizes()
+    private GenomeInfo CaptureGenome(Dictionary<GeneType, Gene> genes)
     {
-      initialAliveRabbitsCount = Tags.Count("Rabbit");
-      initialAliveDeerCount = Tags.Count("Deer");
-      initialAliveWolvesCount = Tags.Count("Wolf");
-      initialAliveBearsCount = Tags.Count("Bear");
+      var info = new GenomeInfo {genes = new List<GeneInfo>()};
 
-      initialAlivePredatorCount = Tags.CountPredators();
-      initialAlivePreyCount = Tags.CountPrey();
-      initialFoodCount = Tags.CountFood();
-      initialAliveCount = initialAlivePreyCount + initialAlivePredatorCount;
+      foreach (var pair in genes)
+      {
+        info.genes.Add(CreateGeneInfo(pair.Key, pair.Value));
+      }
 
-      aliveCount = initialAliveCount;
-      foodCount = initialFoodCount;
+      return info;
     }
-    private void CaptureInitialGenomes()
-    {
-    }
+
     private static void AddGene(ICollection<GeneInfo> genes, KeyValuePair<GeneType, Gene> pair)
     {
       genes.Add(CreateGeneInfo(pair.Key, pair.Value));
     }
 
+    private static Mating CreateMatingInfo(IGenome male, IGenome female) => new Mating
+    {
+            male = RecordGenes(male),
+            female = RecordGenes(female)
+    };
+
+    private static List<GeneInfo> RecordGenes(IGenome genome) => new List<GeneInfo>(GeneCount)
+    {
+            CreateGeneInfo(GeneType.HungerRate, genome.GetHungerRate()),
+            CreateGeneInfo(GeneType.HungerThreshold, genome.GetHungerThreshold()),
+            CreateGeneInfo(GeneType.ThirstRate, genome.GetThirstRate()),
+            CreateGeneInfo(GeneType.ThirstThreshold, genome.GetThirstThreshold()),
+            CreateGeneInfo(GeneType.Vision, genome.GetVision()),
+            CreateGeneInfo(GeneType.SpeedFactor, genome.GetSpeedFactor()),
+            CreateGeneInfo(GeneType.SizeFactor, genome.GetSizeFactor()),
+            CreateGeneInfo(GeneType.DesirabilityScore, genome.GetDesirabilityScore()),
+            CreateGeneInfo(GeneType.GestationPeriod, genome.GetGestationPeriod()),
+            CreateGeneInfo(GeneType.SexualMaturityTime, genome.GetSexualMaturityTime())
+    };
+
     private static GeneInfo CreateGeneInfo(GeneType type, Gene gene) => new GeneInfo
     {
-            type = type,
-            min = gene.Min,
-            max = gene.Max,
+            gene = type,
             value = gene.Value
     };
   }
