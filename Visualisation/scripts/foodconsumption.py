@@ -26,7 +26,7 @@ def visualise_food_consumption(data: LogData, directory: Path):
 
   axes.legend(loc="upper left")
   axes.set_xlim(0, data.duration_secs())
-  axes.set_ylim(0, max(max(food_history), max(consumer_history)) + 20)
+  axes.set_ylim(0, max(max(food_history.values()), max(consumer_history.values())) + 20)
   axes.set_xlabel("Time (seconds)")
   axes.set_ylabel("Amount")
   axes.set_title("Food availability and consumer population")
