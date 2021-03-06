@@ -19,7 +19,7 @@ namespace Ecosystem.Genes
               Vision = Merge(first.Vision, second.Vision, mutateChance),
               SpeedFactor = Merge(first.SpeedFactor, second.SpeedFactor, mutateChance),
               SizeFactor = Merge(first.SizeFactor, second.SizeFactor, mutateChance),
-              DesirabilityScore = Merge(first.DesirabilityScore, second.DesirabilityScore, mutateChance),
+              DesirabilityFactor = Merge(first.DesirabilityFactor, second.DesirabilityFactor, mutateChance),
               GestationPeriod = Merge(first.GestationPeriod, second.GestationPeriod, mutateChance),
               SexualMaturityTime = Merge(first.SexualMaturityTime, second.SexualMaturityTime, mutateChance),
               MutateChance = mutateChance

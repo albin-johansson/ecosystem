@@ -45,7 +45,7 @@ namespace Ecosystem.Genes
 
     public Gene GetSizeFactor() => Pack.SizeFactor;
 
-    public Gene GetDesirabilityScore() => Pack.DesirabilityScore;
+    public Gene GetDesirabilityScore() => Pack.DesirabilityFactor;
 
     public Gene GetGestationPeriod() => Pack.GestationPeriod;
 

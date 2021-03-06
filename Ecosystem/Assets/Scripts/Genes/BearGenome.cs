@@ -31,7 +31,19 @@ namespace Ecosystem.Genes
 
     protected override void Initialize()
     {
-      Pack = GenomePack.Create(DefaultGenes);
+      Pack = new GenomePack
+      {
+              HungerRate = HungerRate,
+              HungerThreshold = HungerThreshold,
+              ThirstRate = ThirstRate,
+              ThirstThreshold = ThirstThreshold,
+              Vision = Vision,
+              SpeedFactor = SpeedFactor,
+              SizeFactor = SizeFactor,
+              DesirabilityFactor = DesirabilityFactor,
+              GestationPeriod = GestationPeriod,
+              SexualMaturityTime = SexualMaturityTime
+      };
     }
 
     public override Dictionary<GeneType, Gene> GetInitialGenes()
