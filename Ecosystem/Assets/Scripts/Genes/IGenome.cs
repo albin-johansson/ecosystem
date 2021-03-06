@@ -34,7 +34,7 @@ namespace Ecosystem.Genes
 
     Gene GetSexualMaturityTime();
 
-    GenomePack GetGenes();
+    GenomeData GetGenes();
 
     Dictionary<GeneType, Gene> GetInitialGenes();
   }

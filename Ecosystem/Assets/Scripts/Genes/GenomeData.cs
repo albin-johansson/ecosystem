@@ -1,9 +1,9 @@
 using System.Collections.Generic;
-using Random = UnityEngine.Random;
+using UnityEngine;
 
 namespace Ecosystem.Genes
 {
-  public sealed class GenomePack
+  public sealed class GenomeData
   {
     internal Gene HungerRate;
     internal Gene HungerThreshold;
@@ -19,7 +19,7 @@ namespace Ecosystem.Genes
     internal double MutateChance = 0.05;
     internal readonly bool IsMale = Random.value > 0.5;
 
-    internal static GenomePack Create(Dictionary<GeneType, Gene> initial) => new GenomePack
+    internal static GenomeData Create(Dictionary<GeneType, Gene> initial) => new GenomeData
     {
             HungerRate = initial[GeneType.HungerRate],
             HungerThreshold = initial[GeneType.HungerThreshold],

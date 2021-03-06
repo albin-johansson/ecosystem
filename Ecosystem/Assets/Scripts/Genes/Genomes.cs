@@ -7,10 +7,10 @@ namespace Ecosystem.Genes
       return first.GetType() == second.GetType() && first.IsMale != second.IsMale;
     }
 
-    public static GenomePack Merge(GenomePack first, GenomePack second)
+    public static GenomeData Merge(GenomeData first, GenomeData second)
     {
       var mutateChance = first.MutateChance;
-      return new GenomePack
+      return new GenomeData
       {
               HungerRate = Merge(first.HungerRate, second.HungerRate, mutateChance),
               HungerThreshold = Merge(first.HungerThreshold, second.HungerThreshold, mutateChance),

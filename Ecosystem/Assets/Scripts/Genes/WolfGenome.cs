@@ -31,7 +31,7 @@ namespace Ecosystem.Genes
 
     protected override void Initialize()
     {
-      Pack = GenomePack.Create(DefaultGenes);
+      Data = GenomeData.Create(DefaultGenes);
     }
 
     public override Dictionary<GeneType, Gene> GetInitialGenes()

@@ -5,7 +5,7 @@ namespace Ecosystem.Genes
 {
   public abstract class AbstractGenome : MonoBehaviour, IGenome
   {
-    internal GenomePack Pack;
+    internal GenomeData Data;
 
     private void Awake()
     {
@@ -18,10 +18,10 @@ namespace Ecosystem.Genes
 
     public void Initialize(IGenome first, IGenome second)
     {
-      Pack = Genomes.Merge(first.GetGenes(), second.GetGenes());
+      Data = Genomes.Merge(first.GetGenes(), second.GetGenes());
     }
 
-    public bool IsMale => Pack.IsMale;
+    public bool IsMale => Data.IsMale;
 
     public float Speed => GetHungerRate().Value *
                           GetSpeedFactor().Value *
@@ -31,26 +31,26 @@ namespace Ecosystem.Genes
 
     public float Attractiveness => GetDesirabilityScore().Value;
 
-    public Gene GetHungerRate() => Pack.HungerRate;
+    public Gene GetHungerRate() => Data.HungerRate;
 
-    public Gene GetHungerThreshold() => Pack.HungerThreshold;
+    public Gene GetHungerThreshold() => Data.HungerThreshold;
 
-    public Gene GetThirstRate() => Pack.ThirstRate;
+    public Gene GetThirstRate() => Data.ThirstRate;
 
-    public Gene GetThirstThreshold() => Pack.ThirstThreshold;
+    public Gene GetThirstThreshold() => Data.ThirstThreshold;
 
-    public Gene GetVision() => Pack.Vision;
+    public Gene GetVision() => Data.Vision;
 
-    public Gene GetSpeedFactor() => Pack.SpeedFactor;
+    public Gene GetSpeedFactor() => Data.SpeedFactor;
 
-    public Gene GetSizeFactor() => Pack.SizeFactor;
+    public Gene GetSizeFactor() => Data.SizeFactor;
 
-    public Gene GetDesirabilityScore() => Pack.DesirabilityScore;
+    public Gene GetDesirabilityScore() => Data.DesirabilityScore;
 
-    public Gene GetGestationPeriod() => Pack.GestationPeriod;
+    public Gene GetGestationPeriod() => Data.GestationPeriod;
 
-    public Gene GetSexualMaturityTime() => Pack.SexualMaturityTime;
+    public Gene GetSexualMaturityTime() => Data.SexualMaturityTime;
 
-    public GenomePack GetGenes() => Pack;
+    public GenomeData GetGenes() => Data;
   }
 }
