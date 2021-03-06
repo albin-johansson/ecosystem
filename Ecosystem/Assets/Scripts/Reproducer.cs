@@ -5,12 +5,30 @@ namespace Ecosystem
 {
   public sealed class Reproducer : MonoBehaviour
   {
+    /// <summary>
+    ///   The signature of birth event handlers.
+    /// </summary>
+    /// <param name="animal">the game object associated with the animal that was born.</param>
     public delegate void BirthEvent(GameObject animal);
+
+    /// <summary>
+    ///   The signature of mating event handlers.
+    /// </summary>
+    /// <param name="position">the position of the mating.</param>
+    /// <param name="animalTag">the tag associated with the animals that mated.</param>
+    /// <param name="male">the genome associated with the male.</param>
+    /// <param name="female">the genome associated with the female.</param>
+    public delegate void MatingEvent(Vector3 position, string animalTag, Genome male, Genome female);
 
     /// <summary>
     ///   This event is emitted every time an animal is born.
     /// </summary>
     public static event BirthEvent OnBirth;
+
+    /// <summary>
+    ///   This event is emitted every time two animals mate.
+    /// </summary>
+    public static event MatingEvent OnMating;
 
     [SerializeField] private Genome genome;
     [SerializeField] private GameObject prefab;
@@ -70,6 +88,9 @@ namespace Ecosystem
     {
       _isPregnant = true;
       _mateGenome = mateGenome;
+
+      var parentGameObject = gameObject;
+      OnMating?.Invoke(parentGameObject.transform.position, parentGameObject.tag, mateGenome, genome);
     }
 
     private void OnTriggerEnter(Collider other)

@@ -19,6 +19,7 @@ namespace Ecosystem.Logging
     [SerializeField] private Text birthCountText;
     [SerializeField] private Text deadCountText;
     [SerializeField] private Text foodCountText;
+    [SerializeField] private Text matingCountText;
     [SerializeField] private Text preyConsumedCountText;
     [SerializeField] private Text timePassedText;
 
@@ -32,7 +33,7 @@ namespace Ecosystem.Logging
       FoodConsumer.OnFoodEaten += LogFoodEaten;
       PreyConsumer.OnPreyConsumed += LogPreyConsumed;
       Reproducer.OnBirth += LogBirth;
-      Reproducer.OnReproduction += LogReproduction;
+      Reproducer.OnMating += LogMating;
 
       _data.CountInitialStats();
 
@@ -69,9 +70,11 @@ namespace Ecosystem.Logging
       birthCountText.text = _data.BirthCount().ToString();
     }
 
-    private void LogReproduction(Vector3 position, string animalTag, Genome male, Genome female)
+    private void LogMating(Vector3 position, string animalTag, Genome male, Genome female)
     {
       _data.AddMating(position, animalTag, male, female);
+      
+      matingCountText.text = _data.MatingCount().ToString();
     }
 
     private void LogDeath(CauseOfDeath cause, GameObject deadObject)

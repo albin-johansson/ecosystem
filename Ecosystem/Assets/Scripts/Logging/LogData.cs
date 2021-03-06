@@ -74,6 +74,11 @@ namespace Ecosystem.Logging
     [SerializeField] private int deadCount;
 
     /// <summary>
+    ///   The amount of matings.
+    /// </summary>
+    [SerializeField] private int matingCount;
+
+    /// <summary>
     ///   The amount of animals that have been born.
     /// </summary>
     [SerializeField] private int birthCount;
@@ -88,6 +93,7 @@ namespace Ecosystem.Logging
     /// </summary>
     [SerializeField] private List<SimulationEvent> events = new List<SimulationEvent>();
 
+    [SerializeField] private List<Mating> matings = new List<Mating>();
     [SerializeField] private List<Death> deaths = new List<Death>();
 
     /// <summary>
@@ -121,6 +127,44 @@ namespace Ecosystem.Logging
       duration = SessionTime.Now();
     }
 
+    /// <summary>
+    ///   Adds a simulation event that represents the mating of two animals.
+    /// </summary>
+    /// <param name="position">the position where the animals mated.</param>
+    /// <param name="animalTag">the tag associated with the animals.</param>
+    /// <param name="male">the genome associated with the male.</param>
+    /// <param name="female">the genome associated with the female.</param>
+    public void AddMating(Vector3 position, string animalTag, Genome male, Genome female)
+    {
+      events.Add(new SimulationEvent
+      {
+              time = SessionTime.Now(),
+              type = "mating",
+              tag = animalTag,
+              position = position,
+              matingIndex = matings.Count,
+              deathIndex = -1
+      });
+
+      var info = new Mating
+      {
+              male = new List<GeneInfo>(),
+              female = new List<GeneInfo>()
+      };
+
+      foreach (var pair in male.Genes)
+      {
+        AddGene(info.male, pair);
+      }
+
+      foreach (var pair in female.Genes)
+      {
+        AddGene(info.female, pair);
+      }
+
+      matings.Add(info);
+      ++matingCount;
+    }
 
     /// <summary>
     ///   Adds a simulation event that represents the birth of an animal.
@@ -202,6 +246,20 @@ namespace Ecosystem.Logging
 
     public int FoodCount() => foodCount;
 
+    public int MatingCount() => matingCount;
+
     public int PreyConsumedCount() => preyConsumedCount;
+
+    private static void AddGene(ICollection<GeneInfo> genes, KeyValuePair<GeneType, Gene> pair)
+    {
+      var gene = pair.Value;
+      genes.Add(new GeneInfo
+      {
+              type = pair.Key,
+              min = gene.Min,
+              max = gene.Max,
+              value = gene.Value
+      });
+    }
   }
 }
