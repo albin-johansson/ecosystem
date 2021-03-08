@@ -33,6 +33,7 @@ namespace Ecosystem
     [SerializeField] private AbstractGenome genome;
     [SerializeField] private GameObject prefab;
 
+    private Transform _directoryOfAnimal;
     private bool _isPregnant;
     private bool _isSexuallyMature;
     private double _gestationPeriod;
@@ -47,6 +48,7 @@ namespace Ecosystem
     {
       _sexualMaturityTime = genome.GetSexualMaturityTime().Value;
       _gestationPeriod = genome.GetGestationPeriod().Value;
+      _directoryOfAnimal = gameObject.transform.parent.parent;
     }
 
     private void Update()
@@ -77,7 +79,7 @@ namespace Ecosystem
       _isPregnant = false;
       _pregnancyElapsedTime = 0;
 
-      var child = Instantiate(prefab, currentTransform.position, currentTransform.rotation);
+      var child = Instantiate(prefab, currentTransform.position, currentTransform.rotation, _directoryOfAnimal);
       var childGenome = child.GetComponent<AbstractGenome>();
       childGenome.Initialize(genome, _mateGenome);
 

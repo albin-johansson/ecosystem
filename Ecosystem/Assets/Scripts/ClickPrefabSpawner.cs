@@ -5,6 +5,7 @@ namespace Ecosystem
   // Will spawn the given prefab where the user clicks. 
   public sealed class ClickPrefabSpawner : MonoBehaviour
   {
+    [SerializeField] private Transform directory;
     [SerializeField] private GameObject prefab;
     private Camera _mainCamera;
 
@@ -28,7 +29,7 @@ namespace Ecosystem
 
     private void SpawnAtPosition(Vector3 spawnPosition)
     {
-      Instantiate(prefab, spawnPosition, Quaternion.identity);
+      Instantiate(prefab, spawnPosition, Quaternion.identity, directory);
     }
   }
 }
