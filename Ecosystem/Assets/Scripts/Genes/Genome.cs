@@ -1,4 +1,4 @@
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 
@@ -10,7 +10,7 @@ namespace Ecosystem.Genes
     private static readonly Gene HungerThreshold = new Gene(5, 0, 10);
     private static readonly Gene ThirstRate = new Gene(1, 0.5f, 10);
     private static readonly Gene ThirstThreshold = new Gene(5, 0, 10);
-    private static readonly Gene Vision = new Gene(2, 7, 20);
+    private static readonly Gene Vision = new Gene(0.5f, 0, 1);
     private static readonly Gene SpeedFactor = new Gene(5f, 1, 10);
     private static readonly Gene SizeFactor = new Gene(1.5f, 0.5f, 2);
     private static readonly Gene DesirabilityFactor = new Gene(0.5f, 0, 1);
@@ -117,13 +117,15 @@ namespace Ecosystem.Genes
     }
 
     /// <summary>
-    /// The metabolism depends on the rate it self and the size. 
+    /// The metabolism depends on the rate it self and the size as well as how good vision it has. 
     /// </summary>
     /// <returns>
     /// The rate at which hunger should increase. 
     /// </returns>
     public double GetHungerRate()
     {
+      double hungerRate = Genes[GeneType.HungerRate].Value * Genes[GeneType.SizeFactor].Value;
+      hungerRate += hungerRate * 0.15 * GetVisionRange();
       return Genes[GeneType.HungerRate].Value * Genes[GeneType.SizeFactor].Value;
     }
 

@@ -1733,7 +1733,7 @@ SphereCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Radius: 4
+  m_Radius: 8
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!114 &207253581519820318
 MonoBehaviour:
@@ -1752,6 +1752,7 @@ MonoBehaviour:
   mateFinder: {fileID: 341703086639412255}
   memoryController: {fileID: 6008664309968109715}
   targetTracker: {fileID: 4333919728053627175}
+  genome: {fileID: 0}
 --- !u!114 &6008664309968109715
 MonoBehaviour:
   m_ObjectHideFlags: 0

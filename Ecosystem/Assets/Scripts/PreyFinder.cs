@@ -24,7 +24,9 @@ namespace Ecosystem
               Consumer = preyConsumer
       };
       var sp = GetComponent<SphereCollider>();
-      sp.radius = (float) genome.GetVisionRange() / sp.transform.lossyScale.magnitude;
+      Debug.Log("Radius before: " + sp.radius);
+      sp.radius = (sp.radius / sp.transform.lossyScale.magnitude) * (float) genome.GetVisionRange();
+      Debug.Log("Radius after: " + sp.radius);
     }
 
     private void Update()
