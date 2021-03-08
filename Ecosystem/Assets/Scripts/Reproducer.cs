@@ -84,13 +84,12 @@ namespace Ecosystem
       OnBirth?.Invoke(child);
     }
 
-    private void StartPregnancy(AbstractGenome mateGenome)
+    private void StartPregnancy(IGenome mateGenome)
     {
       _isPregnant = true;
       _mateGenome = mateGenome;
 
-      var parentGameObject = gameObject;
-      OnMating?.Invoke(parentGameObject.transform.position, parentGameObject.tag, mateGenome, genome);
+      OnMating?.Invoke(gameObject.transform.position, prefab.tag, mateGenome, genome);
     }
 
     private void OnTriggerEnter(Collider other)
