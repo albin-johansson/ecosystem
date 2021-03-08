@@ -1,4 +1,4 @@
-﻿using UnityEngine;
+using UnityEngine;
 
 namespace Ecosystem.Genes
 {
@@ -11,7 +11,7 @@ namespace Ecosystem.Genes
     private static readonly Gene Vision = new Gene(2, 7, 20);
     private static readonly Gene SpeedFactor = new Gene(5f, 1, 10);
     private static readonly Gene SizeFactor = new Gene(0.5f, 0.1f, 1);
-    private static readonly Gene DesirabilityFactor = new Gene(1, 1, 10);
+    private static readonly Gene DesirabilityFactor = new Gene(0.5f, 0, 1);
     private static readonly Gene GestationPeriod = new Gene(10, 10, 120);
     private static readonly Gene SexualMaturityTime = new Gene(10, 10, 150);
 

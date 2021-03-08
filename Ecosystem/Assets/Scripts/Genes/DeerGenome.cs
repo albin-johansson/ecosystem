@@ -9,7 +9,7 @@ namespace Ecosystem.Genes
     private static readonly Gene Vision = new Gene(25, 1, 50);
     private static readonly Gene SpeedFactor = new Gene(1.5f, 1, 2);
     private static readonly Gene SizeFactor = new Gene(0.5f, 0.1f, 1);
-    private static readonly Gene DesirabilityFactor = new Gene(1, 1, 10);
+    private static readonly Gene DesirabilityFactor = new Gene(0.5f, 0, 1);
     private static readonly Gene GestationPeriod = new Gene(12, 10, 120);
     private static readonly Gene SexualMaturityTime = new Gene(20, 10, 150);
 

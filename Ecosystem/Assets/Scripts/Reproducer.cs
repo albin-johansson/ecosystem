@@ -70,13 +70,16 @@ namespace Ecosystem
           Genome.CompatibleAsParents(genome, otherReproducer.genome) &&
           otherReproducer.CanMate && CanMate)
       {
-        if (genome.IsMale && !otherReproducer._isPregnant)
+        if (Random.value >= genome.GetDesirability())
         {
-          otherReproducer.StartPregnancy(genome);
-        }
-        else if (!_isPregnant)
-        {
-          StartPregnancy(otherReproducer.genome);
+          if (genome.IsMale && !otherReproducer._isPregnant)
+          {
+            otherReproducer.StartPregnancy(genome);
+          }
+          else if (!_isPregnant)
+          {
+            StartPregnancy(otherReproducer.genome);
+          }
         }
       }
     }
