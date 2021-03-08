@@ -26,9 +26,23 @@ namespace Ecosystem.Genes
     }
 
     // Returns a new mutated gene based on the current Genes range. 
-    public Gene Mutate()
+    internal Gene Mutate()
     {
       return new Gene(GeneUtil.Mutate(Min, Max), Min, Max);
+    }
+
+    internal static Gene Merge(Gene first, Gene second, double mutateChance)
+    {
+      if (GeneUtil.RandomWithChance(mutateChance))
+      {
+        return first.Mutate();
+      }
+      else
+      {
+        return GeneUtil.RandomWithChance(50)
+                ? new Gene(first)
+                : new Gene(second);
+      }
     }
   }
 }
