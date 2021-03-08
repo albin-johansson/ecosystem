@@ -51,8 +51,8 @@ namespace Ecosystem
       {
         var state = _delegate.AnimalState;
         if (state == AnimalState.LookingForFood && other.gameObject.layer == LayerUtil.FoodLayer ||
-            state == AnimalState.LookingForWater && other.gameObject.layer == LayerUtil.WaterLayer||
-            state == AnimalState.Idle && mateFinder.CompatibleAsParents(other.gameObject))
+            state == AnimalState.LookingForWater && other.gameObject.layer == LayerUtil.WaterLayer ||
+            other.CompareTag("Reproducer") && state == AnimalState.Idle && mateFinder.CompatibleAsParents(other.gameObject))
         {
           targetTracker.SetTarget(other.gameObject.transform.position, state);
         }

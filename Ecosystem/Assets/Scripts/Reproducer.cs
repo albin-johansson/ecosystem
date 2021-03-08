@@ -79,6 +79,13 @@ namespace Ecosystem
           StartPregnancy(otherReproducer.genome);
         }
       }
+    
+    public bool CompatibleAsParents(GameObject other)
+    {
+      Debug.Log("Check comp: " + "Male: " + genome.IsMale + "Can mate: " + CanMate);
+      return CanMate && other.TryGetComponent(out Reproducer reproducer) &&
+             Genome.CompatibleAsParents(genome, reproducer.genome);
     }
+    
   }
 }
