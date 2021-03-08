@@ -3,8 +3,8 @@ using UnityEngine;
 namespace Ecosystem.Util
 {
   /// <summary>
-  ///   A utility class related to game object tags. An important use case for tags are for
-  ///   counting the amount of different kinds of game objects, such as prey, predators and food.
+  ///   A utility class related to game object tags. An important use case for tags is counting
+  ///   the amount of different kinds of game objects, such as prey, predators and food.
   /// </summary>
   public static class Tags
   {
