@@ -188,7 +188,7 @@ Material:
     - _Offset_X_Axis_BLD: -0.05
     - _Offset_Y_Axis_BLD: 0.09
     - _Offset_Z: 0
-    - _Outline_Width: 10
+    - _Outline_Width: 5
     - _Parallax: 0.02
     - _RimLight: 1
     - _RimLight_FeatherOff: 0
@@ -216,15 +216,15 @@ Material:
     - _Tweak_SystemShadowsLevel: 0
     - _UVSec: 0
     - _Unlit_Intensity: 1
-    - _Use_1stAs2nd: 0
-    - _Use_BaseAs1st: 0
+    - _Use_1stAs2nd: 1
+    - _Use_BaseAs1st: 1
     - _ZWrite: 1
     - _simpleUI: 0
     - _utsTechnique: 1
     - _utsVersion: 2.075
     m_Colors:
-    - _1st_ShadeColor: {r: 1, g: 1, b: 1, a: 1}
-    - _2nd_ShadeColor: {r: 1, g: 1, b: 1, a: 1}
+    - _1st_ShadeColor: {r: 0.32156864, g: 0.29411766, b: 0.25490198, a: 1}
+    - _2nd_ShadeColor: {r: 0.32156864, g: 0.29411766, b: 0.25490198, a: 1}
     - _Ap_RimLightColor: {r: 1, g: 1, b: 1, a: 1}
     - _BaseColor: {r: 1, g: 1, b: 1, a: 1}
     - _Color: {r: 1, g: 1, b: 1, a: 1}
@@ -234,7 +234,7 @@ Material:
     - _HighColor: {r: 0, g: 0, b: 0, a: 1}
     - _MatCapColor: {r: 1, g: 1, b: 1, a: 1}
     - _Outline_Color: {r: 0, g: 0, b: 0, a: 1}
-    - _RimLightColor: {r: 1, g: 1, b: 1, a: 1}
+    - _RimLightColor: {r: 0.32156864, g: 0.29411766, b: 0.25490198, a: 1}
     - _SpecColor: {r: 0, g: 0, b: 0, a: 1}
     - _ViewShift: {r: 0, g: 0, b: 0, a: 1}
   m_BuildTextureStacks: []
