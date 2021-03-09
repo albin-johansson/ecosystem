@@ -330,7 +330,7 @@ RectTransform:
   m_Children:
   - {fileID: 1437913133}
   m_Father: {fileID: 1679864746}
-  m_RootOrder: 1
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
@@ -349,7 +349,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 148d95c806ee61a4ab3a196645d609ca, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  button: SampleScene
+  scene: PrototypeScene
 --- !u!114 &368668883
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -816,7 +816,7 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1990503006}
   m_HandleRect: {fileID: 1990503005}
   m_Direction: 2
-  m_Value: 1.0000002
+  m_Value: 1
   m_Size: 0.6909091
   m_NumberOfSteps: 0
   m_OnValueChanged:
@@ -1341,7 +1341,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 148d95c806ee61a4ab3a196645d609ca, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  button: ForestScene
+  scene: ForestScene
 --- !u!114 &1193304321
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1691,8 +1691,8 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1193304316}
-  - {fileID: 368668881}
   - {fileID: 1970755747}
+  - {fileID: 368668881}
   m_Father: {fileID: 833402624}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -6762,7 +6762,7 @@ RectTransform:
   m_Children:
   - {fileID: 1928067723}
   m_Father: {fileID: 1679864746}
-  m_RootOrder: 2
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
@@ -6905,7 +6905,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 148d95c806ee61a4ab3a196645d609ca, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  button: DynamicScene
+  scene: DynamicScene
 --- !u!1 &1990503004
 GameObject:
   m_ObjectHideFlags: 0
