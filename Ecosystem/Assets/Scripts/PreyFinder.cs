@@ -25,7 +25,7 @@ namespace Ecosystem
       };
       var sp = GetComponent<SphereCollider>();
       Debug.Log("Radius before: " + sp.radius);
-      sp.radius = (sp.radius / sp.transform.lossyScale.magnitude) * (float) genome.GetVisionRange();
+      sp.radius = (sp.radius / sp.transform.lossyScale.magnitude) * (float) genome.GetVisionFactor();
       Debug.Log("Radius after: " + sp.radius);
     }
 

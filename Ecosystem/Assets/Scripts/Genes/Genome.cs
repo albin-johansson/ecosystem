@@ -111,7 +111,7 @@ namespace Ecosystem.Genes
              Genes[GeneType.SizeFactor].ValueAsDecimal();
     }
 
-    public double GetVisionRange()
+    public double GetVisionFactor()
     {
       return Genes[GeneType.Vision].Value;
     }
@@ -125,7 +125,7 @@ namespace Ecosystem.Genes
     public double GetHungerRate()
     {
       double hungerRate = Genes[GeneType.HungerRate].Value * Genes[GeneType.SizeFactor].Value;
-      hungerRate += hungerRate * 0.15 * GetVisionRange();
+      hungerRate -= hungerRate * 0.15 * GetVisionFactor();
       return Genes[GeneType.HungerRate].Value * Genes[GeneType.SizeFactor].Value;
     }
 
