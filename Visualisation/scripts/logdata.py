@@ -26,6 +26,12 @@ class LogData:
   def duration_secs(self) -> int:
     return self.data["duration"] / 1_000
 
+  def alive_count(self) -> int:
+    return self.data["aliveCount"]
+
+  def food_count(self) -> int:
+    return self.data["foodCount"]
+
   def initial_food_count(self) -> int:
     return self.data["initialFoodCount"]
 
@@ -38,22 +44,37 @@ class LogData:
   def initial_predator_count(self) -> int:
     return self.data["initialAlivePredatorCount"]
 
-  def deaths(self):
-    return self.data["deaths"]
+  def initial_rabbit_count(self) -> int:
+    return self.data["initialAliveRabbitsCount"]
 
-  def food_consumptions(self):
-    return self.data["foodConsumptions"]
+  def initial_deer_count(self) -> int:
+    return self.data["initialAliveDeerCount"]
+
+  def initial_wolf_count(self) -> int:
+    return self.data["initialAliveWolvesCount"]
+
+  def initial_bear_count(self) -> int:
+    return self.data["initialAliveBearsCount"]
+
+  def events(self):
+    return self.data["events"]
+
+  def death_info(self, index: int):
+    return self.data["deaths"][index]
+
+  def mating_info(self, index: int):
+    return self.data["matings"][index]
 
   def __getitem__(self, item):  # operator[]
     return self.data[item]
 
 
-def get_population_history(data: LogData, tag: str, initial_count: Amount) -> dict[TimePoint, Amount]:
+def get_population_history(data: LogData, tags: list[str], initial_count: Amount) -> dict[TimePoint, Amount]:
   """
   Returns the population history for a class of animal, e.g. rabbits or wolves.
 
   :param data: the data wrapper to read from.
-  :param tag: the tag associated with the animals to obtain the history of.
+  :param tags: a list of tags associated with the animals to obtain the history of.
   :param initial_count: the initial amount of animals.
   :return: a dictionary that maps time points (in seconds) to the associated population size.
   """
@@ -61,11 +82,18 @@ def get_population_history(data: LogData, tag: str, initial_count: Amount) -> di
   history: dict[TimePoint, Amount] = {0: initial_count}
   count: Amount = initial_count
 
-  for death in data.deaths():
-    if death["tag"] == tag:
-      count = count - 1
+  for event in data.events():
+    time: TimePoint = event["time"] / 1_000
+    event_type: str = event["type"]
+    event_tag: str = event["tag"]
 
-      time: TimePoint = death["time"] / 1_000
+    if event_tag in tags:
+      if event_type == "death":
+        count = count - 1
+
+      elif event_type == "birth":
+        count = count + 1
+
       history[time] = count
 
   history[data.duration_secs()] = count
@@ -86,8 +114,8 @@ def get_food_history(data: LogData) -> dict[TimePoint, Amount]:
   food_history: dict[TimePoint, Amount] = {0: initial_food_count}
   food_count: Amount = initial_food_count
 
-  for consumption in data.food_consumptions():
-    time: TimePoint = consumption["time"] / 1_000
+  for event in data.events():
+    time: TimePoint = event["time"] / 1_000
 
     food_count = food_count - 1
     food_history[time] = food_count
@@ -95,3 +123,11 @@ def get_food_history(data: LogData) -> dict[TimePoint, Amount]:
   food_history[data.duration_secs()] = food_count
 
   return food_history
+
+
+def is_predator(tag: str) -> bool:
+  return tag == "Wolf" or tag == "Bear"
+
+
+def is_prey(tag: str) -> bool:
+  return tag == "Rabbit" or tag == "Deer"

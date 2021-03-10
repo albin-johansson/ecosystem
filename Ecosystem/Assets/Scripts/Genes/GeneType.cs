@@ -1,5 +1,8 @@
-﻿namespace Ecosystem.Genes
+﻿using System;
+
+namespace Ecosystem.Genes
 {
+  [Serializable]
   public enum GeneType
   {
     HungerRate,

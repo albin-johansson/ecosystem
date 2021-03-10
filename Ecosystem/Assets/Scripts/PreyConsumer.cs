@@ -1,13 +1,14 @@
 ﻿using Ecosystem.Genes;
 using Ecosystem.Logging;
 using Ecosystem.UI;
+using Ecosystem.Util;
 using UnityEngine;
 
 namespace Ecosystem
 {
   public sealed class PreyConsumer : MonoBehaviour, IConsumer
   {
-    [SerializeField] private Genome genome;
+    [SerializeField] private AbstractGenome genome;
     [SerializeField] private ResourceBar resourceBar;
     [SerializeField] private DeathHandler deathHandler;
     [SerializeField] private double maxHunger = 100;
@@ -35,7 +36,7 @@ namespace Ecosystem
         return;
       }
 
-      Hunger += genome.GetHungerRate() * Time.deltaTime;
+      Hunger += genome.Metabolism * Time.deltaTime;
       resourceBar.SetValue((float) Hunger);
       if (Hunger > maxHunger)
       {
@@ -46,7 +47,7 @@ namespace Ecosystem
 
     private void OnTriggerEnter(Collider other)
     {
-      if (other.CompareTag("Prey"))
+      if (Tags.IsPrey(other.gameObject))
       {
         animationController.EnterAttackAnimation();
         OnPreyConsumed?.Invoke();
@@ -57,7 +58,7 @@ namespace Ecosystem
 
     public bool IsHungry()
     {
-      return Hunger > genome.GetHungerThreshold();
+      return Hunger > genome.GetHungerThreshold().Value;
     }
   }
 }
