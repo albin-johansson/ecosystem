@@ -1,32 +1,35 @@
-using System;
 using UnityEngine;
 
-// Will spawn the given prefab where the user clicks. 
-public sealed class ClickPrefabSpawner : MonoBehaviour
+namespace Ecosystem
 {
-  [SerializeField] private GameObject prefab;
-  private Camera _mainCamera;
-
-  private void Start()
+  // Will spawn the given prefab where the user clicks. 
+  public sealed class ClickPrefabSpawner : MonoBehaviour
   {
-    _mainCamera = Camera.main;
-  }
+    [SerializeField] private Transform directory;
+    [SerializeField] private GameObject prefab;
+    private Camera _mainCamera;
 
-  private void Update()
-  {
-    if (!Input.GetMouseButtonDown(0))
+    private void Start()
     {
-      return;
+      _mainCamera = Camera.main;
     }
 
-    if (Physics.Raycast(_mainCamera.ScreenPointToRay(Input.mousePosition), out var hitInfo))
+    private void Update()
     {
-      SpawnAtPosition(hitInfo.point);
-    }
-  }
+      if (!Input.GetMouseButtonDown(0))
+      {
+        return;
+      }
 
-  private void SpawnAtPosition(Vector3 spawnPosition)
-  {
-    Instantiate(prefab, spawnPosition, Quaternion.identity);
+      if (Physics.Raycast(_mainCamera.ScreenPointToRay(Input.mousePosition), out var hitInfo))
+      {
+        SpawnAtPosition(hitInfo.point);
+      }
+    }
+
+    private void SpawnAtPosition(Vector3 spawnPosition)
+    {
+      Instantiate(prefab, spawnPosition, Quaternion.identity, directory);
+    }
   }
 }

@@ -1,41 +1,64 @@
-﻿using UnityEngine;
+﻿using Ecosystem.Genes;
+using Ecosystem.Logging;
+using Ecosystem.UI;
+using Ecosystem.Util;
+using UnityEngine;
 
-public sealed class PreyConsumer : MonoBehaviour
+namespace Ecosystem
 {
-  [SerializeField] private Genome genome;
-  [SerializeField] private ResourceBar resourceBar;
-  [SerializeField] private double maxHunger = 100;
-
-
-  [SerializeField] private DeathHandler deathHandler;
-  private double Hunger { get; set; }
-
-  private void Start()
+  public sealed class PreyConsumer : MonoBehaviour, IConsumer
   {
-    resourceBar.SetMaxValue((float) maxHunger);
-  }
+    [SerializeField] private AbstractGenome genome;
+    [SerializeField] private ResourceBar resourceBar;
+    [SerializeField] private DeathHandler deathHandler;
+    [SerializeField] private double maxHunger = 100;
+    [SerializeField] private EcoAnimationController animationController;
+    private bool _isDead;
 
-  private void Update()
-  {
-    Hunger += genome.GetHungerRate() * Time.deltaTime;
-    resourceBar.SetValue((float) Hunger);
-    if (Hunger > maxHunger)
+    public double Hunger { get; private set; }
+
+    public delegate void PreyConsumedEvent();
+
+    /// <summary>
+    /// This event is emitted every time a prey is consumed.
+    /// </summary>
+    public static event PreyConsumedEvent OnPreyConsumed;
+
+    private void Start()
     {
-      deathHandler.Die(CauseOfDeath.Starvation);
+      resourceBar.SetMaxValue((float) maxHunger);
     }
-  }
 
-  private void OnTriggerEnter(Collider other)
-  {
-    if (other.GetComponent<Prey>() != null)
+    private void Update()
     {
-      other.gameObject.GetComponent<DeathHandler>().Die(CauseOfDeath.Hunted);
-      Hunger = 0;
-    }
-  }
+      if (_isDead)
+      {
+        return;
+      }
 
-  internal bool IsHungry()
-  {
-    return Hunger > genome.GetHungerThreshold();
+      Hunger += genome.Metabolism * Time.deltaTime;
+      resourceBar.SetValue((float) Hunger);
+      if (Hunger > maxHunger)
+      {
+        _isDead = true;
+        deathHandler.Die(CauseOfDeath.Starvation);
+      }
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+      if (Tags.IsPrey(other.gameObject))
+      {
+        animationController.EnterAttackAnimation();
+        OnPreyConsumed?.Invoke();
+        other.gameObject.GetComponent<DeathHandler>().Die(CauseOfDeath.Eaten);
+        Hunger = 0;
+      }
+    }
+
+    public bool IsHungry()
+    {
+      return Hunger > genome.GetHungerThreshold().Value;
+    }
   }
 }

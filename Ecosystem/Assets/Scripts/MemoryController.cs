@@ -1,64 +1,71 @@
 using System.Collections.Generic;
+using Ecosystem.Util;
 using UnityEngine;
 
-public sealed class MemoryController : MonoBehaviour
+namespace Ecosystem
 {
-  private const int Capacity = 5;
-
-  private List<(Desire, GameObject)> _memory;
-  private int _nextMemoryLocation;
-
-  private void Start()
+  public sealed class MemoryController : MonoBehaviour
   {
-    _memory = new List<(Desire, GameObject)>(Capacity);
-  }
+    private const int Capacity = 5;
 
-  //Save gameobject and its "Desire" identifier as a tuple to _memory
-  public void SaveToMemory(GameObject other)
-  {
-    _memory.Insert(_nextMemoryLocation, (GetDesire(other), other.gameObject));
-    ++_nextMemoryLocation;
-    if (_nextMemoryLocation >= Capacity)
+    private List<(AnimalState, Vector3)> _memory;
+    private int _nextMemoryLocation;
+
+    private void Start()
     {
-      _nextMemoryLocation = 0;
+      _memory = new List<(AnimalState, Vector3)>(Capacity);
     }
-  }
 
-  /// <summary>
-  /// Looks for a game object in the memory with the specified desire.
-  /// </summary>
-  /// <param name="desire">The desire to look for the in the memory</param>
-  /// <returns>The first game object associated with the specified desire; null if no such object exists.</returns>
-  public GameObject RecallFromMemory(Desire desire)
-  {
-    foreach (var (memoryDesire, memoryGameObject) in _memory)
+    //Saves a game objects position and its desire to memory
+    public void SaveToMemory(GameObject other)
     {
-      if (desire == memoryDesire && memoryGameObject)
+      _memory.Insert(_nextMemoryLocation, (GetAnimalState(other), other.gameObject.transform.position));
+      ++_nextMemoryLocation;
+      if (_nextMemoryLocation >= Capacity)
       {
-        return memoryGameObject;
+        _nextMemoryLocation = 0;
       }
     }
 
-    return null;
-  }
+    private static AnimalState GetAnimalState(GameObject other)
+    {
+      if (other.gameObject.layer == Layers.FoodLayer)
+      {
+        return AnimalState.LookingForFood;
+      }
+      else if (other.gameObject.layer == Layers.PreyLayer)
+      {
+        return AnimalState.LookingForPrey;
+      }
+      else if (other.gameObject.layer == Layers.WaterLayer)
+      {
+        return AnimalState.LookingForWater;
+      }
 
-  private static Desire GetDesire(GameObject other)
-  {
-    if (other.GetComponent<Food>())
-    {
-      return Desire.Food;
+      return AnimalState.Idle;
     }
-    else if (other.GetComponent<Prey>())
+
+    //Get a position of an object with the same Type as the Desire asked for in currentDesire
+    public (bool, Vector3) GetFromMemory(AnimalState currentDesire)
     {
-      return Desire.Prey;
-    }
-    else if (other.GetComponent<Water>())
-    {
-      return Desire.Water;
-    }
-    else
-    {
-      return Desire.Idle;
+      int i = 0;
+      foreach (var (desire, position) in _memory)
+      {
+        if (desire == currentDesire)
+        {
+          if (currentDesire != AnimalState.LookingForWater)
+          {
+            //Removes food resource from memory to prevent animal from wandering back to food that has already been consumed. 
+            _memory.Insert(i, (AnimalState.Idle, new Vector3()));
+          }
+
+          return (true, position);
+        }
+
+        i++;
+      }
+
+      return (false, Vector3.zero);
     }
   }
 }

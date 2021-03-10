@@ -33,18 +33,6 @@ LODGroup:
     renderers:
     - renderer: {fileID: 7318616467099359385}
   m_Enabled: 1
---- !u!114 &6955707579694436422
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7332217931988766355}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1e96b5fc1d6f48c09ed24d1482fb288c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1001 &7333217439412842729
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -62,7 +50,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1573628690202234, guid: 9d4d39397bb3e4df98ac838ef29e39a1, type: 3}
       propertyPath: m_TagString
-      value: Food
+      value: Carrot
       objectReference: {fileID: 0}
     - target: {fileID: 4998177367392914, guid: 9d4d39397bb3e4df98ac838ef29e39a1, type: 3}
       propertyPath: m_RootOrder
@@ -110,8 +98,12 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 23679695659657328, guid: 9d4d39397bb3e4df98ac838ef29e39a1, type: 3}
       propertyPath: m_Materials.Array.size
-      value: 2
+      value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 23679695659657328, guid: 9d4d39397bb3e4df98ac838ef29e39a1, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 6b2db1c3e38afd34abc96fb5470be5e3, type: 2}
     - target: {fileID: 23679695659657328, guid: 9d4d39397bb3e4df98ac838ef29e39a1, type: 3}
       propertyPath: m_Materials.Array.data[1]
       value: 

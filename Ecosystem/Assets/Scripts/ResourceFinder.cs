@@ -1,73 +1,57 @@
+using Ecosystem.Util;
 using UnityEngine;
-using Random = UnityEngine.Random;
 
-public sealed class ResourceFinder : MonoBehaviour
+namespace Ecosystem
 {
-  [SerializeField] private FoodConsumer foodConsumer;
-  [SerializeField] private WaterConsumer waterConsumer;
-  [SerializeField] private MemoryController memoryController;
-  [SerializeField] private TargetTracker targetTracker;
-
-  private Desire _priority = Desire.Idle;
-
-  private void Update()
+  public sealed class ResourceFinder : MonoBehaviour // TODO rename to PreyBehaviour?
   {
-    UpdatePriority();
-    CheckMemory();
-  }
+    [SerializeField] private FoodConsumer foodConsumer;
+    [SerializeField] private WaterConsumer waterConsumer;
+    [SerializeField] private MateFinder mateFinder;
+    [SerializeField] private MemoryController memoryController;
+    [SerializeField] private TargetTracker targetTracker;
+    private AnimalBehaviourDelegate _delegate;
 
-  //Checks MemoryController for objects that matches the priority Desire
-  private void CheckMemory()
-  {
-    if (!targetTracker.HasTarget)
+    private void Start()
     {
-      var target = memoryController.RecallFromMemory(_priority);
-      if (target)
+      _delegate = new AnimalBehaviourDelegate
       {
-        targetTracker.SetTarget(target);
+              MemoryController = memoryController,
+              TargetTracker = targetTracker,
+              WaterConsumer = waterConsumer,
+              Consumer = foodConsumer
+      };
+    }
+
+    private void Update()
+    {
+      _delegate.Update();
+    }
+
+    /// <summary>
+    ///   When colliding with an object, that object is saved to the animals memory, and
+    ///   subsequently set as a target if the priority matches. If a predator is within
+    ///   field of view the animal will flee.
+    /// </summary>
+    private void OnTriggerEnter(Collider other)
+    {
+      if (Layers.IsPredatorLayer(other.gameObject.layer))
+      {
+        targetTracker.FleeFromPredator(other.gameObject);
+        return;
       }
-    }
-  }
 
-  //Sets priority, OBS. needs to be worked on to get a better flow
-  private void UpdatePriority()
-  {
-    // Hunger has implicit priority
-    if (foodConsumer.IsHungry())
-    {
-      _priority = Desire.Food;
-    }
-    else if (waterConsumer.IsThirsty())
-    {
-      _priority = Desire.Water;
-    }
-    else
-    {
-      _priority = Desire.Idle;
-    }
-  }
+      memoryController.SaveToMemory(other.gameObject);
 
-  /// <summary>
-  /// When colliding with an object that object is saved to MemoryController and then set as a target in TargetTracker if the priority matches.
-  /// Might be an improvment to only save the object and not set it as a target.
-  /// If a predator is found the targetTracker resolves the fleeing mechanics.
-  /// </summary>
-  private void OnTriggerEnter(Collider other)
-  {
-    if (other.GetComponent<Predator>())
-    {
-      targetTracker.FleeFromPredator(other.gameObject);
-      return;
-    }
-
-    memoryController.SaveToMemory(other.gameObject);
-
-    if (!targetTracker.HasTarget)
-    {
-      if (_priority == Desire.Food && other.GetComponent<Food>() != null ||
-          _priority == Desire.Water && other.GetComponent<Water>() != null)
+      if (!targetTracker.HasTarget)
       {
-        targetTracker.SetTarget(other.gameObject);
+        var state = _delegate.AnimalState;
+        if (state == AnimalState.LookingForFood && other.gameObject.layer == Layers.FoodLayer ||
+            state == AnimalState.LookingForWater && other.gameObject.layer == Layers.WaterLayer ||
+            state == AnimalState.Idle && mateFinder.CompatibleAsParents(other.gameObject))
+        {
+          targetTracker.SetTarget(other.gameObject.transform.position, state);
+        }
       }
     }
   }

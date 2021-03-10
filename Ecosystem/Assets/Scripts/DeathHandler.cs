@@ -1,18 +1,30 @@
-﻿using UnityEngine;
+﻿using System;
+using Ecosystem.Logging;
+using UnityEngine;
 
-/// <summary>
-/// Handles killing the game object.
-/// </summary>
-public sealed class DeathHandler : MonoBehaviour
+namespace Ecosystem
 {
-  private void DestroyObjectDelayed()
+  /// <summary>
+  /// Handles killing the game object.
+  /// </summary>
+  public sealed class DeathHandler : MonoBehaviour
   {
-    //TODO: make the time depend on the death animation
-    Destroy(gameObject.gameObject, 5);
-  }
+    [SerializeField] private EcoAnimationController animationController;
+    private CauseOfDeath _cause;
 
-  public void Die(CauseOfDeath cause)
-  {
-    DestroyObjectDelayed();
+    public delegate void DeathEvent(CauseOfDeath cause, GameObject gameObject);
+
+    /// <summary>
+    /// This event is emitted every time an entity dies.
+    /// </summary>
+    public static event DeathEvent OnDeath;
+
+    public void Die(CauseOfDeath cause)
+    {
+      _cause = cause;
+      OnDeath?.Invoke(_cause, gameObject.gameObject);
+      Destroy(gameObject.gameObject, 3); // Make sure that there's enough time to display the death animation 
+      animationController.EnterDeathAnimation();
+    }
   }
 }

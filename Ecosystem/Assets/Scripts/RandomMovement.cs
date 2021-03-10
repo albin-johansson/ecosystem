@@ -2,47 +2,71 @@ using UnityEngine;
 using UnityEngine.AI;
 using Random = UnityEngine.Random;
 
-public sealed class RandomMovement : MonoBehaviour
+namespace Ecosystem
 {
-  [SerializeField] private NavMeshAgent navAgent;
-  [SerializeField] private AnimationStatesController animationStatesController;
-  [SerializeField, Tooltip("What is considered to be the ground")]
-  private LayerMask groundMask;
-
-  private Transform _transform;
-  private float _timer;
-
-  private void Start()
+  public sealed class RandomMovement : MonoBehaviour
   {
-    _transform = navAgent.transform;
-  }
+    [SerializeField] private NavMeshAgent navAgent;
+    [SerializeField] private EcoAnimationController animationController;
+
+    [SerializeField, Tooltip("What is considered to be the ground")]
+    private LayerMask groundMask;
+
+    private Transform _transform;
+    private Vector3 _lastPos;
+    private float _timer;
+
+    private void Start()
+    {
+      _transform = navAgent.transform;
+      _lastPos = _transform.position;
+    }
 
     //The TargetRandomDestination function is called if the agent has no path or the timer has run out
-  private void Update()
-  {
-    if (!navAgent.hasPath || _timer < 0)
+    private void Update()
     {
-      TargetRandomDestination();
-      _timer = 10;
+      if (!navAgent.hasPath || _timer < 0)
+      {
+        _timer = 10;
+        TargetRandomDestination();
+      }
+      else
+      {
+        _timer -= Time.deltaTime;
+      }
     }
-    else
+
+    private void TargetRandomDestination()
     {
-      _timer -= Time.deltaTime;
+      var randomX = Random.Range(-8f, 8f);
+      var randomZ = Random.Range(-8f, 8f);
+
+      var position = _transform.position;
+      var destination = new Vector3(position.x + randomX, position.y, position.z + randomZ);
+
+      if (!IsNewPosGood(position, destination))
+      {
+        return;
+      }
+
+      if (Physics.Raycast(destination, -_transform.up, 2f, groundMask))
+      {
+        _lastPos = position;
+        navAgent.SetDestination(destination);
+        animationController.MoveAnimation();
+      }
     }
-  }
 
-  private void TargetRandomDestination()
-  {
-    var randomX = Random.Range(-8f, 8f);
-    var randomZ = Random.Range(-8f, 8f);
-
-    var position = _transform.position;
-    var destination = new Vector3(position.x + randomX, position.y, position.z + randomZ);
-
-    if (Physics.Raycast(destination, -_transform.up, 2f, groundMask))
+    /// <summary>
+    ///Compares the new suggested destination with the position it had before it arrived at this one.
+    ///If the last is closer to the destination than how close destination is to its current position it will choose another one.
+    /// This is too avoid having the animal wander back and forth.
+    /// </summary>
+    public bool IsNewPosGood(Vector3 current, Vector3 newPos)
     {
-      navAgent.SetDestination(destination);
-      animationStatesController.AnimAnimationState = AnimationState.Walking;
+      var temp1 = new Vector3(current.x - newPos.x, 0, current.z - newPos.z);
+      var temp2 = new Vector3(_lastPos.x - newPos.x, 0, _lastPos.z - newPos.z);
+      return Vector3.SqrMagnitude(temp1) <= Vector3.SqrMagnitude(temp2);
     }
   }
 }

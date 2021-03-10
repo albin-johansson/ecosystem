@@ -1,65 +1,51 @@
-﻿using UnityEngine;
+﻿using Ecosystem.Util;
+using UnityEngine;
 
-public sealed class PreyFinder : MonoBehaviour
+namespace Ecosystem
 {
-  [SerializeField] private PreyConsumer preyConsumer;
-  [SerializeField] private WaterConsumer waterConsumer;
-  [SerializeField] private MemoryController memoryController;
-  [SerializeField] private TargetTracker targetTracker;
-
-  private Desire _priority = Desire.Idle;
-
-  private void Update()
+  public sealed class PreyFinder : MonoBehaviour // TODO rename to PredatorBehaviour?
   {
-    UpdatePriority();
-    CheckMemory();
-  }
+    [SerializeField] private PreyConsumer preyConsumer;
+    [SerializeField] private WaterConsumer waterConsumer;
+    [SerializeField] private MateFinder mateFinder;
+    [SerializeField] private MemoryController memoryController;
+    [SerializeField] private TargetTracker targetTracker;
 
-  // Checks the memory for objects that matches the prioritised desire
-  private void CheckMemory()
-  {
-    if (!targetTracker.HasTarget)
+    private AnimalBehaviourDelegate _delegate;
+
+    private void Start()
     {
-      var target = memoryController.RecallFromMemory(_priority);
-      if (target)
+      _delegate = new AnimalBehaviourDelegate
       {
-        targetTracker.SetTarget(target);
-      }
+              MemoryController = memoryController,
+              TargetTracker = targetTracker,
+              WaterConsumer = waterConsumer,
+              Consumer = preyConsumer
+      };
     }
-  }
 
-  // TODO needs to be worked on to get a better flow
-  private void UpdatePriority()
-  {
-    // Hunger has implicit priority
-    if (preyConsumer.IsHungry())
+    private void Update()
     {
-      _priority = Desire.Prey;
+      _delegate.Update();
     }
-    else if (waterConsumer.IsThirsty())
-    {
-      _priority = Desire.Water;
-    }
-    else
-    {
-      _priority = Desire.Idle;
-    }
-  }
 
-  /// <summary>
-  /// When colliding with an object, that object is saved to the animals memory, and subsequently set as a target if the
-  /// priority matches.
-  /// </summary>
-  /// TODO Might be an improvement to only save the object and not set it as a target.
-  private void OnTriggerEnter(Collider other)
-  {
-    memoryController.SaveToMemory(other.gameObject);
-    if (!targetTracker.HasTarget)
+    /// <summary>
+    /// When colliding with an object, that object is saved to the animals memory, and subsequently set as a target if the
+    /// priority matches.
+    /// </summary>
+    private void OnTriggerEnter(Collider other)
     {
-      if (_priority == Desire.Prey && other.GetComponent<Prey>() ||
-          _priority == Desire.Water && other.GetComponent<Water>())
+      memoryController.SaveToMemory(other.gameObject);
+
+      if (!targetTracker.HasTarget)
       {
-        targetTracker.SetTarget(other.gameObject);
+        var state = _delegate.AnimalState;
+        if (state == AnimalState.LookingForFood && other.gameObject.layer == Layers.PreyLayer ||
+            state == AnimalState.LookingForWater && other.gameObject.layer == Layers.WaterLayer ||
+            state == AnimalState.Idle && mateFinder.CompatibleAsParents(other.gameObject))
+        {
+          targetTracker.SetTarget(other.gameObject.transform.position, state);
+        }
       }
     }
   }
