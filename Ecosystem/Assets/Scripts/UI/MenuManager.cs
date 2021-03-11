@@ -50,24 +50,27 @@ namespace Ecosystem.UI
 
     private void OnSceneChanged(Scene current, Scene next)
     {
-      var rabbit = Resources.Load("Prefabs/Animals/EcoRabbit");
-      var deer = Resources.Load("Prefabs/Animals/EcoDeer");
-      var wolf = Resources.Load("Prefabs/Animals/EcoWolf");
-      var bear = Resources.Load("Prefabs/Animals/EcoBear");
-      var carrot = Resources.Load("Prefabs/Food/EcoCarrot");
-      
-      var nRabbits = int.Parse(dynamicRabbitCount.text);
-      var nDeer = int.Parse(dynamicDeerCount.text);
-      var nWolves = int.Parse(dynamicWolfCount.text);
-      var nBears = int.Parse(dynamicBearCount.text);
+      if (next.name == "DynamicScene")
+      {
+        var rabbit = Resources.Load("Prefabs/Animals/EcoRabbit");
+        var deer = Resources.Load("Prefabs/Animals/EcoDeer");
+        var wolf = Resources.Load("Prefabs/Animals/EcoWolf");
+        var bear = Resources.Load("Prefabs/Animals/EcoBear");
+        var carrot = Resources.Load("Prefabs/Food/EcoCarrot");
 
-      var terrain = Terrain.activeTerrain;
+        var nRabbits = int.Parse(dynamicRabbitCount.text);
+        var nDeer = int.Parse(dynamicDeerCount.text);
+        var nWolves = int.Parse(dynamicWolfCount.text);
+        var nBears = int.Parse(dynamicBearCount.text);
 
-      Instantiate(nRabbits, rabbit, terrain);
-      Instantiate(nWolves, wolf, terrain);
-      Instantiate(nDeer, deer, terrain);
-      Instantiate(nBears, bear, terrain);
-      Instantiate(1000, carrot, terrain);
+        var terrain = Terrain.activeTerrain;
+
+        Instantiate(nRabbits, rabbit, terrain);
+        Instantiate(nWolves, wolf, terrain);
+        Instantiate(nDeer, deer, terrain);
+        Instantiate(nBears, bear, terrain);
+        Instantiate(1000, carrot, terrain);
+      }
     }
 
     private static void Instantiate(int count, Object prefab, Terrain terrain)
