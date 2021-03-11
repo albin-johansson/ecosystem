@@ -12,7 +12,6 @@ GameObject:
   - component: {fileID: 5674612439593892959}
   - component: {fileID: 1577317612144711687}
   - component: {fileID: 8446978696801691137}
-  - component: {fileID: 2014486241405200647}
   m_Layer: 6
   m_Name: EcoBerry
   m_TagString: Food
@@ -102,17 +101,3 @@ LODGroup:
     renderers:
     - renderer: {fileID: 1577317612144711687}
   m_Enabled: 1
---- !u!136 &2014486241405200647
-CapsuleCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8559470340436687699}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  m_Radius: 1.133155
-  m_Height: 1.6643739
-  m_Direction: 1
-  m_Center: {x: 0, y: 0, z: 0}

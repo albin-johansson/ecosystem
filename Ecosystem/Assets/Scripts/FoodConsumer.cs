@@ -45,7 +45,11 @@ namespace Ecosystem
 
     private void OnTriggerEnter(Collider other)
     {
-      if (other.CompareTag("Food"))
+      if (other.CompareTag("StaticFood"))
+      {
+        OnFoodEaten?.Invoke(other.gameObject);
+        Hunger -= 5f;
+      } else if (other.CompareTag("Food"))
       {
         OnFoodEaten?.Invoke(other.gameObject);
         Destroy(other.gameObject);
