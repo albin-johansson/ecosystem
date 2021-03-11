@@ -16,5 +16,18 @@ namespace Ecosystem.UI
     {
       slider.value = slider.maxValue - value;
     }
+    
+    public void SetSaturationValue(float value)
+    {
+      if (slider.maxValue < value)
+      {
+        slider.value = slider.maxValue;
+      }
+      else
+      {
+        slider.value = value;
+      }
+    }
+    
   }
 }

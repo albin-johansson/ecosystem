@@ -5,8 +5,10 @@ namespace Ecosystem
   /// </summary>
   public interface IConsumer
   {
-    double Hunger { get; }
+    double Hunger { get; set; }
 
     bool IsHungry();
+
+    void SetSaturation(float value);
   }
 }

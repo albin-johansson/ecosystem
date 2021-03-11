@@ -1,17 +1,19 @@
+using UnityEngine;
+
 namespace Ecosystem.Genes
 {
   public sealed class BearGenome : Genome
   {
-    private static readonly Gene HungerRate = new Gene(1.2f, 0.5f, 10);
-    private static readonly Gene HungerThreshold = new Gene(4, 0, 10);
-    private static readonly Gene ThirstRate = new Gene(1.5f, 0.5f, 10);
-    private static readonly Gene ThirstThreshold = new Gene(3, 0, 10);
-    private static readonly Gene Vision = new Gene(0.5f, 0, 1);
-    private static readonly Gene SpeedFactor = new Gene(15, 1, 25);
-    private static readonly Gene SizeFactor = new Gene(0.5f, 0.1f, 1);
+    private static readonly Gene HungerRate = new Gene(1, 0.5f, 1.5f);
+    private static readonly Gene HungerThreshold = new Gene(5, 0, 10);
+    private static readonly Gene ThirstRate = new Gene(1, 0.5f, 1.5f);
+    private static readonly Gene ThirstThreshold = new Gene(5, 0, 10);
+    private static readonly Gene Vision = new Gene(1f, .5f, 1.5f);
+    private static readonly Gene SpeedFactor = new Gene(1f, .5f, 1.5f);
+    private static readonly Gene SizeFactor = new Gene(1, 0.5f, 1.5f);
     private static readonly Gene DesirabilityFactor = new Gene(0.5f, 0, 1);
-    private static readonly Gene GestationPeriod = new Gene(14, 10, 120);
-    private static readonly Gene SexualMaturityTime = new Gene(15, 10, 150);
+    private static readonly Gene GestationPeriod = new Gene(20, 10, 120);
+    private static readonly Gene SexualMaturityTime = new Gene(20, 10, 120);
 
     protected override void Initialize()
     {
@@ -31,6 +33,12 @@ namespace Ecosystem.Genes
       Genes[GeneType.DesirabilityScore] = DesirabilityFactor;
       Genes[GeneType.GestationPeriod] = GestationPeriod;
       Genes[GeneType.SexualMaturityTime] = SexualMaturityTime;
+      
+      if (Random.value > 0.5)
+      {
+        IsMale = true;
+      }
+      GenesToAttributes();
     }
   }
 }

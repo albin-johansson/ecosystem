@@ -13,7 +13,7 @@ namespace Ecosystem
     [SerializeField] private double maxHunger = 100;
     private bool _isDead;
 
-    public double Hunger { get; private set; }
+    public double Hunger { get; set; }
 
     public delegate void FoodEatenEvent(GameObject food);
 
@@ -56,6 +56,12 @@ namespace Ecosystem
     public bool IsHungry()
     {
       return Hunger > genome.GetHungerThreshold();
+    }
+
+    public void SetSaturation(float value)
+    {
+      Hunger = maxHunger - value;
+      resourceBar.SetSaturationValue(value);
     }
   }
 }

@@ -1,4 +1,4 @@
-﻿using Ecosystem.Genes;
+using Ecosystem.Genes;
 using Ecosystem.Logging;
 using Ecosystem.UI;
 using UnityEngine;
@@ -14,7 +14,7 @@ namespace Ecosystem
     [SerializeField] private EcoAnimationController animationController;
     private bool _isDead;
 
-    public double Hunger { get; private set; }
+    public double Hunger { get; set; }
 
     public delegate void PreyConsumedEvent();
 
@@ -59,5 +59,12 @@ namespace Ecosystem
     {
       return Hunger > genome.GetHungerThreshold();
     }
+    
+    public void SetSaturation(float value)
+    {
+      Hunger = maxHunger - value;
+      resourceBar.SetSaturationValue(value);
+    }
+    
   }
 }

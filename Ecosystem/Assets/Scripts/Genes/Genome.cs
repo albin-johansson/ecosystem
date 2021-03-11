@@ -6,16 +6,16 @@ namespace Ecosystem.Genes
 {
   public class Genome : MonoBehaviour
   {
-    private static readonly Gene HungerRate = new Gene(1, 0.5f, 10);
+    private static readonly Gene HungerRate = new Gene(1, 0.5f, 1.5f);
     private static readonly Gene HungerThreshold = new Gene(5, 0, 10);
-    private static readonly Gene ThirstRate = new Gene(1, 0.5f, 10);
+    private static readonly Gene ThirstRate = new Gene(1, 0.5f, 1.5f);
     private static readonly Gene ThirstThreshold = new Gene(5, 0, 10);
-    private static readonly Gene Vision = new Gene(0.5f, 0, 1);
-    private static readonly Gene SpeedFactor = new Gene(5f, 1, 10);
-    private static readonly Gene SizeFactor = new Gene(1.5f, 0.5f, 2);
+    private static readonly Gene Vision = new Gene(1f, .5f, 1.5f);
+    private static readonly Gene SpeedFactor = new Gene(1f, .5f, 1.5f);
+    private static readonly Gene SizeFactor = new Gene(1, 0.5f, 1.5f);
     private static readonly Gene DesirabilityFactor = new Gene(0.5f, 0, 1);
-    private static readonly Gene GestationPeriod = new Gene(10, 10, 120);
-    private static readonly Gene SexualMaturityTime = new Gene(10, 10, 120);
+    private static readonly Gene GestationPeriod = new Gene(20, 10, 120);
+    private static readonly Gene SexualMaturityTime = new Gene(20, 10, 120);
 
     public bool IsMale { get; protected set; }
     protected double MutateChance;
@@ -91,7 +91,7 @@ namespace Ecosystem.Genes
     {
       if (gameObject.TryGetComponent(out NavMeshAgent navMeshAgent))
       {
-        navMeshAgent.speed = (float) GetSpeed();
+        navMeshAgent.speed *= (float) GetSpeed();
       }
 
       if (gameObject.TryGetComponent(out Animator animator))
@@ -125,8 +125,9 @@ namespace Ecosystem.Genes
     public double GetHungerRate()
     {
       double hungerRate = Genes[GeneType.HungerRate].Value * Genes[GeneType.SizeFactor].Value;
-      hungerRate -= hungerRate * 0.15 * GetVisionFactor();
-      return Genes[GeneType.HungerRate].Value * Genes[GeneType.SizeFactor].Value;
+      hungerRate += hungerRate * 0.15 * GetVisionFactor();
+      hungerRate += hungerRate * 0.3 * Genes[GeneType.SpeedFactor].Value;
+      return hungerRate;
     }
 
     public double GetHungerThreshold()
