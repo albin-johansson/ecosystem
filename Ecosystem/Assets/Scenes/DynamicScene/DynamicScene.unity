@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.43711957, g: 0.48483884, b: 0.5651056, a: 1}
+  m_IndirectSpecularColor: {r: 0.43897322, g: 0.48719049, b: 0.5674493, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -97,7 +97,7 @@ LightmapSettings:
     m_ExportTrainingData: 0
     m_TrainingDataDestination: TrainingData
     m_LightProbeSampleCountMultiplier: 4
-  m_LightingDataAsset: {fileID: 112000000, guid: 5020c6f5d914e184fb679b16e09ccb52, type: 2}
+  m_LightingDataAsset: {fileID: 112000000, guid: 3ca4edd31921981438f50486a455cdb1, type: 2}
   m_LightingSettings: {fileID: 4890085278179872738, guid: 9c9991bddc8a8084ca009f8f8217fb8b, type: 2}
 --- !u!196 &4
 NavMeshSettings:
@@ -122,7 +122,7 @@ NavMeshSettings:
     preserveTilesOutsideBounds: 0
     debug:
       m_Flags: 0
-  m_NavMeshData: {fileID: 23800000, guid: fd0bcdcb63a9eed4599322304ba7ce11, type: 2}
+  m_NavMeshData: {fileID: 23800000, guid: cfb23da5151538f44809d8b73c11ac38, type: 2}
 --- !u!1 &2311946
 GameObject:
   m_ObjectHideFlags: 0
@@ -167,6 +167,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 938855721}
     m_Modifications:
+    - target: {fileID: 3463232439016609762, guid: ad44e96043516fa45908a398544073e2, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 3548113231540868564, guid: ad44e96043516fa45908a398544073e2, type: 3}
       propertyPath: m_Name
       value: Water Mass
@@ -754,7 +758,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3548113231540868564, guid: ad44e96043516fa45908a398544073e2, type: 3}
       propertyPath: m_Name
-      value: Water Mass
+      value: Sea
       objectReference: {fileID: 0}
     - target: {fileID: 6317102523152618976, guid: ad44e96043516fa45908a398544073e2, type: 3}
       propertyPath: m_RootOrder
@@ -821,6 +825,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 938855721}
     m_Modifications:
+    - target: {fileID: 3463232439016609762, guid: ad44e96043516fa45908a398544073e2, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 3548113231540868564, guid: ad44e96043516fa45908a398544073e2, type: 3}
       propertyPath: m_Name
       value: Water Mass
@@ -973,6 +981,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 938855721}
     m_Modifications:
+    - target: {fileID: 3463232439016609762, guid: ad44e96043516fa45908a398544073e2, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 3548113231540868564, guid: ad44e96043516fa45908a398544073e2, type: 3}
       propertyPath: m_Name
       value: Water Mass
@@ -1244,7 +1256,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 4
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &724271819
 PrefabInstance:
@@ -1359,6 +1371,7 @@ Transform:
   - {fileID: 140209547}
   - {fileID: 1935787900}
   - {fileID: 462054475}
+  - {fileID: 1453159941}
   m_Father: {fileID: 1718093830}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -1540,8 +1553,86 @@ Transform:
   m_Children:
   - {fileID: 223739859}
   m_Father: {fileID: 0}
-  m_RootOrder: 5
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1001 &1453159940
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 938855721}
+    m_Modifications:
+    - target: {fileID: 3463232439016609762, guid: ad44e96043516fa45908a398544073e2, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3548113231540868564, guid: ad44e96043516fa45908a398544073e2, type: 3}
+      propertyPath: m_Name
+      value: Water Mass
+      objectReference: {fileID: 0}
+    - target: {fileID: 6317102523152618976, guid: ad44e96043516fa45908a398544073e2, type: 3}
+      propertyPath: m_RootOrder
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 6317102523152618976, guid: ad44e96043516fa45908a398544073e2, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 42.073925
+      objectReference: {fileID: 0}
+    - target: {fileID: 6317102523152618976, guid: ad44e96043516fa45908a398544073e2, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 6317102523152618976, guid: ad44e96043516fa45908a398544073e2, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 41.765087
+      objectReference: {fileID: 0}
+    - target: {fileID: 6317102523152618976, guid: ad44e96043516fa45908a398544073e2, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 508.23
+      objectReference: {fileID: 0}
+    - target: {fileID: 6317102523152618976, guid: ad44e96043516fa45908a398544073e2, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 11
+      objectReference: {fileID: 0}
+    - target: {fileID: 6317102523152618976, guid: ad44e96043516fa45908a398544073e2, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 32.45
+      objectReference: {fileID: 0}
+    - target: {fileID: 6317102523152618976, guid: ad44e96043516fa45908a398544073e2, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6317102523152618976, guid: ad44e96043516fa45908a398544073e2, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6317102523152618976, guid: ad44e96043516fa45908a398544073e2, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6317102523152618976, guid: ad44e96043516fa45908a398544073e2, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6317102523152618976, guid: ad44e96043516fa45908a398544073e2, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6317102523152618976, guid: ad44e96043516fa45908a398544073e2, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6317102523152618976, guid: ad44e96043516fa45908a398544073e2, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: ad44e96043516fa45908a398544073e2, type: 3}
+--- !u!4 &1453159941 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 6317102523152618976, guid: ad44e96043516fa45908a398544073e2, type: 3}
+  m_PrefabInstance: {fileID: 1453159940}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1534392434
 GameObject:
   m_ObjectHideFlags: 0
@@ -1628,13 +1719,13 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1534392434}
-  m_LocalRotation: {x: 0.7253124, y: -0.17092861, z: 0.19434683, w: 0.6379144}
+  m_LocalRotation: {x: 0.6925456, y: -0.08349335, z: 0.2902228, w: 0.6551185}
   m_LocalPosition: {x: 0, y: 3, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 1
-  m_LocalEulerAnglesHint: {x: 97.336, y: -30, z: 0}
+  m_LocalEulerAnglesHint: {x: 107.087006, y: -95.237, z: -64.23901}
 --- !u!1 &1552723891
 GameObject:
   m_ObjectHideFlags: 0
@@ -1646,9 +1737,9 @@ GameObject:
   - component: {fileID: 1552723892}
   - component: {fileID: 1552723894}
   - component: {fileID: 1552723893}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Terrain
-  m_TagString: Untagged
+  m_TagString: Ground
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 4294967295
@@ -1750,6 +1841,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 938855721}
     m_Modifications:
+    - target: {fileID: 3463232439016609762, guid: ad44e96043516fa45908a398544073e2, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 3548113231540868564, guid: ad44e96043516fa45908a398544073e2, type: 3}
       propertyPath: m_Name
       value: Water Mass

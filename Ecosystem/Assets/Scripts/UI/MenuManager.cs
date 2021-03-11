@@ -1,6 +1,8 @@
-using System;
+using Ecosystem.Util;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
+using Object = UnityEngine.Object;
 
 namespace Ecosystem.UI
 {
@@ -8,9 +10,14 @@ namespace Ecosystem.UI
   {
     [SerializeField] private GameObject mainMenu;
     [SerializeField] private GameObject dynamicSceneMenu;
+    [SerializeField] private Text dynamicRabbitCount;
+    [SerializeField] private Text dynamicDeerCount;
+    [SerializeField] private Text dynamicWolfCount;
+    [SerializeField] private Text dynamicBearCount;
 
     private void Start()
     {
+      SceneManager.activeSceneChanged += OnSceneChanged;
       EnterMainMenu();
     }
 
@@ -33,16 +40,45 @@ namespace Ecosystem.UI
 
     public void StartDynamicScene()
     {
+      SceneManager.LoadScene("Assets/Scenes/DynamicScene/DynamicScene.unity");
     }
 
     public void StartTestScene()
     {
       SceneManager.LoadScene("PrototypeScene");
-      
     }
 
-    public void OnRabbitCountChange(string count)
+    private void OnSceneChanged(Scene current, Scene next)
     {
+      var rabbit = Resources.Load("Prefabs/Animals/EcoRabbit");
+      var deer = Resources.Load("Prefabs/Animals/EcoDeer");
+      var wolf = Resources.Load("Prefabs/Animals/EcoWolf");
+      var bear = Resources.Load("Prefabs/Animals/EcoBear");
+      var carrot = Resources.Load("Prefabs/Food/EcoCarrot");
+      
+      var nRabbits = int.Parse(dynamicRabbitCount.text);
+      var nDeer = int.Parse(dynamicDeerCount.text);
+      var nWolves = int.Parse(dynamicWolfCount.text);
+      var nBears = int.Parse(dynamicBearCount.text);
+
+      var terrain = Terrain.activeTerrain;
+
+      Instantiate(nRabbits, rabbit, terrain);
+      Instantiate(nWolves, wolf, terrain);
+      Instantiate(nDeer, deer, terrain);
+      Instantiate(nBears, bear, terrain);
+      Instantiate(1000, carrot, terrain);
+    }
+
+    private static void Instantiate(int count, Object prefab, Terrain terrain)
+    {
+      for (var i = 0; i < count; ++i)
+      {
+        if (Terrains.RandomWalkablePosition(terrain, out var position))
+        {
+          Instantiate(prefab, position, Quaternion.identity);
+        }
+      }
     }
   }
 }
