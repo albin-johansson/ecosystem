@@ -11,7 +11,7 @@ namespace Ecosystem
     [SerializeField] private MateFinder mateFinder;
     [SerializeField] private MemoryController memoryController;
     [SerializeField] private TargetTracker targetTracker;
-    [SerializeField] private Genome genome;
+    [SerializeField] private AbstractGenome genome;
 
     private AnimalBehaviourDelegate _delegate;
 
@@ -25,7 +25,7 @@ namespace Ecosystem
               Consumer = preyConsumer
       };
       var sp = GetComponent<SphereCollider>();
-      sp.radius = (sp.radius / sp.transform.lossyScale.magnitude) * (float) genome.GetVisionFactor();
+      sp.radius = (sp.radius / sp.transform.lossyScale.magnitude) * genome.GetVision().Value;
     }
 
     private void Update()

@@ -70,8 +70,8 @@ namespace Ecosystem
         {
           consumer = transform.root.GetComponentInChildren<IConsumer>();
         }
-        consumer.Hunger += (genome.GetHungerRate() / 3) * Time.deltaTime;
-        childSaturation += (float) (genome.GetHungerRate() / 3) *  Time.deltaTime;
+        consumer.Hunger += (genome.Metabolism / 3) * Time.deltaTime;
+        childSaturation += (genome.Metabolism / 3) *  Time.deltaTime;
         _pregnancyElapsedTime += Time.deltaTime;
         if (_pregnancyElapsedTime >= _gestationPeriod)
         {
@@ -114,7 +114,8 @@ namespace Ecosystem
           Genomes.CompatibleAsParents(genome, otherReproducer.genome) &&
           otherReproducer.CanMate && CanMate)
       {
-        if (Random.value >= (genome.GetDesirability() + otherReproducer.genome.GetDesirability())/2)
+        Debug.Log("Try pregnancy");
+        if (Random.value >= (genome.Attractiveness + otherReproducer.genome.Attractiveness)/2)
         {
           if (genome.IsMale && !otherReproducer._isPregnant)
           {
@@ -131,7 +132,7 @@ namespace Ecosystem
     public bool CompatibleAsParents(GameObject other)
     {
       return CanMate && other.TryGetComponent(out Reproducer reproducer) &&
-             Genome.CompatibleAsParents(genome, reproducer.genome);
+             Genomes.CompatibleAsParents(genome, reproducer.genome);
     }
     
   }

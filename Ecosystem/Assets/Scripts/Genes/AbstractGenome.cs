@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using UnityEngine.AI;
 
 namespace Ecosystem.Genes
 {
@@ -27,6 +28,19 @@ namespace Ecosystem.Genes
     public float Metabolism => GetHungerRate().Value * GetSizeFactor().Value;
 
     public float Attractiveness => GetDesirabilityScore().Value;
+    
+    protected void GenesToAttributes()
+    {
+      if (gameObject.TryGetComponent(out NavMeshAgent navMeshAgent))
+      {
+        navMeshAgent.speed *= Speed;
+      }
+
+      if (gameObject.TryGetComponent(out Animator animator))
+      {
+        gameObject.transform.localScale.Scale(GetSizeFactor().Value * new Vector3(1, 1, 1));
+      }
+    }
 
     public Gene GetHungerRate() => Data.HungerRate;
 

@@ -1627,7 +1627,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 85b69fff4ae22bc438ab072e486351d2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  genome: {fileID: 1080774011748047759}
   reproducer: {fileID: 3460790299832027449}
 --- !u!1 &7509506793630284121
 GameObject:
@@ -1752,7 +1751,7 @@ MonoBehaviour:
   mateFinder: {fileID: 341703086639412255}
   memoryController: {fileID: 6008664309968109715}
   targetTracker: {fileID: 4333919728053627175}
-  genome: {fileID: 0}
+  genome: {fileID: 1080774011748047759}
 --- !u!114 &6008664309968109715
 MonoBehaviour:
   m_ObjectHideFlags: 0
