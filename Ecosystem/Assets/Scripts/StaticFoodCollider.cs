@@ -1,3 +1,4 @@
+using Ecosystem.Util;
 using UnityEngine;
 
 namespace Ecosystem
@@ -8,7 +9,7 @@ namespace Ecosystem
 
     private void OnTriggerEnter(Collider other)
     {
-      if (other.CompareTag("Prey"))
+      if (Tags.IsPrey(other.gameObject))
       {
         stationaryFoodGeneration.AmountOfBerries -= 1;
         var location = stationaryFoodGeneration.BerriesPlaced.Pop();
