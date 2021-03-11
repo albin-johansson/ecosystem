@@ -1,4 +1,5 @@
 ﻿using Ecosystem.Genes;
+﻿using Ecosystem.Util;
 using UnityEngine;
 
 namespace Ecosystem
@@ -43,8 +44,8 @@ namespace Ecosystem
       if (!targetTracker.HasTarget)
       {
         var state = _delegate.AnimalState;
-        if (state == AnimalState.LookingForFood && other.gameObject.layer == LayerUtil.PreyLayer ||
-            state == AnimalState.LookingForWater && other.gameObject.layer == LayerUtil.WaterLayer ||
+        if (state == AnimalState.LookingForFood && other.gameObject.layer == Layers.PreyLayer ||
+            state == AnimalState.LookingForWater && other.gameObject.layer == Layers.WaterLayer ||
             state == AnimalState.Idle && mateFinder.CompatibleAsParents(other.gameObject))
         {
           targetTracker.SetTarget(other.gameObject.transform.position, state);

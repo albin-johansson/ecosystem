@@ -5,6 +5,7 @@ namespace Ecosystem
   // Will spawn a given prefab inside the given terrain if it hits something with a ground tag.
   public sealed class RayPrefabSpawner : MonoBehaviour
   {
+    [SerializeField] private Transform directory;
     [SerializeField] private GameObject prefab;
     [SerializeField] private Terrain terrain;
     [SerializeField] private float rate;
@@ -31,7 +32,7 @@ namespace Ecosystem
 
         if (hit.transform.CompareTag("Ground"))
         {
-          Instantiate(prefab, hit.point, Quaternion.identity);
+          Instantiate(prefab, hit.point, Quaternion.identity, directory);
         }
       }
     }

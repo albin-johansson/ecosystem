@@ -7,7 +7,7 @@ namespace Ecosystem
 {
   public sealed class WaterConsumer : MonoBehaviour
   {
-    [SerializeField] private Genome genome;
+    [SerializeField] private AbstractGenome genome;
     [SerializeField] private ResourceBar resourceBar;
     [SerializeField] private DeathHandler deathHandler;
     [SerializeField] private float maxThirst = 100;
@@ -28,7 +28,7 @@ namespace Ecosystem
         return;
       }
 
-      Thirst += genome.GetThirstRate() * Time.deltaTime;
+      Thirst += genome.GetThirstRate().Value * Time.deltaTime;
       resourceBar.SetValue(Thirst);
       if (IsDrinking)
       {
@@ -62,7 +62,7 @@ namespace Ecosystem
 
     internal bool IsThirsty()
     {
-      return Thirst > genome.GetThirstThreshold();
+      return Thirst > genome.GetThirstThreshold().Value;
     }
   }
 }

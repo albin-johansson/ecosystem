@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using Ecosystem.Util;
 using UnityEngine;
 
 namespace Ecosystem
@@ -28,15 +29,15 @@ namespace Ecosystem
 
     private static AnimalState GetAnimalState(GameObject other)
     {
-      if (other.gameObject.layer == LayerUtil.FoodLayer)
+      if (other.gameObject.layer == Layers.FoodLayer)
       {
         return AnimalState.LookingForFood;
       }
-      else if (other.gameObject.layer == LayerUtil.PreyLayer)
+      else if (other.gameObject.layer == Layers.PreyLayer)
       {
         return AnimalState.LookingForPrey;
       }
-      else if (other.gameObject.layer == LayerUtil.WaterLayer)
+      else if (other.gameObject.layer == Layers.WaterLayer)
       {
         return AnimalState.LookingForWater;
       }
