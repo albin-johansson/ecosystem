@@ -5,7 +5,7 @@ using Random = UnityEngine.Random;
 namespace Ecosystem
 {
   /// <summary>
-  /// The handler script for the stationary food generators. Actives children meshes for visuals.  
+  /// The handler script for the stationary food generators. Actives children objects for visuals purposes.  
   /// </summary>
   public class StationaryFoodGeneration : MonoBehaviour
   {
@@ -19,7 +19,7 @@ namespace Ecosystem
     public Stack<int> BerriesPlaced { get; private set; } = new Stack<int>();
     public int AmountOfBerries { get; set; }
 
-    //An extra child object was added to the original berry bush prefab to create some order to which berries in it´s hierarchy are locations and which are consumable. 
+    //Deactivates all berries to make them invisible.  
     private void Start()
     {
       _spawningLocations = spawner.childCount - 1;
@@ -34,7 +34,7 @@ namespace Ecosystem
 
     /// <summary>
     /// The berry bush prefab has now a child with multiple invisible berries in it´s hierarchy.
-    /// These invisible berries act as spawning locations for actual berries which can be eaten by animals.
+    /// These invisible berries are set to visible to indicate how many berries exist on the bush. 
     /// </summary>
     private void Update()
     {

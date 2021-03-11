@@ -7,6 +7,8 @@ namespace Ecosystem
   {
     [SerializeField] private StationaryFoodGeneration stationaryFoodGeneration;
 
+
+    //Handles the consuming of berries, when all berries has been consumed the bush will deactivate itself until new berries are available. 
     private void OnTriggerEnter(Collider other)
     {
       if (Tags.IsPrey(other.gameObject))
