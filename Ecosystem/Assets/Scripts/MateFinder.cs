@@ -5,13 +5,13 @@ namespace Ecosystem
 {
   public sealed class MateFinder : MonoBehaviour
   {
-    [SerializeField] private Genome genome;
+    [SerializeField] private AbstractGenome genome;
     [SerializeField] private Reproducer reproducer;
 
     public bool CompatibleAsParents(GameObject other)
     {
-      return reproducer.CanMate && other.TryGetComponent(out Genome otherGenome) &&
-             Genome.CompatibleAsParents(genome, otherGenome);
+      return reproducer.CanMate && other.TryGetComponent(out AbstractGenome otherGenome) &&
+             Genomes.CompatibleAsParents(genome, otherGenome);
     }
   }
 }
