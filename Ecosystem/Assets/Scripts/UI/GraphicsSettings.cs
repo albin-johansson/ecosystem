@@ -8,7 +8,7 @@ namespace Ecosystem.UI
         [SerializeField] private Image settingsWindow;
 
         private bool _windowIsOpen;
-        public static int _postProcessingActive;
+        public static int _antiAliasingMode;
         
         public void SettingsMenu()
         {
@@ -22,8 +22,11 @@ namespace Ecosystem.UI
                 _windowIsOpen = true;
                 settingsWindow.gameObject.SetActive(true);
             }
+        }
 
-            _postProcessingActive = 10;
+        public void AntiAliasingOption()
+        {
+            _antiAliasingMode = gameObject.GetComponent<Dropdown>().value;
         }
     }
 }

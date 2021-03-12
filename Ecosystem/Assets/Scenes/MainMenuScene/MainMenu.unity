@@ -1405,6 +1405,60 @@ PrefabInstance:
       propertyPath: m_SizeDelta.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 6890148631583218159, guid: 6096d776666406e4193d9ad1245833ac, type: 3}
+      propertyPath: m_Text
+      value: 'Anti-Aliasing
+
+'
+      objectReference: {fileID: 0}
+    - target: {fileID: 7359741440662230133, guid: 6096d776666406e4193d9ad1245833ac, type: 3}
+      propertyPath: m_Options.m_Options.Array.size
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 7359741440662230133, guid: 6096d776666406e4193d9ad1245833ac, type: 3}
+      propertyPath: m_Options.m_Options.Array.data[0].m_Text
+      value: SubpixelMorphologicalAntialiasing
+      objectReference: {fileID: 0}
+    - target: {fileID: 7359741440662230133, guid: 6096d776666406e4193d9ad1245833ac, type: 3}
+      propertyPath: m_Options.m_Options.Array.data[1].m_Text
+      value: TemporalAntialiasing
+      objectReference: {fileID: 0}
+    - target: {fileID: 7359741440662230133, guid: 6096d776666406e4193d9ad1245833ac, type: 3}
+      propertyPath: m_Options.m_Options.Array.data[2].m_Text
+      value: FastApproximateAntialiasing
+      objectReference: {fileID: 0}
+    - target: {fileID: 7359741440662230133, guid: 6096d776666406e4193d9ad1245833ac, type: 3}
+      propertyPath: m_Options.m_Options.Array.data[3].m_Text
+      value: None
+      objectReference: {fileID: 0}
+    - target: {fileID: 7359741440662230133, guid: 6096d776666406e4193d9ad1245833ac, type: 3}
+      propertyPath: m_OnValueChanged.m_PersistentCalls.m_Calls.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7359741440662230133, guid: 6096d776666406e4193d9ad1245833ac, type: 3}
+      propertyPath: m_OnValueChanged.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7359741440662230133, guid: 6096d776666406e4193d9ad1245833ac, type: 3}
+      propertyPath: m_OnValueChanged.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 1859260630}
+    - target: {fileID: 7359741440662230133, guid: 6096d776666406e4193d9ad1245833ac, type: 3}
+      propertyPath: m_OnValueChanged.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 7359741440662230133, guid: 6096d776666406e4193d9ad1245833ac, type: 3}
+      propertyPath: m_OnValueChanged.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: AntiAliasingOption
+      objectReference: {fileID: 0}
+    - target: {fileID: 7359741440662230133, guid: 6096d776666406e4193d9ad1245833ac, type: 3}
+      propertyPath: m_OnValueChanged.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: Ecosystem.UI.GraphicsSettings, ScriptsAssembly
+      objectReference: {fileID: 0}
+    - target: {fileID: 7359741440662230133, guid: 6096d776666406e4193d9ad1245833ac, type: 3}
+      propertyPath: m_OnValueChanged.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
+      objectReference: {fileID: 0}
     - target: {fileID: 8232688759629256194, guid: 6096d776666406e4193d9ad1245833ac, type: 3}
       propertyPath: m_AnchorMax.y
       value: 0
@@ -1462,6 +1516,24 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5f7201a12d95ffc409449d95f23cf332, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!1 &1859260625 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 6954480971218953835, guid: 6096d776666406e4193d9ad1245833ac, type: 3}
+  m_PrefabInstance: {fileID: 1628216757}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1859260630
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1859260625}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 70eb25357daf2e249b644cebae5c0be0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  settingsWindow: {fileID: 0}
 --- !u!1 &1879225894
 GameObject:
   m_ObjectHideFlags: 0
@@ -6371,19 +6443,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   mainMenu: {fileID: 1071901118}
   dynamicSceneMenu: {fileID: 2026068121}
-  rabbitPrefab: {fileID: 2014496642}
-  deerPrefab: {fileID: 7155763010095567698, guid: ac935de5e4958254196cd0457e8a0df5, type: 3}
-  wolfPrefab: {fileID: 4371145773595096147, guid: 9ad7ab249851e454e9360e8fc8284e3b, type: 3}
-  bearPrefab: {fileID: 7237780236292801018, guid: a5fd4d9dd473da54c83430115c05e48c, type: 3}
   dynamicRabbitCount: {fileID: 1815966860}
   dynamicDeerCount: {fileID: 54312118}
   dynamicWolfCount: {fileID: 886235166}
   dynamicBearCount: {fileID: 687530572}
---- !u!1 &2014496642 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 3436557251021641289, guid: 52b1c190247192a42a5e36bafea08096, type: 3}
-  m_PrefabInstance: {fileID: 940642794}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &2026068119
 PrefabInstance:
   m_ObjectHideFlags: 0

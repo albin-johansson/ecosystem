@@ -5,22 +5,26 @@ namespace Ecosystem.UI
 {
     public class HandlePostProcessing : MonoBehaviour
     {
-        private PostProcessVolume ppVolume;
+        [SerializeField] private PostProcessVolume ppVolume;
+        [SerializeField] private PostProcessLayer ppLayer;
         
         private void Start()
         {
-            //ppProfile.GetComponent<AmbientOcclusion>().intensity = 0f;
-            if (GraphicsSettings._postProcessingActive == 10)
+            switch (GraphicsSettings._antiAliasingMode)
             {
-                print("hello");
-            }
-
-            Component[] components = gameObject.GetComponents<Component>();
-            foreach(var component in components)
-            {
-                print(component.tag);
-                print(component.name);
-                print(component.gameObject);
+                case 0:
+                    ppLayer.antialiasingMode = PostProcessLayer.Antialiasing.SubpixelMorphologicalAntialiasing;
+                    break;
+                case 1:
+                    ppLayer.antialiasingMode = PostProcessLayer.Antialiasing.TemporalAntialiasing;
+                    break;
+                case 2:
+                    ppLayer.antialiasingMode = PostProcessLayer.Antialiasing.FastApproximateAntialiasing;
+                    break;
+                case 3:
+                    ppLayer.antialiasingMode = PostProcessLayer.Antialiasing.None;
+                    break;
+                default: break;
             }
         }
     }
