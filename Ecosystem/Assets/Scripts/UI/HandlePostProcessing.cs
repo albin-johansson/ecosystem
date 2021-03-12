@@ -1,9 +1,11 @@
 using UnityEngine;
+using UnityEngine.Rendering.PostProcessing;
 
 namespace Ecosystem.UI
 {
     public class HandlePostProcessing : MonoBehaviour
     {
+        private PostProcessVolume ppVolume;
         
         private void Start()
         {
