@@ -93,7 +93,6 @@ namespace Ecosystem
       childGenome.Initialize(genome, _mateGenome);
       
       var childConsumer = child.GetComponentInChildren<IConsumer>();
-      Debug.Log(childSaturation);
       childConsumer.SetSaturation(childSaturation);
 
       OnBirth?.Invoke(child);
@@ -114,7 +113,6 @@ namespace Ecosystem
           Genomes.CompatibleAsParents(genome, otherReproducer.genome) &&
           otherReproducer.CanMate && CanMate)
       {
-        Debug.Log("Try pregnancy");
         if (Random.value >= (genome.Attractiveness + otherReproducer.genome.Attractiveness)/2)
         {
           if (genome.IsMale && !otherReproducer._isPregnant)
