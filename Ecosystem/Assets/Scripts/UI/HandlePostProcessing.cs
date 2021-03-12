@@ -1,11 +1,10 @@
 using UnityEngine;
-using UnityEngine.Rendering.PostProcessing;
 
 namespace Ecosystem.UI
 {
     public class HandlePostProcessing : MonoBehaviour
     {
-        private PostProcessVolume ppProfile;
+        
         private void Start()
         {
             //ppProfile.GetComponent<AmbientOcclusion>().intensity = 0f;
