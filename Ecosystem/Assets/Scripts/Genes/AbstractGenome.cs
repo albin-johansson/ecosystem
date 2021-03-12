@@ -17,6 +17,7 @@ namespace Ecosystem.Genes
     public void Initialize(IGenome first, IGenome second)
     {
       Data = Genomes.Merge(first, second);
+      GenesToAttributes();
     }
 
     public bool IsMale => Data.IsMale;
@@ -25,7 +26,7 @@ namespace Ecosystem.Genes
                           GetSpeedFactor().Value *
                           GetSizeFactor().ValueAsDecimal();
 
-    public float Metabolism => GetHungerRate().Value * GetSizeFactor().Value;
+    public float Metabolism => GetHungerRate().Value * GetSizeFactor().Value * 1.15f * GetVision().Value * 1.30f * GetSpeedFactor().Value;
 
     public float Attractiveness => GetDesirabilityScore().Value;
     
