@@ -49,8 +49,6 @@ namespace Ecosystem
         TargetTracker.ResumeTracking();
       }
 
-      AnimalState = AnimalState.Idle;
-      /*
       if (Consumer.Hunger > WaterConsumer.Thirst && Consumer.IsHungry())
       {
         AnimalState = AnimalState.LookingForFood;
@@ -63,7 +61,7 @@ namespace Ecosystem
       {
         AnimalState = AnimalState.Idle;
       }
-      */
+      
     }
 
     public void Update()
