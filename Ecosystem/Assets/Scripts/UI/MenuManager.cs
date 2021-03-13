@@ -1,4 +1,3 @@
-using System;
 using Ecosystem.Util;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -76,10 +75,17 @@ namespace Ecosystem.UI
       }
     }
 
+    /// <summary>
+    ///   Spawns the specified amount of prefabs on random walkable positions on the terrain.
+    /// </summary>
+    /// <param name="count">the amount of prefabs that will be spawned</param>
+    /// <param name="prefab">the prefab that will be spawned</param>
+    /// <param name="terrain">the terrain on which the prefab will be spawned</param>
     private static void Instantiate(int count, Object prefab, Terrain terrain)
     {
       for (var i = 0; i < count; ++i)
       {
+        // There is a small risk that we fail to find a walkable position, but it's fine
         if (Terrains.RandomWalkablePosition(terrain, out var position))
         {
           Instantiate(prefab, position, Quaternion.identity);
