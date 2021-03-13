@@ -19,7 +19,7 @@ namespace Ecosystem.UI
       _transform = transform; // Cache reference for performance reasons
     }
 
-    private void Update()
+    private void LateUpdate()
     {
       if (Input.GetKey(KeyCode.Q))
       {
@@ -43,6 +43,8 @@ namespace Ecosystem.UI
       if (_track)
       {
         transform.position = _trackedTarget.position + Vector3.up * distance;
+        //TODO: when should always be looking at target?
+        //transform.LookAt(_trackedTarget);
       }
       else
       {
@@ -58,6 +60,8 @@ namespace Ecosystem.UI
 
       //TODO: how to best handle rotate(). always or sometimes?
       Rotate();
+
+      //Check if under map. 
     }
 
     private void Translate()
