@@ -42,7 +42,7 @@ namespace Ecosystem.UI
 
     public void StartDynamicScene()
     {
-      SceneManager.LoadScene("Assets/Scenes/DynamicScene/DynamicScene.unity");
+      SceneManager.LoadScene("DynamicScene");
     }
 
     public void StartTestScene()
