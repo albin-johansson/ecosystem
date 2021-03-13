@@ -1,3 +1,4 @@
+using System;
 using Ecosystem.Util;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -14,6 +15,7 @@ namespace Ecosystem.UI
     [SerializeField] private Text dynamicDeerCount;
     [SerializeField] private Text dynamicWolfCount;
     [SerializeField] private Text dynamicBearCount;
+    [SerializeField] private Text dynamicCarrotCount;
 
     private void Start()
     {
@@ -62,6 +64,7 @@ namespace Ecosystem.UI
         var nDeer = int.Parse(dynamicDeerCount.text);
         var nWolves = int.Parse(dynamicWolfCount.text);
         var nBears = int.Parse(dynamicBearCount.text);
+        var nCarrots = int.Parse(dynamicCarrotCount.text);
 
         var terrain = Terrain.activeTerrain;
 
@@ -69,7 +72,7 @@ namespace Ecosystem.UI
         Instantiate(nWolves, wolf, terrain);
         Instantiate(nDeer, deer, terrain);
         Instantiate(nBears, bear, terrain);
-        Instantiate(1000, carrot, terrain);
+        Instantiate(nCarrots, carrot, terrain);
       }
     }
 

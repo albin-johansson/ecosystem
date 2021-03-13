@@ -6371,19 +6371,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   mainMenu: {fileID: 1071901118}
   dynamicSceneMenu: {fileID: 2026068121}
-  rabbitPrefab: {fileID: 2014496642}
-  deerPrefab: {fileID: 7155763010095567698, guid: ac935de5e4958254196cd0457e8a0df5, type: 3}
-  wolfPrefab: {fileID: 4371145773595096147, guid: 9ad7ab249851e454e9360e8fc8284e3b, type: 3}
-  bearPrefab: {fileID: 7237780236292801018, guid: a5fd4d9dd473da54c83430115c05e48c, type: 3}
   dynamicRabbitCount: {fileID: 1815966860}
   dynamicDeerCount: {fileID: 54312118}
   dynamicWolfCount: {fileID: 886235166}
   dynamicBearCount: {fileID: 687530572}
---- !u!1 &2014496642 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 3436557251021641289, guid: 52b1c190247192a42a5e36bafea08096, type: 3}
-  m_PrefabInstance: {fileID: 940642794}
-  m_PrefabAsset: {fileID: 0}
+  dynamicCarrotCount: {fileID: 2026068122}
 --- !u!1001 &2026068119
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -6591,6 +6583,17 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 7487047544982954160, guid: f6a6c66b57f65c648b7becd500b2a5fe, type: 3}
   m_PrefabInstance: {fileID: 2026068119}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &2026068122 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 4055620014080399266, guid: f6a6c66b57f65c648b7becd500b2a5fe, type: 3}
+  m_PrefabInstance: {fileID: 2026068119}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5f7201a12d95ffc409449d95f23cf332, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &2114367932
 GameObject:
   m_ObjectHideFlags: 0
