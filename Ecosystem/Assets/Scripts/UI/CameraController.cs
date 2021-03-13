@@ -10,6 +10,9 @@ namespace Ecosystem.UI
     private float _y;
     private Vector3 _rotateValue;
     private Transform _transform;
+    private Transform _trackedTarget;
+    private bool _track = false;
+    private float distance = 20; //TODO: add support for changing distance, scroll wheel?
 
     private void Start()
     {
@@ -18,15 +21,43 @@ namespace Ecosystem.UI
 
     private void Update()
     {
-      if (Input.GetKeyUp(KeyCode.Escape))
+      if (Input.GetKey(KeyCode.Q))
       {
-        Application.Quit();
+        _track = false;
       }
-      else if (Input.GetKey(KeyCode.Mouse1))
+
+      if (Input.GetKey(KeyCode.Mouse0))
       {
-        Rotate();
-        Translate();
+        Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+        RaycastHit hit;
+
+        if (Physics.Raycast(ray, out hit, 100))
+        {
+          //TODO: check if hit is animal. else it is terrain so ignore it. 
+          _trackedTarget = hit.transform;
+          _track = true;
+          Debug.Log(hit.transform.gameObject.name);
+        }
       }
+
+      if (_track)
+      {
+        transform.position = _trackedTarget.position + Vector3.up * distance;
+      }
+      else
+      {
+        if (Input.GetKey(KeyCode.Mouse1))
+        {
+          Translate();
+        }
+        else if (Input.GetKeyUp(KeyCode.Escape))
+        {
+          Application.Quit();
+        }
+      }
+
+      //TODO: how to best handle rotate(). always or sometimes?
+      Rotate();
     }
 
     private void Translate()
