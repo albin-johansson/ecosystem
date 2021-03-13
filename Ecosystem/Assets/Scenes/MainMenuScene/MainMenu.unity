@@ -1349,9 +1349,29 @@ PrefabInstance:
       propertyPath: m_AnchorMin.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5326757288336452054, guid: 6096d776666406e4193d9ad1245833ac, type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5326757288336452054, guid: 6096d776666406e4193d9ad1245833ac, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5326757288336452054, guid: 6096d776666406e4193d9ad1245833ac, type: 3}
+      propertyPath: m_AnchorMin.x
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 5840183978108954035, guid: 6096d776666406e4193d9ad1245833ac, type: 3}
       propertyPath: m_Name
       value: MainMenu
+      objectReference: {fileID: 0}
+    - target: {fileID: 5867919842218553125, guid: 6096d776666406e4193d9ad1245833ac, type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5867919842218553125, guid: 6096d776666406e4193d9ad1245833ac, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6464432163759029636, guid: 6096d776666406e4193d9ad1245833ac, type: 3}
       propertyPath: m_AnchorMax.y
@@ -1410,6 +1430,10 @@ PrefabInstance:
       value: 'Anti-Aliasing
 
 '
+      objectReference: {fileID: 0}
+    - target: {fileID: 6907368115616150592, guid: 6096d776666406e4193d9ad1245833ac, type: 3}
+      propertyPath: m_Value
+      value: 0.25
       objectReference: {fileID: 0}
     - target: {fileID: 7359741440662230133, guid: 6096d776666406e4193d9ad1245833ac, type: 3}
       propertyPath: m_Options.m_Options.Array.size

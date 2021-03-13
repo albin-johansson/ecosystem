@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 using UnityEngine.Rendering.PostProcessing;
 
@@ -26,6 +27,9 @@ namespace Ecosystem.UI
                     break;
                 default: break;
             }
+            
+            ppVolume.profile.GetSetting<AmbientOcclusion>().active = GraphicsSettings._ambientOcclusionActive;
+            ppVolume.profile.GetSetting<AmbientOcclusion>().intensity.value = (float) GraphicsSettings._ambientOcclusionIntensity/100;
         }
     }
 }
