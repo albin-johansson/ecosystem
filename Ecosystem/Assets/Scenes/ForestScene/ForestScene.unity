@@ -11066,8 +11066,8 @@ GameObject:
   - component: {fileID: 1127527931}
   - component: {fileID: 1127527933}
   - component: {fileID: 1127527930}
-  - component: {fileID: 1127527935}
   - component: {fileID: 1127527934}
+  - component: {fileID: 1127527935}
   m_Layer: 12
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -11158,7 +11158,7 @@ Camera:
     y: 0
     width: 1
     height: 1
-  near clip plane: 0.3
+  near clip plane: 0.5
   far clip plane: 1000
   field of view: 60
   orthographic: 0
@@ -11204,8 +11204,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a7c7775a74327a9488b7492d090e09c8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 50
-  _rigidbody: {fileID: 0}
+  speed: 25
 --- !u!135 &1127527934
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -11214,10 +11213,10 @@ SphereCollider:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1127527929}
   m_Material: {fileID: 0}
-  m_IsTrigger: 1
+  m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Radius: 0.5
+  m_Radius: 3
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!54 &1127527935
 Rigidbody:
@@ -11229,11 +11228,11 @@ Rigidbody:
   serializedVersion: 2
   m_Mass: 1
   m_Drag: 0
-  m_AngularDrag: 0.05
+  m_AngularDrag: 0
   m_UseGravity: 0
   m_IsKinematic: 0
   m_Interpolate: 0
-  m_Constraints: 0
+  m_Constraints: 112
   m_CollisionDetection: 0
 --- !u!1 &1129532822
 GameObject:

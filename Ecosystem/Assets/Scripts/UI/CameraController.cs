@@ -9,21 +9,23 @@ namespace Ecosystem.UI
 
     private float _x;
     private float _y;
+
     private Vector3 _rotateValue;
+
     private Transform _transform;
-    [SerializeField] private Rigidbody _rigidbody;
     private Transform _trackedTarget;
     private bool _track = false;
-    private float distance = 20; //TODO: add support for changing distance, scroll wheel?
-    private bool isColliding = false;
-    private float frozenY;
+    private float distance = 20;
+    private bool col = false;
+    private Rigidbody rb;
 
     private void Start()
     {
-      _transform = transform; // Cache reference for performance reasons
+      rb = GetComponent<Rigidbody>();
+      _transform = rb.transform;
     }
 
-    private void LateUpdate()
+    private void Update()
     {
       //Stop tracking with "Q"
       if (Input.GetKey(KeyCode.Q))
@@ -75,57 +77,105 @@ namespace Ecosystem.UI
         Application.Quit();
       }
 
+      if (rb.velocity.magnitude > speed)
+      {
+        rb.velocity = rb.velocity.normalized * speed;
+      }
+
       //Check if under map. 
-      
+      /*
+       //SampleHeight gives a value under the terrain.
+      float currentTerrainHeight = Terrain.activeTerrain.SampleHeight(_transform.position);
+      if (_transform.position.y < currentTerrainHeight)
+        _transform.position = new Vector3(_transform.position.x, currentTerrainHeight+1, _transform.position.z);
+        */
       /*
       Ray r = new Ray(_transform.position, Vector3.down); //Camera.main.transform.position + Vector3.down;
       RaycastHit h;
-
-      if (Physics.Raycast(r, out h, 1))
+      if (Physics.Raycast(r, out h, 0.01f))
       {
+        //CheckCameraCollision(h.point);
         if (h.transform.tag.Equals("Terrain"))
         {
-          _transform.position = _transform.position + Vector3.up;
+          _transform.position = _transform.position + new Vector3(0, 0.02f, 0);
         }
+      }
+      
+      if (col)
+      {
+        _transform.position += new Vector3(0, 0.5f, 0);
       }
       */
     }
 
-    public void OnTriggerEnter(Collider other)
+
+    /*
+    private float offset = 1.0f;
+
+    private void CheckCameraCollision(Vector3 targetPosition)
     {
-      isColliding = true;
-      frozenY = _transform.position.y;
-      //check if only terrain?
-      //_rigidbody.constraints = RigidbodyConstraints.FreezePositionY;
-      Debug.Log("Collided with " + other.name);
+      Ray ray = new Ray(targetPosition, Vector3.down); //_transform.position - targetPosition);
+      RaycastHit hit = new RaycastHit();
+      if (Physics.Raycast(ray, out hit, (_transform.position - targetPosition).magnitude))
+      {
+        if (hit.distance > offset)
+          _transform.position = ray.GetPoint(hit.distance - offset);
+        else
+          _transform.position = targetPosition;
+      }
+    }
+    
+
+    public void OnCollisionEnter()
+    {
+      Debug.Log("Collided with something");
+      //col = true;
+      //_transform.position = new Vector3(_transform.position.x, _transform.position.y, _transform.position.z);
     }
 
-    public void OnTriggerExt(Collider other)
+    public void OnCollisionExit()
     {
-      isColliding = false;
-      _rigidbody.constraints = RigidbodyConstraints.None;
+      col = false;
     }
+    */
+
+    private Vector3 forward;
+    private Vector3 back;
+    private Vector3 right;
+    private Vector3 left;
 
     private void Translate()
     {
       if (Input.GetKey(KeyCode.W))
       {
-        _transform.position += speed * Time.deltaTime * _transform.forward;
+        rb.velocity += 100 * speed * Time.deltaTime * _transform.forward;
+        //_transform.position += speed * Time.deltaTime * _transform.forward;
       }
 
       if (Input.GetKey(KeyCode.S))
       {
-        _transform.position -= speed * Time.deltaTime * _transform.forward;
+        rb.velocity -= 100 * speed * Time.deltaTime * _transform.forward;
+        //_transform.position -= speed * Time.deltaTime * _transform.forward;
       }
 
       if (Input.GetKey(KeyCode.D))
       {
-        _transform.position += speed * Time.deltaTime * _transform.right;
+        rb.velocity += 100 * speed * Time.deltaTime * _transform.right;
+        //_transform.position += speed * Time.deltaTime * _transform.right;
       }
 
       if (Input.GetKey(KeyCode.A))
       {
-        _transform.position -= speed * Time.deltaTime * _transform.right;
+        rb.velocity -= 100 * speed * Time.deltaTime * _transform.right;
+        //_transform.position -= speed * Time.deltaTime * _transform.right;
+      }
+
+      //Key up
+      if (Input.GetKeyUp(KeyCode.W) || Input.GetKeyUp(KeyCode.S) || Input.GetKeyUp(KeyCode.D) ||
+          Input.GetKeyUp(KeyCode.A))
+      {
+        rb.velocity = Vector3.zero;
+        //_transform.position += speed * Time.deltaTime * _transform.forward;
       }
     }
 
