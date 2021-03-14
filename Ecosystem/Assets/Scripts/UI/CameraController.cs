@@ -17,6 +17,8 @@ namespace Ecosystem.UI
     private bool _track = false;
     private float _distance = 20;
     private Rigidbody _rigidbody;
+    private float _boostFactor = 2;
+    private bool _boosted = false;
 
     private void Start()
     {
@@ -30,6 +32,18 @@ namespace Ecosystem.UI
       if (Input.GetKey(KeyCode.Q))
       {
         _track = false;
+      }
+
+      if (Input.GetKey(KeyCode.LeftShift) && !_boosted)
+      {
+        _boosted = true;
+        speed *= _boostFactor;
+      }
+
+      if (Input.GetKeyUp(KeyCode.LeftShift) && _boosted)
+      {
+        _boosted = false;
+        speed /= _boostFactor;
       }
 
       //Select animal to follow with mouse button
@@ -57,8 +71,6 @@ namespace Ecosystem.UI
 
         //follow
         _transform.position = _trackedTarget.position + Vector3.up * _distance;
-        //TODO: could this be useful?
-        //transform.LookAt(_trackedTarget);
       }
       //Move around with "WASD"
       else
@@ -109,8 +121,8 @@ namespace Ecosystem.UI
 
     private void Rotate()
     {
-      _y = Input.GetAxis("Mouse X");
-      _x = Input.GetAxis("Mouse Y");
+      _y = Input.GetAxis("Mouse X") * 1.5f;
+      _x = Input.GetAxis("Mouse Y") * 1.5f;
       _rotateValue = new Vector3(_x, _y * -1, 0);
       _transform.eulerAngles -= _rotateValue;
     }
