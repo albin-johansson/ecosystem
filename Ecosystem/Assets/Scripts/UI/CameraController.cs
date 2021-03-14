@@ -111,9 +111,19 @@ namespace Ecosystem.UI
         _rigidbody.velocity -= speed * Time.deltaTime * _transform.right;
       }
 
+      if (Input.GetKey(KeyCode.R))
+      {
+        _rigidbody.velocity += speed * Time.deltaTime * Vector3.up;
+      }
+
+      if (Input.GetKey(KeyCode.F))
+      {
+        _rigidbody.velocity += speed * Time.deltaTime * Vector3.down;
+      }
+
       //Key up
       if (Input.GetKeyUp(KeyCode.W) || Input.GetKeyUp(KeyCode.S) || Input.GetKeyUp(KeyCode.D) ||
-          Input.GetKeyUp(KeyCode.A))
+          Input.GetKeyUp(KeyCode.A) || Input.GetKeyUp(KeyCode.R) || Input.GetKeyUp(KeyCode.F))
       {
         _rigidbody.velocity = Vector3.zero;
       }
