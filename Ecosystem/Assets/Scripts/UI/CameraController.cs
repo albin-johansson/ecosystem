@@ -11,9 +11,12 @@ namespace Ecosystem.UI
     private float _y;
     private Vector3 _rotateValue;
     private Transform _transform;
+    [SerializeField] private Rigidbody _rigidbody;
     private Transform _trackedTarget;
     private bool _track = false;
     private float distance = 20; //TODO: add support for changing distance, scroll wheel?
+    private bool isColliding = false;
+    private float frozenY;
 
     private void Start()
     {
@@ -57,7 +60,7 @@ namespace Ecosystem.UI
         //TODO: when should always be looking at target?
         //transform.LookAt(_trackedTarget);
       }
-      //Move around with "WASF"
+      //Move around with "WASD"
       else
       {
         Translate();
@@ -73,6 +76,34 @@ namespace Ecosystem.UI
       }
 
       //Check if under map. 
+      
+      /*
+      Ray r = new Ray(_transform.position, Vector3.down); //Camera.main.transform.position + Vector3.down;
+      RaycastHit h;
+
+      if (Physics.Raycast(r, out h, 1))
+      {
+        if (h.transform.tag.Equals("Terrain"))
+        {
+          _transform.position = _transform.position + Vector3.up;
+        }
+      }
+      */
+    }
+
+    public void OnTriggerEnter(Collider other)
+    {
+      isColliding = true;
+      frozenY = _transform.position.y;
+      //check if only terrain?
+      //_rigidbody.constraints = RigidbodyConstraints.FreezePositionY;
+      Debug.Log("Collided with " + other.name);
+    }
+
+    public void OnTriggerExt(Collider other)
+    {
+      isColliding = false;
+      _rigidbody.constraints = RigidbodyConstraints.None;
     }
 
     private void Translate()
