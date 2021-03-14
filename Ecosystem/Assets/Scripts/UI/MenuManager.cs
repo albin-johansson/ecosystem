@@ -10,6 +10,7 @@ namespace Ecosystem.UI
   {
     [SerializeField] private GameObject mainMenu;
     [SerializeField] private GameObject dynamicSceneMenu;
+    [SerializeField] private Button dynamicSceneStartButton;
     [SerializeField] private Text dynamicRabbitCount;
     [SerializeField] private Text dynamicDeerCount;
     [SerializeField] private Text dynamicWolfCount;
@@ -73,6 +74,15 @@ namespace Ecosystem.UI
         Instantiate(nBears, bear, terrain);
         Instantiate(nCarrots, carrot, terrain);
       }
+    }
+
+    public void ValidateDynamicSceneInputs()
+    {
+      dynamicSceneStartButton.interactable = dynamicRabbitCount.text != "" &&
+                                             dynamicDeerCount.text != "" &&
+                                             dynamicWolfCount.text != "" &&
+                                             dynamicBearCount.text != "" &&
+                                             dynamicCarrotCount.text != "";
     }
 
     /// <summary>

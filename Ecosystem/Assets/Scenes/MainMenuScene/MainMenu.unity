@@ -232,6 +232,17 @@ Transform:
   m_Father: {fileID: 486680476}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 360.05, y: -56, z: 22.101}
+--- !u!114 &162799715 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 2798473157152337215, guid: f6a6c66b57f65c648b7becd500b2a5fe, type: 3}
+  m_PrefabInstance: {fileID: 2026068119}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &467942803
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -6371,6 +6382,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   mainMenu: {fileID: 1071901118}
   dynamicSceneMenu: {fileID: 2026068121}
+  dynamicSceneStartButton: {fileID: 162799715}
   dynamicRabbitCount: {fileID: 1815966860}
   dynamicDeerCount: {fileID: 54312118}
   dynamicWolfCount: {fileID: 886235166}
@@ -6467,6 +6479,22 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1642404097148772153, guid: f6a6c66b57f65c648b7becd500b2a5fe, type: 3}
+      propertyPath: m_OnEndEdit.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 1952800703}
+    - target: {fileID: 1642404097148772153, guid: f6a6c66b57f65c648b7becd500b2a5fe, type: 3}
+      propertyPath: m_OnEndEdit.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: ValidateDynamicSceneInputs
+      objectReference: {fileID: 0}
+    - target: {fileID: 1642404097148772153, guid: f6a6c66b57f65c648b7becd500b2a5fe, type: 3}
+      propertyPath: m_OnEndEdit.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: Ecosystem.UI.MenuManager, ScriptsAssembly
+      objectReference: {fileID: 0}
+    - target: {fileID: 1642404097148772153, guid: f6a6c66b57f65c648b7becd500b2a5fe, type: 3}
+      propertyPath: m_OnEndEdit.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
+      objectReference: {fileID: 0}
     - target: {fileID: 2798473157152337215, guid: f6a6c66b57f65c648b7becd500b2a5fe, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.size
       value: 1
@@ -6523,6 +6551,38 @@ PrefabInstance:
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
       value: UnityEngine.Object, UnityEngine
       objectReference: {fileID: 0}
+    - target: {fileID: 6099479474424698292, guid: f6a6c66b57f65c648b7becd500b2a5fe, type: 3}
+      propertyPath: m_OnEndEdit.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 1952800703}
+    - target: {fileID: 6099479474424698292, guid: f6a6c66b57f65c648b7becd500b2a5fe, type: 3}
+      propertyPath: m_OnEndEdit.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: ValidateDynamicSceneInputs
+      objectReference: {fileID: 0}
+    - target: {fileID: 6099479474424698292, guid: f6a6c66b57f65c648b7becd500b2a5fe, type: 3}
+      propertyPath: m_OnEndEdit.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: Ecosystem.UI.MenuManager, ScriptsAssembly
+      objectReference: {fileID: 0}
+    - target: {fileID: 6099479474424698292, guid: f6a6c66b57f65c648b7becd500b2a5fe, type: 3}
+      propertyPath: m_OnEndEdit.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
+      objectReference: {fileID: 0}
+    - target: {fileID: 7439869028756133488, guid: f6a6c66b57f65c648b7becd500b2a5fe, type: 3}
+      propertyPath: m_OnEndEdit.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 1952800703}
+    - target: {fileID: 7439869028756133488, guid: f6a6c66b57f65c648b7becd500b2a5fe, type: 3}
+      propertyPath: m_OnEndEdit.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: ValidateDynamicSceneInputs
+      objectReference: {fileID: 0}
+    - target: {fileID: 7439869028756133488, guid: f6a6c66b57f65c648b7becd500b2a5fe, type: 3}
+      propertyPath: m_OnEndEdit.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: Ecosystem.UI.MenuManager, ScriptsAssembly
+      objectReference: {fileID: 0}
+    - target: {fileID: 7439869028756133488, guid: f6a6c66b57f65c648b7becd500b2a5fe, type: 3}
+      propertyPath: m_OnEndEdit.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
+      objectReference: {fileID: 0}
     - target: {fileID: 7487047544982954160, guid: f6a6c66b57f65c648b7becd500b2a5fe, type: 3}
       propertyPath: m_Name
       value: DynamicSceneMenu
@@ -6533,7 +6593,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8439560843454987578, guid: f6a6c66b57f65c648b7becd500b2a5fe, type: 3}
       propertyPath: m_OnEndEdit.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
-      value: 5
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8439560843454987578, guid: f6a6c66b57f65c648b7becd500b2a5fe, type: 3}
       propertyPath: m_OnEndEdit.m_PersistentCalls.m_Calls.Array.data[0].m_Target
@@ -6545,7 +6605,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8439560843454987578, guid: f6a6c66b57f65c648b7becd500b2a5fe, type: 3}
       propertyPath: m_OnEndEdit.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: OnRabbitCountChange
+      value: ValidateDynamicSceneInputs
       objectReference: {fileID: 0}
     - target: {fileID: 8439560843454987578, guid: f6a6c66b57f65c648b7becd500b2a5fe, type: 3}
       propertyPath: m_OnValueChanged.m_PersistentCalls.m_Calls.Array.data[0].m_Target
@@ -6569,6 +6629,26 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8439560843454987578, guid: f6a6c66b57f65c648b7becd500b2a5fe, type: 3}
       propertyPath: m_OnValueChanged.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
+      objectReference: {fileID: 0}
+    - target: {fileID: 8467508718558477128, guid: f6a6c66b57f65c648b7becd500b2a5fe, type: 3}
+      propertyPath: m_OnEndEdit.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8467508718558477128, guid: f6a6c66b57f65c648b7becd500b2a5fe, type: 3}
+      propertyPath: m_OnEndEdit.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 1952800703}
+    - target: {fileID: 8467508718558477128, guid: f6a6c66b57f65c648b7becd500b2a5fe, type: 3}
+      propertyPath: m_OnEndEdit.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: ValidateDynamicSceneInputs
+      objectReference: {fileID: 0}
+    - target: {fileID: 8467508718558477128, guid: f6a6c66b57f65c648b7becd500b2a5fe, type: 3}
+      propertyPath: m_OnEndEdit.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: Ecosystem.UI.MenuManager, ScriptsAssembly
+      objectReference: {fileID: 0}
+    - target: {fileID: 8467508718558477128, guid: f6a6c66b57f65c648b7becd500b2a5fe, type: 3}
+      propertyPath: m_OnEndEdit.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
       value: UnityEngine.Object, UnityEngine
       objectReference: {fileID: 0}
     m_RemovedComponents: []
