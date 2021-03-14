@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 
 namespace Ecosystem.UI
@@ -21,11 +22,13 @@ namespace Ecosystem.UI
 
     private void LateUpdate()
     {
+      //Stop tracking with "Q"
       if (Input.GetKey(KeyCode.Q))
       {
         _track = false;
       }
 
+      //Select animal to follow with mouse button
       if (Input.GetKey(KeyCode.Mouse0))
       {
         Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
@@ -33,33 +36,41 @@ namespace Ecosystem.UI
 
         if (Physics.Raycast(ray, out hit, 100))
         {
-          //TODO: check if hit is animal. else it is terrain so ignore it. 
-          _trackedTarget = hit.transform;
-          _track = true;
-          Debug.Log(hit.transform.gameObject.name);
+          if (!hit.transform.tag.Equals("Terrain"))
+          {
+            _trackedTarget = hit.transform;
+            _track = true;
+            Debug.Log(hit.transform.gameObject.name);
+          }
         }
       }
 
+      //Follow the tracked animal
       if (_track)
       {
+        //Zoom with mouse wheel
+        distance += Input.mouseScrollDelta.y;
+        distance = Math.Max(distance, 5);
+
+        //follow
         transform.position = _trackedTarget.position + Vector3.up * distance;
         //TODO: when should always be looking at target?
         //transform.LookAt(_trackedTarget);
       }
+      //Move around with "WASF"
       else
       {
-        if (Input.GetKey(KeyCode.Mouse1))
-        {
-          Translate();
-        }
-        else if (Input.GetKeyUp(KeyCode.Escape))
-        {
-          Application.Quit();
-        }
+        Translate();
       }
 
       //TODO: how to best handle rotate(). always or sometimes?
       Rotate();
+
+      //Exit application
+      if (Input.GetKeyUp(KeyCode.Escape))
+      {
+        Application.Quit();
+      }
 
       //Check if under map. 
     }
