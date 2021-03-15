@@ -1,42 +1,64 @@
 ﻿using System;
 using System.Collections.Generic;
 using UnityEngine;
+using Object = System.Object;
 
 namespace Ecosystem
 {
   public class ObjectPool : MonoBehaviour
   {
-    [SerializeField] private GameObject prefab;
-    [SerializeField] private Queue<GameObject> animalPool = new Queue<GameObject>();
-    [SerializeField] private int poolStartSize;
+    public List<Pool> pools;
+    public Dictionary<string, Queue<GameObject>> poolDictionary;
+
+
+    #region Singleton
+
+    public static ObjectPool instance;
+
+    private void Awake()
+    {
+      instance = this;
+    }
+
+    #endregion
 
     private void Start()
     {
-      for (var i = 0; i < poolStartSize; i++)
+      poolDictionary = new Dictionary<string, Queue<GameObject>>();
+
+      foreach (var pool in pools)
       {
-        var animal = Instantiate(prefab);
-        animalPool.Enqueue(animal);
-        animal.SetActive(false);
+        var objectPool = new Queue<GameObject>();
+
+        for (var i = 0; i < pool.size; i++)
+        {
+          var objectToPool = Instantiate(pool.prefab);
+          objectToPool.SetActive(false);
+          objectPool.Enqueue(objectToPool);
+        }
+
+        poolDictionary.Add(pool.tag, objectPool);
       }
     }
-    public GameObject GetAnimal(){
 
-      if (animalPool.Count > 0)
+    public GameObject GetFromPool(string poolTag)
+    {
+      var wantedPool = poolDictionary[poolTag];
+      if (wantedPool.Count > 1)
       {
-        var animal = animalPool.Dequeue();
-        return animal;
+        return wantedPool.Dequeue();
       }
       else
       {
-        var animal = Instantiate(prefab);
-        return animal;
+        return Instantiate(wantedPool.Peek());
       }
     }
-    
-   public void ReturnAnimal(GameObject animal)
+
+    public void ReturnToPool(string poolTag, GameObject objectToReturn)
     {
-      animalPool.Enqueue(animal);
-      animal.SetActive(false);
+      var wantedPool = poolDictionary[poolTag];
+      objectToReturn.SetActive(false);
+      wantedPool.Enqueue(objectToReturn);
     }
   }
 }

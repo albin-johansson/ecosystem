@@ -79,7 +79,10 @@ namespace Ecosystem
       _isPregnant = false;
       _pregnancyElapsedTime = 0;
 
-      var child = Instantiate(prefab, currentTransform.position, currentTransform.rotation, _directoryOfAnimal);
+      var child = ObjectPool.instance.GetFromPool(_directoryOfAnimal.tag);
+      child.transform.position = currentTransform.position;
+      child.transform.rotation = currentTransform.rotation;
+      child.transform.parent = _directoryOfAnimal;
       var childGenome = child.GetComponent<AbstractGenome>();
       childGenome.Initialize(genome, _mateGenome);
 
