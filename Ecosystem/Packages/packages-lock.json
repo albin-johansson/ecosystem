@@ -1,5 +1,44 @@
 {
   "dependencies": {
+    "com.reese.nav": {
+      "version": "https://github.com/reeseschultz/ReeseUnityDemos.git#nav",
+      "depth": 0,
+      "source": "git",
+      "dependencies": {
+        "com.unity.entities": "0.17.0-preview.41",
+        "com.unity.physics": "0.5.1-preview.2",
+        "com.unity.rendering.hybrid": "0.11.0-preview.42"
+      },
+      "hash": "3e9b5649fc2941da004f506972d44516fcb335c2"
+    },
+    "com.reese.random": {
+      "version": "https://github.com/reeseschultz/ReeseUnityDemos.git#random",
+      "depth": 0,
+      "source": "git",
+      "dependencies": {
+        "com.unity.entities": "0.17.0-preview.41"
+      },
+      "hash": "08a667199cf820f27923c7d87ee8d72ed6927b32"
+    },
+    "com.reese.spatial": {
+      "version": "https://github.com/reeseschultz/ReeseUnityDemos.git#spatial",
+      "depth": 0,
+      "source": "git",
+      "dependencies": {
+        "com.unity.entities": "0.17.0-preview.41",
+        "com.unity.physics": "0.5.1-preview.2"
+      },
+      "hash": "b187d9ee1620e684c4477c0455b997fc2f407eda"
+    },
+    "com.unity.burst": {
+      "version": "1.4.1",
+      "depth": 2,
+      "source": "registry",
+      "dependencies": {
+        "com.unity.mathematics": "1.2.1"
+      },
+      "url": "https://packages.unity.com"
+    },
     "com.unity.collab-proxy": {
       "version": "1.3.9",
       "depth": 0,
