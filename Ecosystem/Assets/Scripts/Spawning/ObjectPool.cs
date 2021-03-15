@@ -63,7 +63,6 @@ namespace Ecosystem.Spawning
 
     private void ResetObjectComponents(GameObject objectToReset)
     {
-      //TODO: Replace with OnEnable and OnDisable in movement controller and stateController
       var navMeshAgent = objectToReset.GetComponent<NavMeshAgent>();
       navMeshAgent.isStopped = true;
       navMeshAgent.ResetPath();
