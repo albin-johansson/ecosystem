@@ -1,3 +1,4 @@
+using System;
 using Ecosystem.Genes;
 using UnityEngine;
 
@@ -32,6 +33,7 @@ namespace Ecosystem
 
     [SerializeField] private AbstractGenome genome;
     [SerializeField] private GameObject prefab;
+    [SerializeField] private string tagInPool;
 
     private Transform _directoryOfAnimal;
     private bool _isPregnant;
@@ -78,11 +80,11 @@ namespace Ecosystem
 
       _isPregnant = false;
       _pregnancyElapsedTime = 0;
-
-      var child = ObjectPool.instance.GetFromPool(_directoryOfAnimal.tag);
+      var child = ObjectPool.instance.GetFromPool(tagInPool);
       child.transform.position = currentTransform.position;
       child.transform.rotation = currentTransform.rotation;
       child.transform.parent = _directoryOfAnimal;
+      child.SetActive(true);
       var childGenome = child.GetComponent<AbstractGenome>();
       childGenome.Initialize(genome, _mateGenome);
 
