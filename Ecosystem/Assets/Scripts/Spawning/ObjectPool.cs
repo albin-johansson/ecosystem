@@ -12,6 +12,7 @@ namespace Ecosystem.Spawning
     private Dictionary<string, Queue<GameObject>> _poolDictionary;
     private static int _walkable;
     public static ObjectPool instance;
+    private Transform _poolTransform;
 
     private void Awake()
     {
@@ -20,6 +21,7 @@ namespace Ecosystem.Spawning
 
     private void Start()
     {
+      _poolTransform = transform;
       _walkable = 1 << NavMesh.GetAreaFromName("Walkable");
       _poolDictionary = new Dictionary<string, Queue<GameObject>>();
 
@@ -29,9 +31,8 @@ namespace Ecosystem.Spawning
 
         for (var i = 0; i < pool.size; i++)
         {
-          var parentTransform = transform;
-          NavMesh.SamplePosition(parentTransform.position, out var hit, Single.PositiveInfinity, _walkable);
-          var objectToPool = Instantiate(pool.prefab, hit.position, parentTransform.rotation, parentTransform);
+          NavMesh.SamplePosition(_poolTransform.position, out var hit, float.PositiveInfinity, _walkable);
+          var objectToPool = Instantiate(pool.prefab, hit.position, _poolTransform.rotation, _poolTransform);
           objectToPool.SetActive(false);
           objectPool.Enqueue(objectToPool);
         }
@@ -66,6 +67,7 @@ namespace Ecosystem.Spawning
       var navMeshAgent = objectToReset.GetComponent<NavMeshAgent>();
       navMeshAgent.isStopped = true;
       navMeshAgent.ResetPath();
+      objectToReset.transform.parent = _poolTransform;
       objectToReset.SetActive(false);
     }
   }
