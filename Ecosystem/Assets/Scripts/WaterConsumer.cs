@@ -17,10 +17,6 @@ namespace Ecosystem
     public bool IsDrinking { get; private set; }
     public float Thirst { get; private set; }
 
-    private void Start()
-    {
-      resourceBar.SetMaxValue(maxThirst);
-    }
 
     private void OnEnable()
     {

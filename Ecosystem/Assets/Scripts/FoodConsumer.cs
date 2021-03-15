@@ -24,11 +24,6 @@ namespace Ecosystem
     /// </summary>
     public static event FoodEatenEvent OnFoodEaten;
 
-    private void Start()
-    {
-      resourceBar.SetMaxValue((float) maxHunger);
-    }
-
     private void OnEnable()
     {
       resourceBar.SetMaxValue((float) maxHunger);

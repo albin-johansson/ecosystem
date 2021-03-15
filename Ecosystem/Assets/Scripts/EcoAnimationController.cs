@@ -16,7 +16,8 @@ namespace Ecosystem
     private float _navMeshAgentSpeed;
     private float _navMeshAgentVelocity;
 
-    private void Start()
+
+    private void OnEnable()
     {
       _animator = GetComponent<Animator>();
       _isWalkingHash = Animator.StringToHash("isWalking");
@@ -25,10 +26,6 @@ namespace Ecosystem
       _isAttackingHash = Animator.StringToHash("isAttacking");
       _animationSpeedMultiplier = Animator.StringToHash("animationSpeedMultiplier");
       _navMeshAgentSpeed = navMeshAgent.speed;
-    }
-
-    private void OnEnable()
-    {
       ResetAnimatorParameters();
       _navMeshAgentSpeed = navMeshAgent.speed;
     }
