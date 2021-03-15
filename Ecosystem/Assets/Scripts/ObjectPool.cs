@@ -8,11 +8,9 @@ namespace Ecosystem
   public class ObjectPool : MonoBehaviour
   {
     public List<Pool> pools;
-    public Dictionary<string, Queue<GameObject>> poolDictionary;
+    private Dictionary<string, Queue<GameObject>> _poolDictionary;
 
-
-    #region Singleton
-
+    
     public static ObjectPool instance;
 
     private void Awake()
@@ -20,11 +18,9 @@ namespace Ecosystem
       instance = this;
     }
 
-    #endregion
-
     private void Start()
     {
-      poolDictionary = new Dictionary<string, Queue<GameObject>>();
+      _poolDictionary = new Dictionary<string, Queue<GameObject>>();
 
       foreach (var pool in pools)
       {
@@ -37,13 +33,13 @@ namespace Ecosystem
           objectPool.Enqueue(objectToPool);
         }
 
-        poolDictionary.Add(pool.tag, objectPool);
+        _poolDictionary.Add(pool.tag, objectPool);
       }
     }
 
     public GameObject GetFromPool(string poolTag)
     {
-      var wantedPool = poolDictionary[poolTag];
+      var wantedPool = _poolDictionary[poolTag];
       if (wantedPool.Count > 1)
       {
         return wantedPool.Dequeue();
@@ -56,7 +52,7 @@ namespace Ecosystem
 
     public void ReturnToPool(string poolTag, GameObject objectToReturn)
     {
-      var wantedPool = poolDictionary[poolTag];
+      var wantedPool = _poolDictionary[poolTag];
       objectToReturn.SetActive(false);
       wantedPool.Enqueue(objectToReturn);
     }
