@@ -32,7 +32,7 @@ namespace Ecosystem.Genes
     protected override void Initialize()
     {
       Data = GenomeData.Create(DefaultGenes);
-      GenesToAttributes();
+      ConvertGenesToAttributes();
     }
   }
 }

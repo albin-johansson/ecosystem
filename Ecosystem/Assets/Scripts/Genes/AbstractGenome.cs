@@ -17,7 +17,7 @@ namespace Ecosystem.Genes
     public void Initialize(IGenome first, IGenome second)
     {
       Data = Genomes.Merge(first, second);
-      GenesToAttributes();
+      ConvertGenesToAttributes();
     }
 
     public bool IsMale => Data.IsMale;
@@ -30,17 +30,14 @@ namespace Ecosystem.Genes
 
     public float Attractiveness => GetDesirabilityScore().Value;
     
-    protected void GenesToAttributes()
+    protected void ConvertGenesToAttributes()
     {
       if (gameObject.TryGetComponent(out NavMeshAgent navMeshAgent))
       {
         navMeshAgent.speed *= Speed;
       }
-
-      if (gameObject.TryGetComponent(out Animator animator))
-      {
-        gameObject.transform.localScale.Scale(GetSizeFactor().Value * new Vector3(1, 1, 1));
-      }
+      
+      gameObject.transform.localScale *= GetSizeFactor().Value;
     }
 
     public Gene GetHungerRate() => Data.HungerRate;
