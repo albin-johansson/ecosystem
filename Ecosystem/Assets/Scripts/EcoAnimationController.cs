@@ -16,7 +16,6 @@ namespace Ecosystem
     private float _navMeshAgentSpeed;
     private float _navMeshAgentVelocity;
 
-
     private void OnEnable()
     {
       _animator = GetComponent<Animator>();
