@@ -13,8 +13,6 @@ namespace Ecosystem.ECS
   public sealed class NavTerrainSpawner : MonoBehaviour
   {
     [SerializeField] private int amount = 100;
-    [SerializeField] private float3 spawnOffset = new float3(0, 1, 0);
-    [SerializeField] private float3 destination;
 
     private Entity _prefab;
 
@@ -22,7 +20,8 @@ namespace Ecosystem.ECS
 
     private void Start()
     {
-      _prefab = EntityManager.CreateEntityQuery(typeof(CylinderPrefab)).GetSingleton<CylinderPrefab>().Value;
+      var query = EntityManager.CreateEntityQuery(typeof(CylinderPrefab));
+      _prefab = query.GetSingleton<CylinderPrefab>().Value;
     }
 
     private void Update()
@@ -31,6 +30,32 @@ namespace Ecosystem.ECS
       {
         Spawn();
       }
+    }
+
+    private void Spawn()
+    {
+      var entities = new NativeArray<Entity>(amount, Allocator.Temp);
+      EntityManager.Instantiate(_prefab, entities);
+
+      var terrain = Terrain.activeTerrain;
+
+      foreach (var entity in entities)
+      {
+        AddNavAgent(entity, transform.position);
+
+        if (Terrains.RandomWalkablePosition(terrain, out var position))
+        {
+          EntityManager.AddComponentData(entity, new NavDestination
+          {
+                  Teleport = false,
+                  Tolerance = 10f,
+                  CustomLerp = false,
+                  WorldPoint = position
+          });
+        }
+      }
+
+      entities.Dispose();
     }
 
     private static void AddNavAgent(Entity entity, float3 position)
@@ -53,40 +78,6 @@ namespace Ecosystem.ECS
       EntityManager.AddComponent<LocalToParent>(entity);
       EntityManager.AddComponent<NavNeedsSurface>(entity);
       EntityManager.AddComponent<NavTerrainCapable>(entity);
-    }
-
-    private void Spawn()
-    {
-      var entities = new NativeArray<Entity>(amount, Allocator.Temp);
-
-      EntityManager.Instantiate(_prefab, entities);
-
-      foreach (var entity in entities)
-      {
-        AddNavAgent(entity, transform.position);
-
-        // EntityManager.AddComponentData(entity, new NavDestination
-        // {
-        // Teleport = false,
-        // Tolerance = 10f,
-        // CustomLerp = false,
-        // WorldPoint = destination
-        // });
-
-        var terrain = Terrain.activeTerrain;
-        if (Terrains.RandomWalkablePosition(terrain, out var position))
-        {
-          EntityManager.AddComponentData(entity, new NavDestination
-          {
-                  Teleport = false,
-                  Tolerance = 10f,
-                  CustomLerp = false,
-                  WorldPoint = position
-          });
-        }
-      }
-
-      entities.Dispose();
     }
   }
 }
