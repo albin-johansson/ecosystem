@@ -36,7 +36,6 @@ namespace Ecosystem
       yield return new WaitForSeconds(delay);
       gameObject.SetActive(false);
       ObjectPool.instance.ReturnToPool(tagInPool, _gameObject);
-      //TODO:Reset all scripts that have a 'state' 
     }
   }
 }

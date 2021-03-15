@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.AI;
 using Object = System.Object;
 
 namespace Ecosystem
@@ -10,7 +11,7 @@ namespace Ecosystem
     public List<Pool> pools;
     private Dictionary<string, Queue<GameObject>> _poolDictionary;
 
-    
+
     public static ObjectPool instance;
 
     private void Awake()
@@ -53,8 +54,17 @@ namespace Ecosystem
     public void ReturnToPool(string poolTag, GameObject objectToReturn)
     {
       var wantedPool = _poolDictionary[poolTag];
-      objectToReturn.SetActive(false);
+      ResetObjectComponents(objectToReturn);
       wantedPool.Enqueue(objectToReturn);
+    }
+
+    private void ResetObjectComponents(GameObject objectToReset)
+    {
+      //TODO: Replace with OnEnable and OnDisable in movement controller and stateController
+      var navMeshAgent = objectToReset.GetComponent<NavMeshAgent>();
+      navMeshAgent.isStopped = true;
+      navMeshAgent.ResetPath();
+      objectToReset.SetActive(false);
     }
   }
 }

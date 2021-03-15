@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 using UnityEngine.AI;
 
 namespace Ecosystem
@@ -23,6 +24,12 @@ namespace Ecosystem
       _isDeadHash = Animator.StringToHash("isDead");
       _isAttackingHash = Animator.StringToHash("isAttacking");
       _animationSpeedMultiplier = Animator.StringToHash("animationSpeedMultiplier");
+      _navMeshAgentSpeed = navMeshAgent.speed;
+    }
+
+    private void OnEnable()
+    {
+      ResetAnimatorParameters();
       _navMeshAgentSpeed = navMeshAgent.speed;
     }
 

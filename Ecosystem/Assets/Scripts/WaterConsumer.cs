@@ -1,3 +1,4 @@
+using System;
 using Ecosystem.Genes;
 using Ecosystem.Logging;
 using Ecosystem.UI;
@@ -19,6 +20,17 @@ namespace Ecosystem
     private void Start()
     {
       resourceBar.SetMaxValue(maxThirst);
+    }
+
+    private void OnEnable()
+    {
+      resourceBar.SetMaxValue(maxThirst);
+    }
+
+    private void OnDisable()
+    {
+      Thirst = 0;
+      IsDrinking = false;
     }
 
     private void Update()
