@@ -7,6 +7,8 @@ namespace Ecosystem.UI
   public sealed class GraphicsSettings : MonoBehaviour
   {
     [SerializeField] private GameObject settingsWindow;
+    [SerializeField] private GameObject ambientOcclusionSlider;
+    [SerializeField] private GameObject intensityText;
 
     public static int _antiAliasingMode;
     public static bool _ambientOcclusionActive = true;
@@ -25,6 +27,8 @@ namespace Ecosystem.UI
     public void AmbientOcclusionActive()
     {
       _ambientOcclusionActive = !_ambientOcclusionActive;
+      ambientOcclusionSlider.SetActive(!ambientOcclusionSlider.activeSelf);
+      intensityText.SetActive(!intensityText.activeSelf);
     }
 
     public void AmbientOcclusionSlider()
