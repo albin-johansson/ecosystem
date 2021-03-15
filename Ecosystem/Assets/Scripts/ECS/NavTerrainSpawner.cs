@@ -1,4 +1,5 @@
 using Ecosystem.Authoring;
+using Ecosystem.Util;
 using Reese.Nav;
 using Unity.Collections;
 using Unity.Entities;
@@ -26,10 +27,32 @@ namespace Ecosystem.ECS
 
     private void Update()
     {
-      if (Input.GetMouseButtonUp(0))
+      if (Input.GetKeyUp(KeyCode.L))
       {
         Spawn();
       }
+    }
+
+    private static void AddNavAgent(Entity entity, float3 position)
+    {
+      EntityManager.AddComponentData(entity, new NavAgent
+      {
+              TranslationSpeed = 20 + 5 * Random.value,
+              RotationSpeed = 0.3f,
+              TypeID = NavUtil.GetAgentType(NavConstants.HUMANOID),
+              Offset = new float3(0, 1, 0)
+      });
+
+      EntityManager.AddComponentData(entity, new Translation
+      {
+              Value = position
+      });
+
+      EntityManager.AddComponent<LocalToWorld>(entity);
+      EntityManager.AddComponent<Parent>(entity);
+      EntityManager.AddComponent<LocalToParent>(entity);
+      EntityManager.AddComponent<NavNeedsSurface>(entity);
+      EntityManager.AddComponent<NavTerrainCapable>(entity);
     }
 
     private void Spawn()
@@ -40,32 +63,27 @@ namespace Ecosystem.ECS
 
       foreach (var entity in entities)
       {
-        EntityManager.AddComponentData(entity, new NavAgent
-        {
-                TranslationSpeed = 20 + 5 * Random.value,
-                RotationSpeed = 0.3f,
-                TypeID = NavUtil.GetAgentType(NavConstants.HUMANOID),
-                Offset = new float3(0, 1, 0)
-        });
+        AddNavAgent(entity, transform.position);
 
-        EntityManager.AddComponentData(entity, new Translation
-        {
-                Value = spawnOffset
-        });
+        // EntityManager.AddComponentData(entity, new NavDestination
+        // {
+        // Teleport = false,
+        // Tolerance = 10f,
+        // CustomLerp = false,
+        // WorldPoint = destination
+        // });
 
-        EntityManager.AddComponent<LocalToWorld>(entity);
-        EntityManager.AddComponent<Parent>(entity);
-        EntityManager.AddComponent<LocalToParent>(entity);
-        EntityManager.AddComponent<NavNeedsSurface>(entity);
-        EntityManager.AddComponent<NavTerrainCapable>(entity);
-
-        EntityManager.AddComponentData(entity, new NavDestination
+        var terrain = Terrain.activeTerrain;
+        if (Terrains.RandomWalkablePosition(terrain, out var position))
         {
-                Teleport = false,
-                Tolerance = 10f,
-                CustomLerp = false,
-                WorldPoint = destination
-        });
+          EntityManager.AddComponentData(entity, new NavDestination
+          {
+                  Teleport = false,
+                  Tolerance = 10f,
+                  CustomLerp = false,
+                  WorldPoint = position
+          });
+        }
       }
 
       entities.Dispose();
