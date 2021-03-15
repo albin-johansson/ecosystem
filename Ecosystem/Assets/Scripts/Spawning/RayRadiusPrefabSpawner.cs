@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace Ecosystem
+namespace Ecosystem.Spawning
 {
 // Will spawn a given prefab inside a radius if it hits something with a ground tag.
   public sealed class RayRadiusPrefabSpawner : MonoBehaviour

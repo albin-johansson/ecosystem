@@ -1,5 +1,6 @@
 using System;
 using Ecosystem.Genes;
+using Ecosystem.Spawning;
 using UnityEngine;
 
 namespace Ecosystem

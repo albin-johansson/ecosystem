@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-namespace Ecosystem
+namespace Ecosystem.Spawning
 {
   [System.Serializable]
   public class Pool

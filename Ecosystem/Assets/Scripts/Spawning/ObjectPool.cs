@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.AI;
 using Object = System.Object;
 
-namespace Ecosystem
+namespace Ecosystem.Spawning
 {
   public class ObjectPool : MonoBehaviour
   {

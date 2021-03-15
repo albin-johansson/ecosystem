@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections;
 using Ecosystem.Logging;
+using Ecosystem.Spawning;
 using UnityEngine;
 
 namespace Ecosystem
