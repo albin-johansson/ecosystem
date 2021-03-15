@@ -5736,16 +5736,16 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   pools:
-  - tag: Rabbit
+  - key: Rabbit
     prefab: {fileID: 3436557251021641289, guid: 52b1c190247192a42a5e36bafea08096, type: 3}
     size: 100
-  - tag: Wolf
+  - key: Wolf
     prefab: {fileID: 4371145773595096147, guid: 9ad7ab249851e454e9360e8fc8284e3b, type: 3}
     size: 100
-  - tag: Deer
+  - key: Deer
     prefab: {fileID: 7155763010095567698, guid: ac935de5e4958254196cd0457e8a0df5, type: 3}
     size: 100
-  - tag: Bear
+  - key: Bear
     prefab: {fileID: 7237780236292801018, guid: a5fd4d9dd473da54c83430115c05e48c, type: 3}
     size: 100
 --- !u!4 &567821616

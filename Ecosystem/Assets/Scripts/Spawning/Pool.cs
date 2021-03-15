@@ -5,7 +5,7 @@ namespace Ecosystem.Spawning
   [System.Serializable]
   public class Pool
   {
-    public string tag;
+    public string key;
     public GameObject prefab;
     public int size;
   }

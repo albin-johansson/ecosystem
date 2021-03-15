@@ -34,7 +34,7 @@ namespace Ecosystem
 
     [SerializeField] private AbstractGenome genome;
     [SerializeField] private GameObject prefab;
-    [SerializeField] private string tagInPool;
+    [SerializeField] private string keyToPool;
 
     private Transform _directoryOfAnimal;
     private bool _isPregnant;
@@ -81,7 +81,7 @@ namespace Ecosystem
 
       _isPregnant = false;
       _pregnancyElapsedTime = 0;
-      var child = ObjectPool.instance.GetFromPool(tagInPool);
+      var child = ObjectPool.instance.GetFromPool(keyToPool);
       child.transform.position = currentTransform.position;
       child.transform.rotation = currentTransform.rotation;
       child.transform.parent = _directoryOfAnimal;

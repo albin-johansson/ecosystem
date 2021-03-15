@@ -1026,7 +1026,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   animationController: {fileID: 2656864231929346077}
-  tagInPool: Rabbit
+  keyToPool: Rabbit
 --- !u!114 &3441429084631058016
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1951,7 +1951,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   genome: {fileID: 1438288584065220351}
   prefab: {fileID: 3436557251021641289}
-  tagInPool: Rabbit
+  keyToPool: Rabbit
 --- !u!1 &7274074492873787243
 GameObject:
   m_ObjectHideFlags: 0

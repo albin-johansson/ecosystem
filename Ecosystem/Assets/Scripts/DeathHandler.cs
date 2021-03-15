@@ -12,7 +12,7 @@ namespace Ecosystem
   public sealed class DeathHandler : MonoBehaviour
   {
     [SerializeField] private EcoAnimationController animationController;
-    [SerializeField] private string tagInPool;
+    [SerializeField] private string keyToPool;
     private CauseOfDeath _cause;
     private GameObject _gameObject;
 
@@ -35,7 +35,7 @@ namespace Ecosystem
     private IEnumerator InactivateAfterDelay(int delay)
     {
       yield return new WaitForSeconds(delay);
-      ObjectPool.instance.ReturnToPool(tagInPool, _gameObject);
+      ObjectPool.instance.ReturnToPool(keyToPool, _gameObject);
     }
   }
 }

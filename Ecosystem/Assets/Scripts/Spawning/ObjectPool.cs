@@ -37,13 +37,13 @@ namespace Ecosystem.Spawning
           objectPool.Enqueue(objectToPool);
         }
 
-        _poolDictionary.Add(pool.tag, objectPool);
+        _poolDictionary.Add(pool.key, objectPool);
       }
     }
 
-    public GameObject GetFromPool(string poolTag)
+    public GameObject GetFromPool(string poolKey)
     {
-      var wantedPool = _poolDictionary[poolTag];
+      var wantedPool = _poolDictionary[poolKey];
       if (wantedPool.Count > 1)
       {
         return wantedPool.Dequeue();
@@ -54,9 +54,9 @@ namespace Ecosystem.Spawning
       }
     }
 
-    public void ReturnToPool(string poolTag, GameObject objectToReturn)
+    public void ReturnToPool(string poolKey, GameObject objectToReturn)
     {
-      var wantedPool = _poolDictionary[poolTag];
+      var wantedPool = _poolDictionary[poolKey];
       ResetObjectComponents(objectToReturn);
       wantedPool.Enqueue(objectToReturn);
     }
