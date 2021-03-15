@@ -13,5 +13,10 @@ namespace Ecosystem.Genes
     {
       return Random.value * (max - min) + min;
     }
+
+    public static Gene NewGeneFromList(float min, float max, float[] vals)
+    {
+      return new Gene(vals[Random.Range(0, vals.Length)], min, max);
+    }
   }
 }
