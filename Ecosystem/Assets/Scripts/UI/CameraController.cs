@@ -28,25 +28,41 @@ namespace Ecosystem.UI
 
     private void Update()
     {
-      //Stop tracking with "Q"
+      Boost();
+      Track();
+      Move();
+      Rotate();
+
+      if (Input.GetKeyUp(KeyCode.Escape))
+      {
+        Application.Quit();
+      }
+
+      _rigidbody.velocity = _rigidbody.velocity.normalized * speed;
+    }
+
+    private void Move()
+    {
+      if (_track)
+      {
+        _distance += Input.mouseScrollDelta.y;
+        _distance = Math.Max(_distance, 5);
+
+        _transform.position = _trackedTarget.position + Vector3.up * _distance;
+      }
+      else
+      {
+        Translate();
+      }
+    }
+
+    private void Track()
+    {
       if (Input.GetKey(KeyCode.Q))
       {
         _track = false;
       }
 
-      if (Input.GetKey(KeyCode.LeftShift) && !_boosted)
-      {
-        _boosted = true;
-        speed *= _boostFactor;
-      }
-
-      if (Input.GetKeyUp(KeyCode.LeftShift) && _boosted)
-      {
-        _boosted = false;
-        speed /= _boostFactor;
-      }
-
-      //Select animal to follow with mouse button
       if (Input.GetKey(KeyCode.Mouse0))
       {
         Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
@@ -61,32 +77,21 @@ namespace Ecosystem.UI
           }
         }
       }
+    }
 
-      //Follow the tracked animal
-      if (_track)
+    private void Boost()
+    {
+      if (Input.GetKey(KeyCode.LeftShift) && !_boosted)
       {
-        //Zoom with mouse wheel
-        _distance += Input.mouseScrollDelta.y;
-        _distance = Math.Max(_distance, 5);
-
-        //follow
-        _transform.position = _trackedTarget.position + Vector3.up * _distance;
-      }
-      //Move around with "WASD"
-      else
-      {
-        Translate();
+        _boosted = true;
+        speed *= _boostFactor;
       }
 
-      Rotate();
-
-      //Exit application
-      if (Input.GetKeyUp(KeyCode.Escape))
+      if (Input.GetKeyUp(KeyCode.LeftShift) && _boosted)
       {
-        Application.Quit();
+        _boosted = false;
+        speed /= _boostFactor;
       }
-
-      _rigidbody.velocity = _rigidbody.velocity.normalized * speed;
     }
 
     private void Translate()
