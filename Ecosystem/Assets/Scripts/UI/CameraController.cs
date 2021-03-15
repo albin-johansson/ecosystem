@@ -45,10 +45,17 @@ namespace Ecosystem.UI
     {
       if (_track)
       {
-        _distance += Input.mouseScrollDelta.y;
-        _distance = Math.Max(_distance, 5);
+        if (_trackedTarget != null)
+        {
+          _distance += Input.mouseScrollDelta.y;
+          _distance = Math.Max(_distance, 5);
 
-        _transform.position = _trackedTarget.position + Vector3.up * _distance;
+          _transform.position = _trackedTarget.position + Vector3.up * _distance + Vector3.back;
+        }
+        else
+        {
+          _track = false;
+        }
       }
       else
       {
@@ -136,10 +143,13 @@ namespace Ecosystem.UI
 
     private void Rotate()
     {
-      _y = Input.GetAxis("Mouse X") * 1.5f;
-      _x = Input.GetAxis("Mouse Y") * 1.5f;
-      _rotateValue = new Vector3(_x, _y * -1, 0);
-      _transform.eulerAngles -= _rotateValue;
+      if (!Input.GetKey(KeyCode.LeftControl))
+      {
+        _y = Input.GetAxis("Mouse X") * 1.5f;
+        _x = Input.GetAxis("Mouse Y") * 1.5f;
+        _rotateValue = new Vector3(_x, _y * -1, 0);
+        _transform.eulerAngles -= _rotateValue;
+      }
     }
   }
 }
