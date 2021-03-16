@@ -86,9 +86,10 @@ namespace Ecosystem
       child.transform.rotation = currentTransform.rotation;
       child.transform.parent = _directoryOfAnimal;
       child.SetActive(true);
-      var childGenome = child.GetComponent<AbstractGenome>();
-      childGenome.Initialize(genome, _mateGenome);
-
+      if (TryGetComponent<AbstractGenome>(out var childGenome))
+      {
+        childGenome.Initialize(genome, _mateGenome);
+      }
       OnBirth?.Invoke(child);
     }
 

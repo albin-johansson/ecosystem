@@ -14,11 +14,17 @@ namespace Ecosystem.Spawning
     public static ObjectPoolHandler instance;
     private Transform _poolTransform;
 
+    /// <summary>
+    /// This makes the PoolHandler a 'Singleton'. This makes it so that the same instance of the class is used.
+    /// </summary>
     private void Awake()
     {
       instance = this;
     }
 
+    /// <summary>
+    /// This function will initiate all pools and Instantiate the gameObjects in the pools.
+    /// </summary>
     private void Start()
     {
       _poolTransform = transform;
@@ -54,6 +60,7 @@ namespace Ecosystem.Spawning
       }
     }
 
+
     public void ReturnToPool(string poolKey, GameObject objectToReturn)
     {
       var wantedPool = _poolDictionary[poolKey];
@@ -61,6 +68,11 @@ namespace Ecosystem.Spawning
       wantedPool.Enqueue(objectToReturn);
     }
 
+
+    /// <summary>
+    /// Resets values and variables in components that is connected to the GameObject.
+    /// Also moves inactive gameObjects to the pool in the hierarchy.
+    /// </summary>
     private void ResetObjectComponents(GameObject objectToReset)
     {
       if (TryGetComponent<NavMeshAgent>(out var navMeshAgent))
@@ -68,6 +80,7 @@ namespace Ecosystem.Spawning
         navMeshAgent.isStopped = true;
         navMeshAgent.ResetPath();
       }
+
       objectToReset.transform.parent = _poolTransform;
       objectToReset.SetActive(false);
     }
