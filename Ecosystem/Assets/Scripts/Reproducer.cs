@@ -40,8 +40,8 @@ namespace Ecosystem
     private double _sexualMaturityTime;
     private double _pregnancyElapsedTime;
     private double _maturityElapsedTime;
-    private float childSaturation;
-    private IConsumer consumer;
+    private float _childSaturation;
+    private IConsumer _consumer;
     private IGenome _mateGenome;
 
     public bool CanMate => !_isPregnant && _isSexuallyMature;
