@@ -4,7 +4,7 @@ using UnityEngine;
 namespace Ecosystem.Spawning
 {
   /// <summary>
-  /// Contains the value needed to iniate the objectPools in ObjectPoolHandler.
+  /// Contains the value needed to initiate the objectPools in ObjectPoolHandler.
   /// </summary>
   [Serializable]
   public sealed class Pool
