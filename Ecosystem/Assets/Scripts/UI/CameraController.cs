@@ -55,13 +55,11 @@ namespace Ecosystem.UI
           if (_lookLocked)
           {
             adjustmentVector3 = _trackedTarget.forward;
-            //_transform.position = _trackedTarget.position + Vector3.up * _distance - _trackedTarget.forward;
             _transform.LookAt(_trackedTarget);
           }
           else
           {
             adjustmentVector3 = Vector3.zero;
-            //_transform.position = _trackedTarget.position + Vector3.up * _distance - Vector3.back * _distance;
           }
 
           _transform.position = _trackedTarget.position + Vector3.up * _distance - adjustmentVector3 * _distance;
@@ -97,6 +95,7 @@ namespace Ecosystem.UI
           {
             _trackedTarget = hit.transform;
             _track = true;
+            _lookLocked = true;
           }
         }
       }
