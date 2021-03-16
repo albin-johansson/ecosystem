@@ -43,6 +43,7 @@ namespace Ecosystem
     private float _childSaturation;
     private IConsumer _consumer;
     private IGenome _mateGenome;
+    private readonly float _childFoodConsumtionFraction = 1/3;
 
     public bool CanMate => !_isPregnant && _isSexuallyMature;
 
@@ -66,17 +67,17 @@ namespace Ecosystem
 
       if (_isPregnant)
       {
-        if (consumer == null)
+        if (_consumer == null)
         {
-          consumer = transform.root.GetComponentInChildren<IConsumer>();
+          _consumer = transform.root.GetComponentInChildren<IConsumer>();
         }
-        consumer.Hunger += (genome.Metabolism / 3) * Time.deltaTime;
-        childSaturation += (genome.Metabolism / 3) *  Time.deltaTime;
+        _consumer.Hunger += (genome.Metabolism * _childFoodConsumtionFraction) * Time.deltaTime;
+        _childSaturation += (genome.Metabolism * _childFoodConsumtionFraction) *  Time.deltaTime;
         _pregnancyElapsedTime += Time.deltaTime;
         if (_pregnancyElapsedTime >= _gestationPeriod)
         {
           GiveBirth();
-          childSaturation = 0;
+          _childSaturation = 0;
         }
       }
     }
@@ -93,7 +94,7 @@ namespace Ecosystem
       childGenome.Initialize(genome, _mateGenome);
       
       var childConsumer = child.GetComponentInChildren<IConsumer>();
-      childConsumer.SetSaturation(childSaturation);
+      childConsumer.SetSaturation(_childSaturation);
 
       OnBirth?.Invoke(child);
     }
