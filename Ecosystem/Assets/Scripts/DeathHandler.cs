@@ -35,7 +35,7 @@ namespace Ecosystem
     private IEnumerator InactivateAfterDelay(int delay)
     {
       yield return new WaitForSeconds(delay);
-      ObjectPool.instance.ReturnToPool(keyToPool, _gameObject);
+      ObjectPoolHandler.instance.ReturnToPool(keyToPool, _gameObject);
     }
   }
 }

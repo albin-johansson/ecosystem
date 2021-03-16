@@ -1,9 +1,10 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 
 namespace Ecosystem.Spawning
 {
-  [System.Serializable]
-  public class Pool
+  [Serializable]
+  public sealed class Pool
   {
     public string key;
     public GameObject prefab;

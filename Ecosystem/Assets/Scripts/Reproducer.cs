@@ -81,7 +81,7 @@ namespace Ecosystem
 
       _isPregnant = false;
       _pregnancyElapsedTime = 0;
-      var child = ObjectPool.instance.GetFromPool(keyToPool);
+      var child = ObjectPoolHandler.instance.GetFromPool(keyToPool);
       child.transform.position = currentTransform.position;
       child.transform.rotation = currentTransform.rotation;
       child.transform.parent = _directoryOfAnimal;

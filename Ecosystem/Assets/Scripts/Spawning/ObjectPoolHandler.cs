@@ -6,12 +6,12 @@ using Object = System.Object;
 
 namespace Ecosystem.Spawning
 {
-  public class ObjectPool : MonoBehaviour
+  public class ObjectPoolHandler : MonoBehaviour
   {
     public List<Pool> pools;
     private Dictionary<string, Queue<GameObject>> _poolDictionary;
     private static int _walkable;
-    public static ObjectPool instance;
+    public static ObjectPoolHandler instance;
     private Transform _poolTransform;
 
     private void Awake()
@@ -63,9 +63,11 @@ namespace Ecosystem.Spawning
 
     private void ResetObjectComponents(GameObject objectToReset)
     {
-      var navMeshAgent = objectToReset.GetComponent<NavMeshAgent>();
-      navMeshAgent.isStopped = true;
-      navMeshAgent.ResetPath();
+      if (TryGetComponent<NavMeshAgent>(out var navMeshAgent))
+      {
+        navMeshAgent.isStopped = true;
+        navMeshAgent.ResetPath();
+      }
       objectToReset.transform.parent = _poolTransform;
       objectToReset.SetActive(false);
     }
