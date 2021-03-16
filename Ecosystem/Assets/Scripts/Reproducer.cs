@@ -1,4 +1,3 @@
-using System;
 using Ecosystem.Genes;
 using Ecosystem.Spawning;
 using UnityEngine;
@@ -90,6 +89,7 @@ namespace Ecosystem
       {
         childGenome.Initialize(genome, _mateGenome);
       }
+
       OnBirth?.Invoke(child);
     }
 
