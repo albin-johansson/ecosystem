@@ -3607,6 +3607,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   genome: {fileID: 570846004582155358}
   prefab: {fileID: 7155763010095567698}
+  keyToPool: Deer
 --- !u!1 &3504996671413722853
 GameObject:
   m_ObjectHideFlags: 0
@@ -7579,6 +7580,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   animationController: {fileID: 4427174813899224407}
+  keyToPool: Deer
 --- !u!114 &570846004582155358
 MonoBehaviour:
   m_ObjectHideFlags: 0

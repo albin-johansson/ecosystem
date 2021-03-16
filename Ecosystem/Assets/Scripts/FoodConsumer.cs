@@ -1,3 +1,4 @@
+using System;
 using Ecosystem.Genes;
 using Ecosystem.Logging;
 using Ecosystem.UI;
@@ -23,9 +24,14 @@ namespace Ecosystem
     /// </summary>
     public static event FoodEatenEvent OnFoodEaten;
 
-    private void Start()
+    private void OnEnable()
     {
       resourceBar.SetMaxValue((float) maxHunger);
+    }
+
+    private void OnDisable()
+    {
+      Hunger = 0;
     }
 
     private void Update()
