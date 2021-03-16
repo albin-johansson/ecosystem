@@ -932,6 +932,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   genome: {fileID: 1080774011748047759}
   prefab: {fileID: 7237780236292801018}
+  keyToPool: Bear
 --- !u!1 &4817363271471425423
 GameObject:
   m_ObjectHideFlags: 0
@@ -1603,6 +1604,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   animationController: {fileID: -4165548273840364118}
+  keyToPool: Bear
 --- !u!114 &1080774011748047759
 MonoBehaviour:
   m_ObjectHideFlags: 0
