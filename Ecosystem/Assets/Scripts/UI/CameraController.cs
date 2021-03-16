@@ -19,6 +19,7 @@ namespace Ecosystem.UI
     private Rigidbody _rigidbody;
     private float _boostFactor = 2;
     private bool _boosted = false;
+    private bool _lookLocked = false;
 
     private void Start()
     {
@@ -29,8 +30,8 @@ namespace Ecosystem.UI
     private void Update()
     {
       Boost();
-      Track();
-      Move();
+      SelectTracked();
+      TrackingOrWASD();
       Rotate();
 
       if (Input.GetKeyUp(KeyCode.Escape))
@@ -41,7 +42,9 @@ namespace Ecosystem.UI
       _rigidbody.velocity = _rigidbody.velocity.normalized * speed;
     }
 
-    private void Move()
+    private Vector3 adjustmentVector3 = new Vector3(0, 0, 0);
+
+    private void TrackingOrWASD()
     {
       if (_track)
       {
@@ -49,12 +52,24 @@ namespace Ecosystem.UI
         {
           _distance += Input.mouseScrollDelta.y;
           _distance = Math.Max(_distance, 5);
+          if (_lookLocked)
+          {
+            adjustmentVector3 = _trackedTarget.forward;
+            //_transform.position = _trackedTarget.position + Vector3.up * _distance - _trackedTarget.forward;
+            _transform.LookAt(_trackedTarget);
+          }
+          else
+          {
+            adjustmentVector3 = Vector3.zero;
+            //_transform.position = _trackedTarget.position + Vector3.up * _distance - Vector3.back * _distance;
+          }
 
-          _transform.position = _trackedTarget.position + Vector3.up * _distance + Vector3.back;
+          _transform.position = _trackedTarget.position + Vector3.up * _distance - adjustmentVector3 * _distance;
         }
         else
         {
           _track = false;
+          _lookLocked = false;
         }
       }
       else
@@ -63,11 +78,12 @@ namespace Ecosystem.UI
       }
     }
 
-    private void Track()
+    private void SelectTracked()
     {
       if (Input.GetKey(KeyCode.Q))
       {
         _track = false;
+        _lookLocked = false;
       }
 
       if (Input.GetKey(KeyCode.Mouse0))
@@ -83,6 +99,11 @@ namespace Ecosystem.UI
             _track = true;
           }
         }
+      }
+
+      if (Input.GetKeyUp(KeyCode.F))
+      {
+        _lookLocked = !_lookLocked;
       }
     }
 
@@ -143,7 +164,7 @@ namespace Ecosystem.UI
 
     private void Rotate()
     {
-      if (!Input.GetKey(KeyCode.LeftControl))
+      if (!Input.GetKey(KeyCode.LeftControl) && !_lookLocked)
       {
         _y = Input.GetAxis("Mouse X") * 1.5f;
         _x = Input.GetAxis("Mouse Y") * 1.5f;
