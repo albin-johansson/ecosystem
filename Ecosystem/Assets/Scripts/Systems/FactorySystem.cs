@@ -1,7 +1,10 @@
+using Ecosystem.Components;
 using Ecosystem.ECS;
 using Reese.Nav;
+using Reese.Spatial;
 using Unity.Entities;
 using Unity.Mathematics;
+using Unity.Physics;
 using Unity.Transforms;
 using Random = UnityEngine.Random;
 
@@ -25,7 +28,16 @@ namespace Ecosystem.Systems
 
       var entity = EntityManager.Instantiate(_rabbitPrefab);
 
+      EntityManager.AddComponent<Rabbit>(entity);
+
       AddNavAgent(entity, position);
+      
+      EntityManager.AddComponent<PhysicsCollider>(entity);
+      EntityManager.AddComponent<SpatialActivator>(entity);
+      
+      EntityManager.AddComponent(entity, typeof(SpatialTag));
+      var buffer = EntityManager.AddBuffer<SpatialTag>(entity);
+      buffer.Add("Rabbit");
 
       return entity;
     }
