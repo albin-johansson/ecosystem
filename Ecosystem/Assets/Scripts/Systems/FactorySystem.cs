@@ -11,12 +11,6 @@ namespace Ecosystem.Systems
   {
     private Entity _rabbitPrefab;
 
-    protected override void OnStartRunning()
-    {
-      base.OnStartRunning();
-      _rabbitPrefab = LoadPrefab<RabbitPrefab>().Value;
-    }
-
     protected override void OnUpdate()
     {
       // Do nothing
@@ -24,6 +18,11 @@ namespace Ecosystem.Systems
 
     public Entity MakeRabbit(float3 position)
     {
+      if (_rabbitPrefab == Entity.Null)
+      {
+        _rabbitPrefab = LoadPrefab<RabbitPrefab>().Value;
+      }
+
       var entity = EntityManager.Instantiate(_rabbitPrefab);
 
       AddNavAgent(entity, position);
