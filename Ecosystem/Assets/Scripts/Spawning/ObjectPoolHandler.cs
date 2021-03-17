@@ -45,6 +45,11 @@ namespace Ecosystem.Spawning
       }
     }
 
+    public bool isPoolValid(string poolKey)
+    {
+      return _poolDictionary.ContainsKey(poolKey);
+    }
+
     public GameObject GetFromPool(string poolKey)
     {
       var wantedPool = _poolDictionary[poolKey];
