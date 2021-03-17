@@ -13,6 +13,7 @@ namespace Ecosystem
     [SerializeField] private DeathHandler deathHandler;
     [SerializeField] private double maxHunger = 100;
     [SerializeField] private EcoAnimationController animationController;
+    [SerializeField] private Reproducer reproducer;
     private bool _isDead;
 
     public double Hunger { get; set; }
@@ -36,7 +37,14 @@ namespace Ecosystem
         return;
       }
 
-      Hunger += genome.Metabolism * Time.deltaTime;
+      if (reproducer.IsPregnant)
+      {
+        Hunger += genome.Metabolism * genome.GetChildFoodConsumtionFactor() * Time.deltaTime;
+      }
+      else
+      {
+        Hunger += genome.Metabolism * Time.deltaTime;
+      }
       resourceBar.SetValue((float) Hunger);
       if (Hunger > maxHunger)
       {

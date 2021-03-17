@@ -18,6 +18,7 @@ namespace Ecosystem.Genes
 
     internal double MutateChance = 0.05;
     internal readonly float MetabolismFactor = 1.495f; // 1.15 (Vision) * 1.30 (Speed)
+    internal readonly float ChildFoodConsumtionFactor = 1 / 3;
     internal readonly bool IsMale = Random.value > 0.5;
 
     internal static GenomeData Create(Dictionary<GeneType, Gene> initial) => new GenomeData
