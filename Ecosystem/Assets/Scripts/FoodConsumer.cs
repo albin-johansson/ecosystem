@@ -61,6 +61,8 @@ namespace Ecosystem
         if (ObjectPoolHandler.instance.isPoolValid(gameObjectTag))
         {
           ObjectPoolHandler.instance.ReturnToPool(gameObjectTag, other.gameObject);
+          Hunger = 0;
+          return;
         }
         Destroy(other.gameObject);
         Hunger = 0;
