@@ -6,7 +6,6 @@ using Random = UnityEngine.Random;
 
 namespace Ecosystem.Spawning
 {
-  // Will spawn a given prefab inside the given terrain if it hits something with a ground tag.
   public sealed class RayPrefabSpawner : MonoBehaviour
   {
     [SerializeField] private Terrain terrain;
