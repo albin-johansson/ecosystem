@@ -5,7 +5,7 @@ namespace Ecosystem
   /// </summary>
   public interface IConsumer
   {
-    double Hunger { get; set; }
+    double Hunger { get; }
 
     bool IsHungry();
 
