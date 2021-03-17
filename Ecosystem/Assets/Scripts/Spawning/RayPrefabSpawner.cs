@@ -1,4 +1,5 @@
 using System;
+using Ecosystem.Util;
 using UnityEngine;
 using UnityEngine.AI;
 using UnityEngine.UI;
@@ -23,16 +24,9 @@ namespace Ecosystem.Spawning
     [SerializeField] private float spawnRate;
 
     private float _elapsedTime;
-    private int _walkable;
     private bool _usePool;
     private bool _haveCheckedPool;
-
-
-    private void Start()
-    {
-      _walkable = 1 << NavMesh.GetAreaFromName("Walkable");
-    }
-
+    
     private void Update()
     {
       if (!_haveCheckedPool)
@@ -69,7 +63,7 @@ namespace Ecosystem.Spawning
 
     private void Spawn(Vector3 position, float wantedRadius)
     {
-      if (NavMesh.SamplePosition(position, out var hit, wantedRadius, _walkable))
+      if (NavMesh.SamplePosition(position, out var hit, wantedRadius, Terrains.Walkable))
       {
         if (_usePool)
         {

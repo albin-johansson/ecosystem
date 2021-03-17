@@ -5,7 +5,6 @@ using Ecosystem.Spawning;
 using Ecosystem.UI;
 using Ecosystem.Util;
 using UnityEngine;
-using Object = System.Object;
 
 namespace Ecosystem
 {
@@ -58,14 +57,15 @@ namespace Ecosystem
       {
         OnFoodEaten?.Invoke(other.gameObject);
         var gameObjectTag = other.gameObject.tag;
+        Hunger = 0;
         if (ObjectPoolHandler.instance.isPoolValid(gameObjectTag))
         {
           ObjectPoolHandler.instance.ReturnToPool(gameObjectTag, other.gameObject);
-          Hunger = 0;
-          return;
         }
-        Destroy(other.gameObject);
-        Hunger = 0;
+        else
+        {
+          Destroy(other.gameObject);
+        }
       }
     }
 
