@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using Ecosystem.Util;
 using UnityEngine;
 using UnityEngine.AI;
 
@@ -26,7 +27,7 @@ namespace Ecosystem.Spawning
     private void Start()
     {
       _poolTransform = transform;
-      _walkable = 1 << NavMesh.GetAreaFromName("Walkable");
+      _walkable = Terrains.Walkable;
       _poolDictionary = new Dictionary<string, Queue<GameObject>>();
 
       foreach (var pool in pools)
