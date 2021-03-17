@@ -15,7 +15,10 @@ namespace Ecosystem.ECS
     {
       if (Input.GetKeyUp(KeyCode.L))
       {
-        Spawn();
+        for (var i = 0; i < 100; ++i)
+        {
+          Spawn();
+        }
       }
     }
 
