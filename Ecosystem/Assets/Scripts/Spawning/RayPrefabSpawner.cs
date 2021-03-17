@@ -1,4 +1,7 @@
+using System;
 using UnityEngine;
+using UnityEngine.AI;
+using Random = UnityEngine.Random;
 
 namespace Ecosystem.Spawning
 {
@@ -10,6 +13,13 @@ namespace Ecosystem.Spawning
     [SerializeField] private Terrain terrain;
     [SerializeField] private float rate;
     private float _elapsedTime;
+    private int _walkable;
+    
+
+    private void Start()
+    {
+    _walkable = 1 << NavMesh.GetAreaFromName("Walkable");
+    }
 
     private void Update()
     {
@@ -22,17 +32,12 @@ namespace Ecosystem.Spawning
         var xPos = Random.Range(-terrainData.bounds.extents.x, terrainData.bounds.extents.x);
         var zPos = Random.Range(-terrainData.bounds.extents.z, terrainData.bounds.extents.z);
 
-        var position = terrainData.bounds.center + new Vector3(xPos, 0, zPos);
-        var height = terrain.SampleHeight(terrainData.bounds.center + new Vector3(xPos, 0, zPos)) + 10;
-
-        if (!Physics.Raycast(position + new Vector3(0, height, 0), Vector3.down, out var hit, 200.0f))
+        var position = transform.position + new Vector3(xPos, 0, zPos);
+        
+        if (NavMesh.SamplePosition(position, out var hit, float.PositiveInfinity, _walkable))
         {
-          return;
-        }
-
-        if (hit.transform.CompareTag("Ground"))
-        {
-          Instantiate(prefab, hit.point, Quaternion.identity, directory);
+          print("instantiating");
+          Instantiate(prefab, hit.position, Quaternion.identity, directory);
         }
       }
     }
