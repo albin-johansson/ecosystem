@@ -89,12 +89,11 @@ namespace Ecosystem.Spawning
     private void SpawnOnNavMesh()
     {
       var terrainData = terrain.terrainData;
-      var xPos = Random.Range(-terrainData.bounds.extents.x, terrainData.bounds.extents.x);
-      var zPos = Random.Range(-terrainData.bounds.extents.z, terrainData.bounds.extents.z);
+      var xPos = Random.Range(0, terrainData.bounds.max.x);
+      var zPos = Random.Range(0, terrainData.bounds.max.z);
+      var position = terrain.transform.position + new Vector3(xPos, 0, zPos);
 
-      var position = transform.position + new Vector3(xPos, 0, zPos);
-
-      Spawn(position, float.PositiveInfinity);
+      Spawn(position, terrainData.bounds.max.y);
     }
   }
 }
