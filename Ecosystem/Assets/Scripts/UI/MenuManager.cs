@@ -50,6 +50,11 @@ namespace Ecosystem.UI
       SceneManager.LoadScene("PrototypeScene");
     }
 
+    public void StartEcsDemo()
+    {
+      SceneManager.LoadScene("ECSDemo");
+    }
+
     private void OnSceneChanged(Scene current, Scene next)
     {
       if (next.name == "DynamicScene")
