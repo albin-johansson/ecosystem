@@ -1,5 +1,7 @@
+using System;
 using Ecosystem.Genes;
 using Ecosystem.Logging;
+using Ecosystem.Spawning;
 using Ecosystem.UI;
 using Ecosystem.Util;
 using UnityEngine;
@@ -23,9 +25,14 @@ namespace Ecosystem
     /// </summary>
     public static event FoodEatenEvent OnFoodEaten;
 
-    private void Start()
+    private void OnEnable()
     {
       resourceBar.SetMaxValue((float) maxHunger);
+    }
+
+    private void OnDisable()
+    {
+      Hunger = 0;
     }
 
     private void Update()
@@ -49,8 +56,16 @@ namespace Ecosystem
       if (Tags.IsFood(other.gameObject))
       {
         OnFoodEaten?.Invoke(other.gameObject);
-        Destroy(other.gameObject);
+        var gameObjectTag = other.gameObject.tag;
         Hunger = 0;
+        if (ObjectPoolHandler.instance.isPoolValid(gameObjectTag))
+        {
+          ObjectPoolHandler.instance.ReturnToPool(gameObjectTag, other.gameObject);
+        }
+        else
+        {
+          Destroy(other.gameObject);
+        }
       }
     }
 

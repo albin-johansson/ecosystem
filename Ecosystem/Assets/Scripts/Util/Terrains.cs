@@ -7,7 +7,7 @@ namespace Ecosystem.Util
   {
     private const float Range = 10.0f;
 
-    private static readonly int Walkable = 1 << NavMesh.GetAreaFromName("Walkable");
+    public static readonly int Walkable = 1 << NavMesh.GetAreaFromName("Walkable");
 
     /// <summary>
     ///   Attempts to find a random but walkable position in the specified terrain. This function

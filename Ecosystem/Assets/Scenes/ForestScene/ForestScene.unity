@@ -5706,6 +5706,62 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 6830424851560844183, guid: ced74b2f1ab6bc049b99dc9fd895a640, type: 3}
   m_PrefabInstance: {fileID: 1530160993}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &567821614
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 567821616}
+  - component: {fileID: 567821615}
+  m_Layer: 0
+  m_Name: ObjectPool
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &567821615
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 567821614}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: abc590f38b264fd09ccdb5f3f1c9f428, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  pools:
+  - key: Rabbit
+    prefab: {fileID: 3436557251021641289, guid: 52b1c190247192a42a5e36bafea08096, type: 3}
+    size: 100
+  - key: Wolf
+    prefab: {fileID: 4371145773595096147, guid: 9ad7ab249851e454e9360e8fc8284e3b, type: 3}
+    size: 100
+  - key: Deer
+    prefab: {fileID: 7155763010095567698, guid: ac935de5e4958254196cd0457e8a0df5, type: 3}
+    size: 100
+  - key: Bear
+    prefab: {fileID: 7237780236292801018, guid: a5fd4d9dd473da54c83430115c05e48c, type: 3}
+    size: 100
+--- !u!4 &567821616
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 567821614}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 1719684907}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &568896207
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -8004,7 +8060,7 @@ GameObject:
   - component: {fileID: 808937133}
   m_Layer: 3
   m_Name: Terrain
-  m_TagString: Untagged
+  m_TagString: Terrain
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 4294967295
@@ -11066,7 +11122,9 @@ GameObject:
   - component: {fileID: 1127527931}
   - component: {fileID: 1127527933}
   - component: {fileID: 1127527930}
-  m_Layer: 0
+  - component: {fileID: 1127527934}
+  - component: {fileID: 1127527935}
+  m_Layer: 11
   m_Name: Main Camera
   m_TagString: MainCamera
   m_Icon: {fileID: 0}
@@ -11156,7 +11214,7 @@ Camera:
     y: 0
     width: 1
     height: 1
-  near clip plane: 0.3
+  near clip plane: 0.5
   far clip plane: 1000
   field of view: 60
   orthographic: 0
@@ -11202,7 +11260,36 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a7c7775a74327a9488b7492d090e09c8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 50
+  speed: 20
+--- !u!135 &1127527934
+SphereCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1127527929}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 3
+  m_Center: {x: 0, y: 0, z: 0}
+--- !u!54 &1127527935
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1127527929}
+  serializedVersion: 2
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0
+  m_UseGravity: 0
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_Constraints: 112
+  m_CollisionDetection: 0
 --- !u!1 &1129532822
 GameObject:
   m_ObjectHideFlags: 0
@@ -11517,7 +11604,7 @@ Transform:
   m_Children:
   - {fileID: 365793019}
   m_Father: {fileID: 1719684907}
-  m_RootOrder: 1
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &1161353771
 PrefabInstance:
@@ -17272,6 +17359,7 @@ Transform:
   m_LocalPosition: {x: 42.212616, y: 32.07946, z: 51.60622}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
+  - {fileID: 567821616}
   - {fileID: 2118523331}
   - {fileID: 1147334323}
   m_Father: {fileID: 0}
@@ -20939,7 +21027,7 @@ Transform:
   - {fileID: 1831354691}
   - {fileID: 1129532823}
   m_Father: {fileID: 1719684907}
-  m_RootOrder: 0
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &2129687643
 PrefabInstance:
