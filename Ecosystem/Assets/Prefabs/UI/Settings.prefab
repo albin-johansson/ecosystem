@@ -428,7 +428,6 @@ GameObject:
   m_Component:
   - component: {fileID: 5702271029249694178}
   - component: {fileID: 6567119715679795937}
-  - component: {fileID: 89298090593762095}
   m_Layer: 0
   m_Name: AmbientOcclusionSlider
   m_TagString: Untagged
@@ -509,7 +508,7 @@ MonoBehaviour:
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 89298090593762095}
+      - m_Target: {fileID: 5703634410337215407}
         m_TargetAssemblyTypeName: Ecosystem.UI.GraphicsSettings, ScriptsAssembly
         m_MethodName: AmbientOcclusionSlider
         m_Mode: 1
@@ -521,23 +520,6 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
---- !u!114 &89298090593762095
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1731778411481199958}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 70eb25357daf2e249b644cebae5c0be0, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  mainMenuWindow: {fileID: 0}
-  settingsWindow: {fileID: 0}
-  ambientOcclusionSlider: {fileID: 0}
-  intensityText: {fileID: 0}
-  intensityTextValue: {fileID: 2773624603093657610}
 --- !u!1 &2030715905435486216
 GameObject:
   m_ObjectHideFlags: 0
@@ -548,7 +530,6 @@ GameObject:
   m_Component:
   - component: {fileID: 3276917139579958873}
   - component: {fileID: 2855702962339022274}
-  - component: {fileID: 3184802506641880416}
   m_Layer: 0
   m_Name: AmbientOcclusionActive
   m_TagString: Untagged
@@ -623,7 +604,7 @@ MonoBehaviour:
   onValueChanged:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 3184802506641880416}
+      - m_Target: {fileID: 5703634410337215407}
         m_TargetAssemblyTypeName: Ecosystem.UI.GraphicsSettings, ScriptsAssembly
         m_MethodName: AmbientOcclusionActive
         m_Mode: 1
@@ -636,23 +617,6 @@ MonoBehaviour:
           m_BoolArgument: 0
         m_CallState: 2
   m_IsOn: 1
---- !u!114 &3184802506641880416
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2030715905435486216}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 70eb25357daf2e249b644cebae5c0be0, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  mainMenuWindow: {fileID: 0}
-  settingsWindow: {fileID: 0}
-  ambientOcclusionSlider: {fileID: 1731778411481199958}
-  intensityText: {fileID: 6506214100411898918}
-  intensityTextValue: {fileID: 2773624603093657610}
 --- !u!1 &2190605676063226779
 GameObject:
   m_ObjectHideFlags: 0
@@ -2179,7 +2143,6 @@ GameObject:
   - component: {fileID: 4957968448755415480}
   - component: {fileID: 3675435490347029450}
   - component: {fileID: 6482023650403434581}
-  - component: {fileID: 5974679390530820370}
   m_Layer: 5
   m_Name: AntiAliasingDropDown
   m_TagString: Untagged
@@ -2308,7 +2271,7 @@ MonoBehaviour:
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 5974679390530820370}
+      - m_Target: {fileID: 5703634410337215407}
         m_TargetAssemblyTypeName: Ecosystem.UI.GraphicsSettings, ScriptsAssembly
         m_MethodName: AntiAliasingOption
         m_Mode: 1
@@ -2321,23 +2284,6 @@ MonoBehaviour:
           m_BoolArgument: 0
         m_CallState: 2
   m_AlphaFadeSpeed: 0.15
---- !u!114 &5974679390530820370
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6067064444414408487}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 70eb25357daf2e249b644cebae5c0be0, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  mainMenuWindow: {fileID: 0}
-  settingsWindow: {fileID: 0}
-  ambientOcclusionSlider: {fileID: 0}
-  intensityText: {fileID: 0}
-  intensityTextValue: {fileID: 0}
 --- !u!1 &6506214100411898918
 GameObject:
   m_ObjectHideFlags: 0
@@ -2597,6 +2543,7 @@ GameObject:
   - component: {fileID: 8907064833368617845}
   - component: {fileID: 989342213826685993}
   - component: {fileID: 7635796067327463041}
+  - component: {fileID: 5703634410337215407}
   m_Layer: 5
   m_Name: Settings
   m_TagString: Untagged
@@ -2686,6 +2633,24 @@ MonoBehaviour:
   m_BlockingMask:
     serializedVersion: 2
     m_Bits: 4294967295
+--- !u!114 &5703634410337215407
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7296354168450833532}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 70eb25357daf2e249b644cebae5c0be0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  mainMenuWindow: {fileID: 0}
+  settingsWindow: {fileID: 7863612202765630121}
+  ambientOcclusionSlider: {fileID: 1731778411481199958}
+  antialiasingDropdown: {fileID: 6067064444414408487}
+  intensityText: {fileID: 6506214100411898918}
+  intensityTextValue: {fileID: 2773624603093657610}
 --- !u!1 &7863612202765630121
 GameObject:
   m_ObjectHideFlags: 0
@@ -2779,7 +2744,6 @@ GameObject:
   - component: {fileID: 7000324589827684331}
   - component: {fileID: 3471609167092614655}
   - component: {fileID: 3732543494754218549}
-  - component: {fileID: 316527008970395309}
   m_Layer: 0
   m_Name: Show Settings button
   m_TagString: Untagged
@@ -2888,7 +2852,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 316527008970395309}
+      - m_Target: {fileID: 5703634410337215407}
         m_TargetAssemblyTypeName: Ecosystem.UI.GraphicsSettings, ScriptsAssembly
         m_MethodName: SettingsMenu
         m_Mode: 1
@@ -2900,23 +2864,6 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
---- !u!114 &316527008970395309
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8200321083332431840}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 70eb25357daf2e249b644cebae5c0be0, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  mainMenuWindow: {fileID: 0}
-  settingsWindow: {fileID: 7863612202765630121}
-  ambientOcclusionSlider: {fileID: 0}
-  intensityText: {fileID: 0}
-  intensityTextValue: {fileID: 0}
 --- !u!1 &8422177236915099435
 GameObject:
   m_ObjectHideFlags: 0

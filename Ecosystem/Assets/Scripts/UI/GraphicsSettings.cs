@@ -10,6 +10,7 @@ namespace Ecosystem.UI
     [SerializeField] private GameObject mainMenuWindow;
     [SerializeField] private GameObject settingsWindow;
     [SerializeField] private GameObject ambientOcclusionSlider;
+    [SerializeField] private GameObject antialiasingDropdown;
     [SerializeField] private GameObject intensityText;
     [SerializeField] private GameObject intensityTextValue;
     
@@ -25,7 +26,7 @@ namespace Ecosystem.UI
 
     public void AntiAliasingOption()
     {
-      _antiAliasingMode = gameObject.GetComponent<TMP_Dropdown>().value;
+      _antiAliasingMode = antialiasingDropdown.GetComponent<TMP_Dropdown>().value;
     }
 
     public void AmbientOcclusionActive()
@@ -38,7 +39,7 @@ namespace Ecosystem.UI
 
     public void AmbientOcclusionSlider()
     {
-      _ambientOcclusionIntensity = (int) Math.Round(100 * gameObject.GetComponent<Slider>().value);
+      _ambientOcclusionIntensity = (int) Math.Round(100 * ambientOcclusionSlider.GetComponent<Slider>().value);
       intensityTextValue.GetComponent<TMP_Text>().text = _ambientOcclusionIntensity + "%";
     }
   }
