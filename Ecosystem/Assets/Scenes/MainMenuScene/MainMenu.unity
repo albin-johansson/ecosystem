@@ -134,6 +134,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5f7201a12d95ffc409449d95f23cf332, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!1 &62789227 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 8200321083332431840, guid: 1ded045ed96889543bd7186fc2ea0381, type: 3}
+  m_PrefabInstance: {fileID: 793687911}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &91879529 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 6317102523152618976, guid: ad44e96043516fa45908a398544073e2, type: 3}
@@ -6585,6 +6590,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   mainMenu: {fileID: 1071901118}
   dynamicSceneMenu: {fileID: 2026068121}
+  settingsButton: {fileID: 62789227}
   dynamicSceneStartButton: {fileID: 162799715}
   dynamicRabbitCount: {fileID: 1815966860}
   dynamicDeerCount: {fileID: 54312118}
