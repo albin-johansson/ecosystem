@@ -1,4 +1,6 @@
-﻿namespace Ecosystem.Genes
+﻿using System.Collections.Generic;
+
+namespace Ecosystem.Genes
 {
   public sealed class GenomePreset
   {
@@ -14,7 +16,8 @@
     Gene GestationPeriod = new Gene(12, 10, 120);
     Gene SexualMaturityTime = new Gene(20, 10, 150);
     */
-
+    public Dictionary<GeneType, Preset> tmp = new Dictionary<GeneType, Preset>();
+    /*
     public (float min, float max) HR { get; set; }
     public (float min, float max) HT { get; set; }
     public (float min, float max) TR { get; set; }
@@ -35,5 +38,6 @@
     public float[] DFs { get; set; }
     public float[] GPs { get; set; }
     public float[] SMs { get; set; }
+    */
   }
 }
