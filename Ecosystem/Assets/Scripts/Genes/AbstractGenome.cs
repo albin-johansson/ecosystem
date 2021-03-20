@@ -76,6 +76,13 @@ namespace Ecosystem.Genes
     }
 
     protected abstract void Initialize();
+    protected abstract Dictionary<GeneType, Preset> GetPresets();
+    protected abstract float GetClassMutateChance();
+
+    public GenomeData CreateData()
+    {
+      return GenomeData.Create(CreateGenes(GetPresets()), GetClassMutateChance());
+    }
 
     public void Initialize(IGenome first, IGenome second)
     {

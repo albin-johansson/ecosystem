@@ -28,7 +28,17 @@ namespace Ecosystem.Genes
 
     protected override void Initialize()
     {
-      Data = GenomeData.Create(CreateGenes(preset), _mutateChance);
+      Data = CreateData();
+    }
+
+    protected override Dictionary<GeneType, Preset> GetPresets()
+    {
+      return preset;
+    }
+
+    protected override float GetClassMutateChance()
+    {
+      return _mutateChance;
     }
   }
 }
