@@ -6,6 +6,13 @@ namespace Ecosystem.Genes
   public abstract class AbstractGenome : MonoBehaviour, IGenome
   {
     internal GenomeData Data;
+    internal float chance;
+
+    public void SetPreset(Dictionary<GeneType, Preset> presets, float mutateChance = 0.05f)
+    {
+      _preset = presets;
+      chance = mutateChance;
+    }
 
     internal Dictionary<GeneType, Preset> _preset = new Dictionary<GeneType, Preset>()
     {
@@ -25,6 +32,7 @@ namespace Ecosystem.Genes
     {
       Initialize();
     }
+    
 
     protected Dictionary<GeneType, Gene> CreateGenes()
     {
