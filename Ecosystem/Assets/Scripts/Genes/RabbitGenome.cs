@@ -23,7 +23,7 @@ namespace Ecosystem.Genes
     public static void SetPreset(Dictionary<GeneType, Preset> presets, float mutateChance = 0.05f)
     {
       preset = presets;
-      RabbitGenome._mutateChance = mutateChance;
+      _mutateChance = mutateChance;
     }
 
     protected override void Initialize()

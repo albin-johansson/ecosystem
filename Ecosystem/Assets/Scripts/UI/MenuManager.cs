@@ -93,16 +93,16 @@ namespace Ecosystem.UI
         {
           RabbitGenome.SetPreset(new Dictionary<GeneType, Preset>()
           {
-            {GeneType.HungerRate, new Preset(0, 2, new[] {0.5f})},
-            {GeneType.HungerThreshold, new Preset(0, 2, new[] {0.5f})},
-            {GeneType.ThirstRate, new Preset(0, 2, new[] {0.5f})},
-            {GeneType.ThirstThreshold, new Preset(0, 2, new[] {0.5f})},
-            {GeneType.Vision, new Preset(0, 2, new[] {0.5f})},
-            {GeneType.SpeedFactor, new Preset(0, 2, new[] {0.5f})},
-            {GeneType.SizeFactor, new Preset(0, 2, new[] {0.5f})},
-            {GeneType.DesirabilityScore, new Preset(0, 2, new[] {0.5f})},
-            {GeneType.GestationPeriod, new Preset(0, 2, new[] {0.5f})},
-            {GeneType.SexualMaturityTime, new Preset(0, 2, new[] {0.5f})}
+            {GeneType.HungerRate, new Preset(0, 2, new[] {0.7f})},
+            {GeneType.HungerThreshold, new Preset(0, 2, new[] {0.7f})},
+            {GeneType.ThirstRate, new Preset(0, 2, new[] {0.7f})},
+            {GeneType.ThirstThreshold, new Preset(0, 2, new[] {0.7f})},
+            {GeneType.Vision, new Preset(0, 2, new[] {0.7f})},
+            {GeneType.SpeedFactor, new Preset(0, 2, new[] {0.7f})},
+            {GeneType.SizeFactor, new Preset(0, 2, new[] {0.7f})},
+            {GeneType.DesirabilityScore, new Preset(0, 2, new[] {0.7f})},
+            {GeneType.GestationPeriod, new Preset(0, 2, new[] {0.7f})},
+            {GeneType.SexualMaturityTime, new Preset(0, 2, new[] {0.7f})}
           }, 0.1f);
         }
 
@@ -120,7 +120,8 @@ namespace Ecosystem.UI
                                              dynamicDeerCount.text != "" &&
                                              dynamicWolfCount.text != "" &&
                                              dynamicBearCount.text != "" &&
-                                             dynamicCarrotCount.text != "";
+                                             dynamicCarrotCount.text != "" &&
+                                             setOrRandom.text != "";
     }
 
     /// <summary>

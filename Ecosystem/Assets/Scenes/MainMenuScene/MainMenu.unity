@@ -231,13 +231,13 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 87864057}
   m_TextComponent: {fileID: 87864057}
   m_Placeholder: {fileID: 0}
-  m_ContentType: 2
+  m_ContentType: 0
   m_InputType: 0
   m_AsteriskChar: 42
-  m_KeyboardType: 4
+  m_KeyboardType: 0
   m_LineType: 0
   m_HideMobileInput: 0
-  m_CharacterValidation: 1
+  m_CharacterValidation: 0
   m_CharacterLimit: 4
   m_OnEndEdit:
     m_PersistentCalls:
@@ -6633,7 +6633,7 @@ MonoBehaviour:
   dynamicWolfCount: {fileID: 886235166}
   dynamicBearCount: {fileID: 687530572}
   dynamicCarrotCount: {fileID: 2026068122}
-  setOrRandom: {fileID: 0}
+  setOrRandom: {fileID: 87864057}
 --- !u!1001 &2026068119
 PrefabInstance:
   m_ObjectHideFlags: 0

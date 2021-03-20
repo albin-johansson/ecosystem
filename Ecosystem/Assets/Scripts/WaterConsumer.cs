@@ -34,6 +34,7 @@ namespace Ecosystem
       {
         return;
       }
+      Debug.Log(genome.GetHungerRate().Value);
 
       Thirst += genome.GetThirstRate().Value * Time.deltaTime;
       resourceBar.SetValue(Thirst);
