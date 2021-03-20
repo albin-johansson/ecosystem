@@ -95,10 +95,6 @@ namespace Ecosystem
         childGenome.Initialize(genome, _mateGenome);
       }
 
-      child = Instantiate(prefab, currentTransform.position, currentTransform.rotation, _directoryOfAnimal);
-      childGenome = child.GetComponent<AbstractGenome>();
-      childGenome.Initialize(genome, _mateGenome);
-
       var childConsumer = child.GetComponentInChildren<IConsumer>();
       childConsumer.SetSaturation(_childSaturation);
 
