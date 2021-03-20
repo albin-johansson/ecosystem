@@ -73,7 +73,7 @@ namespace Ecosystem.UI
 
         var terrain = Terrain.activeTerrain;
 
-        if (mutateOrSet.Equals("y"))
+        if (mutateOrSet.Equals("n"))
         {
           RabbitGenome.SetPreset(new Dictionary<GeneType, Preset>()
           {
@@ -88,7 +88,22 @@ namespace Ecosystem.UI
             {GeneType.GestationPeriod, new Preset(0, 2, new[] {0.5f, 1f})},
             {GeneType.SexualMaturityTime, new Preset(0, 2, new[] {0.5f, 1f})}
           }, 0f);
-//          RabbitGenome;
+        }
+        else if (mutateOrSet.Equals("y"))
+        {
+          RabbitGenome.SetPreset(new Dictionary<GeneType, Preset>()
+          {
+            {GeneType.HungerRate, new Preset(0, 2, new[] {0.5f})},
+            {GeneType.HungerThreshold, new Preset(0, 2, new[] {0.5f})},
+            {GeneType.ThirstRate, new Preset(0, 2, new[] {0.5f})},
+            {GeneType.ThirstThreshold, new Preset(0, 2, new[] {0.5f})},
+            {GeneType.Vision, new Preset(0, 2, new[] {0.5f})},
+            {GeneType.SpeedFactor, new Preset(0, 2, new[] {0.5f})},
+            {GeneType.SizeFactor, new Preset(0, 2, new[] {0.5f})},
+            {GeneType.DesirabilityScore, new Preset(0, 2, new[] {0.5f})},
+            {GeneType.GestationPeriod, new Preset(0, 2, new[] {0.5f})},
+            {GeneType.SexualMaturityTime, new Preset(0, 2, new[] {0.5f})}
+          }, 0.1f);
         }
 
         Instantiate(nRabbits, rabbit, terrain);
