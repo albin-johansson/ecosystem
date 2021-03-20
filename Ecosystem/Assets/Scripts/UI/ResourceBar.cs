@@ -21,6 +21,5 @@ namespace Ecosystem.UI
     {
       slider.value = Mathf.Min(slider.maxValue, value);
     }
-    
   }
 }

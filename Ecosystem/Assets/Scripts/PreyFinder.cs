@@ -12,7 +12,7 @@ namespace Ecosystem
     [SerializeField] private MemoryController memoryController;
     [SerializeField] private TargetTracker targetTracker;
     [SerializeField] private AbstractGenome genome;
-    [SerializeField] private SphereCollider sp;
+    [SerializeField] private SphereCollider sphereCollider;
 
     private AnimalBehaviourDelegate _delegate;
 
@@ -25,7 +25,7 @@ namespace Ecosystem
               WaterConsumer = waterConsumer,
               Consumer = preyConsumer
       };
-      sp.radius = (sp.radius / sp.transform.lossyScale.magnitude) * genome.GetVision().Value;
+      sphereCollider.radius = (sphereCollider.radius / sphereCollider.transform.lossyScale.magnitude) * genome.GetVision().Value;
     }
 
     private void Update()

@@ -7,6 +7,9 @@ namespace Ecosystem.Genes
   {
     internal GenomeData Data;
 
+    private const float MetabolismFactor = 1.495f; // 1.15 (Vision) * 1.30 (Speed)
+    private const float ChildFoodConsumtionFactor = 4f / 3f;
+
     private void Awake()
     {
       Initialize();
@@ -22,13 +25,13 @@ namespace Ecosystem.Genes
 
     public bool IsMale => Data.IsMale;
     
-    public float GetChildFoodConsumtionFactor() => Data.ChildFoodConsumtionFactor;
+    public float GetChildFoodConsumtionFactor() => ChildFoodConsumtionFactor;
 
     public float Speed => GetHungerRate().Value *
                           GetSpeedFactor().Value *
                           GetSizeFactor().ValueAsDecimal();
 
-    public float Metabolism => GetHungerRate().Value * GetSizeFactor().Value * (1 + Data.MetabolismFactor * ((GetVision().Value - 1) + (GetSpeedFactor().Value - 1)));
+    public float Metabolism => GetHungerRate().Value * GetSizeFactor().Value * (1 + MetabolismFactor * ((GetVision().Value - 1) + (GetSpeedFactor().Value - 1)));
 
     public float Attractiveness => GetDesirabilityScore().Value;
     
