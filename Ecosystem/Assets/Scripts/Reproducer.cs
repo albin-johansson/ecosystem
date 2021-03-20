@@ -80,6 +80,7 @@ namespace Ecosystem
 
     private void GiveBirth()
     {
+      Debug.Log("Give Birth");
       var currentTransform = transform;
 
       IsPregnant = false;
