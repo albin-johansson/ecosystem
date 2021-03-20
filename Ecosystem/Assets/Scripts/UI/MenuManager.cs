@@ -1,3 +1,5 @@
+using System.Collections.Generic;
+using Ecosystem.Genes;
 using Ecosystem.Util;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -16,9 +18,7 @@ namespace Ecosystem.UI
     [SerializeField] private Text dynamicWolfCount;
     [SerializeField] private Text dynamicBearCount;
     [SerializeField] private Text dynamicCarrotCount;
-    [SerializeField] private Text rabbitHRmax;
-    [SerializeField] private Text rabbitHRmin;
-    [SerializeField] private Text rabbitHRval;
+    [SerializeField] private Text setOrRandom;
 
 
     private void Start()
@@ -69,11 +69,27 @@ namespace Ecosystem.UI
         var nWolves = int.Parse(dynamicWolfCount.text);
         var nBears = int.Parse(dynamicBearCount.text);
         var nCarrots = int.Parse(dynamicCarrotCount.text);
-        var HRmin = int.Parse(rabbitHRmin.text);
-        var HRmax = int.Parse(rabbitHRmax.text);
-        var HRval = int.Parse(rabbitHRval.text);
+        var mutateOrSet = setOrRandom.text;
 
         var terrain = Terrain.activeTerrain;
+
+        if (mutateOrSet.Equals("y"))
+        {
+          RabbitGenome.SetPreset(new Dictionary<GeneType, Preset>()
+          {
+            {GeneType.HungerRate, new Preset(0, 2, new[] {0.5f, 1f})},
+            {GeneType.HungerThreshold, new Preset(0, 2, new[] {0.5f, 1f})},
+            {GeneType.ThirstRate, new Preset(0, 2, new[] {0.5f, 1f})},
+            {GeneType.ThirstThreshold, new Preset(0, 2, new[] {0.5f, 1f})},
+            {GeneType.Vision, new Preset(0, 2, new[] {0.5f, 1f})},
+            {GeneType.SpeedFactor, new Preset(0, 2, new[] {0.5f, 1f})},
+            {GeneType.SizeFactor, new Preset(0, 2, new[] {0.5f, 1f})},
+            {GeneType.DesirabilityScore, new Preset(0, 2, new[] {0.5f, 1f})},
+            {GeneType.GestationPeriod, new Preset(0, 2, new[] {0.5f, 1f})},
+            {GeneType.SexualMaturityTime, new Preset(0, 2, new[] {0.5f, 1f})}
+          }, 0f);
+//          RabbitGenome;
+        }
 
         Instantiate(nRabbits, rabbit, terrain);
         Instantiate(nWolves, wolf, terrain);

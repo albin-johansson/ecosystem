@@ -8,13 +8,7 @@ namespace Ecosystem.Genes
     internal GenomeData Data;
     internal float chance;
 
-    public void SetPreset(Dictionary<GeneType, Preset> presets, float mutateChance = 0.05f)
-    {
-      _preset = presets;
-      chance = mutateChance;
-    }
-
-    internal Dictionary<GeneType, Preset> _preset = new Dictionary<GeneType, Preset>()
+    internal static Dictionary<GeneType, Preset> _preset = new Dictionary<GeneType, Preset>()
     {
       {GeneType.HungerRate, new Preset(0, 1, new[] {0f, 1f})},
       {GeneType.HungerThreshold, new Preset(0, 1, new[] {0f, 1f})},
@@ -32,30 +26,91 @@ namespace Ecosystem.Genes
     {
       Initialize();
     }
-    
+
 
     protected Dictionary<GeneType, Gene> CreateGenes()
     {
-      Gene HungerRate = GeneUtil.NewGeneFromList(_preset[GeneType.HungerRate].min,
-        _preset[GeneType.HungerRate].max, _preset[GeneType.HungerRate].values);
-      Gene HungerThreshold = GeneUtil.NewGeneFromList(_preset[GeneType.HungerThreshold].min,
-        _preset[GeneType.HungerThreshold].max, _preset[GeneType.HungerThreshold].values);
-      Gene ThirstRate = GeneUtil.NewGeneFromList(_preset[GeneType.ThirstRate].min,
-        _preset[GeneType.ThirstRate].max, _preset[GeneType.ThirstRate].values);
-      Gene ThirstThreshold = GeneUtil.NewGeneFromList(_preset[GeneType.ThirstThreshold].min,
-        _preset[GeneType.ThirstThreshold].max, _preset[GeneType.ThirstThreshold].values);
-      Gene Vision = GeneUtil.NewGeneFromList(_preset[GeneType.Vision].min, _preset[GeneType.Vision].max,
-        _preset[GeneType.Vision].values);
-      Gene SpeedFactor = GeneUtil.NewGeneFromList(_preset[GeneType.SpeedFactor].min,
-        _preset[GeneType.SpeedFactor].max, _preset[GeneType.SpeedFactor].values);
-      Gene SizeFactor = GeneUtil.NewGeneFromList(_preset[GeneType.SizeFactor].min,
-        _preset[GeneType.SizeFactor].max, _preset[GeneType.SizeFactor].values);
-      Gene DesirabilityFactor = GeneUtil.NewGeneFromList(_preset[GeneType.DesirabilityScore].min,
-        _preset[GeneType.DesirabilityScore].max, _preset[GeneType.DesirabilityScore].values);
-      Gene GestationPeriod = GeneUtil.NewGeneFromList(_preset[GeneType.GestationPeriod].min,
-        _preset[GeneType.GestationPeriod].max, _preset[GeneType.GestationPeriod].values);
-      Gene SexualMaturityTime = GeneUtil.NewGeneFromList(_preset[GeneType.SexualMaturityTime].min,
-        _preset[GeneType.SexualMaturityTime].max, _preset[GeneType.SexualMaturityTime].values);
+      return CreateGenes(_preset);
+      /*
+      Gene HungerRate = GeneUtil.NewGeneFromList(presets[GeneType.HungerRate].min,
+        presets[GeneType.HungerRate].max, presets[GeneType.HungerRate].values);
+      Gene HungerThreshold = GeneUtil.NewGeneFromList(presets[GeneType.HungerThreshold].min,
+        presets[GeneType.HungerThreshold].max, presets[GeneType.HungerThreshold].values);
+      Gene ThirstRate = GeneUtil.NewGeneFromList(presets[GeneType.ThirstRate].min,
+        presets[GeneType.ThirstRate].max, presets[GeneType.ThirstRate].values);
+      Gene ThirstThreshold = GeneUtil.NewGeneFromList(presets[GeneType.ThirstThreshold].min,
+        presets[GeneType.ThirstThreshold].max, presets[GeneType.ThirstThreshold].values);
+      Gene Vision = GeneUtil.NewGeneFromList(presets[GeneType.Vision].min, presets[GeneType.Vision].max,
+        presets[GeneType.Vision].values);
+      Gene SpeedFactor = GeneUtil.NewGeneFromList(presets[GeneType.SpeedFactor].min,
+        presets[GeneType.SpeedFactor].max, presets[GeneType.SpeedFactor].values);
+      Gene SizeFactor = GeneUtil.NewGeneFromList(presets[GeneType.SizeFactor].min,
+        presets[GeneType.SizeFactor].max, presets[GeneType.SizeFactor].values);
+      Gene DesirabilityFactor = GeneUtil.NewGeneFromList(presets[GeneType.DesirabilityScore].min,
+        presets[GeneType.DesirabilityScore].max, presets[GeneType.DesirabilityScore].values);
+      Gene GestationPeriod = GeneUtil.NewGeneFromList(presets[GeneType.GestationPeriod].min,
+        presets[GeneType.GestationPeriod].max, presets[GeneType.GestationPeriod].values);
+      Gene SexualMaturityTime = GeneUtil.NewGeneFromList(presets[GeneType.SexualMaturityTime].min,
+        presets[GeneType.SexualMaturityTime].max, presets[GeneType.SexualMaturityTime].values);
+      Dictionary<GeneType, Gene> genes = new Dictionary<GeneType, Gene>
+      {
+        {
+          GeneType.HungerRate, HungerRate
+        },
+        {
+          GeneType.HungerThreshold, HungerThreshold
+        },
+        {
+          GeneType.ThirstRate, ThirstRate
+        },
+        {
+          GeneType.ThirstThreshold, ThirstThreshold
+        },
+        {
+          GeneType.Vision, Vision
+        },
+        {
+          GeneType.SpeedFactor, SpeedFactor
+        },
+        {
+          GeneType.SizeFactor, SizeFactor
+        },
+        {
+          GeneType.DesirabilityScore, DesirabilityFactor
+        },
+        {
+          GeneType.GestationPeriod, GestationPeriod
+        },
+        {
+          GeneType.SexualMaturityTime, SexualMaturityTime
+        }
+      };
+      return genes;
+      */
+    }
+
+    protected Dictionary<GeneType, Gene> CreateGenes(Dictionary<GeneType, Preset> presets)
+    {
+      Gene HungerRate = GeneUtil.NewGeneFromList(presets[GeneType.HungerRate].min,
+        presets[GeneType.HungerRate].max, presets[GeneType.HungerRate].values);
+      Gene HungerThreshold = GeneUtil.NewGeneFromList(presets[GeneType.HungerThreshold].min,
+        presets[GeneType.HungerThreshold].max, presets[GeneType.HungerThreshold].values);
+      Gene ThirstRate = GeneUtil.NewGeneFromList(presets[GeneType.ThirstRate].min,
+        presets[GeneType.ThirstRate].max, presets[GeneType.ThirstRate].values);
+      Gene ThirstThreshold = GeneUtil.NewGeneFromList(presets[GeneType.ThirstThreshold].min,
+        presets[GeneType.ThirstThreshold].max, presets[GeneType.ThirstThreshold].values);
+      Gene Vision = GeneUtil.NewGeneFromList(presets[GeneType.Vision].min, presets[GeneType.Vision].max,
+        presets[GeneType.Vision].values);
+      Gene SpeedFactor = GeneUtil.NewGeneFromList(presets[GeneType.SpeedFactor].min,
+        presets[GeneType.SpeedFactor].max, presets[GeneType.SpeedFactor].values);
+      Gene SizeFactor = GeneUtil.NewGeneFromList(presets[GeneType.SizeFactor].min,
+        presets[GeneType.SizeFactor].max, presets[GeneType.SizeFactor].values);
+      Gene DesirabilityFactor = GeneUtil.NewGeneFromList(presets[GeneType.DesirabilityScore].min,
+        presets[GeneType.DesirabilityScore].max, presets[GeneType.DesirabilityScore].values);
+      Gene GestationPeriod = GeneUtil.NewGeneFromList(presets[GeneType.GestationPeriod].min,
+        presets[GeneType.GestationPeriod].max, presets[GeneType.GestationPeriod].values);
+      Gene SexualMaturityTime = GeneUtil.NewGeneFromList(presets[GeneType.SexualMaturityTime].min,
+        presets[GeneType.SexualMaturityTime].max, presets[GeneType.SexualMaturityTime].values);
       Dictionary<GeneType, Gene> genes = new Dictionary<GeneType, Gene>
       {
         {
