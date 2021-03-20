@@ -16,6 +16,10 @@ namespace Ecosystem.UI
     [SerializeField] private Text dynamicWolfCount;
     [SerializeField] private Text dynamicBearCount;
     [SerializeField] private Text dynamicCarrotCount;
+    [SerializeField] private Text rabbitHRmax;
+    [SerializeField] private Text rabbitHRmin;
+    [SerializeField] private Text rabbitHRval;
+
 
     private void Start()
     {
@@ -65,6 +69,9 @@ namespace Ecosystem.UI
         var nWolves = int.Parse(dynamicWolfCount.text);
         var nBears = int.Parse(dynamicBearCount.text);
         var nCarrots = int.Parse(dynamicCarrotCount.text);
+        var HRmin = int.Parse(rabbitHRmin.text);
+        var HRmax = int.Parse(rabbitHRmax.text);
+        var HRval = int.Parse(rabbitHRval.text);
 
         var terrain = Terrain.activeTerrain;
 
