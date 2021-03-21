@@ -68,9 +68,9 @@ namespace Ecosystem.Spawning
         if (_usePool)
         {
           var spawnedObject = ObjectPoolHandler.instance.GetFromPool(keyInPool);
-          spawnedObject.transform.position = position;
-          spawnedObject.SetActive(true);
+          spawnedObject.transform.position = hit.position;
           spawnedObject.transform.parent = directory;
+          spawnedObject.SetActive(true);
         }
         else
         {
