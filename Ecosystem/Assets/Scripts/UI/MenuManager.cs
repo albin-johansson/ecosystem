@@ -13,6 +13,7 @@ namespace Ecosystem.UI
     [SerializeField] private GameObject mainMenu;
     [SerializeField] private GameObject dynamicSceneMenu;
     [SerializeField] private Button dynamicSceneStartButton;
+    [SerializeField] private Button GenomeType;
     [SerializeField] private Text dynamicRabbitCount;
     [SerializeField] private Text dynamicDeerCount;
     [SerializeField] private Text dynamicWolfCount;
