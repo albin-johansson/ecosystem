@@ -1,12 +1,13 @@
 using System;
+using JetBrains.Annotations;
 using Unity.Entities;
 
-namespace Ecosystem.ECS
+namespace Ecosystem.ECS.Authoring
 {
   [Serializable]
   [GenerateAuthoringComponent]
   public struct RabbitPrefab : IComponentData
   {
-    public Entity Value;
+    [UsedImplicitly] public Entity Value;
   }
 }
