@@ -1,4 +1,3 @@
-using Ecosystem.Util;
 using Reese.Nav;
 using Unity.Entities;
 using Unity.Mathematics;
@@ -7,8 +6,10 @@ using UnityEngine;
 namespace Ecosystem.Systems
 {
   [UpdateInGroup(typeof(FixedStepSimulationSystemGroup))]
-  [UpdateAfter(typeof(NavSurfaceSystem))] 
+  [UpdateAfter(typeof(NavSurfaceSystem))]
   [UpdateAfter(typeof(NavDestinationSystem))]
+  // [UpdateAfter(typeof(SpatialStartSystem))]
+  // [UpdateAfter(typeof(SpatialEndSystem))]
   public sealed class SpawnSystem : SystemBase
   {
     private bool _keyDown;
@@ -23,13 +24,13 @@ namespace Ecosystem.Systems
       switch (Input.GetKey(KeyCode.L))
       {
         case true when !_keyDown:
-          var entity = FactorySystem.MakeRabbit(new float3(645, 0, 475));
+          FactorySystem.MakeRabbit(new float3(645, 0, 475));
 
-          var terrain = Terrain.activeTerrain;
-          if (Terrains.RandomWalkablePosition(terrain, out var position))
-          {
-            TrackingSystem.SetDestination(entity, position);
-          }
+          // var terrain = Terrain.activeTerrain;
+          // if (Terrains.RandomWalkablePosition(terrain, out var position))
+          // {
+          //   TrackingSystem.SetDestination(entity, position);
+          // }
 
           _keyDown = true;
           break;
