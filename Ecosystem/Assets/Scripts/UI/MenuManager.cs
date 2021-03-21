@@ -14,13 +14,18 @@ namespace Ecosystem.UI
     [SerializeField] private GameObject dynamicSceneMenu;
     [SerializeField] private GameObject genomeTypeMenu;
     [SerializeField] private Button dynamicSceneStartButton;
-    [SerializeField] private Button GenomeType;
     [SerializeField] private Text dynamicRabbitCount;
     [SerializeField] private Text dynamicDeerCount;
     [SerializeField] private Text dynamicWolfCount;
     [SerializeField] private Text dynamicBearCount;
+
     [SerializeField] private Text dynamicCarrotCount;
-    [SerializeField] private Text setOrRandom;
+    //[SerializeField] private Text setOrRandom;
+
+    [SerializeField] private Text rabbitGenome;
+    [SerializeField] private Text deerGenome;
+    [SerializeField] private Text wolfGenome;
+    [SerializeField] private Text bearGenome;
 
 
     private void Start()
@@ -32,6 +37,7 @@ namespace Ecosystem.UI
     public void EnterMainMenu()
     {
       dynamicSceneMenu.SetActive(false);
+      genomeTypeMenu.SetActive(false);
       mainMenu.SetActive(true);
     }
 
@@ -43,6 +49,7 @@ namespace Ecosystem.UI
 
     public void EnterGenomeTypeMenu()
     {
+      Debug.Log("Yo bro");
       mainMenu.SetActive(false);
       genomeTypeMenu.SetActive(true);
     }
@@ -77,7 +84,7 @@ namespace Ecosystem.UI
         var nWolves = int.Parse(dynamicWolfCount.text);
         var nBears = int.Parse(dynamicBearCount.text);
         var nCarrots = int.Parse(dynamicCarrotCount.text);
-        var mutateOrSet = setOrRandom.text;
+        var mutateOrSet = "y"; //setOrRandom.text;
 
         var terrain = Terrain.activeTerrain;
 
@@ -128,8 +135,7 @@ namespace Ecosystem.UI
                                              dynamicDeerCount.text != "" &&
                                              dynamicWolfCount.text != "" &&
                                              dynamicBearCount.text != "" &&
-                                             dynamicCarrotCount.text != "" &&
-                                             setOrRandom.text != "";
+                                             dynamicCarrotCount.text != "" &&;
     }
 
     /// <summary>
