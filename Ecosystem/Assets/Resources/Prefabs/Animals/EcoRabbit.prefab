@@ -518,8 +518,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7268078574618211150}
-  - component: {fileID: 6548548314612515429}
-  - component: {fileID: 8737520346852457035}
   - component: {fileID: 2469128493361948961}
   m_Layer: 8
   m_Name: Movement
@@ -542,37 +540,6 @@ Transform:
   m_Father: {fileID: 831424744415161892}
   m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &6548548314612515429
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2719731396375845655}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 21feba9944ff41e38e1f9441ba7bcf14, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  navAgent: {fileID: 2689415282919559664}
-  animationController: {fileID: 2656864231929346077}
-  groundMask:
-    serializedVersion: 2
-    m_Bits: 8
---- !u!114 &8737520346852457035
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2719731396375845655}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fb55c6559f397694e950bfc758d54331, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  navAgent: {fileID: 2689415282919559664}
-  animationController: {fileID: 2656864231929346077}
 --- !u!114 &2469128493361948961
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2192,7 +2159,6 @@ GameObject:
   m_Component:
   - component: {fileID: 6132990314379234639}
   - component: {fileID: 7194725648983189641}
-  - component: {fileID: 8447711326330248734}
   - component: {fileID: 3915165533490199740}
   - component: {fileID: 8678172465868756156}
   m_Layer: 8
@@ -2229,23 +2195,6 @@ SphereCollider:
   serializedVersion: 2
   m_Radius: 4
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &8447711326330248734
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8398216545277643250}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ee98a1a0083b443492aa1afbf34ab499, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  foodConsumer: {fileID: 2592824637093240721}
-  waterConsumer: {fileID: 2647182948873053790}
-  mateFinder: {fileID: 3441429084631058016}
-  memoryController: {fileID: 3915165533490199740}
-  targetTracker: {fileID: 8737520346852457035}
 --- !u!114 &3915165533490199740
 MonoBehaviour:
   m_ObjectHideFlags: 0
