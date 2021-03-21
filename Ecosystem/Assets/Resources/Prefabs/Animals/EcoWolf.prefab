@@ -7420,6 +7420,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3cd94d57fb1da52439641dc290534ae7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  stateText: {fileID: 9114406357668576936}
   consumer: {fileID: 5694940851676850990}
   waterConsumer: {fileID: 3242938931952141863}
   movementController: {fileID: 6378755894846735859}
@@ -10117,5 +10118,16 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 0f33f2c7a1419e740be5570d71daa2bf, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &9114406357668576936 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 5266423967863666801, guid: b11869fe3d5ecbf4b912f33fa4a312db, type: 3}
+  m_PrefabInstance: {fileID: 3993277767788021465}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3d543e4934b76d84286e0a658a3962f6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 

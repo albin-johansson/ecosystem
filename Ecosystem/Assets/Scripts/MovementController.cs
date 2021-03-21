@@ -214,7 +214,7 @@ namespace Ecosystem.AnimalBehaviour
       var navAgentPosition = navAgent.transform.position;
       var visionRange = (float) genome.GetVision().Value;
       var directionFromThreat = navAgentPosition - threatPosition;
-      for (var i = 0; i < 4; i++)
+      for (var i = 0; i < _fleeingAngles.Length; i++)
       {
         _fleeDestination = (navAgentPosition + directionFromThreat) * visionRange;
         var validatedFleeDestination = ValidateDestination(_fleeDestination);

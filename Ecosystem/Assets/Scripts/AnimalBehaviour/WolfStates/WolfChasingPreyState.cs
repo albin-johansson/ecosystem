@@ -21,7 +21,7 @@ namespace Ecosystem.AnimalBehaviour.WolfStates
 
     public override AnimalState Tick()
     {
-      if (_target == null)
+      if (_target == null || !movementController.IsTargetInRange(_target.transform.position))
       {
         return base.Tick();
       }

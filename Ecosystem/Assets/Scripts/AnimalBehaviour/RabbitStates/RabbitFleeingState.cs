@@ -40,13 +40,14 @@ namespace Ecosystem.AnimalBehaviour.RabbitStates
     {
       if (movementController.IsReachable(other.gameObject.transform.position))
       {
-        if (other.gameObject.tag == "Water")
+        var tag = other.gameObject.tag;
+        if (tag == "Water")
         {
           memoryController.SaveToMemory(other.gameObject);
           return;
         }
 
-        if (other.gameObject.tag == "Predator")
+        if (tag == "Wolf" || tag == "Bear")
         {
           //TODO: Add logic for tracking all Predators in collision
           return;

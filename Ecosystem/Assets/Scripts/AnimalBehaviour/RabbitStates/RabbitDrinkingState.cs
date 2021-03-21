@@ -51,7 +51,7 @@ namespace Ecosystem.AnimalBehaviour.RabbitStates
           return;
         }
 
-        if (tag == "Predator")
+        if (tag == "Wolf" || tag == "Bear")
         {
           _target = other.gameObject;
           return;

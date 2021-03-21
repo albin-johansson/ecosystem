@@ -25,7 +25,7 @@ namespace Ecosystem.AnimalBehaviour.RabbitStates
     { 
       if(_target != null)
       {
-        if(_target.tag == "Predator")
+        if(_target.tag == "Wolf" || _target.tag == "Bear")
         {
           return AnimalState.Fleeing;
         }
@@ -61,7 +61,7 @@ namespace Ecosystem.AnimalBehaviour.RabbitStates
           return;
         }
 
-        if (tag == "Predator")
+        if (tag == "Wolf" || tag == "Bear")
         {
           _target = other.gameObject;
           return;

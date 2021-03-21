@@ -27,6 +27,7 @@ namespace Ecosystem
     {
       Thirst = 0;
       IsDrinking = false;
+      CanDrink = false;
     }
 
     private void Update()
@@ -67,7 +68,7 @@ namespace Ecosystem
     {
       if (other.gameObject.CompareTag("Water"))
       {
-        CanDrink = true;
+        CanDrink = false;
       }
     }
 

@@ -28,7 +28,7 @@ namespace Ecosystem.AnimalBehaviour.RabbitStates
         return base.Tick();
       }
 
-      if (_target.tag == "Predator")
+      if (_target.tag == "Wolf" || _target.tag == "Bear")
       {
         return AnimalState.Fleeing;
       }
