@@ -1,8 +1,6 @@
 using Ecosystem.ECS;
-using Reese.Spatial;
 using Unity.Entities;
 using Unity.Mathematics;
-using Unity.Physics;
 using Unity.Transforms;
 
 namespace Ecosystem.Systems
@@ -16,7 +14,7 @@ namespace Ecosystem.Systems
       // Do nothing
     }
 
-    public Entity MakeRabbit(float3 position)
+    public void MakeRabbit(float3 position)
     {
       if (_rabbitPrefab == Entity.Null)
       {
@@ -25,17 +23,10 @@ namespace Ecosystem.Systems
 
       var rabbit = EntityManager.Instantiate(_rabbitPrefab);
 
-      EntityManager.AddComponentData(rabbit, new SpatialTrigger
-      {
-              Filter = CollisionFilter.Default
-      });
-
       EntityManager.SetComponentData(rabbit, new Translation
       {
               Value = position
       });
-
-      return rabbit;
     }
 
     private T LoadPrefab<T>() where T : struct, IComponentData

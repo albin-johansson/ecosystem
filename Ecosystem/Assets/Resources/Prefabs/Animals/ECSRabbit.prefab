@@ -94,6 +94,7 @@ GameObject:
   - component: {fileID: 2798923770393617482}
   - component: {fileID: 4196424216554123458}
   - component: {fileID: 6586140821735944982}
+  - component: {fileID: 3793959517244244152}
   - component: {fileID: 5921398429196909263}
   - component: {fileID: 8902540027125052898}
   m_Layer: 0
@@ -180,7 +181,26 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 49bf61acc4c2877fd847ee2daa8c9274, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  tags: []
+  tags:
+  - Rabbit
+--- !u!114 &3793959517244244152
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3716636463991691157}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 60a02d0a728429e45875398d367ef8e0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  belongsToLayer: 0
+  collidesWithLayer: 0
+  groupIndex: 0
+  useDefaultCollisionFilter: 1
+  tags:
+  - Rabbit
 --- !u!114 &5921398429196909263
 MonoBehaviour:
   m_ObjectHideFlags: 0
