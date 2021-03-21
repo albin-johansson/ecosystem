@@ -1,4 +1,5 @@
 using Ecosystem.ECS;
+using Ecosystem.ECS.Authoring;
 using Unity.Entities;
 using Unity.Mathematics;
 using Unity.Transforms;
@@ -18,7 +19,7 @@ namespace Ecosystem.Systems
     {
       if (_rabbitPrefab == Entity.Null)
       {
-        _rabbitPrefab = LoadPrefab<RabbitPrefab>().Value;
+        _rabbitPrefab = EntityManager.LoadPrefab<RabbitPrefab>().Value;
       }
 
       var rabbit = EntityManager.Instantiate(_rabbitPrefab);
@@ -27,11 +28,6 @@ namespace Ecosystem.Systems
       {
               Value = position
       });
-    }
-
-    private T LoadPrefab<T>() where T : struct, IComponentData
-    {
-      return EntityManager.CreateEntityQuery(typeof(T)).GetSingleton<T>();
     }
   }
 }
