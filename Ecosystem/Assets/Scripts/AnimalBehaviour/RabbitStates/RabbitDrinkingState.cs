@@ -23,7 +23,7 @@ namespace Ecosystem.AnimalBehaviour.RabbitStates
 
     override public AnimalState Tick()
     {
-      if (_target.CompareTag("Predator"))
+      if (_target.CompareTag("Wolf") || _target.CompareTag("Bear"))
       {
         return AnimalState.Fleeing;
       }

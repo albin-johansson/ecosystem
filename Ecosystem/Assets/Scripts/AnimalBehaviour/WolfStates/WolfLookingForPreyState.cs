@@ -46,7 +46,7 @@ namespace Ecosystem.AnimalBehaviour.WolfStates
           return;
         }
 
-        if (other.gameObject.CompareTag("Prey"))
+        if (other.gameObject.CompareTag("Rabbit") || other.gameObject.CompareTag("Deer"))
         {
           _target = other.gameObject;
         }

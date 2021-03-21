@@ -520,6 +520,7 @@ GameObject:
   - component: {fileID: 7268078574618211150}
   - component: {fileID: 6548548314612515429}
   - component: {fileID: 8737520346852457035}
+  - component: {fileID: 2469128493361948961}
   m_Layer: 8
   m_Name: Movement
   m_TagString: Untagged
@@ -572,6 +573,20 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   navAgent: {fileID: 2689415282919559664}
   animationController: {fileID: 2656864231929346077}
+--- !u!114 &2469128493361948961
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2719731396375845655}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 33065438d0e433c4185335d9b2c4bf73, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  navAgent: {fileID: 2689415282919559664}
+  genome: {fileID: 1438288584065220351}
 --- !u!1 &2757367380692593370
 GameObject:
   m_ObjectHideFlags: 0
@@ -2179,8 +2194,9 @@ GameObject:
   - component: {fileID: 7194725648983189641}
   - component: {fileID: 8447711326330248734}
   - component: {fileID: 3915165533490199740}
+  - component: {fileID: 8678172465868756156}
   m_Layer: 8
-  m_Name: ResourceFinder
+  m_Name: StateMachine
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2242,6 +2258,23 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 61c23cb0a96b9f243b4a54dd181e22d4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &8678172465868756156
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8398216545277643250}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9c7fb3531ec9c784baa8246d216af247, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  consumer: {fileID: 2592824637093240721}
+  waterConsumer: {fileID: 2647182948873053790}
+  movementController: {fileID: 2469128493361948961}
+  animationController: {fileID: 2656864231929346077}
+  memoryController: {fileID: 3915165533490199740}
 --- !u!1 &8456268486169713850
 GameObject:
   m_ObjectHideFlags: 0

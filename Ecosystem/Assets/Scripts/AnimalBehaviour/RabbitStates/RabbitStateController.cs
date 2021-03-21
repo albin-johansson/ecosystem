@@ -71,7 +71,6 @@ namespace Ecosystem.AnimalBehaviour.RabbitStates
           break;
       
       }
-      Debug.Log(_state.Type());
       _state.Begin(target);
     }
 

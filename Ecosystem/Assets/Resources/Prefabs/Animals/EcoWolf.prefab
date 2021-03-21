@@ -7360,10 +7360,10 @@ GameObject:
   m_Component:
   - component: {fileID: 1794369525927108614}
   - component: {fileID: 651377425655632140}
-  - component: {fileID: 7578443524068375752}
   - component: {fileID: 4820126447581470678}
+  - component: {fileID: 1277855786782778012}
   m_Layer: 7
-  m_Name: ResourceFinder
+  m_Name: StateMachine
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -7396,23 +7396,6 @@ SphereCollider:
   serializedVersion: 2
   m_Radius: 4
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &7578443524068375752
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7028009723732116728}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: cb234d2a03714eaba5866a59d8ecfee9, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  preyConsumer: {fileID: 5694940851676850990}
-  waterConsumer: {fileID: 3242938931952141863}
-  mateFinder: {fileID: 6720820444802297723}
-  memoryController: {fileID: 4820126447581470678}
-  targetTracker: {fileID: 7813067152338188920}
 --- !u!114 &4820126447581470678
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -7425,6 +7408,23 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 61c23cb0a96b9f243b4a54dd181e22d4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &1277855786782778012
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7028009723732116728}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3cd94d57fb1da52439641dc290534ae7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  consumer: {fileID: 5694940851676850990}
+  waterConsumer: {fileID: 3242938931952141863}
+  movementController: {fileID: 6378755894846735859}
+  animationController: {fileID: -4792604738439377631}
+  memoryController: {fileID: 4820126447581470678}
 --- !u!1 &7116156556552470170
 GameObject:
   m_ObjectHideFlags: 0
@@ -8450,8 +8450,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7604608410832787383}
-  - component: {fileID: 9158634549972003059}
-  - component: {fileID: 7813067152338188920}
+  - component: {fileID: 6378755894846735859}
   m_Layer: 7
   m_Name: Movement
   m_TagString: Untagged
@@ -8473,7 +8472,7 @@ Transform:
   m_Father: {fileID: 3855438275871624271}
   m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &9158634549972003059
+--- !u!114 &6378755894846735859
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -8482,28 +8481,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 8066780691616185067}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 21feba9944ff41e38e1f9441ba7bcf14, type: 3}
+  m_Script: {fileID: 11500000, guid: 33065438d0e433c4185335d9b2c4bf73, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   navAgent: {fileID: 3161004195564935848}
-  animationController: {fileID: -4792604738439377631}
-  groundMask:
-    serializedVersion: 2
-    m_Bits: 8
---- !u!114 &7813067152338188920
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8066780691616185067}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fb55c6559f397694e950bfc758d54331, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  navAgent: {fileID: 3161004195564935848}
-  animationController: {fileID: -4792604738439377631}
+  genome: {fileID: 1593158740268700976}
 --- !u!1 &8171843457048072183
 GameObject:
   m_ObjectHideFlags: 0
