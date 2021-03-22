@@ -30,7 +30,7 @@ namespace Ecosystem.AnimalBehaviour.RabbitStates
       }
       else if (WaterConsumer.IsDrinking)
       {
-        return AnimalState.Drinking;
+        return Type();
       }
       else
       {
