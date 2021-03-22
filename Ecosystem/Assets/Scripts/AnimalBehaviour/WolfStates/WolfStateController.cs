@@ -15,19 +15,25 @@ namespace Ecosystem.AnimalBehaviour.WolfStates
     private IAnimalState _drinking;
     private IAnimalState _runningTowardsWater;
     private IAnimalState _chasingPrey;
-    private WolfStateData stateData;
-
+    private WolfStateData _stateData;
 
     public override void Start()
     {
-      stateData = new WolfStateData(consumer, waterConsumer, movementController, animationController, memoryController);
-      _idle = WolfStateFactory.CreateIdle(stateData);
-      _lookingForPrey = WolfStateFactory.CreateLookingForPrey(stateData);
-      _lookingForWater = WolfStateFactory.CreateLookingForWater(stateData);
-      _drinking = WolfStateFactory.CreateDrinking(stateData);
-      _runningTowardsWater = WolfStateFactory.CreateRunningTowardsWater(stateData);
-      _chasingPrey = WolfStateFactory.CreateChasingPrey(stateData);
-      _state = _idle;
+      _stateData = new WolfStateData
+      {
+              consumer = consumer,
+              animationController = animationController,
+              memoryController = memoryController,
+              movementController = movementController,
+              waterConsumer = waterConsumer
+      };
+
+      _idle = WolfStateFactory.CreateIdle(_stateData);
+      _lookingForPrey = WolfStateFactory.CreateLookingForPrey(_stateData);
+      _lookingForWater = WolfStateFactory.CreateLookingForWater(_stateData);
+      _drinking = WolfStateFactory.CreateDrinking(_stateData);
+      _runningTowardsWater = WolfStateFactory.CreateRunningTowardsWater(_stateData);
+      _chasingPrey = WolfStateFactory.CreateChasingPrey(_stateData);
       SwitchState(AnimalState.Idle);
     }
 
