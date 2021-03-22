@@ -18,11 +18,9 @@ namespace Ecosystem.AnimalBehaviour.RabbitStates
     private IAnimalState _runningTowardsFood;
     private IAnimalState _fleeing;
 
-    private RabbitStateData _stateData;
-
     public override void Start()
     {
-      _stateData = new RabbitStateData
+      var data = new RabbitStateData
       {
               Consumer = consumer,
               AnimationController = animationController,
@@ -31,15 +29,15 @@ namespace Ecosystem.AnimalBehaviour.RabbitStates
               WaterConsumer = waterConsumer
       };
 
-      _idle = RabbitStateFactory.CreateIdle(_stateData);
-      _lookingForFood = RabbitStateFactory.CreateLookingForFood(_stateData);
-      _lookingForWater = RabbitStateFactory.CreateLookingForWater(_stateData);
-      _drinking = RabbitStateFactory.CreateDrinking(_stateData);
-      _runningTowardsWater = RabbitStateFactory.CreateRunningTowardsWater(_stateData);
-      _runningTowardsFood = RabbitStateFactory.CreateRunningTowardsFood(_stateData);
-      _fleeing = RabbitStateFactory.CreateFleeing(_stateData);
-      State = _idle;
+      _idle = RabbitStateFactory.CreateIdle(data);
+      _lookingForFood = RabbitStateFactory.CreateLookingForFood(data);
+      _lookingForWater = RabbitStateFactory.CreateLookingForWater(data);
+      _drinking = RabbitStateFactory.CreateDrinking(data);
+      _runningTowardsWater = RabbitStateFactory.CreateRunningTowardsWater(data);
+      _runningTowardsFood = RabbitStateFactory.CreateRunningTowardsFood(data);
+      _fleeing = RabbitStateFactory.CreateFleeing(data);
 
+      State = _idle;
       SwitchState(AnimalState.Idle);
     }
 
@@ -81,7 +79,7 @@ namespace Ecosystem.AnimalBehaviour.RabbitStates
 
         case AnimalState.ChasingPrey:
           break;
-        
+
         default:
           break;
       }
