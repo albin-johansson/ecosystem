@@ -1,6 +1,7 @@
 using Ecosystem.Genes;
 using Ecosystem.Logging;
 using Ecosystem.UI;
+using Ecosystem.Util;
 using UnityEngine;
 
 namespace Ecosystem
@@ -16,11 +17,13 @@ namespace Ecosystem
     public bool IsDrinking { get; private set; }
     public bool CanDrink { get; private set; }
     public float Thirst { get; private set; }
+    private int _waterSourcesAvailable = 0;
 
 
     private void OnEnable()
     {
       resourceBar.SetMaxValue(maxThirst);
+      _waterSourcesAvailable = 0;
     }
 
     private void OnDisable()
@@ -56,19 +59,21 @@ namespace Ecosystem
       }
     }
 
-    private void OnTriggerEnter(Collider other) //TODO: fix bug: enter twice and exit once will yeld a false negative, only possible if watersources are overlapping
+    private void OnTriggerEnter(Collider other)
     {
-      if (other.gameObject.CompareTag("Water"))
+      if (Tags.IsWater(other.gameObject))
       {
-        CanDrink = true;
+        _waterSourcesAvailable++;
+        CanDrink = _waterSourcesAvailable > 0;
       }
     }
 
     private void OnTriggerExit(Collider other)
     {
-      if (other.gameObject.CompareTag("Water"))
+      if (Tags.IsWater(other.gameObject))
       {
-        CanDrink = false;
+        _waterSourcesAvailable--;
+        CanDrink = _waterSourcesAvailable > 0;
       }
     }
 
