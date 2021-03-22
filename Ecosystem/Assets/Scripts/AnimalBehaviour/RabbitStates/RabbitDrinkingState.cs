@@ -1,8 +1,9 @@
+using Ecosystem.Util;
 using UnityEngine;
 
 namespace Ecosystem.AnimalBehaviour.RabbitStates
 {
-  public class RabbitDrinkingState : AbstractAnimalState
+  internal sealed class RabbitDrinkingState : AbstractAnimalState
   {
     public RabbitDrinkingState(RabbitStateData data)
     {
@@ -21,48 +22,41 @@ namespace Ecosystem.AnimalBehaviour.RabbitStates
       //TODO Check memory
     }
 
-    override public AnimalState Tick()
+    public override AnimalState Tick()
     {
-      if (Target.CompareTag("Wolf") || Target.CompareTag("Bear"))
+      if (Tags.IsPredator(Target))
       {
         return AnimalState.Fleeing;
       }
-
-      if (WaterConsumer.IsDrinking)
+      else if (WaterConsumer.IsDrinking)
       {
-        return this.Type();
+        return AnimalState.Drinking;
       }
-      return base.Tick();
+      else
+      {
+        return base.Tick();
+      }
+    }
+
+    public override void OnTriggerEnter(Collider other)
+    {
+      var otherObject = other.gameObject;
+      if (MovementController.IsReachable(otherObject.transform.position))
+      {
+        if (otherObject.CompareTag("Water") || Tags.IsFood(otherObject))
+        {
+          MemoryController.SaveToMemory(otherObject);
+        }
+        else if (Tags.IsPredator(otherObject))
+        {
+          Target = otherObject;
+        }
+      }
     }
 
     public override AnimalState Type()
     {
       return AnimalState.Drinking;
-    }
-
-    public override void OnTriggerEnter(Collider other)
-    {
-      var tag = other.gameObject.tag;
-      if (MovementController.IsReachable(other.gameObject.transform.position))
-      {
-        if (tag == "Water")
-        {
-          MemoryController.SaveToMemory(other.gameObject);
-          return;
-        }
-
-        if (tag == "Wolf" || tag == "Bear")
-        {
-          Target = other.gameObject;
-          return;
-        }
-
-        if (tag == "Food")
-        {
-          MemoryController.SaveToMemory(other.gameObject); 
-          return;
-        }
-      }
     }
   }
 }
