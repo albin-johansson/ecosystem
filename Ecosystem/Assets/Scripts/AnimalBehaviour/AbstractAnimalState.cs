@@ -33,7 +33,7 @@ namespace Ecosystem.AnimalBehaviour
     {
     }
 
-    public virtual GameObject End()
+    public GameObject End()
     {
       return Target;
     }
