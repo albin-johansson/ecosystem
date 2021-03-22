@@ -1,7 +1,9 @@
+using System;
 using Ecosystem.Genes;
 using Ecosystem.Util;
 using UnityEngine;
 using UnityEngine.AI;
+using Random = UnityEngine.Random;
 
 namespace Ecosystem
 {
@@ -17,7 +19,7 @@ namespace Ecosystem
     private Vector3 _fleeDestination;
     private float _previousSpeed;
     private readonly float[] _fleeingAngles = {-90, 90, 180};
-
+    
     #region PublicFunctions
 
     /// <summary>
@@ -176,9 +178,10 @@ namespace Ecosystem
     ///   Checks if a position is valid by checking if there is a valid position within 1.0f radius,
     ///   returns that valid position. If not valid returns zero vector.
     /// </summary>
-    private static bool ValidateDestination(Vector3 destination, out Vector3 validPosition)
+    private bool ValidateDestination(Vector3 destination, out Vector3 validPosition)
     {
-      if (NavMesh.SamplePosition(destination, out var hit, 1.0f, NavMesh.AllAreas))
+      destination = Terrains.instance.SampleTerrainHeight(destination);
+      if (NavMesh.SamplePosition(destination, out var hit, navAgent.height*2, Terrains.Walkable))
       {
         validPosition = hit.position;
         return true;

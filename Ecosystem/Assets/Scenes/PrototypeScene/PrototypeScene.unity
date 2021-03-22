@@ -149,6 +149,26 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 464592539}
     m_Modifications:
+    - target: {fileID: 3350421026760717125, guid: ac935de5e4958254196cd0457e8a0df5, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 43.28
+      objectReference: {fileID: 0}
+    - target: {fileID: 3350421026760717125, guid: ac935de5e4958254196cd0457e8a0df5, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 2.4903865
+      objectReference: {fileID: 0}
+    - target: {fileID: 3350421026760717125, guid: ac935de5e4958254196cd0457e8a0df5, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 38.15
+      objectReference: {fileID: 0}
+    - target: {fileID: 3350421026760717125, guid: ac935de5e4958254196cd0457e8a0df5, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0.2315453
+      objectReference: {fileID: 0}
+    - target: {fileID: 3350421026760717125, guid: ac935de5e4958254196cd0457e8a0df5, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0.000000057514697
+      objectReference: {fileID: 0}
     - target: {fileID: 7332217931988766355, guid: a4692b44427bacf41ad31be76110a8f2, type: 3}
       propertyPath: m_Name
       value: EcoCarrot
@@ -176,26 +196,6 @@ PrefabInstance:
     - target: {fileID: 7337792851589526139, guid: a4692b44427bacf41ad31be76110a8f2, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 90.172
-      objectReference: {fileID: 0}
-    - target: {fileID: 3350421026760717125, guid: ac935de5e4958254196cd0457e8a0df5, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 43.28
-      objectReference: {fileID: 0}
-    - target: {fileID: 3350421026760717125, guid: ac935de5e4958254196cd0457e8a0df5, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 2.4903865
-      objectReference: {fileID: 0}
-    - target: {fileID: 3350421026760717125, guid: ac935de5e4958254196cd0457e8a0df5, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: 38.15
-      objectReference: {fileID: 0}
-    - target: {fileID: 3350421026760717125, guid: ac935de5e4958254196cd0457e8a0df5, type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 0.2315453
-      objectReference: {fileID: 0}
-    - target: {fileID: 3350421026760717125, guid: ac935de5e4958254196cd0457e8a0df5, type: 3}
-      propertyPath: m_LocalRotation.x
-      value: 0.000000057514697
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: a4692b44427bacf41ad31be76110a8f2, type: 3}
@@ -2944,6 +2944,7 @@ GameObject:
   - component: {fileID: 1482260076}
   - component: {fileID: 1482260078}
   - component: {fileID: 1482260077}
+  - component: {fileID: 1482260079}
   m_Layer: 3
   m_Name: Terrain
   m_TagString: Ground
@@ -3009,6 +3010,19 @@ Terrain:
   m_GroupingID: 0
   m_RenderingLayerMask: 1
   m_AllowAutoConnect: 1
+--- !u!114 &1482260079
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1482260075}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 988b4f4362e84ef99e269f3c867f3efb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  terrain: {fileID: 1482260078}
 --- !u!1001 &1507905431
 PrefabInstance:
   m_ObjectHideFlags: 0
