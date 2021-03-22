@@ -19,7 +19,7 @@ namespace Ecosystem
     private Vector3 _fleeDestination;
     private float _previousSpeed;
     private readonly float[] _fleeingAngles = {-90, 90, 180};
-    
+
     #region PublicFunctions
 
     /// <summary>
@@ -181,7 +181,7 @@ namespace Ecosystem
     private bool ValidateDestination(Vector3 destination, out Vector3 validPosition)
     {
       destination = Terrains.instance.SampleTerrainHeight(destination);
-      if (NavMesh.SamplePosition(destination, out var hit, navAgent.height*2, Terrains.Walkable))
+      if (NavMesh.SamplePosition(destination, out var hit, navAgent.height * 2, Terrains.Walkable))
       {
         validPosition = hit.position;
         return true;

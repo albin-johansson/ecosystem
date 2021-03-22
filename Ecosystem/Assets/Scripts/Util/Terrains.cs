@@ -10,7 +10,7 @@ namespace Ecosystem.Util
     private const float Range = 10.0f;
 
     public static int Walkable;
-    
+
     /// <summary>
     ///   Makes the class able to be used as a singleton 
     /// </summary>
