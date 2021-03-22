@@ -31,7 +31,7 @@ namespace Ecosystem.Genes
                           GetSpeedFactor().Value *
                           GetSizeFactor().ValueAsDecimal();
 
-    public float Metabolism => GetHungerRate().Value * GetSizeFactor().Value * (1 + MetabolismFactor * ((GetVision().Value - 1) + (GetSpeedFactor().Value - 1)));
+    public float Metabolism => GetHungerRate().Value * GetSizeFactor().Value * (1 + MetabolismFactor * (GetVision().ValueAsDecimal() + GetSpeedFactor().ValueAsDecimal()));
 
     public float Attractiveness => GetDesirabilityScore().Value;
     
