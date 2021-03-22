@@ -17,7 +17,7 @@ namespace Ecosystem.AnimalBehaviour
     {
       if (Consumer.Hunger > WaterConsumer.Thirst && Consumer.IsHungry())
       {
-        return AnimalState.LookingForPrey;
+        return AnimalState.LookingForFood;
       }
       else if (WaterConsumer.Thirst > Consumer.Hunger && WaterConsumer.IsThirsty())
       {
