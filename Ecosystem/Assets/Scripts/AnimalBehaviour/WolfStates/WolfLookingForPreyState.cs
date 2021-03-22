@@ -1,8 +1,9 @@
+using Ecosystem.Util;
 using UnityEngine;
 
 namespace Ecosystem.AnimalBehaviour.WolfStates
 {
-  public class WolfLookingForPreyState : AbstractAnimalState
+  internal sealed class WolfLookingForPreyState : AbstractAnimalState
   {
     public WolfLookingForPreyState(WolfStateData data)
     {
@@ -22,33 +23,33 @@ namespace Ecosystem.AnimalBehaviour.WolfStates
 
     public override AnimalState Tick()
     {
-      if (Target != null)
+      if (Target)
       {
         return AnimalState.ChasingPrey;
       }
-
-      if (WaterConsumer.Thirst > Consumer.Hunger && WaterConsumer.IsThirsty()) //If we are more thirsty then hungry: Look for water
+      else if (WaterConsumer.Thirst > Consumer.Hunger && WaterConsumer.IsThirsty())
       {
         return AnimalState.LookingForWater;
       }
-
-      MovementController.UpdateWander();
-      return this.Type();
+      else
+      {
+        MovementController.UpdateWander();
+        return Type();
+      }
     }
 
-    override public void OnTriggerEnter(Collider other)
+    public override void OnTriggerEnter(Collider other)
     {
-      if (MovementController.IsReachable(other.gameObject.transform.position))
+      var otherObject = other.gameObject;
+      if (MovementController.IsReachable(otherObject.transform.position))
       {
-        if (other.gameObject.CompareTag("Water"))
+        if (otherObject.CompareTag("Water"))
         {
-          MemoryController.SaveToMemory(other.gameObject);
-          return;
+          MemoryController.SaveToMemory(otherObject);
         }
-
-        if (other.gameObject.CompareTag("Rabbit") || other.gameObject.CompareTag("Deer"))
+        else if (Tags.IsPrey(otherObject))
         {
-          Target = other.gameObject;
+          Target = otherObject;
         }
       }
     }
