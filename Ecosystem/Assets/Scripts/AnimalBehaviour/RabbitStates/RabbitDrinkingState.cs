@@ -17,7 +17,9 @@ namespace Ecosystem.AnimalBehaviour.RabbitStates
     public override void Begin(GameObject target)
     {
       Target = target;
+      AnimationController.IdleAnimation();
       MovementController.StandStill(true);
+      WaterConsumer.StartDrinking();
       // TODO: Add animationController.DrinkAnimation();
       //TODO Check memory
     }
