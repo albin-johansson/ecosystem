@@ -2,7 +2,7 @@ using UnityEngine;
 
 namespace Ecosystem.AnimalBehaviour.WolfStates
 {
-  public class WolfIdleState : AbstractAnimalState
+  internal sealed class WolfIdleState : AbstractAnimalState
   {
     public WolfIdleState(WolfStateData data)
     {
@@ -23,7 +23,6 @@ namespace Ecosystem.AnimalBehaviour.WolfStates
       MovementController.UpdateWander();
       return base.Tick();
     }
-
 
     public override AnimalState Type()
     {
