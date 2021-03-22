@@ -1,8 +1,9 @@
+using Ecosystem.Util;
 using UnityEngine;
 
 namespace Ecosystem.AnimalBehaviour.RabbitStates
 {
-  public class RabbitFleeingState : AbstractAnimalState
+  internal sealed class RabbitFleeingState : AbstractAnimalState
   {
     public RabbitFleeingState(RabbitStateData data)
     {
@@ -12,7 +13,7 @@ namespace Ecosystem.AnimalBehaviour.RabbitStates
       AnimationController = data.AnimationController;
       MemoryController = data.MemoryController;
     }
-    
+
     public override void Begin(GameObject target)
     {
       Target = target;
@@ -23,43 +24,45 @@ namespace Ecosystem.AnimalBehaviour.RabbitStates
 
     public override AnimalState Tick()
     {
-      if(Target == null)
+      if (Target)
+      {
+        MovementController.UpdateFleeing(Target.transform.position);
+        return Type();
+      }
+      else
       {
         return base.Tick();
       }
-      MovementController.UpdateFleeing(Target.transform.position);
-      return Type();
+    }
+
+    public override void OnTriggerEnter(Collider other)
+    {
+      var otherObject = other.gameObject;
+      if (MovementController.IsReachable(otherObject.transform.position))
+      {
+        if (otherObject.CompareTag("Water"))
+        {
+          MemoryController.SaveToMemory(otherObject);
+        }
+        else if (Tags.IsPredator(otherObject))
+        {
+          //TODO: Add logic for tracking all Predators in collision
+        }
+      }
+    }
+
+    public override void OnTriggerExit(Collider other)
+    {
+      //TODO: Logic for looking for other predators already in the collider and set the closest one to current target.
+      if (other.gameObject == Target)
+      {
+        Target = null;
+      }
     }
 
     public override AnimalState Type()
     {
       return AnimalState.Fleeing;
-    }
-
-    public override void OnTriggerEnter(Collider other)
-    {
-      if (MovementController.IsReachable(other.gameObject.transform.position))
-      {
-        var tag = other.gameObject.tag;
-        if (tag == "Water")
-        {
-          MemoryController.SaveToMemory(other.gameObject);
-          return;
-        }
-
-        if (tag == "Wolf" || tag == "Bear")
-        {
-          //TODO: Add logic for tracking all Predators in collision
-          return;
-        }
-      }
-    }  
-    public override void OnTriggerExit(Collider other)
-    {
-      if (other.gameObject == Target)  //TODO: Add logic for looking for other predators already in the collider and set the closest one to current target.
-      {
-        Target = null;                         
-      }
     }
   }
 }
