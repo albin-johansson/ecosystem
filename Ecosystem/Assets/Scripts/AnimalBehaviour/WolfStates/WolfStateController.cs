@@ -21,11 +21,11 @@ namespace Ecosystem.AnimalBehaviour.WolfStates
     {
       var data = new WolfStateData
       {
-              consumer = consumer,
-              animationController = animationController,
-              memoryController = memoryController,
-              movementController = movementController,
-              waterConsumer = waterConsumer
+              Consumer = consumer,
+              AnimationController = animationController,
+              MemoryController = memoryController,
+              MovementController = movementController,
+              WaterConsumer = waterConsumer
       };
 
       _idle = WolfStateFactory.CreateIdle(data);
