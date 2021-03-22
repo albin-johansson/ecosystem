@@ -6,46 +6,46 @@ namespace Ecosystem.AnimalBehaviour.WolfStates
   {
     public WolfLookingForWaterState(WolfStateData data)
     {
-      consumer = data.consumer;
-      waterConsumer = data.waterConsumer;
-      movementController = data.movementController;
-      animationController = data.animationController;
-      memoryController = data.memoryController;
+      Consumer = data.consumer;
+      WaterConsumer = data.waterConsumer;
+      MovementController = data.movementController;
+      AnimationController = data.animationController;
+      MemoryController = data.memoryController;
     }
 
     public override void Begin(GameObject target)
     {
-      _target = null;
-      movementController.StartWander();
-      animationController.MoveAnimation();
+      Target = null;
+      MovementController.StartWander();
+      AnimationController.MoveAnimation();
       //TODO Check memory
     }
 
     public override AnimalState Tick()
     {
-      movementController.UpdateWander();
-      if (_target != null)
+      MovementController.UpdateWander();
+      if (Target != null)
       {
         return AnimalState.RunningTowardsWater;
       }
 
-      if (waterConsumer.Thirst < consumer.Hunger  && consumer.IsHungry()) //If we are more thirsty then hungry: Look for water
+      if (WaterConsumer.Thirst < Consumer.Hunger  && Consumer.IsHungry()) //If we are more thirsty then hungry: Look for water
       {
         return AnimalState.LookingForPrey;
       }
 
-      movementController.UpdateWander();
+      MovementController.UpdateWander();
       return this.Type();
     }
 
     override public void OnTriggerEnter(Collider other)
     {
-      if (movementController.IsReachable(other.gameObject.transform.position))
+      if (MovementController.IsReachable(other.gameObject.transform.position))
       {
         if (other.gameObject.CompareTag("Water"))
         {
-          memoryController.SaveToMemory(other.gameObject);
-          _target = other.gameObject;
+          MemoryController.SaveToMemory(other.gameObject);
+          Target = other.gameObject;
           return;
         }
       }

@@ -6,34 +6,34 @@ namespace Ecosystem.AnimalBehaviour.RabbitStates
   {
     public RabbitIdleState(RabbitStateData data)
     {
-      consumer = data.consumer;
-      waterConsumer = data.waterConsumer;
-      movementController = data.movementController;
-      animationController = data.animationController;
-      memoryController = data.memoryController;
+      Consumer = data.consumer;
+      WaterConsumer = data.waterConsumer;
+      MovementController = data.movementController;
+      AnimationController = data.animationController;
+      MemoryController = data.memoryController;
     }
     
     public override void Begin(GameObject target)
     {
-      _target = null;
-      movementController.StartWander();
-      animationController.MoveAnimation();
+      Target = null;
+      MovementController.StartWander();
+      AnimationController.MoveAnimation();
       //TODO Check memory
     }
 
     override public AnimalState Tick()
     {
-      if (_target != null)
+      if (Target != null)
       {
         return AnimalState.Fleeing;
       }
 
-      if (consumer.Hunger >= waterConsumer.Thirst && consumer.IsHungry())
+      if (Consumer.Hunger >= WaterConsumer.Thirst && Consumer.IsHungry())
       {
         return AnimalState.LookingForFood;
       }
 
-      if (waterConsumer.Thirst > consumer.Hunger && waterConsumer.IsThirsty())
+      if (WaterConsumer.Thirst > Consumer.Hunger && WaterConsumer.IsThirsty())
       {
         return AnimalState.LookingForWater;
       }
@@ -43,18 +43,18 @@ namespace Ecosystem.AnimalBehaviour.RabbitStates
 
     public override void OnTriggerEnter(Collider other)
     {
-      if (movementController.IsReachable(other.gameObject.transform.position))
+      if (MovementController.IsReachable(other.gameObject.transform.position))
       {
         var tag = other.gameObject.tag;
         if (tag == "Water")
         {
-          memoryController.SaveToMemory(other.gameObject);
+          MemoryController.SaveToMemory(other.gameObject);
           return;
         }
 
         if (tag == "Wolf" || tag == "Bear")
         {
-          _target = other.gameObject;
+          Target = other.gameObject;
           return;
         }
       }

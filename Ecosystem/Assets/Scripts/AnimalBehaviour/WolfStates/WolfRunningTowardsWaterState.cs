@@ -6,37 +6,37 @@ namespace Ecosystem.AnimalBehaviour.WolfStates
   {
     public WolfRunningTowardsWaterState(WolfStateData data)
     {
-      consumer = data.consumer;
-      waterConsumer = data.waterConsumer;
-      movementController = data.movementController;
-      animationController = data.animationController;
-      memoryController = data.memoryController;
+      Consumer = data.consumer;
+      WaterConsumer = data.waterConsumer;
+      MovementController = data.movementController;
+      AnimationController = data.animationController;
+      MemoryController = data.memoryController;
     }
     public override void Begin(GameObject target)
     {
-      _target = target;
-      movementController.RunToTarget(_target.transform.position);
-      animationController.MoveAnimation();
+      Target = target;
+      MovementController.RunToTarget(Target.transform.position);
+      AnimationController.MoveAnimation();
     }
 
     public override AnimalState Tick()
     {
-      if (_target == null)
+      if (Target == null)
       {
         return AnimalState.LookingForWater;
       }
 
-      if (waterConsumer.CanDrink)
+      if (WaterConsumer.CanDrink)
       {
         return AnimalState.Drinking;
       }
 
-      if (waterConsumer.Thirst < consumer.Hunger && consumer.IsHungry()) //If we are more thirsty then hungry: Look for water
+      if (WaterConsumer.Thirst < Consumer.Hunger && Consumer.IsHungry()) //If we are more thirsty then hungry: Look for water
       {
         return AnimalState.LookingForPrey;
       }
 
-      movementController.RunToTarget(_target.transform.position);
+      MovementController.RunToTarget(Target.transform.position);
       return this.Type();
     }
 

@@ -6,31 +6,31 @@ namespace Ecosystem.AnimalBehaviour.WolfStates
   {
     public WolfChasingPreyState(WolfStateData data)
     {
-      consumer = data.consumer;
-      waterConsumer = data.waterConsumer;
-      movementController = data.movementController;
-      animationController = data.animationController;
-      memoryController = data.memoryController;
+      Consumer = data.consumer;
+      WaterConsumer = data.waterConsumer;
+      MovementController = data.movementController;
+      AnimationController = data.animationController;
+      MemoryController = data.memoryController;
     }
     public override void Begin(GameObject target)
     {
-      _target = target;
-      movementController.StartHunting(_target.transform.position);
-      animationController.MoveAnimation();
+      Target = target;
+      MovementController.StartHunting(Target.transform.position);
+      AnimationController.MoveAnimation();
     }
 
     public override AnimalState Tick()
     {
-      if (_target == null || !movementController.IsTargetInRange(_target.transform.position))
+      if (Target == null || !MovementController.IsTargetInRange(Target.transform.position))
       {
         return base.Tick();
       }
       else
       {
-        movementController.UpdateHunting(_target.transform.position);
+        MovementController.UpdateHunting(Target.transform.position);
       }
 
-      if (waterConsumer.Thirst > consumer.Hunger && waterConsumer.IsThirsty()) //If we are more thirsty then hungry: Look for water
+      if (WaterConsumer.Thirst > Consumer.Hunger && WaterConsumer.IsThirsty()) //If we are more thirsty then hungry: Look for water
       {
         return AnimalState.LookingForWater;
       }
@@ -41,9 +41,9 @@ namespace Ecosystem.AnimalBehaviour.WolfStates
 
     override public void OnTriggerExit(Collider other)
     {
-      if (other.gameObject == _target)
+      if (other.gameObject == Target)
       {
-        _target = null;
+        Target = null;
       }
     }
 

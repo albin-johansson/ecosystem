@@ -6,28 +6,28 @@ namespace Ecosystem.AnimalBehaviour.RabbitStates
   {
     public RabbitFleeingState(RabbitStateData data)
     {
-      consumer = data.consumer;
-      waterConsumer = data.waterConsumer;
-      movementController = data.movementController;
-      animationController = data.animationController;
-      memoryController = data.memoryController;
+      Consumer = data.consumer;
+      WaterConsumer = data.waterConsumer;
+      MovementController = data.movementController;
+      AnimationController = data.animationController;
+      MemoryController = data.memoryController;
     }
     
     public override void Begin(GameObject target)
     {
-      _target = target;
-      movementController.StartFleeing(_target.transform.position);
-      animationController.MoveAnimation();
+      Target = target;
+      MovementController.StartFleeing(Target.transform.position);
+      AnimationController.MoveAnimation();
       //TODO Check memory
     }
 
     public override AnimalState Tick()
     {
-      if(_target == null)
+      if(Target == null)
       {
         return base.Tick();
       }
-      movementController.UpdateFleeing(_target.transform.position);
+      MovementController.UpdateFleeing(Target.transform.position);
       return Type();
     }
 
@@ -38,12 +38,12 @@ namespace Ecosystem.AnimalBehaviour.RabbitStates
 
     public override void OnTriggerEnter(Collider other)
     {
-      if (movementController.IsReachable(other.gameObject.transform.position))
+      if (MovementController.IsReachable(other.gameObject.transform.position))
       {
         var tag = other.gameObject.tag;
         if (tag == "Water")
         {
-          memoryController.SaveToMemory(other.gameObject);
+          MemoryController.SaveToMemory(other.gameObject);
           return;
         }
 
@@ -56,9 +56,9 @@ namespace Ecosystem.AnimalBehaviour.RabbitStates
     }  
     public override void OnTriggerExit(Collider other)
     {
-      if (other.gameObject == _target)  //TODO: Add logic for looking for other predators already in the collider and set the closest one to current target.
+      if (other.gameObject == Target)  //TODO: Add logic for looking for other predators already in the collider and set the closest one to current target.
       {
-        _target = null;                         
+        Target = null;                         
       }
     }
   }

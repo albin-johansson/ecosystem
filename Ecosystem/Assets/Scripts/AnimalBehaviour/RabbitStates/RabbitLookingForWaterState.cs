@@ -6,41 +6,41 @@ namespace Ecosystem.AnimalBehaviour.RabbitStates
   {
     public RabbitLookingForWaterState(RabbitStateData data)
     {
-      consumer = data.consumer;
-      waterConsumer = data.waterConsumer;
-      movementController = data.movementController;
-      animationController = data.animationController;
-      memoryController = data.memoryController;
+      Consumer = data.consumer;
+      WaterConsumer = data.waterConsumer;
+      MovementController = data.movementController;
+      AnimationController = data.animationController;
+      MemoryController = data.memoryController;
     }
     
     public override void Begin(GameObject target)
     {
-      _target = null;
-      movementController.StartWander();
-      animationController.MoveAnimation();
+      Target = null;
+      MovementController.StartWander();
+      AnimationController.MoveAnimation();
       //TODO Check memory
     }
 
     public override AnimalState Tick()
     { 
-      if(_target != null)
+      if(Target != null)
       {
-        if(_target.tag == "Wolf" || _target.tag == "Bear")
+        if(Target.tag == "Wolf" || Target.tag == "Bear")
         {
           return AnimalState.Fleeing;
         }
 
-        if(_target.tag == "Water")
+        if(Target.tag == "Water")
         {
           return AnimalState.RunningTowardsWater;
         }
       }
       
-      if(consumer.Hunger > waterConsumer.Thirst && consumer.IsHungry())
+      if(Consumer.Hunger > WaterConsumer.Thirst && Consumer.IsHungry())
       {
         return AnimalState.LookingForFood;
       }
-      movementController.UpdateWander();
+      MovementController.UpdateWander();
       return Type();
     }
 
@@ -52,24 +52,24 @@ namespace Ecosystem.AnimalBehaviour.RabbitStates
     public override void OnTriggerEnter(Collider other)
     {
       var tag = other.gameObject.tag;
-      if (movementController.IsReachable(other.gameObject.transform.position))
+      if (MovementController.IsReachable(other.gameObject.transform.position))
       {
         if (tag == "Water")
         {
-          memoryController.SaveToMemory(other.gameObject);
-          _target = other.gameObject;
+          MemoryController.SaveToMemory(other.gameObject);
+          Target = other.gameObject;
           return;
         }
 
         if (tag == "Wolf" || tag == "Bear")
         {
-          _target = other.gameObject;
+          Target = other.gameObject;
           return;
         }
 
         if (tag == "Food")
         {
-          memoryController.SaveToMemory(other.gameObject); 
+          MemoryController.SaveToMemory(other.gameObject); 
           return;
         }
       }
