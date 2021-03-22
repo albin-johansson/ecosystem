@@ -6,9 +6,9 @@ namespace Ecosystem.AnimalBehaviour
   {
     protected IAnimalState State;
 
-    public virtual void Start()
-    {
-    }
+    public abstract void Start();
+
+    public abstract void SwitchState(AnimalState state);
 
     public void Update()
     {
@@ -27,10 +27,6 @@ namespace Ecosystem.AnimalBehaviour
     public void OnTriggerExit(Collider other)
     {
       State.OnTriggerExit(other);
-    }
-
-    public virtual void SwitchState(AnimalState state)
-    {
     }
   }
 }
