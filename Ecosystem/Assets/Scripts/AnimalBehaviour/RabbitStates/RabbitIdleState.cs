@@ -1,8 +1,9 @@
+using Ecosystem.Util;
 using UnityEngine;
 
 namespace Ecosystem.AnimalBehaviour.RabbitStates
 {
-  public class RabbitIdleState : AbstractAnimalState
+  internal sealed class RabbitIdleState : AbstractAnimalState
   {
     public RabbitIdleState(RabbitStateData data)
     {
@@ -12,7 +13,7 @@ namespace Ecosystem.AnimalBehaviour.RabbitStates
       AnimationController = data.AnimationController;
       MemoryController = data.MemoryController;
     }
-    
+
     public override void Begin(GameObject target)
     {
       Target = null;
@@ -21,45 +22,42 @@ namespace Ecosystem.AnimalBehaviour.RabbitStates
       //TODO Check memory
     }
 
-    override public AnimalState Tick()
+    public override AnimalState Tick()
     {
-      if (Target != null)
+      if (Target)
       {
         return AnimalState.Fleeing;
       }
-
-      if (Consumer.Hunger >= WaterConsumer.Thirst && Consumer.IsHungry())
+      else if (Consumer.Hunger >= WaterConsumer.Thirst && Consumer.IsHungry())
       {
         return AnimalState.LookingForFood;
       }
-
-      if (WaterConsumer.Thirst > Consumer.Hunger && WaterConsumer.IsThirsty())
+      else if (WaterConsumer.Thirst > Consumer.Hunger && WaterConsumer.IsThirsty())
       {
         return AnimalState.LookingForWater;
       }
-
-      return Type();
+      else
+      {
+        return Type();
+      }
     }
 
     public override void OnTriggerEnter(Collider other)
     {
-      if (MovementController.IsReachable(other.gameObject.transform.position))
+      var otherObject = other.gameObject;
+      if (MovementController.IsReachable(otherObject.transform.position))
       {
-        var tag = other.gameObject.tag;
-        if (tag == "Water")
+        if (otherObject.CompareTag("Water"))
         {
-          MemoryController.SaveToMemory(other.gameObject);
-          return;
+          MemoryController.SaveToMemory(otherObject);
         }
-
-        if (tag == "Wolf" || tag == "Bear")
+        else if (Tags.IsPredator(otherObject))
         {
-          Target = other.gameObject;
-          return;
+          Target = otherObject;
         }
       }
     }
-    
+
     public override AnimalState Type()
     {
       return AnimalState.Idle;
