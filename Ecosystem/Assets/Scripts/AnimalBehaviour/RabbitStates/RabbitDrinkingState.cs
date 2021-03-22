@@ -6,11 +6,11 @@ namespace Ecosystem.AnimalBehaviour.RabbitStates
   {
     public RabbitDrinkingState(RabbitStateData data)
     {
-      Consumer = data.consumer;
-      WaterConsumer = data.waterConsumer;
-      MovementController = data.movementController;
-      AnimationController = data.animationController;
-      MemoryController = data.memoryController;
+      Consumer = data.Consumer;
+      WaterConsumer = data.WaterConsumer;
+      MovementController = data.MovementController;
+      AnimationController = data.AnimationController;
+      MemoryController = data.MemoryController;
     }
 
     public override void Begin(GameObject target)

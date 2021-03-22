@@ -2,10 +2,10 @@ namespace Ecosystem.AnimalBehaviour.RabbitStates
 {
   public struct RabbitStateData
   {
-    public IConsumer consumer; 
-    public WaterConsumer waterConsumer;
-    public MovementController movementController;
-    public EcoAnimationController animationController;
-    public MemoryController memoryController;
+    public IConsumer Consumer;
+    public WaterConsumer WaterConsumer;
+    public MovementController MovementController;
+    public EcoAnimationController AnimationController;
+    public MemoryController MemoryController;
   }
 }
