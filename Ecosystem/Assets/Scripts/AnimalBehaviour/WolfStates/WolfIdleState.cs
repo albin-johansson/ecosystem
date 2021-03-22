@@ -2,28 +2,27 @@ using UnityEngine;
 
 namespace Ecosystem.AnimalBehaviour.WolfStates
 {
-  public class WolfIdleState : AbstractAnimalState
+  internal sealed class WolfIdleState : AbstractAnimalState
   {
     public WolfIdleState(WolfStateData data)
     {
-      consumer = data.consumer;
-      waterConsumer = data.waterConsumer;
-      movementController = data.movementController;
-      animationController = data.animationController;
-      memoryController = data.memoryController;
+      Consumer = data.Consumer;
+      WaterConsumer = data.WaterConsumer;
+      MovementController = data.MovementController;
+      AnimationController = data.AnimationController;
+      MemoryController = data.MemoryController;
     }
 
     public override void Begin(GameObject target)
     {
-      movementController.StartWander();
+      MovementController.StartWander();
     }
 
     public override AnimalState Tick()
     {
-      movementController.UpdateWander();
+      MovementController.UpdateWander();
       return base.Tick();
     }
-
 
     public override AnimalState Type()
     {

@@ -1,17 +1,13 @@
-using System;
-using System.Numerics;
 using Ecosystem.Genes;
-using UnityEditor.Experimental.GraphView;
+using Ecosystem.Util;
 using UnityEngine;
 using UnityEngine.AI;
-using Quaternion = UnityEngine.Quaternion;
-using Vector3 = UnityEngine.Vector3;
 
-namespace Ecosystem.AnimalBehaviour
+namespace Ecosystem
 {
   /// <summary>
   ///  This class contains all functions used for movement and navigation. This is to be used
-  /// with a state machine.
+  ///  with a state machine.
   /// </summary>
   public sealed class MovementController : MonoBehaviour
   {
@@ -22,7 +18,6 @@ namespace Ecosystem.AnimalBehaviour
     private float _previousSpeed;
     private readonly float[] _fleeingAngles = {-90, 90, 180};
 
-
     #region PublicFunctions
 
     /// <summary>
@@ -32,7 +27,7 @@ namespace Ecosystem.AnimalBehaviour
     {
       if (IsReachable(targetPosition))
       {
-        return (genome.GetVision().Value < Vector3.Distance(navAgent.transform.position, targetPosition));
+        return genome.GetVision().Value < Vector3.Distance(navAgent.transform.position, targetPosition);
       }
       else
       {
@@ -45,25 +40,19 @@ namespace Ecosystem.AnimalBehaviour
     /// </summary>
     public bool IsReachable(Vector3 targetPosition)
     {
-      return true;
-      //TODO: Fix this function
-      //var potentialPath = new NavMeshPath();
-      //return (navAgent.CalculatePath(targetPosition, potentialPath));
+      var path = new NavMeshPath();
+      return NavMesh.CalculatePath(navAgent.transform.position, targetPosition, Terrains.Walkable, path);
     }
 
     /// <summary>
     ///   Makes the animal run to target if target is valid.
     /// </summary>
-    public bool RunToTarget(Vector3 targetPosition)
+    public void RunToTarget(Vector3 targetPosition)
     {
-      var validatedPosition = ValidateDestination(targetPosition);
-      if (validatedPosition != Vector3.zero)
+      if (ValidateDestination(targetPosition, out var validPosition))
       {
-        SetTarget(validatedPosition);
-        return true;
+        SetTarget(validPosition);
       }
-
-      return false;
     }
 
     /// <summary>
@@ -72,7 +61,7 @@ namespace Ecosystem.AnimalBehaviour
     /// </summary>
     public void StartHunting(Vector3 targetPosition)
     {
-      SetNavAgentSpeed(true);
+      SetNavAgentSpeed();
       SetTarget(targetPosition);
     }
 
@@ -90,7 +79,7 @@ namespace Ecosystem.AnimalBehaviour
     public void StartFleeing(Vector3 threatPosition)
     {
       _fleeDestination = FindFleeDestination(threatPosition);
-      SetNavAgentSpeed(true);
+      SetNavAgentSpeed();
       SetTarget(_fleeDestination);
     }
 
@@ -129,27 +118,24 @@ namespace Ecosystem.AnimalBehaviour
       }
     }
 
-
     /// <summary>
     ///   Sets a target at the edge of the vision range in an angle within a half circle
     ///   of the direction the animal look.
     /// </summary>
-    public bool StartWander()  //borde raycastas så den hittar terräng?
+    public void StartWander() // TODO Should this be ray casted in order to find terrain?
     {
-      var direction = navAgent.transform.forward.normalized * (float) genome.GetVision().Value;
-      var randomAngle = UnityEngine.Random.Range(-90f, 90f);
-      direction = RotateDirection(direction, randomAngle);
-      var position = navAgent.transform.position;
+      var agentTransform = navAgent.transform;
+
+      var direction = agentTransform.forward.normalized * genome.GetVision().Value;
+      direction = RotateDirection(direction, Random.Range(-90f, 90f));
+
+      var position = agentTransform.position;
       var destination = position + direction;
 
-      var validatedDestination = ValidateDestination(destination);
-      if (!(validatedDestination == Vector3.zero))
+      if (ValidateDestination(destination, out var validPosition))
       {
-        SetTarget(validatedDestination);
-        return true;
+        SetTarget(validPosition);
       }
-
-      return false;
     }
 
     /// <summary>
@@ -190,18 +176,18 @@ namespace Ecosystem.AnimalBehaviour
     ///   Checks if a position is valid by checking if there is a valid position within 1.0f radius,
     ///   returns that valid position. If not valid returns zero vector.
     /// </summary>
-    private static Vector3 ValidateDestination(Vector3 destination)
+    private static bool ValidateDestination(Vector3 destination, out Vector3 validPosition)
     {
       if (NavMesh.SamplePosition(destination, out var hit, 1.0f, NavMesh.AllAreas))
       {
-        destination = hit.position;
+        validPosition = hit.position;
+        return true;
       }
       else
       {
-        destination = Vector3.zero;
+        validPosition = Vector3.zero;
+        return false;
       }
-
-      return destination;
     }
 
     /// <summary>
@@ -212,29 +198,31 @@ namespace Ecosystem.AnimalBehaviour
     private Vector3 FindFleeDestination(Vector3 threatPosition)
     {
       var navAgentPosition = navAgent.transform.position;
-      var visionRange = (float) genome.GetVision().Value;
+
       var directionFromThreat = navAgentPosition - threatPosition;
-      for (var i = 0; i < _fleeingAngles.Length; i++)
+      var visionRange = genome.GetVision().Value;
+
+      foreach (var angle in _fleeingAngles)
       {
         _fleeDestination = (navAgentPosition + directionFromThreat) * visionRange;
-        var validatedFleeDestination = ValidateDestination(_fleeDestination);
-        if (validatedFleeDestination == Vector3.zero)
+
+        if (ValidateDestination(_fleeDestination, out var validPosition))
         {
-          directionFromThreat = RotateDirection(directionFromThreat, _fleeingAngles[i]);
+          return validPosition;
         }
         else
         {
-          return _fleeDestination;
+          directionFromThreat = RotateDirection(directionFromThreat, angle);
         }
       }
 
       return Vector3.zero;
     }
 
-    private void SetNavAgentSpeed(bool run)
+    private void SetNavAgentSpeed()
     {
       //TODO: Should use stamina or energy from genome (not implemented in genome yet)
-      navAgent.speed = (float) genome.GetSpeedFactor().Value;
+      navAgent.speed = genome.GetSpeedFactor().Value;
     }
 
     #endregion

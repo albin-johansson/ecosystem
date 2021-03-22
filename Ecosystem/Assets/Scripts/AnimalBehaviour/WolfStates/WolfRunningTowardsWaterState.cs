@@ -2,42 +2,43 @@ using UnityEngine;
 
 namespace Ecosystem.AnimalBehaviour.WolfStates
 {
-  public class WolfRunningTowardsWaterState : AbstractAnimalState
+  internal sealed class WolfRunningTowardsWaterState : AbstractAnimalState
   {
     public WolfRunningTowardsWaterState(WolfStateData data)
     {
-      consumer = data.consumer;
-      waterConsumer = data.waterConsumer;
-      movementController = data.movementController;
-      animationController = data.animationController;
-      memoryController = data.memoryController;
+      Consumer = data.Consumer;
+      WaterConsumer = data.WaterConsumer;
+      MovementController = data.MovementController;
+      AnimationController = data.AnimationController;
+      MemoryController = data.MemoryController;
     }
+
     public override void Begin(GameObject target)
     {
-      _target = target;
-      movementController.RunToTarget(_target.transform.position);
-      animationController.MoveAnimation();
+      Target = target;
+      MovementController.RunToTarget(Target.transform.position);
+      AnimationController.MoveAnimation();
     }
 
     public override AnimalState Tick()
     {
-      if (_target == null)
+      if (Target)
       {
         return AnimalState.LookingForWater;
       }
-
-      if (waterConsumer.CanDrink)
+      else if (WaterConsumer.CanDrink)
       {
         return AnimalState.Drinking;
       }
-
-      if (waterConsumer.Thirst < consumer.Hunger && consumer.IsHungry()) //If we are more thirsty then hungry: Look for water
+      else if (WaterConsumer.Thirst < Consumer.Hunger && Consumer.IsHungry())
       {
         return AnimalState.LookingForPrey;
       }
-
-      movementController.RunToTarget(_target.transform.position);
-      return this.Type();
+      else
+      {
+        MovementController.RunToTarget(Target.transform.position);
+        return Type();
+      }
     }
 
     public override AnimalState Type()

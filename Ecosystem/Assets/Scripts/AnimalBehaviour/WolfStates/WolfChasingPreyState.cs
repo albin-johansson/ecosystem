@@ -2,48 +2,48 @@ using UnityEngine;
 
 namespace Ecosystem.AnimalBehaviour.WolfStates
 {
-  public class WolfChasingPreyState : AbstractAnimalState
+  internal sealed class WolfChasingPreyState : AbstractAnimalState
   {
     public WolfChasingPreyState(WolfStateData data)
     {
-      consumer = data.consumer;
-      waterConsumer = data.waterConsumer;
-      movementController = data.movementController;
-      animationController = data.animationController;
-      memoryController = data.memoryController;
+      Consumer = data.Consumer;
+      WaterConsumer = data.WaterConsumer;
+      MovementController = data.MovementController;
+      AnimationController = data.AnimationController;
+      MemoryController = data.MemoryController;
     }
+
     public override void Begin(GameObject target)
     {
-      _target = target;
-      movementController.StartHunting(_target.transform.position);
-      animationController.MoveAnimation();
+      Target = target;
+      MovementController.StartHunting(Target.transform.position);
+      AnimationController.MoveAnimation();
     }
 
     public override AnimalState Tick()
     {
-      if (_target == null || !movementController.IsTargetInRange(_target.transform.position))
+      if (!Target || !MovementController.IsTargetInRange(Target.transform.position))
       {
         return base.Tick();
       }
       else
       {
-        movementController.UpdateHunting(_target.transform.position);
+        MovementController.UpdateHunting(Target.transform.position);
       }
 
-      if (waterConsumer.Thirst > consumer.Hunger && waterConsumer.IsThirsty()) //If we are more thirsty then hungry: Look for water
+      if (WaterConsumer.Thirst > Consumer.Hunger && WaterConsumer.IsThirsty())
       {
         return AnimalState.LookingForWater;
       }
 
-
-      return this.Type();
+      return Type();
     }
 
-    override public void OnTriggerExit(Collider other)
+    public override void OnTriggerExit(Collider other)
     {
-      if (other.gameObject == _target)
+      if (other.gameObject == Target)
       {
-        _target = null;
+        Target = null;
       }
     }
 

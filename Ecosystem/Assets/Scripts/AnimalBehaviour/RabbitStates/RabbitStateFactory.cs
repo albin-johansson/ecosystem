@@ -4,44 +4,37 @@ namespace Ecosystem.AnimalBehaviour.RabbitStates
   {
     public static IAnimalState CreateIdle(RabbitStateData data)
     {
-      var State = new RabbitIdleState(data);
-      return State;
+      return new RabbitIdleState(data);
     }
 
     public static IAnimalState CreateLookingForFood(RabbitStateData data)
     {
-      RabbitLookingForFoodState State = new RabbitLookingForFoodState(data);
-      return State;
+      return new RabbitLookingForFoodState(data);
     }
 
     public static IAnimalState CreateLookingForWater(RabbitStateData data)
     {
-      RabbitLookingForWaterState State = new RabbitLookingForWaterState(data);
-      return State;
+      return new RabbitLookingForWaterState(data);
     }
 
     public static IAnimalState CreateRunningTowardsFood(RabbitStateData data)
     {
-      RabbitRunningTowardsFoodState State = new RabbitRunningTowardsFoodState(data);
-      return State;
+      return new RabbitRunningTowardsFoodState(data);
     }
 
     public static IAnimalState CreateDrinking(RabbitStateData data)
     {
-      RabbitDrinkingState State = new RabbitDrinkingState(data);
-      return State;
+      return new RabbitDrinkingState(data);
     }
 
     public static IAnimalState CreateRunningTowardsWater(RabbitStateData data)
     {
-      RabbitRunningTowardsWaterState State = new RabbitRunningTowardsWaterState(data);
-      return State;
+      return new RabbitRunningTowardsWaterState(data);
     }
 
     public static IAnimalState CreateFleeing(RabbitStateData data)
     {
-      RabbitFleeingState State = new RabbitFleeingState(data);
-      return State;
+      return new RabbitFleeingState(data);
     }
   }
 }

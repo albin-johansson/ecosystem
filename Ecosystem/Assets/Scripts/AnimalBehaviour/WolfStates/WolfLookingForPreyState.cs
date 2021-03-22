@@ -1,54 +1,55 @@
+using Ecosystem.Util;
 using UnityEngine;
 
 namespace Ecosystem.AnimalBehaviour.WolfStates
 {
-  public class WolfLookingForPreyState : AbstractAnimalState
+  internal sealed class WolfLookingForPreyState : AbstractAnimalState
   {
     public WolfLookingForPreyState(WolfStateData data)
     {
-      consumer = data.consumer;
-      waterConsumer = data.waterConsumer;
-      movementController = data.movementController;
-      animationController = data.animationController;
-      memoryController = data.memoryController;
+      Consumer = data.Consumer;
+      WaterConsumer = data.WaterConsumer;
+      MovementController = data.MovementController;
+      AnimationController = data.AnimationController;
+      MemoryController = data.MemoryController;
     }
 
     public override void Begin(GameObject target)
     {
-      _target = null;
-      movementController.StartWander();
-      animationController.MoveAnimation();
+      Target = null;
+      MovementController.StartWander();
+      AnimationController.MoveAnimation();
     }
 
     public override AnimalState Tick()
     {
-      if (_target != null)
+      if (Target)
       {
         return AnimalState.ChasingPrey;
       }
-
-      if (waterConsumer.Thirst > consumer.Hunger && waterConsumer.IsThirsty()) //If we are more thirsty then hungry: Look for water
+      else if (WaterConsumer.Thirst > Consumer.Hunger && WaterConsumer.IsThirsty())
       {
         return AnimalState.LookingForWater;
       }
-
-      movementController.UpdateWander();
-      return this.Type();
+      else
+      {
+        MovementController.UpdateWander();
+        return Type();
+      }
     }
 
-    override public void OnTriggerEnter(Collider other)
+    public override void OnTriggerEnter(Collider other)
     {
-      if (movementController.IsReachable(other.gameObject.transform.position))
+      var otherObject = other.gameObject;
+      if (MovementController.IsReachable(otherObject.transform.position))
       {
-        if (other.gameObject.CompareTag("Water"))
+        if (otherObject.CompareTag("Water"))
         {
-          memoryController.SaveToMemory(other.gameObject);
-          return;
+          MemoryController.SaveToMemory(otherObject);
         }
-
-        if (other.gameObject.CompareTag("Rabbit") || other.gameObject.CompareTag("Deer"))
+        else if (Tags.IsPrey(otherObject))
         {
-          _target = other.gameObject;
+          Target = otherObject;
         }
       }
     }
