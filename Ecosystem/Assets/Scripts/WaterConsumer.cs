@@ -14,6 +14,7 @@ namespace Ecosystem
 
     private bool _isDead;
     public bool IsDrinking { get; private set; }
+    public bool CanDrink { get; private set; }
     public float Thirst { get; private set; }
 
 
@@ -26,6 +27,7 @@ namespace Ecosystem
     {
       Thirst = 0;
       IsDrinking = false;
+      CanDrink = false;
     }
 
     private void Update()
@@ -54,17 +56,34 @@ namespace Ecosystem
       }
     }
 
-    private void OnTriggerEnter(Collider other)
+    private void OnTriggerEnter(Collider other) //TODO: fix bug: enter twice and exit once will yeld a false negative, only possible if watersources are overlapping
     {
-      if (other.gameObject.CompareTag("Water") && IsThirsty())
+      if (other.gameObject.CompareTag("Water"))
       {
-        IsDrinking = true;
+        CanDrink = true;
+      }
+    }
+
+    private void OnTriggerExit(Collider other)
+    {
+      if (other.gameObject.CompareTag("Water"))
+      {
+        CanDrink = false;
       }
     }
 
     public void StopDrinking()
     {
       IsDrinking = false;
+    }
+
+    public bool StartDrinking()
+    {
+      if (CanDrink)
+      {
+        IsDrinking = true;
+      }
+      return IsDrinking;
     }
 
     internal bool IsThirsty()
