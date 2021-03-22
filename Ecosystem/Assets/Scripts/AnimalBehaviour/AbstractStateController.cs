@@ -4,7 +4,7 @@ namespace Ecosystem.AnimalBehaviour
 {
   public abstract class AbstractStateController : MonoBehaviour, IStateController
   {
-    public IAnimalState _state;
+    protected IAnimalState State;
 
     public virtual void Start()
     {
@@ -12,8 +12,8 @@ namespace Ecosystem.AnimalBehaviour
 
     public void Update()
     {
-      var newState = _state.Tick();
-      if (newState != _state.Type())
+      var newState = State.Tick();
+      if (newState != State.Type())
       {
         SwitchState(newState);
       }
@@ -21,12 +21,12 @@ namespace Ecosystem.AnimalBehaviour
 
     public void OnTriggerEnter(Collider other)
     {
-      _state.OnTriggerEnter(other);
+      State.OnTriggerEnter(other);
     }
 
     public void OnTriggerExit(Collider other)
     {
-      _state.OnTriggerExit(other);
+      State.OnTriggerExit(other);
     }
 
     public virtual void SwitchState(AnimalState state)

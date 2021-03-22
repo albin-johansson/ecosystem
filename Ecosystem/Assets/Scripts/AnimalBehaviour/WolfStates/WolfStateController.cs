@@ -4,11 +4,12 @@ namespace Ecosystem.AnimalBehaviour.WolfStates
 {
   public sealed class WolfStateController : AbstractStateController
   {
-    [SerializeField] private PreyConsumer consumer; 
+    [SerializeField] private PreyConsumer consumer;
     [SerializeField] private WaterConsumer waterConsumer;
     [SerializeField] private MovementController movementController;
     [SerializeField] private EcoAnimationController animationController;
     [SerializeField] private MemoryController memoryController;
+
     private IAnimalState _idle;
     private IAnimalState _lookingForPrey;
     private IAnimalState _lookingForWater;
@@ -34,50 +35,51 @@ namespace Ecosystem.AnimalBehaviour.WolfStates
       _drinking = WolfStateFactory.CreateDrinking(_stateData);
       _runningTowardsWater = WolfStateFactory.CreateRunningTowardsWater(_stateData);
       _chasingPrey = WolfStateFactory.CreateChasingPrey(_stateData);
+      State = _idle;
       SwitchState(AnimalState.Idle);
     }
 
     public override void SwitchState(AnimalState state)
     {
-      var target = _state.End();
+      var target = State.End();
       switch (state)
-      { 
-        case  AnimalState.LookingForWater:
-          _state = _lookingForWater;
+      {
+        case AnimalState.LookingForWater:
+          State = _lookingForWater;
           break;
 
-        case  AnimalState.LookingForPrey:
-          _state = _lookingForPrey;
+        case AnimalState.LookingForPrey:
+          State = _lookingForPrey;
           break;
 
-        case  AnimalState.Idle:
-          _state = _idle;
+        case AnimalState.Idle:
+          State = _idle;
           break;
 
-        case  AnimalState.Fleeing:
+        case AnimalState.Fleeing:
 
           break;
-          
-        case  AnimalState.Drinking:
-          _state = _drinking;
+
+        case AnimalState.Drinking:
+          State = _drinking;
           break;
 
-        case  AnimalState.RunningTowardsWater:
-          _state = _runningTowardsWater;
+        case AnimalState.RunningTowardsWater:
+          State = _runningTowardsWater;
           break;
 
-        case  AnimalState.RunningTowardsFood:
+        case AnimalState.RunningTowardsFood:
           break;
 
-        case  AnimalState.ChasingPrey:
-          _state = _chasingPrey;
+        case AnimalState.ChasingPrey:
+          State = _chasingPrey;
           break;
 
         default:
           break;
-      
       }
-      _state.Begin(target);
+
+      State.Begin(target);
     }
   }
 }
