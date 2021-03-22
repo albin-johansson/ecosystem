@@ -2,7 +2,7 @@ using UnityEngine;
 
 namespace Ecosystem.AnimalBehaviour.WolfStates
 {
-  public class WolfChasingPreyState : AbstractAnimalState
+  internal sealed class WolfChasingPreyState : AbstractAnimalState
   {
     public WolfChasingPreyState(WolfStateData data)
     {
@@ -12,6 +12,7 @@ namespace Ecosystem.AnimalBehaviour.WolfStates
       AnimationController = data.animationController;
       MemoryController = data.memoryController;
     }
+
     public override void Begin(GameObject target)
     {
       Target = target;
@@ -21,7 +22,7 @@ namespace Ecosystem.AnimalBehaviour.WolfStates
 
     public override AnimalState Tick()
     {
-      if (Target == null || !MovementController.IsTargetInRange(Target.transform.position))
+      if (!Target || !MovementController.IsTargetInRange(Target.transform.position))
       {
         return base.Tick();
       }
@@ -30,16 +31,15 @@ namespace Ecosystem.AnimalBehaviour.WolfStates
         MovementController.UpdateHunting(Target.transform.position);
       }
 
-      if (WaterConsumer.Thirst > Consumer.Hunger && WaterConsumer.IsThirsty()) //If we are more thirsty then hungry: Look for water
+      if (WaterConsumer.Thirst > Consumer.Hunger && WaterConsumer.IsThirsty())
       {
         return AnimalState.LookingForWater;
       }
 
-
-      return this.Type();
+      return Type();
     }
 
-    override public void OnTriggerExit(Collider other)
+    public override void OnTriggerExit(Collider other)
     {
       if (other.gameObject == Target)
       {
