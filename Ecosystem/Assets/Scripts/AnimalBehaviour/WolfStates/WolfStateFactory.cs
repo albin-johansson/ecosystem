@@ -4,39 +4,32 @@ namespace Ecosystem.AnimalBehaviour.WolfStates
   {
     public static IAnimalState CreateIdle(WolfStateData data)
     {
-      var State = new WolfIdleState(data);
-      return State;
+      return new WolfIdleState(data);
     }
 
     public static IAnimalState CreateLookingForPrey(WolfStateData data)
     {
-      WolfLookingForPreyState State = new WolfLookingForPreyState(data);
-      return State;
+      return new WolfLookingForPreyState(data);
     }
 
     public static IAnimalState CreateLookingForWater(WolfStateData data)
     {
-      WolfLookingForWaterState State = new WolfLookingForWaterState(data);
-
-      return State;
+      return new WolfLookingForWaterState(data);
     }
 
     public static IAnimalState CreateChasingPrey(WolfStateData data)
     {
-      WolfChasingPreyState State = new WolfChasingPreyState(data);
-      return State;
+      return new WolfChasingPreyState(data);
     }
 
     public static IAnimalState CreateDrinking(WolfStateData data)
     {
-      WolfDrinkingState State = new WolfDrinkingState(data);
-      return State;
+      return new WolfDrinkingState(data);
     }
 
     public static IAnimalState CreateRunningTowardsWater(WolfStateData data)
     {
-      WolfRunningTowardsWaterState State = new WolfRunningTowardsWaterState(data);
-      return State;
+      return new WolfRunningTowardsWaterState(data);
     }
   }
 }
