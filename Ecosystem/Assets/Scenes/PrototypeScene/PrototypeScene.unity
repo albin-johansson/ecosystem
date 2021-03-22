@@ -149,6 +149,26 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 464592539}
     m_Modifications:
+    - target: {fileID: 3350421026760717125, guid: ac935de5e4958254196cd0457e8a0df5, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 43.28
+      objectReference: {fileID: 0}
+    - target: {fileID: 3350421026760717125, guid: ac935de5e4958254196cd0457e8a0df5, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 2.4903865
+      objectReference: {fileID: 0}
+    - target: {fileID: 3350421026760717125, guid: ac935de5e4958254196cd0457e8a0df5, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 38.15
+      objectReference: {fileID: 0}
+    - target: {fileID: 3350421026760717125, guid: ac935de5e4958254196cd0457e8a0df5, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0.2315453
+      objectReference: {fileID: 0}
+    - target: {fileID: 3350421026760717125, guid: ac935de5e4958254196cd0457e8a0df5, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0.000000057514697
+      objectReference: {fileID: 0}
     - target: {fileID: 7332217931988766355, guid: a4692b44427bacf41ad31be76110a8f2, type: 3}
       propertyPath: m_Name
       value: EcoCarrot
@@ -176,26 +196,6 @@ PrefabInstance:
     - target: {fileID: 7337792851589526139, guid: a4692b44427bacf41ad31be76110a8f2, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 90.172
-      objectReference: {fileID: 0}
-    - target: {fileID: 3350421026760717125, guid: ac935de5e4958254196cd0457e8a0df5, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 43.28
-      objectReference: {fileID: 0}
-    - target: {fileID: 3350421026760717125, guid: ac935de5e4958254196cd0457e8a0df5, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 2.4903865
-      objectReference: {fileID: 0}
-    - target: {fileID: 3350421026760717125, guid: ac935de5e4958254196cd0457e8a0df5, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: 38.15
-      objectReference: {fileID: 0}
-    - target: {fileID: 3350421026760717125, guid: ac935de5e4958254196cd0457e8a0df5, type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 0.2315453
-      objectReference: {fileID: 0}
-    - target: {fileID: 3350421026760717125, guid: ac935de5e4958254196cd0457e8a0df5, type: 3}
-      propertyPath: m_LocalRotation.x
-      value: 0.000000057514697
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: a4692b44427bacf41ad31be76110a8f2, type: 3}
@@ -414,7 +414,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 208682696}
-  - component: {fileID: 208682697}
+  - component: {fileID: 208682698}
   m_Layer: 0
   m_Name: RadiusPrefabSpawner
   m_TagString: Untagged
@@ -436,7 +436,7 @@ Transform:
   m_Father: {fileID: 2066719653}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &208682697
+--- !u!114 &208682698
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -445,13 +445,16 @@ MonoBehaviour:
   m_GameObject: {fileID: 208682695}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0ec72f8ba0cc94e41a4196a253a2fe37, type: 3}
+  m_Script: {fileID: 11500000, guid: d26820fbc845f1842af9fe92437a9fab, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  directory: {fileID: 464592539}
+  terrain: {fileID: 1482260078}
   prefab: {fileID: 7332217931988766355, guid: a4692b44427bacf41ad31be76110a8f2, type: 3}
-  rate: 2
+  directory: {fileID: 464592539}
+  useRadius: 1
   radius: 2
+  keyInPool: 
+  spawnRate: 2
 --- !u!1 &234426631
 GameObject:
   m_ObjectHideFlags: 0
@@ -464,6 +467,7 @@ GameObject:
   - component: {fileID: 234426633}
   - component: {fileID: 234426632}
   - component: {fileID: 234426635}
+  - component: {fileID: 234426636}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -549,6 +553,22 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 25
+--- !u!54 &234426636
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 234426631}
+  serializedVersion: 2
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_UseGravity: 0
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0
 --- !u!114 &240249464 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 7808996231844987710, guid: 3831f586ea2ac004ea0d8941a5129ad2, type: 3}
@@ -2396,10 +2416,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d26820fbc845f1842af9fe92437a9fab, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  directory: {fileID: 464592539}
-  prefab: {fileID: 7332217931988766355, guid: a4692b44427bacf41ad31be76110a8f2, type: 3}
   terrain: {fileID: 1482260078}
-  rate: 2
+  prefab: {fileID: 7332217931988766355, guid: a4692b44427bacf41ad31be76110a8f2, type: 3}
+  directory: {fileID: 464592539}
+  useRadius: 0
+  radius: 0
+  keyInPool: 
+  spawnRate: 2
 --- !u!1001 &1079039874
 PrefabInstance:
   m_ObjectHideFlags: 0

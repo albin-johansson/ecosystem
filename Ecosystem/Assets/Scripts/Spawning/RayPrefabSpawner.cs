@@ -1,40 +1,92 @@
+using System;
+using Ecosystem.Util;
 using UnityEngine;
+using UnityEngine.AI;
+using UnityEngine.UI;
+using Random = UnityEngine.Random;
 
 namespace Ecosystem.Spawning
 {
-  // Will spawn a given prefab inside the given terrain if it hits something with a ground tag.
   public sealed class RayPrefabSpawner : MonoBehaviour
   {
-    [SerializeField] private Transform directory;
-    [SerializeField] private GameObject prefab;
     [SerializeField] private Terrain terrain;
-    [SerializeField] private float rate;
-    private float _elapsedTime;
+    [SerializeField] private GameObject prefab;
 
+    [Tooltip("This directory will be overwritten if objectPool is used")] [SerializeField]
+    private Transform directory;
+
+    [SerializeField] private bool useRadius;
+    [SerializeField] private float radius;
+
+    [Tooltip("Fill this field if using objectPooling for the spawning gameObject")] [SerializeField]
+    private string keyInPool;
+
+    [SerializeField] private float spawnRate;
+
+    private float _elapsedTime;
+    private bool _usePool;
+    private bool _haveCheckedPool;
+    
     private void Update()
     {
-      _elapsedTime += Time.deltaTime;
-      if (rate < _elapsedTime)
+      if (!_haveCheckedPool)
       {
-        _elapsedTime = 0;
+        _usePool = ObjectPoolHandler.instance.isPoolValid(keyInPool);
+        _haveCheckedPool = true;
+      }
 
-        var terrainData = terrain.terrainData;
-        var xPos = Random.Range(-terrainData.bounds.extents.x, terrainData.bounds.extents.x);
-        var zPos = Random.Range(-terrainData.bounds.extents.z, terrainData.bounds.extents.z);
+      _elapsedTime += Time.deltaTime;
+      if (spawnRate > _elapsedTime)
+      {
+        return;
+      }
 
-        var position = terrainData.bounds.center + new Vector3(xPos, 0, zPos);
-        var height = terrain.SampleHeight(terrainData.bounds.center + new Vector3(xPos, 0, zPos)) + 10;
+      _elapsedTime = 0;
 
-        if (!Physics.Raycast(position + new Vector3(0, height, 0), Vector3.down, out var hit, 200.0f))
+      if (useRadius)
+      {
+        SpawnInRadius();
+      }
+      else
+      {
+        SpawnOnNavMesh();
+      }
+    }
+
+    private void SpawnInRadius()
+    {
+      var dir = Random.insideUnitCircle * radius;
+      var position = transform.position + new Vector3(dir.x, 0, dir.y);
+
+      Spawn(position, radius);
+    }
+
+    private void Spawn(Vector3 position, float wantedRadius)
+    {
+      if (NavMesh.SamplePosition(position, out var hit, wantedRadius, Terrains.Walkable))
+      {
+        if (_usePool)
         {
-          return;
+          var spawnedObject = ObjectPoolHandler.instance.GetFromPool(keyInPool);
+          spawnedObject.transform.position = hit.position;
+          spawnedObject.transform.parent = directory;
+          spawnedObject.SetActive(true);
         }
-
-        if (hit.transform.CompareTag("Ground"))
+        else
         {
-          Instantiate(prefab, hit.point, Quaternion.identity, directory);
+          Instantiate(prefab, hit.position, Quaternion.identity, directory);
         }
       }
+    }
+
+    private void SpawnOnNavMesh()
+    {
+      var terrainData = terrain.terrainData;
+      var xPos = Random.Range(0, terrainData.bounds.max.x);
+      var zPos = Random.Range(0, terrainData.bounds.max.z);
+      var position = terrain.transform.position + new Vector3(xPos, 0, zPos);
+
+      Spawn(position, terrainData.bounds.max.y);
     }
   }
 }
