@@ -7,6 +7,9 @@ namespace Ecosystem.UI
 {
   public sealed class GraphicsSettings : MonoBehaviour
   {
+    [SerializeField] private Sprite cogwheel;
+    [SerializeField] private Sprite arrow;
+    [SerializeField] private Image showSettingsButtonImage;
     [SerializeField] private GameObject mainMenuWindow;
     [SerializeField] private GameObject settingsWindow;
     [SerializeField] private GameObject ambientOcclusionSlider;
@@ -22,6 +25,14 @@ namespace Ecosystem.UI
     {
       settingsWindow.SetActive(!settingsWindow.activeSelf);
       mainMenuWindow.SetActive(!mainMenuWindow.activeSelf);
+      if (settingsWindow.activeSelf)
+      {
+        showSettingsButtonImage.sprite = arrow; 
+      }
+      else
+      {
+        showSettingsButtonImage.sprite = cogwheel;
+      }
     }
 
     public void AntiAliasingOption()
