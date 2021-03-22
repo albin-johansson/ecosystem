@@ -4,7 +4,6 @@ namespace Ecosystem.AnimalBehaviour
 {
   public abstract class AbstractAnimalState : IAnimalState
   {
-    public MateFinder MateFinder;
     protected IConsumer Consumer;
     protected WaterConsumer WaterConsumer;
     protected MemoryController MemoryController;
