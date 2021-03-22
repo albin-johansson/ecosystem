@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace Ecosystem
+namespace Ecosystem.Spawning
 {
   // Will spawn the given prefab where the user clicks. 
   public sealed class ClickPrefabSpawner : MonoBehaviour

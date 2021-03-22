@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 using UnityEngine.AI;
 
 namespace Ecosystem
@@ -15,7 +16,7 @@ namespace Ecosystem
     private float _navMeshAgentSpeed;
     private float _navMeshAgentVelocity;
 
-    private void Start()
+    private void OnEnable()
     {
       _animator = GetComponent<Animator>();
       _isWalkingHash = Animator.StringToHash("isWalking");
@@ -23,6 +24,8 @@ namespace Ecosystem
       _isDeadHash = Animator.StringToHash("isDead");
       _isAttackingHash = Animator.StringToHash("isAttacking");
       _animationSpeedMultiplier = Animator.StringToHash("animationSpeedMultiplier");
+      _navMeshAgentSpeed = navMeshAgent.speed;
+      ResetAnimatorParameters();
       _navMeshAgentSpeed = navMeshAgent.speed;
     }
 
