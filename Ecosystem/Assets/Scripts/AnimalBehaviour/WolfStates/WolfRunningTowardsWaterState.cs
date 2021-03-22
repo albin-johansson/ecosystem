@@ -2,7 +2,7 @@ using UnityEngine;
 
 namespace Ecosystem.AnimalBehaviour.WolfStates
 {
-  public class WolfRunningTowardsWaterState : AbstractAnimalState
+  internal sealed class WolfRunningTowardsWaterState : AbstractAnimalState
   {
     public WolfRunningTowardsWaterState(WolfStateData data)
     {
@@ -12,6 +12,7 @@ namespace Ecosystem.AnimalBehaviour.WolfStates
       AnimationController = data.animationController;
       MemoryController = data.memoryController;
     }
+
     public override void Begin(GameObject target)
     {
       Target = target;
@@ -21,23 +22,23 @@ namespace Ecosystem.AnimalBehaviour.WolfStates
 
     public override AnimalState Tick()
     {
-      if (Target == null)
+      if (Target)
       {
         return AnimalState.LookingForWater;
       }
-
-      if (WaterConsumer.CanDrink)
+      else if (WaterConsumer.CanDrink)
       {
         return AnimalState.Drinking;
       }
-
-      if (WaterConsumer.Thirst < Consumer.Hunger && Consumer.IsHungry()) //If we are more thirsty then hungry: Look for water
+      else if (WaterConsumer.Thirst < Consumer.Hunger && Consumer.IsHungry())
       {
         return AnimalState.LookingForPrey;
       }
-
-      MovementController.RunToTarget(Target.transform.position);
-      return this.Type();
+      else
+      {
+        MovementController.RunToTarget(Target.transform.position);
+        return Type();
+      }
     }
 
     public override AnimalState Type()
