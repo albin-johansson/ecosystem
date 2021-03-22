@@ -1,4 +1,5 @@
 using System;
+using Ecosystem.Util;
 using UnityEngine;
 
 namespace Ecosystem.UI
@@ -91,7 +92,7 @@ namespace Ecosystem.UI
 
         if (Physics.Raycast(ray, out hit, 100))
         {
-          if (!hit.transform.tag.Equals("Terrain"))
+          if (Tags.IsAnimal(hit.transform.gameObject))
           {
             _trackedTarget = hit.transform;
             _track = true;
