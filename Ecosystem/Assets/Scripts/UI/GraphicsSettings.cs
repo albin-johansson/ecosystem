@@ -20,6 +20,7 @@ namespace Ecosystem.UI
     public static int _antiAliasingMode;
     public static bool _ambientOcclusionActive = true;
     public static int _ambientOcclusionIntensity = 25;
+    public static bool _update = false;
 
     public void SettingsMenu()
     {
@@ -27,11 +28,13 @@ namespace Ecosystem.UI
       mainMenuWindow.SetActive(!mainMenuWindow.activeSelf);
       if (settingsWindow.activeSelf)
       {
-        showSettingsButtonImage.sprite = arrow; 
+        showSettingsButtonImage.sprite = arrow;
+        _update = true;
       }
       else
       {
         showSettingsButtonImage.sprite = cogwheel;
+        _update = false;
       }
     }
 
