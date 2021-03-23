@@ -1,6 +1,7 @@
 using Ecosystem.Genes;
 using Ecosystem.Logging;
 using Ecosystem.UI;
+using Ecosystem.Util;
 using UnityEngine;
 
 namespace Ecosystem
@@ -14,18 +15,22 @@ namespace Ecosystem
 
     private bool _isDead;
     public bool IsDrinking { get; private set; }
+    public bool CanDrink { get; private set; }
     public float Thirst { get; private set; }
+    private int _waterSourcesAvailable = 0;
 
 
     private void OnEnable()
     {
       resourceBar.SetMaxValue(maxThirst);
+      _waterSourcesAvailable = 0;
     }
 
     private void OnDisable()
     {
       Thirst = 0;
       IsDrinking = false;
+      CanDrink = false;
     }
 
     private void Update()
@@ -56,15 +61,34 @@ namespace Ecosystem
 
     private void OnTriggerEnter(Collider other)
     {
-      if (other.gameObject.CompareTag("Water") && IsThirsty())
+      if (Tags.IsWater(other.gameObject))
       {
-        IsDrinking = true;
+        _waterSourcesAvailable++;
+        CanDrink = _waterSourcesAvailable > 0;
+      }
+    }
+
+    private void OnTriggerExit(Collider other)
+    {
+      if (Tags.IsWater(other.gameObject))
+      {
+        _waterSourcesAvailable--;
+        CanDrink = _waterSourcesAvailable > 0;
       }
     }
 
     public void StopDrinking()
     {
       IsDrinking = false;
+    }
+
+    public bool StartDrinking()
+    {
+      if (CanDrink)
+      {
+        IsDrinking = true;
+      }
+      return IsDrinking;
     }
 
     internal bool IsThirsty()
