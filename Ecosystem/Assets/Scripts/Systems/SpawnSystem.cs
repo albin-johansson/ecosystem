@@ -2,8 +2,8 @@ using Ecosystem.Util;
 using Reese.Nav;
 using Unity.Entities;
 using Unity.Mathematics;
-using UnityEditor.SearchService;
 using UnityEngine;
+using Random = UnityEngine.Random;
 
 namespace Ecosystem.Systems
 {
@@ -30,7 +30,14 @@ namespace Ecosystem.Systems
         {
           if (Terrains.RandomWalkablePosition(terrain, out var position))
           {
-            FactorySystem.MakeRabbit(position);
+            if (Random.value > 0.5)
+            {
+              FactorySystem.MakeRabbit(position);
+            }
+            else
+            {
+              FactorySystem.MakeWolf(position);
+            }
           }
         }
 
