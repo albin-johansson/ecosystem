@@ -125,7 +125,7 @@ namespace Ecosystem
     ///   Sets a target at the edge of the vision range in an angle within a half circle
     ///   of the direction the animal look.
     /// </summary>
-    public void StartWander() // TODO Should this be ray casted in order to find terrain?
+    public void StartWander()
     {
       var agentTransform = navAgent.transform;
 
@@ -162,7 +162,6 @@ namespace Ecosystem
     /// </summary>
     private void SetTarget(Vector3 destination)
     {
-      //TODO: rotate before moving
       navAgent.SetDestination(destination);
     }
 
