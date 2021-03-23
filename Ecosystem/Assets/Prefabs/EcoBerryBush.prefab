@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 4394439881536811296}
   - component: {fileID: 7295364426056297732}
   - component: {fileID: 3330879788161668165}
+  - component: {fileID: 7118100303498064253}
   m_Layer: 6
   m_Name: EcoBerryBush
   m_TagString: Food
@@ -147,6 +148,21 @@ LODGroup:
     - renderer: {fileID: 0}
     - renderer: {fileID: 0}
   m_Enabled: 1
+--- !u!114 &7118100303498064253
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1534203587558825071}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 52b4576266ef38946ad1413924bd2a18, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  prefab: {fileID: 8559470340436687699, guid: cad66cdb650c32041829c021f7276f59, type: 3}
+  rate: 10
+  radius: 2
 --- !u!1001 &65032591394484543
 PrefabInstance:
   m_ObjectHideFlags: 0
