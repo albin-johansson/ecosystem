@@ -33,6 +33,19 @@ LODGroup:
     renderers:
     - renderer: {fileID: 7318616467099359385}
   m_Enabled: 1
+--- !u!114 &2571273204485233299
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7332217931988766355}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 447cdde87036ae847b423148d5fee418, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  NutritionalValue: 100
 --- !u!1001 &7333217439412842729
 PrefabInstance:
   m_ObjectHideFlags: 0

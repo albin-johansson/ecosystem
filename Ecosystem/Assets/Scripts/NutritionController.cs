@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -7,13 +8,17 @@ namespace Ecosystem
     public class NutritionController : MonoBehaviour
     {
 
-        [SerializeField] private float NutritionalValue;
+        [SerializeField] private Double NutritionalValue;
 
-        public float Consume(float hunger)
+        public double Consume(Double hunger)
         {
-            var consumptionAmount = Mathf.Min(hunger, NutritionalValue);
-            NutritionalValue -= consumptionAmount;
-            return consumptionAmount;
+            if (hunger < NutritionalValue)
+            {
+                NutritionalValue -= hunger;
+                return hunger;
+            }
+
+            return NutritionalValue;
         }
     }
 }

@@ -55,16 +55,20 @@ namespace Ecosystem
     {
       if (Tags.IsFood(other.gameObject))
       {
-        OnFoodEaten?.Invoke(other.gameObject);
-        var gameObjectTag = other.gameObject.tag;
-        Hunger = 0;
-        if (ObjectPoolHandler.instance.isPoolValid(gameObjectTag))
+        if (TryGetComponent(out NutritionController nutritionController))
         {
-          ObjectPoolHandler.instance.ReturnToPool(gameObjectTag, other.gameObject);
-        }
-        else
-        {
-          Destroy(other.gameObject);
+          Hunger -= nutritionController.Consume(Hunger);
+          OnFoodEaten?.Invoke(other.gameObject);
+          var gameObjectTag = other.gameObject.tag;
+          Hunger = 0;
+          if (ObjectPoolHandler.instance.isPoolValid(gameObjectTag))
+          {
+            ObjectPoolHandler.instance.ReturnToPool(gameObjectTag, other.gameObject);
+          }
+          else
+          {
+            Destroy(other.gameObject);
+          }
         }
       }
     }
