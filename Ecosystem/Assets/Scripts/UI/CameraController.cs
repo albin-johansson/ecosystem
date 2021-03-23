@@ -13,19 +13,21 @@ namespace Ecosystem.UI
 
     private Vector3 _rotateValue;
 
-    private Transform _transform;
+    [SerializeField] private Transform _transform;
     private Transform _trackedTarget;
     private bool _track = false;
     private float _distance = 20;
-    private Rigidbody _rigidbody;
+    [SerializeField] private Rigidbody _rigidbody;
     private float _boostFactor = 2;
     private bool _boosted = false;
     private bool _lookLocked = false;
 
     private void Start()
     {
+      /*
       _rigidbody = GetComponent<Rigidbody>();
       _transform = _rigidbody.transform;
+      */
     }
 
     private void Update()
