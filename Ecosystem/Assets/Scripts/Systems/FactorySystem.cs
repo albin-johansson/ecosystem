@@ -1,3 +1,4 @@
+using Ecosystem.Components;
 using Ecosystem.ECS;
 using Ecosystem.ECS.Authoring;
 using Unity.Entities;
@@ -9,6 +10,7 @@ namespace Ecosystem.Systems
   public sealed class FactorySystem : SystemBase
   {
     private Entity _rabbitPrefab;
+    private Entity _wolfPrefab;
 
     protected override void OnUpdate()
     {
@@ -24,7 +26,24 @@ namespace Ecosystem.Systems
 
       var rabbit = EntityManager.Instantiate(_rabbitPrefab);
 
+      EntityManager.AddComponent<Roaming>(rabbit);
       EntityManager.SetComponentData(rabbit, new Translation
+      {
+              Value = position
+      });
+    }
+
+    public void MakeWolf(float3 position)
+    {
+      if (_wolfPrefab == Entity.Null)
+      {
+        _wolfPrefab = EntityManager.LoadPrefab<WolfPrefab>().Value;
+      }
+      
+      var wolf = EntityManager.Instantiate(_wolfPrefab);
+      EntityManager.AddComponent<Idle>(wolf);
+      
+      EntityManager.SetComponentData(wolf, new Translation
       {
               Value = position
       });
