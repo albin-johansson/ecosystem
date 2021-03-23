@@ -1,6 +1,8 @@
+using Ecosystem.Util;
 using Reese.Nav;
 using Unity.Entities;
 using Unity.Mathematics;
+using UnityEditor.SearchService;
 using UnityEngine;
 
 namespace Ecosystem.Systems
@@ -8,11 +10,11 @@ namespace Ecosystem.Systems
   [UpdateInGroup(typeof(FixedStepSimulationSystemGroup))]
   [UpdateAfter(typeof(NavSurfaceSystem))]
   [UpdateAfter(typeof(NavDestinationSystem))]
-  // [UpdateAfter(typeof(SpatialStartSystem))]
-  // [UpdateAfter(typeof(SpatialEndSystem))]
+  [UpdateAfter(typeof(RandomNavigationSystem))]
   public sealed class SpawnSystem : SystemBase
   {
     private bool _keyDown;
+    private bool _hasSpawned;
 
     private static World InjectionWorld => World.DefaultGameObjectInjectionWorld;
 
@@ -21,16 +23,28 @@ namespace Ecosystem.Systems
 
     protected override void OnUpdate()
     {
+      if (!_hasSpawned)
+      {
+        var terrain = Terrain.activeTerrain;
+        for (var i = 0; i < 1000; ++i)
+        {
+          if (Terrains.RandomWalkablePosition(terrain, out var position))
+          {
+            FactorySystem.MakeRabbit(position);
+          }
+        }
+
+        _hasSpawned = true;
+      }
+
       switch (Input.GetKey(KeyCode.L))
       {
         case true when !_keyDown:
-          FactorySystem.MakeRabbit(new float3(645, 0, 475));
-
-          // var terrain = Terrain.activeTerrain;
-          // if (Terrains.RandomWalkablePosition(terrain, out var position))
-          // {
-          //   TrackingSystem.SetDestination(entity, position);
-          // }
+          var terrain = Terrain.activeTerrain;
+          if (Terrains.RandomWalkablePosition(terrain, out var position))
+          {
+            FactorySystem.MakeRabbit(position);
+          }
 
           _keyDown = true;
           break;
