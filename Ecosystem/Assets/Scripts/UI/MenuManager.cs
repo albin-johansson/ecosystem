@@ -135,7 +135,7 @@ namespace Ecosystem.UI
                                              dynamicDeerCount.text != "" &&
                                              dynamicWolfCount.text != "" &&
                                              dynamicBearCount.text != "" &&
-                                             dynamicCarrotCount.text != "" &&;
+                                             dynamicCarrotCount.text != "";
     }
 
     /// <summary>
