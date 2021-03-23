@@ -38,13 +38,14 @@ namespace Ecosystem
     }
 
     /// <summary>
-    ///   Checks whether a position is reachable through the NavMesh
+    ///   Checks whether a point is reachable through the navMesh, will return true if there is a valid point
+    ///   within a radius from the point
     /// </summary>
     public bool IsReachable(Vector3 targetPosition)
     {
-      var path = new NavMeshPath();
-      return NavMesh.CalculatePath(navAgent.transform.position, targetPosition, Terrains.Walkable, path);
+      return ValidateDestination(targetPosition, out var destination);
     }
+
 
     /// <summary>
     ///   Makes the animal run to target if target is valid.
@@ -165,13 +166,21 @@ namespace Ecosystem
       navAgent.SetDestination(destination);
     }
 
-    //
     /// <summary>
     ///   Rotates a vector the specified amount in the Y-plane
     /// </summary>
     private static Vector3 RotateDirection(Vector3 direction, float amount)
     {
       return Quaternion.Euler(0, amount, 0) * direction;
+    }
+
+    /// <summary>
+    ///   Validates if there is a path to a given point
+    /// </summary>
+    private bool ValidatePath(Vector3 destination)
+    {
+      var navMeshPath = new NavMeshPath();
+      return NavMesh.CalculatePath(navAgent.transform.position, destination, Terrains.Walkable, navMeshPath);
     }
 
     /// <summary>
@@ -184,13 +193,11 @@ namespace Ecosystem
       if (NavMesh.SamplePosition(destination, out var hit, navAgent.height * 2, Terrains.Walkable))
       {
         validPosition = hit.position;
-        return true;
+        return ValidatePath(validPosition);
       }
-      else
-      {
-        validPosition = Vector3.zero;
-        return false;
-      }
+
+      validPosition = Vector3.zero;
+      return false;
     }
 
     /// <summary>
@@ -201,10 +208,9 @@ namespace Ecosystem
     private Vector3 FindFleeDestination(Vector3 threatPosition)
     {
       var navAgentPosition = navAgent.transform.position;
-
       var directionFromThreat = navAgentPosition - threatPosition;
-      var visionRange = genome.GetVision().Value;
 
+      var visionRange = genome.GetVision().Value;
       foreach (var angle in _fleeingAngles)
       {
         _fleeDestination = (navAgentPosition + directionFromThreat) * visionRange;
