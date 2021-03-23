@@ -11311,8 +11311,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 20
-  _transform: {fileID: 1127527932}
-  _rigidbody: {fileID: 1127527935}
+  cameraRigidBody: {fileID: 1127527935}
 --- !u!135 &1127527934
 SphereCollider:
   m_ObjectHideFlags: 0
