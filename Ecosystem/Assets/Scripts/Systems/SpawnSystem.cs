@@ -3,6 +3,7 @@ using Reese.Nav;
 using Unity.Entities;
 using Unity.Mathematics;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using Random = UnityEngine.Random;
 
 namespace Ecosystem.Systems
@@ -20,6 +21,15 @@ namespace Ecosystem.Systems
 
     private static FactorySystem FactorySystem => InjectionWorld.GetOrCreateSystem<FactorySystem>();
     private static TrackingSystem TrackingSystem => InjectionWorld.GetOrCreateSystem<TrackingSystem>();
+
+    protected override void OnCreate()
+    {
+      base.OnCreate();
+      if (SceneManager.GetActiveScene().name != "ECSDemo")
+      {
+        Enabled = false;
+      }
+    }
 
     protected override void OnUpdate()
     {

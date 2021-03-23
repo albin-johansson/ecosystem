@@ -4,6 +4,7 @@ using Ecosystem.ECS.Authoring;
 using Unity.Entities;
 using Unity.Mathematics;
 using Unity.Transforms;
+using UnityEngine.SceneManagement;
 
 namespace Ecosystem.Systems
 {
@@ -11,6 +12,15 @@ namespace Ecosystem.Systems
   {
     private Entity _rabbitPrefab;
     private Entity _wolfPrefab;
+
+    protected override void OnCreate()
+    {
+      base.OnCreate();
+      if (SceneManager.GetActiveScene().name != "ECSDemo")
+      {
+        Enabled = false;
+      }
+    }
 
     protected override void OnUpdate()
     {

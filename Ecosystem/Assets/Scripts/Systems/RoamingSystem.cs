@@ -5,6 +5,7 @@ using Unity.Entities;
 using Unity.Physics.Systems;
 using Unity.Rendering;
 using Unity.Transforms;
+using UnityEngine.SceneManagement;
 
 namespace Ecosystem.Systems
 {
@@ -18,6 +19,15 @@ namespace Ecosystem.Systems
 
     private EntityCommandBufferSystem BufferSystem =>
             World.GetOrCreateSystem<BeginSimulationEntityCommandBufferSystem>();
+
+    protected override void OnCreate()
+    {
+      base.OnCreate();
+      if (SceneManager.GetActiveScene().name != "ECSDemo")
+      {
+        Enabled = false;
+      }
+    }
 
     protected override void OnUpdate()
     {
