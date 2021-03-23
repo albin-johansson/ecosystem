@@ -21,7 +21,7 @@ namespace Ecosystem.AnimalBehaviour.RabbitStates
       MovementController.StandStill(true);
       WaterConsumer.StartDrinking();
       // TODO: Add animationController.DrinkAnimation();
-      //TODO Check memory
+      // TODO Check memory
     }
 
     public override AnimalState Tick()
