@@ -1,9 +1,10 @@
-using Ecosystem.Util;
+using Ecosystem.Components;
 using Reese.Nav;
+using Reese.Random;
 using Unity.Entities;
 using Unity.Physics.Systems;
+using Unity.Rendering;
 using Unity.Transforms;
-using UnityEngine;
 
 namespace Ecosystem.Systems
 {
@@ -11,32 +12,63 @@ namespace Ecosystem.Systems
   [UpdateBefore(typeof(BuildPhysicsWorld))]
   public sealed class RandomNavigationSystem : SystemBase
   {
-    private EntityCommandBufferSystem BufferSystem => World.GetOrCreateSystem<BeginSimulationEntityCommandBufferSystem>();
+    private NavSystem NavSystem => World.GetOrCreateSystem<NavSystem>();
+
+    private BuildPhysicsWorld BuildPhysicsWorldSys => World.GetExistingSystem<BuildPhysicsWorld>();
+
+    private EntityCommandBufferSystem BufferSystem =>
+            World.GetOrCreateSystem<BeginSimulationEntityCommandBufferSystem>();
 
     protected override void OnUpdate()
     {
-      var commandBuffer = BufferSystem.CreateCommandBuffer();
-      var terrain = Terrain.activeTerrain;
+      var physicsWorld = BuildPhysicsWorldSys.PhysicsWorld;
+      var settings = NavSystem.Settings;
+      var commandBuffer = BufferSystem.CreateCommandBuffer().AsParallelWriter();
+      var jumpableBufferFromEntity = GetBufferFromEntity<NavJumpableBufferElement>(true);
+      var renderBoundsFromEntity = GetComponentDataFromEntity<RenderBounds>(true);
+      var randomArray = World.GetExistingSystem<RandomSystem>().RandomArray;
 
       Entities.WithNone<NavProblem, NavDestination, NavPlanning>()
-              .ForEach((Entity entity, in Parent surface) =>
+              .WithAll<Roaming>()
+              .WithReadOnly(jumpableBufferFromEntity)
+              .WithReadOnly(renderBoundsFromEntity)
+              .WithReadOnly(physicsWorld)
+              .WithNativeDisableParallelForRestriction(randomArray)
+              .ForEach((Entity entity,
+                      int entityInQueryIndex,
+                      int nativeThreadIndex,
+                      ref NavAgent agent,
+                      in Parent surface,
+                      in LocalToWorld localToWorld) =>
               {
-                if (surface.Value.Equals(Entity.Null))
+                if (surface.Value.Equals(Entity.Null) || !jumpableBufferFromEntity.HasComponent(surface.Value))
                 {
                   return;
                 }
 
-                if (Terrains.RandomWalkablePosition(terrain, out var position))
+                var random = randomArray[nativeThreadIndex];
+
+                if (physicsWorld.GetPointOnSurfaceLayer(
+                        localToWorld,
+                        NavUtil.GetRandomPointInBounds(ref random, renderBoundsFromEntity[surface.Value].Value, 99),
+                        out var validDestination,
+                        settings.ObstacleRaycastDistanceMax,
+                        settings.ColliderLayer,
+                        settings.SurfaceLayer))
                 {
-                  commandBuffer.AddComponent(entity, new NavDestination
+                  commandBuffer.AddComponent(entityInQueryIndex, entity, new NavDestination
                   {
-                          Teleport = false,
-                          Tolerance = 10f,
-                          CustomLerp = false,
-                          WorldPoint = position
+                          WorldPoint = validDestination
                   });
                 }
-              }).WithName("RandomNavigationSystemJob").WithoutBurst().Run();
+
+                randomArray[nativeThreadIndex] = random;
+              })
+              .WithName("RandomNavigationSystemJob")
+              .ScheduleParallel();
+
+      BufferSystem.AddJobHandleForProducer(Dependency);
+      BuildPhysicsWorldSys.AddInputDependency(Dependency);
     }
   }
 }
