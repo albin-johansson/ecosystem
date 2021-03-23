@@ -3,23 +3,11 @@ using UnityEngine.AI;
 
 namespace Ecosystem.Util
 {
-  public sealed class Terrains : MonoBehaviour
+  public static class Terrains 
   {
-    [SerializeField] private Terrain terrain;
-    public static Terrains instance;
     private const float Range = 10.0f;
-
-    public static int Walkable;
-
-    /// <summary>
-    ///   Makes the class able to be used as a singleton 
-    /// </summary>
-    private void Awake()
-    {
-      Walkable = 1 << NavMesh.GetAreaFromName("Walkable");
-      instance = this;
-    }
-
+    public static int Walkable =  1 << NavMesh.GetAreaFromName("Walkable");
+    
     /// <summary>
     ///   Attempts to find a random but walkable position in the specified terrain. This function
     ///   will give up if it can't find a walkable positions after 50 iterations.
@@ -49,12 +37,6 @@ namespace Ecosystem.Util
 
       position = Vector3.zero;
       return false;
-    }
-
-    public Vector3 SampleTerrainHeight(Vector3 position)
-    {
-      position.y = terrain.SampleHeight(position);
-      return position;
     }
   }
 }

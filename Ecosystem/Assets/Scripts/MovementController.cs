@@ -180,7 +180,7 @@ namespace Ecosystem
     /// </summary>
     private bool ValidateDestination(Vector3 destination, out Vector3 validPosition)
     {
-      destination = Terrains.instance.SampleTerrainHeight(destination);
+      destination.y = Terrain.activeTerrain.SampleHeight(destination);
       if (NavMesh.SamplePosition(destination, out var hit, navAgent.height * 2, Terrains.Walkable))
       {
         validPosition = hit.position;
