@@ -7,5 +7,6 @@ namespace Ecosystem.AnimalBehaviour.RabbitStates
     public MovementController MovementController;
     public EcoAnimationController AnimationController;
     public MemoryController MemoryController;
+    public Reproducer Reproducer;
   }
 }

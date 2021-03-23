@@ -37,14 +37,15 @@ namespace Ecosystem
 
     private Transform _directoryOfAnimal;
     private bool _isPregnant;
-    private bool _isSexuallyMature;
     private double _gestationPeriod;
     private double _sexualMaturityTime;
     private double _pregnancyElapsedTime;
     private double _maturityElapsedTime;
     private IGenome _mateGenome;
 
-    public bool CanMate => !_isPregnant && _isSexuallyMature;
+    public bool isSexuallyMature;
+    public bool isWilling;
+    private bool CanMate => !_isPregnant && isSexuallyMature && isWilling;
 
     private void Start()
     {
@@ -55,12 +56,12 @@ namespace Ecosystem
 
     private void Update()
     {
-      if (!_isSexuallyMature)
+      if (!isSexuallyMature)
       {
         _maturityElapsedTime += Time.deltaTime;
         if (_maturityElapsedTime >= _sexualMaturityTime)
         {
-          _isSexuallyMature = true;
+          isSexuallyMature = true;
         }
       }
 
@@ -72,6 +73,11 @@ namespace Ecosystem
           GiveBirth();
         }
       }
+    }
+    public bool CompatibleAsParents(GameObject other)
+    {
+      return CanMate && other.TryGetComponent(out AbstractGenome otherGenome) &&
+             Genomes.CompatibleAsParents(genome, otherGenome);
     }
 
     private void GiveBirth()

@@ -9,6 +9,7 @@ namespace Ecosystem.AnimalBehaviour.RabbitStates
     [SerializeField] private MovementController movementController;
     [SerializeField] private EcoAnimationController animationController;
     [SerializeField] private MemoryController memoryController;
+    [SerializeField] private Reproducer reproducer;
 
     private IAnimalState _idle;
     private IAnimalState _lookingForFood;
@@ -26,7 +27,8 @@ namespace Ecosystem.AnimalBehaviour.RabbitStates
               AnimationController = animationController,
               MemoryController = memoryController,
               MovementController = movementController,
-              WaterConsumer = waterConsumer
+              WaterConsumer = waterConsumer,
+              Reproducer = reproducer
       };
 
       _idle = RabbitStateFactory.CreateIdle(data);
@@ -79,6 +81,10 @@ namespace Ecosystem.AnimalBehaviour.RabbitStates
 
         case AnimalState.ChasingPrey:
           break;
+        
+        case AnimalState.LookingForMate:
+          State = _idle;
+          break;      //TODO make this enter LookingForMateState
 
         default:
           break;

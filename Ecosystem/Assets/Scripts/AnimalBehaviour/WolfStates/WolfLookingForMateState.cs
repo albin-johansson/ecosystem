@@ -1,11 +1,10 @@
-using Ecosystem.Util;
 using UnityEngine;
 
-namespace Ecosystem.AnimalBehaviour.RabbitStates
+namespace Ecosystem.AnimalBehaviour.WolfStates
 {
-  internal sealed class RabbitIdleState : AbstractAnimalState
+  public class WolfLookingForMate : AbstractAnimalState
   {
-    public RabbitIdleState(RabbitStateData data)
+    public WolfLookingForMate(WolfStateData data)
     {
       Consumer = data.Consumer;
       WaterConsumer = data.WaterConsumer;
@@ -14,33 +13,42 @@ namespace Ecosystem.AnimalBehaviour.RabbitStates
       MemoryController = data.MemoryController;
       Reproducer = data.Reproducer;
     }
-
+    
     public override void Begin(GameObject target)
     {
       Target = null;
-      MovementController.StartWander();
-      AnimationController.MoveAnimation();
-      //TODO Check memory
+      Reproducer.isWilling = true;
+    }
+    
+    public override AnimalState Type()
+    {
+      return AnimalState.LookingForMate;
     }
 
     public override AnimalState Tick()
     {
       if (Target)
       {
-        return AnimalState.Fleeing;
-      }
-      else if (Consumer.Hunger >= WaterConsumer.Thirst && Consumer.IsHungry())
-      {
-        return AnimalState.LookingForFood;
-      }
-      else if (WaterConsumer.Thirst > Consumer.Hunger && WaterConsumer.IsThirsty())
-      {
-        return AnimalState.LookingForWater;
+        if (Reproducer.CompatibleAsParents(Target))
+        {
+          MovementController.RunToTarget(Target.transform.position);
+        }
+        else
+        {
+          Target = null;
+        }
       }
       else
       {
-        return Type();
+        MovementController.UpdateWander();
       }
+      return base.Tick();
+    }
+
+    public override GameObject End()
+    {
+      Reproducer.isWilling = false;
+      return base.End();
     }
 
     public override void OnTriggerEnter(Collider other)
@@ -52,16 +60,11 @@ namespace Ecosystem.AnimalBehaviour.RabbitStates
         {
           MemoryController.SaveToMemory(otherObject);
         }
-        else if (Tags.IsPredator(otherObject))
+        else if (Reproducer.CompatibleAsParents(otherObject))
         {
           Target = otherObject;
         }
       }
-    }
-
-    public override AnimalState Type()
-    {
-      return AnimalState.Idle;
     }
   }
 }
