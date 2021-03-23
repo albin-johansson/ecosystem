@@ -18,13 +18,6 @@ namespace Ecosystem
 
     public double Hunger { get; private set; }
 
-    public delegate void FoodEatenEvent(GameObject food);
-
-    /// <summary>
-    /// This event is emitted every time a food resource is consumed.
-    /// </summary>
-    public static event FoodEatenEvent OnFoodEaten;
-
     private void OnEnable()
     {
       resourceBar.SetMaxValue((float) maxHunger);
@@ -55,19 +48,9 @@ namespace Ecosystem
     {
       if (Tags.IsFood(other.gameObject))
       {
-        if (TryGetComponent(out NutritionController nutritionController))
+        if (other.TryGetComponent(out NutritionController nutritionController))
         {
           Hunger -= nutritionController.Consume(Hunger);
-          OnFoodEaten?.Invoke(other.gameObject);
-          var gameObjectTag = other.gameObject.tag;
-          if (ObjectPoolHandler.instance.isPoolValid(gameObjectTag))
-          {
-            ObjectPoolHandler.instance.ReturnToPool(gameObjectTag, other.gameObject);
-          }
-          else
-          {
-            Destroy(other.gameObject);
-          }
         }
       }
     }
