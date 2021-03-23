@@ -10,7 +10,7 @@ namespace Ecosystem.Systems
 {
   [UpdateInGroup(typeof(FixedStepSimulationSystemGroup))]
   [UpdateBefore(typeof(BuildPhysicsWorld))]
-  public sealed class RandomNavigationSystem : SystemBase
+  public sealed class RoamingSystem : SystemBase
   {
     private NavSystem NavSystem => World.GetOrCreateSystem<NavSystem>();
 
@@ -64,7 +64,7 @@ namespace Ecosystem.Systems
 
                 randomArray[nativeThreadIndex] = random;
               })
-              .WithName("RandomNavigationSystemJob")
+              .WithName("RoamingSystemJob")
               .ScheduleParallel();
 
       BufferSystem.AddJobHandleForProducer(Dependency);

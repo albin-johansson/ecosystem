@@ -10,7 +10,7 @@ namespace Ecosystem.Systems
   [UpdateInGroup(typeof(FixedStepSimulationSystemGroup))]
   [UpdateAfter(typeof(NavSurfaceSystem))]
   [UpdateAfter(typeof(NavDestinationSystem))]
-  [UpdateAfter(typeof(RandomNavigationSystem))]
+  [UpdateAfter(typeof(RoamingSystem))]
   public sealed class SpawnSystem : SystemBase
   {
     private bool _keyDown;
