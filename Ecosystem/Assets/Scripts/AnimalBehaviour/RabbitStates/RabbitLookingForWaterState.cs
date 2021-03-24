@@ -40,6 +40,12 @@ namespace Ecosystem.AnimalBehaviour.RabbitStates
       {
         return AnimalState.LookingForFood;
       }
+      
+      if (MemoryController.GetFromMemory().Item1)
+      {
+        Target = MemoryController.GetFromMemory().Item2;
+        return Type();
+      }
 
       MovementController.UpdateWander();
 
@@ -63,7 +69,7 @@ namespace Ecosystem.AnimalBehaviour.RabbitStates
         }
         else if (Tags.IsFood(otherObject))
         {
-          MemoryController.SaveToMemory(other.gameObject);
+          MemoryController.SaveToMemory(other.gameObject); // Todo add food function to memory
         }
       }
     }
