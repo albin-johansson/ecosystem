@@ -29,7 +29,7 @@ namespace Ecosystem
     {
       if (IsReachable(targetPosition))
       {
-        return genome.GetVision().Value < Vector3.Distance(navAgent.transform.position, targetPosition);
+        return genome.GetVision().Value > Vector3.Distance(navAgent.transform.position, targetPosition);
       }
       else
       {
@@ -179,7 +179,8 @@ namespace Ecosystem
     private bool ValidatePath(Vector3 destination)
     {
       var navMeshPath = new NavMeshPath();
-      return NavMesh.CalculatePath(navAgent.transform.position, destination, Terrains.Walkable, navMeshPath);
+      NavMesh.CalculatePath(navAgent.transform.position, destination, Terrains.Walkable, navMeshPath);
+      return navMeshPath.status == NavMeshPathStatus.PathComplete;
     }
 
     /// <summary>
@@ -193,7 +194,7 @@ namespace Ecosystem
       {
         validPosition = hit.position;
         return ValidatePath(validPosition);
-      }
+      } 
 
       validPosition = Vector3.zero;
       return false;

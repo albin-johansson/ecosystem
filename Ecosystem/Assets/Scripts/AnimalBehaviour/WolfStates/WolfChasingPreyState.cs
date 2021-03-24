@@ -22,7 +22,7 @@ namespace Ecosystem.AnimalBehaviour.WolfStates
 
     public override AnimalState Tick()
     {
-      if (!Target || !MovementController.IsTargetInRange(Target.transform.position))
+      if (!Target || !Target.activeSelf || !MovementController.IsTargetInRange(Target.transform.position))
       {
         return base.Tick();
       }
@@ -30,13 +30,19 @@ namespace Ecosystem.AnimalBehaviour.WolfStates
       {
         MovementController.UpdateHunting(Target.transform.position);
       }
-
+      
+      /*
       if (WaterConsumer.Thirst > Consumer.Hunger && WaterConsumer.IsThirsty())
       {
         return AnimalState.LookingForWater;
       }
+      */
 
       return Type();
+    }
+
+    public override void OnTriggerEnter(Collider other)
+    {
     }
 
     public override void OnTriggerExit(Collider other)
@@ -49,7 +55,7 @@ namespace Ecosystem.AnimalBehaviour.WolfStates
 
     public override AnimalState Type()
     {
-      return AnimalState.LookingForWater;
+      return AnimalState.ChasingPrey;
     }
   }
 }
