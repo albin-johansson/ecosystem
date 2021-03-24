@@ -207,20 +207,21 @@ namespace Ecosystem
     private Vector3 FindFleeDestination(Vector3 threatPosition)
     {
       var navAgentPosition = navAgent.transform.position;
-      var directionFromThreat = navAgentPosition - threatPosition;
+      //TODO: Fix visionRange
+      var visionRange = 2;
+      var directionFromThreat = (navAgentPosition - threatPosition).normalized * visionRange;
 
-      var visionRange = genome.GetVision().Value;
+   
       foreach (var angle in _fleeingAngles)
       {
         _fleeDestination = navAgentPosition + (directionFromThreat.normalized * visionRange);
-
         if (ValidateDestination(_fleeDestination, out var validPosition))
         {
           return validPosition;
         }
         else
         {
-          _fleeDestination = navAgentPosition + RotateDirection(directionFromThreat.normalized * visionRange, angle);
+          directionFromThreat = RotateDirection(_fleeDestination - navAgentPosition, angle);
         }
       }
 
