@@ -22,9 +22,9 @@ namespace Ecosystem.AnimalBehaviour.WolfStates
 
     public override AnimalState Tick()
     {
-      if (Target)
+      if (!Target)
       {
-        return AnimalState.LookingForWater;
+        return base.Tick();
       }
       else if (WaterConsumer.CanDrink)
       {
