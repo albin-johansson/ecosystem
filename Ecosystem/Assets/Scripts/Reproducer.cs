@@ -36,16 +36,18 @@ namespace Ecosystem
     [SerializeField] private string keyToPool;
 
     private Transform _directoryOfAnimal;
-    private bool _isPregnant;
     private double _gestationPeriod;
     private double _sexualMaturityTime;
     private double _pregnancyElapsedTime;
     private double _maturityElapsedTime;
     private IGenome _mateGenome;
-
-    public bool isSexuallyMature;
+    private bool _isSexuallyMature;
+    private bool _isPregnant;
     public bool isWilling;
-    private bool CanMate => !_isPregnant && isSexuallyMature && isWilling;
+    
+    private bool CanMate => !_isPregnant && _isSexuallyMature && isWilling;
+    
+    public bool IsFertile => !_isPregnant && _isSexuallyMature;
 
     private void Start()
     {
@@ -56,12 +58,12 @@ namespace Ecosystem
 
     private void Update()
     {
-      if (!isSexuallyMature)
+      if (!_isSexuallyMature)
       {
         _maturityElapsedTime += Time.deltaTime;
         if (_maturityElapsedTime >= _sexualMaturityTime)
         {
-          isSexuallyMature = true;
+          _isSexuallyMature = true;
         }
       }
 

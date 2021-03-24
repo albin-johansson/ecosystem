@@ -24,7 +24,7 @@ namespace Ecosystem.AnimalBehaviour
       {
         return AnimalState.LookingForWater;
       }
-      else if (Reproducer.isSexuallyMature)
+      else if (Reproducer.IsFertile)
       {
         return AnimalState.LookingForMate;
       }
