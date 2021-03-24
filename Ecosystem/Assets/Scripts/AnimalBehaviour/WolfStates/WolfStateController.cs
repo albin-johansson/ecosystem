@@ -82,6 +82,10 @@ namespace Ecosystem.AnimalBehaviour.WolfStates
         case AnimalState.LookingForFood:
           State = _lookingForPrey;
           break;
+        
+        case AnimalState.LookingForMate:
+          State = _lookingForMate;
+          break;
 
         default:
           break;

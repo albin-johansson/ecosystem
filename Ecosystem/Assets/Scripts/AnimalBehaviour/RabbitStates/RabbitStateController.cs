@@ -18,6 +18,7 @@ namespace Ecosystem.AnimalBehaviour.RabbitStates
     private IAnimalState _runningTowardsWater;
     private IAnimalState _runningTowardsFood;
     private IAnimalState _fleeing;
+    private IAnimalState _lookingForMate;
 
     public override void Start()
     {
@@ -38,6 +39,7 @@ namespace Ecosystem.AnimalBehaviour.RabbitStates
       _runningTowardsWater = RabbitStateFactory.CreateRunningTowardsWater(data);
       _runningTowardsFood = RabbitStateFactory.CreateRunningTowardsFood(data);
       _fleeing = RabbitStateFactory.CreateFleeing(data);
+      _lookingForMate = RabbitStateFactory.CreateLookingForMate(data);
 
       State = _idle;
       SwitchState(AnimalState.Idle);
@@ -83,7 +85,7 @@ namespace Ecosystem.AnimalBehaviour.RabbitStates
           break;
         
         case AnimalState.LookingForMate:
-          State = _idle;
+          State = _lookingForMate;
           break;      //TODO make this enter LookingForMateState
 
         default:

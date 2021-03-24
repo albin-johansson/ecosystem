@@ -36,5 +36,10 @@ namespace Ecosystem.AnimalBehaviour.RabbitStates
     {
       return new RabbitFleeingState(data);
     }
+
+    public static IAnimalState CreateLookingForMate(RabbitStateData data)
+    {
+      return new RabbitLookingForMateState(data);
+    }
   }
 }

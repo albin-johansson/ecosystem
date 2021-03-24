@@ -1,10 +1,11 @@
+using Ecosystem.Util;
 using UnityEngine;
 
-namespace Ecosystem.AnimalBehaviour.WolfStates
+namespace Ecosystem.AnimalBehaviour.RabbitStates
 {
-  public class WolfLookingForMateState : AbstractAnimalState
+  public class RabbitLookingForMateState : AbstractAnimalState
   {
-    public WolfLookingForMateState(WolfStateData data)
+    public RabbitLookingForMateState(RabbitStateData data)
     {
       Consumer = data.Consumer;
       WaterConsumer = data.WaterConsumer;
@@ -29,7 +30,11 @@ namespace Ecosystem.AnimalBehaviour.WolfStates
     {
       if (Target)
       {
-        if (Reproducer.CompatibleAsParents(Target))
+        if (Tags.IsPredator(Target))
+        {
+          return AnimalState.Fleeing;
+        }
+        else if (Reproducer.CompatibleAsParents(Target))
         {
           MovementController.RunToTarget(Target.transform.position);
         }
@@ -61,6 +66,10 @@ namespace Ecosystem.AnimalBehaviour.WolfStates
           MemoryController.SaveToMemory(otherObject);
         }
         else if (Reproducer.CompatibleAsParents(otherObject))
+        {
+          Target = otherObject;
+        }
+        else if (Tags.IsPredator(otherObject))
         {
           Target = otherObject;
         }
