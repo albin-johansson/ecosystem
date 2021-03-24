@@ -86,7 +86,7 @@ namespace Ecosystem.AnimalBehaviour.RabbitStates
         
         case AnimalState.LookingForMate:
           State = _lookingForMate;
-          break;      //TODO make this enter LookingForMateState
+          break;
 
         default:
           break;

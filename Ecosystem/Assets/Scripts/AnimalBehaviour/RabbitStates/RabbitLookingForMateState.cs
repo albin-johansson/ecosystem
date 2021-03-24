@@ -65,11 +65,7 @@ namespace Ecosystem.AnimalBehaviour.RabbitStates
         {
           MemoryController.SaveToMemory(otherObject);
         }
-        else if (Reproducer.CompatibleAsParents(otherObject))
-        {
-          Target = otherObject;
-        }
-        else if (Tags.IsPredator(otherObject))
+        else if (Reproducer.CompatibleAsParents(otherObject) || Tags.IsPredator(otherObject))
         {
           Target = otherObject;
         }
