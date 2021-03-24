@@ -18,7 +18,7 @@ namespace Ecosystem
 
     private Vector3 _fleeDestination;
     private float _previousSpeed;
-    private readonly float[] _fleeingAngles = {-90, 90, 180};
+    private readonly float[] _fleeingAngles = {-45, 90, 45, -180, -90};
 
     #region PublicFunctions
 
@@ -212,7 +212,7 @@ namespace Ecosystem
       var visionRange = genome.GetVision().Value;
       foreach (var angle in _fleeingAngles)
       {
-        _fleeDestination = (navAgentPosition + directionFromThreat) * visionRange;
+        _fleeDestination = navAgentPosition + (directionFromThreat.normalized * visionRange);
 
         if (ValidateDestination(_fleeDestination, out var validPosition))
         {
@@ -220,7 +220,7 @@ namespace Ecosystem
         }
         else
         {
-          directionFromThreat = RotateDirection(directionFromThreat, angle);
+          _fleeDestination = navAgentPosition + RotateDirection(directionFromThreat.normalized * visionRange, angle);
         }
       }
 
