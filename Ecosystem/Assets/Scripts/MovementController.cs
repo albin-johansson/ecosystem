@@ -207,8 +207,7 @@ namespace Ecosystem
     private Vector3 FindFleeDestination(Vector3 threatPosition)
     {
       var navAgentPosition = navAgent.transform.position;
-      //TODO: Fix visionRange
-      var visionRange = 2;
+      var visionRange = genome.GetVision().Value;
       var directionFromThreat = (navAgentPosition - threatPosition).normalized * visionRange;
 
    
