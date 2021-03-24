@@ -17,6 +17,8 @@ namespace Ecosystem
 
     public double Hunger { get; private set; }
 
+    public bool CollideActive { get; set; }
+
     public delegate void PreyConsumedEvent();
 
     /// <summary>
@@ -47,6 +49,7 @@ namespace Ecosystem
 
     private void OnTriggerEnter(Collider other)
     {
+      if (!CollideActive) return;
       if (Tags.IsPrey(other.gameObject))
       {
         animationController.EnterAttackAnimation();

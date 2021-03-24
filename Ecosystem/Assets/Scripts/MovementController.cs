@@ -29,7 +29,7 @@ namespace Ecosystem
     {
       if (IsReachable(targetPosition))
       {
-        return genome.GetVision().Value > Vector3.Distance(navAgent.transform.position, targetPosition);
+        return genome.GetVision().Value >= Math.Floor(Vector3.Distance(navAgent.transform.position, targetPosition));
       }
       else
       {
