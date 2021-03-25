@@ -8,5 +8,9 @@ namespace Ecosystem
     Idle,
     Fleeing,
     Drinking,
+    RunningTowardsWater,
+    RunningTowardsFood,
+    ChasingPrey,
+    LookingForMate
   }
 }

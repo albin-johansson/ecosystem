@@ -38,7 +38,6 @@ namespace Ecosystem
 
     private Transform _directoryOfAnimal;
     public bool IsPregnant { get; private set; }
-    private bool _isSexuallyMature;
     private double _gestationPeriod;
     private double _sexualMaturityTime;
     private double _pregnancyElapsedTime;
@@ -46,7 +45,12 @@ namespace Ecosystem
     private float _childSaturation;
     private IConsumer _consumer;
     private IGenome _mateGenome;
-    public bool CanMate => !IsPregnant && _isSexuallyMature;
+    private bool _isSexuallyMature;
+    public bool isWilling;
+    
+    private bool CanMate => !IsPregnant && _isSexuallyMature && isWilling;
+    
+    public bool IsFertile => !IsPregnant && _isSexuallyMature;
 
     private void Start()
     {
@@ -76,6 +80,11 @@ namespace Ecosystem
           _childSaturation = 0;
         }
       }
+    }
+    public bool CompatibleAsParents(GameObject other)
+    {
+      return CanMate && other.TryGetComponent(out AbstractGenome otherGenome) &&
+             Genomes.CompatibleAsParents(genome, otherGenome);
     }
 
     private void GiveBirth()

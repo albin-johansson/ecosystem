@@ -14,12 +14,21 @@ namespace Ecosystem.Util
     public static bool IsPrey(GameObject animal) => animal.CompareTag("Rabbit") ||
                                                     animal.CompareTag("Deer");
 
+    public static bool IsAnimal(GameObject gameObject) => IsPrey(gameObject) || IsPredator(gameObject);
+
     /// <summary>
     ///   Indicates whether or not the supplied game object has a tag that indicates that it's a food item.
     /// </summary>
     /// <param name="gameObject">the game object that will be checked</param>
     /// <returns><c>true</c> if the game object is a food item; <c>false</c> otherwise.</returns>
     public static bool IsFood(GameObject gameObject) => gameObject.CompareTag("Carrot");
+
+    /// <summary>
+    ///   Indicates whether or not the supplied game object has a tag that indicates that it's a water item.
+    /// </summary>
+    /// <param name="gameObject">the game object that will be checked</param>
+    /// <returns><c>true</c> if the game object is a water item; <c>false</c> otherwise.</returns>
+    public static bool IsWater(GameObject gameObject) => gameObject.CompareTag("Water");
 
     /// <summary>
     ///   Counts the current amount of game objects with the specified tag.
