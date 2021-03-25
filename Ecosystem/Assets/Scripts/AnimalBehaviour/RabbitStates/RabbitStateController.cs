@@ -5,12 +5,7 @@ namespace Ecosystem.AnimalBehaviour.RabbitStates
   public sealed class RabbitStateController : AbstractStateController
   {
     [SerializeField] private FoodConsumer consumer;
-    [SerializeField] private WaterConsumer waterConsumer;
-    [SerializeField] private MovementController movementController;
-    [SerializeField] private EcoAnimationController animationController;
-    [SerializeField] private MemoryController memoryController;
-    [SerializeField] private Reproducer reproducer;
-
+    
     private IAnimalState _idle;
     private IAnimalState _lookingForFood;
     private IAnimalState _lookingForWater;

@@ -5,12 +5,7 @@ namespace Ecosystem.AnimalBehaviour.WolfStates
   public sealed class WolfStateController : AbstractStateController
   {
     [SerializeField] private PreyConsumer consumer;
-    [SerializeField] private WaterConsumer waterConsumer;
-    [SerializeField] private MovementController movementController;
-    [SerializeField] private EcoAnimationController animationController;
-    [SerializeField] private MemoryController memoryController;
-    [SerializeField] private Reproducer reproducer;
-
+    
     private IAnimalState _idle;
     private IAnimalState _lookingForPrey;
     private IAnimalState _lookingForWater;

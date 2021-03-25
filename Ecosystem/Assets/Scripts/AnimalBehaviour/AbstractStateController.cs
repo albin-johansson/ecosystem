@@ -5,7 +5,13 @@ namespace Ecosystem.AnimalBehaviour
   public abstract class AbstractStateController : MonoBehaviour, IStateController
   {
     protected IAnimalState State;
-    [SerializeField] private StateText StateText;
+    [SerializeField] protected StateText StateText;
+    [SerializeField] protected WaterConsumer waterConsumer;
+    [SerializeField] protected MovementController movementController;
+    [SerializeField] protected EcoAnimationController animationController;
+    [SerializeField] protected MemoryController memoryController;
+    [SerializeField] protected Reproducer reproducer;
+
 
     public abstract void Start();
 
@@ -23,11 +29,13 @@ namespace Ecosystem.AnimalBehaviour
 
     public void OnTriggerEnter(Collider other)
     {
+      memoryController.SaveToInVision(other.gameObject);
       State.OnTriggerEnter(other);
     }
 
-    public void OnTriggerExit(Collider other)
-    {
+  public void OnTriggerExit(Collider other)
+  {
+    memoryController.RemoveFromInVision(other.gameObject);
       State.OnTriggerExit(other);
     }
   }

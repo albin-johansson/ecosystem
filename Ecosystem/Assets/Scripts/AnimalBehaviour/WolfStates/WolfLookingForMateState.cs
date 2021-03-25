@@ -55,16 +55,14 @@ namespace Ecosystem.AnimalBehaviour.WolfStates
     public override void OnTriggerEnter(Collider other)
     {
       var otherObject = other.gameObject;
-      if (MovementController.IsReachable(otherObject.transform.position))
+      
+      if (otherObject.CompareTag("Water"))
       {
-        if (otherObject.CompareTag("Water"))
-        {
-          MemoryController.SaveToMemory(otherObject);
-        }
-        else if (Reproducer.CompatibleAsParents(otherObject))
-        {
-          Target = otherObject;
-        }
+        MemoryController.SaveToMemory(otherObject);
+      }
+      else if (Reproducer.CompatibleAsParents(otherObject))
+      {
+        Target = otherObject;
       }
     }
   }

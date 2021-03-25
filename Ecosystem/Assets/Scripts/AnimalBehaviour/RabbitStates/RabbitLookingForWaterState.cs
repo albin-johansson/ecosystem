@@ -55,18 +55,15 @@ namespace Ecosystem.AnimalBehaviour.RabbitStates
     public override void OnTriggerEnter(Collider other)
     {
       var otherObject = other.gameObject;
-
-      if (MovementController.IsReachable(otherObject.transform.position))
+      
+      if (otherObject.CompareTag("Water"))
       {
-        if (otherObject.CompareTag("Water"))
-        {
-          MemoryController.SaveToMemory(otherObject);
-          Target = otherObject;
-        }
-        else if (Tags.IsPredator(otherObject))
-        {
-          Target = other.gameObject;
-        }
+        MemoryController.SaveToMemory(otherObject);
+        Target = otherObject;
+      }
+      else if (Tags.IsPredator(otherObject))
+      {
+        Target = other.gameObject;
       }
     }
 

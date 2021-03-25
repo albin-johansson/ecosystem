@@ -46,19 +46,14 @@ namespace Ecosystem.AnimalBehaviour
 
     public virtual void OnTriggerEnter(Collider other)
     {
-      if (MovementController.IsReachable(other.gameObject.transform.position) &&
-          other.gameObject.CompareTag("Water"))
+      MemoryController.SaveToInVision(other.gameObject);
+      if (other.gameObject.CompareTag("Water"))
       {
-        MemoryController.SaveToMemory(other.gameObject);
       }
     }
 
     public virtual void OnTriggerExit(Collider other)
     {
-      if (other.gameObject.CompareTag("Water"))
-      {
-        MemoryController.SaveToMemory(other.gameObject);
-      }
     }
   }
 }
