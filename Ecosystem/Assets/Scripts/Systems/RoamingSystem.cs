@@ -13,12 +13,10 @@ namespace Ecosystem.Systems
   [UpdateBefore(typeof(BuildPhysicsWorld))]
   public sealed class RoamingSystem : SystemBase
   {
-    private NavSystem NavSystem => World.GetOrCreateSystem<NavSystem>();
-
-    private BuildPhysicsWorld BuildPhysicsWorldSys => World.GetExistingSystem<BuildPhysicsWorld>();
-
-    private EntityCommandBufferSystem BufferSystem =>
-            World.GetOrCreateSystem<BeginSimulationEntityCommandBufferSystem>();
+    private EntityCommandBufferSystem _barrier;
+    private NavSystem _navSystem;
+    private BuildPhysicsWorld _buildPhysicsWorld;
+    private RandomSystem _randomSystem;
 
     protected override void OnCreate()
     {
@@ -27,18 +25,28 @@ namespace Ecosystem.Systems
       {
         Enabled = false;
       }
+      else
+      {
+        _barrier = World.GetOrCreateSystem<BeginSimulationEntityCommandBufferSystem>();
+        _navSystem = World.GetOrCreateSystem<NavSystem>();
+        _buildPhysicsWorld = World.GetExistingSystem<BuildPhysicsWorld>();
+        _randomSystem = World.GetExistingSystem<RandomSystem>();
+      }
     }
 
     protected override void OnUpdate()
     {
-      var physicsWorld = BuildPhysicsWorldSys.PhysicsWorld;
-      var settings = NavSystem.Settings;
-      var commandBuffer = BufferSystem.CreateCommandBuffer().AsParallelWriter();
+      var buffer = _barrier.CreateCommandBuffer().AsParallelWriter();
+      
       var jumpableBufferFromEntity = GetBufferFromEntity<NavJumpableBufferElement>(true);
       var renderBoundsFromEntity = GetComponentDataFromEntity<RenderBounds>(true);
-      var randomArray = World.GetExistingSystem<RandomSystem>().RandomArray;
+      
+      var physicsWorld = _buildPhysicsWorld.PhysicsWorld;
+      var randomArray = _randomSystem.RandomArray;
+      var settings = _navSystem.Settings;
 
       Entities.WithNone<NavProblem, NavDestination, NavPlanning>()
+              .WithNone<Dead>()
               .WithAll<Roaming>()
               .WithReadOnly(jumpableBufferFromEntity)
               .WithReadOnly(renderBoundsFromEntity)
@@ -66,7 +74,7 @@ namespace Ecosystem.Systems
                         settings.ColliderLayer,
                         settings.SurfaceLayer))
                 {
-                  commandBuffer.AddComponent(entityInQueryIndex, entity, new NavDestination
+                  buffer.AddComponent(entityInQueryIndex, entity, new NavDestination
                   {
                           WorldPoint = validDestination
                   });
@@ -77,8 +85,8 @@ namespace Ecosystem.Systems
               .WithName("RoamingSystemJob")
               .ScheduleParallel();
 
-      BufferSystem.AddJobHandleForProducer(Dependency);
-      BuildPhysicsWorldSys.AddInputDependency(Dependency);
+      _barrier.AddJobHandleForProducer(Dependency);
+      _buildPhysicsWorld.AddInputDependency(Dependency);
     }
   }
 }
