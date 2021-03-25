@@ -9,6 +9,7 @@ namespace Ecosystem.AnimalBehaviour.WolfStates
     [SerializeField] private MovementController movementController;
     [SerializeField] private EcoAnimationController animationController;
     [SerializeField] private MemoryController memoryController;
+    [SerializeField] private Reproducer reproducer;
 
     private IAnimalState _idle;
     private IAnimalState _lookingForPrey;
@@ -16,6 +17,7 @@ namespace Ecosystem.AnimalBehaviour.WolfStates
     private IAnimalState _drinking;
     private IAnimalState _runningTowardsWater;
     private IAnimalState _chasingPrey;
+    private IAnimalState _lookingForMate;
 
     public override void Start()
     {
@@ -25,7 +27,8 @@ namespace Ecosystem.AnimalBehaviour.WolfStates
               AnimationController = animationController,
               MemoryController = memoryController,
               MovementController = movementController,
-              WaterConsumer = waterConsumer
+              WaterConsumer = waterConsumer,
+              Reproducer = reproducer,
       };
 
       _idle = WolfStateFactory.CreateIdle(data);
@@ -34,6 +37,7 @@ namespace Ecosystem.AnimalBehaviour.WolfStates
       _drinking = WolfStateFactory.CreateDrinking(data);
       _runningTowardsWater = WolfStateFactory.CreateRunningTowardsWater(data);
       _chasingPrey = WolfStateFactory.CreateChasingPrey(data);
+      _lookingForMate = WolfStateFactory.CreateLookingForMate(data);
 
       State = _idle;
       SwitchState(AnimalState.Idle);
@@ -79,6 +83,10 @@ namespace Ecosystem.AnimalBehaviour.WolfStates
 
         case AnimalState.LookingForFood:
           State = _lookingForPrey;
+          break;
+        
+        case AnimalState.LookingForMate:
+          State = _lookingForMate;
           break;
 
         default:

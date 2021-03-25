@@ -9,6 +9,7 @@ namespace Ecosystem.AnimalBehaviour
     protected MemoryController MemoryController;
     protected MovementController MovementController;
     protected EcoAnimationController AnimationController;
+    protected Reproducer Reproducer;
     protected GameObject Target;
 
     public abstract AnimalState Type();
@@ -23,6 +24,10 @@ namespace Ecosystem.AnimalBehaviour
       {
         return AnimalState.LookingForWater;
       }
+      else if (Reproducer.IsFertile)
+      {
+        return AnimalState.LookingForMate;
+      }
       else
       {
         return AnimalState.Idle;
@@ -33,7 +38,7 @@ namespace Ecosystem.AnimalBehaviour
     {
     }
 
-    public GameObject End()
+    public virtual GameObject End()
     {
       Consumer.CollideActive = false;
       return Target;

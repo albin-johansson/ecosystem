@@ -12,6 +12,7 @@ namespace Ecosystem.AnimalBehaviour.WolfStates
       MovementController = data.MovementController;
       AnimationController = data.AnimationController;
       MemoryController = data.MemoryController;
+      Reproducer = data.Reproducer;
     }
 
     public override void Begin(GameObject target)

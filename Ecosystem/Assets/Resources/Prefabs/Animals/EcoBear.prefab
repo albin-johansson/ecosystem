@@ -915,6 +915,8 @@ MonoBehaviour:
   genome: {fileID: 1080774011748047759}
   prefab: {fileID: 7237780236292801018}
   keyToPool: Bear
+  isSexuallyMature: 0
+  isWilling: 0
 --- !u!1 &4817363271471425423
 GameObject:
   m_ObjectHideFlags: 0
@@ -1351,7 +1353,6 @@ GameObject:
   - component: {fileID: -4165548273840364118}
   - component: {fileID: 5519717986162146221}
   - component: {fileID: 1080774011748047759}
-  - component: {fileID: 341703086639412255}
   m_Layer: 10
   m_Name: EcoBear
   m_TagString: Bear
@@ -1599,20 +1600,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b65414bb43209374c86329675bc191ee, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &341703086639412255
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7237780236292801018}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 85b69fff4ae22bc438ab072e486351d2, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  genome: {fileID: 1080774011748047759}
-  reproducer: {fileID: 3460790299832027449}
 --- !u!1 &7509506793630284121
 GameObject:
   m_ObjectHideFlags: 0
@@ -1749,6 +1736,7 @@ MonoBehaviour:
   movementController: {fileID: 7401787944804568421}
   animationController: {fileID: -4165548273840364118}
   memoryController: {fileID: 6008664309968109715}
+  reproducer: {fileID: 3460790299832027449}
 --- !u!1 &8421346663248798016
 GameObject:
   m_ObjectHideFlags: 0

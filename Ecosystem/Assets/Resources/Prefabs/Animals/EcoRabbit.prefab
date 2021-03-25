@@ -852,7 +852,6 @@ GameObject:
   - component: {fileID: 1438288584065220351}
   - component: {fileID: 2656864231929346077}
   - component: {fileID: 3025539359171641749}
-  - component: {fileID: 3441429084631058016}
   m_Layer: 8
   m_Name: EcoRabbit
   m_TagString: Rabbit
@@ -1009,20 +1008,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   animationController: {fileID: 2656864231929346077}
   keyToPool: Rabbit
---- !u!114 &3441429084631058016
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3436557251021641289}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 85b69fff4ae22bc438ab072e486351d2, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  genome: {fileID: 1438288584065220351}
-  reproducer: {fileID: 5235625224800737656}
 --- !u!1 &3579996788643659857
 GameObject:
   m_ObjectHideFlags: 0
@@ -1934,6 +1919,8 @@ MonoBehaviour:
   genome: {fileID: 1438288584065220351}
   prefab: {fileID: 3436557251021641289}
   keyToPool: Rabbit
+  isSexuallyMature: 0
+  isWilling: 0
 --- !u!1 &7274074492873787243
 GameObject:
   m_ObjectHideFlags: 0
@@ -2225,6 +2212,7 @@ MonoBehaviour:
   movementController: {fileID: 2469128493361948961}
   animationController: {fileID: 2656864231929346077}
   memoryController: {fileID: 3915165533490199740}
+  reproducer: {fileID: 5235625224800737656}
 --- !u!1 &8456268486169713850
 GameObject:
   m_ObjectHideFlags: 0
