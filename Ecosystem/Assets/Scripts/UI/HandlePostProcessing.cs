@@ -4,51 +4,39 @@ using UnityEngine.Rendering.PostProcessing;
 
 namespace Ecosystem.UI
 {
-  public class HandlePostProcessing : MonoBehaviour
+  public sealed class HandlePostProcessing : MonoBehaviour
   {
     [SerializeField] private PostProcessVolume ppVolume;
     [SerializeField] private PostProcessLayer ppLayer;
-
+    private bool _starting = true;
+    
+    private const int MSAA = 0;
+    private const int TAA = 1;
+    private const int FXAA = 2;
+    private const int None = 3;
+    
     private void Start()
     {
-      switch (GraphicsSettings._antiAliasingMode)
-      {
-        case 0:
-          ppLayer.antialiasingMode = PostProcessLayer.Antialiasing.SubpixelMorphologicalAntialiasing;
-          break;
-        case 1:
-          ppLayer.antialiasingMode = PostProcessLayer.Antialiasing.TemporalAntialiasing;
-          break;
-        case 2:
-          ppLayer.antialiasingMode = PostProcessLayer.Antialiasing.FastApproximateAntialiasing;
-          break;
-        case 3:
-          ppLayer.antialiasingMode = PostProcessLayer.Antialiasing.None;
-          break;
-        default: break;
-      }
-
-      ppVolume.profile.GetSetting<AmbientOcclusion>().active = GraphicsSettings._ambientOcclusionActive;
-      ppVolume.profile.GetSetting<AmbientOcclusion>().intensity.value =
-        (float) GraphicsSettings._ambientOcclusionIntensity / 100;
+      Update();
     }
 
     private void Update()
     {
-      if (GraphicsSettings._update)
+      if (_starting || GraphicsSettings._update)
       {
+        _starting = false;
         switch (GraphicsSettings._antiAliasingMode)
         {
-          case 0:
+          case MSAA:
             ppLayer.antialiasingMode = PostProcessLayer.Antialiasing.SubpixelMorphologicalAntialiasing;
             break;
-          case 1:
+          case TAA:
             ppLayer.antialiasingMode = PostProcessLayer.Antialiasing.TemporalAntialiasing;
             break;
-          case 2:
+          case FXAA:
             ppLayer.antialiasingMode = PostProcessLayer.Antialiasing.FastApproximateAntialiasing;
             break;
-          case 3:
+          case None:
             ppLayer.antialiasingMode = PostProcessLayer.Antialiasing.None;
             break;
           default: break;
