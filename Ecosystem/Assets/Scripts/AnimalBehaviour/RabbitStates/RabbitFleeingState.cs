@@ -6,7 +6,7 @@ namespace Ecosystem.AnimalBehaviour.RabbitStates
   internal sealed class RabbitFleeingState : AbstractAnimalState
   {
     private GameObject _lastPredatorSeen;
-    
+
     public RabbitFleeingState(RabbitStateData data)
     {
       Consumer = data.Consumer;
@@ -50,14 +50,12 @@ namespace Ecosystem.AnimalBehaviour.RabbitStates
         else if (Tags.IsPredator(otherObject))
         {
           _lastPredatorSeen = otherObject;
-          //TODO: Add logic for tracking all Predators in collision
         }
       }
     }
 
     public override void OnTriggerExit(Collider other)
     {
-      //TODO: Logic for looking for other predators already in the collider and set the closest one to current target.
       if (other.gameObject == Target)
       {
         if (other.gameObject == _lastPredatorSeen)
@@ -66,7 +64,7 @@ namespace Ecosystem.AnimalBehaviour.RabbitStates
         }
         else
         {
-          Target = _lastPredatorSeen; 
+          Target = _lastPredatorSeen;
         }
       }
     }

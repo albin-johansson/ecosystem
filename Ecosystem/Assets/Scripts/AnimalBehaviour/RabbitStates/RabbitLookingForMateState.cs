@@ -14,13 +14,13 @@ namespace Ecosystem.AnimalBehaviour.RabbitStates
       MemoryController = data.MemoryController;
       Reproducer = data.Reproducer;
     }
-    
+
     public override void Begin(GameObject target)
     {
       Target = null;
       Reproducer.isWilling = true;
     }
-    
+
     public override AnimalState Type()
     {
       return AnimalState.LookingForMate;
@@ -47,6 +47,7 @@ namespace Ecosystem.AnimalBehaviour.RabbitStates
       {
         MovementController.UpdateWander();
       }
+
       return base.Tick();
     }
 

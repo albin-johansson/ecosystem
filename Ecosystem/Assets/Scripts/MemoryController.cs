@@ -37,6 +37,7 @@ namespace Ecosystem
           return (true, _memory[i]);
         }
       }
+
       return (false, null);
     }
   }

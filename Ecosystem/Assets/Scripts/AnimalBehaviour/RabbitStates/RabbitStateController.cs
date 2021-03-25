@@ -24,12 +24,12 @@ namespace Ecosystem.AnimalBehaviour.RabbitStates
     {
       var data = new RabbitStateData
       {
-              Consumer = consumer,
-              AnimationController = animationController,
-              MemoryController = memoryController,
-              MovementController = movementController,
-              WaterConsumer = waterConsumer,
-              Reproducer = reproducer
+        Consumer = consumer,
+        AnimationController = animationController,
+        MemoryController = memoryController,
+        MovementController = movementController,
+        WaterConsumer = waterConsumer,
+        Reproducer = reproducer
       };
 
       _idle = RabbitStateFactory.CreateIdle(data);
@@ -83,7 +83,7 @@ namespace Ecosystem.AnimalBehaviour.RabbitStates
 
         case AnimalState.ChasingPrey:
           break;
-        
+
         case AnimalState.LookingForMate:
           State = _lookingForMate;
           break;

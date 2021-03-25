@@ -1,5 +1,4 @@
-﻿using Ecosystem.AnimalBehaviour;
-using UnityEngine;
+﻿using UnityEngine;
 
 namespace Ecosystem.AnimalBehaviour.WolfStates
 {
