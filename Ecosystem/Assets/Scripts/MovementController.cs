@@ -79,11 +79,17 @@ namespace Ecosystem
     /// <summary>
     ///   Finds a destination to flee to opposite of given threat position and updates speed.
     /// </summary>
-    public void StartFleeing(Vector3 threatPosition)
+    public bool StartFleeing(Vector3 threatPosition)
     {
       _fleeDestination = FindFleeDestination(threatPosition);
-      SetNavAgentSpeed();
-      SetTarget(_fleeDestination);
+      if (_fleeDestination != Vector3.zero)
+      {
+        SetNavAgentSpeed();
+        SetTarget(_fleeDestination);
+        return true;
+      }
+
+      return false;
     }
 
 
@@ -91,12 +97,14 @@ namespace Ecosystem
     ///   Updates animals navigation when fleeing if it doesn't have a target destination,
     ///   or it is getting close to it.
     /// </summary>
-    public void UpdateFleeing(Vector3 threatPosition)
+    public bool UpdateFleeing(Vector3 threatPosition)
     {
       if (!navAgent.hasPath || navAgent.remainingDistance < 1.0f)
       {
-        StartFleeing(threatPosition);
+        return StartFleeing(threatPosition);
       }
+
+      return true;
     }
 
 
@@ -137,6 +145,7 @@ namespace Ecosystem
 
       if (ValidateDestination(destination, out var validPosition))
       {
+        SetNavAgentSpeed();
         SetTarget(validPosition);
       }
     }
@@ -194,7 +203,7 @@ namespace Ecosystem
       {
         validPosition = hit.position;
         return ValidatePath(validPosition);
-      } 
+      }
 
       validPosition = Vector3.zero;
       return false;
@@ -211,7 +220,7 @@ namespace Ecosystem
       var visionRange = genome.GetVision().Value;
       var directionFromThreat = (navAgentPosition - threatPosition).normalized * visionRange;
 
-   
+
       foreach (var angle in _fleeingAngles)
       {
         _fleeDestination = navAgentPosition + (directionFromThreat.normalized * visionRange);
