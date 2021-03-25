@@ -28,16 +28,16 @@ namespace Ecosystem
       }
     }
 
-    public (bool, GameObject) GetFromMemory()
+    public (bool, GameObject) GetFromMemory(string tag)
     {
-      if (_memory.Count > 0)
+      for (int i = 0; i < _memory.Count; i++)
       {
-        return (true, _memory[Random.Range(0, _memory.Count)]);
+        if (_memory[i].CompareTag(tag))
+        {
+          return (true, _memory[i]);
+        }
       }
-      else
-      {
-        return (false, null);
-      }
+      return (false, null);
     }
   }
 }

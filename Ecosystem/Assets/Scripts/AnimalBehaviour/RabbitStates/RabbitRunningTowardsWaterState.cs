@@ -58,10 +58,6 @@ namespace Ecosystem.AnimalBehaviour.RabbitStates
         {
           Target = otherObject;
         }
-        else if (Tags.IsFood(otherObject))
-        {
-          MemoryController.SaveToMemory(otherObject);
-        }
       }
     }
 

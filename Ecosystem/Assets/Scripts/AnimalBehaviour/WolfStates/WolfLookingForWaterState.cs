@@ -32,8 +32,8 @@ namespace Ecosystem.AnimalBehaviour.WolfStates
         return AnimalState.LookingForPrey;
       }
 
-      var (item1, memoryObject) = MemoryController.GetFromMemory();
-      if (item1 && memoryObject.CompareTag("Water"))
+      var (item1, memoryObject) = MemoryController.GetFromMemory("Water");
+      if (item1)
       {
         Target = memoryObject;
         return base.Tick();

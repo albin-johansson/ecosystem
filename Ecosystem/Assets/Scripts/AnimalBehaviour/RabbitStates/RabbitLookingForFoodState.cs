@@ -41,13 +41,6 @@ namespace Ecosystem.AnimalBehaviour.RabbitStates
         return AnimalState.LookingForWater;
       }
 
-      var (item1, memoryObject) = MemoryController.GetFromMemory();
-      if (item1 && Tags.IsFood(memoryObject))
-      {
-        Target = memoryObject;
-        return base.Tick();
-      }
-
       MovementController.UpdateWander();
 
       return Type();
@@ -64,7 +57,6 @@ namespace Ecosystem.AnimalBehaviour.RabbitStates
         }
         else if (Tags.IsFood(otherObject))
         {
-          MemoryController.SaveToMemory(otherObject);
           Target = otherObject;
         }
         else if (Tags.IsPredator(otherObject))

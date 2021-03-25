@@ -41,8 +41,8 @@ namespace Ecosystem.AnimalBehaviour.RabbitStates
         return AnimalState.LookingForFood;
       }
 
-      var (item1, memoryObject) = MemoryController.GetFromMemory();
-      if (item1 && memoryObject.CompareTag("Water"))
+      var (item1, memoryObject) = MemoryController.GetFromMemory("Water");
+      if (item1)
       {
         Target = memoryObject;
         return base.Tick();
@@ -66,10 +66,6 @@ namespace Ecosystem.AnimalBehaviour.RabbitStates
         else if (Tags.IsPredator(otherObject))
         {
           Target = other.gameObject;
-        }
-        else if (Tags.IsFood(otherObject))
-        {
-          MemoryController.SaveToMemory(other.gameObject); // Todo add food function to memory
         }
       }
     }

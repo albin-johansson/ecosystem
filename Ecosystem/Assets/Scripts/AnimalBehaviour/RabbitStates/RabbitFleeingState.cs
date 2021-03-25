@@ -20,7 +20,6 @@ namespace Ecosystem.AnimalBehaviour.RabbitStates
       Target = target;
       MovementController.StartFleeing(Target.transform.position);
       AnimationController.MoveAnimation();
-      //TODO Check memory
     }
 
     public override AnimalState Tick()
