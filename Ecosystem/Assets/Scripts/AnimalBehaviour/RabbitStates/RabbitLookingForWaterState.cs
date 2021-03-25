@@ -19,7 +19,6 @@ namespace Ecosystem.AnimalBehaviour.RabbitStates
       Target = null;
       MovementController.StartWander();
       AnimationController.MoveAnimation();
-      //TODO Check memory
     }
 
     public override AnimalState Tick()
@@ -40,15 +39,15 @@ namespace Ecosystem.AnimalBehaviour.RabbitStates
       {
         return AnimalState.LookingForFood;
       }
-      
-      if (MemoryController.GetFromMemory().Item1)
+
+      var (item1, memoryObject) = MemoryController.GetFromMemory();
+      if (item1 && memoryObject.CompareTag("Water"))
       {
-        Target = MemoryController.GetFromMemory().Item2;
-        return Type();
+        Target = memoryObject;
+        return base.Tick();
       }
 
       MovementController.UpdateWander();
-
       return Type();
     }
 
