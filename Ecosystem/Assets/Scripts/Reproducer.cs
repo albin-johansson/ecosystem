@@ -138,11 +138,5 @@ namespace Ecosystem
         }
       }
     }
-
-    public bool CompatibleAsParents(GameObject other)
-    {
-      return CanMate && other.TryGetComponent(out Reproducer reproducer) &&
-             Genomes.CompatibleAsParents(genome, reproducer.genome);
-    }
   }
 }
