@@ -100,7 +100,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 49bf61acc4c2877fd847ee2daa8c9274, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  tags: []
+  tags:
+  - Rabbit
+  - Wolf
 --- !u!114 &5911609315381024474
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -117,7 +119,9 @@ MonoBehaviour:
   collidesWithLayer: 0
   groupIndex: 0
   useDefaultCollisionFilter: 1
-  tags: []
+  tags:
+  - Rabbit
+  - Wolf
 --- !u!114 &8945324408999112724
 MonoBehaviour:
   m_ObjectHideFlags: 0
