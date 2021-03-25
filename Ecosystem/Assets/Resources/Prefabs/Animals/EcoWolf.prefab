@@ -4463,7 +4463,6 @@ GameObject:
   - component: {fileID: -4792604738439377631}
   - component: {fileID: 1593158740268700976}
   - component: {fileID: 618687372982133785}
-  - component: {fileID: 6720820444802297723}
   m_Layer: 7
   m_Name: EcoWolf
   m_TagString: Wolf
@@ -4620,20 +4619,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   animationController: {fileID: -4792604738439377631}
   keyToPool: Wolf
---- !u!114 &6720820444802297723
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4371145773595096147}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 85b69fff4ae22bc438ab072e486351d2, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  genome: {fileID: 1593158740268700976}
-  reproducer: {fileID: 1675561535909660547}
 --- !u!1 &4395386118049015763
 GameObject:
   m_ObjectHideFlags: 0
@@ -7420,12 +7405,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3cd94d57fb1da52439641dc290534ae7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  stateText: {fileID: 9114406357668576936}
   consumer: {fileID: 5694940851676850990}
   waterConsumer: {fileID: 3242938931952141863}
   movementController: {fileID: 6378755894846735859}
   animationController: {fileID: -4792604738439377631}
   memoryController: {fileID: 4820126447581470678}
+  reproducer: {fileID: 1675561535909660547}
 --- !u!1 &7116156556552470170
 GameObject:
   m_ObjectHideFlags: 0
@@ -8700,6 +8685,8 @@ MonoBehaviour:
   genome: {fileID: 1593158740268700976}
   prefab: {fileID: 4371145773595096147}
   keyToPool: Wolf
+  isSexuallyMature: 0
+  isWilling: 0
 --- !u!1 &8326107814804612613
 GameObject:
   m_ObjectHideFlags: 0
@@ -10118,16 +10105,5 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 0f33f2c7a1419e740be5570d71daa2bf, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!114 &9114406357668576936 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 5266423967863666801, guid: b11869fe3d5ecbf4b912f33fa4a312db, type: 3}
-  m_PrefabInstance: {fileID: 3993277767788021465}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3d543e4934b76d84286e0a658a3962f6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
