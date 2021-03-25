@@ -19,7 +19,6 @@ namespace Ecosystem.AnimalBehaviour.RabbitStates
       Target = null;
       MovementController.StartWander();
       AnimationController.MoveAnimation();
-      //TODO Check memory
     }
 
     public override AnimalState Tick()
