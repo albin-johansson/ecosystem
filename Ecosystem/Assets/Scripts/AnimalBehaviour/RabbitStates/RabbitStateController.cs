@@ -9,6 +9,7 @@ namespace Ecosystem.AnimalBehaviour.RabbitStates
     [SerializeField] private MovementController movementController;
     [SerializeField] private EcoAnimationController animationController;
     [SerializeField] private MemoryController memoryController;
+    [SerializeField] private Reproducer reproducer;
 
     private IAnimalState _idle;
     private IAnimalState _lookingForFood;
@@ -17,6 +18,7 @@ namespace Ecosystem.AnimalBehaviour.RabbitStates
     private IAnimalState _runningTowardsWater;
     private IAnimalState _runningTowardsFood;
     private IAnimalState _fleeing;
+    private IAnimalState _lookingForMate;
 
     public override void Start()
     {
@@ -26,7 +28,8 @@ namespace Ecosystem.AnimalBehaviour.RabbitStates
               AnimationController = animationController,
               MemoryController = memoryController,
               MovementController = movementController,
-              WaterConsumer = waterConsumer
+              WaterConsumer = waterConsumer,
+              Reproducer = reproducer
       };
 
       _idle = RabbitStateFactory.CreateIdle(data);
@@ -36,6 +39,7 @@ namespace Ecosystem.AnimalBehaviour.RabbitStates
       _runningTowardsWater = RabbitStateFactory.CreateRunningTowardsWater(data);
       _runningTowardsFood = RabbitStateFactory.CreateRunningTowardsFood(data);
       _fleeing = RabbitStateFactory.CreateFleeing(data);
+      _lookingForMate = RabbitStateFactory.CreateLookingForMate(data);
 
       State = _idle;
       SwitchState(AnimalState.Idle);
@@ -78,6 +82,10 @@ namespace Ecosystem.AnimalBehaviour.RabbitStates
           break;
 
         case AnimalState.ChasingPrey:
+          break;
+        
+        case AnimalState.LookingForMate:
+          State = _lookingForMate;
           break;
 
         default:

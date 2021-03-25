@@ -36,15 +36,18 @@ namespace Ecosystem
     [SerializeField] private string keyToPool;
 
     private Transform _directoryOfAnimal;
-    private bool _isPregnant;
-    private bool _isSexuallyMature;
     private double _gestationPeriod;
     private double _sexualMaturityTime;
     private double _pregnancyElapsedTime;
     private double _maturityElapsedTime;
     private IGenome _mateGenome;
-
-    public bool CanMate => !_isPregnant && _isSexuallyMature;
+    private bool _isSexuallyMature;
+    private bool _isPregnant;
+    public bool isWilling;
+    
+    private bool CanMate => !_isPregnant && _isSexuallyMature && isWilling;
+    
+    public bool IsFertile => !_isPregnant && _isSexuallyMature;
 
     private void Start()
     {
@@ -72,6 +75,11 @@ namespace Ecosystem
           GiveBirth();
         }
       }
+    }
+    public bool CompatibleAsParents(GameObject other)
+    {
+      return CanMate && other.TryGetComponent(out AbstractGenome otherGenome) &&
+             Genomes.CompatibleAsParents(genome, otherGenome);
     }
 
     private void GiveBirth()
