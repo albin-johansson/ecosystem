@@ -3590,7 +3590,6 @@ MonoBehaviour:
   genome: {fileID: 570846004582155358}
   prefab: {fileID: 7155763010095567698}
   keyToPool: Deer
-  isSexuallyMature: 0
   isWilling: 0
 --- !u!1 &3504996671413722853
 GameObject:
@@ -10003,6 +10002,10 @@ PrefabInstance:
     - target: {fileID: 8137074873794477987, guid: b11869fe3d5ecbf4b912f33fa4a312db, type: 3}
       propertyPath: m_Layer
       value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 8482749343550285724, guid: b11869fe3d5ecbf4b912f33fa4a312db, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8703765452308408067, guid: b11869fe3d5ecbf4b912f33fa4a312db, type: 3}
       propertyPath: m_Layer
