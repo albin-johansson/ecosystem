@@ -915,7 +915,6 @@ MonoBehaviour:
   genome: {fileID: 1080774011748047759}
   prefab: {fileID: 7237780236292801018}
   keyToPool: Bear
-  isSexuallyMature: 0
   isWilling: 0
 --- !u!1 &4817363271471425423
 GameObject:
@@ -1502,7 +1501,7 @@ NavMeshAgent:
   m_Enabled: 1
   m_AgentTypeID: 0
   m_Radius: 0.5
-  m_Speed: 10
+  m_Speed: 8
   m_Acceleration: 8
   avoidancePriority: 50
   m_AngularSpeed: 120
@@ -1705,7 +1704,7 @@ SphereCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Radius: 14
+  m_Radius: 5
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!114 &6008664309968109715
 MonoBehaviour:
@@ -1737,6 +1736,8 @@ MonoBehaviour:
   animationController: {fileID: -4165548273840364118}
   memoryController: {fileID: 6008664309968109715}
   reproducer: {fileID: 3460790299832027449}
+  sphereCollider: {fileID: 6405190242370463797}
+  genome: {fileID: 1080774011748047759}
 --- !u!1 &8421346663248798016
 GameObject:
   m_ObjectHideFlags: 0

@@ -910,7 +910,7 @@ NavMeshAgent:
   m_Enabled: 1
   m_AgentTypeID: 0
   m_Radius: 0.14
-  m_Speed: 10
+  m_Speed: 8
   m_Acceleration: 8
   avoidancePriority: 50
   m_AngularSpeed: 120
@@ -1920,7 +1920,6 @@ MonoBehaviour:
   genome: {fileID: 1438288584065220351}
   prefab: {fileID: 3436557251021641289}
   keyToPool: Rabbit
-  isSexuallyMature: 0
   isWilling: 0
 --- !u!1 &7274074492873787243
 GameObject:
@@ -2181,7 +2180,7 @@ SphereCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Radius: 14
+  m_Radius: 5
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!114 &3915165533490199740
 MonoBehaviour:
@@ -2213,6 +2212,8 @@ MonoBehaviour:
   animationController: {fileID: 2656864231929346077}
   memoryController: {fileID: 3915165533490199740}
   reproducer: {fileID: 5235625224800737656}
+  sphereCollider: {fileID: 7194725648983189641}
+  genome: {fileID: 1438288584065220351}
 --- !u!1 &8456268486169713850
 GameObject:
   m_ObjectHideFlags: 0

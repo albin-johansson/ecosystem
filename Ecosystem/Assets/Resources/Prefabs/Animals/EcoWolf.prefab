@@ -4501,7 +4501,7 @@ NavMeshAgent:
   m_Enabled: 1
   m_AgentTypeID: 0
   m_Radius: 0.5
-  m_Speed: 10
+  m_Speed: 8
   m_Acceleration: 8
   avoidancePriority: 50
   m_AngularSpeed: 120
@@ -4619,19 +4619,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   animationController: {fileID: -4792604738439377631}
   keyToPool: Wolf
---- !u!114 &6720820444802297723
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4371145773595096147}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 85b69fff4ae22bc438ab072e486351d2, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  reproducer: {fileID: 1675561535909660547}
 --- !u!1 &4395386118049015763
 GameObject:
   m_ObjectHideFlags: 0
@@ -7392,7 +7379,7 @@ SphereCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Radius: 14
+  m_Radius: 5
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!114 &4820126447581470678
 MonoBehaviour:
@@ -7406,14 +7393,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 61c23cb0a96b9f243b4a54dd181e22d4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  preyConsumer: {fileID: 5694940851676850990}
-  waterConsumer: {fileID: 3242938931952141863}
-  mateFinder: {fileID: 6720820444802297723}
-  memoryController: {fileID: 4820126447581470678}
-  targetTracker: {fileID: 7813067152338188920}
-  genome: {fileID: 1593158740268700976}
-  sphereCollider: {fileID: 651377425655632140}
---- !u!114 &4820126447581470678
 --- !u!114 &1277855786782778012
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -7432,6 +7411,8 @@ MonoBehaviour:
   animationController: {fileID: -4792604738439377631}
   memoryController: {fileID: 4820126447581470678}
   reproducer: {fileID: 1675561535909660547}
+  sphereCollider: {fileID: 651377425655632140}
+  genome: {fileID: 1593158740268700976}
 --- !u!1 &7116156556552470170
 GameObject:
   m_ObjectHideFlags: 0
@@ -8706,7 +8687,6 @@ MonoBehaviour:
   genome: {fileID: 1593158740268700976}
   prefab: {fileID: 4371145773595096147}
   keyToPool: Wolf
-  isSexuallyMature: 0
   isWilling: 0
 --- !u!1 &8326107814804612613
 GameObject:

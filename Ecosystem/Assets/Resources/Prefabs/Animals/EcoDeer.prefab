@@ -3590,7 +3590,6 @@ MonoBehaviour:
   genome: {fileID: 570846004582155358}
   prefab: {fileID: 7155763010095567698}
   keyToPool: Deer
-  isSexuallyMature: 0
   isWilling: 0
 --- !u!1 &3504996671413722853
 GameObject:
@@ -4887,7 +4886,7 @@ SphereCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Radius: 14
+  m_Radius: 5
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!114 &5959171333855914516
 MonoBehaviour:
@@ -4919,6 +4918,8 @@ MonoBehaviour:
   animationController: {fileID: 4427174813899224407}
   memoryController: {fileID: 5959171333855914516}
   reproducer: {fileID: 4953059004311012286}
+  sphereCollider: {fileID: 6776153342693034266}
+  genome: {fileID: 570846004582155358}
 --- !u!1 &4759522730638570450
 GameObject:
   m_ObjectHideFlags: 0
@@ -7479,7 +7480,7 @@ NavMeshAgent:
   m_Enabled: 1
   m_AgentTypeID: 0
   m_Radius: 0.5
-  m_Speed: 10
+  m_Speed: 8
   m_Acceleration: 8
   avoidancePriority: 50
   m_AngularSpeed: 120
