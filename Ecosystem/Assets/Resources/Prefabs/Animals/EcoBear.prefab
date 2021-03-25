@@ -915,7 +915,6 @@ MonoBehaviour:
   genome: {fileID: 1080774011748047759}
   prefab: {fileID: 7237780236292801018}
   keyToPool: Bear
-  isSexuallyMature: 0
   isWilling: 0
 --- !u!1 &4817363271471425423
 GameObject:
@@ -1704,7 +1703,7 @@ SphereCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Radius: 4
+  m_Radius: 6
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!114 &6008664309968109715
 MonoBehaviour:

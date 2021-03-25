@@ -16,6 +16,8 @@ namespace Ecosystem
     [SerializeField] private double maxHunger = 100;
     private bool _isDead;
 
+    public bool IsAttacking { get; set; }
+
     public double Hunger { get; private set; }
 
     public bool CollideActive { get; set; }

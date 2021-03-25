@@ -27,17 +27,15 @@ namespace Ecosystem.AnimalBehaviour.WolfStates
       {
         return base.Tick();
       }
+
+      if (Consumer.IsAttacking)
+      {
+        return AnimalState.Attacking;
+      }
       else
       {
         MovementController.UpdateHunting(Target.transform.position);
       }
-      
-      /*
-      if (WaterConsumer.Thirst > Consumer.Hunger && WaterConsumer.IsThirsty())
-      {
-        return AnimalState.LookingForWater;
-      }
-      */
 
       return Type();
     }
