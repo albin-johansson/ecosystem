@@ -14,14 +14,10 @@ namespace Ecosystem
 
     private List<GameObject> _memory;
     private int _nextMemoryLocation;
-    private List<GameObject> _inVision;
-
-    private bool _inVisionLock;
 
     private void Start()
     {
       _memory = new List<GameObject>(MemoryCapacity);
-      _inVision = new List<GameObject>(InVisionCapacity);
     }
 
     //Saves a game objects position and its desire to memory
@@ -35,38 +31,16 @@ namespace Ecosystem
       }
     }
 
-    public void SaveToInVision(GameObject other)
+    public GameObject GetClosestInMemory(Func<GameObject, bool> filter, Vector3 position)
     {
-      _inVision.Add(other);
-    }
-
-    public IEnumerator RemoveFromInVision(GameObject other)
-    {
-      yield return new WaitUntil(() => !_inVisionLock);
-      _inVision.Remove(other);
-    }
-
-    public GameObject GetClosestInVision(Func<GameObject, bool> filter, Vector3 position)
-    {
-      _inVisionLock = true;
-      var r =  GetClosestFromList(filter, position, _inVision);
-      _inVisionLock = false;
+      var r =  GetClosestFromList(filter, position, _memory);
       return r;
-    }
-
-    public GameObject GetClosest(Func<GameObject, bool> filter, Vector3 position)
-    {
-      var closest = GetClosestInVision(filter, position);
-      if (closest)
-      {
-        return closest;
-      }
-      return GetClosestFromList(filter, position, _memory);
     }
 
     private static GameObject GetClosestFromList(Func<GameObject, bool> f, Vector3 p, List<GameObject> l)
     {
       GameObject closest = null;
+      l.RemoveAll(GameObject => !GameObject);
       foreach (var r in l.Where(f))
       {
         if (!closest)

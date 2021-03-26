@@ -1,5 +1,7 @@
+using Ecosystem.Genes;
 using Ecosystem.UI;
 using UnityEngine;
+using UnityEngine.EventSystems;
 
 namespace Ecosystem.AnimalBehaviour
 {
@@ -12,6 +14,7 @@ namespace Ecosystem.AnimalBehaviour
     [SerializeField] protected EcoAnimationController animationController;
     [SerializeField] protected MemoryController memoryController;
     [SerializeField] protected Reproducer reproducer;
+    [SerializeField] protected AbstractGenome genome;
 
 
     public abstract void Start();
@@ -31,13 +34,11 @@ namespace Ecosystem.AnimalBehaviour
 
     public void OnTriggerEnter(Collider other)
     {
-      memoryController.SaveToInVision(other.gameObject);
       State.OnTriggerEnter(other);
     }
 
-  public void OnTriggerExit(Collider other)
-  {
-    StartCoroutine(memoryController.RemoveFromInVision(other.gameObject));
+    public void OnTriggerExit(Collider other)
+    {
       State.OnTriggerExit(other);
     }
   }

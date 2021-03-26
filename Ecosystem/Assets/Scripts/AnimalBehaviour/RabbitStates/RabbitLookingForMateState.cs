@@ -5,6 +5,7 @@ namespace Ecosystem.AnimalBehaviour.RabbitStates
 {
   public class RabbitLookingForMateState : AbstractAnimalState
   {
+    private readonly LayerMask _whatIsMate = LayerMask.GetMask("Prey");
     public RabbitLookingForMateState(RabbitStateData data)
     {
       Consumer = data.Consumer;
@@ -13,12 +14,15 @@ namespace Ecosystem.AnimalBehaviour.RabbitStates
       AnimationController = data.AnimationController;
       MemoryController = data.MemoryController;
       Reproducer = data.Reproducer;
+      Genome = data.Genome;
     }
 
     public override void Begin(GameObject target)
     {
       Reproducer.isWilling = true;
-      Target = MemoryController.GetClosestInVision(Reproducer.CompatibleAsParents, MovementController.GetPosition());
+      MovementController.StartWander();
+      AnimationController.MoveAnimation();
+      Target = GetClosestMate(GetInVision(MovementController.GetPosition(), Genome.GetVision().Value, _whatIsMate));
     }
 
     public override AnimalState Type()
@@ -40,7 +44,7 @@ namespace Ecosystem.AnimalBehaviour.RabbitStates
         }
         else
         {
-          Target = MemoryController.GetClosestInVision(Reproducer.CompatibleAsParents, MovementController.GetPosition());
+          Target = GetClosestMate(GetInVision(MovementController.GetPosition(), Genome.GetVision().Value, _whatIsMate));
         }
       }
       else

@@ -196,7 +196,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5745841613518323677}
   - component: {fileID: 7401787944804568421}
-  m_Layer: 10
+  m_Layer: 0
   m_Name: Movement
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1144,7 +1144,7 @@ GameObject:
   - component: {fileID: 4475402439294125818}
   - component: {fileID: 1750528480465133566}
   - component: {fileID: 3973268693136602879}
-  m_Layer: 10
+  m_Layer: 0
   m_Name: Consumer
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1671,7 +1671,7 @@ GameObject:
   - component: {fileID: 6405190242370463797}
   - component: {fileID: 6008664309968109715}
   - component: {fileID: 6410639263071043262}
-  m_Layer: 10
+  m_Layer: 0
   m_Name: StateMachine
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1730,12 +1730,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   StateText: {fileID: 7034133904784691590}
-  consumer: {fileID: 3973268693136602879}
   waterConsumer: {fileID: 1750528480465133566}
   movementController: {fileID: 7401787944804568421}
   animationController: {fileID: -4165548273840364118}
   memoryController: {fileID: 6008664309968109715}
   reproducer: {fileID: 3460790299832027449}
+  genome: {fileID: 0}
+  consumer: {fileID: 3973268693136602879}
 --- !u!1 &8421346663248798016
 GameObject:
   m_ObjectHideFlags: 0

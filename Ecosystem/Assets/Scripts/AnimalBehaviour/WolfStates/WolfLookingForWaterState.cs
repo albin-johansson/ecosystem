@@ -17,7 +17,7 @@ namespace Ecosystem.AnimalBehaviour.WolfStates
 
     public override void Begin(GameObject target)
     {
-      Target = MemoryController.GetClosest(Tags.IsWater, MovementController.GetPosition());
+      Target = MemoryController.GetClosestInMemory(Tags.IsWater, MovementController.GetPosition());
       MovementController.StartWander();
       AnimationController.MoveAnimation();
     }

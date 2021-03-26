@@ -1,10 +1,13 @@
+using System.Linq;
 using Ecosystem.Util;
+using UnityEditor.Experimental.GraphView;
 using UnityEngine;
 
 namespace Ecosystem.AnimalBehaviour.RabbitStates
 {
   internal sealed class RabbitLookingForFoodState : AbstractAnimalState
   {
+    private readonly LayerMask _whatIsFood = LayerMask.GetMask("Food");
     public RabbitLookingForFoodState(RabbitStateData data)
     {
       Consumer = data.Consumer;
@@ -13,11 +16,12 @@ namespace Ecosystem.AnimalBehaviour.RabbitStates
       AnimationController = data.AnimationController;
       MemoryController = data.MemoryController;
       Reproducer = data.Reproducer;
+      Genome = data.Genome;
     }
 
     public override void Begin(GameObject target)
     {
-      Target = null;
+      Target = GetClosest(GetInVision(MovementController.GetPosition(), Genome.GetVision().Value, _whatIsFood));
       MovementController.StartWander();
       AnimationController.MoveAnimation();
     }

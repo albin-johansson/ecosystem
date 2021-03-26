@@ -1,11 +1,10 @@
-using Ecosystem.Util;
 using UnityEngine;
 
 namespace Ecosystem.AnimalBehaviour.RabbitStates
 {
   internal sealed class RabbitFleeingState : AbstractAnimalState
   {
-
+    private readonly LayerMask _whatIsPredator = LayerMask.GetMask("Bear", "Wolf");
     public RabbitFleeingState(RabbitStateData data)
     {
       Consumer = data.Consumer;
@@ -14,6 +13,7 @@ namespace Ecosystem.AnimalBehaviour.RabbitStates
       AnimationController = data.AnimationController;
       MemoryController = data.MemoryController;
       Reproducer = data.Reproducer;
+      Genome = data.Genome;
     }
 
     public override void Begin(GameObject target)
@@ -49,7 +49,7 @@ namespace Ecosystem.AnimalBehaviour.RabbitStates
     {
       if (other.gameObject == Target)
       {
-        Target = MemoryController.GetClosestInVision(Tags.IsPredator, MovementController.GetPosition());
+        Target = GetClosest(GetInVision(MovementController.GetPosition(), Genome.GetVision().Value, _whatIsPredator));
       }
     }
 
