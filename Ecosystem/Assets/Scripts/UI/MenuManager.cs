@@ -10,6 +10,7 @@ namespace Ecosystem.UI
   {
     [SerializeField] private GameObject mainMenu;
     [SerializeField] private GameObject dynamicSceneMenu;
+    [SerializeField] private GameObject settingsButton;
     [SerializeField] private Button dynamicSceneStartButton;
     [SerializeField] private Text dynamicRabbitCount;
     [SerializeField] private Text dynamicDeerCount;
@@ -27,11 +28,13 @@ namespace Ecosystem.UI
     {
       dynamicSceneMenu.SetActive(false);
       mainMenu.SetActive(true);
+      settingsButton.SetActive(true);
     }
 
     public void EnterDynamicSceneMenu()
     {
       mainMenu.SetActive(false);
+      settingsButton.SetActive(false);
       dynamicSceneMenu.SetActive(true);
     }
 
