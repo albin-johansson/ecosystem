@@ -5,7 +5,6 @@ namespace Ecosystem.AnimalBehaviour.RabbitStates
 {
   internal sealed class RabbitFleeingState : AbstractAnimalState
   {
-    private GameObject _lastPredatorSeen;
 
     public RabbitFleeingState(RabbitStateData data)
     {
@@ -20,7 +19,6 @@ namespace Ecosystem.AnimalBehaviour.RabbitStates
     public override void Begin(GameObject target)
     {
       Target = target;
-      _lastPredatorSeen = target;
       MovementController.StartFleeing(Target.transform.position);
       AnimationController.MoveAnimation();
     }
@@ -45,24 +43,13 @@ namespace Ecosystem.AnimalBehaviour.RabbitStates
       {
         MemoryController.SaveToMemory(otherObject);
       }
-      else if (Tags.IsPredator(otherObject))
-      { 
-        _lastPredatorSeen = otherObject;
-      }
     }
 
     public override void OnTriggerExit(Collider other)
     {
       if (other.gameObject == Target)
       {
-        if (other.gameObject == _lastPredatorSeen)
-        {
-          Target = null;
-        }
-        else
-        {
-          Target = _lastPredatorSeen;
-        }
+        Target = MemoryController.GetClosestInVision(Tags.IsPredator, MovementController.GetPosition());
       }
     }
 

@@ -35,7 +35,7 @@ namespace Ecosystem.AnimalBehaviour
 
   public void OnTriggerExit(Collider other)
   {
-    memoryController.RemoveFromInVision(other.gameObject);
+    StartCoroutine(memoryController.RemoveFromInVision(other.gameObject));
       State.OnTriggerExit(other);
     }
   }

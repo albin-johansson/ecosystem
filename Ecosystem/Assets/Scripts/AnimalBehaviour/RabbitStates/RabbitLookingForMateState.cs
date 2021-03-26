@@ -17,8 +17,8 @@ namespace Ecosystem.AnimalBehaviour.RabbitStates
 
     public override void Begin(GameObject target)
     {
-      Target = null;
       Reproducer.isWilling = true;
+      Target = MemoryController.GetClosestInVision(Reproducer.CompatibleAsParents, MovementController.GetPosition());
     }
 
     public override AnimalState Type()
@@ -40,7 +40,7 @@ namespace Ecosystem.AnimalBehaviour.RabbitStates
         }
         else
         {
-          Target = null;
+          Target = MemoryController.GetClosestInVision(Reproducer.CompatibleAsParents, MovementController.GetPosition());
         }
       }
       else

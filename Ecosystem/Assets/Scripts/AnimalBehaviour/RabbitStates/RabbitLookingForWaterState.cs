@@ -17,46 +17,33 @@ namespace Ecosystem.AnimalBehaviour.RabbitStates
 
     public override void Begin(GameObject target)
     {
-      Target = null;
+      Target = MemoryController.GetClosest(Tags.IsWater, MovementController.GetPosition());
       MovementController.StartWander();
       AnimationController.MoveAnimation();
     }
 
     public override AnimalState Tick()
     {
+      MovementController.UpdateWander();
       if (Target)
       {
         if (Tags.IsPredator(Target))
         {
           return AnimalState.Fleeing;
         }
-        else if (Target.CompareTag("Water"))
+        else if (Tags.IsWater(Target))
         {
           return AnimalState.RunningTowardsWater;
         }
       }
-
-      if (Consumer.Hunger > WaterConsumer.Thirst && Consumer.IsHungry())
-      {
-        return AnimalState.LookingForFood;
-      }
-
-      var (item1, memoryObject) = MemoryController.GetFromMemory("Water");
-      if (item1)
-      {
-        Target = memoryObject;
-        return base.Tick();
-      }
-
-      MovementController.UpdateWander();
-      return Type();
+      return base.Tick();
     }
-
+    
     public override void OnTriggerEnter(Collider other)
     {
       var otherObject = other.gameObject;
       
-      if (otherObject.CompareTag("Water"))
+      if (Tags.IsWater(otherObject))
       {
         MemoryController.SaveToMemory(otherObject);
         Target = otherObject;

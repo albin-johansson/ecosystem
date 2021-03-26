@@ -1,10 +1,8 @@
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
-using Ecosystem.Util;
 using UnityEngine;
-using UnityEngine.UIElements;
-using Random = UnityEngine.Random;
 using Vector3 = UnityEngine.Vector3;
 
 namespace Ecosystem
@@ -17,6 +15,8 @@ namespace Ecosystem
     private List<GameObject> _memory;
     private int _nextMemoryLocation;
     private List<GameObject> _inVision;
+
+    private bool _inVisionLock;
 
     private void Start()
     {
@@ -40,56 +40,46 @@ namespace Ecosystem
       _inVision.Add(other);
     }
 
-    public void RemoveFromInVision(GameObject other)
+    public IEnumerator RemoveFromInVision(GameObject other)
     {
+      yield return new WaitUntil(() => !_inVisionLock);
       _inVision.Remove(other);
     }
-    
+
     public GameObject GetClosestInVision(Func<GameObject, bool> filter, Vector3 position)
     {
-      GameObject closest = null;
-      foreach (var obj in _inVision.Where(filter))
+      _inVisionLock = true;
+      var r =  GetClosestFromList(filter, position, _inVision);
+      _inVisionLock = false;
+      return r;
+    }
+
+    public GameObject GetClosest(Func<GameObject, bool> filter, Vector3 position)
+    {
+      var closest = GetClosestInVision(filter, position);
+      if (closest)
       {
-        if (closest)
+        return closest;
+      }
+      return GetClosestFromList(filter, position, _memory);
+    }
+
+    private static GameObject GetClosestFromList(Func<GameObject, bool> f, Vector3 p, List<GameObject> l)
+    {
+      GameObject closest = null;
+      foreach (var r in l.Where(f))
+      {
+        if (!closest)
         {
-          if (Vector3.Distance(position, closest.transform.position) >
-              Vector3.Distance(position, obj.transform.position))
-          {
-            closest = obj;
-          }
+          closest = r;
         }
-        else
+        else if (Vector3.Distance(p, closest.transform.position) >
+                 Vector3.Distance(p, r.transform.position))
         {
-          closest = obj;
+          closest = r;
         }
       }
       return closest;
-    }
-
-    public (bool, GameObject) GetFromInVision(string tag)
-    {
-      for (int i = 0; i < _inVision.Count; i++)
-      {
-        if (_inVision[i].CompareTag(tag))
-        {
-          return (true, _inVision[i]);
-        }
-      }
-
-      return (false, null);
-    }
-
-    public (bool, GameObject) GetFromMemory(string tag)
-    {
-      for (int i = 0; i < _memory.Count; i++)
-      {
-        if (_memory[i].CompareTag(tag))
-        {
-          return (true, _memory[i]);
-        }
-      }
-
-      return (false, null);
     }
   }
 }

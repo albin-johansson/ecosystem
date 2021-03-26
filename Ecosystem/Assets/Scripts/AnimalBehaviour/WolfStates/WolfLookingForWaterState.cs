@@ -1,3 +1,4 @@
+using Ecosystem.Util;
 using UnityEngine;
 
 namespace Ecosystem.AnimalBehaviour.WolfStates
@@ -16,7 +17,7 @@ namespace Ecosystem.AnimalBehaviour.WolfStates
 
     public override void Begin(GameObject target)
     {
-      Target = null;
+      Target = MemoryController.GetClosest(Tags.IsWater, MovementController.GetPosition());
       MovementController.StartWander();
       AnimationController.MoveAnimation();
     }
@@ -27,26 +28,14 @@ namespace Ecosystem.AnimalBehaviour.WolfStates
       {
         return AnimalState.RunningTowardsWater;
       }
-      else if (WaterConsumer.Thirst < Consumer.Hunger && Consumer.IsHungry())
-      {
-        return AnimalState.LookingForPrey;
-      }
-
-      var (item1, memoryObject) = MemoryController.GetFromMemory("Water");
-      if (item1)
-      {
-        Target = memoryObject;
-        return base.Tick();
-      }
-
       MovementController.UpdateWander();
-      return Type();
+      return base.Tick();
     }
 
     public override void OnTriggerEnter(Collider other)
     {
       var otherObject = other.gameObject;
-      if (otherObject.CompareTag("Water"))
+      if (Tags.IsWater(otherObject))
       {
         MemoryController.SaveToMemory(otherObject);
         Target = otherObject;
