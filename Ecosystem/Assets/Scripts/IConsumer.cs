@@ -8,5 +8,7 @@ namespace Ecosystem
     double Hunger { get; }
 
     bool IsHungry();
+
+    void SetSaturation(float value);
   }
 }

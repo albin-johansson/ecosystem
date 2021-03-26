@@ -1,3 +1,4 @@
+using Ecosystem.Genes;
 using UnityEngine;
 
 namespace Ecosystem.AnimalBehaviour.WolfStates
@@ -10,6 +11,8 @@ namespace Ecosystem.AnimalBehaviour.WolfStates
     [SerializeField] private EcoAnimationController animationController;
     [SerializeField] private MemoryController memoryController;
     [SerializeField] private Reproducer reproducer;
+    [SerializeField] private SphereCollider sphereCollider;
+    [SerializeField] private AbstractGenome genome;
 
     private IAnimalState _idle;
     private IAnimalState _lookingForPrey;
@@ -38,7 +41,9 @@ namespace Ecosystem.AnimalBehaviour.WolfStates
       _runningTowardsWater = WolfStateFactory.CreateRunningTowardsWater(data);
       _chasingPrey = WolfStateFactory.CreateChasingPrey(data);
       _lookingForMate = WolfStateFactory.CreateLookingForMate(data);
-
+      
+      sphereCollider.radius = (sphereCollider.radius / sphereCollider.transform.lossyScale.magnitude) * genome.GetVision().Value;
+      
       State = _idle;
       SwitchState(AnimalState.Idle);
     }
