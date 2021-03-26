@@ -19,13 +19,10 @@ namespace Ecosystem.AnimalBehaviour.WolfStates
       Target = null;
       MovementController.StartWander();
       AnimationController.MoveAnimation();
-
-      // TODO Check memory
     }
 
     public override AnimalState Tick()
     {
-      MovementController.UpdateWander();
       if (Target)
       {
         return AnimalState.RunningTowardsWater;
@@ -34,11 +31,16 @@ namespace Ecosystem.AnimalBehaviour.WolfStates
       {
         return AnimalState.LookingForPrey;
       }
-      else
+
+      var (successfulRetrieval, memoryObject) = MemoryController.GetFromMemory("Water");
+      if (successfulRetrieval)
       {
-        MovementController.UpdateWander();
-        return Type();
+        Target = memoryObject;
+        return base.Tick();
       }
+
+      MovementController.UpdateWander();
+      return Type();
     }
 
     public override void OnTriggerEnter(Collider other)

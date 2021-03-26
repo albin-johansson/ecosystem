@@ -18,9 +18,7 @@ namespace Ecosystem.AnimalBehaviour.RabbitStates
     public override void Begin(GameObject target)
     {
       Target = null;
-      MovementController.StartWander();
-      AnimationController.MoveAnimation();
-      //TODO Check memory
+      AnimationController.IdleAnimation();
     }
 
     public override AnimalState Tick()

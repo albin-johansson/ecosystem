@@ -16,13 +16,8 @@ namespace Ecosystem.AnimalBehaviour.WolfStates
 
     public override void Begin(GameObject target)
     {
-      MovementController.StartWander();
-    }
-
-    public override AnimalState Tick()
-    {
-      MovementController.UpdateWander();
-      return base.Tick();
+      Target = null;
+      AnimationController.IdleAnimation();
     }
 
     public override AnimalState Type()

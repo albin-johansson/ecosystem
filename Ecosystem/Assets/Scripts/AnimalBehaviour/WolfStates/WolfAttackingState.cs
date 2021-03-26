@@ -1,10 +1,10 @@
-using UnityEngine;
+﻿using UnityEngine;
 
 namespace Ecosystem.AnimalBehaviour.WolfStates
 {
-  internal sealed class WolfDrinkingState : AbstractAnimalState
+  internal sealed class WolfAttackingState : AbstractAnimalState
   {
-    public WolfDrinkingState(WolfStateData data)
+    public WolfAttackingState(WolfStateData data)
     {
       Consumer = data.Consumer;
       WaterConsumer = data.WaterConsumer;
@@ -17,27 +17,24 @@ namespace Ecosystem.AnimalBehaviour.WolfStates
     public override void Begin(GameObject target)
     {
       Target = target;
+      AnimationController.EnterAttackAnimation();
       MovementController.StandStill(true);
-      AnimationController.IdleAnimation();
-      WaterConsumer.StartDrinking();
     }
 
     public override AnimalState Tick()
     {
-      if (WaterConsumer.IsDrinking)
+      if (AnimationController.IsIdle())
       {
-        return Type();
-      }
-      else
-      {
-        MovementController.StandStill(false);
+        Consumer.IsAttacking = false;
         return base.Tick();
       }
+
+      return Type();
     }
 
     public override AnimalState Type()
     {
-      return AnimalState.Drinking;
+      return AnimalState.Attacking;
     }
   }
 }

@@ -18,16 +18,16 @@ namespace Ecosystem.Genes
 
     public static readonly Dictionary<GeneType, Gene> DefaultGenes = new Dictionary<GeneType, Gene>
     {
-            {GeneType.HungerRate, HungerRate},
-            {GeneType.HungerThreshold, HungerThreshold},
-            {GeneType.ThirstRate, ThirstRate},
-            {GeneType.ThirstThreshold, ThirstThreshold},
-            {GeneType.Vision, Vision},
-            {GeneType.SpeedFactor, SpeedFactor},
-            {GeneType.SizeFactor, SizeFactor},
-            {GeneType.DesirabilityScore, DesirabilityFactor},
-            {GeneType.GestationPeriod, GestationPeriod},
-            {GeneType.SexualMaturityTime, SexualMaturityTime},
+      {GeneType.HungerRate, HungerRate},
+      {GeneType.HungerThreshold, HungerThreshold},
+      {GeneType.ThirstRate, ThirstRate},
+      {GeneType.ThirstThreshold, ThirstThreshold},
+      {GeneType.Vision, Vision},
+      {GeneType.SpeedFactor, SpeedFactor},
+      {GeneType.SizeFactor, SizeFactor},
+      {GeneType.DesirabilityScore, DesirabilityFactor},
+      {GeneType.GestationPeriod, GestationPeriod},
+      {GeneType.SexualMaturityTime, SexualMaturityTime},
     };
 
     protected override void Initialize()

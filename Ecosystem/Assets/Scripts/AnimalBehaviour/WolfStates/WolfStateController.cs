@@ -21,17 +21,18 @@ namespace Ecosystem.AnimalBehaviour.WolfStates
     private IAnimalState _runningTowardsWater;
     private IAnimalState _chasingPrey;
     private IAnimalState _lookingForMate;
+    private IAnimalState _attacking;
 
     public override void Start()
     {
       var data = new WolfStateData
       {
-              Consumer = consumer,
-              AnimationController = animationController,
-              MemoryController = memoryController,
-              MovementController = movementController,
-              WaterConsumer = waterConsumer,
-              Reproducer = reproducer,
+        Consumer = consumer,
+        AnimationController = animationController,
+        MemoryController = memoryController,
+        MovementController = movementController,
+        WaterConsumer = waterConsumer,
+        Reproducer = reproducer,
       };
 
       _idle = WolfStateFactory.CreateIdle(data);
@@ -41,6 +42,8 @@ namespace Ecosystem.AnimalBehaviour.WolfStates
       _runningTowardsWater = WolfStateFactory.CreateRunningTowardsWater(data);
       _chasingPrey = WolfStateFactory.CreateChasingPrey(data);
       _lookingForMate = WolfStateFactory.CreateLookingForMate(data);
+      _attacking = WolfStateFactory.CreateAttackingState(data);
+
       
       sphereCollider.radius = (sphereCollider.radius / sphereCollider.transform.lossyScale.magnitude) * genome.GetVision().Value;
       
@@ -59,6 +62,7 @@ namespace Ecosystem.AnimalBehaviour.WolfStates
 
         case AnimalState.LookingForPrey:
           State = _lookingForPrey;
+          consumer.CollideActive = true;
           break;
 
         case AnimalState.Idle:
@@ -82,14 +86,19 @@ namespace Ecosystem.AnimalBehaviour.WolfStates
 
         case AnimalState.ChasingPrey:
           State = _chasingPrey;
+          consumer.CollideActive = true;
           break;
 
         case AnimalState.LookingForFood:
           State = _lookingForPrey;
           break;
-        
+
         case AnimalState.LookingForMate:
           State = _lookingForMate;
+          break;
+
+        case AnimalState.Attacking:
+          State = _attacking;
           break;
 
         default:

@@ -53,11 +53,6 @@ namespace Ecosystem.AnimalBehaviour.RabbitStates
         {
           Target = otherObject;
         }
-        else if (Tags.IsFood(otherObject))
-        {
-          //TODO: Check if the new food is closer than the current target
-          MemoryController.SaveToMemory(otherObject);
-        }
       }
     }
 

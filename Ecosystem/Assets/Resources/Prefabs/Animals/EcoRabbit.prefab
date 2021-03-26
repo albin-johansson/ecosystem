@@ -935,7 +935,7 @@ Rigidbody:
   m_Drag: 0
   m_AngularDrag: 0.05
   m_UseGravity: 0
-  m_IsKinematic: 0
+  m_IsKinematic: 1
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
@@ -2207,6 +2207,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9c7fb3531ec9c784baa8246d216af247, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  StateText: {fileID: 105660128847220486}
   consumer: {fileID: 2592824637093240721}
   waterConsumer: {fileID: 2647182948873053790}
   movementController: {fileID: 2469128493361948961}
@@ -2415,6 +2416,10 @@ PrefabInstance:
       propertyPath: m_Layer
       value: 8
       objectReference: {fileID: 0}
+    - target: {fileID: 8482749343550285724, guid: b11869fe3d5ecbf4b912f33fa4a312db, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 8703765452308408067, guid: b11869fe3d5ecbf4b912f33fa4a312db, type: 3}
       propertyPath: m_Layer
       value: 8
@@ -2446,5 +2451,16 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 0f33f2c7a1419e740be5570d71daa2bf, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &105660128847220486 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 8623289280508370884, guid: b11869fe3d5ecbf4b912f33fa4a312db, type: 3}
+  m_PrefabInstance: {fileID: 8564565261024153794}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 920e87bfe7fe9274dbe2c10fc8c06029, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 

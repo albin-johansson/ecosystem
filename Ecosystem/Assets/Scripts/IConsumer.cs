@@ -7,7 +7,11 @@ namespace Ecosystem
   {
     double Hunger { get; }
 
+    bool CollideActive { get; set; }
+
     bool IsHungry();
+
+    bool IsAttacking { get; set; }
 
     void SetSaturation(float value);
   }

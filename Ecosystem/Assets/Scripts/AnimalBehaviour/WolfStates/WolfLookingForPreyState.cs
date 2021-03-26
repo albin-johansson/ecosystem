@@ -32,6 +32,11 @@ namespace Ecosystem.AnimalBehaviour.WolfStates
       {
         return AnimalState.LookingForWater;
       }
+
+      if (Consumer.IsAttacking)
+      {
+        return AnimalState.Attacking;
+      }
       else
       {
         MovementController.UpdateWander();

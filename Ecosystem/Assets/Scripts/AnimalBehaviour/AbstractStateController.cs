@@ -1,3 +1,4 @@
+using Ecosystem.UI;
 using UnityEngine;
 
 namespace Ecosystem.AnimalBehaviour
@@ -5,6 +6,7 @@ namespace Ecosystem.AnimalBehaviour
   public abstract class AbstractStateController : MonoBehaviour, IStateController
   {
     protected IAnimalState State;
+    [SerializeField] private StateText StateText;
 
     public abstract void Start();
 
@@ -16,6 +18,8 @@ namespace Ecosystem.AnimalBehaviour
       if (newState != State.Type())
       {
         SwitchState(newState);
+        //Uncomment for debugging
+        //StateText.SetText(newState.ToString());
       }
     }
 

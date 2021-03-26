@@ -18,6 +18,9 @@ namespace Ecosystem
     private bool _isDead;
 
     public double Hunger { get; set; }
+    public bool IsAttacking { get; set; }
+
+    public bool CollideActive { get; set; }
 
     public delegate void FoodEatenEvent(GameObject food);
 
