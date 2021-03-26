@@ -14,8 +14,7 @@ namespace Ecosystem
     {
       _memory = new List<GameObject>(Capacity);
     }
-
-    //Saves a game objects position and its desire to memory
+    
     public void SaveToMemory(GameObject other)
     {
       _memory.Insert(_nextMemoryLocation, (other.gameObject));
