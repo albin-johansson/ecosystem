@@ -34,9 +34,7 @@ namespace Ecosystem.AnimalBehaviour
       }
     }
 
-    public virtual void Begin(GameObject target)
-    {
-    }
+    public virtual void Begin(GameObject target) { }
 
     public virtual GameObject End()
     {

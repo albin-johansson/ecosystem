@@ -1,7 +1,5 @@
 using System.Collections.Generic;
 using UnityEngine;
-using Random = UnityEngine.Random;
-using Vector3 = UnityEngine.Vector3;
 
 namespace Ecosystem
 {
@@ -30,14 +28,13 @@ namespace Ecosystem
 
     public (bool, GameObject) GetFromMemory(string tag)
     {
-      for (int i = 0; i < _memory.Count; i++)
+      foreach (var memoryItem in _memory)
       {
-        if (_memory[i].CompareTag(tag))
+        if (memoryItem.CompareTag(tag))
         {
-          return (true, _memory[i]);
+          return (true, memoryItem);
         }
       }
-
       return (false, null);
     }
   }

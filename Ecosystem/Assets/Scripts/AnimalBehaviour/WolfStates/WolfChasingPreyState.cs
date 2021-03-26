@@ -40,10 +40,6 @@ namespace Ecosystem.AnimalBehaviour.WolfStates
       return Type();
     }
 
-    public override void OnTriggerEnter(Collider other)
-    {
-    }
-
     public override void OnTriggerExit(Collider other)
     {
       if (other.gameObject == Target)

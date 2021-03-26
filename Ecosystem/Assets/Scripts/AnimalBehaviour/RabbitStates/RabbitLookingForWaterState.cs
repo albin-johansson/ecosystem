@@ -41,8 +41,8 @@ namespace Ecosystem.AnimalBehaviour.RabbitStates
         return AnimalState.LookingForFood;
       }
 
-      var (item1, memoryObject) = MemoryController.GetFromMemory("Water");
-      if (item1)
+      var (successfulRetrieval, memoryObject) = MemoryController.GetFromMemory("Water");
+      if (successfulRetrieval)
       {
         Target = memoryObject;
         return base.Tick();
