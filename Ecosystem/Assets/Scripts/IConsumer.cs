@@ -12,5 +12,7 @@ namespace Ecosystem
     bool IsHungry();
 
     bool IsAttacking { get; set; }
+
+    void SetSaturation(float value);
   }
 }

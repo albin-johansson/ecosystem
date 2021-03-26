@@ -1,5 +1,6 @@
 using Ecosystem.Genes;
 using Ecosystem.Spawning;
+using Ecosystem.Util;
 using UnityEngine;
 
 namespace Ecosystem
@@ -36,18 +37,20 @@ namespace Ecosystem
     [SerializeField] private string keyToPool;
 
     private Transform _directoryOfAnimal;
+    public bool IsPregnant { get; private set; }
     private double _gestationPeriod;
     private double _sexualMaturityTime;
     private double _pregnancyElapsedTime;
     private double _maturityElapsedTime;
+    private float _childSaturation;
+    private IConsumer _consumer;
     private IGenome _mateGenome;
     private bool _isSexuallyMature;
-    private bool _isPregnant;
     public bool isWilling;
     
-    private bool CanMate => !_isPregnant && _isSexuallyMature && isWilling;
+    private bool CanMate => !IsPregnant && _isSexuallyMature && isWilling;
     
-    public bool IsFertile => !_isPregnant && _isSexuallyMature;
+    public bool IsFertile => !IsPregnant && _isSexuallyMature;
 
     private void Start()
     {
@@ -67,12 +70,14 @@ namespace Ecosystem
         }
       }
 
-      if (_isPregnant)
+      if (IsPregnant)
       {
+        _childSaturation += (genome.Metabolism * genome.GetChildFoodConsumtionFactor()) * Time.deltaTime;
         _pregnancyElapsedTime += Time.deltaTime;
         if (_pregnancyElapsedTime >= _gestationPeriod)
         {
           GiveBirth();
+          _childSaturation = 0;
         }
       }
     }
@@ -84,9 +89,10 @@ namespace Ecosystem
 
     private void GiveBirth()
     {
+      Debug.Log("Give Birth");
       var currentTransform = transform;
 
-      _isPregnant = false;
+      IsPregnant = false;
       _pregnancyElapsedTime = 0;
       var child = ObjectPoolHandler.instance.GetFromPool(keyToPool);
       child.transform.position = currentTransform.position;
@@ -98,12 +104,15 @@ namespace Ecosystem
         childGenome.Initialize(genome, _mateGenome);
       }
 
+      var childConsumer = child.GetComponentInChildren<IConsumer>();
+      childConsumer.SetSaturation(_childSaturation);
+
       OnBirth?.Invoke(child);
     }
 
     private void StartPregnancy(IGenome mateGenome)
     {
-      _isPregnant = true;
+      IsPregnant = true;
       _mateGenome = mateGenome;
 
       OnMating?.Invoke(gameObject.transform.position, prefab.tag, mateGenome, genome);
@@ -116,13 +125,16 @@ namespace Ecosystem
           Genomes.CompatibleAsParents(genome, otherReproducer.genome) &&
           otherReproducer.CanMate && CanMate)
       {
-        if (genome.IsMale && !otherReproducer._isPregnant)
+        if (Random.value >= (genome.Attractiveness + otherReproducer.genome.Attractiveness) / 2)
         {
-          otherReproducer.StartPregnancy(genome);
-        }
-        else if (!_isPregnant)
-        {
-          StartPregnancy(otherReproducer.genome);
+          if (genome.IsMale && !otherReproducer.IsPregnant)
+          {
+            otherReproducer.StartPregnancy(genome);
+          }
+          else if (!IsPregnant)
+          {
+            StartPregnancy(otherReproducer.genome);
+          }
         }
       }
     }

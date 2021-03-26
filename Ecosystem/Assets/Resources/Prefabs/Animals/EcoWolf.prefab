@@ -4501,7 +4501,7 @@ NavMeshAgent:
   m_Enabled: 1
   m_AgentTypeID: 0
   m_Radius: 0.5
-  m_Speed: 3.5
+  m_Speed: 8
   m_Acceleration: 8
   avoidancePriority: 50
   m_AngularSpeed: 120
@@ -7379,7 +7379,7 @@ SphereCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Radius: 4
+  m_Radius: 8
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!114 &4820126447581470678
 MonoBehaviour:
@@ -7412,6 +7412,8 @@ MonoBehaviour:
   animationController: {fileID: -4792604738439377631}
   memoryController: {fileID: 4820126447581470678}
   reproducer: {fileID: 1675561535909660547}
+  sphereCollider: {fileID: 651377425655632140}
+  genome: {fileID: 1593158740268700976}
 --- !u!1 &7116156556552470170
 GameObject:
   m_ObjectHideFlags: 0
@@ -8473,6 +8475,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   navAgent: {fileID: 3161004195564935848}
   genome: {fileID: 1593158740268700976}
+  sphereCollider: {fileID: 651377425655632140}
 --- !u!1 &8171843457048072183
 GameObject:
   m_ObjectHideFlags: 0
@@ -8780,6 +8783,7 @@ MonoBehaviour:
   deathHandler: {fileID: 618687372982133785}
   maxHunger: 100
   animationController: {fileID: -4792604738439377631}
+  reproducer: {fileID: 1675561535909660547}
 --- !u!114 &3242938931952141863
 MonoBehaviour:
   m_ObjectHideFlags: 0

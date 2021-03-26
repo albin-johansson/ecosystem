@@ -447,6 +447,7 @@ MonoBehaviour:
   resourceBar: {fileID: 5745726529469456637}
   deathHandler: {fileID: 3025539359171641749}
   maxHunger: 100
+  reproducer: {fileID: 5235625224800737656}
 --- !u!1 &2486851696740545862
 GameObject:
   m_ObjectHideFlags: 0
@@ -554,6 +555,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   navAgent: {fileID: 2689415282919559664}
   genome: {fileID: 1438288584065220351}
+  sphereCollider: {fileID: 7194725648983189641}
 --- !u!1 &2757367380692593370
 GameObject:
   m_ObjectHideFlags: 0
@@ -909,7 +911,7 @@ NavMeshAgent:
   m_Enabled: 1
   m_AgentTypeID: 0
   m_Radius: 0.14
-  m_Speed: 3.5
+  m_Speed: 8
   m_Acceleration: 8
   avoidancePriority: 50
   m_AngularSpeed: 120
@@ -1902,8 +1904,8 @@ BoxCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 0.2, y: 0.2, z: 0.5}
-  m_Center: {x: 0, y: 0.1, z: 0}
+  m_Size: {x: 0.2, y: 0.2, z: 0.76662326}
+  m_Center: {x: 0, y: 0.1, z: 0.13331133}
 --- !u!114 &5235625224800737656
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2179,7 +2181,7 @@ SphereCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Radius: 4
+  m_Radius: 8
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!114 &3915165533490199740
 MonoBehaviour:
@@ -2212,6 +2214,8 @@ MonoBehaviour:
   animationController: {fileID: 2656864231929346077}
   memoryController: {fileID: 3915165533490199740}
   reproducer: {fileID: 5235625224800737656}
+  sphereCollider: {fileID: 7194725648983189641}
+  genome: {fileID: 1438288584065220351}
 --- !u!1 &8456268486169713850
 GameObject:
   m_ObjectHideFlags: 0
