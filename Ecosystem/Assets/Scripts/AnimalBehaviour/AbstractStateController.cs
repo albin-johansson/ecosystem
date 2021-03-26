@@ -1,3 +1,4 @@
+using Ecosystem.UI;
 using UnityEngine;
 
 namespace Ecosystem.AnimalBehaviour
@@ -23,7 +24,8 @@ namespace Ecosystem.AnimalBehaviour
       if (newState != State.Type())
       {
         SwitchState(newState);
-        StateText.SetText(newState.ToString());
+        //Uncomment for debugging
+        //StateText.SetText(newState.ToString());
       }
     }
 

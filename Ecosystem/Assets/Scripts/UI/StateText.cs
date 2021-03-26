@@ -1,14 +1,14 @@
 using UnityEngine;
 
-namespace Ecosystem
+namespace Ecosystem.UI
 {
   public class StateText : MonoBehaviour
   {
-    [SerializeField] private TextMesh _textMesh;
+    [SerializeField] private TextMesh textMesh;
 
     public void SetText(string Text)
     {
-      _textMesh.text = Text;
+      textMesh.text = Text;
     }
   }
 }

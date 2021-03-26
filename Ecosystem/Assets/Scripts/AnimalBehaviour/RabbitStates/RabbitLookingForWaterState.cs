@@ -38,11 +38,11 @@ namespace Ecosystem.AnimalBehaviour.RabbitStates
       }
       return base.Tick();
     }
-    
+
     public override void OnTriggerEnter(Collider other)
     {
       var otherObject = other.gameObject;
-      
+
       if (Tags.IsWater(otherObject))
       {
         MemoryController.SaveToMemory(otherObject);

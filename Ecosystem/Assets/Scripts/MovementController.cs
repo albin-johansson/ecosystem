@@ -140,18 +140,20 @@ namespace Ecosystem
     /// </summary>
     public void StartWander()
     {
+      float[] wanderAngles = {0f, -90f, 90f, 180f};
       var agentTransform = navAgent.transform;
-
       var direction = agentTransform.forward.normalized * genome.GetVision().Value;
-      direction = RotateDirection(direction, Random.Range(-90f, 90f));
-
-      var position = agentTransform.position;
-      var destination = position + direction;
-
-      if (ValidateDestination(destination, out var validPosition))
+      foreach (var angle in wanderAngles)
       {
-        SetNavAgentSpeed();
-        SetTarget(validPosition);
+        var rotatedDirection = RotateDirection(direction, Random.Range(angle - 45f, angle + 45f));
+        var position = agentTransform.position;
+        var destination = position + rotatedDirection;
+        if (ValidateDestination(destination, out var validPosition))
+        {
+          SetNavAgentSpeed();
+          SetTarget(validPosition);
+          return;
+        }
       }
     }
 

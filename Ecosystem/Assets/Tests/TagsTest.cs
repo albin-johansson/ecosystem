@@ -47,6 +47,17 @@ namespace Tests
     }
 
     [Test]
+    public void IsAnimalTest()
+    {
+      Assert.IsTrue(Tags.IsAnimal(_wolf));
+      Assert.IsTrue(Tags.IsAnimal(_bear));
+      Assert.IsTrue(Tags.IsAnimal(_rabbit));
+      Assert.IsTrue(Tags.IsAnimal(_deer));
+
+      Assert.IsFalse(Tags.IsAnimal(_carrot));
+    }
+
+    [Test]
     public void CountTest()
     {
       Assert.IsTrue(Tags.Count("Rabbit") > 0);

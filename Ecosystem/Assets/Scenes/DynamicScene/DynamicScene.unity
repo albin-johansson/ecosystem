@@ -3032,6 +3032,7 @@ GameObject:
   m_Component:
   - component: {fileID: 306189528}
   - component: {fileID: 306189529}
+  - component: {fileID: 306189530}
   m_Layer: 9
   m_Name: Post-processing
   m_TagString: Untagged
@@ -3070,6 +3071,20 @@ MonoBehaviour:
   blendDistance: 0
   weight: 1
   priority: 0
+--- !u!114 &306189530
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 306189527}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3f84cff6da476ae4da132381bd2c775c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ppVolume: {fileID: 306189529}
+  ppLayer: {fileID: 945693408}
 --- !u!1001 &312763708
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -10111,6 +10126,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 50
+  cameraRigidBody: {fileID: 945693412}
 --- !u!54 &945693412
 Rigidbody:
   m_ObjectHideFlags: 0
