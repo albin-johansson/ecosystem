@@ -10,8 +10,8 @@ GameObject:
   m_Component:
   - component: {fileID: 9058187245416395537}
   - component: {fileID: 5088870757367511084}
-  m_Layer: 0
-  m_Name: WMutate
+  m_Layer: 5
+  m_Name: Wolf Mutate
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -96,7 +96,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1469936072075518064}
   - component: {fileID: 6969523370373157750}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: Wolf
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -163,8 +163,8 @@ GameObject:
   - component: {fileID: 117463654463590921}
   - component: {fileID: 8313361582912338304}
   - component: {fileID: 8221856851048896274}
-  m_Layer: 0
-  m_Name: RGLabel
+  m_Layer: 5
+  m_Name: Rabbit Genome Label
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -257,7 +257,8 @@ GameObject:
   - component: {fileID: 4534826920272945874}
   - component: {fileID: 936363995781909183}
   - component: {fileID: 2063835626549178149}
-  m_Layer: 0
+  - component: {fileID: 8280339710620586159}
+  m_Layer: 5
   m_Name: Label
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -304,7 +305,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.19607843, g: 0.19607843, b: 0.19607843, a: 1}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -325,6 +326,21 @@ MonoBehaviour:
     m_VerticalOverflow: 0
     m_LineSpacing: 1
   m_Text: Allow mutation
+--- !u!114 &8280339710620586159
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 740358341901141474}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e19747de3f5aca642ab2be37e372fb86, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_EffectColor: {r: 0, g: 0, b: 0, a: 0.5}
+  m_EffectDistance: {x: 1, y: -1}
+  m_UseGraphicAlpha: 1
 --- !u!1 &812570228436552505
 GameObject:
   m_ObjectHideFlags: 0
@@ -336,7 +352,7 @@ GameObject:
   - component: {fileID: 6714203110301945501}
   - component: {fileID: 8540918344804544273}
   - component: {fileID: 3282468942108079382}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: Checkmark
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -410,8 +426,8 @@ GameObject:
   m_Component:
   - component: {fileID: 4956021016544326932}
   - component: {fileID: 3894698232163681785}
-  m_Layer: 0
-  m_Name: WSet
+  m_Layer: 5
+  m_Name: Wolf Set
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -497,7 +513,7 @@ GameObject:
   - component: {fileID: 1336907977551101893}
   - component: {fileID: 129310950450770870}
   - component: {fileID: 3199938434217102034}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: Background
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -573,7 +589,7 @@ GameObject:
   - component: {fileID: 2938715046368934094}
   - component: {fileID: 4256080800147289432}
   - component: {fileID: 5750611216191155025}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: Checkmark
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -648,7 +664,7 @@ GameObject:
   - component: {fileID: 5885994579837614047}
   - component: {fileID: 6933624099131550556}
   - component: {fileID: 8201345966195159006}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: Checkmark
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -723,7 +739,7 @@ GameObject:
   - component: {fileID: 1822564243150955224}
   - component: {fileID: 2209363888678515185}
   - component: {fileID: 372728774254645511}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: Background
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -798,7 +814,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4835099820671036750}
   - component: {fileID: 7762964392767210679}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: Dear
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -864,7 +880,7 @@ GameObject:
   - component: {fileID: 4492792170613666649}
   - component: {fileID: 2743731867300088182}
   - component: {fileID: 6893087479401678237}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: Checkmark
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -940,8 +956,8 @@ GameObject:
   - component: {fileID: 8961867452777216707}
   - component: {fileID: 9120007339981713654}
   - component: {fileID: 1428257193071525186}
-  m_Layer: 0
-  m_Name: DGLabel
+  m_Layer: 5
+  m_Name: Dear Genome Label
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1034,7 +1050,7 @@ GameObject:
   - component: {fileID: 1000318970852970800}
   - component: {fileID: 5677894817651508704}
   - component: {fileID: 9044016786503015624}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: Background
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1110,7 +1126,8 @@ GameObject:
   - component: {fileID: 3290610736481383362}
   - component: {fileID: 3598971124937713643}
   - component: {fileID: 8923658448385972623}
-  m_Layer: 0
+  - component: {fileID: 973215071585787831}
+  m_Layer: 5
   m_Name: Label
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1157,7 +1174,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.19607843, g: 0.19607843, b: 0.19607843, a: 1}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -1178,6 +1195,21 @@ MonoBehaviour:
     m_VerticalOverflow: 0
     m_LineSpacing: 1
   m_Text: Set of genes
+--- !u!114 &973215071585787831
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3227666521639684495}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e19747de3f5aca642ab2be37e372fb86, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_EffectColor: {r: 0, g: 0, b: 0, a: 0.5}
+  m_EffectDistance: {x: 1, y: -1}
+  m_UseGraphicAlpha: 1
 --- !u!1 &3522563491973694953
 GameObject:
   m_ObjectHideFlags: 0
@@ -1189,7 +1221,7 @@ GameObject:
   - component: {fileID: 6949036754788974718}
   - component: {fileID: 1766169753656515714}
   - component: {fileID: 6954175233321958923}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: Inputs
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1237,7 +1269,7 @@ MonoBehaviour:
     m_Top: 0
     m_Bottom: 0
   m_ChildAlignment: 4
-  m_Spacing: 6
+  m_Spacing: -150
   m_ChildForceExpandWidth: 1
   m_ChildForceExpandHeight: 1
   m_ChildControlWidth: 1
@@ -1271,7 +1303,7 @@ GameObject:
   - component: {fileID: 1186307982999516474}
   - component: {fileID: 1746777502780035287}
   - component: {fileID: 3186347487963415775}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: Headline
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1294,7 +1326,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 1}
   m_AnchorMax: {x: 0.5, y: 1}
-  m_AnchoredPosition: {x: 0, y: -100}
+  m_AnchoredPosition: {x: 0, y: -200}
   m_SizeDelta: {x: 300, y: 55}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &1186307982999516474
@@ -1365,7 +1397,7 @@ GameObject:
   - component: {fileID: 7784700904962002986}
   - component: {fileID: 348423943273255476}
   - component: {fileID: 5812040797901534000}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: Checkmark
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1439,8 +1471,8 @@ GameObject:
   m_Component:
   - component: {fileID: 7179637789310256288}
   - component: {fileID: 4873203583292653186}
-  m_Layer: 0
-  m_Name: BMutate
+  m_Layer: 5
+  m_Name: Bear Mutate
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1527,8 +1559,8 @@ GameObject:
   - component: {fileID: 1610772034049883644}
   - component: {fileID: 4204539144474161718}
   - component: {fileID: 353059577186147949}
-  m_Layer: 0
-  m_Name: BGLabel
+  m_Layer: 5
+  m_Name: Bear Genome Label
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1621,7 +1653,7 @@ GameObject:
   - component: {fileID: 963094440457796111}
   - component: {fileID: 1812107278102547423}
   - component: {fileID: 1100435880718465279}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: Checkmark
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1696,7 +1728,7 @@ GameObject:
   - component: {fileID: 1568738101511347825}
   - component: {fileID: 2286813002317440387}
   - component: {fileID: 84862559163674510}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: Background
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1771,8 +1803,8 @@ GameObject:
   m_Component:
   - component: {fileID: 3349364267456607412}
   - component: {fileID: 8067489431721607191}
-  m_Layer: 0
-  m_Name: BSet
+  m_Layer: 5
+  m_Name: Bear Set
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1858,7 +1890,8 @@ GameObject:
   - component: {fileID: 8533184048285789792}
   - component: {fileID: 5513618430387146500}
   - component: {fileID: 3146481666356629212}
-  m_Layer: 0
+  - component: {fileID: 3190448283539681494}
+  m_Layer: 5
   m_Name: Label
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1905,7 +1938,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.19607843, g: 0.19607843, b: 0.19607843, a: 1}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -1926,6 +1959,21 @@ MonoBehaviour:
     m_VerticalOverflow: 0
     m_LineSpacing: 1
   m_Text: Allow mutation
+--- !u!114 &3190448283539681494
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4633570547047178067}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e19747de3f5aca642ab2be37e372fb86, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_EffectColor: {r: 0, g: 0, b: 0, a: 0.5}
+  m_EffectDistance: {x: 1, y: -1}
+  m_UseGraphicAlpha: 1
 --- !u!1 &4949799640351825624
 GameObject:
   m_ObjectHideFlags: 0
@@ -1938,7 +1986,7 @@ GameObject:
   - component: {fileID: 7437868893628782781}
   - component: {fileID: 3740710179969617135}
   - component: {fileID: 3829626161044870095}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: GenomeSelectMenu
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2039,7 +2087,7 @@ GameObject:
   - component: {fileID: 6729304954070669291}
   - component: {fileID: 6750248306016607994}
   - component: {fileID: 3364375989586978769}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: Background
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2115,7 +2163,7 @@ GameObject:
   - component: {fileID: 3719742917738501500}
   - component: {fileID: 9067299513922814773}
   - component: {fileID: 5608962049356581495}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: Checkmark
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2189,8 +2237,8 @@ GameObject:
   m_Component:
   - component: {fileID: 3062506915155819898}
   - component: {fileID: 739244944442455497}
-  m_Layer: 0
-  m_Name: RSet
+  m_Layer: 5
+  m_Name: Rabbit Set
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2277,8 +2325,8 @@ GameObject:
   - component: {fileID: 5623149194690171268}
   - component: {fileID: 371736791764793722}
   - component: {fileID: 8834581144990287448}
-  m_Layer: 0
-  m_Name: WGLabel
+  m_Layer: 5
+  m_Name: Wolf Genome Label
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2372,7 +2420,8 @@ GameObject:
   - component: {fileID: 3951417951323712679}
   - component: {fileID: 3950771108635034510}
   - component: {fileID: 842932742466505772}
-  m_Layer: 0
+  - component: {fileID: 2861330723483649431}
+  m_Layer: 5
   m_Name: Return
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2395,7 +2444,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 1}
   m_AnchorMax: {x: 0.5, y: 1}
-  m_AnchoredPosition: {x: 0, y: -180}
+  m_AnchoredPosition: {x: 0, y: -290}
   m_SizeDelta: {x: 125, y: 40}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &3951417951323712679
@@ -2484,6 +2533,21 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls: []
+--- !u!114 &2861330723483649431
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5745907810860899200}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e19747de3f5aca642ab2be37e372fb86, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_EffectColor: {r: 0, g: 0, b: 0, a: 0.5}
+  m_EffectDistance: {x: 1, y: -1}
+  m_UseGraphicAlpha: 1
 --- !u!1 &6013459717285706397
 GameObject:
   m_ObjectHideFlags: 0
@@ -2494,8 +2558,8 @@ GameObject:
   m_Component:
   - component: {fileID: 1988681375706643880}
   - component: {fileID: 5270417989163542807}
-  m_Layer: 0
-  m_Name: RMutate
+  m_Layer: 5
+  m_Name: Rabbit Mutate
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2581,7 +2645,7 @@ GameObject:
   - component: {fileID: 2461816405253072182}
   - component: {fileID: 1244010969223200743}
   - component: {fileID: 6837087978928035509}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: Checkmark
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2656,7 +2720,8 @@ GameObject:
   - component: {fileID: 5918392115982635594}
   - component: {fileID: 8527098192903523746}
   - component: {fileID: 59487466862483867}
-  m_Layer: 0
+  - component: {fileID: 8421224859366447182}
+  m_Layer: 5
   m_Name: Label
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2703,7 +2768,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.19607843, g: 0.19607843, b: 0.19607843, a: 1}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -2724,6 +2789,21 @@ MonoBehaviour:
     m_VerticalOverflow: 0
     m_LineSpacing: 1
   m_Text: Set of genes
+--- !u!114 &8421224859366447182
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6322042436142331598}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e19747de3f5aca642ab2be37e372fb86, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_EffectColor: {r: 0, g: 0, b: 0, a: 0.5}
+  m_EffectDistance: {x: 1, y: -1}
+  m_UseGraphicAlpha: 1
 --- !u!1 &6750869767914163530
 GameObject:
   m_ObjectHideFlags: 0
@@ -2735,7 +2815,8 @@ GameObject:
   - component: {fileID: 675299377822565132}
   - component: {fileID: 7991452134478614315}
   - component: {fileID: 4838127134525891061}
-  m_Layer: 0
+  - component: {fileID: 5488092339578442067}
+  m_Layer: 5
   m_Name: Label
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2782,7 +2863,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.19607843, g: 0.19607843, b: 0.19607843, a: 1}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -2803,6 +2884,21 @@ MonoBehaviour:
     m_VerticalOverflow: 0
     m_LineSpacing: 1
   m_Text: Set of genes
+--- !u!114 &5488092339578442067
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6750869767914163530}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e19747de3f5aca642ab2be37e372fb86, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_EffectColor: {r: 0, g: 0, b: 0, a: 0.5}
+  m_EffectDistance: {x: 1, y: -1}
+  m_UseGraphicAlpha: 1
 --- !u!1 &6840161203397879662
 GameObject:
   m_ObjectHideFlags: 0
@@ -2814,7 +2910,8 @@ GameObject:
   - component: {fileID: 995906238085016759}
   - component: {fileID: 6480403778792702882}
   - component: {fileID: 7538163667817833690}
-  m_Layer: 0
+  - component: {fileID: 5418947091653290136}
+  m_Layer: 5
   m_Name: Label
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2861,7 +2958,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.19607843, g: 0.19607843, b: 0.19607843, a: 1}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -2873,7 +2970,7 @@ MonoBehaviour:
     m_FontSize: 14
     m_FontStyle: 0
     m_BestFit: 0
-    m_MinSize: 10
+    m_MinSize: 1
     m_MaxSize: 40
     m_Alignment: 0
     m_AlignByGeometry: 0
@@ -2882,6 +2979,21 @@ MonoBehaviour:
     m_VerticalOverflow: 0
     m_LineSpacing: 1
   m_Text: Set of genes
+--- !u!114 &5418947091653290136
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6840161203397879662}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e19747de3f5aca642ab2be37e372fb86, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_EffectColor: {r: 0, g: 0, b: 0, a: 0.5}
+  m_EffectDistance: {x: 1, y: -1}
+  m_UseGraphicAlpha: 1
 --- !u!1 &6974480763638687097
 GameObject:
   m_ObjectHideFlags: 0
@@ -2893,7 +3005,8 @@ GameObject:
   - component: {fileID: 7258224860832637739}
   - component: {fileID: 1406524280838669317}
   - component: {fileID: 2917295674983145770}
-  m_Layer: 0
+  - component: {fileID: 5667183383933431092}
+  m_Layer: 5
   m_Name: Label
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2940,7 +3053,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.19607843, g: 0.19607843, b: 0.19607843, a: 1}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -2961,6 +3074,21 @@ MonoBehaviour:
     m_VerticalOverflow: 0
     m_LineSpacing: 1
   m_Text: Allow mutation
+--- !u!114 &5667183383933431092
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6974480763638687097}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e19747de3f5aca642ab2be37e372fb86, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_EffectColor: {r: 0, g: 0, b: 0, a: 0.5}
+  m_EffectDistance: {x: 1, y: -1}
+  m_UseGraphicAlpha: 1
 --- !u!1 &7315825610587162550
 GameObject:
   m_ObjectHideFlags: 0
@@ -2972,7 +3100,7 @@ GameObject:
   - component: {fileID: 7516551004807252789}
   - component: {fileID: 6646074588109539558}
   - component: {fileID: 8540732483184412407}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: Background
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3048,7 +3176,7 @@ GameObject:
   - component: {fileID: 5893640691649319556}
   - component: {fileID: 1188759149000119308}
   - component: {fileID: 5565009539990443552}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: Background
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3123,7 +3251,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4196212072086198569}
   - component: {fileID: 3739397517529368573}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: Rabbit
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3189,7 +3317,7 @@ GameObject:
   - component: {fileID: 2205516288066442780}
   - component: {fileID: 6181264163903687194}
   - component: {fileID: 2487772470665370779}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: Background
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3264,8 +3392,8 @@ GameObject:
   m_Component:
   - component: {fileID: 7697790811990469295}
   - component: {fileID: 3704231025523950948}
-  m_Layer: 0
-  m_Name: DMutate
+  m_Layer: 5
+  m_Name: Dear Mutate
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3350,7 +3478,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6032146066610953017}
   - component: {fileID: 1575125088210326558}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: Bear
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3416,7 +3544,8 @@ GameObject:
   - component: {fileID: 407063408707273906}
   - component: {fileID: 4634990406893507190}
   - component: {fileID: 8131788733787917177}
-  m_Layer: 0
+  - component: {fileID: 2142023393628235194}
+  m_Layer: 5
   m_Name: Label
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3463,7 +3592,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.19607843, g: 0.19607843, b: 0.19607843, a: 1}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -3484,6 +3613,21 @@ MonoBehaviour:
     m_VerticalOverflow: 0
     m_LineSpacing: 1
   m_Text: Allow mutation
+--- !u!114 &2142023393628235194
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9162934137278858359}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e19747de3f5aca642ab2be37e372fb86, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_EffectColor: {r: 0, g: 0, b: 0, a: 0.5}
+  m_EffectDistance: {x: 1, y: -1}
+  m_UseGraphicAlpha: 1
 --- !u!1 &9190853159493251584
 GameObject:
   m_ObjectHideFlags: 0
@@ -3494,8 +3638,8 @@ GameObject:
   m_Component:
   - component: {fileID: 8823454647047109763}
   - component: {fileID: 2724991801197716499}
-  m_Layer: 0
-  m_Name: DSet
+  m_Layer: 5
+  m_Name: Dear Set
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

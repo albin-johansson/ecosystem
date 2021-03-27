@@ -3,6 +3,7 @@ using Ecosystem.Genes;
 using Ecosystem.Util;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.Serialization;
 using UnityEngine.UI;
 
 namespace Ecosystem.UI
@@ -11,7 +12,7 @@ namespace Ecosystem.UI
   {
     [SerializeField] private GameObject mainMenu;
     [SerializeField] private GameObject dynamicSceneMenu;
-    [SerializeField] private GameObject genomeTypeMenu;
+    [SerializeField] private GameObject genomeSettingsMenu;
     [SerializeField] private Button dynamicSceneStartButton;
     [SerializeField] private Text dynamicRabbitCount;
     [SerializeField] private Text dynamicDeerCount;
@@ -28,12 +29,12 @@ namespace Ecosystem.UI
     [SerializeField] private Toggle bearMutate;
 
     private Dictionary<GeneType, Preset> rabbitPreset;
-    private float rabbitMutateChance = 0.05f;
     private Dictionary<GeneType, Preset> wolfPreset;
-    private float wolfMutateChance = 0.05f;
     private Dictionary<GeneType, Preset> dearPreset;
-    private float dearMutateChance = 0.05f;
     private Dictionary<GeneType, Preset> bearPreset;
+    private float rabbitMutateChance = 0.05f;
+    private float wolfMutateChance = 0.05f;
+    private float dearMutateChance = 0.05f;
     private float bearMutateChance = 0.05f;
 
     private void Start()
@@ -60,7 +61,7 @@ namespace Ecosystem.UI
     public void EnterMainMenu()
     {
       dynamicSceneMenu.SetActive(false);
-      genomeTypeMenu.SetActive(false);
+      genomeSettingsMenu.SetActive(false);
       mainMenu.SetActive(true);
     }
 
@@ -72,10 +73,8 @@ namespace Ecosystem.UI
 
     public void EnterGenomeTypeMenu()
     {
-      //TODO: remember to remove/clean
-      Debug.Log("Yo bro");
       mainMenu.SetActive(false);
-      genomeTypeMenu.SetActive(true);
+      genomeSettingsMenu.SetActive(true);
     }
 
     public void StartForestScene()
@@ -154,8 +153,6 @@ namespace Ecosystem.UI
      * presets below
      * -------------------------------------------------------
      */
-
-    //TODO: check if "ref" is needed.
     private void ToggleSet(bool isOn, ref Dictionary<GeneType, Preset> preset, Dictionary<GeneType, Preset> single,
       Dictionary<GeneType, Preset> multi)
     {
@@ -168,13 +165,6 @@ namespace Ecosystem.UI
       ToggleSet(toggle.isOn, ref rabbitPreset, RabbitGenome.defaultSingular, RabbitGenome.defaultSet);
     }
 
-
-    //TODO: give own defaults!
-    public void ToggleSetBear(Toggle toggle)
-    {
-      ToggleSet(toggle.isOn, ref bearPreset, RabbitGenome.defaultSingular, RabbitGenome.defaultSet);
-    }
-
     //TODO: give own defaults!
     public void ToggleSetWolf(Toggle toggle)
     {
@@ -185,6 +175,12 @@ namespace Ecosystem.UI
     public void ToggleSetDear(Toggle toggle)
     {
       ToggleSet(toggle.isOn, ref dearPreset, RabbitGenome.defaultSingular, RabbitGenome.defaultSet);
+    }
+
+    //TODO: give own defaults!
+    public void ToggleSetBear(Toggle toggle)
+    {
+      ToggleSet(toggle.isOn, ref bearPreset, RabbitGenome.defaultSingular, RabbitGenome.defaultSet);
     }
 
     /**
