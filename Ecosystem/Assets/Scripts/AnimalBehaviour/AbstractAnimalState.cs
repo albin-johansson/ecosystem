@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Xml.Schema;
 using Ecosystem.Genes;
 using UnityEngine;
 using UnityEngine.UIElements;
@@ -48,7 +49,6 @@ namespace Ecosystem.AnimalBehaviour
     {
       var colliderArr = new Collider[10];
       var size = Physics.OverlapSphereNonAlloc(position, visionRange, colliderArr, mask);
-      
       var colliders = new List<Collider>(size);
       for (var i = 0; i < size; i++)
       {
@@ -60,6 +60,12 @@ namespace Ecosystem.AnimalBehaviour
     protected GameObject GetClosestMate(List<Collider> colliders)
     {
       return GetClosestWithFilter(colliders, Reproducer.CompatibleAsParents);
+    }
+
+    protected static GameObject SelectCloser(Vector3 position, GameObject first, GameObject second)
+    {
+      return Vector3.SqrMagnitude(position - first.transform.position) <
+             Vector3.SqrMagnitude(position - second.transform.position) ? first : second;
     }
 
 

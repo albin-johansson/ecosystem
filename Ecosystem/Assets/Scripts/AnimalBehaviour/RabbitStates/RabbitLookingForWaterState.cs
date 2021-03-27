@@ -1,10 +1,12 @@
 using Ecosystem.Util;
+using UnityEditor.Experimental.GraphView;
 using UnityEngine;
 
 namespace Ecosystem.AnimalBehaviour.RabbitStates
 {
   internal sealed class RabbitLookingForWaterState : AbstractAnimalState
   {
+    private readonly LayerMask _whatIsWater = LayerMask.GetMask("Water"); 
     public RabbitLookingForWaterState(RabbitStateData data)
     {
       Consumer = data.Consumer;
@@ -19,6 +21,10 @@ namespace Ecosystem.AnimalBehaviour.RabbitStates
     public override void Begin(GameObject target)
     {
       Target = MemoryController.GetClosestInMemory(Tags.IsWater, MovementController.GetPosition());
+      if (!Target)
+      {
+        Target = GetWaterInVision();
+      }
       MovementController.StartWander();
       AnimationController.MoveAnimation();
     }
@@ -53,6 +59,11 @@ namespace Ecosystem.AnimalBehaviour.RabbitStates
       {
         Target = other.gameObject;
       }
+    }
+
+    private GameObject GetWaterInVision()
+    {
+      return Genome ? GetClosest(GetInVision(MovementController.GetPosition(), Genome.GetVision().Value, _whatIsWater)) : null;
     }
 
     public override AnimalState Type()

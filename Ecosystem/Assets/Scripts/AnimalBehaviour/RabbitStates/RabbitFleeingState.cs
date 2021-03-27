@@ -1,4 +1,3 @@
-using System;
 using UnityEngine;
 
 namespace Ecosystem.AnimalBehaviour.RabbitStates
@@ -6,6 +5,7 @@ namespace Ecosystem.AnimalBehaviour.RabbitStates
   internal sealed class RabbitFleeingState : AbstractAnimalState
   {
     private readonly LayerMask _whatIsPredator = LayerMask.GetMask("Bear", "Wolf");
+    
     public RabbitFleeingState(RabbitStateData data)
     {
       Consumer = data.Consumer;
@@ -35,9 +35,10 @@ namespace Ecosystem.AnimalBehaviour.RabbitStates
         }
         else
         {
-          Target = GetClosestPredator();
+          Target = GetPredatorInVision();
           if (Target)
           {
+            MovementController.UpdateFleeing(Target.transform.position);
             return Type();
           }
         }
@@ -56,21 +57,19 @@ namespace Ecosystem.AnimalBehaviour.RabbitStates
 
     public override void OnTriggerExit(Collider other)
     {
-      if (other.gameObject == Target)
+      if (other.gameObject == Target)//Target)
       {
-        Target = GetClosestPredator();
+        Target = GetPredatorInVision();
       }
     }
 
-    private GameObject GetClosestPredator()
+    private GameObject GetPredatorInVision()
     {
-      var target = GetClosest(GetInVision(MovementController.GetPosition(), Genome.GetVision().Value, _whatIsPredator));
-      if(target){Debug.Log(target.name);}
-      return target;
+      return Genome ? GetClosest(GetInVision(MovementController.GetPosition(), Genome.GetVision().Value, _whatIsPredator)) : null;
     }
-  
 
-  public override AnimalState Type()
+
+    public override AnimalState Type()
     {
       return AnimalState.Fleeing;
     }

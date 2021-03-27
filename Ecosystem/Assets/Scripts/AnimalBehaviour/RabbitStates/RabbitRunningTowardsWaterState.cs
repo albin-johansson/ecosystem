@@ -20,7 +20,6 @@ namespace Ecosystem.AnimalBehaviour.RabbitStates
       Target = target;
       MovementController.RunToTarget(Target.transform.position);
       AnimationController.MoveAnimation();
-      //TODO Check memory
     }
 
     public override AnimalState Tick()
@@ -50,8 +49,8 @@ namespace Ecosystem.AnimalBehaviour.RabbitStates
       
       if (otherObject.CompareTag("Water"))
       {
-        // TODO: Check if new source is closer
         MemoryController.SaveToMemory(otherObject);
+        Target = SelectCloser(MovementController.GetPosition(), otherObject, Target);
       }
       else if (Tags.IsPredator(otherObject))
       {

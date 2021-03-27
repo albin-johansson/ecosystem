@@ -1,4 +1,5 @@
 using System.Linq;
+using System.Threading;
 using Ecosystem.Util;
 using UnityEditor.Experimental.GraphView;
 using UnityEngine;
@@ -21,7 +22,7 @@ namespace Ecosystem.AnimalBehaviour.RabbitStates
 
     public override void Begin(GameObject target)
     {
-      Target = GetClosest(GetInVision(MovementController.GetPosition(), Genome.GetVision().Value, _whatIsFood));
+      Target = GetFoodInVision();
       MovementController.StartWander();
       AnimationController.MoveAnimation();
     }
@@ -65,6 +66,11 @@ namespace Ecosystem.AnimalBehaviour.RabbitStates
       {
         Target = otherObject;
       }
+    }
+
+    private GameObject GetFoodInVision()
+    {
+      return Genome ? GetClosest(GetInVision(MovementController.GetPosition(), Genome.GetVision().Value, _whatIsFood)) : null;
     }
 
     public override AnimalState Type()

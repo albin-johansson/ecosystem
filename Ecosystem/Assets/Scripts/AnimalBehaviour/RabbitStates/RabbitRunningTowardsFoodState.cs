@@ -43,7 +43,11 @@ namespace Ecosystem.AnimalBehaviour.RabbitStates
     public override void OnTriggerEnter(Collider other)
     {
       var otherObject = other.gameObject;
-      if (otherObject.CompareTag("Water"))
+      if (otherObject.CompareTag("Food"))
+      {
+        Target = SelectCloser(MovementController.GetPosition(), otherObject, Target);
+      }
+      else if (otherObject.CompareTag("Water"))
       {
         MemoryController.SaveToMemory(otherObject);
       }
