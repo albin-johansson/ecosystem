@@ -76,6 +76,7 @@ namespace Ecosystem.UI
     public void EnterGenomeTypeMenu()
     {
       mainMenu.SetActive(false);
+      settingsButton.SetActive(false);
       genomeSettingsMenu.SetActive(true);
     }
 
