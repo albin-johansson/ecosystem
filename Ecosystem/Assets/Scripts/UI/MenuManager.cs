@@ -4,7 +4,6 @@ using Ecosystem.Util;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
-using Object = UnityEngine.Object;
 
 namespace Ecosystem.UI
 {
@@ -18,18 +17,42 @@ namespace Ecosystem.UI
     [SerializeField] private Text dynamicDeerCount;
     [SerializeField] private Text dynamicWolfCount;
     [SerializeField] private Text dynamicBearCount;
-
     [SerializeField] private Text dynamicCarrotCount;
-    //[SerializeField] private Text setOrRandom;
+    [SerializeField] private Toggle rabbitSet;
+    [SerializeField] private Toggle rabbitMutate;
+    [SerializeField] private Toggle wolfSet;
+    [SerializeField] private Toggle wolfMutate;
+    [SerializeField] private Toggle dearSet;
+    [SerializeField] private Toggle dearMutate;
+    [SerializeField] private Toggle bearSet;
+    [SerializeField] private Toggle bearMutate;
 
-    [SerializeField] private Text rabbitGenome;
-    [SerializeField] private Text deerGenome;
-    [SerializeField] private Text wolfGenome;
-    [SerializeField] private Text bearGenome;
-
+    private Dictionary<GeneType, Preset> rabbitPreset;
+    private float rabbitMutateChance = 0.05f;
+    private Dictionary<GeneType, Preset> wolfPreset;
+    private float wolfMutateChance = 0.05f;
+    private Dictionary<GeneType, Preset> dearPreset;
+    private float dearMutateChance = 0.05f;
+    private Dictionary<GeneType, Preset> bearPreset;
+    private float bearMutateChance = 0.05f;
 
     private void Start()
     {
+      //Set up listeners for Genome settings. 
+      rabbitPreset = RabbitGenome.defaultSet;
+      //TODO: give own defaults
+      wolfPreset = RabbitGenome.defaultSet;
+      dearPreset = RabbitGenome.defaultSet;
+      bearPreset = RabbitGenome.defaultSet;
+
+      rabbitSet.onValueChanged.AddListener(delegate { ToggleSetRabbit(rabbitSet); });
+      rabbitMutate.onValueChanged.AddListener(delegate { ToggleMutateRabbit(rabbitMutate); });
+      wolfSet.onValueChanged.AddListener(delegate { ToggleSetWolf(wolfSet); });
+      wolfMutate.onValueChanged.AddListener(delegate { ToggleMutateWolf(wolfMutate); });
+      dearSet.onValueChanged.AddListener(delegate { ToggleSetDear(dearSet); });
+      dearMutate.onValueChanged.AddListener(delegate { ToggleMutateDear(dearMutate); });
+      bearSet.onValueChanged.AddListener(delegate { ToggleSetBear(bearSet); });
+      bearMutate.onValueChanged.AddListener(delegate { ToggleMutateBear(bearMutate); });
       SceneManager.activeSceneChanged += OnSceneChanged;
       EnterMainMenu();
     }
@@ -49,6 +72,7 @@ namespace Ecosystem.UI
 
     public void EnterGenomeTypeMenu()
     {
+      //TODO: remember to remove/clean
       Debug.Log("Yo bro");
       mainMenu.SetActive(false);
       genomeTypeMenu.SetActive(true);
@@ -71,6 +95,9 @@ namespace Ecosystem.UI
 
     private void OnSceneChanged(Scene current, Scene next)
     {
+      //TODO: set all presets. 
+      RabbitGenome.SetPreset(rabbitPreset, rabbitMutateChance);
+
       if (next.name == "DynamicScene")
       {
         var rabbit = Resources.Load("Prefabs/Animals/EcoRabbit");
@@ -84,42 +111,8 @@ namespace Ecosystem.UI
         var nWolves = int.Parse(dynamicWolfCount.text);
         var nBears = int.Parse(dynamicBearCount.text);
         var nCarrots = int.Parse(dynamicCarrotCount.text);
-        var mutateOrSet = "y"; //setOrRandom.text;
 
         var terrain = Terrain.activeTerrain;
-
-        if (mutateOrSet.Equals("n"))
-        {
-          RabbitGenome.SetPreset(new Dictionary<GeneType, Preset>()
-          {
-            {GeneType.HungerRate, new Preset(0, 2, new[] {0.5f, 1f})},
-            {GeneType.HungerThreshold, new Preset(0, 2, new[] {0.5f, 1f})},
-            {GeneType.ThirstRate, new Preset(0, 2, new[] {0.5f, 1f})},
-            {GeneType.ThirstThreshold, new Preset(0, 2, new[] {0.5f, 1f})},
-            {GeneType.Vision, new Preset(0, 2, new[] {0.5f, 1f})},
-            {GeneType.SpeedFactor, new Preset(0, 2, new[] {0.5f, 1f})},
-            {GeneType.SizeFactor, new Preset(0, 2, new[] {0.5f, 1f})},
-            {GeneType.DesirabilityScore, new Preset(0, 2, new[] {0.5f, 1f})},
-            {GeneType.GestationPeriod, new Preset(0, 2, new[] {0.5f, 1f})},
-            {GeneType.SexualMaturityTime, new Preset(0, 2, new[] {0.5f, 1f})}
-          }, 0f);
-        }
-        else if (mutateOrSet.Equals("y"))
-        {
-          RabbitGenome.SetPreset(new Dictionary<GeneType, Preset>()
-          {
-            {GeneType.HungerRate, new Preset(0, 2, new[] {0.7f})},
-            {GeneType.HungerThreshold, new Preset(0, 2, new[] {0.7f})},
-            {GeneType.ThirstRate, new Preset(0, 2, new[] {0.7f})},
-            {GeneType.ThirstThreshold, new Preset(0, 2, new[] {0.7f})},
-            {GeneType.Vision, new Preset(0, 2, new[] {0.7f})},
-            {GeneType.SpeedFactor, new Preset(0, 2, new[] {0.7f})},
-            {GeneType.SizeFactor, new Preset(0, 2, new[] {0.7f})},
-            {GeneType.DesirabilityScore, new Preset(0, 2, new[] {0.7f})},
-            {GeneType.GestationPeriod, new Preset(0, 2, new[] {0.7f})},
-            {GeneType.SexualMaturityTime, new Preset(0, 2, new[] {0.7f})}
-          }, 0.1f);
-        }
 
         Instantiate(nRabbits, rabbit, terrain);
         Instantiate(nWolves, wolf, terrain);
@@ -154,6 +147,75 @@ namespace Ecosystem.UI
           Instantiate(prefab, position, Quaternion.identity);
         }
       }
+    }
+
+    /**
+     * -------------------------------------------------------
+     * presets below
+     * -------------------------------------------------------
+     */
+
+    //TODO: check if "ref" is needed.
+    private void ToggleSet(bool isOn, ref Dictionary<GeneType, Preset> preset, Dictionary<GeneType, Preset> single,
+      Dictionary<GeneType, Preset> multi)
+    {
+      Debug.Log("Animal set: " + isOn);
+      preset = isOn ? multi : single;
+    }
+
+    public void ToggleSetRabbit(Toggle toggle)
+    {
+      ToggleSet(toggle.isOn, ref rabbitPreset, RabbitGenome.defaultSingular, RabbitGenome.defaultSet);
+    }
+
+
+    //TODO: give own defaults!
+    public void ToggleSetBear(Toggle toggle)
+    {
+      ToggleSet(toggle.isOn, ref bearPreset, RabbitGenome.defaultSingular, RabbitGenome.defaultSet);
+    }
+
+    //TODO: give own defaults!
+    public void ToggleSetWolf(Toggle toggle)
+    {
+      ToggleSet(toggle.isOn, ref wolfPreset, RabbitGenome.defaultSingular, RabbitGenome.defaultSet);
+    }
+
+    //TODO: give own defaults!
+    public void ToggleSetDear(Toggle toggle)
+    {
+      ToggleSet(toggle.isOn, ref dearPreset, RabbitGenome.defaultSingular, RabbitGenome.defaultSet);
+    }
+
+    /**
+     * -------------------------------------------------------
+     * mutates below
+     * -------------------------------------------------------
+     */
+    public void ToggleMutateRabbit(Toggle toggle)
+    {
+      ToggleMutate(toggle.isOn, ref rabbitMutateChance);
+    }
+
+    public void ToggleMutateWolf(Toggle toggle)
+    {
+      ToggleMutate(toggle.isOn, ref wolfMutateChance);
+    }
+
+    public void ToggleMutateDear(Toggle toggle)
+    {
+      ToggleMutate(toggle.isOn, ref dearMutateChance);
+    }
+
+    public void ToggleMutateBear(Toggle toggle)
+    {
+      ToggleMutate(toggle.isOn, ref bearMutateChance);
+    }
+
+    private void ToggleMutate(bool isOn, ref float chance)
+    {
+      Debug.Log("animal mutate: " + isOn);
+      chance = isOn ? 0.05f : 0f;
     }
   }
 }
