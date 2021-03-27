@@ -53,6 +53,12 @@ namespace Ecosystem.AnimalBehaviour.RabbitStates
       }
     }
 
+    public override GameObject End()
+    {
+      WaterConsumer.StopDrinking();
+      return base.End();
+    }
+
     public override AnimalState Type()
     {
       return AnimalState.Drinking;
