@@ -3,7 +3,6 @@ using Ecosystem.Genes;
 using Ecosystem.Util;
 using UnityEngine;
 using UnityEngine.SceneManagement;
-using UnityEngine.Serialization;
 using UnityEngine.UI;
 
 namespace Ecosystem.UI
@@ -41,7 +40,7 @@ namespace Ecosystem.UI
     {
       //Set up listeners for Genome settings. 
       rabbitPreset = RabbitGenome.defaultSet;
-      //TODO: give own defaults
+      //TODO: give own defaults: make sure toggles match
       wolfPreset = RabbitGenome.defaultSet;
       dearPreset = RabbitGenome.defaultSet;
       bearPreset = RabbitGenome.defaultSet;
