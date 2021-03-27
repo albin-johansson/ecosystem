@@ -1,5 +1,4 @@
-﻿using System;
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.AI;
 
 namespace Ecosystem
@@ -76,6 +75,11 @@ namespace Ecosystem
     public void IdleAnimation()
     {
       ResetAnimatorParameters();
+    }
+
+    public bool IsIdle()
+    {
+      return !_animator.GetBool(_isAttackingHash) && _animator.GetAnimatorTransitionInfo(0).IsName("Attack -> Idle");
     }
   }
 }
