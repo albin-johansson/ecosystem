@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 
 namespace Ecosystem.AnimalBehaviour.RabbitStates
@@ -27,13 +28,21 @@ namespace Ecosystem.AnimalBehaviour.RabbitStates
     {
       if (Target)
       {
-        MovementController.UpdateFleeing(Target.transform.position);
-        return Type();
+        if (Target.activeSelf)
+        {
+          MovementController.UpdateFleeing(Target.transform.position);
+          return Type();
+        }
+        else
+        {
+          Target = GetClosestPredator();
+          if (Target)
+          {
+            return Type();
+          }
+        }
       }
-      else
-      {
-        return base.Tick();
-      }
+      return base.Tick();
     }
 
     public override void OnTriggerEnter(Collider other)
@@ -49,11 +58,19 @@ namespace Ecosystem.AnimalBehaviour.RabbitStates
     {
       if (other.gameObject == Target)
       {
-        Target = GetClosest(GetInVision(MovementController.GetPosition(), Genome.GetVision().Value, _whatIsPredator));
+        Target = GetClosestPredator();
       }
     }
 
-    public override AnimalState Type()
+    private GameObject GetClosestPredator()
+    {
+      var target = GetClosest(GetInVision(MovementController.GetPosition(), Genome.GetVision().Value, _whatIsPredator));
+      if(target){Debug.Log(target.name);}
+      return target;
+    }
+  
+
+  public override AnimalState Type()
     {
       return AnimalState.Fleeing;
     }
