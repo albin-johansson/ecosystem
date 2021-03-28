@@ -1,9 +1,11 @@
+using Ecosystem.Util;
 using UnityEngine;
 
 namespace Ecosystem.AnimalBehaviour.WolfStates
 {
   internal sealed class WolfChasingPreyState : AbstractAnimalState
   {
+    private readonly LayerMask _whatIsPrey = LayerMask.GetMask("Prey"); 
     public WolfChasingPreyState(WolfStateData data)
     {
       Consumer = data.Consumer;
@@ -12,6 +14,7 @@ namespace Ecosystem.AnimalBehaviour.WolfStates
       AnimationController = data.AnimationController;
       MemoryController = data.MemoryController;
       Reproducer = data.Reproducer;
+      Genome = data.Genome;
     }
 
     public override void Begin(GameObject target)
@@ -23,12 +26,16 @@ namespace Ecosystem.AnimalBehaviour.WolfStates
 
     public override AnimalState Tick()
     {
-      if (!Target || !Target.activeSelf || !MovementController.IsTargetInRange(Target.transform.position))
+      if (!Target || !Consumer.IsHungry())
       {
         return base.Tick();
       }
-
-      if (Consumer.IsAttacking)
+      else if (!Target.activeSelf || !MovementController.IsTargetInRange(Target.transform.position))
+      {
+        Target = GetClosestInVision(_whatIsPrey);
+        return Type();
+      }
+      else if (Consumer.IsAttacking)
       {
         return AnimalState.Attacking;
       }
@@ -40,11 +47,20 @@ namespace Ecosystem.AnimalBehaviour.WolfStates
       return Type();
     }
 
+    public override void OnTriggerEnter(Collider other)
+    {
+      var otherObject = other.gameObject;
+      if (Tags.IsPrey(otherObject))
+      {
+        Target = SelectCloser(Target, otherObject);
+      }
+    }
+
     public override void OnTriggerExit(Collider other)
     {
       if (other.gameObject == Target)
       {
-        Target = null;
+        Target = GetClosestInVision(_whatIsPrey);
       }
     }
 

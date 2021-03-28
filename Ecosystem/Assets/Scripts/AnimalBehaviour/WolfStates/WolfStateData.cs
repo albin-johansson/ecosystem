@@ -1,3 +1,5 @@
+using Ecosystem.Genes;
+
 namespace Ecosystem.AnimalBehaviour.WolfStates
 {
   public struct WolfStateData
@@ -8,5 +10,6 @@ namespace Ecosystem.AnimalBehaviour.WolfStates
     public EcoAnimationController AnimationController;
     public MemoryController MemoryController;
     public Reproducer Reproducer;
+    public AbstractGenome Genome;
   }
 }

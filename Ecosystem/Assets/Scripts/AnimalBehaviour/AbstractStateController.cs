@@ -8,7 +8,7 @@ namespace Ecosystem.AnimalBehaviour
   public abstract class AbstractStateController : MonoBehaviour, IStateController
   {
     protected IAnimalState State;
-    [SerializeField] protected StateText StateText;
+    [SerializeField] protected StateText stateText;
     [SerializeField] protected WaterConsumer waterConsumer;
     [SerializeField] protected MovementController movementController;
     [SerializeField] protected EcoAnimationController animationController;
@@ -28,7 +28,7 @@ namespace Ecosystem.AnimalBehaviour
       {
         SwitchState(newState);
         //Uncomment for debugging
-        //StateText.SetText(newState.ToString());
+        stateText.SetText(newState.ToString());
       }
     }
 

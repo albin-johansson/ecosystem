@@ -35,7 +35,7 @@ namespace Ecosystem.AnimalBehaviour.RabbitStates
         }
         else
         {
-          Target = GetPredatorInVision();
+          Target = GetClosestInVision(_whatIsPredator);
           if (Target)
           {
             MovementController.UpdateFleeing(Target.transform.position);
@@ -59,15 +59,9 @@ namespace Ecosystem.AnimalBehaviour.RabbitStates
     {
       if (other.gameObject == Target)//Target)
       {
-        Target = GetPredatorInVision();
+        Target = GetClosestInVision(_whatIsPredator);
       }
     }
-
-    private GameObject GetPredatorInVision()
-    {
-      return Genome ? GetClosest(GetInVision(MovementController.GetPosition(), Genome.GetVision().Value, _whatIsPredator)) : null;
-    }
-
 
     public override AnimalState Type()
     {

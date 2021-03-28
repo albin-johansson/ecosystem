@@ -22,7 +22,7 @@ namespace Ecosystem.AnimalBehaviour.RabbitStates
 
     public override void Begin(GameObject target)
     {
-      Target = GetFoodInVision();
+      Target = GetClosestInVision(_whatIsFood);
       MovementController.StartWander();
       AnimationController.MoveAnimation();
     }
@@ -66,11 +66,6 @@ namespace Ecosystem.AnimalBehaviour.RabbitStates
       {
         Target = otherObject;
       }
-    }
-
-    private GameObject GetFoodInVision()
-    {
-      return Genome ? GetClosest(GetInVision(MovementController.GetPosition(), Genome.GetVision().Value, _whatIsFood)) : null;
     }
 
     public override AnimalState Type()

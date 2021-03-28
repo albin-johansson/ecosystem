@@ -4,6 +4,7 @@ namespace Ecosystem.AnimalBehaviour.WolfStates
 {
   public class WolfLookingForMateState : AbstractAnimalState
   {
+    private readonly LayerMask _whatIsMate = LayerMask.GetMask("Bear","Wolf");
     public WolfLookingForMateState(WolfStateData data)
     {
       Consumer = data.Consumer;
@@ -12,12 +13,14 @@ namespace Ecosystem.AnimalBehaviour.WolfStates
       AnimationController = data.AnimationController;
       MemoryController = data.MemoryController;
       Reproducer = data.Reproducer;
+      Genome = data.Genome;
     }
 
     public override void Begin(GameObject target)
     {
-      Target = null;
       Reproducer.isWilling = true;
+      Target = GetClosestMateInVision(_whatIsMate);
+
     }
 
     public override AnimalState Type()
@@ -29,13 +32,15 @@ namespace Ecosystem.AnimalBehaviour.WolfStates
     {
       if (Target)
       {
-        if (Reproducer.CompatibleAsParents(Target))
+        if (Reproducer.CompatibleAsParents(Target) &&
+            MovementController.IsTargetInRange(Target.transform.position))
         {
           MovementController.RunToTarget(Target.transform.position);
+          return Type();
         }
         else
         {
-          Target = null;
+          Target = GetClosestMateInVision(_whatIsMate);
         }
       }
       else
@@ -63,6 +68,14 @@ namespace Ecosystem.AnimalBehaviour.WolfStates
       else if (Reproducer.CompatibleAsParents(otherObject))
       {
         Target = otherObject;
+      }
+    }
+
+    public override void OnTriggerExit(Collider other)
+    {
+      if (other.gameObject == Target)
+      {
+        Target = GetClosestMateInVision(_whatIsMate);
       }
     }
   }

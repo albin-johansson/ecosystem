@@ -4469,7 +4469,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &3855438275871624271
 Transform:
   m_ObjectHideFlags: 0
@@ -7405,13 +7405,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3cd94d57fb1da52439641dc290534ae7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  StateText: {fileID: 4667676523914516765}
+  stateText: {fileID: 4667676523914516765}
   waterConsumer: {fileID: 3242938931952141863}
   movementController: {fileID: 6378755894846735859}
   animationController: {fileID: -4792604738439377631}
   memoryController: {fileID: 4820126447581470678}
   reproducer: {fileID: 1675561535909660547}
-  genome: {fileID: 0}
+  genome: {fileID: 1593158740268700976}
   consumer: {fileID: 5694940851676850990}
 --- !u!1 &7116156556552470170
 GameObject:
@@ -10001,19 +10001,19 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4553548993296237901, guid: b11869fe3d5ecbf4b912f33fa4a312db, type: 3}
       propertyPath: m_AnchorMax.x
-      value: 0
+      value: 0.5
       objectReference: {fileID: 0}
     - target: {fileID: 4553548993296237901, guid: b11869fe3d5ecbf4b912f33fa4a312db, type: 3}
       propertyPath: m_AnchorMax.y
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5905012580436718799, guid: b11869fe3d5ecbf4b912f33fa4a312db, type: 3}
       propertyPath: m_AnchorMax.x
-      value: 0
+      value: 0.5
       objectReference: {fileID: 0}
     - target: {fileID: 5905012580436718799, guid: b11869fe3d5ecbf4b912f33fa4a312db, type: 3}
       propertyPath: m_AnchorMax.y
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5969686279488406544, guid: b11869fe3d5ecbf4b912f33fa4a312db, type: 3}
       propertyPath: m_Name

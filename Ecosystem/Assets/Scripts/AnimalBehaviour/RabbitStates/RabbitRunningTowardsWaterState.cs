@@ -50,7 +50,7 @@ namespace Ecosystem.AnimalBehaviour.RabbitStates
       if (otherObject.CompareTag("Water"))
       {
         MemoryController.SaveToMemory(otherObject);
-        Target = SelectCloser(MovementController.GetPosition(), otherObject, Target);
+        Target = SelectCloser(otherObject, Target);
       }
       else if (Tags.IsPredator(otherObject))
       {

@@ -1,10 +1,12 @@
 using Ecosystem.Util;
+using UnityEditor.Experimental.GraphView;
 using UnityEngine;
 
 namespace Ecosystem.AnimalBehaviour.WolfStates
 {
   internal sealed class WolfLookingForWaterState : AbstractAnimalState
   {
+    private readonly LayerMask _whatIsWater = LayerMask.GetMask("Water");
     public WolfLookingForWaterState(WolfStateData data)
     {
       Consumer = data.Consumer;
@@ -17,7 +19,11 @@ namespace Ecosystem.AnimalBehaviour.WolfStates
 
     public override void Begin(GameObject target)
     {
-      Target = MemoryController.GetClosestInMemory(Tags.IsWater, MovementController.GetPosition());
+      Target = GetClosestInVision(_whatIsWater);
+      if (!Target)
+      {
+        Target = MemoryController.GetClosestInMemory(Tags.IsWater, MovementController.GetPosition());
+      }
       MovementController.StartWander();
       AnimationController.MoveAnimation();
     }

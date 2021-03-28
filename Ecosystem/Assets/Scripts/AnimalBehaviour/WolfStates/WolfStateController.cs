@@ -1,3 +1,4 @@
+using Ecosystem.Genes;
 using UnityEngine;
 
 namespace Ecosystem.AnimalBehaviour.WolfStates
@@ -25,6 +26,7 @@ namespace Ecosystem.AnimalBehaviour.WolfStates
         MovementController = movementController,
         WaterConsumer = waterConsumer,
         Reproducer = reproducer,
+        Genome = genome,
       };
 
       _idle = WolfStateFactory.CreateIdle(data);

@@ -20,12 +20,11 @@ namespace Ecosystem.AnimalBehaviour.RabbitStates
       Target = target;
       MovementController.RunToTarget(Target.transform.position);
       AnimationController.MoveAnimation();
-      //TODO Check memory
     }
 
     public override AnimalState Tick()
     {
-      if (!Target)
+      if (!Target || !Consumer.IsHungry())
       {
         return base.Tick();
       }
@@ -45,7 +44,7 @@ namespace Ecosystem.AnimalBehaviour.RabbitStates
       var otherObject = other.gameObject;
       if (otherObject.CompareTag("Food"))
       {
-        Target = SelectCloser(MovementController.GetPosition(), otherObject, Target);
+        Target = SelectCloser(otherObject, Target);
       }
       else if (otherObject.CompareTag("Water"))
       {

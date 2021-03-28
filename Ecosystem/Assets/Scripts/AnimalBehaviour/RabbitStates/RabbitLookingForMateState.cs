@@ -22,7 +22,7 @@ namespace Ecosystem.AnimalBehaviour.RabbitStates
       Reproducer.isWilling = true;
       MovementController.StartWander();
       AnimationController.MoveAnimation();
-      Target = GetClosestMate(GetInVision(MovementController.GetPosition(), Genome.GetVision().Value, _whatIsMate));
+      Target = GetClosestInVision(_whatIsMate);
     }
 
     public override AnimalState Type()
@@ -34,7 +34,12 @@ namespace Ecosystem.AnimalBehaviour.RabbitStates
     {
       if (Target)
       {
-        if (Tags.IsPredator(Target))
+        if (!Target.activeSelf)
+        {
+          Target = GetClosestMateInVision(_whatIsMate);
+          return base.Tick();
+        }
+        else if (Tags.IsPredator(Target))
         {
           return AnimalState.Fleeing;
         }
@@ -44,7 +49,7 @@ namespace Ecosystem.AnimalBehaviour.RabbitStates
         }
         else
         {
-          Target = GetClosestMate(GetInVision(MovementController.GetPosition(), Genome.GetVision().Value, _whatIsMate));
+          Target = GetClosestMateInVision(_whatIsMate);
         }
       }
       else
@@ -71,6 +76,14 @@ namespace Ecosystem.AnimalBehaviour.RabbitStates
       else if (Reproducer.CompatibleAsParents(otherObject) || Tags.IsPredator(otherObject))
       {
         Target = otherObject;
+      }
+    }
+
+    public override void OnTriggerExit(Collider other)
+    {
+      if (other.gameObject == Target)
+      {
+        Target = GetClosestMateInVision(_whatIsMate);
       }
     }
   }

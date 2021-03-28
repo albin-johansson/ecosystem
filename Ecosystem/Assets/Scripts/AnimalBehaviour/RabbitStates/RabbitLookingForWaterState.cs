@@ -20,10 +20,10 @@ namespace Ecosystem.AnimalBehaviour.RabbitStates
 
     public override void Begin(GameObject target)
     {
-      Target = MemoryController.GetClosestInMemory(Tags.IsWater, MovementController.GetPosition());
+      Target = GetClosestInVision(_whatIsWater);
       if (!Target)
       {
-        Target = GetWaterInVision();
+        Target = MemoryController.GetClosestInMemory(Tags.IsWater, MovementController.GetPosition());
       }
       MovementController.StartWander();
       AnimationController.MoveAnimation();
@@ -60,12 +60,7 @@ namespace Ecosystem.AnimalBehaviour.RabbitStates
         Target = other.gameObject;
       }
     }
-
-    private GameObject GetWaterInVision()
-    {
-      return Genome ? GetClosest(GetInVision(MovementController.GetPosition(), Genome.GetVision().Value, _whatIsWater)) : null;
-    }
-
+    
     public override AnimalState Type()
     {
       return AnimalState.LookingForWater;
