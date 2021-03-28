@@ -5,25 +5,13 @@ using Unity.Entities;
 using Unity.Mathematics;
 using Unity.Transforms;
 using UnityEngine;
-using UnityEngine.SceneManagement;
 
 namespace Ecosystem.Systems
 {
-  public sealed class FactorySystem : SystemBase
+  public sealed class FactorySystem : AbstractSystem
   {
     private Entity _rabbitPrefab = Entity.Null;
     private Entity _wolfPrefab = Entity.Null;
-
-    private void OnSceneChanged(Scene current, Scene next)
-    {
-      Enabled = EcsUtils.IsEcsCapable(next);
-    }
-
-    protected override void OnCreate()
-    {
-      base.OnCreate();
-      SceneManager.activeSceneChanged += OnSceneChanged;
-    }
 
     protected override void OnUpdate()
     {
