@@ -41,31 +41,33 @@ namespace Ecosystem.Systems
     public void MakeRabbit(float3 position)
     {
       Debug.Assert(Enabled);
-      
+
       if (_rabbitPrefab == Entity.Null)
       {
         _rabbitPrefab = EntityManager.LoadPrefab<RabbitPrefab>().Value;
       }
 
       var rabbit = EntityManager.Instantiate(_rabbitPrefab);
-      SetPosition(rabbit, position);
 
       EntityManager.AddComponent<Roaming>(rabbit);
+
+      SetPosition(rabbit, position);
     }
 
     public void MakeWolf(float3 position)
     {
       Debug.Assert(Enabled);
-      
+
       if (_wolfPrefab == Entity.Null)
       {
         _wolfPrefab = EntityManager.LoadPrefab<WolfPrefab>().Value;
       }
 
       var wolf = EntityManager.Instantiate(_wolfPrefab);
-      SetPosition(wolf, position);
 
       EntityManager.AddComponent<Roaming>(wolf);
+
+      SetPosition(wolf, position);
     }
   }
 }
