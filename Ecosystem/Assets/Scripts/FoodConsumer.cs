@@ -46,9 +46,6 @@ namespace Ecosystem
         return;
       }
 
-      Debug.Log("animal has hunger rate: " + genome.GetHungerRate().Value);
-
-
       if (reproducer.IsPregnant)
       {
         Hunger += genome.Metabolism * genome.GetChildFoodConsumtionFactor() * Time.deltaTime;

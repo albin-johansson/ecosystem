@@ -30,7 +30,7 @@ namespace Ecosystem.Genes
       {GeneType.ThirstThreshold, new Preset(0, 10, new[] {5f})},
       {GeneType.Vision, new Preset(1, 50, new[] {30f})},
       {GeneType.SpeedFactor, new Preset(1, 2, new[] {1.5f})},
-      {GeneType.SizeFactor, new Preset(0.1f, 1.5f, new[] {1f})},
+      {GeneType.SizeFactor, new Preset(0.5f, 1.5f, new[] {1f})},
       {GeneType.DesirabilityScore, new Preset(1, 10, new[] {5f})},
       {GeneType.GestationPeriod, new Preset(10, 120, new[] {40f})},
       {GeneType.SexualMaturityTime, new Preset(10, 150, new[] {40f})}
@@ -39,7 +39,6 @@ namespace Ecosystem.Genes
 
     protected override void Initialize()
     {
-      preset = defaultSet;
       Data = CreateData();
       ConvertGenesToAttributes();
     }
