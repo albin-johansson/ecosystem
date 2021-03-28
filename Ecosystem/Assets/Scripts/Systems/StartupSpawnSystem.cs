@@ -1,16 +1,14 @@
-using Ecosystem.ECS;
 using Ecosystem.Util;
 using Reese.Nav;
 using Unity.Entities;
 using UnityEngine;
-using UnityEngine.SceneManagement;
 
 namespace Ecosystem.Systems
 {
   [UpdateInGroup(typeof(FixedStepSimulationSystemGroup))]
   [UpdateAfter(typeof(NavSurfaceSystem))]
   [UpdateAfter(typeof(NavDestinationSystem))]
-  public sealed class StartupSpawnSystem : SystemBase
+  public sealed class StartupSpawnSystem : AbstractSystem
   {
     public static int InitialRabbitCount;
     public static int InitialWolfCount;
@@ -18,19 +16,9 @@ namespace Ecosystem.Systems
     private FactorySystem _factorySystem;
     private bool _hasSpawned;
 
-    private void OnSceneChanged(Scene current, Scene next)
+    protected override void Initialize()
     {
-      Enabled = EcsUtils.IsEcsCapable(next);
-      if (Enabled)
-      {
-        _factorySystem = World.GetOrCreateSystem<FactorySystem>();
-      }
-    }
-
-    protected override void OnCreate()
-    {
-      base.OnCreate();
-      SceneManager.activeSceneChanged += OnSceneChanged;
+      _factorySystem = World.GetOrCreateSystem<FactorySystem>();
     }
 
     protected override void OnUpdate()
