@@ -1,12 +1,10 @@
 using Ecosystem.Components;
-using Ecosystem.ECS;
 using Reese.Nav;
 using Reese.Random;
 using Unity.Entities;
 using Unity.Physics.Systems;
 using Unity.Rendering;
 using Unity.Transforms;
-using UnityEngine.SceneManagement;
 
 namespace Ecosystem.Systems.Movement
 {
@@ -15,29 +13,19 @@ namespace Ecosystem.Systems.Movement
   ///   wander randomly in the world. This system iterates all entities with the <c>Roaming</c> component.
   /// </summary>
   [UpdateInGroup(typeof(MovementSystemGroup))]
-  public sealed class RoamingSystem : SystemBase
+  public sealed class RoamingSystem : AbstractSystem
   {
     private EntityCommandBufferSystem _barrier;
     private NavSystem _navSystem;
     private BuildPhysicsWorld _buildPhysicsWorld;
     private RandomSystem _randomSystem;
 
-    private void SceneChanged(Scene current, Scene next)
+    protected override void Initialize()
     {
-      Enabled = EcsUtils.IsEcsCapable(next);
-      if (Enabled)
-      {
-        _barrier = World.GetOrCreateSystem<BeginSimulationEntityCommandBufferSystem>();
-        _navSystem = World.GetOrCreateSystem<NavSystem>();
-        _buildPhysicsWorld = World.GetExistingSystem<BuildPhysicsWorld>();
-        _randomSystem = World.GetExistingSystem<RandomSystem>();
-      }
-    }
-
-    protected override void OnCreate()
-    {
-      base.OnCreate();
-      SceneManager.activeSceneChanged += SceneChanged;
+      _barrier = World.GetOrCreateSystem<BeginSimulationEntityCommandBufferSystem>();
+      _navSystem = World.GetOrCreateSystem<NavSystem>();
+      _buildPhysicsWorld = World.GetExistingSystem<BuildPhysicsWorld>();
+      _randomSystem = World.GetExistingSystem<RandomSystem>();
     }
 
     protected override void OnUpdate()
