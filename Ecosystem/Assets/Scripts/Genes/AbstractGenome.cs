@@ -33,6 +33,11 @@ namespace Ecosystem.Genes
     }
 
 
+    /// <summary>
+    /// Default for creating genes for new animals without
+    /// its presets already defined.
+    /// </summary>
+    /// <returns></returns>
     protected Dictionary<GeneType, Gene> CreateGenes()
     {
       return CreateGenes(_defaultPresets);

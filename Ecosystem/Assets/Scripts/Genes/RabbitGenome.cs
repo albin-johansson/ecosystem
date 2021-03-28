@@ -38,6 +38,7 @@ namespace Ecosystem.Genes
 
     protected override void Initialize()
     {
+      preset = defaultSet;
       Data = CreateData();
       ConvertGenesToAttributes();
     }
