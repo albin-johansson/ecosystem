@@ -15,6 +15,7 @@ GameObject:
   - component: {fileID: 6586140821735944982}
   - component: {fileID: 3793959517244244152}
   - component: {fileID: 5921398429196909263}
+  - component: {fileID: 5264252205927029590}
   - component: {fileID: 8902540027125052898}
   m_Layer: 0
   m_Name: ECSRabbit
@@ -130,6 +131,18 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 16b9c1f7e9da478c9b4a7232655543e5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &5264252205927029590
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3716636463991691157}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ae3b2da566f645f6bb2f7effe535eb89, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!114 &8902540027125052898
