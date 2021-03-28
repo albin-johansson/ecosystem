@@ -15,6 +15,7 @@ namespace Ecosystem.AnimalBehaviour
     [SerializeField] protected MemoryController memoryController;
     [SerializeField] protected Reproducer reproducer;
     [SerializeField] protected AbstractGenome genome;
+    [SerializeField] protected SphereCollider sphereCollider;
 
 
     public abstract void Start();
