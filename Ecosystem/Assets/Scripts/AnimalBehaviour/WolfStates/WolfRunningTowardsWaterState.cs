@@ -11,6 +11,7 @@ namespace Ecosystem.AnimalBehaviour.WolfStates
       MovementController = data.MovementController;
       AnimationController = data.AnimationController;
       MemoryController = data.MemoryController;
+      Reproducer = data.Reproducer;
     }
 
     public override void Begin(GameObject target)
@@ -22,9 +23,9 @@ namespace Ecosystem.AnimalBehaviour.WolfStates
 
     public override AnimalState Tick()
     {
-      if (Target)
+      if (!Target)
       {
-        return AnimalState.LookingForWater;
+        return base.Tick();
       }
       else if (WaterConsumer.CanDrink)
       {

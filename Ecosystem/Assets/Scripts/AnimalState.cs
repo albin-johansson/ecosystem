@@ -11,5 +11,7 @@ namespace Ecosystem
     RunningTowardsWater,
     RunningTowardsFood,
     ChasingPrey,
+    LookingForMate,
+    Attacking
   }
 }

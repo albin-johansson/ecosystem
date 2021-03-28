@@ -16,5 +16,10 @@ namespace Ecosystem.UI
     {
       slider.value = slider.maxValue - value;
     }
+    
+    public void SetSaturationValue(float value)
+    {
+      slider.value = Mathf.Min(slider.maxValue, value);
+    }
   }
 }

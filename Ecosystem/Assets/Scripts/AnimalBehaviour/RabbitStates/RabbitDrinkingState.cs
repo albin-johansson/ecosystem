@@ -12,14 +12,17 @@ namespace Ecosystem.AnimalBehaviour.RabbitStates
       MovementController = data.MovementController;
       AnimationController = data.AnimationController;
       MemoryController = data.MemoryController;
+      Reproducer = data.Reproducer;
     }
 
     public override void Begin(GameObject target)
     {
       Target = target;
+      AnimationController.IdleAnimation();
       MovementController.StandStill(true);
+      WaterConsumer.StartDrinking();
       // TODO: Add animationController.DrinkAnimation();
-      //TODO Check memory
+      // TODO Check memory
     }
 
     public override AnimalState Tick()

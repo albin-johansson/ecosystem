@@ -12,6 +12,7 @@ namespace Ecosystem.AnimalBehaviour.RabbitStates
       MovementController = data.MovementController;
       AnimationController = data.AnimationController;
       MemoryController = data.MemoryController;
+      Reproducer = data.Reproducer;
     }
 
     public override void Begin(GameObject target)
@@ -19,7 +20,6 @@ namespace Ecosystem.AnimalBehaviour.RabbitStates
       Target = null;
       MovementController.StartWander();
       AnimationController.MoveAnimation();
-      //TODO Check memory
     }
 
     public override AnimalState Tick()
@@ -41,8 +41,14 @@ namespace Ecosystem.AnimalBehaviour.RabbitStates
         return AnimalState.LookingForFood;
       }
 
-      MovementController.UpdateWander();
+      var (successfulRetrieval, memoryObject) = MemoryController.GetFromMemory("Water");
+      if (successfulRetrieval)
+      {
+        Target = memoryObject;
+        return base.Tick();
+      }
 
+      MovementController.UpdateWander();
       return Type();
     }
 
@@ -60,10 +66,6 @@ namespace Ecosystem.AnimalBehaviour.RabbitStates
         else if (Tags.IsPredator(otherObject))
         {
           Target = other.gameObject;
-        }
-        else if (Tags.IsFood(otherObject))
-        {
-          MemoryController.SaveToMemory(other.gameObject);
         }
       }
     }

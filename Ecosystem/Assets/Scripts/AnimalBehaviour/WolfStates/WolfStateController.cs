@@ -1,3 +1,4 @@
+using Ecosystem.Genes;
 using UnityEngine;
 
 namespace Ecosystem.AnimalBehaviour.WolfStates
@@ -9,6 +10,9 @@ namespace Ecosystem.AnimalBehaviour.WolfStates
     [SerializeField] private MovementController movementController;
     [SerializeField] private EcoAnimationController animationController;
     [SerializeField] private MemoryController memoryController;
+    [SerializeField] private Reproducer reproducer;
+    [SerializeField] private SphereCollider sphereCollider;
+    [SerializeField] private AbstractGenome genome;
 
     private IAnimalState _idle;
     private IAnimalState _lookingForPrey;
@@ -16,16 +20,19 @@ namespace Ecosystem.AnimalBehaviour.WolfStates
     private IAnimalState _drinking;
     private IAnimalState _runningTowardsWater;
     private IAnimalState _chasingPrey;
+    private IAnimalState _lookingForMate;
+    private IAnimalState _attacking;
 
     public override void Start()
     {
       var data = new WolfStateData
       {
-              Consumer = consumer,
-              AnimationController = animationController,
-              MemoryController = memoryController,
-              MovementController = movementController,
-              WaterConsumer = waterConsumer
+        Consumer = consumer,
+        AnimationController = animationController,
+        MemoryController = memoryController,
+        MovementController = movementController,
+        WaterConsumer = waterConsumer,
+        Reproducer = reproducer,
       };
 
       _idle = WolfStateFactory.CreateIdle(data);
@@ -34,7 +41,12 @@ namespace Ecosystem.AnimalBehaviour.WolfStates
       _drinking = WolfStateFactory.CreateDrinking(data);
       _runningTowardsWater = WolfStateFactory.CreateRunningTowardsWater(data);
       _chasingPrey = WolfStateFactory.CreateChasingPrey(data);
+      _lookingForMate = WolfStateFactory.CreateLookingForMate(data);
+      _attacking = WolfStateFactory.CreateAttackingState(data);
 
+      
+      sphereCollider.radius = (sphereCollider.radius / sphereCollider.transform.lossyScale.magnitude) * genome.GetVision().Value;
+      
       State = _idle;
       SwitchState(AnimalState.Idle);
     }
@@ -50,6 +62,7 @@ namespace Ecosystem.AnimalBehaviour.WolfStates
 
         case AnimalState.LookingForPrey:
           State = _lookingForPrey;
+          consumer.CollideActive = true;
           break;
 
         case AnimalState.Idle:
@@ -73,10 +86,19 @@ namespace Ecosystem.AnimalBehaviour.WolfStates
 
         case AnimalState.ChasingPrey:
           State = _chasingPrey;
+          consumer.CollideActive = true;
           break;
 
         case AnimalState.LookingForFood:
           State = _lookingForPrey;
+          break;
+
+        case AnimalState.LookingForMate:
+          State = _lookingForMate;
+          break;
+
+        case AnimalState.Attacking:
+          State = _attacking;
           break;
 
         default:
