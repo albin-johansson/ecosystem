@@ -112,6 +112,12 @@ namespace Ecosystem.UI
                                              dynamicCarrotCount.text != "";
     }
 
+    public void ValidateEcsDemoSceneInputs()
+    {
+      ecsSceneStartButton.interactable = ecsRabbitCount.text != "" &&
+                                         ecsWolfCount.text != "";
+    }
+
     /// <summary>
     ///   Spawns the specified amount of prefabs on random walkable positions on the terrain.
     /// </summary>

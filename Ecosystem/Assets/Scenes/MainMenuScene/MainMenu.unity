@@ -403,6 +403,38 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 7811533366841065045, guid: df06f5a25e82f094189570bb11e0c6ba, type: 3}
+      propertyPath: m_OnEndEdit.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 1952800703}
+    - target: {fileID: 7811533366841065045, guid: df06f5a25e82f094189570bb11e0c6ba, type: 3}
+      propertyPath: m_OnEndEdit.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: ValidateEcsDemoSceneInputs
+      objectReference: {fileID: 0}
+    - target: {fileID: 7811533366841065045, guid: df06f5a25e82f094189570bb11e0c6ba, type: 3}
+      propertyPath: m_OnEndEdit.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: Ecosystem.UI.MenuManager, ScriptsAssembly
+      objectReference: {fileID: 0}
+    - target: {fileID: 7811533366841065045, guid: df06f5a25e82f094189570bb11e0c6ba, type: 3}
+      propertyPath: m_OnEndEdit.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
+      objectReference: {fileID: 0}
+    - target: {fileID: 7993316682927415081, guid: df06f5a25e82f094189570bb11e0c6ba, type: 3}
+      propertyPath: m_OnEndEdit.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 1952800703}
+    - target: {fileID: 7993316682927415081, guid: df06f5a25e82f094189570bb11e0c6ba, type: 3}
+      propertyPath: m_OnEndEdit.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: ValidateEcsDemoSceneInputs
+      objectReference: {fileID: 0}
+    - target: {fileID: 7993316682927415081, guid: df06f5a25e82f094189570bb11e0c6ba, type: 3}
+      propertyPath: m_OnEndEdit.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: Ecosystem.UI.MenuManager, ScriptsAssembly
+      objectReference: {fileID: 0}
+    - target: {fileID: 7993316682927415081, guid: df06f5a25e82f094189570bb11e0c6ba, type: 3}
+      propertyPath: m_OnEndEdit.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: df06f5a25e82f094189570bb11e0c6ba, type: 3}
 --- !u!224 &246206649 stripped
