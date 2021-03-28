@@ -1,3 +1,4 @@
+using Ecosystem.Systems;
 using Ecosystem.Util;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -10,13 +11,19 @@ namespace Ecosystem.UI
   {
     [SerializeField] private GameObject mainMenu;
     [SerializeField] private GameObject dynamicSceneMenu;
+    [SerializeField] private GameObject ecsDemoSceneMenu;
     [SerializeField] private GameObject settingsButton;
+
     [SerializeField] private Button dynamicSceneStartButton;
     [SerializeField] private Text dynamicRabbitCount;
     [SerializeField] private Text dynamicDeerCount;
     [SerializeField] private Text dynamicWolfCount;
     [SerializeField] private Text dynamicBearCount;
     [SerializeField] private Text dynamicCarrotCount;
+
+    [SerializeField] private Button ecsSceneStartButton;
+    [SerializeField] private Text ecsRabbitCount;
+    [SerializeField] private Text ecsWolfCount;
 
     private void Start()
     {
@@ -28,6 +35,7 @@ namespace Ecosystem.UI
     {
       dynamicSceneMenu.SetActive(false);
       mainMenu.SetActive(true);
+      ecsDemoSceneMenu.SetActive(false);
       settingsButton.SetActive(true);
     }
 
@@ -35,7 +43,16 @@ namespace Ecosystem.UI
     {
       mainMenu.SetActive(false);
       settingsButton.SetActive(false);
+      ecsDemoSceneMenu.SetActive(false);
       dynamicSceneMenu.SetActive(true);
+    }
+
+    public void EnterEcsDemoSceneMenu()
+    {
+      mainMenu.SetActive(false);
+      settingsButton.SetActive(false);
+      dynamicSceneMenu.SetActive(false);
+      ecsDemoSceneMenu.SetActive(true);
     }
 
     public void StartForestScene()
@@ -55,6 +72,8 @@ namespace Ecosystem.UI
 
     public void StartEcsDemo()
     {
+      StartupSpawnSystem.InitialRabbitCount = int.Parse(ecsRabbitCount.text);
+      StartupSpawnSystem.InitialWolfCount = int.Parse(ecsWolfCount.text);
       SceneManager.LoadScene("ECSDemo");
     }
 
