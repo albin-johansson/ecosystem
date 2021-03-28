@@ -3,6 +3,9 @@ using UnityEngine.SceneManagement;
 
 namespace Ecosystem.ECS
 {
+  /// <summary>
+  ///   A utility class for working with the ECS framework.
+  /// </summary>
   public static class EcsUtils
   {
     // Extension function for entity managers, less verbose way to initialize a prefab
