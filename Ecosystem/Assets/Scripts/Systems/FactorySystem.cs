@@ -11,8 +11,8 @@ namespace Ecosystem.Systems
 {
   public sealed class FactorySystem : SystemBase
   {
-    private Entity _rabbitPrefab;
-    private Entity _wolfPrefab;
+    private Entity _rabbitPrefab = Entity.Null;
+    private Entity _wolfPrefab = Entity.Null;
 
     private void OnSceneChanged(Scene current, Scene next)
     {
