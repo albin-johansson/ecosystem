@@ -39,9 +39,9 @@ namespace Ecosystem.Systems.Movement
       var randomArray = _randomSystem.RandomArray;
       var settings = _navSystem.Settings;
 
-      Entities.WithNone<NavProblem, NavDestination, NavPlanning>()
+      Entities.WithAll<Roaming>()
+              .WithNone<NavProblem, NavDestination, NavPlanning>()
               .WithNone<Dead>()
-              .WithAll<Roaming>()
               .WithReadOnly(jumpableBufferFromEntity)
               .WithReadOnly(renderBoundsFromEntity)
               .WithReadOnly(physicsWorld)
