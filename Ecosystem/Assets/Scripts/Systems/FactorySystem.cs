@@ -13,18 +13,28 @@ namespace Ecosystem.Systems
     private Entity _rabbitPrefab;
     private Entity _wolfPrefab;
 
+    private void OnSceneChanged(Scene current, Scene next)
+    {
+      Enabled = EcsUtils.IsEcsCapable(next);
+    }
+
     protected override void OnCreate()
     {
       base.OnCreate();
-      if (SceneManager.GetActiveScene().name != "ECSDemo")
-      {
-        Enabled = false;
-      }
+      SceneManager.activeSceneChanged += OnSceneChanged;
     }
 
     protected override void OnUpdate()
     {
       // Do nothing
+    }
+
+    private void SetPosition(Entity entity, float3 position)
+    {
+      EntityManager.SetComponentData(entity, new Translation
+      {
+              Value = position
+      });
     }
 
     public void MakeRabbit(float3 position)
@@ -35,12 +45,9 @@ namespace Ecosystem.Systems
       }
 
       var rabbit = EntityManager.Instantiate(_rabbitPrefab);
+      SetPosition(rabbit, position);
 
       EntityManager.AddComponent<Roaming>(rabbit);
-      EntityManager.SetComponentData(rabbit, new Translation
-      {
-              Value = position
-      });
     }
 
     public void MakeWolf(float3 position)
@@ -49,14 +56,11 @@ namespace Ecosystem.Systems
       {
         _wolfPrefab = EntityManager.LoadPrefab<WolfPrefab>().Value;
       }
-      
+
       var wolf = EntityManager.Instantiate(_wolfPrefab);
-      EntityManager.AddComponent<Idle>(wolf);
-      
-      EntityManager.SetComponentData(wolf, new Translation
-      {
-              Value = position
-      });
+      SetPosition(wolf, position);
+
+      EntityManager.AddComponent<Roaming>(wolf);
     }
   }
 }
