@@ -1,4 +1,5 @@
 using Unity.Entities;
+using UnityEngine.SceneManagement;
 
 namespace Ecosystem.ECS
 {
@@ -8,6 +9,11 @@ namespace Ecosystem.ECS
     public static T LoadPrefab<T>(this EntityManager manager) where T : struct, IComponentData
     {
       return manager.CreateEntityQuery(typeof(T)).GetSingleton<T>();
+    }
+
+    public static bool IsEcsCapable(Scene scene)
+    {
+      return scene.name == "ECSDemo";
     }
   }
 }
