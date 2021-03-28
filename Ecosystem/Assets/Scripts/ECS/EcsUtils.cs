@@ -11,6 +11,7 @@ namespace Ecosystem.ECS
       return manager.CreateEntityQuery(typeof(T)).GetSingleton<T>();
     }
 
+    // Simple utility for checking if a scene is known to support the ECS framework
     public static bool IsEcsCapable(Scene scene)
     {
       return scene.name == "ECSDemo";
