@@ -45,9 +45,19 @@ namespace Ecosystem.Systems.Collisions
               {
                 var preyEntity = follow.Target;
 
+                if (deadFromEntity.HasComponent(preyEntity))
+                {
+                  // If the target prey died during our chase, return to roaming
+                  buffer.RemoveComponent<NavFollow>(entityInQueryIndex, predatorEntity);
+                  buffer.RemoveComponent<NavDestination>(entityInQueryIndex, predatorEntity);
+                  buffer.RemoveComponent<NavPlanning>(entityInQueryIndex, predatorEntity);
+                  buffer.RemoveComponent<NavProblem>(entityInQueryIndex, predatorEntity);
+                  buffer.AddComponent<Roaming>(entityInQueryIndex, predatorEntity);
+                  return;
+                }
+
                 if (!localToWorldFromEntity.HasComponent(preyEntity) ||
-                    !preyFromEntity.HasComponent(preyEntity) ||
-                    deadFromEntity.HasComponent(preyEntity))
+                    !preyFromEntity.HasComponent(preyEntity))
                 {
                   return;
                 }
