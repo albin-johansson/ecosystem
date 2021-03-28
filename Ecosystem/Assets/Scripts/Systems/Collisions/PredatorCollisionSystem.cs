@@ -9,7 +9,7 @@ using UnityEngine.SceneManagement;
 namespace Ecosystem.Systems.Collisions
 {
   [UpdateInGroup(typeof(CollisionSystemGroup))]
-  public sealed class WolfCollisionSystem : SystemBase
+  public sealed class PredatorCollisionSystem : SystemBase
   {
     private EntityCommandBufferSystem _barrier;
 
@@ -32,28 +32,34 @@ namespace Ecosystem.Systems.Collisions
     {
       var buffer = _barrier.CreateCommandBuffer().AsParallelWriter();
 
-      Entities.WithAll<Wolf, SpatialTrigger, PhysicsCollider>()
+      var preyFromEntity = GetComponentDataFromEntity<Prey>(true);
+      var deadFromEntity = GetComponentDataFromEntity<Dead>(true);
+
+      Entities.WithAll<Predator, SpatialTrigger, PhysicsCollider>()
               .WithNone<NavFollow, Dead>()
               .WithChangeFilter<SpatialEntry>() // Note that we only observe collision entries
-              .ForEach((Entity wolf, in DynamicBuffer<SpatialEntry> entries) =>
+              .WithReadOnly(preyFromEntity)
+              .WithReadOnly(deadFromEntity)
+              .ForEach((Entity predatorEntity, in DynamicBuffer<SpatialEntry> entries) =>
               {
                 // Traverse from the end of the buffer for performance reasons.
                 for (var i = entries.Length - 1; i >= 0; --i)
                 {
                   var activator = entries[i].Value.Activator;
-                  if (HasComponent<Rabbit>(activator) && !HasComponent<Dead>(activator))
+
+                  if (preyFromEntity.HasComponent(activator) && !deadFromEntity.HasComponent(activator))
                   {
-                    // Stop roaming and pursue the rabbit
-                    buffer.RemoveComponent<Roaming>(wolf.Index, wolf);
-                    buffer.AddComponent(wolf.Index, wolf, new NavFollow
+                    // Stop roaming and pursue the detected prey
+                    buffer.RemoveComponent<Roaming>(predatorEntity.Index, predatorEntity);
+                    buffer.AddComponent(predatorEntity.Index, predatorEntity, new NavFollow
                     {
                             Target = activator,
-                            MaxDistance = 50,
+                            MaxDistance = 20, // TODO make this a property of predators? Or a separate comp
                             MinDistance = 0
                     });
                   }
                 }
-              }).WithName("WolfCollisionSystemEntryJob")
+              }).WithName("PredatorCollisionSystemEntryJob")
               .WithBurst()
               .ScheduleParallel();
 
