@@ -1,12 +1,16 @@
-using UnityEngine;
 using System.Collections.Generic;
 
 namespace Ecosystem.Genes
 {
   public sealed class BearGenome : AbstractGenome
   {
+    static BearGenome()
+    {
+      preset = defaultSet;
+    }
+
     internal static float _mutateChance = 0.05f;
-    internal static Dictionary<GeneType, Preset> preset = defaultSet;
+    internal static Dictionary<GeneType, Preset> preset;
 
     public static readonly Dictionary<GeneType, Preset> defaultSet = new Dictionary<GeneType, Preset>()
     {

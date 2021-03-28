@@ -7,21 +7,19 @@ namespace Ecosystem.Genes
   public abstract class AbstractGenome : MonoBehaviour, IGenome
   {
     internal GenomeData Data;
-    //internal float chance;
 
-    internal static Dictionary<GeneType, Preset> _defaultPresets = new Dictionary<GeneType, Preset>()
+    internal static readonly Dictionary<GeneType, Preset> _defaultPresets = new Dictionary<GeneType, Preset>()
     {
-      //TODO: change to real values.
-      {GeneType.HungerRate, new Preset(0, 1, new[] {0f, 1f})},
-      {GeneType.HungerThreshold, new Preset(0, 1, new[] {0f, 1f})},
-      {GeneType.ThirstRate, new Preset(0, 1, new[] {0f, 1f})},
-      {GeneType.ThirstThreshold, new Preset(0, 1, new[] {0f, 1f})},
-      {GeneType.Vision, new Preset(0, 1, new[] {0f, 1f})},
-      {GeneType.SpeedFactor, new Preset(0, 1, new[] {0f, 1f})},
-      {GeneType.SizeFactor, new Preset(0, 1, new[] {0f, 1f})},
-      {GeneType.DesirabilityScore, new Preset(0, 1, new[] {0f, 1f})},
-      {GeneType.GestationPeriod, new Preset(0, 1, new[] {0f, 1f})},
-      {GeneType.SexualMaturityTime, new Preset(0, 1, new[] {0f, 1f})}
+      {GeneType.HungerRate, new Preset(0, 10, new[] {1f, 5f, 7f})},
+      {GeneType.HungerThreshold, new Preset(0, 10, new[] {1f, 5f, 7f})},
+      {GeneType.ThirstRate, new Preset(0, 10, new[] {0.5f, 3f, 6f, 9f})},
+      {GeneType.ThirstThreshold, new Preset(0, 10, new[] {1f, 5f, 7f})},
+      {GeneType.Vision, new Preset(1, 50, new[] {5f, 10f, 25f, 40f, 45f})},
+      {GeneType.SpeedFactor, new Preset(1, 2, new[] {1f, 1.5f, 2f})},
+      {GeneType.SizeFactor, new Preset(0.5f, 1.5f, new[] {0.5f, 1f, 1.5f})},
+      {GeneType.DesirabilityScore, new Preset(1, 10, new[] {1f, 5f, 10f})},
+      {GeneType.GestationPeriod, new Preset(10, 120, new[] {12f, 20f, 50f, 70f, 90f, 110f})},
+      {GeneType.SexualMaturityTime, new Preset(10, 150, new[] {20f, 50f, 90f, 140f})}
     };
 
     private const float MetabolismFactor = 1.495f; // 1.15 (Vision) * 1.30 (Speed)
@@ -37,7 +35,6 @@ namespace Ecosystem.Genes
     /// Default for creating genes for new animals without
     /// its presets already defined.
     /// </summary>
-    /// <returns></returns>
     protected Dictionary<GeneType, Gene> CreateGenes()
     {
       return CreateGenes(_defaultPresets);
