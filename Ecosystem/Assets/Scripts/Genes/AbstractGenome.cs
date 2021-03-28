@@ -7,8 +7,10 @@ namespace Ecosystem.Genes
   public abstract class AbstractGenome : MonoBehaviour, IGenome
   {
     internal GenomeData Data;
+    private const float MetabolismFactor = 1.495f; // 1.15 (Vision) * 1.30 (Speed)
+    private const float ChildFoodConsumtionFactor = 4f / 3f;
 
-    internal static readonly Dictionary<GeneType, Preset> _defaultPresets = new Dictionary<GeneType, Preset>()
+    private static readonly Dictionary<GeneType, Preset> _defaultPresets = new Dictionary<GeneType, Preset>()
     {
       {GeneType.HungerRate, new Preset(0, 10, new[] {1f, 5f, 7f})},
       {GeneType.HungerThreshold, new Preset(0, 10, new[] {1f, 5f, 7f})},
@@ -21,9 +23,6 @@ namespace Ecosystem.Genes
       {GeneType.GestationPeriod, new Preset(10, 120, new[] {12f, 20f, 50f, 70f, 90f, 110f})},
       {GeneType.SexualMaturityTime, new Preset(10, 150, new[] {20f, 50f, 90f, 140f})}
     };
-
-    private const float MetabolismFactor = 1.495f; // 1.15 (Vision) * 1.30 (Speed)
-    private const float ChildFoodConsumtionFactor = 4f / 3f;
 
     private void Awake()
     {
@@ -42,43 +41,30 @@ namespace Ecosystem.Genes
 
     protected Dictionary<GeneType, Gene> CreateGenes(Dictionary<GeneType, Preset> presets)
     {
-      //Take the genes from the dictionary presets. 
-      Gene HungerRate = GeneUtil.NewGeneFromList(presets[GeneType.HungerRate].min,
-        presets[GeneType.HungerRate].max, presets[GeneType.HungerRate].values);
-      Gene HungerThreshold = GeneUtil.NewGeneFromList(presets[GeneType.HungerThreshold].min,
-        presets[GeneType.HungerThreshold].max, presets[GeneType.HungerThreshold].values);
-      Gene ThirstRate = GeneUtil.NewGeneFromList(presets[GeneType.ThirstRate].min,
-        presets[GeneType.ThirstRate].max, presets[GeneType.ThirstRate].values);
-      Gene ThirstThreshold = GeneUtil.NewGeneFromList(presets[GeneType.ThirstThreshold].min,
-        presets[GeneType.ThirstThreshold].max, presets[GeneType.ThirstThreshold].values);
-      Gene Vision = GeneUtil.NewGeneFromList(presets[GeneType.Vision].min, presets[GeneType.Vision].max,
-        presets[GeneType.Vision].values);
-      Gene SpeedFactor = GeneUtil.NewGeneFromList(presets[GeneType.SpeedFactor].min,
-        presets[GeneType.SpeedFactor].max, presets[GeneType.SpeedFactor].values);
-      Gene SizeFactor = GeneUtil.NewGeneFromList(presets[GeneType.SizeFactor].min,
-        presets[GeneType.SizeFactor].max, presets[GeneType.SizeFactor].values);
-      Gene DesirabilityFactor = GeneUtil.NewGeneFromList(presets[GeneType.DesirabilityScore].min,
-        presets[GeneType.DesirabilityScore].max, presets[GeneType.DesirabilityScore].values);
-      Gene GestationPeriod = GeneUtil.NewGeneFromList(presets[GeneType.GestationPeriod].min,
-        presets[GeneType.GestationPeriod].max, presets[GeneType.GestationPeriod].values);
-      Gene SexualMaturityTime = GeneUtil.NewGeneFromList(presets[GeneType.SexualMaturityTime].min,
-        presets[GeneType.SexualMaturityTime].max, presets[GeneType.SexualMaturityTime].values);
+      var hungerRate = GeneUtil.CreateGeneFromPreset(presets[GeneType.HungerRate]);
+      var hungerThreshold = GeneUtil.CreateGeneFromPreset(presets[GeneType.HungerThreshold]);
+      var thirstRate = GeneUtil.CreateGeneFromPreset(presets[GeneType.ThirstRate]);
+      var thirstThreshold = GeneUtil.CreateGeneFromPreset(presets[GeneType.ThirstThreshold]);
+      var vision = GeneUtil.CreateGeneFromPreset(presets[GeneType.Vision]);
+      var speedFactor = GeneUtil.CreateGeneFromPreset(presets[GeneType.SpeedFactor]);
+      var sizeFactor = GeneUtil.CreateGeneFromPreset(presets[GeneType.SizeFactor]);
+      var desirabilityFactor = GeneUtil.CreateGeneFromPreset(presets[GeneType.DesirabilityScore]);
+      var gestationPeriod = GeneUtil.CreateGeneFromPreset(presets[GeneType.GestationPeriod]);
+      var sexualMaturityTime = GeneUtil.CreateGeneFromPreset(presets[GeneType.SexualMaturityTime]);
 
-      //Create the genes dictionary
-      Dictionary<GeneType, Gene> genes = new Dictionary<GeneType, Gene>
+      return new Dictionary<GeneType, Gene>
       {
-        {GeneType.HungerRate, HungerRate},
-        {GeneType.HungerThreshold, HungerThreshold},
-        {GeneType.ThirstRate, ThirstRate},
-        {GeneType.ThirstThreshold, ThirstThreshold},
-        {GeneType.Vision, Vision},
-        {GeneType.SpeedFactor, SpeedFactor},
-        {GeneType.SizeFactor, SizeFactor},
-        {GeneType.DesirabilityScore, DesirabilityFactor},
-        {GeneType.GestationPeriod, GestationPeriod},
-        {GeneType.SexualMaturityTime, SexualMaturityTime}
+        {GeneType.HungerRate, hungerRate},
+        {GeneType.HungerThreshold, hungerThreshold},
+        {GeneType.ThirstRate, thirstRate},
+        {GeneType.ThirstThreshold, thirstThreshold},
+        {GeneType.Vision, vision},
+        {GeneType.SpeedFactor, speedFactor},
+        {GeneType.SizeFactor, sizeFactor},
+        {GeneType.DesirabilityScore, desirabilityFactor},
+        {GeneType.GestationPeriod, gestationPeriod},
+        {GeneType.SexualMaturityTime, sexualMaturityTime}
       };
-      return genes;
     }
 
     protected abstract void Initialize();

@@ -4,15 +4,10 @@ namespace Ecosystem.Genes
 {
   public sealed class WolfGenome : AbstractGenome
   {
-    static WolfGenome()
-    {
-      preset = defaultSet;
-    }
+    private static float _mutateChance = 0.05f;
+    private static Dictionary<GeneType, Preset> _preset;
 
-    internal static float _mutateChance = 0.05f;
-    internal static Dictionary<GeneType, Preset> preset;
-
-    public static readonly Dictionary<GeneType, Preset> defaultSet = new Dictionary<GeneType, Preset>()
+    public static readonly Dictionary<GeneType, Preset> DefaultSet = new Dictionary<GeneType, Preset>()
     {
       {GeneType.HungerRate, new Preset(0, 10, new[] {1f, 5f, 7f})},
       {GeneType.HungerThreshold, new Preset(0, 10, new[] {1f, 5f, 7f})},
@@ -26,7 +21,7 @@ namespace Ecosystem.Genes
       {GeneType.SexualMaturityTime, new Preset(10, 150, new[] {20f, 50f, 90f, 140f})}
     };
 
-    public static readonly Dictionary<GeneType, Preset> defaultSingular = new Dictionary<GeneType, Preset>()
+    public static readonly Dictionary<GeneType, Preset> DefaultSingular = new Dictionary<GeneType, Preset>()
     {
       {GeneType.HungerRate, new Preset(0, 10, new[] {1f})},
       {GeneType.HungerThreshold, new Preset(0, 10, new[] {5f})},
@@ -40,6 +35,11 @@ namespace Ecosystem.Genes
       {GeneType.SexualMaturityTime, new Preset(10, 150, new[] {20f})}
     };
 
+    static WolfGenome()
+    {
+      _preset = DefaultSet;
+    }
+
     protected override void Initialize()
     {
       Data = CreateData();
@@ -48,13 +48,13 @@ namespace Ecosystem.Genes
 
     public static void SetPreset(Dictionary<GeneType, Preset> presets, float mutateChance = 0.05f)
     {
-      preset = presets;
+      _preset = presets;
       _mutateChance = mutateChance;
     }
 
     protected override Dictionary<GeneType, Preset> GetPresets()
     {
-      return preset;
+      return _preset;
     }
 
     protected override float GetClassMutateChance()

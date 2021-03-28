@@ -14,9 +14,9 @@ namespace Ecosystem.Genes
       return Random.value * (max - min) + min;
     }
 
-    public static Gene NewGeneFromList(float min, float max, float[] vals)
+    public static Gene CreateGeneFromPreset(Preset preset)
     {
-      return new Gene(vals[Random.Range(0, vals.Length)], min, max);
+      return new Gene(preset.values[Random.Range(0, preset.values.Length)], preset.min, preset.max);
     }
   }
 }

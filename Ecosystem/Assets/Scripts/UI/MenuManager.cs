@@ -39,10 +39,10 @@ namespace Ecosystem.UI
 
     private void Start()
     {
-      rabbitPreset = RabbitGenome.defaultSet;
-      wolfPreset = WolfGenome.defaultSet;
-      deerPreset = DeerGenome.defaultSet;
-      bearPreset = BearGenome.defaultSet;
+      rabbitPreset = RabbitGenome.DefaultSet;
+      wolfPreset = WolfGenome.DefaultSet;
+      deerPreset = DeerGenome.DefaultSet;
+      bearPreset = BearGenome.DefaultSet;
       rabbitSet.onValueChanged.AddListener(delegate { ToggleSetRabbit(rabbitSet); });
       rabbitMutate.onValueChanged.AddListener(delegate { ToggleMutateRabbit(rabbitMutate); });
       wolfSet.onValueChanged.AddListener(delegate { ToggleSetWolf(wolfSet); });
@@ -156,28 +156,27 @@ namespace Ecosystem.UI
     private void ToggleSet(bool isOn, ref Dictionary<GeneType, Preset> preset, Dictionary<GeneType, Preset> single,
       Dictionary<GeneType, Preset> multi)
     {
-      Debug.Log("Animal set: " + isOn);
       preset = isOn ? multi : single;
     }
 
     private void ToggleSetRabbit(Toggle toggle)
     {
-      ToggleSet(toggle.isOn, ref rabbitPreset, RabbitGenome.defaultSingular, RabbitGenome.defaultSet);
+      ToggleSet(toggle.isOn, ref rabbitPreset, RabbitGenome.DefaultSingular, RabbitGenome.DefaultSet);
     }
 
     private void ToggleSetWolf(Toggle toggle)
     {
-      ToggleSet(toggle.isOn, ref wolfPreset, WolfGenome.defaultSingular, WolfGenome.defaultSet);
+      ToggleSet(toggle.isOn, ref wolfPreset, WolfGenome.DefaultSingular, WolfGenome.DefaultSet);
     }
 
     private void ToggleSetDear(Toggle toggle)
     {
-      ToggleSet(toggle.isOn, ref deerPreset, DeerGenome.defaultSingular, DeerGenome.defaultSet);
+      ToggleSet(toggle.isOn, ref deerPreset, DeerGenome.DefaultSingular, DeerGenome.DefaultSet);
     }
 
     private void ToggleSetBear(Toggle toggle)
     {
-      ToggleSet(toggle.isOn, ref bearPreset, BearGenome.defaultSingular, BearGenome.defaultSet);
+      ToggleSet(toggle.isOn, ref bearPreset, BearGenome.DefaultSingular, BearGenome.DefaultSet);
     }
 
     private void ToggleMutateRabbit(Toggle toggle)
@@ -202,7 +201,6 @@ namespace Ecosystem.UI
 
     private void ToggleMutate(bool isOn, ref float chance)
     {
-      Debug.Log("animal mutate: " + isOn);
       chance = isOn ? 0.05f : 0f;
     }
   }

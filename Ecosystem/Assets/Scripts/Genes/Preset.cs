@@ -2,9 +2,9 @@
 {
   public struct Preset
   {
-    public float min;
-    public float max;
-    public float[] values;
+    public float min { get; private set; }
+    public float max { get; private set; }
+    public float[] values { get; private set; }
 
     public Preset(float min, float max, float[] values)
     {
