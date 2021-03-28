@@ -1,3 +1,4 @@
+using Ecosystem.Genes;
 using UnityEngine;
 
 namespace Ecosystem.AnimalBehaviour.RabbitStates
@@ -14,7 +15,7 @@ namespace Ecosystem.AnimalBehaviour.RabbitStates
     private IAnimalState _runningTowardsFood;
     private IAnimalState _fleeing;
     private IAnimalState _lookingForMate;
-
+  
     public override void Start()
     {
       var data = new RabbitStateData
@@ -36,6 +37,8 @@ namespace Ecosystem.AnimalBehaviour.RabbitStates
       _runningTowardsFood = RabbitStateFactory.CreateRunningTowardsFood(data);
       _fleeing = RabbitStateFactory.CreateFleeing(data);
       _lookingForMate = RabbitStateFactory.CreateLookingForMate(data);
+
+      sphereCollider.radius = (sphereCollider.radius / sphereCollider.transform.lossyScale.magnitude) * genome.GetVision().Value;
 
       State = _idle;
       SwitchState(AnimalState.Idle);

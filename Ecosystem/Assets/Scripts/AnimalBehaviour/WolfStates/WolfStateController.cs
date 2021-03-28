@@ -7,6 +7,7 @@ namespace Ecosystem.AnimalBehaviour.WolfStates
   {
     [SerializeField] private PreyConsumer consumer;
     
+
     private IAnimalState _idle;
     private IAnimalState _lookingForPrey;
     private IAnimalState _lookingForWater;
@@ -37,6 +38,9 @@ namespace Ecosystem.AnimalBehaviour.WolfStates
       _chasingPrey = WolfStateFactory.CreateChasingPrey(data);
       _lookingForMate = WolfStateFactory.CreateLookingForMate(data);
       _attacking = WolfStateFactory.CreateAttackingState(data);
+
+
+      sphereCollider.radius = (sphereCollider.radius / sphereCollider.transform.lossyScale.magnitude) * genome.GetVision().Value;
 
       State = _idle;
       SwitchState(AnimalState.Idle);

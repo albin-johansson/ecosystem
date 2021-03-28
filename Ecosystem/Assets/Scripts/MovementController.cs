@@ -15,6 +15,7 @@ namespace Ecosystem
   {
     [SerializeField] private NavMeshAgent navAgent;
     [SerializeField] private AbstractGenome genome;
+    [SerializeField] private SphereCollider sphereCollider;
 
     private Vector3 _fleeDestination;
     private float _previousSpeed;
@@ -29,7 +30,7 @@ namespace Ecosystem
     {
       if (IsReachable(targetPosition))
       {
-        return genome.GetVision().Value >= Math.Floor(Vector3.Distance(navAgent.transform.position, targetPosition));
+        return sphereCollider.radius >= Math.Floor(Vector3.Distance(navAgent.transform.position, targetPosition));
       }
       else
       {
@@ -142,7 +143,7 @@ namespace Ecosystem
     {
       float[] wanderAngles = {0f, -90f, 90f, 180f};
       var agentTransform = navAgent.transform;
-      var direction = agentTransform.forward.normalized * genome.GetVision().Value;
+      var direction = agentTransform.forward.normalized * sphereCollider.radius;
       foreach (var angle in wanderAngles)
       {
         var rotatedDirection = RotateDirection(direction, Random.Range(angle - 45f, angle + 45f));
@@ -224,7 +225,7 @@ namespace Ecosystem
     private Vector3 FindFleeDestination(Vector3 threatPosition)
     {
       var navAgentPosition = navAgent.transform.position;
-      var visionRange = genome.GetVision().Value;
+      var visionRange =sphereCollider.radius;
       var directionFromThreat = (navAgentPosition - threatPosition).normalized * visionRange;
 
 
