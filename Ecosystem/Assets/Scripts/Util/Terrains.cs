@@ -1,5 +1,6 @@
 using UnityEngine;
 using UnityEngine.AI;
+using Random = UnityEngine.Random;
 
 namespace Ecosystem.Util
 {
@@ -11,7 +12,7 @@ namespace Ecosystem.Util
 
     /// <summary>
     ///   Attempts to find a random but walkable position in the specified terrain. This function
-    ///   will give up if it can't find a walkable positions after 50 iterations.
+    ///   will eventually give up if it can't find a walkable position.
     /// </summary>
     /// <param name="terrain">the terrain to obtain a position in.</param>
     /// <param name="position">the resulting walkable position, set to <c>Vector3.zero</c> on failure.</param>
@@ -20,10 +21,14 @@ namespace Ecosystem.Util
     {
       var terrainData = terrain.terrainData;
       var size = terrainData.bounds.size;
+      var terrainPosition = terrain.transform.position;
 
-      for (var i = 0; i < 50; ++i)
+      for (var i = 0; i < 20; ++i)
       {
-        var origin = new Vector3(Random.Range(0, size.x), 0, Random.Range(0, size.z));
+        var x = terrainPosition.x + Random.Range(0, size.x);
+        var z = terrainPosition.z + Random.Range(0, size.z);
+
+        var origin = new Vector3(x, 0, z);
         var y = terrain.SampleHeight(origin) + 10;
 
         origin.y = y;
