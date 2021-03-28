@@ -37,9 +37,6 @@ namespace Ecosystem.Systems
     {
       if (!_hasSpawned)
       {
-        Debug.Log($"SpawnSystem | Spawning {InitialRabbitCount} rabbits...");
-        Debug.Log($"SpawnSystem | Spawning {InitialWolfCount} wolves...");
-
         var terrain = Terrain.activeTerrain;
 
         for (var i = 0; i < InitialRabbitCount; ++i)
