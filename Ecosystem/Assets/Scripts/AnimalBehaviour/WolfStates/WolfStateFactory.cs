@@ -31,5 +31,15 @@ namespace Ecosystem.AnimalBehaviour.WolfStates
     {
       return new WolfRunningTowardsWaterState(data);
     }
+
+    public static IAnimalState CreateLookingForMate(WolfStateData data)
+    {
+      return new WolfLookingForMateState(data);
+    }
+
+    public static IAnimalState CreateAttackingState(WolfStateData data)
+    {
+      return new WolfAttackingState(data);
+    }
   }
 }

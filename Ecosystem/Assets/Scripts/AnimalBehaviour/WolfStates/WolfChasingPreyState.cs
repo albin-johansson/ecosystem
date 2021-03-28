@@ -11,6 +11,7 @@ namespace Ecosystem.AnimalBehaviour.WolfStates
       MovementController = data.MovementController;
       AnimationController = data.AnimationController;
       MemoryController = data.MemoryController;
+      Reproducer = data.Reproducer;
     }
 
     public override void Begin(GameObject target)
@@ -22,18 +23,18 @@ namespace Ecosystem.AnimalBehaviour.WolfStates
 
     public override AnimalState Tick()
     {
-      if (!Target || !MovementController.IsTargetInRange(Target.transform.position))
+      if (!Target || !Target.activeSelf || !MovementController.IsTargetInRange(Target.transform.position))
       {
         return base.Tick();
+      }
+
+      if (Consumer.IsAttacking)
+      {
+        return AnimalState.Attacking;
       }
       else
       {
         MovementController.UpdateHunting(Target.transform.position);
-      }
-
-      if (WaterConsumer.Thirst > Consumer.Hunger && WaterConsumer.IsThirsty())
-      {
-        return AnimalState.LookingForWater;
       }
 
       return Type();
@@ -49,7 +50,7 @@ namespace Ecosystem.AnimalBehaviour.WolfStates
 
     public override AnimalState Type()
     {
-      return AnimalState.LookingForWater;
+      return AnimalState.ChasingPrey;
     }
   }
 }

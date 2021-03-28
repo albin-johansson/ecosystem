@@ -1800,6 +1800,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   navAgent: {fileID: 779919853503654891}
   genome: {fileID: 570846004582155358}
+  sphereCollider: {fileID: 6776153342693034266}
 --- !u!1 &1918589021470924211
 GameObject:
   m_ObjectHideFlags: 0
@@ -3590,6 +3591,7 @@ MonoBehaviour:
   genome: {fileID: 570846004582155358}
   prefab: {fileID: 7155763010095567698}
   keyToPool: Deer
+  isWilling: 0
 --- !u!1 &3504996671413722853
 GameObject:
   m_ObjectHideFlags: 0
@@ -4885,7 +4887,7 @@ SphereCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Radius: 4
+  m_Radius: 8
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!114 &5959171333855914516
 MonoBehaviour:
@@ -4911,12 +4913,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9c7fb3531ec9c784baa8246d216af247, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  stateText: {fileID: 2606292201135057053}
+  StateText: {fileID: 1914420894457515816}
   consumer: {fileID: 5346017003192509530}
   waterConsumer: {fileID: 8855973453505120815}
   movementController: {fileID: 1611194173291749041}
   animationController: {fileID: 4427174813899224407}
   memoryController: {fileID: 5959171333855914516}
+  reproducer: {fileID: 4953059004311012286}
+  sphereCollider: {fileID: 6776153342693034266}
+  genome: {fileID: 570846004582155358}
 --- !u!1 &4759522730638570450
 GameObject:
   m_ObjectHideFlags: 0
@@ -5546,6 +5551,7 @@ MonoBehaviour:
   resourceBar: {fileID: 6078427025632469203}
   deathHandler: {fileID: 6442332908797553670}
   maxHunger: 100
+  reproducer: {fileID: 4953059004311012286}
 --- !u!1 &5456374639049524137
 GameObject:
   m_ObjectHideFlags: 0
@@ -7419,7 +7425,6 @@ GameObject:
   - component: {fileID: 4427174813899224407}
   - component: {fileID: 6442332908797553670}
   - component: {fileID: 570846004582155358}
-  - component: {fileID: 4109275654473428842}
   m_Layer: 8
   m_Name: EcoDeer
   m_TagString: Deer
@@ -7477,7 +7482,7 @@ NavMeshAgent:
   m_Enabled: 1
   m_AgentTypeID: 0
   m_Radius: 0.5
-  m_Speed: 3.5
+  m_Speed: 8
   m_Acceleration: 8
   avoidancePriority: 50
   m_AngularSpeed: 120
@@ -7501,7 +7506,7 @@ Rigidbody:
   m_Drag: 0
   m_AngularDrag: 0.05
   m_UseGravity: 0
-  m_IsKinematic: 0
+  m_IsKinematic: 1
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
@@ -7576,20 +7581,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9414ef04b79fdc7498427d2db88290e7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &4109275654473428842
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7155763010095567698}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 85b69fff4ae22bc438ab072e486351d2, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  genome: {fileID: 570846004582155358}
-  reproducer: {fileID: 4953059004311012286}
 --- !u!1 &7186192348177787887
 GameObject:
   m_ObjectHideFlags: 0
@@ -10016,6 +10007,10 @@ PrefabInstance:
       propertyPath: m_Layer
       value: 8
       objectReference: {fileID: 0}
+    - target: {fileID: 8482749343550285724, guid: b11869fe3d5ecbf4b912f33fa4a312db, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 8703765452308408067, guid: b11869fe3d5ecbf4b912f33fa4a312db, type: 3}
       propertyPath: m_Layer
       value: 8
@@ -10049,14 +10044,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0f33f2c7a1419e740be5570d71daa2bf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &2606292201135057053 stripped
+--- !u!114 &1914420894457515816 stripped
 MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 5266423967863666801, guid: b11869fe3d5ecbf4b912f33fa4a312db, type: 3}
+  m_CorrespondingSourceObject: {fileID: 8623289280508370884, guid: b11869fe3d5ecbf4b912f33fa4a312db, type: 3}
   m_PrefabInstance: {fileID: 7871571146252701932}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3d543e4934b76d84286e0a658a3962f6, type: 3}
+  m_Script: {fileID: 11500000, guid: 920e87bfe7fe9274dbe2c10fc8c06029, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 

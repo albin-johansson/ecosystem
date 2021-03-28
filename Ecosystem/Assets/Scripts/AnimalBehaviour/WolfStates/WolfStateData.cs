@@ -7,5 +7,6 @@ namespace Ecosystem.AnimalBehaviour.WolfStates
     public MovementController MovementController;
     public EcoAnimationController AnimationController;
     public MemoryController MemoryController;
+    public Reproducer Reproducer;
   }
 }

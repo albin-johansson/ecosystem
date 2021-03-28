@@ -1,38 +1,36 @@
 using System;
+using Ecosystem.Util;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 namespace Ecosystem.UI
 {
   public sealed class CameraController : MonoBehaviour
   {
     [SerializeField] private float speed = 8;
-    [SerializeField] private Rigidbody rigidBody;
-
-    private const float BoostFactor = 2;
-
-    private Camera _camera;
+    [SerializeField] private Rigidbody cameraRigidBody;
+    private float _x;
+    private float _y;
     private Vector3 _rotateValue;
     private Transform _transform;
     private Transform _trackedTarget;
-    private Vector3 _adjustmentVector3 = Vector3.zero;
-    private float _x;
-    private float _y;
+    private bool _track = false;
     private float _distance = 20;
-    private bool _boosted;
-    private bool _lookLocked;
-    private bool _track;
+    private float _boostFactor = 2;
+    private bool _boosted = false;
+    private bool _lookLocked = false;
 
     private void Start()
     {
-      _camera = Camera.main;
-      _transform = rigidBody.transform;
+      //Cache specifically that transform. 
+      _transform = cameraRigidBody.transform;
     }
 
     private void Update()
     {
       Boost();
       SelectTracked();
-      TrackingOrMovement();
+      TrackingOrWASD();
       Rotate();
 
       if (Input.GetKeyUp(KeyCode.Escape))
@@ -40,28 +38,30 @@ namespace Ecosystem.UI
         Application.Quit();
       }
 
-      rigidBody.velocity = rigidBody.velocity.normalized * speed;
+      cameraRigidBody.velocity = cameraRigidBody.velocity.normalized * speed;
     }
 
-    private void TrackingOrMovement()
+    private Vector3 adjustmentVector3 = new Vector3(0, 0, 0);
+
+    private void TrackingOrWASD()
     {
       if (_track)
       {
-        if (_trackedTarget)
+        if (_trackedTarget != null)
         {
           _distance += Input.mouseScrollDelta.y;
           _distance = Math.Max(_distance, 5);
           if (_lookLocked)
           {
-            _adjustmentVector3 = _trackedTarget.forward;
+            adjustmentVector3 = _trackedTarget.forward;
             _transform.LookAt(_trackedTarget);
           }
           else
           {
-            _adjustmentVector3 = Vector3.zero;
+            adjustmentVector3 = Vector3.zero;
           }
 
-          _transform.position = _trackedTarget.position + Vector3.up * _distance - _adjustmentVector3 * _distance;
+          _transform.position = _trackedTarget.position + Vector3.up * _distance - adjustmentVector3 * _distance;
         }
         else
         {
@@ -85,10 +85,12 @@ namespace Ecosystem.UI
 
       if (Input.GetKey(KeyCode.Mouse0))
       {
-        var ray = _camera.ScreenPointToRay(Input.mousePosition);
-        if (Physics.Raycast(ray, out var hit, 100))
+        Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+        RaycastHit hit;
+
+        if (Physics.Raycast(ray, out hit, 100))
         {
-          if (!hit.transform.tag.Equals("Terrain"))
+          if (Tags.IsAnimal(hit.transform.gameObject))
           {
             _trackedTarget = hit.transform;
             _track = true;
@@ -108,13 +110,13 @@ namespace Ecosystem.UI
       if (Input.GetKey(KeyCode.LeftShift) && !_boosted)
       {
         _boosted = true;
-        speed *= BoostFactor;
+        speed *= _boostFactor;
       }
 
       if (Input.GetKeyUp(KeyCode.LeftShift) && _boosted)
       {
         _boosted = false;
-        speed /= BoostFactor;
+        speed /= _boostFactor;
       }
     }
 
@@ -122,39 +124,39 @@ namespace Ecosystem.UI
     {
       if (Input.GetKey(KeyCode.W))
       {
-        rigidBody.velocity += speed * Time.deltaTime * _transform.forward;
+        cameraRigidBody.velocity += speed * Time.deltaTime * _transform.forward;
       }
 
       if (Input.GetKey(KeyCode.S))
       {
-        rigidBody.velocity -= speed * Time.deltaTime * _transform.forward;
+        cameraRigidBody.velocity -= speed * Time.deltaTime * _transform.forward;
       }
 
       if (Input.GetKey(KeyCode.D))
       {
-        rigidBody.velocity += speed * Time.deltaTime * _transform.right;
+        cameraRigidBody.velocity += speed * Time.deltaTime * _transform.right;
       }
 
       if (Input.GetKey(KeyCode.A))
       {
-        rigidBody.velocity -= speed * Time.deltaTime * _transform.right;
+        cameraRigidBody.velocity -= speed * Time.deltaTime * _transform.right;
       }
 
       if (Input.GetKey(KeyCode.R))
       {
-        rigidBody.velocity += speed * Time.deltaTime * Vector3.up;
+        cameraRigidBody.velocity += speed * Time.deltaTime * Vector3.up;
       }
 
       if (Input.GetKey(KeyCode.F))
       {
-        rigidBody.velocity += speed * Time.deltaTime * Vector3.down;
+        cameraRigidBody.velocity += speed * Time.deltaTime * Vector3.down;
       }
 
       //Key up
       if (Input.GetKeyUp(KeyCode.W) || Input.GetKeyUp(KeyCode.S) || Input.GetKeyUp(KeyCode.D) ||
           Input.GetKeyUp(KeyCode.A) || Input.GetKeyUp(KeyCode.R) || Input.GetKeyUp(KeyCode.F))
       {
-        rigidBody.velocity = Vector3.zero;
+        cameraRigidBody.velocity = Vector3.zero;
       }
     }
 
