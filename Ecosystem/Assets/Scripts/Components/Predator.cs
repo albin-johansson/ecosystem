@@ -8,5 +8,6 @@ namespace Ecosystem.Components
   public struct Predator : IComponentData
   {
     public float attackDistance;
+    public float maxChaseDistance;
   }
 }
