@@ -26,6 +26,12 @@ namespace Ecosystem.Systems
       });
     }
 
+    private void MakeAnimal(Entity entity, float3 position)
+    {
+      EntityManager.AddComponent<Roaming>(entity);
+      SetPosition(entity, position);
+    }
+
     public void MakeRabbit(float3 position)
     {
       Debug.Assert(Enabled);
@@ -36,10 +42,7 @@ namespace Ecosystem.Systems
       }
 
       var rabbit = EntityManager.Instantiate(_rabbitPrefab);
-
-      EntityManager.AddComponent<Roaming>(rabbit);
-
-      SetPosition(rabbit, position);
+      MakeAnimal(rabbit, position);
     }
 
     public void MakeWolf(float3 position)
@@ -52,10 +55,7 @@ namespace Ecosystem.Systems
       }
 
       var wolf = EntityManager.Instantiate(_wolfPrefab);
-
-      EntityManager.AddComponent<Roaming>(wolf);
-
-      SetPosition(wolf, position);
+      MakeAnimal(wolf, position);
     }
   }
 }
