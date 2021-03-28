@@ -159,9 +159,9 @@ namespace Ecosystem.Logging
     {
       //TODO: current implementation breaks this somewhat. It will only get more broken as changes occur.
       //rabbitGenome = CaptureGenome(RabbitGenome.DefaultGenes);
-      deerGenome = CaptureGenome(DeerGenome.DefaultGenes);
-      wolfGenome = CaptureGenome(WolfGenome.DefaultGenes);
-      bearGenome = CaptureGenome(BearGenome.DefaultGenes);
+      //deerGenome = CaptureGenome(DeerGenome.DefaultGenes);
+      //wolfGenome = CaptureGenome(WolfGenome.DefaultGenes);
+      //bearGenome = CaptureGenome(BearGenome.DefaultGenes);
     }
 
     /// <summary>
