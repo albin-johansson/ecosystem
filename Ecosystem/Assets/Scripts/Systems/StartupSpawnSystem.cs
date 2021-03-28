@@ -15,6 +15,7 @@ namespace Ecosystem.Systems
 
     private FactorySystem _factorySystem;
     private bool _hasSpawned;
+    private int _count; // We use this to wait a frame before we spawn entities, to let prefabs instantiate
 
     protected override void Initialize()
     {
@@ -23,7 +24,7 @@ namespace Ecosystem.Systems
 
     protected override void OnUpdate()
     {
-      if (!_hasSpawned)
+      if (_count > 1 && !_hasSpawned)
       {
         var terrain = Terrain.activeTerrain;
 
@@ -45,6 +46,8 @@ namespace Ecosystem.Systems
 
         _hasSpawned = true;
       }
+
+      ++_count;
     }
   }
 }
