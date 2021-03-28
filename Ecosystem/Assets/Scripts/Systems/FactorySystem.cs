@@ -4,6 +4,7 @@ using Ecosystem.ECS.Authoring;
 using Unity.Entities;
 using Unity.Mathematics;
 using Unity.Transforms;
+using UnityEngine;
 using UnityEngine.SceneManagement;
 
 namespace Ecosystem.Systems
@@ -39,6 +40,8 @@ namespace Ecosystem.Systems
 
     public void MakeRabbit(float3 position)
     {
+      Debug.Assert(Enabled);
+      
       if (_rabbitPrefab == Entity.Null)
       {
         _rabbitPrefab = EntityManager.LoadPrefab<RabbitPrefab>().Value;
@@ -52,6 +55,8 @@ namespace Ecosystem.Systems
 
     public void MakeWolf(float3 position)
     {
+      Debug.Assert(Enabled);
+      
       if (_wolfPrefab == Entity.Null)
       {
         _wolfPrefab = EntityManager.LoadPrefab<WolfPrefab>().Value;
