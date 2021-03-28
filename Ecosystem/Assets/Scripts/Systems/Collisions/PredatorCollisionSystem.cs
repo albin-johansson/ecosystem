@@ -1,31 +1,19 @@
 using Ecosystem.Components;
-using Ecosystem.ECS;
 using Reese.Nav;
 using Reese.Spatial;
 using Unity.Entities;
 using Unity.Physics;
-using UnityEngine.SceneManagement;
 
 namespace Ecosystem.Systems.Collisions
 {
   [UpdateInGroup(typeof(CollisionSystemGroup))]
-  public sealed class PredatorCollisionSystem : SystemBase
+  public sealed class PredatorCollisionSystem : AbstractSystem
   {
     private EntityCommandBufferSystem _barrier;
 
-    private void OnSceneChanged(Scene current, Scene next)
+    protected override void Initialize()
     {
-      Enabled = EcsUtils.IsEcsCapable(next);
-      if (Enabled)
-      {
-        _barrier = World.GetOrCreateSystem<EndSimulationEntityCommandBufferSystem>();
-      }
-    }
-
-    protected override void OnCreate()
-    {
-      base.OnCreate();
-      SceneManager.activeSceneChanged += OnSceneChanged;
+      _barrier = World.GetOrCreateSystem<EndSimulationEntityCommandBufferSystem>();
     }
 
     protected override void OnUpdate()
