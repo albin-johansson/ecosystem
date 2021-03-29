@@ -4,7 +4,7 @@ namespace Ecosystem.AnimalBehaviour.WolfStates
 {
   public class WolfLookingForMateState : AbstractAnimalState
   {
-    private readonly LayerMask _whatIsMate = LayerMask.GetMask("Bear","Wolf");
+    private readonly LayerMask _whatIsMate = LayerMask.GetMask("Bear", "Wolf");
     public WolfLookingForMateState(WolfStateData data)
     {
       Consumer = data.Consumer;
@@ -60,7 +60,7 @@ namespace Ecosystem.AnimalBehaviour.WolfStates
     public override void OnTriggerEnter(Collider other)
     {
       var otherObject = other.gameObject;
-      
+
       if (otherObject.CompareTag("Water"))
       {
         MemoryController.SaveToMemory(otherObject);

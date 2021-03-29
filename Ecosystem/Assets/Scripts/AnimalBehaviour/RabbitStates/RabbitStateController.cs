@@ -14,7 +14,7 @@ namespace Ecosystem.AnimalBehaviour.RabbitStates
     private IAnimalState _runningTowardsFood;
     private IAnimalState _fleeing;
     private IAnimalState _lookingForMate;
-  
+
     public override void Start()
     {
       var data = new RabbitStateData

@@ -5,7 +5,7 @@ namespace Ecosystem.AnimalBehaviour.RabbitStates
 {
   internal sealed class RabbitLookingForWaterState : AbstractAnimalState
   {
-    private readonly LayerMask _whatIsWater = LayerMask.GetMask("Water"); 
+    private readonly LayerMask _whatIsWater = LayerMask.GetMask("Water");
     public RabbitLookingForWaterState(RabbitStateData data)
     {
       Consumer = data.Consumer;
@@ -59,7 +59,7 @@ namespace Ecosystem.AnimalBehaviour.RabbitStates
         Target = other.gameObject;
       }
     }
-    
+
     public override AnimalState Type()
     {
       return AnimalState.LookingForWater;

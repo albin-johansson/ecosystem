@@ -1,4 +1,4 @@
-using Ecosystem.Genes;
+﻿using Ecosystem.Genes;
 using Ecosystem.Logging;
 using Ecosystem.UI;
 using Ecosystem.Util;
@@ -31,7 +31,7 @@ namespace Ecosystem
 
     private void Start()
     {
-      resourceBar.SetMaxValue((float) maxHunger);
+      resourceBar.SetMaxValue((float)maxHunger);
     }
 
     private void Update()
@@ -49,7 +49,7 @@ namespace Ecosystem
       {
         Hunger += genome.Metabolism * Time.deltaTime;
       }
-      resourceBar.SetValue((float) Hunger);
+      resourceBar.SetValue((float)Hunger);
       if (Hunger > maxHunger)
       {
         _isDead = true;
@@ -73,12 +73,12 @@ namespace Ecosystem
     {
       return Hunger > genome.GetHungerThreshold().Value;
     }
-    
+
     public void SetSaturation(float value)
     {
       Hunger = maxHunger - value;
       resourceBar.SetSaturationValue(value);
     }
-    
+
   }
 }

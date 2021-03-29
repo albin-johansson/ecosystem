@@ -5,7 +5,7 @@ namespace Ecosystem.AnimalBehaviour.WolfStates
 {
   internal sealed class WolfChasingPreyState : AbstractAnimalState
   {
-    private readonly LayerMask _whatIsPrey = LayerMask.GetMask("Prey"); 
+    private readonly LayerMask _whatIsPrey = LayerMask.GetMask("Prey");
     public WolfChasingPreyState(WolfStateData data)
     {
       Consumer = data.Consumer;

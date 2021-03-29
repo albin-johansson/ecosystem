@@ -27,7 +27,7 @@ namespace Ecosystem.AnimalBehaviour.RabbitStates
       {
         return AnimalState.Fleeing;
       }
-      else 
+      else
       {
         return base.Tick();
       }

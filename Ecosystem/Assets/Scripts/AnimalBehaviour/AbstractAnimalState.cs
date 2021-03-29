@@ -41,7 +41,7 @@ namespace Ecosystem.AnimalBehaviour
           closest = col.gameObject;
         }
       }
-      
+
       if (closest)
       {
         if (MovementController.IsReachable(closest.transform.position))
@@ -61,7 +61,7 @@ namespace Ecosystem.AnimalBehaviour
       var colliders = GetInVision(mask);
       return GetClosestWithFilter(colliders, o => true);
     }
-    
+
     /// <summary>
     ///   Returns the closest GameObject within the vision radius that lays belong to
     ///   the layers defined by the LayerMask and is CompatibleAsParents.
@@ -71,14 +71,14 @@ namespace Ecosystem.AnimalBehaviour
       var colliders = GetInVision(mask);
       return GetClosestWithFilter(colliders, Reproducer.CompatibleAsParents);
     }
-    
+
     private List<Collider> GetInVision(LayerMask mask)
     {
       if (!Genome)
       {
         return new List<Collider>(0);
       }
-      
+
       var colliderArr = new Collider[10];
       var size = Physics.OverlapSphereNonAlloc(MovementController.GetPosition(), Genome.GetVision().Value, colliderArr, mask);
       var colliders = new List<Collider>(size);
@@ -128,15 +128,13 @@ namespace Ecosystem.AnimalBehaviour
     }
 
     public virtual void OnTriggerEnter(Collider other)
-    { 
+    {
       if (other.gameObject.CompareTag("Water"))
       {
         MemoryController.SaveToMemory(other.gameObject);
       }
     }
 
-    public virtual void OnTriggerExit(Collider other)
-    {
-    }
+    public virtual void OnTriggerExit(Collider other) { }
   }
 }
