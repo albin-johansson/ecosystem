@@ -23,11 +23,20 @@ namespace Ecosystem.AnimalBehaviour.RabbitStates
       Target = target;
       _lastPredatorSeen = target;
       MovementController.StartFleeing(Target.transform.position);
-      AnimationController.MoveAnimation();
+      //AnimationController.MoveAnimation();
     }
 
     public override AnimalState Tick()
     {
+      if (StaminaController.CanRun())
+      {
+        StaminaController.IsRunning = true;
+        AnimationController.RunAnimation();
+      }
+      else
+      {
+        AnimationController.MoveAnimation();
+      }
       if (Target)
       {
         MovementController.UpdateFleeing(Target.transform.position);
@@ -35,6 +44,7 @@ namespace Ecosystem.AnimalBehaviour.RabbitStates
       }
       else
       {
+        StaminaController.IsRunning = false;
         return base.Tick();
       }
     }

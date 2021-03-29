@@ -232,6 +232,7 @@ MonoBehaviour:
   navAgent: {fileID: 6562256236261779254}
   genome: {fileID: 1080774011748047759}
   sphereCollider: {fileID: 6405190242370463797}
+  staminaController: {fileID: 2820276405898936645}
 --- !u!1 &908306828785098365
 GameObject:
   m_ObjectHideFlags: 0
@@ -1161,7 +1162,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6519664316927584784}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 1.14}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 544792022124337019}

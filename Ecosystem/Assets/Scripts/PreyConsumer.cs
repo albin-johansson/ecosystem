@@ -62,9 +62,9 @@ namespace Ecosystem
       if (!CollideActive || IsAttacking) return;
       if (Tags.IsPrey(other.gameObject))
       {
+        other.gameObject.GetComponent<DeathHandler>().Die(CauseOfDeath.Eaten);
         IsAttacking = true;
         OnPreyConsumed?.Invoke();
-        other.gameObject.GetComponent<DeathHandler>().Die(CauseOfDeath.Eaten);
         Hunger = 0;
       }
     }

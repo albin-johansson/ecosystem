@@ -65,6 +65,13 @@ namespace Ecosystem
       _animator.SetBool(_isWalkingHash, true);
     }
 
+    public void RunAnimation()
+    {
+      ResetAnimatorParameters();
+      navMeshAgent.speed = _navMeshAgentSpeed;
+      _animator.SetBool(_isRunningHash, true);
+    }
+
     public void EnterDeathAnimation()
     {
       ResetAnimatorParameters();

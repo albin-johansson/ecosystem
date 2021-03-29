@@ -11,11 +11,11 @@ namespace Ecosystem
         [SerializeField] private double maxStamina = 100;
         public bool IsRunning { get; set; }
         
-        public double Exhaustion { get; private set; }
+        private double Exhaustion { get; set; }
 
         private void Start()
         {
-            Exhaustion = 20;
+            Exhaustion = 50;
             staminaBar.SetMaxValue((float) maxStamina);
             staminaBar.SetValue((float) Exhaustion);
         }
@@ -24,11 +24,11 @@ namespace Ecosystem
         {
             if (IsRunning)
             {
-                Exhaustion += 2 * Time.deltaTime; //todo add genome
+                Exhaustion += genome.GetSpeedFactor().Value * Time.deltaTime; //todo add genome
                 staminaBar.SetValue((float) Exhaustion);
             } else if (Exhaustion > 0)
             {
-                Exhaustion -= 1 * Time.deltaTime;
+                Exhaustion -= genome.Metabolism * Time.deltaTime;
                 staminaBar.SetValue((float) Exhaustion);
             }
 
