@@ -1,10 +1,8 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Xml.Schema;
 using Ecosystem.Genes;
 using UnityEngine;
-using UnityEngine.UIElements;
 
 namespace Ecosystem.AnimalBehaviour
 {
@@ -19,6 +17,12 @@ namespace Ecosystem.AnimalBehaviour
     protected GameObject Target;
     protected AbstractGenome Genome;
 
+
+    /// <summary>
+    ///   A helper function that returns the closest GameObject of those that return true
+    ///   for the filter function, from a list of colliders. If the closest GameObject isn't
+    ///   reachable, return null instead.
+    /// </summary>
     private GameObject GetClosestWithFilter(List<Collider> colliders, Func<GameObject, bool> filter)
     {
       GameObject closest = null;
@@ -26,8 +30,8 @@ namespace Ecosystem.AnimalBehaviour
       {
         if (closest)
         {
-          if(Vector3.Distance(MovementController.GetPosition(), col.gameObject.transform.position)<
-             Vector3.Distance(MovementController.GetPosition(), closest.transform.position))
+          if (Vector3.Distance(MovementController.GetPosition(), col.gameObject.transform.position) <
+              Vector3.Distance(MovementController.GetPosition(), closest.transform.position))
           {
             closest = col.gameObject;
           }
@@ -37,15 +41,31 @@ namespace Ecosystem.AnimalBehaviour
           closest = col.gameObject;
         }
       }
-      return closest;
+      
+      if (closest)
+      {
+        if (MovementController.IsReachable(closest.transform.position))
+        {
+          return closest;
+        }
+      }
+      return null;
     }
 
+    /// <summary>
+    ///   Returns the closest GameObject within the vision radius that lays belong to
+    ///   the layers defined by the LayerMask.
+    /// </summary>
     protected GameObject GetClosestInVision(LayerMask mask)
     {
       var colliders = GetInVision(mask);
       return GetClosestWithFilter(colliders, o => true);
     }
     
+    /// <summary>
+    ///   Returns the closest GameObject within the vision radius that lays belong to
+    ///   the layers defined by the LayerMask and is CompatibleAsParents.
+    /// </summary>
     protected GameObject GetClosestMateInVision(LayerMask mask)
     {
       var colliders = GetInVision(mask);
@@ -111,6 +131,7 @@ namespace Ecosystem.AnimalBehaviour
     { 
       if (other.gameObject.CompareTag("Water"))
       {
+        MemoryController.SaveToMemory(other.gameObject);
       }
     }
 

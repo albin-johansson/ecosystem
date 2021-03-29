@@ -1,4 +1,3 @@
-using Ecosystem.Genes;
 using UnityEngine;
 
 namespace Ecosystem.AnimalBehaviour.RabbitStates

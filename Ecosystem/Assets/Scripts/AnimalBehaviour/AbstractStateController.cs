@@ -1,7 +1,6 @@
 using Ecosystem.Genes;
 using Ecosystem.UI;
 using UnityEngine;
-using UnityEngine.EventSystems;
 
 namespace Ecosystem.AnimalBehaviour
 {

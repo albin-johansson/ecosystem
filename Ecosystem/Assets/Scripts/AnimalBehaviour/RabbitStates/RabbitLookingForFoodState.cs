@@ -1,7 +1,4 @@
-using System.Linq;
-using System.Threading;
 using Ecosystem.Util;
-using UnityEditor.Experimental.GraphView;
 using UnityEngine;
 
 namespace Ecosystem.AnimalBehaviour.RabbitStates

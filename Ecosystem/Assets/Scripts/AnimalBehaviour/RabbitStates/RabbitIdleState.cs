@@ -27,17 +27,9 @@ namespace Ecosystem.AnimalBehaviour.RabbitStates
       {
         return AnimalState.Fleeing;
       }
-      else if (Consumer.Hunger >= WaterConsumer.Thirst && Consumer.IsHungry())
+      else 
       {
-        return AnimalState.LookingForFood;
-      }
-      else if (WaterConsumer.Thirst > Consumer.Hunger && WaterConsumer.IsThirsty())
-      {
-        return AnimalState.LookingForWater;
-      }
-      else
-      {
-        return Type();
+        return base.Tick();
       }
     }
 

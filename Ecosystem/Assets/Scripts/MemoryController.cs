@@ -1,5 +1,4 @@
 using System;
-using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
@@ -10,7 +9,6 @@ namespace Ecosystem
   public sealed class MemoryController : MonoBehaviour
   {
     private const int MemoryCapacity = 5;
-    private const int InVisionCapacity = 10;
 
     private List<GameObject> _memory;
     private int _nextMemoryLocation;
@@ -19,7 +17,7 @@ namespace Ecosystem
     {
       _memory = new List<GameObject>(MemoryCapacity);
     }
-    
+
     public void SaveToMemory(GameObject other)
     {
       _memory.Insert(_nextMemoryLocation, (other.gameObject));
@@ -30,26 +28,24 @@ namespace Ecosystem
       }
     }
 
+    /// <summary>
+    ///   Returns the GameObject from memory that is closest one to position,
+    ///   from the objects that return true for the filter function.
+    /// </summary>
     public GameObject GetClosestInMemory(Func<GameObject, bool> filter, Vector3 position)
     {
-      var r =  GetClosestFromList(filter, position, _memory);
-      return r;
-    }
-
-    private static GameObject GetClosestFromList(Func<GameObject, bool> f, Vector3 p, List<GameObject> l)
-    {
       GameObject closest = null;
-      l.RemoveAll(GameObject => !GameObject);
-      foreach (var r in l.Where(f))
+      _memory.RemoveAll(o => !o);
+      foreach (var o in _memory.Where(filter))
       {
         if (!closest)
         {
-          closest = r;
+          closest = o;
         }
-        else if (Vector3.Distance(p, closest.transform.position) >
-                 Vector3.Distance(p, r.transform.position))
+        else if (Vector3.Distance(position, closest.transform.position) >
+                 Vector3.Distance(position, o.transform.position))
         {
-          closest = r;
+          closest = o;
         }
       }
       return closest;
