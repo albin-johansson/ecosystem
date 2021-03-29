@@ -24,7 +24,7 @@ namespace Ecosystem
         {
             if (IsRunning)
             {
-                Exhaustion += genome.GetSpeedFactor().Value * Time.deltaTime; //todo add genome
+                Exhaustion += genome.GetSpeedFactor().Value * Time.deltaTime;
                 staminaBar.SetValue((float) Exhaustion);
             } else if (Exhaustion > 0)
             {
