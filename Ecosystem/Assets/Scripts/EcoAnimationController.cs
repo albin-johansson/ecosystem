@@ -15,6 +15,8 @@ namespace Ecosystem
     private float _navMeshAgentSpeed;
     private float _navMeshAgentVelocity;
 
+    private bool _isDead;
+
     private void OnEnable()
     {
       _animator = GetComponent<Animator>();
@@ -24,6 +26,7 @@ namespace Ecosystem
       _isAttackingHash = Animator.StringToHash("isAttacking");
       _animationSpeedMultiplier = Animator.StringToHash("animationSpeedMultiplier");
       _navMeshAgentSpeed = navMeshAgent.speed;
+      _isDead = false;
       ResetAnimatorParameters();
       _navMeshAgentSpeed = navMeshAgent.speed;
     }
@@ -60,6 +63,10 @@ namespace Ecosystem
 
     public void MoveAnimation()
     {
+      if (_isDead)
+      {
+        return;
+      }
       ResetAnimatorParameters();
       navMeshAgent.speed = _navMeshAgentSpeed;
       _animator.SetBool(_isWalkingHash, true);
@@ -67,6 +74,10 @@ namespace Ecosystem
 
     public void RunAnimation()
     {
+      if (_isDead)
+      {
+        return;
+      }
       ResetAnimatorParameters();
       navMeshAgent.speed = _navMeshAgentSpeed;
       _animator.SetBool(_isRunningHash, true);
@@ -77,6 +88,7 @@ namespace Ecosystem
       ResetAnimatorParameters();
       navMeshAgent.speed = 0;
       _animator.SetBool(_isDeadHash, true);
+      _isDead = true;
     }
 
     public void IdleAnimation()
