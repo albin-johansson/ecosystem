@@ -5,6 +5,7 @@ namespace Ecosystem.AnimalBehaviour.WolfStates
 {
   public sealed class WolfStateController : AbstractStateController
   {
+    [SerializeField] private StaminaController staminaController;
     [SerializeField] private PreyConsumer consumer;
     [SerializeField] private WaterConsumer waterConsumer;
     [SerializeField] private MovementController movementController;
@@ -27,6 +28,7 @@ namespace Ecosystem.AnimalBehaviour.WolfStates
     {
       var data = new WolfStateData
       {
+        StaminaController = staminaController,
         Consumer = consumer,
         AnimationController = animationController,
         MemoryController = memoryController,

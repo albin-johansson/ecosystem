@@ -5,6 +5,7 @@ namespace Ecosystem.AnimalBehaviour.RabbitStates
 {
   public sealed class RabbitStateController : AbstractStateController
   {
+    [SerializeField] private StaminaController staminaController;
     [SerializeField] private FoodConsumer consumer;
     [SerializeField] private WaterConsumer waterConsumer;
     [SerializeField] private MovementController movementController;
@@ -27,6 +28,7 @@ namespace Ecosystem.AnimalBehaviour.RabbitStates
     {
       var data = new RabbitStateData
       {
+        StaminaController = staminaController,
         Consumer = consumer,
         AnimationController = animationController,
         MemoryController = memoryController,

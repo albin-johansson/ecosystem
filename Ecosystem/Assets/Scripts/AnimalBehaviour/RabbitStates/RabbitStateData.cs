@@ -2,6 +2,7 @@ namespace Ecosystem.AnimalBehaviour.RabbitStates
 {
   public struct RabbitStateData
   {
+    public StaminaController StaminaController;
     public IConsumer Consumer;
     public WaterConsumer WaterConsumer;
     public MovementController MovementController;

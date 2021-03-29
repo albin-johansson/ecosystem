@@ -6,6 +6,7 @@ namespace Ecosystem.AnimalBehaviour.WolfStates
   {
     public WolfAttackingState(WolfStateData data)
     {
+      StaminaController = data.StaminaController;
       Consumer = data.Consumer;
       WaterConsumer = data.WaterConsumer;
       MovementController = data.MovementController;
