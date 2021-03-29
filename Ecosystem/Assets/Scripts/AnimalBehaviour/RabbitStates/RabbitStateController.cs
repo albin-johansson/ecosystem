@@ -1,3 +1,4 @@
+using Ecosystem.Genes;
 using UnityEngine;
 
 namespace Ecosystem.AnimalBehaviour.RabbitStates
@@ -9,6 +10,9 @@ namespace Ecosystem.AnimalBehaviour.RabbitStates
     [SerializeField] private MovementController movementController;
     [SerializeField] private EcoAnimationController animationController;
     [SerializeField] private MemoryController memoryController;
+    [SerializeField] private Reproducer reproducer;
+    [SerializeField] private SphereCollider sphereCollider;
+    [SerializeField] private AbstractGenome genome;
 
     private IAnimalState _idle;
     private IAnimalState _lookingForFood;
@@ -17,16 +21,18 @@ namespace Ecosystem.AnimalBehaviour.RabbitStates
     private IAnimalState _runningTowardsWater;
     private IAnimalState _runningTowardsFood;
     private IAnimalState _fleeing;
+    private IAnimalState _lookingForMate;
 
     public override void Start()
     {
       var data = new RabbitStateData
       {
-              Consumer = consumer,
-              AnimationController = animationController,
-              MemoryController = memoryController,
-              MovementController = movementController,
-              WaterConsumer = waterConsumer
+        Consumer = consumer,
+        AnimationController = animationController,
+        MemoryController = memoryController,
+        MovementController = movementController,
+        WaterConsumer = waterConsumer,
+        Reproducer = reproducer
       };
 
       _idle = RabbitStateFactory.CreateIdle(data);
@@ -36,6 +42,9 @@ namespace Ecosystem.AnimalBehaviour.RabbitStates
       _runningTowardsWater = RabbitStateFactory.CreateRunningTowardsWater(data);
       _runningTowardsFood = RabbitStateFactory.CreateRunningTowardsFood(data);
       _fleeing = RabbitStateFactory.CreateFleeing(data);
+      _lookingForMate = RabbitStateFactory.CreateLookingForMate(data);
+      
+      sphereCollider.radius = (sphereCollider.radius / sphereCollider.transform.lossyScale.magnitude) * genome.GetVision().Value;
 
       State = _idle;
       SwitchState(AnimalState.Idle);
@@ -78,6 +87,10 @@ namespace Ecosystem.AnimalBehaviour.RabbitStates
           break;
 
         case AnimalState.ChasingPrey:
+          break;
+
+        case AnimalState.LookingForMate:
+          State = _lookingForMate;
           break;
 
         default:

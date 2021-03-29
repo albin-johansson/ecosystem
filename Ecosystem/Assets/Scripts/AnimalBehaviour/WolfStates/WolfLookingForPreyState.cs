@@ -12,6 +12,7 @@ namespace Ecosystem.AnimalBehaviour.WolfStates
       MovementController = data.MovementController;
       AnimationController = data.AnimationController;
       MemoryController = data.MemoryController;
+      Reproducer = data.Reproducer;
     }
 
     public override void Begin(GameObject target)
@@ -30,6 +31,11 @@ namespace Ecosystem.AnimalBehaviour.WolfStates
       else if (WaterConsumer.Thirst > Consumer.Hunger && WaterConsumer.IsThirsty())
       {
         return AnimalState.LookingForWater;
+      }
+
+      if (Consumer.IsAttacking)
+      {
+        return AnimalState.Attacking;
       }
       else
       {

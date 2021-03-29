@@ -12,6 +12,7 @@ namespace Ecosystem.AnimalBehaviour.RabbitStates
       MovementController = data.MovementController;
       AnimationController = data.AnimationController;
       MemoryController = data.MemoryController;
+      Reproducer = data.Reproducer;
     }
 
     public override void Begin(GameObject target)
@@ -51,11 +52,6 @@ namespace Ecosystem.AnimalBehaviour.RabbitStates
         else if (Tags.IsPredator(otherObject))
         {
           Target = otherObject;
-        }
-        else if (Tags.IsFood(otherObject))
-        {
-          //TODO: Check if the new food is closer than the current target
-          MemoryController.SaveToMemory(otherObject);
         }
       }
     }
