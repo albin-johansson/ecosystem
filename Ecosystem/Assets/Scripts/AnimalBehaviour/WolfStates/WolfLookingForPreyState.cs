@@ -5,7 +5,6 @@ namespace Ecosystem.AnimalBehaviour.WolfStates
 {
   internal sealed class WolfLookingForPreyState : AbstractAnimalState
   {
-    private readonly LayerMask _whatIsPrey = LayerMask.GetMask("Prey");
     public WolfLookingForPreyState(WolfStateData data)
     {
       Consumer = data.Consumer;
@@ -19,7 +18,7 @@ namespace Ecosystem.AnimalBehaviour.WolfStates
 
     public override void Begin(GameObject target)
     {
-      Target = GetClosestInVision(_whatIsPrey);
+      Target = GetClosestInVision(Layers.PreyLayer);
       MovementController.StartWander();
       AnimationController.MoveAnimation();
     }

@@ -5,7 +5,6 @@ namespace Ecosystem.AnimalBehaviour.WolfStates
 {
   internal sealed class WolfLookingForWaterState : AbstractAnimalState
   {
-    private readonly LayerMask _whatIsWater = LayerMask.GetMask("Water");
     public WolfLookingForWaterState(WolfStateData data)
     {
       Consumer = data.Consumer;
@@ -18,7 +17,7 @@ namespace Ecosystem.AnimalBehaviour.WolfStates
 
     public override void Begin(GameObject target)
     {
-      Target = GetClosestInVision(_whatIsWater);
+      Target = GetClosestInVision(Layers.WaterLayer);
       if (!Target)
       {
         Target = MemoryController.GetClosestInMemory(Tags.IsWater, MovementController.GetPosition());

@@ -120,7 +120,9 @@ namespace Ecosystem.AnimalBehaviour
       }
     }
 
-    public virtual void Begin(GameObject target) { }
+    public virtual void Begin(GameObject target)
+    {
+    }
 
     public virtual GameObject End()
     {
@@ -136,6 +138,8 @@ namespace Ecosystem.AnimalBehaviour
       }
     }
 
-    public virtual void OnTriggerExit(Collider other) { }
+    public virtual void OnTriggerExit(Collider other)
+    {
+    }
   }
 }

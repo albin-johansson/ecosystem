@@ -1,8 +1,6 @@
 using System;
 using System.Collections.Generic;
-using System.Linq;
 using UnityEngine;
-using Vector3 = UnityEngine.Vector3;
 
 namespace Ecosystem
 {
@@ -32,22 +30,27 @@ namespace Ecosystem
     ///   Returns the GameObject from memory that is closest one to position,
     ///   from the objects that return true for the filter function.
     /// </summary>
-    public GameObject GetClosestInMemory(Func<GameObject, bool> filter, Vector3 position)
+    public GameObject GetClosestInMemory(Func<GameObject, bool> predicate, Vector3 position)
     {
       GameObject closest = null;
       _memory.RemoveAll(o => !o);
-      foreach (var o in _memory.Where(filter))
+      foreach (var memoryObject in _memory)
       {
+        if (!predicate(memoryObject))
+        {
+          continue;
+        }
         if (!closest)
         {
-          closest = o;
+          closest = memoryObject;
         }
         else if (Vector3.Distance(position, closest.transform.position) >
-                 Vector3.Distance(position, o.transform.position))
+                 Vector3.Distance(position, memoryObject.transform.position))
         {
-          closest = o;
+          closest = memoryObject;
         }
       }
+      
       return closest;
     }
   }

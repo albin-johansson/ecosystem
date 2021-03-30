@@ -5,7 +5,6 @@ namespace Ecosystem.AnimalBehaviour.RabbitStates
 {
   public class RabbitLookingForMateState : AbstractAnimalState
   {
-    private readonly LayerMask _whatIsMate = LayerMask.GetMask("Prey");
     public RabbitLookingForMateState(RabbitStateData data)
     {
       Consumer = data.Consumer;
@@ -22,7 +21,7 @@ namespace Ecosystem.AnimalBehaviour.RabbitStates
       Reproducer.isWilling = true;
       MovementController.StartWander();
       AnimationController.MoveAnimation();
-      Target = GetClosestInVision(_whatIsMate);
+      Target = GetClosestInVision(Layers.PreyLayer);
     }
 
     public override AnimalState Type()
@@ -36,8 +35,11 @@ namespace Ecosystem.AnimalBehaviour.RabbitStates
       {
         if (!Target.activeSelf)
         {
-          Target = GetClosestMateInVision(_whatIsMate);
-          return base.Tick();
+          Target = GetClosestMateInVision(Layers.PreyLayer);
+          if (!Target)
+          {
+            return base.Tick();
+          }
         }
         else if (Tags.IsPredator(Target))
         {
@@ -49,7 +51,7 @@ namespace Ecosystem.AnimalBehaviour.RabbitStates
         }
         else
         {
-          Target = GetClosestMateInVision(_whatIsMate);
+          Target = GetClosestMateInVision(Layers.PreyLayer);
         }
       }
       else
@@ -83,7 +85,7 @@ namespace Ecosystem.AnimalBehaviour.RabbitStates
     {
       if (other.gameObject == Target)
       {
-        Target = GetClosestMateInVision(_whatIsMate);
+        Target = GetClosestMateInVision(Layers.PreyLayer);
       }
     }
   }

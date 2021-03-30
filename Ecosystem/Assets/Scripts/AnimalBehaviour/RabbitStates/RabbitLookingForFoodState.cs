@@ -5,7 +5,6 @@ namespace Ecosystem.AnimalBehaviour.RabbitStates
 {
   internal sealed class RabbitLookingForFoodState : AbstractAnimalState
   {
-    private readonly LayerMask _whatIsFood = LayerMask.GetMask("Food");
     public RabbitLookingForFoodState(RabbitStateData data)
     {
       Consumer = data.Consumer;
@@ -19,7 +18,7 @@ namespace Ecosystem.AnimalBehaviour.RabbitStates
 
     public override void Begin(GameObject target)
     {
-      Target = GetClosestInVision(_whatIsFood);
+      Target = GetClosestInVision(Layers.FoodLayer);
       MovementController.StartWander();
       AnimationController.MoveAnimation();
     }

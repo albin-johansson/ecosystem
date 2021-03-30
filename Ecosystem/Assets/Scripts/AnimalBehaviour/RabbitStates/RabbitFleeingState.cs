@@ -1,11 +1,10 @@
+using Ecosystem.Util;
 using UnityEngine;
 
 namespace Ecosystem.AnimalBehaviour.RabbitStates
 {
   internal sealed class RabbitFleeingState : AbstractAnimalState
   {
-    private readonly LayerMask _whatIsPredator = LayerMask.GetMask("Bear", "Wolf");
-
     public RabbitFleeingState(RabbitStateData data)
     {
       Consumer = data.Consumer;
@@ -35,7 +34,7 @@ namespace Ecosystem.AnimalBehaviour.RabbitStates
         }
         else
         {
-          Target = GetClosestInVision(_whatIsPredator);
+          Target = GetClosestInVision(Layers.PredatorLayer);
           if (Target)
           {
             MovementController.UpdateFleeing(Target.transform.position);
@@ -59,7 +58,7 @@ namespace Ecosystem.AnimalBehaviour.RabbitStates
     {
       if (other.gameObject == Target)
       {
-        Target = GetClosestInVision(_whatIsPredator);
+        Target = GetClosestInVision(Layers.PredatorLayer);
       }
     }
 

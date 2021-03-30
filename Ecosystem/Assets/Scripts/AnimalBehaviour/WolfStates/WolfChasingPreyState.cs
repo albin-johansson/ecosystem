@@ -5,7 +5,6 @@ namespace Ecosystem.AnimalBehaviour.WolfStates
 {
   internal sealed class WolfChasingPreyState : AbstractAnimalState
   {
-    private readonly LayerMask _whatIsPrey = LayerMask.GetMask("Prey");
     public WolfChasingPreyState(WolfStateData data)
     {
       Consumer = data.Consumer;
@@ -32,7 +31,7 @@ namespace Ecosystem.AnimalBehaviour.WolfStates
       }
       else if (!Target.activeSelf || !MovementController.IsTargetInRange(Target.transform.position))
       {
-        Target = GetClosestInVision(_whatIsPrey);
+        Target = GetClosestInVision(Layers.PreyLayer);
         return Type();
       }
       else if (Consumer.IsAttacking)
@@ -60,7 +59,7 @@ namespace Ecosystem.AnimalBehaviour.WolfStates
     {
       if (other.gameObject == Target)
       {
-        Target = GetClosestInVision(_whatIsPrey);
+        Target = GetClosestInVision(Layers.PreyLayer);
       }
     }
 

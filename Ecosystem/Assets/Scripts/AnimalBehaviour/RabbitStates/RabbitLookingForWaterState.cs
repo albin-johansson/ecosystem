@@ -5,7 +5,6 @@ namespace Ecosystem.AnimalBehaviour.RabbitStates
 {
   internal sealed class RabbitLookingForWaterState : AbstractAnimalState
   {
-    private readonly LayerMask _whatIsWater = LayerMask.GetMask("Water");
     public RabbitLookingForWaterState(RabbitStateData data)
     {
       Consumer = data.Consumer;
@@ -19,7 +18,7 @@ namespace Ecosystem.AnimalBehaviour.RabbitStates
 
     public override void Begin(GameObject target)
     {
-      Target = GetClosestInVision(_whatIsWater);
+      Target = GetClosestInVision(Layers.WaterLayer);
       if (!Target)
       {
         Target = MemoryController.GetClosestInMemory(Tags.IsWater, MovementController.GetPosition());

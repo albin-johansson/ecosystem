@@ -1,10 +1,10 @@
+using Ecosystem.Util;
 using UnityEngine;
 
 namespace Ecosystem.AnimalBehaviour.WolfStates
 {
   public class WolfLookingForMateState : AbstractAnimalState
   {
-    private readonly LayerMask _whatIsMate = LayerMask.GetMask("Bear", "Wolf");
     public WolfLookingForMateState(WolfStateData data)
     {
       Consumer = data.Consumer;
@@ -19,7 +19,7 @@ namespace Ecosystem.AnimalBehaviour.WolfStates
     public override void Begin(GameObject target)
     {
       Reproducer.isWilling = true;
-      Target = GetClosestMateInVision(_whatIsMate);
+      Target = GetClosestMateInVision(Layers.PredatorLayer);
 
     }
 
@@ -40,7 +40,7 @@ namespace Ecosystem.AnimalBehaviour.WolfStates
         }
         else
         {
-          Target = GetClosestMateInVision(_whatIsMate);
+          Target = GetClosestMateInVision(Layers.PredatorLayer);
         }
       }
       else
@@ -75,7 +75,7 @@ namespace Ecosystem.AnimalBehaviour.WolfStates
     {
       if (other.gameObject == Target)
       {
-        Target = GetClosestMateInVision(_whatIsMate);
+        Target = GetClosestMateInVision(Layers.PredatorLayer);
       }
     }
   }

@@ -31,7 +31,7 @@ namespace Ecosystem
 
     private void Start()
     {
-      resourceBar.SetMaxValue((float)maxHunger);
+      resourceBar.SetMaxValue((float) maxHunger);
     }
 
     private void Update()
@@ -49,7 +49,7 @@ namespace Ecosystem
       {
         Hunger += genome.Metabolism * Time.deltaTime;
       }
-      resourceBar.SetValue((float)Hunger);
+      resourceBar.SetValue((float) Hunger);
       if (Hunger > maxHunger)
       {
         _isDead = true;
