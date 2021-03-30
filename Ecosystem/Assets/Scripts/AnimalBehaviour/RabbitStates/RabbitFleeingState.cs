@@ -57,7 +57,7 @@ namespace Ecosystem.AnimalBehaviour.RabbitStates
 
     public override void OnTriggerExit(Collider other)
     {
-      if (other.gameObject == Target) //Target)
+      if (other.gameObject == Target)
       {
         Target = GetClosestInVision(_whatIsPredator);
       }
