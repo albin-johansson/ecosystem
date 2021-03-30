@@ -19,20 +19,10 @@ namespace Ecosystem.AnimalBehaviour.WolfStates
     {
       Target = target;
       MovementController.StartHunting(Target.transform.position);
-      //AnimationController.MoveAnimation();
     }
 
     public override AnimalState Tick()
     {
-      if (StaminaController.CanRun())
-      {
-        StaminaController.IsRunning = true;
-        AnimationController.RunAnimation();
-      }
-      else
-      {
-        AnimationController.MoveAnimation();
-      }
       if (!Target || !Target.activeSelf || !MovementController.IsTargetInRange(Target.transform.position))
       {
         return base.Tick();
@@ -40,16 +30,30 @@ namespace Ecosystem.AnimalBehaviour.WolfStates
 
       if (Consumer.IsAttacking)
       {
-        StaminaController.IsRunning = false;
         AnimationController.MoveAnimation();
         return AnimalState.Attacking;
       }
       else
       {
+        if (StaminaController.CanRun())
+        {
+          StaminaController.IsRunning = true;
+          AnimationController.RunAnimation();
+        }
+        else
+        {
+          AnimationController.MoveAnimation();
+        }
         MovementController.UpdateHunting(Target.transform.position);
       }
 
       return Type();
+    }
+
+    public override GameObject End()
+    {
+      StaminaController.IsRunning = false;
+      return base.End();
     }
 
     public override void OnTriggerExit(Collider other)
