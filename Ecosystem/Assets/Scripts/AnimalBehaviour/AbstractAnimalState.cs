@@ -1,6 +1,4 @@
 using System;
-using System.Collections.Generic;
-using System.Linq;
 using Ecosystem.Genes;
 using UnityEngine;
 
@@ -16,48 +14,48 @@ namespace Ecosystem.AnimalBehaviour
     protected Reproducer Reproducer;
     protected GameObject Target;
     protected AbstractGenome Genome;
-
+    
+    // This is used to avoid repeated allocations
+    private readonly Collider[] _colliderBuffer = new Collider[10];
 
     /// <summary>
-    ///   A helper function that returns the closest GameObject of those that return true
-    ///   for the filter function, from a list of colliders. If the closest GameObject isn't
-    ///   reachable, return null instead.
+    ///   Returns the currently closest GameObject. An optional predicate can be used to filter the colliders. If the
+    ///   closest GameObject isn't reachable, this function returns null.
     /// </summary>
-    private GameObject GetClosestWithFilter((Collider[] colliders, int size) colliderArray, Func<GameObject, bool> predicate)
+    /// <remarks>
+    ///   This function is frequently called, so efforts have been made into making it as fast as possible, which is why
+    ///   the code is somewhat "low-level". These efforts mainly include avoiding repeated allocation of lists and
+    ///   buffers.
+    /// </remarks>
+    private GameObject GetClosest(LayerMask mask, Func<GameObject, bool> predicate = null)
     {
       GameObject closest = null;
-      var (colliders, size) = colliderArray;
-      for (var i = 0; i < size; ++i)
+      
+      var nColliders = UpdateCollisionBuffer(mask);
+      var position = MovementController.GetPosition();
+      
+      for (var index = 0; index < nColliders; ++index)
       {
-        var colliderObject = colliders[i].gameObject;
-        if (predicate(colliderObject))
+        var colliderGameObject = _colliderBuffer[index].gameObject;
+        if (predicate != null && predicate(colliderGameObject))
         {
           continue;
         }
         if (closest)
         {
-          var position = MovementController.GetPosition();
-          var firstMag = Vector3.SqrMagnitude(position - closest.transform.position);
-          var secondMag = Vector3.SqrMagnitude(position - colliderObject.transform.position);
-          if (firstMag > secondMag)
+          if (Vector3.Distance(position, colliderGameObject.transform.position) <
+              Vector3.Distance(position, closest.transform.position))
           {
-            closest = colliderObject;
+            closest = colliderGameObject;
           }
         }
         else
         {
-          closest = colliderObject;
+          closest = colliderGameObject;
         }
       }
 
-      if (closest)
-      {
-        if (MovementController.IsReachable(closest.transform.position))
-        {
-          return closest;
-        }
-      }
-      return null;
+      return closest && MovementController.IsReachable(closest.transform.position) ? closest : null;
     }
 
     /// <summary>
@@ -66,8 +64,7 @@ namespace Ecosystem.AnimalBehaviour
     /// </summary>
     protected GameObject GetClosestInVision(LayerMask mask)
     {
-      var colliderArray = GetInVision(mask);
-      return GetClosestWithFilter(colliderArray, o => true);
+      return GetClosest(mask);
     }
 
     /// <summary>
@@ -76,21 +73,23 @@ namespace Ecosystem.AnimalBehaviour
     /// </summary>
     protected GameObject GetClosestMateInVision(LayerMask mask)
     {
-      var colliders = GetInVision(mask);
-      return GetClosestWithFilter(colliders, Reproducer.CompatibleAsParents);
+      return GetClosest(mask, Reproducer.CompatibleAsParents);
     }
 
-    private (Collider[] colliders, int size) GetInVision(LayerMask mask)
+    /// <summary>
+    ///   Updates the collider buffer with currently overlapping colliders.
+    /// </summary>
+    /// <param name="mask">the layer mask used when checking for overlaps.</param>
+    /// <returns>the number of elements in the buffer that were the result from overlaps.</returns>
+    private int UpdateCollisionBuffer(LayerMask mask)
     {
-      var colliders = new Collider[10];
-      
       if (!Genome)
       {
-        return (colliders, 0);
+        return 0;
       }
 
-      var size = Physics.OverlapSphereNonAlloc(MovementController.GetPosition(), Genome.GetVision().Value, colliders, mask);
-      return (colliders, size);
+      var size = Physics.OverlapSphereNonAlloc(MovementController.GetPosition(), Genome.GetVision().Value, _colliderBuffer, mask);
+      return size;
     }
 
     protected GameObject SelectCloser(GameObject first, GameObject second)
