@@ -1,9 +1,8 @@
-using System;
 using System.Collections.Generic;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
-namespace Ecosystem
+namespace Ecosystem.Spawning
 {
   /// <summary>
   /// The handler script for the stationary food generators. Actives children objects for visuals purposes.  
