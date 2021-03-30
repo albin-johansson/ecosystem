@@ -1,11 +1,13 @@
 using Ecosystem.Util;
 using UnityEngine;
 
-namespace Ecosystem.AnimalBehaviour.RabbitStates
+namespace Ecosystem.AnimalBehaviour.PreyStates
 {
-  internal sealed class RabbitDrinkingState : AbstractAnimalState
+  internal sealed class PreyFleeingState : AbstractAnimalState
   {
-    public RabbitDrinkingState(RabbitStateData data)
+    private GameObject _lastPredatorSeen;
+
+    public PreyFleeingState(StateData data)
     {
       Consumer = data.Consumer;
       WaterConsumer = data.WaterConsumer;
@@ -18,21 +20,16 @@ namespace Ecosystem.AnimalBehaviour.RabbitStates
     public override void Begin(GameObject target)
     {
       Target = target;
-      AnimationController.IdleAnimation();
-      MovementController.StandStill(true);
-      WaterConsumer.StartDrinking();
-      // TODO: Add animationController.DrinkAnimation();
-      // TODO Check memory
+      _lastPredatorSeen = target;
+      MovementController.StartFleeing(Target.transform.position);
+      AnimationController.MoveAnimation();
     }
 
     public override AnimalState Tick()
     {
-      if (Tags.IsPredator(Target))
+      if (Target)
       {
-        return AnimalState.Fleeing;
-      }
-      else if (WaterConsumer.IsDrinking)
-      {
+        MovementController.UpdateFleeing(Target.transform.position);
         return Type();
       }
       else
@@ -46,20 +43,35 @@ namespace Ecosystem.AnimalBehaviour.RabbitStates
       var otherObject = other.gameObject;
       if (MovementController.IsReachable(otherObject.transform.position))
       {
-        if (otherObject.CompareTag("Water") || Tags.IsFood(otherObject))
+        if (otherObject.CompareTag("Water"))
         {
           MemoryController.SaveToMemory(otherObject);
         }
         else if (Tags.IsPredator(otherObject))
         {
-          Target = otherObject;
+          _lastPredatorSeen = otherObject;
+        }
+      }
+    }
+
+    public override void OnTriggerExit(Collider other)
+    {
+      if (other.gameObject == Target)
+      {
+        if (other.gameObject == _lastPredatorSeen)
+        {
+          Target = null;
+        }
+        else
+        {
+          Target = _lastPredatorSeen;
         }
       }
     }
 
     public override AnimalState Type()
     {
-      return AnimalState.Drinking;
+      return AnimalState.Fleeing;
     }
   }
 }

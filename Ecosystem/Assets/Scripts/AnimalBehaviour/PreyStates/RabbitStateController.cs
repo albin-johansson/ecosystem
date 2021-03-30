@@ -1,11 +1,11 @@
 using Ecosystem.Genes;
 using UnityEngine;
 
-namespace Ecosystem.AnimalBehaviour.WolfStates
+namespace Ecosystem.AnimalBehaviour.PreyStates
 {
-  public sealed class WolfStateController : AbstractStateController
+  public sealed class RabbitStateController : AbstractStateController
   {
-    [SerializeField] private PreyConsumer consumer;
+    [SerializeField] private FoodConsumer consumer;
     [SerializeField] private WaterConsumer waterConsumer;
     [SerializeField] private MovementController movementController;
     [SerializeField] private EcoAnimationController animationController;
@@ -15,38 +15,37 @@ namespace Ecosystem.AnimalBehaviour.WolfStates
     [SerializeField] private AbstractGenome genome;
 
     private IAnimalState _idle;
-    private IAnimalState _lookingForPrey;
+    private IAnimalState _lookingForFood;
     private IAnimalState _lookingForWater;
     private IAnimalState _drinking;
     private IAnimalState _runningTowardsWater;
-    private IAnimalState _chasingPrey;
+    private IAnimalState _runningTowardsFood;
+    private IAnimalState _fleeing;
     private IAnimalState _lookingForMate;
-    private IAnimalState _attacking;
 
     public override void Start()
     {
-      var data = new WolfStateData
+      var data = new StateData
       {
         Consumer = consumer,
         AnimationController = animationController,
         MemoryController = memoryController,
         MovementController = movementController,
         WaterConsumer = waterConsumer,
-        Reproducer = reproducer,
+        Reproducer = reproducer
       };
 
-      _idle = WolfStateFactory.CreateIdle(data);
-      _lookingForPrey = WolfStateFactory.CreateLookingForPrey(data);
-      _lookingForWater = WolfStateFactory.CreateLookingForWater(data);
-      _drinking = WolfStateFactory.CreateDrinking(data);
-      _runningTowardsWater = WolfStateFactory.CreateRunningTowardsWater(data);
-      _chasingPrey = WolfStateFactory.CreateChasingPrey(data);
-      _lookingForMate = WolfStateFactory.CreateLookingForMate(data);
-      _attacking = WolfStateFactory.CreateAttackingState(data);
-
+      _idle = PreyStateFactory.CreatePreyIdle(data);
+      _lookingForFood = PreyStateFactory.CreateRabbitLookingForFood(data);
+      _lookingForWater = PreyStateFactory.CreatePreyLookingForWater(data);
+      _drinking = PreyStateFactory.CreatePreyDrinking(data);
+      _runningTowardsWater = PreyStateFactory.CreatePreyRunningTowardsWater(data);
+      _runningTowardsFood = PreyStateFactory.CreateRabbitRunningTowardsFood(data);
+      _fleeing = PreyStateFactory.CreatePreyFleeing(data);
+      _lookingForMate = PreyStateFactory.CreateRabbitLookingForMate(data);
       
       sphereCollider.radius = (sphereCollider.radius / sphereCollider.transform.lossyScale.magnitude) * genome.GetVision().Value;
-      
+
       State = _idle;
       SwitchState(AnimalState.Idle);
     }
@@ -60,9 +59,8 @@ namespace Ecosystem.AnimalBehaviour.WolfStates
           State = _lookingForWater;
           break;
 
-        case AnimalState.LookingForPrey:
-          State = _lookingForPrey;
-          consumer.CollideActive = true;
+        case AnimalState.LookingForFood:
+          State = _lookingForFood;
           break;
 
         case AnimalState.Idle:
@@ -70,7 +68,7 @@ namespace Ecosystem.AnimalBehaviour.WolfStates
           break;
 
         case AnimalState.Fleeing:
-
+          State = _fleeing;
           break;
 
         case AnimalState.Drinking:
@@ -82,23 +80,17 @@ namespace Ecosystem.AnimalBehaviour.WolfStates
           break;
 
         case AnimalState.RunningTowardsFood:
+          State = _runningTowardsFood;
+          break;
+
+        case AnimalState.LookingForPrey:
           break;
 
         case AnimalState.ChasingPrey:
-          State = _chasingPrey;
-          consumer.CollideActive = true;
-          break;
-
-        case AnimalState.LookingForFood:
-          State = _lookingForPrey;
           break;
 
         case AnimalState.LookingForMate:
           State = _lookingForMate;
-          break;
-
-        case AnimalState.Attacking:
-          State = _attacking;
           break;
 
         default:

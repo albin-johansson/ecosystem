@@ -1,11 +1,10 @@
-using Ecosystem.Util;
 using UnityEngine;
 
-namespace Ecosystem.AnimalBehaviour.WolfStates
+namespace Ecosystem.AnimalBehaviour.PredatorStates
 {
-  internal sealed class WolfLookingForPreyState : AbstractAnimalState
+  internal sealed class PredatorLookingForWaterState : AbstractAnimalState
   {
-    public WolfLookingForPreyState(WolfStateData data)
+    public PredatorLookingForWaterState(StateData data)
     {
       Consumer = data.Consumer;
       WaterConsumer = data.WaterConsumer;
@@ -26,22 +25,22 @@ namespace Ecosystem.AnimalBehaviour.WolfStates
     {
       if (Target)
       {
-        return AnimalState.ChasingPrey;
+        return AnimalState.RunningTowardsWater;
       }
-      else if (WaterConsumer.Thirst > Consumer.Hunger && WaterConsumer.IsThirsty())
+      else if (WaterConsumer.Thirst < Consumer.Hunger && Consumer.IsHungry())
       {
-        return AnimalState.LookingForWater;
+        return AnimalState.LookingForPrey;
       }
 
-      if (Consumer.IsAttacking)
+      var (successfulRetrieval, memoryObject) = MemoryController.GetFromMemory("Water");
+      if (successfulRetrieval)
       {
-        return AnimalState.Attacking;
+        Target = memoryObject;
+        return base.Tick();
       }
-      else
-      {
-        MovementController.UpdateWander();
-        return Type();
-      }
+
+      MovementController.UpdateWander();
+      return Type();
     }
 
     public override void OnTriggerEnter(Collider other)
@@ -52,9 +51,6 @@ namespace Ecosystem.AnimalBehaviour.WolfStates
         if (otherObject.CompareTag("Water"))
         {
           MemoryController.SaveToMemory(otherObject);
-        }
-        else if (Tags.IsPrey(otherObject))
-        {
           Target = otherObject;
         }
       }
@@ -62,7 +58,7 @@ namespace Ecosystem.AnimalBehaviour.WolfStates
 
     public override AnimalState Type()
     {
-      return AnimalState.LookingForPrey;
+      return AnimalState.LookingForWater;
     }
   }
 }

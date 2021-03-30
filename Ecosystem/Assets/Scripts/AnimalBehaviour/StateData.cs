@@ -1,6 +1,6 @@
-namespace Ecosystem.AnimalBehaviour.RabbitStates
+namespace Ecosystem.AnimalBehaviour
 {
-  public struct RabbitStateData
+  public struct StateData
   {
     public IConsumer Consumer;
     public WaterConsumer WaterConsumer;

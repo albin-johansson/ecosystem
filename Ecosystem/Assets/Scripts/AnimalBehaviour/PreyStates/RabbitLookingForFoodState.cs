@@ -1,11 +1,11 @@
 using Ecosystem.Util;
 using UnityEngine;
 
-namespace Ecosystem.AnimalBehaviour.RabbitStates
+namespace Ecosystem.AnimalBehaviour.PreyStates
 {
-  internal sealed class RabbitIdleState : AbstractAnimalState
+  internal sealed class RabbitLookingForFoodState : AbstractAnimalState
   {
-    public RabbitIdleState(RabbitStateData data)
+    public RabbitLookingForFoodState(StateData data)
     {
       Consumer = data.Consumer;
       WaterConsumer = data.WaterConsumer;
@@ -18,27 +18,32 @@ namespace Ecosystem.AnimalBehaviour.RabbitStates
     public override void Begin(GameObject target)
     {
       Target = null;
-      AnimationController.IdleAnimation();
+      MovementController.StartWander();
+      AnimationController.MoveAnimation();
     }
 
     public override AnimalState Tick()
     {
       if (Target)
       {
-        return AnimalState.Fleeing;
+        if (Tags.IsPredator(Target))
+        {
+          return AnimalState.Fleeing;
+        }
+        else if (Tags.IsFood(Target))
+        {
+          return AnimalState.RunningTowardsFood;
+        }
       }
-      else if (Consumer.Hunger >= WaterConsumer.Thirst && Consumer.IsHungry())
-      {
-        return AnimalState.LookingForFood;
-      }
-      else if (WaterConsumer.Thirst > Consumer.Hunger && WaterConsumer.IsThirsty())
+
+      if (Consumer.Hunger < WaterConsumer.Thirst && WaterConsumer.IsThirsty())
       {
         return AnimalState.LookingForWater;
       }
-      else
-      {
-        return Type();
-      }
+
+      MovementController.UpdateWander();
+
+      return Type();
     }
 
     public override void OnTriggerEnter(Collider other)
@@ -50,6 +55,10 @@ namespace Ecosystem.AnimalBehaviour.RabbitStates
         {
           MemoryController.SaveToMemory(otherObject);
         }
+        else if (Tags.IsFood(otherObject))
+        {
+          Target = otherObject;
+        }
         else if (Tags.IsPredator(otherObject))
         {
           Target = otherObject;
@@ -59,7 +68,7 @@ namespace Ecosystem.AnimalBehaviour.RabbitStates
 
     public override AnimalState Type()
     {
-      return AnimalState.Idle;
+      return AnimalState.LookingForFood;
     }
   }
 }

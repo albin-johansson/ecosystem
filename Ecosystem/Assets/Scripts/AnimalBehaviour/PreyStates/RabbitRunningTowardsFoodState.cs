@@ -1,10 +1,11 @@
+using Ecosystem.Util;
 using UnityEngine;
 
-namespace Ecosystem.AnimalBehaviour.WolfStates
+namespace Ecosystem.AnimalBehaviour.PreyStates
 {
-  public class WolfLookingForMateState : AbstractAnimalState
+  internal sealed class RabbitRunningTowardsFoodState : AbstractAnimalState
   {
-    public WolfLookingForMateState(WolfStateData data)
+    public RabbitRunningTowardsFoodState(StateData data)
     {
       Consumer = data.Consumer;
       WaterConsumer = data.WaterConsumer;
@@ -16,40 +17,27 @@ namespace Ecosystem.AnimalBehaviour.WolfStates
 
     public override void Begin(GameObject target)
     {
-      Target = null;
-      Reproducer.isWilling = true;
-    }
-
-    public override AnimalState Type()
-    {
-      return AnimalState.LookingForMate;
+      Target = target;
+      MovementController.RunToTarget(Target.transform.position);
+      AnimationController.MoveAnimation();
+      //TODO Check memory
     }
 
     public override AnimalState Tick()
     {
-      if (Target)
+      if (!Target)
       {
-        if (Reproducer.CompatibleAsParents(Target))
-        {
-          MovementController.RunToTarget(Target.transform.position);
-        }
-        else
-        {
-          Target = null;
-        }
+        return base.Tick();
+      }
+      else if (Tags.IsPredator(Target))
+      {
+        return AnimalState.Fleeing;
       }
       else
       {
-        MovementController.UpdateWander();
+        MovementController.RunToTarget(Target.transform.position);
+        return Type();
       }
-
-      return base.Tick();
-    }
-
-    public override GameObject End()
-    {
-      Reproducer.isWilling = false;
-      return base.End();
     }
 
     public override void OnTriggerEnter(Collider other)
@@ -61,11 +49,16 @@ namespace Ecosystem.AnimalBehaviour.WolfStates
         {
           MemoryController.SaveToMemory(otherObject);
         }
-        else if (Reproducer.CompatibleAsParents(otherObject))
+        else if (Tags.IsPredator(otherObject))
         {
           Target = otherObject;
         }
       }
+    }
+
+    public override AnimalState Type()
+    {
+      return AnimalState.RunningTowardsFood;
     }
   }
 }

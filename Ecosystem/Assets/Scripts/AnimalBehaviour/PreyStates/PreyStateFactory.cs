@@ -1,0 +1,45 @@
+namespace Ecosystem.AnimalBehaviour.PreyStates
+{
+  public static class PreyStateFactory
+  {
+    public static IAnimalState CreatePreyIdle(StateData data)
+    {
+      return new PreyIdleState(data);
+    }
+
+    public static IAnimalState CreateRabbitLookingForFood(StateData data)
+    {
+      return new RabbitLookingForFoodState(data);
+    }
+
+    public static IAnimalState CreatePreyLookingForWater(StateData data)
+    {
+      return new PreyLookingForWaterState(data);
+    }
+
+    public static IAnimalState CreateRabbitRunningTowardsFood(StateData data)
+    {
+      return new RabbitRunningTowardsFoodState(data);
+    }
+
+    public static IAnimalState CreatePreyDrinking(StateData data)
+    {
+      return new PreyDrinkingState(data);
+    }
+
+    public static IAnimalState CreatePreyRunningTowardsWater(StateData data)
+    {
+      return new PreyRunningTowardsWaterState(data);
+    }
+
+    public static IAnimalState CreatePreyFleeing(StateData data)
+    {
+      return new PreyFleeingState(data);
+    }
+
+    public static IAnimalState CreateRabbitLookingForMate(StateData data)
+    {
+      return new RabbitLookingForMateState(data);
+    }
+  }
+}

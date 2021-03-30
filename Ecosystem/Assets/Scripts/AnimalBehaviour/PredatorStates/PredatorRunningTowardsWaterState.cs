@@ -1,11 +1,10 @@
-using Ecosystem.Util;
 using UnityEngine;
 
-namespace Ecosystem.AnimalBehaviour.RabbitStates
+namespace Ecosystem.AnimalBehaviour.PredatorStates
 {
-  internal sealed class RabbitRunningTowardsFoodState : AbstractAnimalState
+  internal sealed class PredatorRunningTowardsWaterState : AbstractAnimalState
   {
-    public RabbitRunningTowardsFoodState(RabbitStateData data)
+    public PredatorRunningTowardsWaterState(StateData data)
     {
       Consumer = data.Consumer;
       WaterConsumer = data.WaterConsumer;
@@ -20,7 +19,6 @@ namespace Ecosystem.AnimalBehaviour.RabbitStates
       Target = target;
       MovementController.RunToTarget(Target.transform.position);
       AnimationController.MoveAnimation();
-      //TODO Check memory
     }
 
     public override AnimalState Tick()
@@ -29,9 +27,13 @@ namespace Ecosystem.AnimalBehaviour.RabbitStates
       {
         return base.Tick();
       }
-      else if (Tags.IsPredator(Target))
+      else if (WaterConsumer.CanDrink)
       {
-        return AnimalState.Fleeing;
+        return AnimalState.Drinking;
+      }
+      else if (WaterConsumer.Thirst < Consumer.Hunger && Consumer.IsHungry())
+      {
+        return AnimalState.LookingForPrey;
       }
       else
       {
@@ -40,25 +42,9 @@ namespace Ecosystem.AnimalBehaviour.RabbitStates
       }
     }
 
-    public override void OnTriggerEnter(Collider other)
-    {
-      var otherObject = other.gameObject;
-      if (MovementController.IsReachable(otherObject.transform.position))
-      {
-        if (otherObject.CompareTag("Water"))
-        {
-          MemoryController.SaveToMemory(otherObject);
-        }
-        else if (Tags.IsPredator(otherObject))
-        {
-          Target = otherObject;
-        }
-      }
-    }
-
     public override AnimalState Type()
     {
-      return AnimalState.RunningTowardsFood;
+      return AnimalState.RunningTowardsWater;
     }
   }
 }

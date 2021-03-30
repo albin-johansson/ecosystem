@@ -1,10 +1,10 @@
 using UnityEngine;
 
-namespace Ecosystem.AnimalBehaviour.WolfStates
+namespace Ecosystem.AnimalBehaviour.PredatorStates
 {
   internal sealed class WolfChasingPreyState : AbstractAnimalState
   {
-    public WolfChasingPreyState(WolfStateData data)
+    public WolfChasingPreyState(StateData data)
     {
       Consumer = data.Consumer;
       WaterConsumer = data.WaterConsumer;

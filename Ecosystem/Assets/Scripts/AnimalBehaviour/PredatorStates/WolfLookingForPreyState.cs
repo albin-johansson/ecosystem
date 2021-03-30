@@ -1,11 +1,11 @@
 using Ecosystem.Util;
 using UnityEngine;
 
-namespace Ecosystem.AnimalBehaviour.RabbitStates
+namespace Ecosystem.AnimalBehaviour.PredatorStates
 {
-  internal sealed class RabbitRunningTowardsWaterState : AbstractAnimalState
+  internal sealed class WolfLookingForPreyState : AbstractAnimalState
   {
-    public RabbitRunningTowardsWaterState(RabbitStateData data)
+    public WolfLookingForPreyState(StateData data)
     {
       Consumer = data.Consumer;
       WaterConsumer = data.WaterConsumer;
@@ -17,29 +17,29 @@ namespace Ecosystem.AnimalBehaviour.RabbitStates
 
     public override void Begin(GameObject target)
     {
-      Target = target;
-      MovementController.RunToTarget(Target.transform.position);
+      Target = null;
+      MovementController.StartWander();
       AnimationController.MoveAnimation();
-      //TODO Check memory
     }
 
     public override AnimalState Tick()
     {
-      if (!Target)
+      if (Target)
       {
-        return base.Tick();
+        return AnimalState.ChasingPrey;
       }
-      else if (Tags.IsPredator(Target))
+      else if (WaterConsumer.Thirst > Consumer.Hunger && WaterConsumer.IsThirsty())
       {
-        return AnimalState.Fleeing;
+        return AnimalState.LookingForWater;
       }
-      else if (WaterConsumer.CanDrink)
+
+      if (Consumer.IsAttacking)
       {
-        return AnimalState.Drinking;
+        return AnimalState.Attacking;
       }
       else
       {
-        MovementController.RunToTarget(Target.transform.position);
+        MovementController.UpdateWander();
         return Type();
       }
     }
@@ -51,10 +51,9 @@ namespace Ecosystem.AnimalBehaviour.RabbitStates
       {
         if (otherObject.CompareTag("Water"))
         {
-          // TODO: Check if new source is closer
           MemoryController.SaveToMemory(otherObject);
         }
-        else if (Tags.IsPredator(otherObject))
+        else if (Tags.IsPrey(otherObject))
         {
           Target = otherObject;
         }
@@ -63,7 +62,7 @@ namespace Ecosystem.AnimalBehaviour.RabbitStates
 
     public override AnimalState Type()
     {
-      return AnimalState.RunningTowardsWater;
+      return AnimalState.LookingForPrey;
     }
   }
 }

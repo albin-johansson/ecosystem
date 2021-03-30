@@ -1,10 +1,11 @@
+using Ecosystem.Util;
 using UnityEngine;
 
-namespace Ecosystem.AnimalBehaviour.WolfStates
+namespace Ecosystem.AnimalBehaviour.PreyStates
 {
-  internal sealed class WolfRunningTowardsWaterState : AbstractAnimalState
+  internal sealed class PreyRunningTowardsWaterState : AbstractAnimalState
   {
-    public WolfRunningTowardsWaterState(WolfStateData data)
+    public PreyRunningTowardsWaterState(StateData data)
     {
       Consumer = data.Consumer;
       WaterConsumer = data.WaterConsumer;
@@ -19,6 +20,7 @@ namespace Ecosystem.AnimalBehaviour.WolfStates
       Target = target;
       MovementController.RunToTarget(Target.transform.position);
       AnimationController.MoveAnimation();
+      //TODO Check memory
     }
 
     public override AnimalState Tick()
@@ -27,18 +29,35 @@ namespace Ecosystem.AnimalBehaviour.WolfStates
       {
         return base.Tick();
       }
+      else if (Tags.IsPredator(Target))
+      {
+        return AnimalState.Fleeing;
+      }
       else if (WaterConsumer.CanDrink)
       {
         return AnimalState.Drinking;
-      }
-      else if (WaterConsumer.Thirst < Consumer.Hunger && Consumer.IsHungry())
-      {
-        return AnimalState.LookingForPrey;
       }
       else
       {
         MovementController.RunToTarget(Target.transform.position);
         return Type();
+      }
+    }
+
+    public override void OnTriggerEnter(Collider other)
+    {
+      var otherObject = other.gameObject;
+      if (MovementController.IsReachable(otherObject.transform.position))
+      {
+        if (otherObject.CompareTag("Water"))
+        {
+          // TODO: Check if new source is closer
+          MemoryController.SaveToMemory(otherObject);
+        }
+        else if (Tags.IsPredator(otherObject))
+        {
+          Target = otherObject;
+        }
       }
     }
 

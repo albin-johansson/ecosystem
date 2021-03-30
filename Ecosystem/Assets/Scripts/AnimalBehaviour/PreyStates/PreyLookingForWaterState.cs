@@ -1,11 +1,11 @@
 using Ecosystem.Util;
 using UnityEngine;
 
-namespace Ecosystem.AnimalBehaviour.RabbitStates
+namespace Ecosystem.AnimalBehaviour.PreyStates
 {
-  internal sealed class RabbitLookingForFoodState : AbstractAnimalState
+  internal sealed class PreyLookingForWaterState : AbstractAnimalState
   {
-    public RabbitLookingForFoodState(RabbitStateData data)
+    public PreyLookingForWaterState(StateData data)
     {
       Consumer = data.Consumer;
       WaterConsumer = data.WaterConsumer;
@@ -30,45 +30,49 @@ namespace Ecosystem.AnimalBehaviour.RabbitStates
         {
           return AnimalState.Fleeing;
         }
-        else if (Tags.IsFood(Target))
+        else if (Target.CompareTag("Water"))
         {
-          return AnimalState.RunningTowardsFood;
+          return AnimalState.RunningTowardsWater;
         }
       }
 
-      if (Consumer.Hunger < WaterConsumer.Thirst && WaterConsumer.IsThirsty())
+      if (Consumer.Hunger > WaterConsumer.Thirst && Consumer.IsHungry())
       {
-        return AnimalState.LookingForWater;
+        return AnimalState.LookingForFood;
+      }
+
+      var (successfulRetrieval, memoryObject) = MemoryController.GetFromMemory("Water");
+      if (successfulRetrieval)
+      {
+        Target = memoryObject;
+        return base.Tick();
       }
 
       MovementController.UpdateWander();
-
       return Type();
     }
 
     public override void OnTriggerEnter(Collider other)
     {
       var otherObject = other.gameObject;
+
       if (MovementController.IsReachable(otherObject.transform.position))
       {
         if (otherObject.CompareTag("Water"))
         {
           MemoryController.SaveToMemory(otherObject);
-        }
-        else if (Tags.IsFood(otherObject))
-        {
           Target = otherObject;
         }
         else if (Tags.IsPredator(otherObject))
         {
-          Target = otherObject;
+          Target = other.gameObject;
         }
       }
     }
 
     public override AnimalState Type()
     {
-      return AnimalState.LookingForFood;
+      return AnimalState.LookingForWater;
     }
   }
 }
