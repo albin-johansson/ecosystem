@@ -7405,8 +7405,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3cd94d57fb1da52439641dc290534ae7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  StateText: {fileID: 4667676523914516765}
-  consumer: {fileID: 5694940851676850990}
   waterConsumer: {fileID: 3242938931952141863}
   movementController: {fileID: 6378755894846735859}
   animationController: {fileID: -4792604738439377631}
@@ -7414,6 +7412,8 @@ MonoBehaviour:
   reproducer: {fileID: 1675561535909660547}
   sphereCollider: {fileID: 651377425655632140}
   genome: {fileID: 1593158740268700976}
+  StateText: {fileID: 4667676523914516765}
+  preyConsumer: {fileID: 5694940851676850990}
 --- !u!1 &7116156556552470170
 GameObject:
   m_ObjectHideFlags: 0

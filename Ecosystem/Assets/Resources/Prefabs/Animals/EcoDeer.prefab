@@ -4913,8 +4913,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9c7fb3531ec9c784baa8246d216af247, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  StateText: {fileID: 1914420894457515816}
-  consumer: {fileID: 5346017003192509530}
   waterConsumer: {fileID: 8855973453505120815}
   movementController: {fileID: 1611194173291749041}
   animationController: {fileID: 4427174813899224407}
@@ -4922,6 +4920,8 @@ MonoBehaviour:
   reproducer: {fileID: 4953059004311012286}
   sphereCollider: {fileID: 6776153342693034266}
   genome: {fileID: 570846004582155358}
+  StateText: {fileID: 1914420894457515816}
+  foodConsumer: {fileID: 5346017003192509530}
 --- !u!1 &4759522730638570450
 GameObject:
   m_ObjectHideFlags: 0

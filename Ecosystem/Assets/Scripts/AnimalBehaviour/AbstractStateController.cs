@@ -1,3 +1,4 @@
+using Ecosystem.Genes;
 using Ecosystem.UI;
 using UnityEngine;
 
@@ -5,9 +6,17 @@ namespace Ecosystem.AnimalBehaviour
 {
   public abstract class AbstractStateController : MonoBehaviour, IStateController
   {
-    protected IAnimalState State;
+    [SerializeField] protected WaterConsumer waterConsumer;
+    [SerializeField] protected MovementController movementController;
+    [SerializeField] protected EcoAnimationController animationController;
+    [SerializeField] protected MemoryController memoryController;
+    [SerializeField] protected Reproducer reproducer;
+    [SerializeField] protected SphereCollider sphereCollider;
+    [SerializeField] protected AbstractGenome genome;
     [SerializeField] private StateText StateText;
-
+    
+    protected IConsumer Consumer;
+    protected IAnimalState State;
     public abstract void Start();
 
     public abstract void SwitchState(AnimalState state);
