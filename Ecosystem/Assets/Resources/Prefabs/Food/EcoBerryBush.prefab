@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 1008949879218119337}
   m_Layer: 6
   m_Name: EcoBerryBush
-  m_TagString: StaticFood
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 1
   m_StaticEditorFlags: 8
@@ -116,7 +116,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   spawner: {fileID: 3206359729054347594}
-  rate: 5
+  rate: 10
+  numberOfBerries: 0
 --- !u!1 &3678544169831597734
 GameObject:
   m_ObjectHideFlags: 0

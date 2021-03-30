@@ -30,7 +30,7 @@ namespace Ecosystem.AnimalBehaviour.RabbitStates
         {
           return AnimalState.Fleeing;
         }
-        else if (Tags.IsFood(Target))
+        else if (Tags.IsFood(Target) || Tags.IsStaticFood(Target))
         {
           return AnimalState.RunningTowardsFood;
         }
@@ -55,7 +55,7 @@ namespace Ecosystem.AnimalBehaviour.RabbitStates
         {
           MemoryController.SaveToMemory(otherObject);
         }
-        else if (Tags.IsFood(otherObject))
+        else if (Tags.IsFood(otherObject) || Tags.IsStaticFood(otherObject))
         {
           Target = otherObject;
         }

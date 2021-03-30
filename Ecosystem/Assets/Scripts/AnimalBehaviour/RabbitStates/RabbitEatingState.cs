@@ -1,11 +1,11 @@
-using Ecosystem.Util;
+﻿using Ecosystem.Util;
 using UnityEngine;
 
 namespace Ecosystem.AnimalBehaviour.RabbitStates
 {
-  internal sealed class RabbitRunningTowardsFoodState : AbstractAnimalState
+  internal sealed class RabbitEatingState : AbstractAnimalState
   {
-    public RabbitRunningTowardsFoodState(RabbitStateData data)
+    public RabbitEatingState(RabbitStateData data)
     {
       Consumer = data.Consumer;
       WaterConsumer = data.WaterConsumer;
@@ -18,29 +18,29 @@ namespace Ecosystem.AnimalBehaviour.RabbitStates
     public override void Begin(GameObject target)
     {
       Target = target;
-      MovementController.RunToTarget(Target.transform.position);
-      AnimationController.MoveAnimation();
-      //TODO Check memory
+      AnimationController.IdleAnimation();
+      MovementController.StandStill(true);
+      // TODO Check memory
     }
 
     public override AnimalState Tick()
     {
-      if (!Target || !Target.activeSelf)
-      {
-        return base.Tick();
-      }
-      else if (Tags.IsPredator(Target))
+      if (Tags.IsPredator(Target))
       {
         return AnimalState.Fleeing;
       }
+
+      if (!Consumer.IsHungry())
+      {
+        return base.Tick();
+      }
       else if (Consumer.IsEating)
       {
-        return AnimalState.Eating;
+        return Type();
       }
       else
       {
-        MovementController.RunToTarget(Target.transform.position);
-        return Type();
+        return base.Tick();
       }
     }
 
@@ -49,11 +49,7 @@ namespace Ecosystem.AnimalBehaviour.RabbitStates
       var otherObject = other.gameObject;
       if (MovementController.IsReachable(otherObject.transform.position))
       {
-        if (otherObject.CompareTag("Water"))
-        {
-          MemoryController.SaveToMemory(otherObject);
-        }
-        else if (Tags.IsPredator(otherObject))
+        if (Tags.IsPredator(otherObject))
         {
           Target = otherObject;
         }
@@ -62,7 +58,7 @@ namespace Ecosystem.AnimalBehaviour.RabbitStates
 
     public override AnimalState Type()
     {
-      return AnimalState.RunningTowardsFood;
+      return AnimalState.Drinking;
     }
   }
 }

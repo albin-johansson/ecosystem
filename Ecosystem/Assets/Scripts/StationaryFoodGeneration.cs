@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 using Random = UnityEngine.Random;
@@ -11,6 +12,7 @@ namespace Ecosystem
   {
     [SerializeField] private Transform spawner;
     [SerializeField] private float rate;
+    [SerializeField] private int numberOfBerries;
 
     private float _elapsedTime;
     private int _spawningLocations;
@@ -38,6 +40,7 @@ namespace Ecosystem
     /// </summary>
     private void Update()
     {
+      numberOfBerries = AmountOfBerries;
       _elapsedTime += Time.deltaTime;
       if (_elapsedTime > rate)
       {
@@ -47,14 +50,23 @@ namespace Ecosystem
         }
 
         _elapsedTime = 0;
-
-        if (AmountOfBerries < _spawningLocations + 1)
+        int i = Random.Range(1, 4);
+        while (i > 0)
         {
-          var location = Random.Range(0, _spawningLocations);
-          spawner.GetChild(location).transform.gameObject.SetActive(true);
-          BerriesPlaced.Push(location);
-          AmountOfBerries += 1;
+          i--;
+          SpawnBerries();
         }
+      }
+    }
+
+    private void SpawnBerries()
+    {
+      if (AmountOfBerries < _spawningLocations + 1)
+      {
+        var location = Random.Range(0, _spawningLocations);
+        spawner.GetChild(location).transform.gameObject.SetActive(true);
+        BerriesPlaced.Push(location);
+        AmountOfBerries += 1;
       }
     }
   }

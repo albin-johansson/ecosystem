@@ -1,3 +1,5 @@
+using UnityEngine;
+
 namespace Ecosystem
 {
   /// <summary>
@@ -8,6 +10,8 @@ namespace Ecosystem
     double Hunger { get; }
 
     bool CollideActive { get; set; }
+    
+    GameObject IsEating { get; set; }
 
     bool IsHungry();
 

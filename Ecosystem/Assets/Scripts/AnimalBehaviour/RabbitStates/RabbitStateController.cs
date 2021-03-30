@@ -22,6 +22,7 @@ namespace Ecosystem.AnimalBehaviour.RabbitStates
     private IAnimalState _runningTowardsFood;
     private IAnimalState _fleeing;
     private IAnimalState _lookingForMate;
+    private IAnimalState _eating;
 
     public override void Start()
     {
@@ -43,6 +44,7 @@ namespace Ecosystem.AnimalBehaviour.RabbitStates
       _runningTowardsFood = RabbitStateFactory.CreateRunningTowardsFood(data);
       _fleeing = RabbitStateFactory.CreateFleeing(data);
       _lookingForMate = RabbitStateFactory.CreateLookingForMate(data);
+      _eating = RabbitStateFactory.CreateEating(data);
       
       sphereCollider.radius = (sphereCollider.radius / sphereCollider.transform.lossyScale.magnitude) * genome.GetVision().Value;
 
@@ -91,6 +93,10 @@ namespace Ecosystem.AnimalBehaviour.RabbitStates
 
         case AnimalState.LookingForMate:
           State = _lookingForMate;
+          break;
+        
+        case AnimalState.Eating:
+          State = _eating;
           break;
 
         default:

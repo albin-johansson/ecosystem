@@ -1,4 +1,6 @@
+using System;
 using Ecosystem.Util;
+using UnityEditor.UIElements;
 using UnityEngine;
 
 namespace Ecosystem
@@ -7,11 +9,25 @@ namespace Ecosystem
   {
     [SerializeField] private StationaryFoodGeneration stationaryFoodGeneration;
 
+    private int _count;
+    private float _time;
+    private float _rate = 1;
 
-    //Handles the consuming of berries, when all berries has been consumed the bush will deactivate itself until new berries are available. 
-    private void OnTriggerEnter(Collider other)
+    private void Update()
     {
-      if (Tags.IsPrey(other.gameObject))
+      if (_count < 1)
+      {
+        return;
+      }
+
+      if (_time < _rate)
+      {
+        _time += Time.deltaTime;
+        return;
+      }
+
+      _time = 0;
+      for (int i = 0; i < _count; i++)
       {
         stationaryFoodGeneration.AmountOfBerries -= 1;
         var location = stationaryFoodGeneration.BerriesPlaced.Pop();
@@ -19,7 +35,24 @@ namespace Ecosystem
         if (stationaryFoodGeneration.AmountOfBerries < 1)
         {
           gameObject.SetActive(false);
+          break;
         }
+      }
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+      if (Tags.IsBerryEater(other.gameObject))
+      {
+        _count++;
+      }
+    }
+
+    private void OnTriggerExit(Collider other)
+    {
+      if (Tags.IsBerryEater(other.gameObject))
+      {
+        _count--;
       }
     }
   }
