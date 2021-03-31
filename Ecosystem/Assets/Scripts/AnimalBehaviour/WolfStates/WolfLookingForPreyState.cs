@@ -26,7 +26,14 @@ namespace Ecosystem.AnimalBehaviour.WolfStates
     {
       if (Target)
       {
-        return AnimalState.ChasingPrey;
+        if (Tags.IsMeat(Target))
+        {
+          return AnimalState.GoingToMeat;
+        }
+        else
+        {
+          return AnimalState.ChasingPrey;
+        }
       }
       else if (WaterConsumer.Thirst > Consumer.Hunger && WaterConsumer.IsThirsty())
       {
@@ -53,7 +60,7 @@ namespace Ecosystem.AnimalBehaviour.WolfStates
         {
           MemoryController.SaveToMemory(otherObject);
         }
-        else if (Tags.IsPrey(otherObject))
+        else if (Tags.IsPrey(otherObject) || Tags.IsMeat(otherObject))
         {
           Target = otherObject;
         }

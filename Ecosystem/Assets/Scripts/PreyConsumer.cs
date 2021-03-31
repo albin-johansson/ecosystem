@@ -14,6 +14,7 @@ namespace Ecosystem
     [SerializeField] private double maxHunger = 100;
     [SerializeField] private EcoAnimationController animationController;
     [SerializeField] private Reproducer reproducer;
+    [SerializeField] private GameObject meat;
     private bool _isDead;
 
     public bool IsAttacking { get; set; }
@@ -49,6 +50,7 @@ namespace Ecosystem
       {
         Hunger += genome.Metabolism * Time.deltaTime;
       }
+
       resourceBar.SetValue((float) Hunger);
       if (Hunger > maxHunger)
       {
@@ -59,13 +61,32 @@ namespace Ecosystem
 
     private void OnTriggerEnter(Collider other)
     {
-      if (!CollideActive || IsAttacking) return;
+      if (!CollideActive || IsAttacking)
+      {
+        return;
+      }
+
       if (Tags.IsPrey(other.gameObject))
       {
         IsAttacking = true;
         OnPreyConsumed?.Invoke();
+        var preyPosition = other.gameObject.transform.position;
+
         other.gameObject.GetComponent<DeathHandler>().Die(CauseOfDeath.Eaten);
-        Hunger = 0;
+
+        GameObject corpse = Instantiate(meat, preyPosition, Quaternion.identity);
+
+        if (corpse.TryGetComponent(out NutritionController nutritionController))
+        {
+          Hunger -= nutritionController.Consume(Hunger);
+        }
+      }
+      else if (Tags.IsMeat(other.gameObject))
+      {
+        if (other.TryGetComponent(out NutritionController nutritionController))
+        {
+          Hunger -= nutritionController.Consume(Hunger);
+        }
       }
     }
 
@@ -73,12 +94,11 @@ namespace Ecosystem
     {
       return Hunger > genome.GetHungerThreshold().Value;
     }
-    
+
     public void SetSaturation(float value)
     {
       Hunger = maxHunger - value;
       resourceBar.SetSaturationValue(value);
     }
-    
   }
 }

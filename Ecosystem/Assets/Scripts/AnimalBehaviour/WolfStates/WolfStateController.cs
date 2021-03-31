@@ -22,6 +22,7 @@ namespace Ecosystem.AnimalBehaviour.WolfStates
     private IAnimalState _chasingPrey;
     private IAnimalState _lookingForMate;
     private IAnimalState _attacking;
+    private IAnimalState _goingToFood;
 
     public override void Start()
     {
@@ -43,6 +44,7 @@ namespace Ecosystem.AnimalBehaviour.WolfStates
       _chasingPrey = WolfStateFactory.CreateChasingPrey(data);
       _lookingForMate = WolfStateFactory.CreateLookingForMate(data);
       _attacking = WolfStateFactory.CreateAttackingState(data);
+      _goingToFood = WolfStateFactory.CreateGoingToFoodState(data);
 
       
       sphereCollider.radius = (sphereCollider.radius / sphereCollider.transform.lossyScale.magnitude) * genome.GetVision().Value;
@@ -91,6 +93,7 @@ namespace Ecosystem.AnimalBehaviour.WolfStates
 
         case AnimalState.LookingForFood:
           State = _lookingForPrey;
+          consumer.CollideActive = true;
           break;
 
         case AnimalState.LookingForMate:
@@ -99,6 +102,11 @@ namespace Ecosystem.AnimalBehaviour.WolfStates
 
         case AnimalState.Attacking:
           State = _attacking;
+          break;
+        
+        case AnimalState.GoingToMeat:
+          State = _goingToFood;
+          consumer.CollideActive = true;
           break;
 
         default:

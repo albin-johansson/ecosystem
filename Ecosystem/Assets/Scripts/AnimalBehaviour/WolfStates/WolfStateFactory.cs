@@ -41,5 +41,10 @@ namespace Ecosystem.AnimalBehaviour.WolfStates
     {
       return new WolfAttackingState(data);
     }
+    
+    public static IAnimalState CreateGoingToFoodState(WolfStateData data)
+    {
+      return new WolfGoingToFoodState(data);
+    }
   }
 }
