@@ -13,60 +13,49 @@ namespace Ecosystem.AnimalBehaviour.RabbitStates
       AnimationController = data.AnimationController;
       MemoryController = data.MemoryController;
       Reproducer = data.Reproducer;
+      Genome = data.Genome;
     }
 
     public override void Begin(GameObject target)
     {
-      Target = null;
+      Target = GetClosestInVision(Layers.WaterLayer);
+      if (!Target)
+      {
+        Target = MemoryController.GetClosestInMemory(Tags.IsWater, MovementController.GetPosition());
+      }
       MovementController.StartWander();
       AnimationController.MoveAnimation();
     }
 
     public override AnimalState Tick()
     {
+      MovementController.UpdateWander();
       if (Target)
       {
         if (Tags.IsPredator(Target))
         {
           return AnimalState.Fleeing;
         }
-        else if (Target.CompareTag("Water"))
+        else if (Tags.IsWater(Target))
         {
           return AnimalState.RunningTowardsWater;
         }
       }
-
-      if (Consumer.Hunger > WaterConsumer.Thirst && Consumer.IsHungry())
-      {
-        return AnimalState.LookingForFood;
-      }
-
-      var (successfulRetrieval, memoryObject) = MemoryController.GetFromMemory("Water");
-      if (successfulRetrieval)
-      {
-        Target = memoryObject;
-        return base.Tick();
-      }
-
-      MovementController.UpdateWander();
-      return Type();
+      return base.Tick();
     }
 
     public override void OnTriggerEnter(Collider other)
     {
       var otherObject = other.gameObject;
 
-      if (MovementController.IsReachable(otherObject.transform.position))
+      if (Tags.IsWater(otherObject))
       {
-        if (otherObject.CompareTag("Water"))
-        {
-          MemoryController.SaveToMemory(otherObject);
-          Target = otherObject;
-        }
-        else if (Tags.IsPredator(otherObject))
-        {
-          Target = other.gameObject;
-        }
+        MemoryController.SaveToMemory(otherObject);
+        Target = otherObject;
+      }
+      else if (Tags.IsPredator(otherObject))
+      {
+        Target = other.gameObject;
       }
     }
 
