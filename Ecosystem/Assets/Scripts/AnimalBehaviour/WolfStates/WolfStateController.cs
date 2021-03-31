@@ -1,4 +1,3 @@
-using Ecosystem.Genes;
 using UnityEngine;
 
 namespace Ecosystem.AnimalBehaviour.WolfStates
@@ -6,13 +5,7 @@ namespace Ecosystem.AnimalBehaviour.WolfStates
   public sealed class WolfStateController : AbstractStateController
   {
     [SerializeField] private PreyConsumer consumer;
-    [SerializeField] private WaterConsumer waterConsumer;
-    [SerializeField] private MovementController movementController;
-    [SerializeField] private EcoAnimationController animationController;
-    [SerializeField] private MemoryController memoryController;
-    [SerializeField] private Reproducer reproducer;
-    [SerializeField] private SphereCollider sphereCollider;
-    [SerializeField] private AbstractGenome genome;
+
 
     private IAnimalState _idle;
     private IAnimalState _lookingForPrey;
@@ -34,6 +27,7 @@ namespace Ecosystem.AnimalBehaviour.WolfStates
         MovementController = movementController,
         WaterConsumer = waterConsumer,
         Reproducer = reproducer,
+        Genome = genome,
       };
 
       _idle = WolfStateFactory.CreateIdle(data);
@@ -46,9 +40,9 @@ namespace Ecosystem.AnimalBehaviour.WolfStates
       _attacking = WolfStateFactory.CreateAttackingState(data);
       _goingToFood = WolfStateFactory.CreateGoingToFoodState(data);
 
-      
+
       sphereCollider.radius = (sphereCollider.radius / sphereCollider.transform.lossyScale.magnitude) * genome.GetVision().Value;
-      
+
       State = _idle;
       SwitchState(AnimalState.Idle);
     }

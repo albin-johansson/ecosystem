@@ -1,4 +1,4 @@
-using Ecosystem.Genes;
+﻿using Ecosystem.Genes;
 using Ecosystem.Logging;
 using Ecosystem.UI;
 using Ecosystem.Util;
@@ -100,5 +100,6 @@ namespace Ecosystem
       Hunger = maxHunger - value;
       resourceBar.SetSaturationValue(value);
     }
+
   }
 }

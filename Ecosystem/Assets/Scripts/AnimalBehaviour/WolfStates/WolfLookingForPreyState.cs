@@ -13,11 +13,12 @@ namespace Ecosystem.AnimalBehaviour.WolfStates
       AnimationController = data.AnimationController;
       MemoryController = data.MemoryController;
       Reproducer = data.Reproducer;
+      Genome = data.Genome;
     }
 
     public override void Begin(GameObject target)
     {
-      Target = null;
+      Target = GetClosestInVision(Layers.PreyLayer);
       MovementController.StartWander();
       AnimationController.MoveAnimation();
     }
@@ -35,26 +36,17 @@ namespace Ecosystem.AnimalBehaviour.WolfStates
           return AnimalState.ChasingPrey;
         }
       }
-      else if (WaterConsumer.Thirst > Consumer.Hunger && WaterConsumer.IsThirsty())
-      {
-        return AnimalState.LookingForWater;
-      }
-
-      if (Consumer.IsAttacking)
-      {
-        return AnimalState.Attacking;
-      }
       else
       {
         MovementController.UpdateWander();
-        return Type();
+        return base.Tick();
       }
     }
 
     public override void OnTriggerEnter(Collider other)
     {
       var otherObject = other.gameObject;
-      if (MovementController.IsReachable(otherObject.transform.position))
+      if (otherObject.CompareTag("Water"))
       {
         if (otherObject.CompareTag("Water"))
         {
@@ -64,6 +56,10 @@ namespace Ecosystem.AnimalBehaviour.WolfStates
         {
           Target = otherObject;
         }
+      }
+      else if (Tags.IsPrey(otherObject))
+      {
+        Target = otherObject;
       }
     }
 
