@@ -34,7 +34,10 @@ namespace Ecosystem.AnimalBehaviour
 
     public void OnTriggerEnter(Collider other)
     {
-      State.OnTriggerEnter(other);
+      if (movementController.IsReachable(other.gameObject.transform.position))
+      {
+        State.OnTriggerEnter(other);
+      }
     }
 
     public void OnTriggerExit(Collider other)
