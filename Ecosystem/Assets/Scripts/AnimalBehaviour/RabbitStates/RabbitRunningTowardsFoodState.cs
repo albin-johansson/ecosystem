@@ -25,7 +25,7 @@ namespace Ecosystem.AnimalBehaviour.RabbitStates
 
     public override AnimalState Tick()
     {
-      if (!Target)
+      if (!Target || !Consumer.IsHungry())
       {
         return base.Tick();
       }
