@@ -1,3 +1,4 @@
+using Ecosystem.Util;
 using UnityEngine;
 
 namespace Ecosystem.AnimalBehaviour.WolfStates
@@ -24,17 +25,13 @@ namespace Ecosystem.AnimalBehaviour.WolfStates
 
     public override AnimalState Tick()
     {
-      if (!Target)
+      if (!Target || !WaterConsumer.IsThirsty())
       {
         return base.Tick();
       }
       else if (WaterConsumer.CanDrink)
       {
         return AnimalState.Drinking;
-      }
-      else if (WaterConsumer.Thirst < Consumer.Hunger && Consumer.IsHungry())
-      {
-        return AnimalState.LookingForPrey;
       }
       else
       {
@@ -46,6 +43,16 @@ namespace Ecosystem.AnimalBehaviour.WolfStates
     public override AnimalState Type()
     {
       return AnimalState.RunningTowardsWater;
+    }
+
+    public override void OnTriggerEnter(Collider other)
+    {
+      var otherObject = other.gameObject;
+      if (Tags.IsWater(otherObject))
+      {
+        MemoryController.SaveToMemory(otherObject);
+        Target = SelectCloser(otherObject, Target);
+      }
     }
   }
 }

@@ -1765,7 +1765,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4284669953163483551}
   - component: {fileID: 1611194173291749041}
-  m_Layer: 8
+  m_Layer: 0
   m_Name: Movement
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1801,7 +1801,6 @@ MonoBehaviour:
   navAgent: {fileID: 779919853503654891}
   genome: {fileID: 570846004582155358}
   sphereCollider: {fileID: 6776153342693034266}
-  staminaController: {fileID: 5127935158822396529}
 --- !u!1 &1918589021470924211
 GameObject:
   m_ObjectHideFlags: 0
@@ -3304,7 +3303,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2612359751320925015}
   - component: {fileID: 4010159563819866433}
-  m_Layer: 8
+  m_Layer: 0
   m_Name: deer
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4856,7 +4855,7 @@ GameObject:
   - component: {fileID: 6776153342693034266}
   - component: {fileID: 5959171333855914516}
   - component: {fileID: 1806921574331642721}
-  m_Layer: 8
+  m_Layer: 0
   m_Name: StateMachine
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4914,16 +4913,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9c7fb3531ec9c784baa8246d216af247, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  StateText: {fileID: 1914420894457515816}
-  staminaController: {fileID: 5127935158822396529}
-  consumer: {fileID: 5346017003192509530}
+  stateText: {fileID: 1914420894457515816}
   waterConsumer: {fileID: 8855973453505120815}
   movementController: {fileID: 1611194173291749041}
   animationController: {fileID: 4427174813899224407}
   memoryController: {fileID: 5959171333855914516}
   reproducer: {fileID: 4953059004311012286}
-  sphereCollider: {fileID: 6776153342693034266}
   genome: {fileID: 570846004582155358}
+  sphereCollider: {fileID: 6776153342693034266}
+  consumer: {fileID: 5346017003192509530}
 --- !u!1 &4759522730638570450
 GameObject:
   m_ObjectHideFlags: 0
@@ -5487,8 +5485,7 @@ GameObject:
   - component: {fileID: 4857879101199746012}
   - component: {fileID: 8855973453505120815}
   - component: {fileID: 5346017003192509530}
-  - component: {fileID: 5127935158822396529}
-  m_Layer: 8
+  m_Layer: 0
   m_Name: Consumer
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5555,21 +5552,6 @@ MonoBehaviour:
   deathHandler: {fileID: 6442332908797553670}
   maxHunger: 100
   reproducer: {fileID: 4953059004311012286}
---- !u!114 &5127935158822396529
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5442896545990147931}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8f46c134da7053a4eb9051dc0a6054de, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  genome: {fileID: 570846004582155358}
-  staminaBar: {fileID: 1511940297286169513}
-  maxStamina: 100
 --- !u!1 &5456374639049524137
 GameObject:
   m_ObjectHideFlags: 0
@@ -9929,14 +9911,6 @@ PrefabInstance:
       propertyPath: m_Layer
       value: 8
       objectReference: {fileID: 0}
-    - target: {fileID: 994919344941184360, guid: b11869fe3d5ecbf4b912f33fa4a312db, type: 3}
-      propertyPath: m_AnchorMax.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 994919344941184360, guid: b11869fe3d5ecbf4b912f33fa4a312db, type: 3}
-      propertyPath: m_AnchorMax.y
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 1511114111738311639, guid: b11869fe3d5ecbf4b912f33fa4a312db, type: 3}
       propertyPath: m_Layer
       value: 8
@@ -10062,17 +10036,6 @@ MonoBehaviour:
 --- !u!114 &897296775149995389 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 7011725190466901393, guid: b11869fe3d5ecbf4b912f33fa4a312db, type: 3}
-  m_PrefabInstance: {fileID: 7871571146252701932}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0f33f2c7a1419e740be5570d71daa2bf, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!114 &1511940297286169513 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 8774716248854127429, guid: b11869fe3d5ecbf4b912f33fa4a312db, type: 3}
   m_PrefabInstance: {fileID: 7871571146252701932}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 0}

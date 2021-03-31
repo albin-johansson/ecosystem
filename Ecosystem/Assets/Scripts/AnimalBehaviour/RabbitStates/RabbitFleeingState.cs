@@ -5,8 +5,6 @@ namespace Ecosystem.AnimalBehaviour.RabbitStates
 {
   internal sealed class RabbitFleeingState : AbstractAnimalState
   {
-    private GameObject _lastPredatorSeen;
-
     public RabbitFleeingState(RabbitStateData data)
     {
       StaminaController = data.StaminaController;
@@ -16,12 +14,12 @@ namespace Ecosystem.AnimalBehaviour.RabbitStates
       AnimationController = data.AnimationController;
       MemoryController = data.MemoryController;
       Reproducer = data.Reproducer;
+      Genome = data.Genome;
     }
 
     public override void Begin(GameObject target)
     {
       Target = target;
-      _lastPredatorSeen = target;
       MovementController.StartFleeing(Target.transform.position);
     }
 
@@ -44,8 +42,22 @@ namespace Ecosystem.AnimalBehaviour.RabbitStates
       }
       else
       {
-        return base.Tick();
+        if (Target.activeSelf)
+        {
+          MovementController.UpdateFleeing(Target.transform.position);
+          return Type();
+        }
+        else
+        {
+          Target = GetClosestInVision(Layers.PredatorLayer);
+          if (Target)
+          {
+            MovementController.UpdateFleeing(Target.transform.position);
+            return Type();
+          }
+        }
       }
+      return base.Tick();
     }
 
     public override GameObject End()
@@ -57,16 +69,9 @@ namespace Ecosystem.AnimalBehaviour.RabbitStates
     public override void OnTriggerEnter(Collider other)
     {
       var otherObject = other.gameObject;
-      if (MovementController.IsReachable(otherObject.transform.position))
+      if (otherObject.CompareTag("Water"))
       {
-        if (otherObject.CompareTag("Water"))
-        {
-          MemoryController.SaveToMemory(otherObject);
-        }
-        else if (Tags.IsPredator(otherObject))
-        {
-          _lastPredatorSeen = otherObject;
-        }
+        MemoryController.SaveToMemory(otherObject);
       }
     }
 
@@ -74,14 +79,7 @@ namespace Ecosystem.AnimalBehaviour.RabbitStates
     {
       if (other.gameObject == Target)
       {
-        if (other.gameObject == _lastPredatorSeen)
-        {
-          Target = null;
-        }
-        else
-        {
-          Target = _lastPredatorSeen;
-        }
+        Target = GetClosestInVision(Layers.PredatorLayer);
       }
     }
 

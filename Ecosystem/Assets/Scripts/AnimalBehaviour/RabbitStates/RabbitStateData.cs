@@ -1,3 +1,5 @@
+using Ecosystem.Genes;
+
 namespace Ecosystem.AnimalBehaviour.RabbitStates
 {
   public struct RabbitStateData
@@ -9,5 +11,6 @@ namespace Ecosystem.AnimalBehaviour.RabbitStates
     public EcoAnimationController AnimationController;
     public MemoryController MemoryController;
     public Reproducer Reproducer;
+    public AbstractGenome Genome;
   }
 }

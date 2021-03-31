@@ -48,6 +48,11 @@ namespace Ecosystem
       return ValidateDestination(targetPosition, out var destination);
     }
 
+    public Vector3 GetPosition()
+    {
+      return navAgent.transform.position;
+    }
+
 
     /// <summary>
     ///   Makes the animal run to target if target is valid.
