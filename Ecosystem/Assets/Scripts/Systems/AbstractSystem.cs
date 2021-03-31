@@ -12,6 +12,17 @@ namespace Ecosystem.Systems
       // Do nothing by default, systems can override this to do initialize their data
     }
 
+    protected override void OnCreate()
+    {
+      base.OnCreate();
+      SceneManager.activeSceneChanged += OnSceneChanged;
+    }
+
+    protected override void OnUpdate()
+    {
+      // Do nothing
+    }
+
     private void OnSceneChanged(Scene current, Scene next)
     {
       Enabled = EcsUtils.IsEcsCapable(next);
@@ -19,12 +30,6 @@ namespace Ecosystem.Systems
       {
         Initialize();
       }
-    }
-
-    protected override void OnCreate()
-    {
-      base.OnCreate();
-      SceneManager.activeSceneChanged += OnSceneChanged;
     }
   }
 }
