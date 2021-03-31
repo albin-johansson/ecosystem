@@ -27,33 +27,22 @@ namespace Ecosystem.AnimalBehaviour.RabbitStates
       {
         return AnimalState.Fleeing;
       }
-      else if (Consumer.Hunger >= WaterConsumer.Thirst && Consumer.IsHungry())
-      {
-        return AnimalState.LookingForFood;
-      }
-      else if (WaterConsumer.Thirst > Consumer.Hunger && WaterConsumer.IsThirsty())
-      {
-        return AnimalState.LookingForWater;
-      }
       else
       {
-        return Type();
+        return base.Tick();
       }
     }
 
     public override void OnTriggerEnter(Collider other)
     {
       var otherObject = other.gameObject;
-      if (MovementController.IsReachable(otherObject.transform.position))
+      if (otherObject.CompareTag("Water"))
       {
-        if (otherObject.CompareTag("Water"))
-        {
-          MemoryController.SaveToMemory(otherObject);
-        }
-        else if (Tags.IsPredator(otherObject))
-        {
-          Target = otherObject;
-        }
+        MemoryController.SaveToMemory(otherObject);
+      }
+      else if (Tags.IsPredator(otherObject))
+      {
+        Target = otherObject;
       }
     }
 
