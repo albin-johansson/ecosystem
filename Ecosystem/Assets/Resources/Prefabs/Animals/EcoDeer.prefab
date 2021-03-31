@@ -1765,7 +1765,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4284669953163483551}
   - component: {fileID: 1611194173291749041}
-  m_Layer: 8
+  m_Layer: 0
   m_Name: Movement
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1796,8 +1796,8 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 33065438d0e433c4185335d9b2c4bf73, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
+  m_Name:
+  m_EditorClassIdentifier:
   navAgent: {fileID: 779919853503654891}
   genome: {fileID: 570846004582155358}
   sphereCollider: {fileID: 6776153342693034266}
@@ -3303,7 +3303,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2612359751320925015}
   - component: {fileID: 4010159563819866433}
-  m_Layer: 8
+  m_Layer: 0
   m_Name: deer
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3586,8 +3586,8 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 22eee6933ea9e9b4f90722c64ceefa7c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
+  m_Name:
+  m_EditorClassIdentifier:
   genome: {fileID: 570846004582155358}
   prefab: {fileID: 7155763010095567698}
   keyToPool: Deer
@@ -4855,7 +4855,7 @@ GameObject:
   - component: {fileID: 6776153342693034266}
   - component: {fileID: 5959171333855914516}
   - component: {fileID: 1806921574331642721}
-  m_Layer: 8
+  m_Layer: 0
   m_Name: StateMachine
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4899,8 +4899,8 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 61c23cb0a96b9f243b4a54dd181e22d4, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
+  m_Name:
+  m_EditorClassIdentifier:
 --- !u!114 &1806921574331642721
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4911,17 +4911,17 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 9c7fb3531ec9c784baa8246d216af247, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
+  m_Name:
+  m_EditorClassIdentifier:
+  stateText: {fileID: 1914420894457515816}
   waterConsumer: {fileID: 8855973453505120815}
   movementController: {fileID: 1611194173291749041}
   animationController: {fileID: 4427174813899224407}
   memoryController: {fileID: 5959171333855914516}
   reproducer: {fileID: 4953059004311012286}
-  sphereCollider: {fileID: 6776153342693034266}
   genome: {fileID: 570846004582155358}
-  StateText: {fileID: 1914420894457515816}
-  foodConsumer: {fileID: 5346017003192509530}
+  sphereCollider: {fileID: 6776153342693034266}
+  consumer: {fileID: 5346017003192509530}
 --- !u!1 &4759522730638570450
 GameObject:
   m_ObjectHideFlags: 0
@@ -5485,7 +5485,7 @@ GameObject:
   - component: {fileID: 4857879101199746012}
   - component: {fileID: 8855973453505120815}
   - component: {fileID: 5346017003192509530}
-  m_Layer: 8
+  m_Layer: 0
   m_Name: Consumer
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5529,8 +5529,8 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 5ecc989552950f6449739af04d52bf49, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
+  m_Name:
+  m_EditorClassIdentifier:
   genome: {fileID: 570846004582155358}
   resourceBar: {fileID: 897296775149995389}
   deathHandler: {fileID: 6442332908797553670}
@@ -5545,8 +5545,8 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 8b0d8392b591c9448a6a95dfbc63639a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
+  m_Name:
+  m_EditorClassIdentifier:
   genome: {fileID: 570846004582155358}
   resourceBar: {fileID: 6078427025632469203}
   deathHandler: {fileID: 6442332908797553670}
@@ -7468,7 +7468,7 @@ Animator:
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
   m_LinearVelocityBlending: 0
-  m_WarningMessage: 
+  m_WarningMessage:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
@@ -7552,8 +7552,8 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 184edc0ef7b34b1fae4d32870830ac3f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
+  m_Name:
+  m_EditorClassIdentifier:
   navMeshAgent: {fileID: 779919853503654891}
 --- !u!114 &6442332908797553670
 MonoBehaviour:
@@ -7565,8 +7565,8 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 04dec80f06674629b7366fcb55ec29f2, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
+  m_Name:
+  m_EditorClassIdentifier:
   animationController: {fileID: 4427174813899224407}
   keyToPool: Deer
 --- !u!114 &570846004582155358
@@ -7579,8 +7579,8 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 9414ef04b79fdc7498427d2db88290e7, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
+  m_Name:
+  m_EditorClassIdentifier:
 --- !u!1 &7186192348177787887
 GameObject:
   m_ObjectHideFlags: 0
@@ -10031,8 +10031,8 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 0f33f2c7a1419e740be5570d71daa2bf, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
+  m_Name:
+  m_EditorClassIdentifier:
 --- !u!114 &897296775149995389 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 7011725190466901393, guid: b11869fe3d5ecbf4b912f33fa4a312db, type: 3}
@@ -10042,8 +10042,8 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 0f33f2c7a1419e740be5570d71daa2bf, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
+  m_Name:
+  m_EditorClassIdentifier:
 --- !u!114 &1914420894457515816 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 8623289280508370884, guid: b11869fe3d5ecbf4b912f33fa4a312db, type: 3}
@@ -10053,5 +10053,5 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 920e87bfe7fe9274dbe2c10fc8c06029, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
+  m_Name:
+  m_EditorClassIdentifier:

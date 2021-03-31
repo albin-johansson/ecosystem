@@ -196,7 +196,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5745841613518323677}
   - component: {fileID: 7401787944804568421}
-  m_Layer: 10
+  m_Layer: 0
   m_Name: Movement
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -227,8 +227,8 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 33065438d0e433c4185335d9b2c4bf73, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
+  m_Name:
+  m_EditorClassIdentifier:
   navAgent: {fileID: 6562256236261779254}
   genome: {fileID: 1080774011748047759}
   sphereCollider: {fileID: 6405190242370463797}
@@ -911,8 +911,8 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 22eee6933ea9e9b4f90722c64ceefa7c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
+  m_Name:
+  m_EditorClassIdentifier:
   genome: {fileID: 1080774011748047759}
   prefab: {fileID: 7237780236292801018}
   keyToPool: Bear
@@ -1145,7 +1145,7 @@ GameObject:
   - component: {fileID: 4475402439294125818}
   - component: {fileID: 1750528480465133566}
   - component: {fileID: 3973268693136602879}
-  m_Layer: 10
+  m_Layer: 0
   m_Name: Consumer
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1189,8 +1189,8 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 5ecc989552950f6449739af04d52bf49, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
+  m_Name:
+  m_EditorClassIdentifier:
   genome: {fileID: 1080774011748047759}
   resourceBar: {fileID: 8610027635385015251}
   deathHandler: {fileID: 5519717986162146221}
@@ -1205,8 +1205,8 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: c2fa5581f03243c68b482d0030e00671, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
+  m_Name:
+  m_EditorClassIdentifier:
   genome: {fileID: 1080774011748047759}
   resourceBar: {fileID: 3410853300184415869}
   deathHandler: {fileID: 5519717986162146221}
@@ -1396,7 +1396,7 @@ Animator:
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
   m_LinearVelocityBlending: 0
-  m_WarningMessage: 
+  m_WarningMessage:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
@@ -1572,8 +1572,8 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 184edc0ef7b34b1fae4d32870830ac3f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
+  m_Name:
+  m_EditorClassIdentifier:
   navMeshAgent: {fileID: 6562256236261779254}
 --- !u!114 &5519717986162146221
 MonoBehaviour:
@@ -1585,8 +1585,8 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 04dec80f06674629b7366fcb55ec29f2, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
+  m_Name:
+  m_EditorClassIdentifier:
   animationController: {fileID: -4165548273840364118}
   keyToPool: Bear
 --- !u!114 &1080774011748047759
@@ -1599,8 +1599,8 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: b65414bb43209374c86329675bc191ee, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
+  m_Name:
+  m_EditorClassIdentifier:
 --- !u!1 &7509506793630284121
 GameObject:
   m_ObjectHideFlags: 0
@@ -1673,7 +1673,7 @@ GameObject:
   - component: {fileID: 6405190242370463797}
   - component: {fileID: 6008664309968109715}
   - component: {fileID: 6410639263071043262}
-  m_Layer: 10
+  m_Layer: 0
   m_Name: StateMachine
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1717,8 +1717,8 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 61c23cb0a96b9f243b4a54dd181e22d4, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
+  m_Name:
+  m_EditorClassIdentifier:
 --- !u!114 &6410639263071043262
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1729,17 +1729,17 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 3cd94d57fb1da52439641dc290534ae7, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
+  m_Name:
+  m_EditorClassIdentifier:
+  stateText: {fileID: 7034133904784691590}
   waterConsumer: {fileID: 1750528480465133566}
   movementController: {fileID: 7401787944804568421}
   animationController: {fileID: -4165548273840364118}
   memoryController: {fileID: 6008664309968109715}
   reproducer: {fileID: 3460790299832027449}
-  sphereCollider: {fileID: 6405190242370463797}
   genome: {fileID: 1080774011748047759}
-  StateText: {fileID: 7034133904784691590}
-  preyConsumer: {fileID: 3973268693136602879}
+  sphereCollider: {fileID: 6405190242370463797}
+  consumer: {fileID: 3973268693136602879}
 --- !u!1 &8421346663248798016
 GameObject:
   m_ObjectHideFlags: 0
@@ -1963,8 +1963,8 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 0f33f2c7a1419e740be5570d71daa2bf, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
+  m_Name:
+  m_EditorClassIdentifier:
 --- !u!114 &8610027635385015251 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 7011725190466901393, guid: b11869fe3d5ecbf4b912f33fa4a312db, type: 3}
@@ -1974,8 +1974,8 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 0f33f2c7a1419e740be5570d71daa2bf, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
+  m_Name:
+  m_EditorClassIdentifier:
 --- !u!114 &7034133904784691590 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 8623289280508370884, guid: b11869fe3d5ecbf4b912f33fa4a312db, type: 3}
@@ -1985,5 +1985,5 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 920e87bfe7fe9274dbe2c10fc8c06029, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
+  m_Name:
+  m_EditorClassIdentifier:

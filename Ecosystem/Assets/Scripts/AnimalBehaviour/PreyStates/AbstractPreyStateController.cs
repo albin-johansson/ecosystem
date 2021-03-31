@@ -3,17 +3,17 @@ namespace Ecosystem.AnimalBehaviour.PreyStates
   public abstract class AbstractPreyStateController : AbstractStateController
   {
     protected StateData Data;
-    
+
     private IAnimalState _idle;
     private IAnimalState _lookingForWater;
     private IAnimalState _drinking;
     private IAnimalState _runningTowardsWater;
     private IAnimalState _fleeing;
-    
+
     protected IAnimalState RunningTowardsFood;
     protected IAnimalState LookingForMate;
     protected IAnimalState LookingForFood;
-    
+
     public override void Start()
     {
       Data = new StateData
@@ -23,7 +23,8 @@ namespace Ecosystem.AnimalBehaviour.PreyStates
         MemoryController = memoryController,
         MovementController = movementController,
         WaterConsumer = waterConsumer,
-        Reproducer = reproducer
+        Reproducer = reproducer,
+        Genome = genome,
       };
 
       _idle = PreyStateFactory.CreatePreyIdle(Data);

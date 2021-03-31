@@ -8,5 +8,6 @@ namespace Ecosystem.AnimalBehaviour
     public EcoAnimationController AnimationController;
     public MemoryController MemoryController;
     public Reproducer Reproducer;
+    public AbstractGenome Genome;
   }
 }

@@ -6,17 +6,17 @@ namespace Ecosystem.AnimalBehaviour
 {
   public abstract class AbstractStateController : MonoBehaviour, IStateController
   {
+    protected IAnimalState State;
+    [SerializeField] protected StateText stateText;
     [SerializeField] protected WaterConsumer waterConsumer;
     [SerializeField] protected MovementController movementController;
     [SerializeField] protected EcoAnimationController animationController;
     [SerializeField] protected MemoryController memoryController;
     [SerializeField] protected Reproducer reproducer;
-    [SerializeField] protected SphereCollider sphereCollider;
     [SerializeField] protected AbstractGenome genome;
-    [SerializeField] private StateText StateText;
-    
-    protected IConsumer Consumer;
-    protected IAnimalState State;
+    [SerializeField] protected SphereCollider sphereCollider;
+
+
     public abstract void Start();
 
     public abstract void SwitchState(AnimalState state);
@@ -28,13 +28,16 @@ namespace Ecosystem.AnimalBehaviour
       {
         SwitchState(newState);
         //Uncomment for debugging
-        //StateText.SetText(newState.ToString());
+        stateText.SetText(newState.ToString());
       }
     }
 
     public void OnTriggerEnter(Collider other)
     {
-      State.OnTriggerEnter(other);
+      if (movementController.IsReachable(other.gameObject.transform.position))
+      {
+        State.OnTriggerEnter(other);
+      }
     }
 
     public void OnTriggerExit(Collider other)

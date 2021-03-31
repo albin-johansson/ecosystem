@@ -13,11 +13,12 @@ namespace Ecosystem.AnimalBehaviour.PredatorStates
       AnimationController = data.AnimationController;
       MemoryController = data.MemoryController;
       Reproducer = data.Reproducer;
+      Genome = data.Genome;
     }
 
     public override void Begin(GameObject target)
     {
-      Target = null;
+      Target = GetClosestInVision(Layers.PreyLayer);
       MovementController.StartWander();
       AnimationController.MoveAnimation();
     }
@@ -28,35 +29,23 @@ namespace Ecosystem.AnimalBehaviour.PredatorStates
       {
         return AnimalState.ChasingPrey;
       }
-      else if (WaterConsumer.Thirst > Consumer.Hunger && WaterConsumer.IsThirsty())
-      {
-        return AnimalState.LookingForWater;
-      }
-
-      if (Consumer.IsAttacking)
-      {
-        return AnimalState.Attacking;
-      }
       else
       {
         MovementController.UpdateWander();
-        return Type();
+        return base.Tick();
       }
     }
 
     public override void OnTriggerEnter(Collider other)
     {
       var otherObject = other.gameObject;
-      if (MovementController.IsReachable(otherObject.transform.position))
+      if (otherObject.CompareTag("Water"))
       {
-        if (otherObject.CompareTag("Water"))
-        {
-          MemoryController.SaveToMemory(otherObject);
-        }
-        else if (Tags.IsPrey(otherObject))
-        {
-          Target = otherObject;
-        }
+        MemoryController.SaveToMemory(otherObject);
+      }
+      else if (Tags.IsPrey(otherObject))
+      {
+        Target = otherObject;
       }
     }
 

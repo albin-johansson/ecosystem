@@ -22,7 +22,6 @@ namespace Ecosystem.AnimalBehaviour.PreyStates
       MovementController.StandStill(true);
       WaterConsumer.StartDrinking();
       // TODO: Add animationController.DrinkAnimation();
-      // TODO Check memory
     }
 
     public override AnimalState Tick()
@@ -44,17 +43,20 @@ namespace Ecosystem.AnimalBehaviour.PreyStates
     public override void OnTriggerEnter(Collider other)
     {
       var otherObject = other.gameObject;
-      if (MovementController.IsReachable(otherObject.transform.position))
+      if (Tags.IsWater(otherObject))
       {
-        if (otherObject.CompareTag("Water") || Tags.IsFood(otherObject))
-        {
-          MemoryController.SaveToMemory(otherObject);
-        }
-        else if (Tags.IsPredator(otherObject))
-        {
-          Target = otherObject;
-        }
+        MemoryController.SaveToMemory(otherObject);
       }
+      else if (Tags.IsPredator(otherObject))
+      {
+        Target = otherObject;
+      }
+    }
+
+    public override GameObject End()
+    {
+      WaterConsumer.StopDrinking();
+      return base.End();
     }
 
     public override AnimalState Type()

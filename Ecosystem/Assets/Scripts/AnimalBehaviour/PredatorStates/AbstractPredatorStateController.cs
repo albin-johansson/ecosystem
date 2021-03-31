@@ -9,12 +9,12 @@ namespace Ecosystem.AnimalBehaviour.PredatorStates
     private IAnimalState _drinking;
     private IAnimalState _runningTowardsWater;
     private IAnimalState _attacking;
-    
+
     protected IAnimalState ChasingPrey;
     protected IAnimalState LookingForMate;
     protected IAnimalState LookingForFood;
-    
-    
+
+
     public override void Start()
     {
       Data = new StateData
@@ -25,6 +25,7 @@ namespace Ecosystem.AnimalBehaviour.PredatorStates
         MovementController = movementController,
         WaterConsumer = waterConsumer,
         Reproducer = reproducer,
+        Genome = genome,
       };
 
       _idle = PredatorStateFactory.CreatePredatorIdle(Data);
@@ -34,7 +35,7 @@ namespace Ecosystem.AnimalBehaviour.PredatorStates
       _attacking = PredatorStateFactory.CreatePredatorAttackingState(Data);
 
       sphereCollider.radius = (sphereCollider.radius / sphereCollider.transform.lossyScale.magnitude) * genome.GetVision().Value;
-      
+
       State = _idle;
       SwitchState(AnimalState.Idle);
     }

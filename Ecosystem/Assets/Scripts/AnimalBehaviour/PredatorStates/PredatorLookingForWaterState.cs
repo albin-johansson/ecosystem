@@ -1,3 +1,4 @@
+using Ecosystem.Util;
 using UnityEngine;
 
 namespace Ecosystem.AnimalBehaviour.PredatorStates
@@ -16,7 +17,11 @@ namespace Ecosystem.AnimalBehaviour.PredatorStates
 
     public override void Begin(GameObject target)
     {
-      Target = null;
+      Target = GetClosestInVision(Layers.WaterLayer);
+      if (!Target)
+      {
+        Target = MemoryController.GetClosestInMemory(Tags.IsWater, MovementController.GetPosition());
+      }
       MovementController.StartWander();
       AnimationController.MoveAnimation();
     }
@@ -27,32 +32,17 @@ namespace Ecosystem.AnimalBehaviour.PredatorStates
       {
         return AnimalState.RunningTowardsWater;
       }
-      else if (WaterConsumer.Thirst < Consumer.Hunger && Consumer.IsHungry())
-      {
-        return AnimalState.LookingForPrey;
-      }
-
-      var (successfulRetrieval, memoryObject) = MemoryController.GetFromMemory("Water");
-      if (successfulRetrieval)
-      {
-        Target = memoryObject;
-        return base.Tick();
-      }
-
       MovementController.UpdateWander();
-      return Type();
+      return base.Tick();
     }
 
     public override void OnTriggerEnter(Collider other)
     {
       var otherObject = other.gameObject;
-      if (MovementController.IsReachable(otherObject.transform.position))
+      if (Tags.IsWater(otherObject))
       {
-        if (otherObject.CompareTag("Water"))
-        {
-          MemoryController.SaveToMemory(otherObject);
-          Target = otherObject;
-        }
+        MemoryController.SaveToMemory(otherObject);
+        Target = otherObject;
       }
     }
 

@@ -20,7 +20,6 @@ namespace Ecosystem.AnimalBehaviour.PreyStates
       Target = target;
       MovementController.RunToTarget(Target.transform.position);
       AnimationController.MoveAnimation();
-      //TODO Check memory
     }
 
     public override AnimalState Tick()
@@ -47,17 +46,15 @@ namespace Ecosystem.AnimalBehaviour.PreyStates
     public override void OnTriggerEnter(Collider other)
     {
       var otherObject = other.gameObject;
-      if (MovementController.IsReachable(otherObject.transform.position))
+
+      if (otherObject.CompareTag("Water"))
       {
-        if (otherObject.CompareTag("Water"))
-        {
-          // TODO: Check if new source is closer
-          MemoryController.SaveToMemory(otherObject);
-        }
-        else if (Tags.IsPredator(otherObject))
-        {
-          Target = otherObject;
-        }
+        MemoryController.SaveToMemory(otherObject);
+        Target = SelectCloser(otherObject, Target);
+      }
+      else if (Tags.IsPredator(otherObject))
+      {
+        Target = otherObject;
       }
     }
 
