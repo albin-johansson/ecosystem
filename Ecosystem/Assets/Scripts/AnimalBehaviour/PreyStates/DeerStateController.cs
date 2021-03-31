@@ -2,7 +2,7 @@ using UnityEngine;
 
 namespace Ecosystem.AnimalBehaviour.PreyStates
 {
-  public sealed class DearStateController : AbstractPreyStateController
+  public sealed class DeerStateController : AbstractPreyStateController
   {
     [SerializeField] private FoodConsumer foodConsumer;
 

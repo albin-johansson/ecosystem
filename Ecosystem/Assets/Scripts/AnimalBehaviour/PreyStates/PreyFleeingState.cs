@@ -5,7 +5,7 @@ namespace Ecosystem.AnimalBehaviour.PreyStates
 {
   internal sealed class PreyFleeingState : AbstractAnimalState
   {
-    public RabbitFleeingState(RabbitStateData data)
+    public PreyFleeingState(StateData data)
     {
       Consumer = data.Consumer;
       WaterConsumer = data.WaterConsumer;

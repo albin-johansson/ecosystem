@@ -1,3 +1,5 @@
+using Ecosystem.Genes;
+
 namespace Ecosystem.AnimalBehaviour
 {
   public struct StateData

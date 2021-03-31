@@ -44,12 +44,12 @@ namespace Ecosystem.AnimalBehaviour.PreyStates
 
     public static IAnimalState CreateDeerLookingForMate(StateData data)
     {
-      return null;
+      return new DeerLookingForMateState(data);
     }
 
     public static IAnimalState CreateDeerRunningTowardsFood(StateData data)
     {
-      return null;
+      return new DeerRunningTowardsFoodState(data);
     }
 
     public static IAnimalState CreateDeerLookingForFood(StateData data)

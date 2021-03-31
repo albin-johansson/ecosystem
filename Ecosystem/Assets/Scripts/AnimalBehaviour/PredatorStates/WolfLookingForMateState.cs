@@ -19,7 +19,7 @@ namespace Ecosystem.AnimalBehaviour.PredatorStates
     public override void Begin(GameObject target)
     {
       Reproducer.isWilling = true;
-      Target = GetClosestMateInVision(Layers.PredatorLayer);
+      Target = GetClosestMateInVision(Layers.WolfLayer);
 
     }
 
@@ -75,7 +75,7 @@ namespace Ecosystem.AnimalBehaviour.PredatorStates
     {
       if (other.gameObject == Target)
       {
-        Target = GetClosestMateInVision(Layers.PredatorLayer);
+        Target = GetClosestMateInVision(Layers.WolfLayer);
       }
     }
   }
