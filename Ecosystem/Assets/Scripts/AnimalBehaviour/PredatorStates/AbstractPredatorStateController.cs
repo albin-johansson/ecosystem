@@ -12,7 +12,7 @@ namespace Ecosystem.AnimalBehaviour.PredatorStates
     
     protected IAnimalState ChasingPrey;
     protected IAnimalState LookingForMate;
-    protected IAnimalState LookingForPrey;
+    protected IAnimalState LookingForFood;
     
     
     public override void Start()
@@ -49,7 +49,7 @@ namespace Ecosystem.AnimalBehaviour.PredatorStates
           break;
 
         case AnimalState.LookingForPrey:
-          State = LookingForPrey;
+          State = LookingForFood;
           Consumer.CollideActive = true;
           break;
 
@@ -78,7 +78,7 @@ namespace Ecosystem.AnimalBehaviour.PredatorStates
           break;
 
         case AnimalState.LookingForFood:
-          State = LookingForPrey;
+          State = LookingForFood;
           break;
 
         case AnimalState.LookingForMate:

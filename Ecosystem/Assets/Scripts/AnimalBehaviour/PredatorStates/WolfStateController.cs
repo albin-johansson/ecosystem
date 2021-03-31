@@ -10,7 +10,7 @@ namespace Ecosystem.AnimalBehaviour.PredatorStates
     {
       Consumer = preyConsumer;
       base.Start();
-      LookingForPrey = PredatorStateFactory.CreateWolfLookingForPrey(Data);
+      LookingForFood = PredatorStateFactory.CreateWolfLookingForPrey(Data);
       ChasingPrey = PredatorStateFactory.CreateWolfChasingPrey(Data);
       LookingForMate = PredatorStateFactory.CreateWolfLookingForMate(Data);
     }
