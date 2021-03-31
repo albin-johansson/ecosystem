@@ -1,4 +1,4 @@
-using Ecosystem.Genes;
+﻿using Ecosystem.Genes;
 using Ecosystem.Logging;
 using Ecosystem.UI;
 using Ecosystem.Util;
@@ -75,12 +75,12 @@ namespace Ecosystem
     {
       return Hunger > genome.GetHungerThreshold().Value;
     }
-    
+
     public void SetSaturation(float value)
     {
       Hunger = maxHunger - value;
       resourceBar.SetSaturationValue(value);
     }
-    
+
   }
 }

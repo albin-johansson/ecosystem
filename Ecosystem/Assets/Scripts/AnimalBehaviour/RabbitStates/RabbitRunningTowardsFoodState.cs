@@ -20,12 +20,11 @@ namespace Ecosystem.AnimalBehaviour.RabbitStates
       Target = target;
       MovementController.RunToTarget(Target.transform.position);
       AnimationController.MoveAnimation();
-      //TODO Check memory
     }
 
     public override AnimalState Tick()
     {
-      if (!Target || !Target.activeSelf)
+      if (!Target || !Consumer.IsHungry() || !Target.activeSelf)
       {
         return base.Tick();
       }
@@ -47,16 +46,17 @@ namespace Ecosystem.AnimalBehaviour.RabbitStates
     public override void OnTriggerEnter(Collider other)
     {
       var otherObject = other.gameObject;
-      if (MovementController.IsReachable(otherObject.transform.position))
+      if (otherObject.CompareTag("Food"))
       {
-        if (otherObject.CompareTag("Water"))
-        {
-          MemoryController.SaveToMemory(otherObject);
-        }
-        else if (Tags.IsPredator(otherObject))
-        {
-          Target = otherObject;
-        }
+        Target = SelectCloser(otherObject, Target);
+      }
+      else if (otherObject.CompareTag("Water"))
+      {
+        MemoryController.SaveToMemory(otherObject);
+      }
+      else if (Tags.IsPredator(otherObject))
+      {
+        Target = otherObject;
       }
     }
 
