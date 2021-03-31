@@ -4,7 +4,6 @@ namespace Ecosystem.AnimalBehaviour.RabbitStates
 {
   public sealed class RabbitStateController : AbstractStateController
   {
-    [SerializeField] private StaminaController staminaController;
     [SerializeField] private FoodConsumer consumer;
 
     private IAnimalState _idle;

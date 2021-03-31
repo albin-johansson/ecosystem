@@ -25,8 +25,17 @@ namespace Ecosystem.AnimalBehaviour.RabbitStates
 
     public override AnimalState Tick()
     {
-      if (Target && Target.activeSelf)
+      if (Target)
       {
+        if (!Target.activeSelf)
+        {
+          Target = GetClosestInVision(Layers.PredatorLayer);
+          if (!Target)
+          {
+            return base.Tick();
+          }
+        }
+
         if (StaminaController.CanRun())
         {
           StaminaController.IsRunning = true;
@@ -40,23 +49,7 @@ namespace Ecosystem.AnimalBehaviour.RabbitStates
         MovementController.UpdateFleeing(Target.transform.position);
         return Type();
       }
-      else
-      {
-        if (Target.activeSelf)
-        {
-          MovementController.UpdateFleeing(Target.transform.position);
-          return Type();
-        }
-        else
-        {
-          Target = GetClosestInVision(Layers.PredatorLayer);
-          if (Target)
-          {
-            MovementController.UpdateFleeing(Target.transform.position);
-            return Type();
-          }
-        }
-      }
+
       return base.Tick();
     }
 

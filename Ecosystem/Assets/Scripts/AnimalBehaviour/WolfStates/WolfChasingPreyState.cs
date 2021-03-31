@@ -25,6 +25,11 @@ namespace Ecosystem.AnimalBehaviour.WolfStates
 
     public override AnimalState Tick()
     {
+      if (Consumer.IsAttacking)
+      {
+        return AnimalState.Attacking;
+      }
+      
       if (!Target || !Consumer.IsHungry())
       {
         return base.Tick();
@@ -33,11 +38,6 @@ namespace Ecosystem.AnimalBehaviour.WolfStates
       {
         Target = GetClosestInVision(Layers.PreyLayer);
         return Type();
-      }
-      else if (Consumer.IsAttacking)
-      {
-        AnimationController.MoveAnimation();
-        return AnimalState.Attacking;
       }
       else
       {

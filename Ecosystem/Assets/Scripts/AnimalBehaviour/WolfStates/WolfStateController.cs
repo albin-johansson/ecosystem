@@ -4,7 +4,6 @@ namespace Ecosystem.AnimalBehaviour.WolfStates
 {
   public sealed class WolfStateController : AbstractStateController
   {
-    [SerializeField] private StaminaController staminaController;
     [SerializeField] private PreyConsumer consumer;
 
 
