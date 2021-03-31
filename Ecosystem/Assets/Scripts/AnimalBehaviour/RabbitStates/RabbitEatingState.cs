@@ -34,7 +34,7 @@ namespace Ecosystem.AnimalBehaviour.RabbitStates
       {
         return base.Tick();
       }
-      else if (Consumer.IsEating)
+      else if (Consumer.EatingFromGameObject)
       {
         return Type();
       }

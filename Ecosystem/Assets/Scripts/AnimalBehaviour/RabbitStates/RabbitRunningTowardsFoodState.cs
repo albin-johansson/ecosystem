@@ -33,7 +33,7 @@ namespace Ecosystem.AnimalBehaviour.RabbitStates
       {
         return AnimalState.Fleeing;
       }
-      else if (Consumer.IsEating)
+      else if (Consumer.EatingFromGameObject)
       {
         return AnimalState.Eating;
       }

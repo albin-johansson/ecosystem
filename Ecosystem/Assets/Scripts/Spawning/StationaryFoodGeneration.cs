@@ -5,9 +5,9 @@ using Random = UnityEngine.Random;
 namespace Ecosystem.Spawning
 {
   /// <summary>
-  /// The handler script for the stationary food generators. Actives children objects for visuals purposes.  
+  /// The handler script for the stationary food generators. Activates berries on the bush for visuals purposes.  
   /// </summary>
-  public class StationaryFoodGeneration : MonoBehaviour
+  public sealed class StationaryFoodGeneration : MonoBehaviour
   {
     [SerializeField] private Transform spawner;
     [SerializeField] private float rate;
@@ -25,7 +25,7 @@ namespace Ecosystem.Spawning
     {
       _spawningLocations = spawner.childCount - 1;
 
-      for (int i = 0; i < _spawningLocations; i++)
+      for (int i = 0; i < _spawningLocations; ++i)
       {
         spawner.GetChild(i).gameObject.SetActive(false);
       }
@@ -49,10 +49,8 @@ namespace Ecosystem.Spawning
         }
 
         _elapsedTime = 0;
-        int i = Random.Range(1, 4);
-        while (i > 0)
+        for (var i = Random.Range(1, 4); i > 0; --i)
         {
-          i--;
           SpawnBerries();
         }
       }

@@ -11,7 +11,7 @@ namespace Ecosystem
 
     bool CollideActive { get; set; }
     
-    GameObject IsEating { get; set; }
+    GameObject EatingFromGameObject { get; set; }
 
     bool IsHungry();
 
