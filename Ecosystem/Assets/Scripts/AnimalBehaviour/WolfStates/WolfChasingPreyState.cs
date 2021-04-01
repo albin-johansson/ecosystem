@@ -7,6 +7,7 @@ namespace Ecosystem.AnimalBehaviour.WolfStates
   {
     public WolfChasingPreyState(WolfStateData data)
     {
+      StaminaController = data.StaminaController;
       Consumer = data.Consumer;
       WaterConsumer = data.WaterConsumer;
       MovementController = data.MovementController;
@@ -20,11 +21,15 @@ namespace Ecosystem.AnimalBehaviour.WolfStates
     {
       Target = target;
       MovementController.StartHunting(Target.transform.position);
-      AnimationController.MoveAnimation();
     }
 
     public override AnimalState Tick()
     {
+      if (Consumer.IsAttacking)
+      {
+        return AnimalState.Attacking;
+      }
+      
       if (!Target || !Consumer.IsHungry())
       {
         return base.Tick();
@@ -34,16 +39,27 @@ namespace Ecosystem.AnimalBehaviour.WolfStates
         Target = GetClosestInVision(Layers.PreyLayer);
         return Type();
       }
-      else if (Consumer.IsAttacking)
-      {
-        return AnimalState.Attacking;
-      }
       else
       {
+        if (StaminaController.CanRun())
+        {
+          StaminaController.IsRunning = true;
+          AnimationController.RunAnimation();
+        }
+        else
+        {
+          AnimationController.MoveAnimation();
+        }
         MovementController.UpdateHunting(Target.transform.position);
       }
 
       return Type();
+    }
+
+    public override GameObject End()
+    {
+      StaminaController.IsRunning = false;
+      return base.End();
     }
 
     public override void OnTriggerEnter(Collider other)

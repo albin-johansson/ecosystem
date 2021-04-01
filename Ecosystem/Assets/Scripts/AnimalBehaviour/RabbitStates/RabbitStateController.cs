@@ -19,6 +19,7 @@ namespace Ecosystem.AnimalBehaviour.RabbitStates
     {
       var data = new RabbitStateData
       {
+        StaminaController = staminaController,
         Consumer = consumer,
         AnimationController = animationController,
         MemoryController = memoryController,
