@@ -26,8 +26,7 @@ public sealed class RadiusPrefabSpawner : MonoBehaviour
       }
       if (hit.transform.CompareTag("Terrain"))
       {
-        Debug.Log("Spawns berry");        
-          Instantiate(prefab, hit.point, Quaternion.identity);
+        Instantiate(prefab, hit.point, Quaternion.identity);
       }
     }
   }

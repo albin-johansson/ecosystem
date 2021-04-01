@@ -31,16 +31,13 @@ namespace Ecosystem.AnimalBehaviour.WolfStates
         {
           return AnimalState.GoingToMeat;
         }
-        else
+        else if(Tags.IsPrey(Target))
         {
           return AnimalState.ChasingPrey;
         }
       }
-      else
-      {
-        MovementController.UpdateWander();
-        return base.Tick();
-      }
+      MovementController.UpdateWander();
+      return base.Tick();
     }
 
     public override void OnTriggerEnter(Collider other)
@@ -48,16 +45,9 @@ namespace Ecosystem.AnimalBehaviour.WolfStates
       var otherObject = other.gameObject;
       if (otherObject.CompareTag("Water"))
       {
-        if (otherObject.CompareTag("Water"))
-        {
-          MemoryController.SaveToMemory(otherObject);
-        }
-        else if (Tags.IsPrey(otherObject) || Tags.IsMeat(otherObject))
-        {
-          Target = otherObject;
-        }
+        MemoryController.SaveToMemory(otherObject);
       }
-      else if (Tags.IsPrey(otherObject))
+      else if (Tags.IsPrey(otherObject) || Tags.IsMeat(otherObject))
       {
         Target = otherObject;
       }
