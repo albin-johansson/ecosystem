@@ -15,6 +15,7 @@ namespace Ecosystem.Systems
   {
     public static int InitialRabbitCount;
     public static int InitialWolfCount;
+    public static int InitialCarrotCount;
 
     private FactorySystem _factorySystem;
     private bool _hasSpawned;
@@ -26,7 +27,8 @@ namespace Ecosystem.Systems
       EntityManager.AddSingleton(new InitialSimulationData
       {
               initialRabbitCount = InitialRabbitCount,
-              initialWolfCount = InitialWolfCount
+              initialWolfCount = InitialWolfCount,
+              initialCarrotCount = InitialCarrotCount
       });
     }
 
@@ -36,6 +38,7 @@ namespace Ecosystem.Systems
       {
         Spawn(InitialRabbitCount, position => _factorySystem.MakeRabbit(position));
         Spawn(InitialWolfCount, position => _factorySystem.MakeWolf(position));
+        Spawn(InitialCarrotCount, position => _factorySystem.MakeCarrot(position));
 
         _hasSpawned = true;
       }
