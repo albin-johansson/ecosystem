@@ -198,9 +198,9 @@ namespace Ecosystem.UI
       ToggleMutate(toggle.isOn, ref bearMutateChance);
     }
 
-    private void ToggleMutate(bool isOn, ref float chance)
+    private static float GetMutateChance(bool isOn)
     {
-      chance = isOn ? 0.05f : 0f;
+      return isOn ? 0.05f : 0f;
     }
   }
 }
