@@ -1,3 +1,5 @@
+using Ecosystem.Components;
+using Ecosystem.ECS;
 using Ecosystem.Util;
 using Reese.Nav;
 using Unity.Entities;
@@ -20,6 +22,11 @@ namespace Ecosystem.Systems
     protected override void Initialize()
     {
       _factorySystem = World.GetOrCreateSystem<FactorySystem>();
+      EntityManager.AddSingleton(new InitialSimulationData
+      {
+              initialRabbitCount = InitialRabbitCount,
+              initialWolfCount = InitialWolfCount
+      });
     }
 
     protected override void OnUpdate()
