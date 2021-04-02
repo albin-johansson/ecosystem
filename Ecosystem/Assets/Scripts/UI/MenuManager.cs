@@ -152,9 +152,8 @@ namespace Ecosystem.UI
     }
 
 
-    //Methods for genome settings.
-    private void ToggleSet(bool isOn, ref Dictionary<GeneType, Preset> preset, Dictionary<GeneType, Preset> single,
-      Dictionary<GeneType, Preset> multi)
+    private static void ToggleSet(bool isOn, out Dictionary<GeneType, Preset> preset,
+            Dictionary<GeneType, Preset> single, Dictionary<GeneType, Preset> multi)
     {
       preset = isOn ? multi : single;
     }
