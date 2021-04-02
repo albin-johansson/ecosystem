@@ -12,6 +12,7 @@ namespace Ecosystem.Systems
   {
     private Entity _rabbitPrefab = Entity.Null;
     private Entity _wolfPrefab = Entity.Null;
+    private Entity _carrotPrefab = Entity.Null;
 
     protected override void OnUpdate()
     {
@@ -56,6 +57,19 @@ namespace Ecosystem.Systems
 
       var wolf = EntityManager.Instantiate(_wolfPrefab);
       MakeAnimal(wolf, position);
+    }
+
+    public void MakeCarrot(float3 position)
+    {
+      Debug.Assert(Enabled);
+
+      if (_carrotPrefab == Entity.Null)
+      {
+        _carrotPrefab = EntityManager.GetSingleton<CarrotPrefab>().Value;
+      }
+
+      var carrot = EntityManager.Instantiate(_carrotPrefab);
+      SetPosition(carrot, position);
     }
   }
 }
