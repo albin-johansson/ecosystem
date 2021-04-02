@@ -40,7 +40,7 @@ namespace Ecosystem.AnimalBehaviour.WolfStates
       _attacking = WolfStateFactory.CreateAttackingState(data);
 
 
-      sphereCollider.radius = (sphereCollider.radius / sphereCollider.transform.lossyScale.magnitude) * genome.GetVision().Value;
+      sphereCollider.radius = genome.GetVision().Value;
 
       State = _idle;
       SwitchState(AnimalState.Idle);

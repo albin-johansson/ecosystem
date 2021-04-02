@@ -1606,6 +1606,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   animationController: {fileID: -4165548273840364118}
   keyToPool: Bear
+  _isDead: 0
 --- !u!114 &1080774011748047759
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1749,6 +1750,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   stateText: {fileID: 7034133904784691590}
+  staminaController: {fileID: 560206207795770940}
   waterConsumer: {fileID: 1750528480465133566}
   movementController: {fileID: 7401787944804568421}
   animationController: {fileID: -4165548273840364118}
@@ -1756,7 +1758,6 @@ MonoBehaviour:
   reproducer: {fileID: 3460790299832027449}
   genome: {fileID: 1080774011748047759}
   sphereCollider: {fileID: 6405190242370463797}
-  staminaController: {fileID: 560206207795770940}
   consumer: {fileID: 3973268693136602879}
 --- !u!1 &8421346663248798016
 GameObject:
@@ -1865,6 +1866,22 @@ PrefabInstance:
       propertyPath: m_Layer
       value: 10
       objectReference: {fileID: 0}
+    - target: {fileID: 1526647522327027228, guid: b11869fe3d5ecbf4b912f33fa4a312db, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1526647522327027228, guid: b11869fe3d5ecbf4b912f33fa4a312db, type: 3}
+      propertyPath: m_AnchorMin.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1526647522327027228, guid: b11869fe3d5ecbf4b912f33fa4a312db, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1526647522327027228, guid: b11869fe3d5ecbf4b912f33fa4a312db, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 2536866107968727645, guid: b11869fe3d5ecbf4b912f33fa4a312db, type: 3}
       propertyPath: m_Layer
       value: 10
@@ -1876,6 +1893,22 @@ PrefabInstance:
     - target: {fileID: 3018008042109104378, guid: b11869fe3d5ecbf4b912f33fa4a312db, type: 3}
       propertyPath: m_Layer
       value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 4402140519956974371, guid: b11869fe3d5ecbf4b912f33fa4a312db, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4402140519956974371, guid: b11869fe3d5ecbf4b912f33fa4a312db, type: 3}
+      propertyPath: m_AnchorMin.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4402140519956974371, guid: b11869fe3d5ecbf4b912f33fa4a312db, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4402140519956974371, guid: b11869fe3d5ecbf4b912f33fa4a312db, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4553548993296237901, guid: b11869fe3d5ecbf4b912f33fa4a312db, type: 3}
       propertyPath: m_AnchorMax.x
@@ -1912,6 +1945,22 @@ PrefabInstance:
     - target: {fileID: 7047769294678984298, guid: b11869fe3d5ecbf4b912f33fa4a312db, type: 3}
       propertyPath: m_Layer
       value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 7377427048936836637, guid: b11869fe3d5ecbf4b912f33fa4a312db, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7377427048936836637, guid: b11869fe3d5ecbf4b912f33fa4a312db, type: 3}
+      propertyPath: m_AnchorMin.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7377427048936836637, guid: b11869fe3d5ecbf4b912f33fa4a312db, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7377427048936836637, guid: b11869fe3d5ecbf4b912f33fa4a312db, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7703842002902075840, guid: b11869fe3d5ecbf4b912f33fa4a312db, type: 3}
       propertyPath: m_Layer
@@ -1967,7 +2016,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8482749343550285724, guid: b11869fe3d5ecbf4b912f33fa4a312db, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8703765452308408067, guid: b11869fe3d5ecbf4b912f33fa4a312db, type: 3}
       propertyPath: m_Layer
