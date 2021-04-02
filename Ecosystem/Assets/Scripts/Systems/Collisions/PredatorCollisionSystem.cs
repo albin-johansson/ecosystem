@@ -24,7 +24,7 @@ namespace Ecosystem.Systems.Collisions
       var deadFromEntity = GetComponentDataFromEntity<Dead>(true);
 
       /* This system goes through entry collisions for all currently roaming predators. The predators will start chasing
-         any colliding prey that aren't dead. */
+         any colliding prey that isn't dead. */
       Entities.WithAll<Predator, SpatialTrigger, PhysicsCollider>()
               .WithAll<Roaming>()
               .WithNone<NavFollow, Dead>()
