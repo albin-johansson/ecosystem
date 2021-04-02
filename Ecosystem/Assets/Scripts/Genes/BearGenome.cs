@@ -40,7 +40,6 @@ namespace Ecosystem.Genes
       _preset = DefaultSet;
     }
 
-
     protected override void Initialize()
     {
       Data = CreateData();
@@ -52,7 +51,6 @@ namespace Ecosystem.Genes
       _preset = presets;
       _mutateChance = mutateChance;
     }
-
 
     protected override Dictionary<GeneType, Preset> GetPresets()
     {

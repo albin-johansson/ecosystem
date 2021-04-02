@@ -88,7 +88,6 @@ namespace Ecosystem
       {
         IsDrinking = true;
       }
-
       return IsDrinking;
     }
 
