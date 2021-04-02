@@ -6,8 +6,12 @@ using Unity.Physics;
 
 namespace Ecosystem.Systems.Collisions
 {
+  /// <summary>
+  ///   This system goes through entry collisions for all currently roaming predators. The predators will
+  ///   start chasing any colliding prey that isn't dead.
+  /// </summary>
   [UpdateInGroup(typeof(CollisionSystemGroup))]
-  public sealed class PredatorCollisionSystem : AbstractSystem
+  public sealed class RoamingPredatorCollisionSystem : AbstractSystem
   {
     private EntityCommandBufferSystem _barrier;
 
@@ -23,8 +27,6 @@ namespace Ecosystem.Systems.Collisions
       var preyFromEntity = GetComponentDataFromEntity<Prey>(true);
       var deadFromEntity = GetComponentDataFromEntity<Dead>(true);
 
-      /* This system goes through entry collisions for all currently roaming predators. The predators will start chasing
-         any colliding prey that isn't dead. */
       Entities.WithAll<Predator, SpatialTrigger, PhysicsCollider>()
               .WithAll<Roaming>()
               .WithNone<NavFollow, Dead>()
@@ -58,7 +60,7 @@ namespace Ecosystem.Systems.Collisions
                   }
                 }
               })
-              .WithName("PredatorRoamingCollisionSystemEntryJob")
+              .WithName("RoamingPredatorCollisionSystemJob")
               .WithBurst()
               .ScheduleParallel();
 

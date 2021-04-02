@@ -20,7 +20,7 @@ namespace Ecosystem.Systems.Collisions
   ///   a single animal (or rather, it is *extremely* slow).
   /// </remarks>
   [UpdateInGroup(typeof(CollisionSystemGroup))]
-  [UpdateAfter(typeof(PredatorCollisionSystem))]
+  [UpdateAfter(typeof(RoamingPredatorCollisionSystem))]
   public sealed class PredatorChaseCollisionSystem : AbstractSystem
   {
     private EntityCommandBufferSystem _barrier;
