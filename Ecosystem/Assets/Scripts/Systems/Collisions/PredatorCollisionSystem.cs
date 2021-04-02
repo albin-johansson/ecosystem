@@ -41,7 +41,7 @@ namespace Ecosystem.Systems.Collisions
                 {
                   var activator = entries[i].Value.Activator;
 
-                  // Only chase prey that aren't dead
+                  // Only chase prey that isn't dead
                   if (preyFromEntity.HasComponent(activator) && !deadFromEntity.HasComponent(activator))
                   {
                     // Stop roaming and pursue the detected prey
