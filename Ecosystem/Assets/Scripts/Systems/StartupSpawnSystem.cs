@@ -33,28 +33,25 @@ namespace Ecosystem.Systems
     {
       if (_count > 1 && !_hasSpawned)
       {
-        var terrain = Terrain.activeTerrain;
-
-        for (var i = 0; i < InitialRabbitCount; ++i)
-        {
-          if (Terrains.RandomWalkablePosition(terrain, out var position))
-          {
-            _factorySystem.MakeRabbit(position);
-          }
-        }
-
-        for (var i = 0; i < InitialWolfCount; ++i)
-        {
-          if (Terrains.RandomWalkablePosition(terrain, out var position))
-          {
-            _factorySystem.MakeWolf(position);
-          }
-        }
+        Spawn(InitialRabbitCount, position => _factorySystem.MakeRabbit(position));
+        Spawn(InitialWolfCount, position => _factorySystem.MakeWolf(position));
 
         _hasSpawned = true;
       }
 
       ++_count;
+    }
+
+    private static void Spawn(int count, Action<Vector3> function)
+    {
+      var terrain = Terrain.activeTerrain;
+      for (var i = 0; i < count; ++i)
+      {
+        if (Terrains.RandomWalkablePosition(terrain, out var position))
+        {
+          function(position);
+        }
+      }
     }
   }
 }
