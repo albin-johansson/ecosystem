@@ -66,6 +66,15 @@ namespace Ecosystem.Systems.Collisions
                   // The predator is close enough to kill the chased prey
                   EcsUtils.Kill(ref buffer, entityInQueryIndex, preyEntity, time.ElapsedTime, CauseOfDeath.Eaten);
                   Nav.StopChaseAndRoam(ref buffer, entityInQueryIndex, entity);
+
+                  if (HasComponent<Hunger>(entity))
+                  {
+                    // Reduce the hunger of the predator that consumed the prey
+                    var hunger = GetComponent<Hunger>(entity);
+                    hunger.value -= 50;
+                    hunger.value = math.clamp(hunger.value, 0, hunger.max);
+                    buffer.SetComponent(entityInQueryIndex, entity, hunger);
+                  }
                 }
                 else if (distance > predator.maxChaseDistance)
                 {
