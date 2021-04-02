@@ -38,7 +38,7 @@ namespace Ecosystem.Systems
 
       if (_rabbitPrefab == Entity.Null)
       {
-        _rabbitPrefab = EntityManager.LoadPrefab<RabbitPrefab>().Value;
+        _rabbitPrefab = EntityManager.GetSingleton<RabbitPrefab>().Value;
       }
 
       var rabbit = EntityManager.Instantiate(_rabbitPrefab);
@@ -51,7 +51,7 @@ namespace Ecosystem.Systems
 
       if (_wolfPrefab == Entity.Null)
       {
-        _wolfPrefab = EntityManager.LoadPrefab<WolfPrefab>().Value;
+        _wolfPrefab = EntityManager.GetSingleton<WolfPrefab>().Value;
       }
 
       var wolf = EntityManager.Instantiate(_wolfPrefab);

@@ -8,8 +8,8 @@ namespace Ecosystem.ECS
   /// </summary>
   public static class EcsUtils
   {
-    // Extension function for entity managers, less verbose way to initialize a prefab
-    public static T LoadPrefab<T>(this EntityManager manager) where T : struct, IComponentData
+    // Extension function for entity managers to obtain a "singleton" component
+    public static T GetSingleton<T>(this EntityManager manager) where T : struct, IComponentData
     {
       return manager.CreateEntityQuery(typeof(T)).GetSingleton<T>();
     }
