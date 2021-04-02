@@ -23,31 +23,42 @@ namespace Ecosystem.Systems.Collisions
       var preyFromEntity = GetComponentDataFromEntity<Prey>(true);
       var deadFromEntity = GetComponentDataFromEntity<Dead>(true);
 
+      /* This system goes through entry collisions for all currently roaming predators. The predators will start chasing
+         any colliding prey that aren't dead. */
       Entities.WithAll<Predator, SpatialTrigger, PhysicsCollider>()
+              .WithAll<Roaming>()
               .WithNone<NavFollow, Dead>()
-              .WithChangeFilter<SpatialEntry>() // Note that we only observe collision entries
+              .WithChangeFilter<SpatialEntry>()
               .WithReadOnly(preyFromEntity)
               .WithReadOnly(deadFromEntity)
-              .ForEach((Entity predatorEntity, in DynamicBuffer<SpatialEntry> entries) =>
+              .ForEach((Entity entity,
+                      int entityInQueryIndex,
+                      in Predator predator,
+                      in DynamicBuffer<SpatialEntry> entries) =>
               {
                 // Traverse from the end of the buffer for performance reasons.
                 for (var i = entries.Length - 1; i >= 0; --i)
                 {
                   var activator = entries[i].Value.Activator;
 
+                  // Only chase prey that aren't dead
                   if (preyFromEntity.HasComponent(activator) && !deadFromEntity.HasComponent(activator))
                   {
                     // Stop roaming and pursue the detected prey
-                    buffer.RemoveComponent<Roaming>(predatorEntity.Index, predatorEntity);
-                    buffer.AddComponent(predatorEntity.Index, predatorEntity, new NavFollow
+                    buffer.RemoveComponent<Roaming>(entityInQueryIndex, entity);
+                    buffer.AddComponent(entityInQueryIndex, entity, new NavStop());
+                    buffer.AddComponent(entityInQueryIndex, entity, new NavFollow
                     {
                             Target = activator,
-                            MaxDistance = 20, // TODO make this a property of predators? Or a separate comp
-                            MinDistance = 0
+                            MinDistance = 0,
+                            MaxDistance = predator.maxChaseDistance
                     });
+
+                    break;
                   }
                 }
-              }).WithName("PredatorCollisionSystemEntryJob")
+              })
+              .WithName("PredatorRoamingCollisionSystemEntryJob")
               .WithBurst()
               .ScheduleParallel();
 

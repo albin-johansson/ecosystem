@@ -1,4 +1,5 @@
 using Ecosystem.Components;
+using Ecosystem.ECS;
 using Ecosystem.Logging;
 using Reese.Nav;
 using Unity.Entities;
@@ -10,7 +11,8 @@ namespace Ecosystem.Systems.Collisions
   /// <summary>
   ///   This system is responsible for checking for predators that get within striking distance of the prey that they
   ///   are chasing. When a predator is within striking distance, the prey simply dies in the current implementation,
-  ///   and the predator subsequently returns to roaming.
+  ///   and the predator subsequently returns to roaming. Furthermore, if a predator is too far away from the chased
+  ///   prey, the case is aborted.
   /// </summary>
   /// <remarks>
   ///   This system doesn't make use of colliders, instead the raw distance between entities is used. This is because of
@@ -31,64 +33,47 @@ namespace Ecosystem.Systems.Collisions
     protected override void OnUpdate()
     {
       var buffer = _barrier.CreateCommandBuffer().AsParallelWriter();
-
       var localToWorldFromEntity = GetComponentDataFromEntity<LocalToWorld>(true);
-      var preyFromEntity = GetComponentDataFromEntity<Prey>(true);
       var deadFromEntity = GetComponentDataFromEntity<Dead>(true);
+      var time = Time;
 
       Entities.WithAll<Predator, NavFollow, LocalToWorld>()
               .WithNone<Dead>()
               .WithReadOnly(localToWorldFromEntity)
-              .WithReadOnly(preyFromEntity)
               .WithReadOnly(deadFromEntity)
-              .ForEach((Entity predatorEntity, int entityInQueryIndex, in Predator predator, in NavFollow follow) =>
+              .ForEach((Entity entity,
+                      int entityInQueryIndex,
+                      in Predator predator,
+                      in NavFollow follow,
+                      in LocalToWorld localToWorld) =>
               {
                 var preyEntity = follow.Target;
 
                 if (deadFromEntity.HasComponent(preyEntity))
                 {
-                  // If the target prey died during our chase, return to roaming
-                  buffer.RemoveComponent<NavFollow>(entityInQueryIndex, predatorEntity);
-                  buffer.RemoveComponent<NavDestination>(entityInQueryIndex, predatorEntity);
-                  buffer.RemoveComponent<NavPlanning>(entityInQueryIndex, predatorEntity);
-                  buffer.RemoveComponent<NavProblem>(entityInQueryIndex, predatorEntity);
-                  buffer.AddComponent<Roaming>(entityInQueryIndex, predatorEntity);
+                  // The chased animal died from something else, so abort the chase
+                  Nav.StopChaseAndRoam(ref buffer, entityInQueryIndex, entity);
                   return;
                 }
 
-                if (!localToWorldFromEntity.HasComponent(preyEntity) ||
-                    !preyFromEntity.HasComponent(preyEntity))
-                {
-                  return;
-                }
-
-                var predatorPosition = localToWorldFromEntity[predatorEntity].Position;
+                var predatorPosition = localToWorld.Position;
                 var preyPosition = localToWorldFromEntity[preyEntity].Position;
 
-                if (math.distance(predatorPosition, preyPosition) <= predator.attackDistance)
+                var distance = math.distance(predatorPosition, preyPosition);
+
+                if (distance <= predator.attackDistance)
                 {
-                  // Mark the pursued animal as dead
-                  buffer.AddComponent(preyEntity.Index, preyEntity, new Dead
-                  {
-                          cause = CauseOfDeath.Eaten
-                  });
-
-                  // Make sure that the dead animal stops
-                  buffer.RemoveComponent<NavAgent>(preyEntity.Index, preyEntity);
-                  buffer.RemoveComponent<NavDestination>(preyEntity.Index, preyEntity);
-                  buffer.RemoveComponent<NavPlanning>(preyEntity.Index, preyEntity);
-
-                  // Make the predator stop following the consumed animal
-                  buffer.RemoveComponent<NavFollow>(entityInQueryIndex, predatorEntity);
-                  buffer.RemoveComponent<NavDestination>(entityInQueryIndex, predatorEntity);
-                  buffer.RemoveComponent<NavPlanning>(entityInQueryIndex, predatorEntity);
-                  buffer.RemoveComponent<NavProblem>(entityInQueryIndex, predatorEntity);
-
-                  // Make the predator return to roaming
-                  buffer.AddComponent<Roaming>(entityInQueryIndex, predatorEntity);
+                  // The predator is close enough to kill the chased prey
+                  EcsUtils.Kill(ref buffer, entityInQueryIndex, preyEntity, time.ElapsedTime, CauseOfDeath.Eaten);
+                  Nav.StopChaseAndRoam(ref buffer, entityInQueryIndex, entity);
+                }
+                else if (distance > predator.maxChaseDistance)
+                {
+                  // The predator is too far away from the chased animal, so abort the chase
+                  Nav.StopChaseAndRoam(ref buffer, entityInQueryIndex, entity);
                 }
               })
-              .WithName("PredatorChaseSystemJob")
+              .WithName("PredatorChaseCollisionSystemJob")
               .WithBurst()
               .ScheduleParallel();
 
