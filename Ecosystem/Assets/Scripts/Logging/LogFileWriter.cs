@@ -18,9 +18,12 @@ namespace Ecosystem.Logging
     /// </remarks>
     private static readonly string LogsDirectory;
 
+    private static readonly string EcsLogsDirectory;
+
     static LogFileWriter()
     {
       LogsDirectory = $"{Directory.GetCurrentDirectory()}/SimulationLogs";
+      EcsLogsDirectory = $"{Directory.GetCurrentDirectory()}/ECSLogs";
     }
 
     /// <summary>
@@ -32,6 +35,12 @@ namespace Ecosystem.Logging
     public static void Save(LogData data)
     {
       var path = $"{LogsDirectory}/log_{GetDateTimeString()}.json";
+      WriteToFile(path, JsonUtility.ToJson(data, true));
+    }
+
+    public static void SaveEcs(object data)
+    {
+      var path = $"{EcsLogsDirectory}/log_{GetDateTimeString()}.json";
       WriteToFile(path, JsonUtility.ToJson(data, true));
     }
 
