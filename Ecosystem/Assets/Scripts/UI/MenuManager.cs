@@ -153,49 +153,49 @@ namespace Ecosystem.UI
 
 
     private static void ToggleSet(bool isOn, out Dictionary<GeneType, Preset> preset,
-            Dictionary<GeneType, Preset> single, Dictionary<GeneType, Preset> multi)
+      Dictionary<GeneType, Preset> single, Dictionary<GeneType, Preset> multi)
     {
       preset = isOn ? multi : single;
     }
 
     private void ToggleSetRabbit(Toggle toggle)
     {
-      ToggleSet(toggle.isOn, ref _rabbitPreset, RabbitGenome.DefaultSingular, RabbitGenome.DefaultSet);
+      ToggleSet(toggle.isOn, out _rabbitPreset, RabbitGenome.DefaultSingular, RabbitGenome.DefaultSet);
     }
 
     private void ToggleSetWolf(Toggle toggle)
     {
-      ToggleSet(toggle.isOn, ref _wolfPreset, WolfGenome.DefaultSingular, WolfGenome.DefaultSet);
+      ToggleSet(toggle.isOn, out _wolfPreset, WolfGenome.DefaultSingular, WolfGenome.DefaultSet);
     }
 
     private void ToggleSetDear(Toggle toggle)
     {
-      ToggleSet(toggle.isOn, ref _deerPreset, DeerGenome.DefaultSingular, DeerGenome.DefaultSet);
+      ToggleSet(toggle.isOn, out _deerPreset, DeerGenome.DefaultSingular, DeerGenome.DefaultSet);
     }
 
     private void ToggleSetBear(Toggle toggle)
     {
-      ToggleSet(toggle.isOn, ref _bearPreset, BearGenome.DefaultSingular, BearGenome.DefaultSet);
+      ToggleSet(toggle.isOn, out _bearPreset, BearGenome.DefaultSingular, BearGenome.DefaultSet);
     }
 
     private void ToggleMutateRabbit(Toggle toggle)
     {
-      ToggleMutate(toggle.isOn, ref _rabbitMutateChance);
+      _rabbitMutateChance = GetMutateChance(toggle);
     }
 
     private void ToggleMutateWolf(Toggle toggle)
     {
-      ToggleMutate(toggle.isOn, ref _wolfMutateChance);
+      _wolfMutateChance = GetMutateChance(toggle);
     }
 
     private void ToggleMutateDear(Toggle toggle)
     {
-      ToggleMutate(toggle.isOn, ref _deerMutateChance);
+      _deerMutateChance = GetMutateChance(toggle);
     }
 
     private void ToggleMutateBear(Toggle toggle)
     {
-      ToggleMutate(toggle.isOn, ref _bearMutateChance);
+      _bearMutateChance = GetMutateChance(toggle);
     }
 
     private static float GetMutateChance(bool isOn)
