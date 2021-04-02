@@ -10,7 +10,7 @@ namespace Ecosystem.Genes
     private const float MetabolismFactor = 1.495f; // 1.15 (Vision) * 1.30 (Speed)
     private const float ChildFoodConsumtionFactor = 4f / 3f;
 
-    private static readonly Dictionary<GeneType, Preset> _defaultPresets = new Dictionary<GeneType, Preset>()
+    private static readonly Dictionary<GeneType, Preset> DefaultPresets = new Dictionary<GeneType, Preset>()
     {
       {GeneType.HungerRate, new Preset(0, 10, new[] {1f, 5f, 7f})},
       {GeneType.HungerThreshold, new Preset(0, 10, new[] {1f, 5f, 7f})},
@@ -36,10 +36,10 @@ namespace Ecosystem.Genes
     /// </summary>
     protected Dictionary<GeneType, Gene> CreateGenes()
     {
-      return CreateGenes(_defaultPresets);
+      return CreateGenes(DefaultPresets);
     }
 
-    protected Dictionary<GeneType, Gene> CreateGenes(Dictionary<GeneType, Preset> presets)
+    private static Dictionary<GeneType, Gene> CreateGenes(Dictionary<GeneType, Preset> presets)
     {
       var hungerRate = GeneUtil.CreateGeneFromPreset(presets[GeneType.HungerRate]);
       var hungerThreshold = GeneUtil.CreateGeneFromPreset(presets[GeneType.HungerThreshold]);

@@ -28,21 +28,21 @@ namespace Ecosystem.UI
     [SerializeField] private Toggle bearSet;
     [SerializeField] private Toggle bearMutate;
 
-    private Dictionary<GeneType, Preset> rabbitPreset;
-    private Dictionary<GeneType, Preset> wolfPreset;
-    private Dictionary<GeneType, Preset> deerPreset;
-    private Dictionary<GeneType, Preset> bearPreset;
-    private float rabbitMutateChance = 0.05f;
-    private float wolfMutateChance = 0.05f;
-    private float deerMutateChance = 0.05f;
-    private float bearMutateChance = 0.05f;
+    private Dictionary<GeneType, Preset> _rabbitPreset;
+    private Dictionary<GeneType, Preset> _wolfPreset;
+    private Dictionary<GeneType, Preset> _deerPreset;
+    private Dictionary<GeneType, Preset> _bearPreset;
+    private float _rabbitMutateChance = 0.05f;
+    private float _wolfMutateChance = 0.05f;
+    private float _deerMutateChance = 0.05f;
+    private float _bearMutateChance = 0.05f;
 
     private void Start()
     {
-      rabbitPreset = RabbitGenome.DefaultSet;
-      wolfPreset = WolfGenome.DefaultSet;
-      deerPreset = DeerGenome.DefaultSet;
-      bearPreset = BearGenome.DefaultSet;
+      _rabbitPreset = RabbitGenome.DefaultSet;
+      _wolfPreset = WolfGenome.DefaultSet;
+      _deerPreset = DeerGenome.DefaultSet;
+      _bearPreset = BearGenome.DefaultSet;
       rabbitSet.onValueChanged.AddListener(delegate { ToggleSetRabbit(rabbitSet); });
       rabbitMutate.onValueChanged.AddListener(delegate { ToggleMutateRabbit(rabbitMutate); });
       wolfSet.onValueChanged.AddListener(delegate { ToggleSetWolf(wolfSet); });
@@ -95,10 +95,10 @@ namespace Ecosystem.UI
 
     private void OnSceneChanged(Scene current, Scene next)
     {
-      RabbitGenome.SetPreset(rabbitPreset, rabbitMutateChance);
-      WolfGenome.SetPreset(wolfPreset, wolfMutateChance);
-      DeerGenome.SetPreset(deerPreset, deerMutateChance);
-      BearGenome.SetPreset(bearPreset, bearMutateChance);
+      RabbitGenome.SetPreset(_rabbitPreset, _rabbitMutateChance);
+      WolfGenome.SetPreset(_wolfPreset, _wolfMutateChance);
+      DeerGenome.SetPreset(_deerPreset, _deerMutateChance);
+      BearGenome.SetPreset(_bearPreset, _bearMutateChance);
 
       if (next.name == "DynamicScene")
       {
@@ -161,42 +161,42 @@ namespace Ecosystem.UI
 
     private void ToggleSetRabbit(Toggle toggle)
     {
-      ToggleSet(toggle.isOn, ref rabbitPreset, RabbitGenome.DefaultSingular, RabbitGenome.DefaultSet);
+      ToggleSet(toggle.isOn, ref _rabbitPreset, RabbitGenome.DefaultSingular, RabbitGenome.DefaultSet);
     }
 
     private void ToggleSetWolf(Toggle toggle)
     {
-      ToggleSet(toggle.isOn, ref wolfPreset, WolfGenome.DefaultSingular, WolfGenome.DefaultSet);
+      ToggleSet(toggle.isOn, ref _wolfPreset, WolfGenome.DefaultSingular, WolfGenome.DefaultSet);
     }
 
     private void ToggleSetDear(Toggle toggle)
     {
-      ToggleSet(toggle.isOn, ref deerPreset, DeerGenome.DefaultSingular, DeerGenome.DefaultSet);
+      ToggleSet(toggle.isOn, ref _deerPreset, DeerGenome.DefaultSingular, DeerGenome.DefaultSet);
     }
 
     private void ToggleSetBear(Toggle toggle)
     {
-      ToggleSet(toggle.isOn, ref bearPreset, BearGenome.DefaultSingular, BearGenome.DefaultSet);
+      ToggleSet(toggle.isOn, ref _bearPreset, BearGenome.DefaultSingular, BearGenome.DefaultSet);
     }
 
     private void ToggleMutateRabbit(Toggle toggle)
     {
-      ToggleMutate(toggle.isOn, ref rabbitMutateChance);
+      ToggleMutate(toggle.isOn, ref _rabbitMutateChance);
     }
 
     private void ToggleMutateWolf(Toggle toggle)
     {
-      ToggleMutate(toggle.isOn, ref wolfMutateChance);
+      ToggleMutate(toggle.isOn, ref _wolfMutateChance);
     }
 
     private void ToggleMutateDear(Toggle toggle)
     {
-      ToggleMutate(toggle.isOn, ref deerMutateChance);
+      ToggleMutate(toggle.isOn, ref _deerMutateChance);
     }
 
     private void ToggleMutateBear(Toggle toggle)
     {
-      ToggleMutate(toggle.isOn, ref bearMutateChance);
+      ToggleMutate(toggle.isOn, ref _bearMutateChance);
     }
 
     private void ToggleMutate(bool isOn, ref float chance)
