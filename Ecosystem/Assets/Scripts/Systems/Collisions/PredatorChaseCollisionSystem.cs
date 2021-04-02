@@ -12,7 +12,7 @@ namespace Ecosystem.Systems.Collisions
   ///   This system is responsible for checking for predators that get within striking distance of the prey that they
   ///   are chasing. When a predator is within striking distance, the prey simply dies in the current implementation,
   ///   and the predator subsequently returns to roaming. Furthermore, if a predator is too far away from the chased
-  ///   prey, the case is aborted.
+  ///   prey, the chase is aborted.
   /// </summary>
   /// <remarks>
   ///   This system doesn't make use of colliders, instead the raw distance between entities is used. This is because of
