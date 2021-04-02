@@ -90,9 +90,7 @@ namespace Ecosystem.Genes
                           GetSpeedFactor().Value *
                           GetSizeFactor().ValueAsDecimal();
 
-    public float Metabolism => GetHungerRate().Value * GetSizeFactor().Value *
-                               (1 + MetabolismFactor *
-                                 (GetVision().ValueAsDecimal() + GetSpeedFactor().ValueAsDecimal()));
+    public float Metabolism => GetHungerRate().Value * GetSizeFactor().Value * (1 + MetabolismFactor * (GetVision().ValueAsDecimal() + GetSpeedFactor().ValueAsDecimal()));
 
     public float Attractiveness => GetDesirabilityScore().Value;
 
