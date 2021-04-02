@@ -8,5 +8,6 @@ namespace Ecosystem.Components
   {
     public int initialRabbitCount;
     public int initialWolfCount;
+    public int initialCarrotCount;
   }
 }
