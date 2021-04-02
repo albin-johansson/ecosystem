@@ -7,5 +7,6 @@ namespace Ecosystem.Components
   [GenerateAuthoringComponent]
   public struct Prey : IComponentData
   {
+    public float consumptionDistance;
   }
 }
