@@ -52,7 +52,6 @@ namespace Ecosystem.Genes
       _mutateChance = mutateChance;
     }
 
-
     protected override Dictionary<GeneType, Preset> GetPresets()
     {
       return _preset;
