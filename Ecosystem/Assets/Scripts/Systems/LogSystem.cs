@@ -14,6 +14,8 @@ namespace Ecosystem.Systems
     private struct SimulationEvent
     {
       [UsedImplicitly] public double time;
+      [UsedImplicitly] public string type;
+      [UsedImplicitly] public string tag;
       [UsedImplicitly] public int deathIndex;
     }
 
@@ -28,11 +30,20 @@ namespace Ecosystem.Systems
     {
       [UsedImplicitly] public double duration;
 
-      [UsedImplicitly] public int initialRabbitCount;
-      [UsedImplicitly] public int initialWolfCount;
+      [UsedImplicitly] public int initialAliveCount;
+      [UsedImplicitly] public int initialAlivePreyCount;
+      [UsedImplicitly] public int initialAlivePredatorCount;
+      [UsedImplicitly] public int initialAliveRabbitsCount;
+      [UsedImplicitly] public int initialAliveDeerCount;
+      [UsedImplicitly] public int initialAliveWolvesCount;
+      [UsedImplicitly] public int initialAliveBearsCount;
+      [UsedImplicitly] public int initialFoodCount;
 
-      [UsedImplicitly] public int rabbitCount;
-      [UsedImplicitly] public int wolfCount;
+      [UsedImplicitly] public int aliveCount;
+      [UsedImplicitly] public int deadCount;
+      [UsedImplicitly] public int preyConsumedCount;
+      [UsedImplicitly] public int birthCount;
+      [UsedImplicitly] public int matingCount;
 
       public List<SimulationEvent> events = new List<SimulationEvent>();
       public List<DeathEvent> deaths = new List<DeathEvent>();
@@ -45,12 +56,22 @@ namespace Ecosystem.Systems
       var initialData = EntityManager.GetSingleton<InitialSimulationData>();
       var data = new JsonData
       {
-              duration = Time.ElapsedTime,
-              initialRabbitCount = initialData.initialRabbitCount,
-              initialWolfCount = initialData.initialWolfCount
+              duration = Time.ElapsedTime * 1000,
+
+              initialAliveCount = initialData.initialRabbitCount + initialData.initialWolfCount,
+              initialAlivePreyCount = initialData.initialRabbitCount,
+              initialAlivePredatorCount = initialData.initialWolfCount,
+
+              initialAliveRabbitsCount = initialData.initialRabbitCount,
+              initialAliveDeerCount = 0, // TODO
+              initialAliveWolvesCount = initialData.initialWolfCount,
+              initialAliveBearsCount = 0, // TODO
+
+              initialFoodCount = initialData.initialCarrotCount
       };
 
       ProcessDeaths(data);
+      ProcessFoodConsumption(data);
       ProcessSurvivors(data);
 
       // Sort the event array according to the event times, which makes life easier in the visualisation scripts
@@ -64,9 +85,21 @@ namespace Ecosystem.Systems
       Entities.WithAll<Dead>()
               .ForEach((Entity entity, in Dead dead) =>
               {
+                var tag = "";
+                if (HasComponent<Rabbit>(entity))
+                {
+                  tag = "Rabbit";
+                }
+                else if (HasComponent<Wolf>(entity))
+                {
+                  tag = "Wolf";
+                }
+
                 data.events.Add(new SimulationEvent
                 {
-                        time = dead.when,
+                        time = dead.when * 1000,
+                        type = "death",
+                        tag = tag,
                         deathIndex = data.deaths.Count
                 });
 
@@ -74,8 +107,33 @@ namespace Ecosystem.Systems
                 {
                         cause = dead.cause
                 });
+
+                ++data.deadCount;
+
+                if (dead.cause == CauseOfDeath.Eaten)
+                {
+                  ++data.preyConsumedCount;
+                }
               })
               .WithName("LogSystemProcessDeathsJob")
+              .WithoutBurst()
+              .Run();
+    }
+
+    private void ProcessFoodConsumption(JsonData data)
+    {
+      Entities.WithAll<Carrot, Consumed>()
+              .ForEach((Entity entity, in Consumed consumed) =>
+              {
+                data.events.Add(new SimulationEvent
+                {
+                        time = consumed.when * 1000,
+                        type = "consumption",
+                        tag = "Carrot",
+                        deathIndex = -1,
+                });
+              })
+              .WithName("LogSystemProcessFoodConsumptionJob")
               .WithoutBurst()
               .Run();
     }
@@ -84,17 +142,7 @@ namespace Ecosystem.Systems
     {
       Entities.WithAny<Predator, Prey>()
               .WithNone<Dead>()
-              .ForEach((Entity entity) =>
-              {
-                if (HasComponent<Rabbit>(entity))
-                {
-                  ++data.rabbitCount;
-                }
-                else if (HasComponent<Wolf>(entity))
-                {
-                  ++data.wolfCount;
-                }
-              })
+              .ForEach((Entity entity) => ++data.aliveCount)
               .WithName("LogSystemCountAnimalsJob")
               .WithoutBurst()
               .Run();
