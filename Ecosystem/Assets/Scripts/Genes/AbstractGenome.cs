@@ -12,16 +12,16 @@ namespace Ecosystem.Genes
 
     private static readonly Dictionary<GeneType, Preset> DefaultPresets = new Dictionary<GeneType, Preset>()
     {
-      {GeneType.HungerRate, new Preset(0, 10, new[] {1f, 5f, 7f})},
-      {GeneType.HungerThreshold, new Preset(0, 10, new[] {1f, 5f, 7f})},
-      {GeneType.ThirstRate, new Preset(0, 10, new[] {0.5f, 3f, 6f, 9f})},
-      {GeneType.ThirstThreshold, new Preset(0, 10, new[] {1f, 5f, 7f})},
-      {GeneType.Vision, new Preset(1, 50, new[] {5f, 10f, 25f, 40f, 45f})},
-      {GeneType.SpeedFactor, new Preset(1, 2, new[] {1f, 1.5f, 2f})},
-      {GeneType.SizeFactor, new Preset(0.5f, 1.5f, new[] {0.5f, 1f, 1.5f})},
-      {GeneType.DesirabilityScore, new Preset(1, 10, new[] {1f, 5f, 10f})},
-      {GeneType.GestationPeriod, new Preset(10, 120, new[] {12f, 20f, 50f, 70f, 90f, 110f})},
-      {GeneType.SexualMaturityTime, new Preset(10, 150, new[] {20f, 50f, 90f, 140f})}
+            {GeneType.HungerRate, new Preset(0, 10, new[] {1f, 5f, 7f})},
+            {GeneType.HungerThreshold, new Preset(0, 10, new[] {1f, 5f, 7f})},
+            {GeneType.ThirstRate, new Preset(0, 10, new[] {0.5f, 3f, 6f, 9f})},
+            {GeneType.ThirstThreshold, new Preset(0, 10, new[] {1f, 5f, 7f})},
+            {GeneType.Vision, new Preset(1, 50, new[] {5f, 10f, 25f, 40f, 45f})},
+            {GeneType.SpeedFactor, new Preset(1, 2, new[] {1f, 1.5f, 2f})},
+            {GeneType.SizeFactor, new Preset(0.5f, 1.5f, new[] {0.5f, 1f, 1.5f})},
+            {GeneType.DesirabilityScore, new Preset(1, 10, new[] {1f, 5f, 10f})},
+            {GeneType.GestationPeriod, new Preset(10, 120, new[] {12f, 20f, 50f, 70f, 90f, 110f})},
+            {GeneType.SexualMaturityTime, new Preset(10, 150, new[] {20f, 50f, 90f, 140f})}
     };
 
     private void Awake()
@@ -54,16 +54,16 @@ namespace Ecosystem.Genes
 
       return new Dictionary<GeneType, Gene>
       {
-        {GeneType.HungerRate, hungerRate},
-        {GeneType.HungerThreshold, hungerThreshold},
-        {GeneType.ThirstRate, thirstRate},
-        {GeneType.ThirstThreshold, thirstThreshold},
-        {GeneType.Vision, vision},
-        {GeneType.SpeedFactor, speedFactor},
-        {GeneType.SizeFactor, sizeFactor},
-        {GeneType.DesirabilityScore, desirabilityFactor},
-        {GeneType.GestationPeriod, gestationPeriod},
-        {GeneType.SexualMaturityTime, sexualMaturityTime}
+              {GeneType.HungerRate, hungerRate},
+              {GeneType.HungerThreshold, hungerThreshold},
+              {GeneType.ThirstRate, thirstRate},
+              {GeneType.ThirstThreshold, thirstThreshold},
+              {GeneType.Vision, vision},
+              {GeneType.SpeedFactor, speedFactor},
+              {GeneType.SizeFactor, sizeFactor},
+              {GeneType.DesirabilityScore, desirabilityFactor},
+              {GeneType.GestationPeriod, gestationPeriod},
+              {GeneType.SexualMaturityTime, sexualMaturityTime}
       };
     }
 
