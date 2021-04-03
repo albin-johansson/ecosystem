@@ -61,6 +61,7 @@ namespace Ecosystem.UI
       Dictionary<GeneType, Preset> single, Dictionary<GeneType, Preset> multi)
     {
       preset = isOn ? multi : single;
+      //TODO: currently does not work for only mutate chance changes. 
       AssignChanges();
 
     }
