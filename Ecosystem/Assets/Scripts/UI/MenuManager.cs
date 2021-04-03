@@ -11,7 +11,6 @@ namespace Ecosystem.UI
   {
     [SerializeField] private GameObject mainMenu;
     [SerializeField] private GameObject dynamicSceneMenu;
-    [SerializeField] private GameObject genomeSettingsMenu;
     [SerializeField] private GameObject settingsButton;
     [SerializeField] private Button dynamicSceneStartButton;
     [SerializeField] private Text dynamicRabbitCount;
@@ -19,39 +18,10 @@ namespace Ecosystem.UI
     [SerializeField] private Text dynamicWolfCount;
     [SerializeField] private Text dynamicBearCount;
     [SerializeField] private Text dynamicCarrotCount;
-    [SerializeField] private Toggle rabbitSet;
-    [SerializeField] private Toggle rabbitMutate;
-    [SerializeField] private Toggle wolfSet;
-    [SerializeField] private Toggle wolfMutate;
-    [SerializeField] private Toggle deerSet;
-    [SerializeField] private Toggle deerMutate;
-    [SerializeField] private Toggle bearSet;
-    [SerializeField] private Toggle bearMutate;
 
-    private Dictionary<GeneType, Preset> _rabbitPreset;
-    private Dictionary<GeneType, Preset> _wolfPreset;
-    private Dictionary<GeneType, Preset> _deerPreset;
-    private Dictionary<GeneType, Preset> _bearPreset;
-    private float _rabbitMutateChance = 0.05f;
-    private float _wolfMutateChance = 0.05f;
-    private float _deerMutateChance = 0.05f;
-    private float _bearMutateChance = 0.05f;
 
     private void Start()
     {
-      _rabbitPreset = RabbitGenome.DefaultSet;
-      _wolfPreset = WolfGenome.DefaultSet;
-      _deerPreset = DeerGenome.DefaultSet;
-      _bearPreset = BearGenome.DefaultSet;
-      rabbitSet.onValueChanged.AddListener(delegate { ToggleSetRabbit(rabbitSet); });
-      rabbitMutate.onValueChanged.AddListener(delegate { ToggleMutateRabbit(rabbitMutate); });
-      wolfSet.onValueChanged.AddListener(delegate { ToggleSetWolf(wolfSet); });
-      wolfMutate.onValueChanged.AddListener(delegate { ToggleMutateWolf(wolfMutate); });
-      deerSet.onValueChanged.AddListener(delegate { ToggleSetDear(deerSet); });
-      deerMutate.onValueChanged.AddListener(delegate { ToggleMutateDear(deerMutate); });
-      bearSet.onValueChanged.AddListener(delegate { ToggleSetBear(bearSet); });
-      bearMutate.onValueChanged.AddListener(delegate { ToggleMutateBear(bearMutate); });
-
       SceneManager.activeSceneChanged += OnSceneChanged;
       EnterMainMenu();
     }
@@ -59,7 +29,6 @@ namespace Ecosystem.UI
     public void EnterMainMenu()
     {
       dynamicSceneMenu.SetActive(false);
-      genomeSettingsMenu.SetActive(false);
       mainMenu.SetActive(true);
       settingsButton.SetActive(true);
     }
@@ -69,13 +38,6 @@ namespace Ecosystem.UI
       mainMenu.SetActive(false);
       settingsButton.SetActive(false);
       dynamicSceneMenu.SetActive(true);
-    }
-
-    public void EnterGenomeTypeMenu()
-    {
-      mainMenu.SetActive(false);
-      settingsButton.SetActive(false);
-      genomeSettingsMenu.SetActive(true);
     }
 
     public void StartForestScene()
@@ -95,10 +57,7 @@ namespace Ecosystem.UI
 
     private void OnSceneChanged(Scene current, Scene next)
     {
-      RabbitGenome.SetPreset(_rabbitPreset, _rabbitMutateChance);
-      WolfGenome.SetPreset(_wolfPreset, _wolfMutateChance);
-      DeerGenome.SetPreset(_deerPreset, _deerMutateChance);
-      BearGenome.SetPreset(_bearPreset, _bearMutateChance);
+
 
       if (next.name == "DynamicScene")
       {
@@ -149,58 +108,6 @@ namespace Ecosystem.UI
           Instantiate(prefab, position, Quaternion.identity);
         }
       }
-    }
-
-
-    private static void ToggleSet(bool isOn, out Dictionary<GeneType, Preset> preset,
-      Dictionary<GeneType, Preset> single, Dictionary<GeneType, Preset> multi)
-    {
-      preset = isOn ? multi : single;
-    }
-
-    private void ToggleSetRabbit(Toggle toggle)
-    {
-      ToggleSet(toggle.isOn, out _rabbitPreset, RabbitGenome.DefaultSingular, RabbitGenome.DefaultSet);
-    }
-
-    private void ToggleSetWolf(Toggle toggle)
-    {
-      ToggleSet(toggle.isOn, out _wolfPreset, WolfGenome.DefaultSingular, WolfGenome.DefaultSet);
-    }
-
-    private void ToggleSetDear(Toggle toggle)
-    {
-      ToggleSet(toggle.isOn, out _deerPreset, DeerGenome.DefaultSingular, DeerGenome.DefaultSet);
-    }
-
-    private void ToggleSetBear(Toggle toggle)
-    {
-      ToggleSet(toggle.isOn, out _bearPreset, BearGenome.DefaultSingular, BearGenome.DefaultSet);
-    }
-
-    private void ToggleMutateRabbit(Toggle toggle)
-    {
-      _rabbitMutateChance = GetMutateChance(toggle);
-    }
-
-    private void ToggleMutateWolf(Toggle toggle)
-    {
-      _wolfMutateChance = GetMutateChance(toggle);
-    }
-
-    private void ToggleMutateDear(Toggle toggle)
-    {
-      _deerMutateChance = GetMutateChance(toggle);
-    }
-
-    private void ToggleMutateBear(Toggle toggle)
-    {
-      _bearMutateChance = GetMutateChance(toggle);
-    }
-
-    private static float GetMutateChance(bool isOn)
-    {
-      return isOn ? 0.05f : 0f;
     }
   }
 }

@@ -5,7 +5,7 @@ using UnityEngine.UI;
 
 namespace Ecosystem.UI
 {
-  public sealed class GraphicsSettings : MonoBehaviour
+  public sealed class Settings : MonoBehaviour
   {
     [SerializeField] private Sprite cogwheel;
     [SerializeField] private Sprite arrow;
@@ -16,7 +16,8 @@ namespace Ecosystem.UI
     [SerializeField] private GameObject antialiasingDropdown;
     [SerializeField] private GameObject intensityText;
     [SerializeField] private GameObject intensityTextValue;
-    
+    [SerializeField] private GameObject genomeSettingsMenu;
+
     public static int _antiAliasingMode;
     public static bool _ambientOcclusionActive = true;
     public static int _ambientOcclusionIntensity = 25;
@@ -24,18 +25,42 @@ namespace Ecosystem.UI
 
     public void SettingsMenu()
     {
-      settingsWindow.SetActive(!settingsWindow.activeSelf);
-      mainMenuWindow.SetActive(!mainMenuWindow.activeSelf);
-      if (settingsWindow.activeSelf)
+      Debug.Log("Button pressed");
+
+      if (genomeSettingsMenu.activeSelf)
       {
-        showSettingsButtonImage.sprite = arrow;
-        _update = true;
+        //genomeSettingsMenu.GetComponent<GeneSettingsMenu>().AssignPresests();
+        settingsWindow.SetActive(true);
+        genomeSettingsMenu.SetActive(false);
       }
       else
       {
-        showSettingsButtonImage.sprite = cogwheel;
-        _update = false;
+        settingsWindow.SetActive(!settingsWindow.activeSelf);
+        mainMenuWindow.SetActive(!mainMenuWindow.activeSelf);
+        if (settingsWindow.activeSelf)
+        {
+          showSettingsButtonImage.sprite = arrow;
+          _update = true;
+        }
+        else
+        {
+          showSettingsButtonImage.sprite = cogwheel;
+          _update = false;
+        }
       }
+    }
+    public void EnterGeneSettingsMenu()
+    {
+      mainMenuWindow.SetActive(false);
+      settingsWindow.SetActive(false);
+      genomeSettingsMenu.SetActive(true);
+    }
+    //TODO: remove if we should only use the back arrow instead of "return" button.
+    public void ExitGeneSettingsMenu()
+    {
+      //genomeSettingsMenu.GetComponent<GeneSettingsMenu>().AssignPresests();
+      settingsWindow.SetActive(true);
+      genomeSettingsMenu.SetActive(false);
     }
 
     public void AntiAliasingOption()
