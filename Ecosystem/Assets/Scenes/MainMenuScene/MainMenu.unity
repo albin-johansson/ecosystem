@@ -419,6 +419,22 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 6546478875338054896, guid: df06f5a25e82f094189570bb11e0c6ba, type: 3}
+      propertyPath: m_OnEndEdit.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 1952800703}
+    - target: {fileID: 6546478875338054896, guid: df06f5a25e82f094189570bb11e0c6ba, type: 3}
+      propertyPath: m_OnEndEdit.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: ValidateEcsDemoSceneInputs
+      objectReference: {fileID: 0}
+    - target: {fileID: 6546478875338054896, guid: df06f5a25e82f094189570bb11e0c6ba, type: 3}
+      propertyPath: m_OnEndEdit.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: Ecosystem.UI.MenuManager, ScriptsAssembly
+      objectReference: {fileID: 0}
+    - target: {fileID: 6546478875338054896, guid: df06f5a25e82f094189570bb11e0c6ba, type: 3}
+      propertyPath: m_OnEndEdit.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
+      objectReference: {fileID: 0}
     - target: {fileID: 7811533366841065045, guid: df06f5a25e82f094189570bb11e0c6ba, type: 3}
       propertyPath: m_OnEndEdit.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
@@ -532,6 +548,17 @@ MonoBehaviour:
 --- !u!114 &246206655 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 7121691240568127008, guid: df06f5a25e82f094189570bb11e0c6ba, type: 3}
+  m_PrefabInstance: {fileID: 246206648}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5f7201a12d95ffc409449d95f23cf332, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &246206656 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 610105187317393472, guid: df06f5a25e82f094189570bb11e0c6ba, type: 3}
   m_PrefabInstance: {fileID: 246206648}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 0}
@@ -7412,6 +7439,7 @@ MonoBehaviour:
   ecsWolfCount: {fileID: 246206650}
   ecsBearCount: {fileID: 246206654}
   ecsCarrotCount: {fileID: 246206653}
+  ecsWaterCount: {fileID: 246206656}
 --- !u!1001 &2026068119
 PrefabInstance:
   m_ObjectHideFlags: 0

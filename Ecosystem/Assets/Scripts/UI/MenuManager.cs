@@ -3,7 +3,6 @@ using Ecosystem.Util;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
-using Object = UnityEngine.Object;
 
 namespace Ecosystem.UI
 {
@@ -27,6 +26,7 @@ namespace Ecosystem.UI
     [SerializeField] private Text ecsWolfCount;
     [SerializeField] private Text ecsBearCount;
     [SerializeField] private Text ecsCarrotCount;
+    [SerializeField] private Text ecsWaterCount;
 
     private void Start()
     {
@@ -80,6 +80,7 @@ namespace Ecosystem.UI
       StartupSpawnSystem.InitialWolfCount = int.Parse(ecsWolfCount.text);
       StartupSpawnSystem.InitialBearCount = int.Parse(ecsBearCount.text);
       StartupSpawnSystem.InitialCarrotCount = int.Parse(ecsCarrotCount.text);
+      StartupSpawnSystem.InitialWaterCount = int.Parse(ecsWaterCount.text);
       SceneManager.LoadScene("ECSDemo");
     }
 
@@ -124,7 +125,8 @@ namespace Ecosystem.UI
                                          ecsDeerCount.text != "" &&
                                          ecsWolfCount.text != "" &&
                                          ecsBearCount.text != "" &&
-                                         ecsCarrotCount.text != "";
+                                         ecsCarrotCount.text != "" &&
+                                         ecsWaterCount.text != "";
     }
 
     /// <summary>

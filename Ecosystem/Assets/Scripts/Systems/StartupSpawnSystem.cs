@@ -18,6 +18,7 @@ namespace Ecosystem.Systems
     public static int InitialWolfCount;
     public static int InitialBearCount;
     public static int InitialCarrotCount;
+    public static int InitialWaterCount;
 
     private FactorySystem _factorySystem;
     private bool _hasSpawned;
@@ -45,6 +46,7 @@ namespace Ecosystem.Systems
         Spawn(InitialWolfCount, _factorySystem.MakeWolf);
         Spawn(InitialBearCount, _factorySystem.MakeBear);
         Spawn(InitialCarrotCount, _factorySystem.MakeCarrot);
+        Spawn(InitialWaterCount, _factorySystem.MakeWater);
 
         _hasSpawned = true;
       }
