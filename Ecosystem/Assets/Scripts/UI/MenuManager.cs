@@ -23,7 +23,9 @@ namespace Ecosystem.UI
 
     [SerializeField] private Button ecsSceneStartButton;
     [SerializeField] private Text ecsRabbitCount;
+    [SerializeField] private Text ecsDeerCount;
     [SerializeField] private Text ecsWolfCount;
+    [SerializeField] private Text ecsBearCount;
     [SerializeField] private Text ecsCarrotCount;
 
     private void Start()
@@ -74,7 +76,9 @@ namespace Ecosystem.UI
     public void StartEcsDemo()
     {
       StartupSpawnSystem.InitialRabbitCount = int.Parse(ecsRabbitCount.text);
+      StartupSpawnSystem.InitialDeerCount = int.Parse(ecsDeerCount.text);
       StartupSpawnSystem.InitialWolfCount = int.Parse(ecsWolfCount.text);
+      StartupSpawnSystem.InitialBearCount = int.Parse(ecsBearCount.text);
       StartupSpawnSystem.InitialCarrotCount = int.Parse(ecsCarrotCount.text);
       SceneManager.LoadScene("ECSDemo");
     }
@@ -117,7 +121,9 @@ namespace Ecosystem.UI
     public void ValidateEcsDemoSceneInputs()
     {
       ecsSceneStartButton.interactable = ecsRabbitCount.text != "" &&
+                                         ecsDeerCount.text != "" &&
                                          ecsWolfCount.text != "" &&
+                                         ecsBearCount.text != "" &&
                                          ecsCarrotCount.text != "";
     }
 

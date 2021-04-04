@@ -283,6 +283,22 @@ PrefabInstance:
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
       value: UnityEngine.Object, UnityEngine
       objectReference: {fileID: 0}
+    - target: {fileID: 3497704988435903479, guid: df06f5a25e82f094189570bb11e0c6ba, type: 3}
+      propertyPath: m_OnEndEdit.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 1952800703}
+    - target: {fileID: 3497704988435903479, guid: df06f5a25e82f094189570bb11e0c6ba, type: 3}
+      propertyPath: m_OnEndEdit.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: ValidateEcsDemoSceneInputs
+      objectReference: {fileID: 0}
+    - target: {fileID: 3497704988435903479, guid: df06f5a25e82f094189570bb11e0c6ba, type: 3}
+      propertyPath: m_OnEndEdit.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: Ecosystem.UI.MenuManager, ScriptsAssembly
+      objectReference: {fileID: 0}
+    - target: {fileID: 3497704988435903479, guid: df06f5a25e82f094189570bb11e0c6ba, type: 3}
+      propertyPath: m_OnEndEdit.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
+      objectReference: {fileID: 0}
     - target: {fileID: 4297813173380250058, guid: df06f5a25e82f094189570bb11e0c6ba, type: 3}
       propertyPath: m_Name
       value: EcsDemoMenu
@@ -419,6 +435,22 @@ PrefabInstance:
       propertyPath: m_OnEndEdit.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
       value: UnityEngine.Object, UnityEngine
       objectReference: {fileID: 0}
+    - target: {fileID: 7972532184843041651, guid: df06f5a25e82f094189570bb11e0c6ba, type: 3}
+      propertyPath: m_OnEndEdit.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 1952800703}
+    - target: {fileID: 7972532184843041651, guid: df06f5a25e82f094189570bb11e0c6ba, type: 3}
+      propertyPath: m_OnEndEdit.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: ValidateEcsDemoSceneInputs
+      objectReference: {fileID: 0}
+    - target: {fileID: 7972532184843041651, guid: df06f5a25e82f094189570bb11e0c6ba, type: 3}
+      propertyPath: m_OnEndEdit.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: Ecosystem.UI.MenuManager, ScriptsAssembly
+      objectReference: {fileID: 0}
+    - target: {fileID: 7972532184843041651, guid: df06f5a25e82f094189570bb11e0c6ba, type: 3}
+      propertyPath: m_OnEndEdit.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
+      objectReference: {fileID: 0}
     - target: {fileID: 7993316682927415081, guid: df06f5a25e82f094189570bb11e0c6ba, type: 3}
       propertyPath: m_OnEndEdit.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
@@ -478,6 +510,28 @@ MonoBehaviour:
 --- !u!114 &246206653 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 924395645883953505, guid: df06f5a25e82f094189570bb11e0c6ba, type: 3}
+  m_PrefabInstance: {fileID: 246206648}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5f7201a12d95ffc409449d95f23cf332, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &246206654 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 1714427339739963416, guid: df06f5a25e82f094189570bb11e0c6ba, type: 3}
+  m_PrefabInstance: {fileID: 246206648}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5f7201a12d95ffc409449d95f23cf332, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &246206655 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 7121691240568127008, guid: df06f5a25e82f094189570bb11e0c6ba, type: 3}
   m_PrefabInstance: {fileID: 246206648}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 0}
@@ -7354,7 +7408,9 @@ MonoBehaviour:
   dynamicCarrotCount: {fileID: 2026068122}
   ecsSceneStartButton: {fileID: 246206652}
   ecsRabbitCount: {fileID: 246206651}
+  ecsDeerCount: {fileID: 246206655}
   ecsWolfCount: {fileID: 246206650}
+  ecsBearCount: {fileID: 246206654}
   ecsCarrotCount: {fileID: 246206653}
 --- !u!1001 &2026068119
 PrefabInstance:
