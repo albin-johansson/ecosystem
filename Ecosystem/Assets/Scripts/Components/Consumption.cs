@@ -4,7 +4,7 @@ using Unity.Entities;
 namespace Ecosystem.Components
 {
   [Serializable]
-  public struct Consumed : IComponentData
+  public struct Consumption : IComponentData
   {
     public double when;
   }

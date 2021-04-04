@@ -21,13 +21,11 @@ namespace Ecosystem.Systems.Collisions
     {
       var buffer = _barrier.CreateCommandBuffer().AsParallelWriter();
 
-      var consumedFromEntity = GetComponentDataFromEntity<Consumed>(true);
       var localToWorldFromEntity = GetComponentDataFromEntity<LocalToWorld>(true);
       var time = Time;
 
       Entities.WithAll<Prey, MovingTowardsFood, LocalToWorld>()
               .WithNone<Dead>()
-              .WithReadOnly(consumedFromEntity)
               .WithReadOnly(localToWorldFromEntity)
               .ForEach((Entity entity,
                       int entityInQueryIndex,
@@ -36,13 +34,6 @@ namespace Ecosystem.Systems.Collisions
                       in LocalToWorld localToWorld) =>
               {
                 var foodEntity = movingTowardsFood.Food;
-
-                if (consumedFromEntity.HasComponent(foodEntity))
-                {
-                  // The food item got consumed before we reached it, so return to roaming
-                  PreyUtils.StopGoingForFoodAndRoam(ref buffer, entityInQueryIndex, entity);
-                  return;
-                }
 
                 var foodPosition = localToWorldFromEntity[foodEntity].Position;
                 if (math.distance(localToWorld.Position, foodPosition) < prey.consumptionDistance)

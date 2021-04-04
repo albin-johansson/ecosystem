@@ -20,17 +20,14 @@ namespace Ecosystem.Systems.Collisions
     protected override void OnUpdate()
     {
       var buffer = _barrier.CreateCommandBuffer().AsParallelWriter();
-
       var carrotFromEntity = GetComponentDataFromEntity<Carrot>(true);
-      var consumedFromEntity = GetComponentDataFromEntity<Consumed>(true);
       var localToWorldFromEntity = GetComponentDataFromEntity<LocalToWorld>(true);
 
       Entities.WithAll<Prey, SpatialTrigger, PhysicsCollider>()
               .WithAll<Roaming, Hunger>()
-              .WithNone<MovingTowardsFood, Dead>()
+              .WithNone<Dead, MovingTowardsFood, MovingTowardsWater>()
               .WithChangeFilter<SpatialEntry>()
               .WithReadOnly(carrotFromEntity)
-              .WithReadOnly(consumedFromEntity)
               .WithReadOnly(localToWorldFromEntity)
               .ForEach((Entity entity,
                       int entityInQueryIndex,
@@ -43,7 +40,6 @@ namespace Ecosystem.Systems.Collisions
                   var activator = entries[i].Value.Activator;
 
                   if (carrotFromEntity.HasComponent(activator) &&
-                      !consumedFromEntity.HasComponent(activator) &&
                       localToWorldFromEntity.HasComponent(activator) &&
                       hunger.value >= 0.1 * hunger.max)
                   {

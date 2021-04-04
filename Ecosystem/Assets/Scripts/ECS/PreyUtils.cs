@@ -19,7 +19,7 @@ namespace Ecosystem.ECS
     public static void RegisterConsumption(ref ParallelBuffer buffer, int index, double when)
     {
       var entity = buffer.CreateEntity(index);
-      buffer.AddComponent(index, entity, new Consumed
+      buffer.AddComponent(index, entity, new Consumption
       {
               when = when
       });
