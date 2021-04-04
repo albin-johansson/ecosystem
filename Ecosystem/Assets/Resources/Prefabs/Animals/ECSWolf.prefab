@@ -16,6 +16,7 @@ GameObject:
   - component: {fileID: 5911609315381024474}
   - component: {fileID: 8945324408999112724}
   - component: {fileID: 5499717190659106463}
+  - component: {fileID: 7525987545333133687}
   - component: {fileID: 7944725319553241835}
   - component: {fileID: 4067614916257512693}
   m_Layer: 0
@@ -123,6 +124,7 @@ MonoBehaviour:
   tags:
   - Rabbit
   - Deer
+  - Water
 --- !u!114 &8945324408999112724
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -150,6 +152,21 @@ MonoBehaviour:
   value: 0
   rate: 1.4
   max: 900
+--- !u!114 &7525987545333133687
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6427976643944323812}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 90febca1aaa944bfa7292d4e21d1a9ad, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  value: 0
+  rate: 1
+  max: 500
 --- !u!114 &7944725319553241835
 MonoBehaviour:
   m_ObjectHideFlags: 0

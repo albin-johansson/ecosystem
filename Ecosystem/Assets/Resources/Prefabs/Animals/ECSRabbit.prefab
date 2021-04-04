@@ -16,6 +16,7 @@ GameObject:
   - component: {fileID: 3793959517244244152}
   - component: {fileID: 5921398429196909263}
   - component: {fileID: 3909128329946293872}
+  - component: {fileID: 8100093365737963664}
   - component: {fileID: 5264252205927029590}
   - component: {fileID: 8902540027125052898}
   m_Layer: 0
@@ -122,6 +123,7 @@ MonoBehaviour:
   useDefaultCollisionFilter: 1
   tags:
   - Carrot
+  - Water
 --- !u!114 &5921398429196909263
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -149,6 +151,21 @@ MonoBehaviour:
   value: 0
   rate: 0.5
   max: 600
+--- !u!114 &8100093365737963664
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3716636463991691157}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 90febca1aaa944bfa7292d4e21d1a9ad, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  value: 0
+  rate: 1
+  max: 500
 --- !u!114 &5264252205927029590
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -17,6 +17,7 @@ GameObject:
   - component: {fileID: 7192172941744282121}
   - component: {fileID: 1962017941027759271}
   - component: {fileID: 4304550638704420152}
+  - component: {fileID: 114822803885064220}
   - component: {fileID: 4795890723686020046}
   m_Layer: 0
   m_Name: ECSDeer
@@ -122,6 +123,7 @@ MonoBehaviour:
   useDefaultCollisionFilter: 1
   tags:
   - Carrot
+  - Water
 --- !u!114 &7192172941744282121
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -162,6 +164,21 @@ MonoBehaviour:
   value: 0
   rate: 1.2
   max: 750
+--- !u!114 &114822803885064220
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1915726174166786522}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 90febca1aaa944bfa7292d4e21d1a9ad, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  value: 0
+  rate: 1
+  max: 500
 --- !u!114 &4795890723686020046
 MonoBehaviour:
   m_ObjectHideFlags: 0
