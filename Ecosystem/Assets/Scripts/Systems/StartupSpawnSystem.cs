@@ -14,7 +14,9 @@ namespace Ecosystem.Systems
   public sealed class StartupSpawnSystem : AbstractSystem
   {
     public static int InitialRabbitCount;
+    public static int InitialDeerCount;
     public static int InitialWolfCount;
+    public static int InitialBearCount;
     public static int InitialCarrotCount;
 
     private FactorySystem _factorySystem;
@@ -27,7 +29,9 @@ namespace Ecosystem.Systems
       EntityManager.AddSingleton(new InitialSimulationData
       {
               initialRabbitCount = InitialRabbitCount,
+              initialDeerCount = InitialDeerCount,
               initialWolfCount = InitialWolfCount,
+              initialBearCount = InitialBearCount,
               initialCarrotCount = InitialCarrotCount
       });
     }
@@ -37,7 +41,9 @@ namespace Ecosystem.Systems
       if (_count > 1 && !_hasSpawned)
       {
         Spawn(InitialRabbitCount, position => _factorySystem.MakeRabbit(position));
+        Spawn(InitialDeerCount, position => _factorySystem.MakeDeer(position));
         Spawn(InitialWolfCount, position => _factorySystem.MakeWolf(position));
+        Spawn(InitialBearCount, position => _factorySystem.MakeBear(position));
         Spawn(InitialCarrotCount, position => _factorySystem.MakeCarrot(position));
 
         _hasSpawned = true;
