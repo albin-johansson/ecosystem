@@ -40,11 +40,11 @@ namespace Ecosystem.Systems
     {
       if (_count > 1 && !_hasSpawned)
       {
-        Spawn(InitialRabbitCount, position => _factorySystem.MakeRabbit(position));
-        Spawn(InitialDeerCount, position => _factorySystem.MakeDeer(position));
-        Spawn(InitialWolfCount, position => _factorySystem.MakeWolf(position));
-        Spawn(InitialBearCount, position => _factorySystem.MakeBear(position));
-        Spawn(InitialCarrotCount, position => _factorySystem.MakeCarrot(position));
+        Spawn(InitialRabbitCount, _factorySystem.MakeRabbit);
+        Spawn(InitialDeerCount, _factorySystem.MakeDeer);
+        Spawn(InitialWolfCount, _factorySystem.MakeWolf);
+        Spawn(InitialBearCount, _factorySystem.MakeBear);
+        Spawn(InitialCarrotCount, _factorySystem.MakeCarrot);
 
         _hasSpawned = true;
       }
