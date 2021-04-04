@@ -20,6 +20,7 @@ namespace Ecosystem.AnimalBehaviour.WolfStates
     {
       var data = new WolfStateData
       {
+        StaminaController = staminaController,
         Consumer = consumer,
         AnimationController = animationController,
         MemoryController = memoryController,

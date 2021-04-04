@@ -1765,6 +1765,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4284669953163483551}
   - component: {fileID: 1611194173291749041}
+  - component: {fileID: 1372852687320862236}
   m_Layer: 0
   m_Name: Movement
   m_TagString: Untagged
@@ -1801,6 +1802,22 @@ MonoBehaviour:
   navAgent: {fileID: 779919853503654891}
   genome: {fileID: 570846004582155358}
   sphereCollider: {fileID: 6776153342693034266}
+  staminaController: {fileID: 1372852687320862236}
+--- !u!114 &1372852687320862236
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1851608088184565141}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8f46c134da7053a4eb9051dc0a6054de, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  genome: {fileID: 570846004582155358}
+  staminaBar: {fileID: 4494613015625438085}
+  maxStamina: 100
 --- !u!1 &1918589021470924211
 GameObject:
   m_ObjectHideFlags: 0
@@ -4921,6 +4938,7 @@ MonoBehaviour:
   reproducer: {fileID: 4953059004311012286}
   genome: {fileID: 570846004582155358}
   sphereCollider: {fileID: 6776153342693034266}
+  staminaController: {fileID: 1372852687320862236}
   consumer: {fileID: 5346017003192509530}
 --- !u!1 &4759522730638570450
 GameObject:
@@ -9935,6 +9953,14 @@ PrefabInstance:
       propertyPath: m_AnchorMax.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4801754620403479252, guid: b11869fe3d5ecbf4b912f33fa4a312db, type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4801754620403479252, guid: b11869fe3d5ecbf4b912f33fa4a312db, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 5905012580436718799, guid: b11869fe3d5ecbf4b912f33fa4a312db, type: 3}
       propertyPath: m_AnchorMax.x
       value: 0
@@ -10036,6 +10062,17 @@ MonoBehaviour:
 --- !u!114 &897296775149995389 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 7011725190466901393, guid: b11869fe3d5ecbf4b912f33fa4a312db, type: 3}
+  m_PrefabInstance: {fileID: 7871571146252701932}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0f33f2c7a1419e740be5570d71daa2bf, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &4494613015625438085 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 6007066303522194281, guid: b11869fe3d5ecbf4b912f33fa4a312db, type: 3}
   m_PrefabInstance: {fileID: 7871571146252701932}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 0}

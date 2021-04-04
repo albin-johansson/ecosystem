@@ -6,6 +6,7 @@ namespace Ecosystem.AnimalBehaviour
 {
   public abstract class AbstractAnimalState : IAnimalState
   {
+    protected StaminaController StaminaController;
     protected IConsumer Consumer;
     protected WaterConsumer WaterConsumer;
     protected MemoryController MemoryController;

@@ -7413,6 +7413,7 @@ MonoBehaviour:
   reproducer: {fileID: 1675561535909660547}
   genome: {fileID: 1593158740268700976}
   sphereCollider: {fileID: 651377425655632140}
+  staminaController: {fileID: 9108216171968256464}
   consumer: {fileID: 5694940851676850990}
 --- !u!1 &7116156556552470170
 GameObject:
@@ -8440,6 +8441,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7604608410832787383}
   - component: {fileID: 6378755894846735859}
+  - component: {fileID: 9108216171968256464}
   m_Layer: 0
   m_Name: Movement
   m_TagString: Untagged
@@ -8476,6 +8478,22 @@ MonoBehaviour:
   navAgent: {fileID: 3161004195564935848}
   genome: {fileID: 1593158740268700976}
   sphereCollider: {fileID: 651377425655632140}
+  staminaController: {fileID: 9108216171968256464}
+--- !u!114 &9108216171968256464
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8066780691616185067}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8f46c134da7053a4eb9051dc0a6054de, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  genome: {fileID: 1593158740268700976}
+  staminaBar: {fileID: 7221409857097729456}
+  maxStamina: 100
 --- !u!1 &8171843457048072183
 GameObject:
   m_ObjectHideFlags: 0
@@ -8747,7 +8765,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8403764079830992310}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0.387}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 3855438275871624271}
@@ -10010,6 +10028,14 @@ PrefabInstance:
       propertyPath: m_AnchorMax.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4801754620403479252, guid: b11869fe3d5ecbf4b912f33fa4a312db, type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4801754620403479252, guid: b11869fe3d5ecbf4b912f33fa4a312db, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 5905012580436718799, guid: b11869fe3d5ecbf4b912f33fa4a312db, type: 3}
       propertyPath: m_AnchorMax.x
       value: 0
@@ -10115,6 +10141,17 @@ MonoBehaviour:
 --- !u!114 &6207189616987493192 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 7011725190466901393, guid: b11869fe3d5ecbf4b912f33fa4a312db, type: 3}
+  m_PrefabInstance: {fileID: 3993277767788021465}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0f33f2c7a1419e740be5570d71daa2bf, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &7221409857097729456 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 6007066303522194281, guid: b11869fe3d5ecbf4b912f33fa4a312db, type: 3}
   m_PrefabInstance: {fileID: 3993277767788021465}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 0}
