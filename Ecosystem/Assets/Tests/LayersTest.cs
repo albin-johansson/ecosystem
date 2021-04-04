@@ -9,12 +9,12 @@ namespace Tests
     [Test]
     public void IsPredatorLayerTest()
     {
-      Assert.IsTrue(Layers.IsPredatorLayer(Layers.WolfLayer));
-      Assert.IsTrue(Layers.IsPredatorLayer(Layers.BearLayer));
+      Assert.IsTrue(Layers.IsPredatorLayer(Layers.WolfMask));
+      Assert.IsTrue(Layers.IsPredatorLayer(Layers.BearMask));
 
-      Assert.IsFalse(Layers.IsPredatorLayer(Layers.PreyLayer));
-      Assert.IsFalse(Layers.IsPredatorLayer(Layers.FoodLayer));
-      Assert.IsFalse(Layers.IsPredatorLayer(Layers.WaterLayer));
+      Assert.IsFalse(Layers.IsPredatorLayer(Layers.PreyMask));
+      Assert.IsFalse(Layers.IsPredatorLayer(Layers.FoodMask));
+      Assert.IsFalse(Layers.IsPredatorLayer(Layers.WaterMask));
     }
   }
 }
