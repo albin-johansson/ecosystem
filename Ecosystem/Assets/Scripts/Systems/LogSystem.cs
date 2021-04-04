@@ -66,12 +66,10 @@ namespace Ecosystem.Systems
                                   initialData.initialWolfCount + initialData.initialBearCount,
               initialAlivePreyCount = initialData.initialRabbitCount + initialData.initialDeerCount,
               initialAlivePredatorCount = initialData.initialWolfCount + initialData.initialBearCount,
-
               initialAliveRabbitsCount = initialData.initialRabbitCount,
               initialAliveDeerCount = initialData.initialDeerCount,
               initialAliveWolvesCount = initialData.initialWolfCount,
               initialAliveBearsCount = initialData.initialBearCount,
-
               initialFoodCount = initialData.initialCarrotCount
       };
 
