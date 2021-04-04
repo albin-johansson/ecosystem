@@ -62,14 +62,15 @@ namespace Ecosystem.Systems
       {
               duration = Time.ElapsedTime * 1000,
 
-              initialAliveCount = initialData.initialRabbitCount + initialData.initialWolfCount,
-              initialAlivePreyCount = initialData.initialRabbitCount,
-              initialAlivePredatorCount = initialData.initialWolfCount,
+              initialAliveCount = initialData.initialRabbitCount + initialData.initialDeerCount +
+                                  initialData.initialWolfCount + initialData.initialBearCount,
+              initialAlivePreyCount = initialData.initialRabbitCount + initialData.initialDeerCount,
+              initialAlivePredatorCount = initialData.initialWolfCount + initialData.initialBearCount,
 
               initialAliveRabbitsCount = initialData.initialRabbitCount,
-              initialAliveDeerCount = 0, // TODO
+              initialAliveDeerCount = initialData.initialDeerCount,
               initialAliveWolvesCount = initialData.initialWolfCount,
-              initialAliveBearsCount = 0, // TODO
+              initialAliveBearsCount = initialData.initialBearCount,
 
               initialFoodCount = initialData.initialCarrotCount
       };
@@ -94,9 +95,17 @@ namespace Ecosystem.Systems
                 {
                   tag = "Rabbit";
                 }
+                else if (HasComponent<Deer>(entity))
+                {
+                  tag = "Deer";
+                }
                 else if (HasComponent<Wolf>(entity))
                 {
                   tag = "Wolf";
+                }
+                else if (HasComponent<Bear>(entity))
+                {
+                  tag = "Bear";
                 }
 
                 data.events.Add(new SimulationEvent
