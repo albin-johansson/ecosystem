@@ -1,4 +1,5 @@
 using Ecosystem.Components;
+using Ecosystem.ECS;
 using Unity.Entities;
 using Unity.Mathematics;
 using Unity.Transforms;
@@ -22,7 +23,6 @@ namespace Ecosystem.Systems.Collisions
 
       var consumedFromEntity = GetComponentDataFromEntity<Consumed>(true);
       var localToWorldFromEntity = GetComponentDataFromEntity<LocalToWorld>(true);
-
       var time = Time;
 
       Entities.WithAll<Prey, MovingTowardsFood, LocalToWorld>()
@@ -40,29 +40,20 @@ namespace Ecosystem.Systems.Collisions
                 if (consumedFromEntity.HasComponent(foodEntity))
                 {
                   // The food item got consumed before we reached it, so return to roaming
-                  buffer.RemoveComponent<MovingTowardsFood>(entityInQueryIndex, entity);
-                  buffer.AddComponent<Roaming>(entityInQueryIndex, entity);
+                  PreyUtils.StopGoingForFoodAndRoam(ref buffer, entityInQueryIndex, entity);
                   return;
                 }
 
                 var foodPosition = localToWorldFromEntity[foodEntity].Position;
                 if (math.distance(localToWorld.Position, foodPosition) < prey.consumptionDistance)
                 {
-                  buffer.AddComponent(entityInQueryIndex, foodEntity, new Consumed
-                  {
-                          when = time.ElapsedTime
-                  });
-
-                  buffer.RemoveComponent<MovingTowardsFood>(entityInQueryIndex, entity);
-                  buffer.AddComponent<Roaming>(entityInQueryIndex, entity);
+                  PreyUtils.RegisterConsumption(ref buffer, entityInQueryIndex, time.ElapsedTime);
+                  PreyUtils.StopGoingForFoodAndRoam(ref buffer, entityInQueryIndex, entity);
 
                   if (HasComponent<Hunger>(entity))
                   {
-                    // Reduce the hunger of the prey that consumed the food
                     var hunger = GetComponent<Hunger>(entity);
-                    hunger.value -= 50;
-                    hunger.value = math.clamp(hunger.value, 0, hunger.max);
-                    buffer.SetComponent(entityInQueryIndex, entity, hunger);
+                    PreyUtils.ConsumeFood(ref buffer, entityInQueryIndex, entity, hunger);
                   }
                 }
               })
