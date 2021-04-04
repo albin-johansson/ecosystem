@@ -1,5 +1,5 @@
 using Ecosystem.Components;
-using Reese.Nav;
+using Ecosystem.ECS;
 using Reese.Spatial;
 using Unity.Entities;
 using Unity.Physics;
@@ -26,13 +26,16 @@ namespace Ecosystem.Systems.Collisions
       var localToWorldFromEntity = GetComponentDataFromEntity<LocalToWorld>(true);
 
       Entities.WithAll<Prey, SpatialTrigger, PhysicsCollider>()
-              .WithAll<Roaming>()
+              .WithAll<Roaming, Hunger>()
               .WithNone<MovingTowardsFood, Dead>()
               .WithChangeFilter<SpatialEntry>()
               .WithReadOnly(carrotFromEntity)
               .WithReadOnly(consumedFromEntity)
               .WithReadOnly(localToWorldFromEntity)
-              .ForEach((Entity entity, int entityInQueryIndex, in DynamicBuffer<SpatialEntry> entries) =>
+              .ForEach((Entity entity,
+                      int entityInQueryIndex,
+                      in Hunger hunger,
+                      in DynamicBuffer<SpatialEntry> entries) =>
               {
                 // Traverse from the end of the buffer for performance reasons.
                 for (var i = entries.Length - 1; i >= 0; --i)
@@ -41,7 +44,8 @@ namespace Ecosystem.Systems.Collisions
 
                   if (carrotFromEntity.HasComponent(activator) &&
                       !consumedFromEntity.HasComponent(activator) &&
-                      localToWorldFromEntity.HasComponent(activator))
+                      localToWorldFromEntity.HasComponent(activator) &&
+                      hunger.value >= 0.1 * hunger.max)
                   {
                     // Stop roaming and target the detected carrot
                     buffer.RemoveComponent<Roaming>(entityInQueryIndex, entity);
@@ -51,13 +55,8 @@ namespace Ecosystem.Systems.Collisions
                             Food = activator
                     });
 
-                    buffer.AddComponent(entityInQueryIndex, entity, new NavDestination
-                    {
-                            Teleport = false,
-                            Tolerance = 5.0f,
-                            CustomLerp = false,
-                            WorldPoint = localToWorldFromEntity[activator].Position
-                    });
+                    var position = localToWorldFromEntity[activator].Position;
+                    Nav.SetDestination(ref buffer, entityInQueryIndex, entity, position);
 
                     break;
                   }
