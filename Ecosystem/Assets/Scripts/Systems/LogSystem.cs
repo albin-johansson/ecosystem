@@ -133,8 +133,8 @@ namespace Ecosystem.Systems
 
     private void ProcessFoodConsumption(JsonData data)
     {
-      Entities.WithAll<Consumed>()
-              .ForEach((Entity entity, in Consumed consumed) =>
+      Entities.WithAll<Consumption>()
+              .ForEach((Entity entity, in Consumption consumed) =>
               {
                 data.events.Add(new SimulationEvent
                 {
