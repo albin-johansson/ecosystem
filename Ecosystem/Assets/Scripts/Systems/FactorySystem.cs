@@ -21,7 +21,7 @@ namespace Ecosystem.Systems
       // Do nothing
     }
 
-    private void SetPosition(Entity entity, float3 position)
+    private void SetPosition(Entity entity, Vector3 position)
     {
       EntityManager.SetComponentData(entity, new Translation
       {
@@ -29,13 +29,13 @@ namespace Ecosystem.Systems
       });
     }
 
-    private void MakeAnimal(Entity entity, float3 position)
+    private void MakeAnimal(Entity entity, Vector3 position)
     {
       EntityManager.AddComponent<Roaming>(entity);
       SetPosition(entity, position);
     }
 
-    public void MakeRabbit(float3 position)
+    public void MakeRabbit(Vector3 position)
     {
       Debug.Assert(Enabled);
 
@@ -48,7 +48,7 @@ namespace Ecosystem.Systems
       MakeAnimal(rabbit, position);
     }
 
-    public void MakeDeer(float3 position)
+    public void MakeDeer(Vector3 position)
     {
       Debug.Assert(Enabled);
 
@@ -61,7 +61,7 @@ namespace Ecosystem.Systems
       MakeAnimal(deer, position);
     }
 
-    public void MakeWolf(float3 position)
+    public void MakeWolf(Vector3 position)
     {
       Debug.Assert(Enabled);
 
@@ -74,7 +74,7 @@ namespace Ecosystem.Systems
       MakeAnimal(wolf, position);
     }
 
-    public void MakeBear(float3 position)
+    public void MakeBear(Vector3 position)
     {
       Debug.Assert(Enabled);
 
@@ -87,7 +87,7 @@ namespace Ecosystem.Systems
       MakeAnimal(bear, position);
     }
 
-    public void MakeCarrot(float3 position)
+    public void MakeCarrot(Vector3 position)
     {
       Debug.Assert(Enabled);
 
