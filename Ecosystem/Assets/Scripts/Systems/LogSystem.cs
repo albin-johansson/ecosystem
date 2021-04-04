@@ -52,6 +52,10 @@ namespace Ecosystem.Systems
     protected override void OnDestroy()
     {
       base.OnDestroy();
+      if (!Enabled)
+      {
+        return;
+      }
 
       var initialData = EntityManager.GetSingleton<InitialSimulationData>();
       var data = new JsonData
