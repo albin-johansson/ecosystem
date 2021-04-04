@@ -11,7 +11,9 @@ namespace Ecosystem.Systems
   public sealed class FactorySystem : AbstractSystem
   {
     private Entity _rabbitPrefab = Entity.Null;
+    private Entity _deerPrefab = Entity.Null;
     private Entity _wolfPrefab = Entity.Null;
+    private Entity _bearPrefab = Entity.Null;
     private Entity _carrotPrefab = Entity.Null;
 
     protected override void OnUpdate()
@@ -46,6 +48,19 @@ namespace Ecosystem.Systems
       MakeAnimal(rabbit, position);
     }
 
+    public void MakeDeer(float3 position)
+    {
+      Debug.Assert(Enabled);
+
+      if (_deerPrefab == Entity.Null)
+      {
+        _deerPrefab = EntityManager.GetSingleton<DeerPrefab>().Value;
+      }
+
+      var deer = EntityManager.Instantiate(_deerPrefab);
+      MakeAnimal(deer, position);
+    }
+
     public void MakeWolf(float3 position)
     {
       Debug.Assert(Enabled);
@@ -57,6 +72,19 @@ namespace Ecosystem.Systems
 
       var wolf = EntityManager.Instantiate(_wolfPrefab);
       MakeAnimal(wolf, position);
+    }
+
+    public void MakeBear(float3 position)
+    {
+      Debug.Assert(Enabled);
+
+      if (_bearPrefab == Entity.Null)
+      {
+        _bearPrefab = EntityManager.GetSingleton<BearPrefab>().Value;
+      }
+
+      var bear = EntityManager.Instantiate(_bearPrefab);
+      MakeAnimal(bear, position);
     }
 
     public void MakeCarrot(float3 position)
