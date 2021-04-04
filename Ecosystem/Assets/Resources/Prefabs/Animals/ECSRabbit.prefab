@@ -146,7 +146,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   value: 0
-  rate: 1.5
+  rate: 0.2
   max: 600
 --- !u!114 &5264252205927029590
 MonoBehaviour:
@@ -185,6 +185,7 @@ GameObject:
   - component: {fileID: 4618190398042555383}
   - component: {fileID: 1995424444153764124}
   - component: {fileID: 5832446837963832687}
+  - component: {fileID: 4196927944196649857}
   m_Layer: 0
   m_Name: Mesh
   m_TagString: Untagged
@@ -255,3 +256,22 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!205 &4196927944196649857
+LODGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7525252825034581834}
+  serializedVersion: 2
+  m_LocalReferencePoint: {x: 0.000000014901161, y: 0.18804199, z: 0.00055512786}
+  m_Size: 0.4575708
+  m_FadeMode: 0
+  m_AnimateCrossFading: 0
+  m_LastLODIsBillboard: 0
+  m_LODs:
+  - screenRelativeHeight: 0.010882032
+    fadeTransitionWidth: 0
+    renderers:
+    - renderer: {fileID: 5832446837963832687}
+  m_Enabled: 1
