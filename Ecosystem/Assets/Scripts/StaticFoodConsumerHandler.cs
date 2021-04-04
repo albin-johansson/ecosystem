@@ -12,7 +12,7 @@ namespace Ecosystem
 
     private int _count;
     private float _time;
-    private float _rate = 1;
+    private const float Rate = 1;
 
     private void Update()
     {
@@ -22,7 +22,7 @@ namespace Ecosystem
       }
 
       _time += Time.deltaTime;
-      if (_time >= _rate)
+      if (_time >= Rate)
       {
         for (var i = 0; i < _count; ++i)
         {

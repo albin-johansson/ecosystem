@@ -15,9 +15,8 @@ namespace Ecosystem.Spawning
 
     private float _elapsedTime;
     private int _spawningLocations;
-    private Transform _spawnerChild;
 
-    public Stack<int> BerriesPlaced { get; private set; } = new Stack<int>();
+    public Stack<int> BerriesPlaced { get; } = new Stack<int>();
     public int AmountOfBerries { get; set; }
 
     //Deactivates all berries to make them invisible.  
@@ -25,7 +24,7 @@ namespace Ecosystem.Spawning
     {
       _spawningLocations = spawner.childCount - 1;
 
-      for (int i = 0; i < _spawningLocations; ++i)
+      for (var i = 0; i < _spawningLocations; ++i)
       {
         spawner.GetChild(i).gameObject.SetActive(false);
       }

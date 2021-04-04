@@ -30,11 +30,7 @@ namespace Ecosystem.AnimalBehaviour.RabbitStates
         return AnimalState.Fleeing;
       }
 
-      if (!Consumer.IsHungry())
-      {
-        return base.Tick();
-      }
-      else if (Consumer.EatingFromGameObject)
+      if (Consumer.EatingFromGameObject)
       {
         return Type();
       }
@@ -58,7 +54,7 @@ namespace Ecosystem.AnimalBehaviour.RabbitStates
 
     public override AnimalState Type()
     {
-      return AnimalState.Drinking;
+      return AnimalState.Eating;
     }
   }
 }
