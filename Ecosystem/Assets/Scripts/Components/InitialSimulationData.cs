@@ -7,7 +7,9 @@ namespace Ecosystem.Components
   public struct InitialSimulationData : IComponentData
   {
     public int initialRabbitCount;
+    public int initialDeerCount;
     public int initialWolfCount;
+    public int initialBearCount;
     public int initialCarrotCount;
   }
 }
