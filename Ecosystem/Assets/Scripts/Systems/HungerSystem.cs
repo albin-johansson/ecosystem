@@ -21,6 +21,7 @@ namespace Ecosystem.Systems
       var time = Time;
 
       Entities.WithAll<Hunger>()
+              .WithNone<Dead>()
               .ForEach((Entity entity, int entityInQueryIndex, ref Hunger hunger) =>
               {
                 hunger.value += hunger.rate * time.DeltaTime;
