@@ -8,8 +8,7 @@ namespace Ecosystem
 {
     public class NutritionController : MonoBehaviour
     {
-
-        [SerializeField] private Double NutritionalValue;
+        public double nutritionalValue;
 
         public delegate void FoodEatenEvent(GameObject food);
 
@@ -17,12 +16,21 @@ namespace Ecosystem
         /// This event is emitted every time a food resource is consumed.
         /// </summary>
         public static event FoodEatenEvent OnFoodEaten;
-        
+
+        public void Update()
+        {
+            // Simulates nutritional decay.
+            if (nutritionalValue > 0)
+            {
+                nutritionalValue = (double) Mathf.Max((float) 0, (float) nutritionalValue - Time.deltaTime * 0.1f);
+            }
+        }
         public double Consume(Double hunger)
         {
-            if (hunger < NutritionalValue)
+            Debug.Log("Consume: " + hunger);
+            if (hunger < nutritionalValue)
             {
-                NutritionalValue -= hunger;
+                nutritionalValue -= hunger;
                 return hunger;
             }
             
@@ -37,7 +45,12 @@ namespace Ecosystem
                 Destroy(gameObject);
             }
             
-            return NutritionalValue;
+            return nutritionalValue;
+        }
+
+        public void SetNutrition(double value)
+        {
+            nutritionalValue = value;
         }
     }
 }

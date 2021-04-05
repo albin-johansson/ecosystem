@@ -73,13 +73,6 @@ namespace Ecosystem
         var preyPosition = other.gameObject.transform.position;
 
         other.gameObject.GetComponent<DeathHandler>().Die(CauseOfDeath.Eaten);
-
-        GameObject corpse = Instantiate(meat, preyPosition, Quaternion.identity);
-
-        if (corpse.TryGetComponent(out NutritionController nutritionController))
-        {
-          Hunger -= nutritionController.Consume(Hunger);
-        }
       }
       else if (Tags.IsMeat(other.gameObject))
       {
