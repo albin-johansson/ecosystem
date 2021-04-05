@@ -16,6 +16,7 @@ namespace Ecosystem
     [SerializeField] private NavMeshAgent navAgent;
     [SerializeField] private AbstractGenome genome;
     [SerializeField] private SphereCollider sphereCollider;
+    [SerializeField] private StaminaController staminaController;
 
     private Vector3 _fleeDestination;
     private float _previousSpeed;
@@ -45,6 +46,11 @@ namespace Ecosystem
     public bool IsReachable(Vector3 targetPosition)
     {
       return ValidateDestination(targetPosition, out var destination);
+    }
+
+    public Vector3 GetPosition()
+    {
+      return navAgent.transform.position;
     }
 
 
@@ -242,8 +248,14 @@ namespace Ecosystem
 
     private void SetNavAgentSpeed()
     {
-      //TODO: Should use stamina or energy from genome (not implemented in genome yet)
-      navAgent.speed = genome.GetSpeedFactor().Value;
+      if (staminaController.IsRunning)
+      {
+        navAgent.speed = genome.GetSpeedFactor().Value * 2;
+      }
+      else
+      {
+        navAgent.speed = genome.GetSpeedFactor().Value; 
+      }
     }
 
     #endregion

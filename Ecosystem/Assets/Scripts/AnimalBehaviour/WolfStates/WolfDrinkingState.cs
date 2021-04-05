@@ -6,6 +6,7 @@ namespace Ecosystem.AnimalBehaviour.WolfStates
   {
     public WolfDrinkingState(WolfStateData data)
     {
+      StaminaController = data.StaminaController;
       Consumer = data.Consumer;
       WaterConsumer = data.WaterConsumer;
       MovementController = data.MovementController;
@@ -33,6 +34,12 @@ namespace Ecosystem.AnimalBehaviour.WolfStates
         MovementController.StandStill(false);
         return base.Tick();
       }
+    }
+
+    public override GameObject End()
+    {
+      WaterConsumer.StopDrinking();
+      return base.End();
     }
 
     public override AnimalState Type()
