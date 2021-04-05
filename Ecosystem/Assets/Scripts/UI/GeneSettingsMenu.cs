@@ -41,6 +41,16 @@ namespace Ecosystem.UI
       deerMutate.onValueChanged.AddListener(delegate { ToggleMutateDear(deerMutate); });
       bearSet.onValueChanged.AddListener(delegate { ToggleSetBear(bearSet); });
       bearMutate.onValueChanged.AddListener(delegate { ToggleMutateBear(bearMutate); });
+
+      //Update after changes. 
+      rabbitSet.onValueChanged.AddListener(delegate { AssignChanges(); });
+      rabbitMutate.onValueChanged.AddListener(delegate { AssignChanges(); });
+      wolfSet.onValueChanged.AddListener(delegate { AssignChanges(); });
+      wolfMutate.onValueChanged.AddListener(delegate { AssignChanges(); });
+      deerSet.onValueChanged.AddListener(delegate { AssignChanges(); });
+      deerMutate.onValueChanged.AddListener(delegate { AssignChanges(); });
+      bearSet.onValueChanged.AddListener(delegate { AssignChanges(); });
+      bearMutate.onValueChanged.AddListener(delegate { AssignChanges(); });
     }
 
 
@@ -61,9 +71,6 @@ namespace Ecosystem.UI
       Dictionary<GeneType, Preset> single, Dictionary<GeneType, Preset> multi)
     {
       preset = isOn ? multi : single;
-      //TODO: currently does not work for only mutate chance changes. 
-      AssignChanges();
-
     }
 
     private void ToggleSetRabbit(Toggle toggle)
