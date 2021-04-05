@@ -25,11 +25,8 @@ namespace Ecosystem.UI
 
     public void SettingsMenu()
     {
-      Debug.Log("Button pressed");
-
       if (genomeSettingsMenu.activeSelf)
       {
-        //genomeSettingsMenu.GetComponent<GeneSettingsMenu>().AssignPresests();
         settingsWindow.SetActive(true);
         genomeSettingsMenu.SetActive(false);
       }
@@ -54,13 +51,6 @@ namespace Ecosystem.UI
       mainMenuWindow.SetActive(false);
       settingsWindow.SetActive(false);
       genomeSettingsMenu.SetActive(true);
-    }
-    //TODO: remove if we should only use the back arrow instead of "return" button.
-    public void ExitGeneSettingsMenu()
-    {
-      //genomeSettingsMenu.GetComponent<GeneSettingsMenu>().AssignPresests();
-      settingsWindow.SetActive(true);
-      genomeSettingsMenu.SetActive(false);
     }
 
     public void AntiAliasingOption()
