@@ -701,6 +701,22 @@ PrefabInstance:
       propertyPath: m_AnchorMin.x
       value: 0.25
       objectReference: {fileID: 0}
+    - target: {fileID: 2472615086355290452, guid: 1ded045ed96889543bd7186fc2ea0381, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 793687913}
+    - target: {fileID: 2472615086355290452, guid: 1ded045ed96889543bd7186fc2ea0381, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: EnterGeneSettingsMenu
+      objectReference: {fileID: 0}
+    - target: {fileID: 2472615086355290452, guid: 1ded045ed96889543bd7186fc2ea0381, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: Ecosystem.UI.Settings, ScriptsAssembly
+      objectReference: {fileID: 0}
+    - target: {fileID: 2472615086355290452, guid: 1ded045ed96889543bd7186fc2ea0381, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
+      objectReference: {fileID: 0}
     - target: {fileID: 3353456193979818170, guid: 1ded045ed96889543bd7186fc2ea0381, type: 3}
       propertyPath: m_AnchorMax.x
       value: 0.25
@@ -816,6 +832,17 @@ RectTransform:
   m_CorrespondingSourceObject: {fileID: 5975403216830835549, guid: 1ded045ed96889543bd7186fc2ea0381, type: 3}
   m_PrefabInstance: {fileID: 793687911}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &793687913 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 5703634410337215407, guid: 1ded045ed96889543bd7186fc2ea0381, type: 3}
+  m_PrefabInstance: {fileID: 793687911}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 70eb25357daf2e249b644cebae5c0be0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &886235166 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 4178294844912894744, guid: f6a6c66b57f65c648b7becd500b2a5fe, type: 3}
@@ -2265,18 +2292,18 @@ PrefabInstance:
     - target: {fileID: 842932742466505772, guid: 051f357ceb8f22d42aae984edd2a6324, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
-      objectReference: {fileID: 1952800703}
+      objectReference: {fileID: 793687913}
     - target: {fileID: 842932742466505772, guid: 051f357ceb8f22d42aae984edd2a6324, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
       value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 842932742466505772, guid: 051f357ceb8f22d42aae984edd2a6324, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: EnterMainMenu
+      value: ExitGeneSettingsMenu
       objectReference: {fileID: 0}
     - target: {fileID: 842932742466505772, guid: 051f357ceb8f22d42aae984edd2a6324, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
-      value: Ecosystem.UI.MenuManager, ScriptsAssembly
+      value: Ecosystem.UI.Settings, ScriptsAssembly
       objectReference: {fileID: 0}
     - target: {fileID: 842932742466505772, guid: 051f357ceb8f22d42aae984edd2a6324, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
