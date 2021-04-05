@@ -40,7 +40,7 @@ namespace Ecosystem.AnimalBehaviour.RabbitStates
       _lookingForMate = RabbitStateFactory.CreateLookingForMate(data);
       _eating = RabbitStateFactory.CreateEating(data);
 
-      sphereCollider.radius = (sphereCollider.radius / sphereCollider.transform.lossyScale.magnitude) * genome.GetVision().Value;
+      sphereCollider.radius = genome.GetVision().Value;
 
       State = _idle;
       SwitchState(AnimalState.Idle);

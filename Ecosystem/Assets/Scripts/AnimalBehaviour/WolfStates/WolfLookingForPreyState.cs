@@ -19,7 +19,7 @@ namespace Ecosystem.AnimalBehaviour.WolfStates
 
     public override void Begin(GameObject target)
     {
-      Target = GetClosestInVision(Layers.PreyLayer);
+      Target = GetClosestInVision(Layers.PreyMask);
       MovementController.StartWander();
       AnimationController.MoveAnimation();
     }
