@@ -18,7 +18,8 @@ namespace Ecosystem.AnimalBehaviour.PreyStates
     {
       Data = new StateData
       {
-        Consumer = Consumer,
+        StaminaController = staminaController,
+        Consumer = consumer,
         AnimationController = animationController,
         MemoryController = memoryController,
         MovementController = movementController,
@@ -33,7 +34,7 @@ namespace Ecosystem.AnimalBehaviour.PreyStates
       _runningTowardsWater = PreyStateFactory.CreatePreyRunningTowardsWater(Data);
       _fleeing = PreyStateFactory.CreatePreyFleeing(Data);
 
-      sphereCollider.radius = (sphereCollider.radius / sphereCollider.transform.lossyScale.magnitude) * genome.GetVision().Value;
+      sphereCollider.radius = genome.GetVision().Value;
 
       State = _idle;
       SwitchState(AnimalState.Idle);

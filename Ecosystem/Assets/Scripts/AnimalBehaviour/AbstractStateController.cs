@@ -9,6 +9,7 @@ namespace Ecosystem.AnimalBehaviour
     protected IAnimalState State;
     protected IConsumer Consumer;
     [SerializeField] protected StateText stateText;
+    [SerializeField] protected StaminaController staminaController;
     [SerializeField] protected WaterConsumer waterConsumer;
     [SerializeField] protected MovementController movementController;
     [SerializeField] protected EcoAnimationController animationController;

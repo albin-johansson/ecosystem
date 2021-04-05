@@ -7,6 +7,7 @@ namespace Ecosystem.AnimalBehaviour.PreyStates
   {
     public PreyIdleState(StateData data)
     {
+      StaminaController = data.StaminaController;
       Consumer = data.Consumer;
       WaterConsumer = data.WaterConsumer;
       MovementController = data.MovementController;

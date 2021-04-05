@@ -7,6 +7,7 @@ namespace Ecosystem.AnimalBehaviour.PreyStates
   {
     public RabbitLookingForMateState(StateData data)
     {
+      StaminaController = data.StaminaController;
       Consumer = data.Consumer;
       WaterConsumer = data.WaterConsumer;
       MovementController = data.MovementController;
@@ -21,7 +22,7 @@ namespace Ecosystem.AnimalBehaviour.PreyStates
       Reproducer.isWilling = true;
       MovementController.StartWander();
       AnimationController.MoveAnimation();
-      Target = GetClosestInVision(Layers.RabbitLayer);
+      Target = GetClosestInVision(Layers.RabbitMask);
     }
 
     public override AnimalState Type()
@@ -35,7 +36,7 @@ namespace Ecosystem.AnimalBehaviour.PreyStates
       {
         if (!Target.activeSelf)
         {
-          Target = GetClosestMateInVision(Layers.RabbitLayer);
+          Target = GetClosestMateInVision(Layers.RabbitMask);
           if (!Target)
           {
             return base.Tick();
@@ -51,7 +52,7 @@ namespace Ecosystem.AnimalBehaviour.PreyStates
         }
         else
         {
-          Target = GetClosestMateInVision(Layers.RabbitLayer);
+          Target = GetClosestMateInVision(Layers.RabbitMask);
         }
       }
       else
@@ -85,7 +86,7 @@ namespace Ecosystem.AnimalBehaviour.PreyStates
     {
       if (other.gameObject == Target)
       {
-        Target = GetClosestMateInVision(Layers.RabbitLayer);
+        Target = GetClosestMateInVision(Layers.RabbitMask);
       }
     }
   }

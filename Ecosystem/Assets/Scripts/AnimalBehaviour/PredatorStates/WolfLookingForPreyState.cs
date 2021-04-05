@@ -7,6 +7,7 @@ namespace Ecosystem.AnimalBehaviour.PredatorStates
   {
     public WolfLookingForPreyState(StateData data)
     {
+      StaminaController = data.StaminaController;
       Consumer = data.Consumer;
       WaterConsumer = data.WaterConsumer;
       MovementController = data.MovementController;
@@ -18,7 +19,7 @@ namespace Ecosystem.AnimalBehaviour.PredatorStates
 
     public override void Begin(GameObject target)
     {
-      Target = GetClosestInVision(Layers.PreyLayer);
+      Target = GetClosestInVision(Layers.PreyMask);
       MovementController.StartWander();
       AnimationController.MoveAnimation();
     }

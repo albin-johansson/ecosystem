@@ -6,6 +6,7 @@ namespace Ecosystem.AnimalBehaviour.PredatorStates
   {
     public PredatorAttackingState(StateData data)
     {
+      StaminaController = data.StaminaController;
       Consumer = data.Consumer;
       WaterConsumer = data.WaterConsumer;
       MovementController = data.MovementController;

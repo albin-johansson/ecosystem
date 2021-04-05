@@ -19,7 +19,8 @@ namespace Ecosystem.AnimalBehaviour.PredatorStates
     {
       Data = new StateData
       {
-        Consumer = Consumer,
+        StaminaController = staminaController,
+        Consumer = consumer,
         AnimationController = animationController,
         MemoryController = memoryController,
         MovementController = movementController,
@@ -34,7 +35,7 @@ namespace Ecosystem.AnimalBehaviour.PredatorStates
       _runningTowardsWater = PredatorStateFactory.CreatePredatorRunningTowardsWater(Data);
       _attacking = PredatorStateFactory.CreatePredatorAttackingState(Data);
 
-      sphereCollider.radius = (sphereCollider.radius / sphereCollider.transform.lossyScale.magnitude) * genome.GetVision().Value;
+      sphereCollider.radius = genome.GetVision().Value;
 
       State = _idle;
       SwitchState(AnimalState.Idle);

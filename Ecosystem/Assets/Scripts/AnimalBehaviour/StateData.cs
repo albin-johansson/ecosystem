@@ -4,6 +4,7 @@ namespace Ecosystem.AnimalBehaviour
 {
   public struct StateData
   {
+    public StaminaController StaminaController;
     public IConsumer Consumer;
     public WaterConsumer WaterConsumer;
     public MovementController MovementController;
