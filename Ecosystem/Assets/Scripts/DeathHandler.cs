@@ -16,6 +16,7 @@ namespace Ecosystem
     [SerializeField] private GameObject meatModel;
     private CauseOfDeath _cause;
     private GameObject _gameObject;
+    public bool _isDead; //can probebly remove this when realistic food is implemented
 
     public delegate void DeathEvent(CauseOfDeath cause, GameObject gameObject);
 
@@ -26,6 +27,7 @@ namespace Ecosystem
 
     public void Die(CauseOfDeath cause)
     {
+      _isDead = true; //temporary bug fix so that multiple wolves can´t eat the same prey
       _gameObject = gameObject;
       _cause = cause;
       OnDeath?.Invoke(_cause, _gameObject.gameObject);

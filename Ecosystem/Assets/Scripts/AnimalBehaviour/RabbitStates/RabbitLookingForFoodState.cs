@@ -7,6 +7,7 @@ namespace Ecosystem.AnimalBehaviour.RabbitStates
   {
     public RabbitLookingForFoodState(RabbitStateData data)
     {
+      StaminaController = data.StaminaController;
       Consumer = data.Consumer;
       WaterConsumer = data.WaterConsumer;
       MovementController = data.MovementController;
@@ -18,7 +19,7 @@ namespace Ecosystem.AnimalBehaviour.RabbitStates
 
     public override void Begin(GameObject target)
     {
-      Target = GetClosestInVision(Layers.FoodLayer);
+      Target = GetClosestInVision(Layers.FoodMask);
       MovementController.StartWander();
       AnimationController.MoveAnimation();
     }

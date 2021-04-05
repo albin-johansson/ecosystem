@@ -68,11 +68,13 @@ namespace Ecosystem
 
       if (Tags.IsPrey(other.gameObject))
       {
-        IsAttacking = true;
-        OnPreyConsumed?.Invoke();
-        var preyPosition = other.gameObject.transform.position;
-
-        other.gameObject.GetComponent<DeathHandler>().Die(CauseOfDeath.Eaten);
+        DeathHandler _deathHandler = other.gameObject.GetComponent<DeathHandler>();
+        if (!_deathHandler._isDead)
+        {
+          _deathHandler.Die(CauseOfDeath.Eaten);
+          IsAttacking = true;
+          OnPreyConsumed?.Invoke();
+        }
       }
       else if (Tags.IsMeat(other.gameObject))
       {

@@ -7,6 +7,7 @@ namespace Ecosystem.AnimalBehaviour.WolfStates
   {
     public WolfLookingForWaterState(WolfStateData data)
     {
+      StaminaController = data.StaminaController;
       Consumer = data.Consumer;
       WaterConsumer = data.WaterConsumer;
       MovementController = data.MovementController;
@@ -17,7 +18,7 @@ namespace Ecosystem.AnimalBehaviour.WolfStates
 
     public override void Begin(GameObject target)
     {
-      Target = GetClosestInVision(Layers.WaterLayer);
+      Target = GetClosestInVision(Layers.WaterMask);
       if (!Target)
       {
         Target = MemoryController.GetClosestInMemory(Tags.IsWater, MovementController.GetPosition());

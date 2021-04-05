@@ -7,6 +7,7 @@ namespace Ecosystem.AnimalBehaviour.WolfStates
   {
     public WolfLookingForMateState(WolfStateData data)
     {
+      StaminaController = data.StaminaController;
       Consumer = data.Consumer;
       WaterConsumer = data.WaterConsumer;
       MovementController = data.MovementController;
@@ -19,7 +20,7 @@ namespace Ecosystem.AnimalBehaviour.WolfStates
     public override void Begin(GameObject target)
     {
       Reproducer.isWilling = true;
-      Target = GetClosestMateInVision(Layers.PredatorLayer);
+      Target = GetClosestMateInVision(Layers.PredatorMask);
 
     }
 
@@ -40,7 +41,7 @@ namespace Ecosystem.AnimalBehaviour.WolfStates
         }
         else
         {
-          Target = GetClosestMateInVision(Layers.PredatorLayer);
+          Target = GetClosestMateInVision(Layers.PredatorMask);
         }
       }
       else
@@ -75,7 +76,7 @@ namespace Ecosystem.AnimalBehaviour.WolfStates
     {
       if (other.gameObject == Target)
       {
-        Target = GetClosestMateInVision(Layers.PredatorLayer);
+        Target = GetClosestMateInVision(Layers.PredatorMask);
       }
     }
   }

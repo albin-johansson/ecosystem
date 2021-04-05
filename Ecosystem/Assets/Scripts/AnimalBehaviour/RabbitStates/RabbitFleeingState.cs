@@ -7,6 +7,7 @@ namespace Ecosystem.AnimalBehaviour.RabbitStates
   {
     public RabbitFleeingState(RabbitStateData data)
     {
+      StaminaController = data.StaminaController;
       Consumer = data.Consumer;
       WaterConsumer = data.WaterConsumer;
       MovementController = data.MovementController;
@@ -20,29 +21,42 @@ namespace Ecosystem.AnimalBehaviour.RabbitStates
     {
       Target = target;
       MovementController.StartFleeing(Target.transform.position);
-      AnimationController.MoveAnimation();
     }
 
     public override AnimalState Tick()
     {
       if (Target)
       {
-        if (Target.activeSelf)
+        if (!Target.activeSelf)
         {
-          MovementController.UpdateFleeing(Target.transform.position);
-          return Type();
+          Target = GetClosestInVision(Layers.PredatorMask);
+          if (!Target)
+          {
+            return base.Tick();
+          }
+        }
+
+        if (StaminaController.CanRun())
+        {
+          StaminaController.IsRunning = true;
+          AnimationController.RunAnimation();
         }
         else
         {
-          Target = GetClosestInVision(Layers.PredatorLayer);
-          if (Target)
-          {
-            MovementController.UpdateFleeing(Target.transform.position);
-            return Type();
-          }
+          AnimationController.MoveAnimation();
         }
+
+        MovementController.UpdateFleeing(Target.transform.position);
+        return Type();
       }
+
       return base.Tick();
+    }
+
+    public override GameObject End()
+    {
+      StaminaController.IsRunning = false;
+      return base.End();
     }
 
     public override void OnTriggerEnter(Collider other)
@@ -58,7 +72,7 @@ namespace Ecosystem.AnimalBehaviour.RabbitStates
     {
       if (other.gameObject == Target)
       {
-        Target = GetClosestInVision(Layers.PredatorLayer);
+        Target = GetClosestInVision(Layers.PredatorMask);
       }
     }
 
