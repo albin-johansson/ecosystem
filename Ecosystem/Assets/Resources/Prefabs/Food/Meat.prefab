@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6034043334718517479}
   - component: {fileID: 5397723642851313545}
+  - component: {fileID: 6318471318033541788}
   m_Layer: 12
   m_Name: Meat
   m_TagString: Meat
@@ -47,6 +48,19 @@ CapsuleCollider:
   m_Height: 0.47
   m_Direction: 0
   m_Center: {x: 0.1, y: 0, z: 0}
+--- !u!114 &6318471318033541788
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5971010928584275656}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 447cdde87036ae847b423148d5fee418, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  nutritionalValue: 0
 --- !u!1001 &4920864006477584015
 PrefabInstance:
   m_ObjectHideFlags: 0

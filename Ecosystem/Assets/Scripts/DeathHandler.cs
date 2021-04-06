@@ -13,7 +13,7 @@ namespace Ecosystem
   {
     [SerializeField] private EcoAnimationController animationController;
     [SerializeField] private string keyToPool;
-    [SerializeField] private GameObject meatModel;
+    [SerializeField] private string meatKeyToPool;
     private CauseOfDeath _cause;
     private GameObject _gameObject;
     public bool _isDead; //can probebly remove this when realistic food is implemented
@@ -35,8 +35,12 @@ namespace Ecosystem
       StartCoroutine(InactivateAfterDelay(3));
       if (Tags.IsPrey(_gameObject))
       {
-        GameObject carrion = Instantiate(meatModel, _gameObject.transform.position, Quaternion.identity);
-        NutritionController nutritionController = carrion.AddComponent<NutritionController>();
+        
+        GameObject carrion = ObjectPoolHandler.instance.GetFromPool(meatKeyToPool);
+        carrion.transform.position = _gameObject.transform.position;
+        carrion.transform.rotation = _gameObject.transform.rotation;
+        carrion.SetActive(true);
+        NutritionController nutritionController = carrion.GetComponent<NutritionController>();
         nutritionController.SetNutrition(Nutrition.getNutrition(_gameObject));
       }
     }
