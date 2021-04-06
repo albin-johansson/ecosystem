@@ -1785,7 +1785,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 3350421026760717125}
-  m_RootOrder: 5
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1611194173291749041
 MonoBehaviour:
@@ -3548,67 +3548,6 @@ Transform:
   m_Father: {fileID: 2566156558883909389}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &3485730432107381235
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 7946306195632662829}
-  - component: {fileID: 8161341183878684695}
-  - component: {fileID: 4953059004311012286}
-  m_Layer: 0
-  m_Name: Reproducer
-  m_TagString: Reproducer
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &7946306195632662829
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3485730432107381235}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 3350421026760717125}
-  m_RootOrder: 3
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!65 &8161341183878684695
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3485730432107381235}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 1
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 0.5, y: 1.5, z: 2}
-  m_Center: {x: 0, y: 0.75, z: 0}
---- !u!114 &4953059004311012286
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3485730432107381235}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 22eee6933ea9e9b4f90722c64ceefa7c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  genome: {fileID: 570846004582155358}
-  prefab: {fileID: 7155763010095567698}
-  keyToPool: Deer
-  isWilling: 0
 --- !u!1 &3504996671413722853
 GameObject:
   m_ObjectHideFlags: 0
@@ -4936,7 +4875,7 @@ MonoBehaviour:
   movementController: {fileID: 1611194173291749041}
   animationController: {fileID: 4427174813899224407}
   memoryController: {fileID: 5959171333855914516}
-  reproducer: {fileID: 4953059004311012286}
+  reproducer: {fileID: 7965410119150201383}
   genome: {fileID: 570846004582155358}
   sphereCollider: {fileID: 6776153342693034266}
   consumer: {fileID: 5346017003192509530}
@@ -5503,6 +5442,7 @@ GameObject:
   - component: {fileID: 4857879101199746012}
   - component: {fileID: 8855973453505120815}
   - component: {fileID: 5346017003192509530}
+  - component: {fileID: 7965410119150201383}
   m_Layer: 0
   m_Name: Consumer
   m_TagString: Untagged
@@ -5518,11 +5458,11 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5442896545990147931}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0.973, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalPosition: {x: 0, y: 0.973, z: -0.157}
+  m_LocalScale: {x: 1.05, y: 1.05, z: 1.7262}
   m_Children: []
   m_Father: {fileID: 3350421026760717125}
-  m_RootOrder: 4
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!65 &4857879101199746012
 BoxCollider:
@@ -5569,7 +5509,23 @@ MonoBehaviour:
   resourceBar: {fileID: 6078427025632469203}
   deathHandler: {fileID: 6442332908797553670}
   maxHunger: 100
-  reproducer: {fileID: 4953059004311012286}
+  reproducer: {fileID: 7965410119150201383}
+--- !u!114 &7965410119150201383
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5442896545990147931}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 22eee6933ea9e9b4f90722c64ceefa7c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  genome: {fileID: 570846004582155358}
+  prefab: {fileID: 7155763010095567698}
+  keyToPool: Deer
+  isWilling: 0
 --- !u!1 &5456374639049524137
 GameObject:
   m_ObjectHideFlags: 0
@@ -7464,7 +7420,6 @@ Transform:
   - {fileID: 4898058360673817619}
   - {fileID: 2612359751320925015}
   - {fileID: 1583206724766175299}
-  - {fileID: 7946306195632662829}
   - {fileID: 8025181674659432259}
   - {fileID: 4284669953163483551}
   - {fileID: 497818961259405540}
@@ -10036,7 +9991,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7770376172294729736, guid: b11869fe3d5ecbf4b912f33fa4a312db, type: 3}
       propertyPath: m_RootOrder
-      value: 6
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 7770376172294729736, guid: b11869fe3d5ecbf4b912f33fa4a312db, type: 3}
       propertyPath: m_LocalPosition.x
