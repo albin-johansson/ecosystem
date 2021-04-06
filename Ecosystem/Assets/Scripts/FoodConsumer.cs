@@ -21,6 +21,13 @@ namespace Ecosystem
     public bool IsAttacking { get; set; }
 
     public bool CollideActive { get; set; }
+    
+    public delegate void FoodEatenEvent(GameObject food);
+
+    /// <summary>
+    /// This event is emitted every time a food resource is consumed.
+    /// </summary>
+    public static event FoodEatenEvent OnFoodEaten;
 
     private void OnEnable()
     {
