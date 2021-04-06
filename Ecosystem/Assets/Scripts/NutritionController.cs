@@ -9,6 +9,7 @@ namespace Ecosystem
     public class NutritionController : MonoBehaviour
     {
         public double nutritionalValue;
+        [SerializeField] private string keyToPool;
 
         public delegate void FoodEatenEvent(GameObject food);
 
@@ -35,7 +36,7 @@ namespace Ecosystem
             
             OnFoodEaten?.Invoke(gameObject);
             var gameObjectTag = gameObject.tag;
-            if (ObjectPoolHandler.instance.isPoolValid(gameObjectTag))
+            if (ObjectPoolHandler.instance.isPoolValid(keyToPool))
             {
                 ObjectPoolHandler.instance.ReturnToPool(gameObjectTag, gameObject);
             }
