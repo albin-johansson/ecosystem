@@ -49,6 +49,11 @@ namespace Ecosystem
       if (EatingFromGameObject && EatingFromGameObject.activeSelf)
       {
         Hunger -= 4 * Time.deltaTime;
+        if (Hunger <= 0)
+        {
+          Hunger = 0;
+          EatingFromGameObject = null;
+        }
       }
       else
       {
