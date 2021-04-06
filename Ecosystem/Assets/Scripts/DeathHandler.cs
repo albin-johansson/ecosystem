@@ -42,6 +42,7 @@ namespace Ecosystem
         carrion.SetActive(true);
         NutritionController nutritionController = carrion.GetComponent<NutritionController>();
         nutritionController.SetNutrition(Nutrition.getNutrition(_gameObject));
+        nutritionController.SetKeyToPool("Meat");
       }
     }
 

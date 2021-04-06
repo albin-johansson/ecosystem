@@ -49,6 +49,11 @@ namespace Ecosystem
     {
       nutritionalValue = value;
     }
+    
+    public void SetKeyToPool(String key)
+    {
+      keyToPool = key;
+    }
 
     private void ReturnToPool()
     {
