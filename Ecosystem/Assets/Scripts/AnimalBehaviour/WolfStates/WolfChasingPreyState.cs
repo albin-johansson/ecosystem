@@ -36,7 +36,7 @@ namespace Ecosystem.AnimalBehaviour.WolfStates
       }
       else if (!Target.activeSelf || !MovementController.IsTargetInRange(Target.transform.position))
       {
-        Target = GetClosestInVision(Layers.PreyLayer);
+        Target = GetClosestInVision(Layers.PreyMask);
         return Type();
       }
       else
@@ -75,7 +75,7 @@ namespace Ecosystem.AnimalBehaviour.WolfStates
     {
       if (other.gameObject == Target)
       {
-        Target = GetClosestInVision(Layers.PreyLayer);
+        Target = GetClosestInVision(Layers.PreyMask);
       }
     }
 

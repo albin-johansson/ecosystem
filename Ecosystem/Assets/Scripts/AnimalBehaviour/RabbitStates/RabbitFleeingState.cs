@@ -29,7 +29,7 @@ namespace Ecosystem.AnimalBehaviour.RabbitStates
       {
         if (!Target.activeSelf)
         {
-          Target = GetClosestInVision(Layers.PredatorLayer);
+          Target = GetClosestInVision(Layers.PredatorMask);
           if (!Target)
           {
             return base.Tick();
@@ -72,7 +72,7 @@ namespace Ecosystem.AnimalBehaviour.RabbitStates
     {
       if (other.gameObject == Target)
       {
-        Target = GetClosestInVision(Layers.PredatorLayer);
+        Target = GetClosestInVision(Layers.PredatorMask);
       }
     }
 
