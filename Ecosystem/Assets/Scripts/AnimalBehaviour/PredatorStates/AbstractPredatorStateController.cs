@@ -20,7 +20,7 @@ namespace Ecosystem.AnimalBehaviour.PredatorStates
       Data = new StateData
       {
         StaminaController = staminaController,
-        Consumer = consumer,
+        Consumer = Consumer,
         AnimationController = animationController,
         MemoryController = memoryController,
         MovementController = movementController,

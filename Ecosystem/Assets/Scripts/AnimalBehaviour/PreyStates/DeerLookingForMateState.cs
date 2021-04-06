@@ -21,7 +21,7 @@ namespace Ecosystem.AnimalBehaviour.PreyStates
       Reproducer.isWilling = true;
       MovementController.StartWander();
       AnimationController.MoveAnimation();
-      Target = GetClosestInVision(Layers.DeerLayer);
+      Target = GetClosestInVision(Layers.DeerMask);
     }
 
     public override AnimalState Type()
@@ -35,7 +35,7 @@ namespace Ecosystem.AnimalBehaviour.PreyStates
       {
         if (!Target.activeSelf)
         {
-          Target = GetClosestMateInVision(Layers.DeerLayer);
+          Target = GetClosestMateInVision(Layers.DeerMask);
           if (!Target)
           {
             return base.Tick();
@@ -51,7 +51,7 @@ namespace Ecosystem.AnimalBehaviour.PreyStates
         }
         else
         {
-          Target = GetClosestMateInVision(Layers.DeerLayer);
+          Target = GetClosestMateInVision(Layers.DeerMask);
         }
       }
       else
@@ -85,7 +85,7 @@ namespace Ecosystem.AnimalBehaviour.PreyStates
     {
       if (other.gameObject == Target)
       {
-        Target = GetClosestMateInVision(Layers.DeerLayer);
+        Target = GetClosestMateInVision(Layers.DeerMask);
       }
     }
   }

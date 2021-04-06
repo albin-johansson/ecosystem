@@ -31,7 +31,7 @@ namespace Ecosystem.AnimalBehaviour.PredatorStates
       }
       else if (!Target.activeSelf || !MovementController.IsTargetInRange(Target.transform.position))
       {
-        Target = GetClosestInVision(Layers.PreyLayer);
+        Target = GetClosestInVision(Layers.PreyMask);
         return Type();
       }
       else if (Consumer.IsAttacking)
@@ -59,7 +59,7 @@ namespace Ecosystem.AnimalBehaviour.PredatorStates
     {
       if (other.gameObject == Target)
       {
-        Target = GetClosestInVision(Layers.PreyLayer);
+        Target = GetClosestInVision(Layers.PreyMask);
       }
     }
 

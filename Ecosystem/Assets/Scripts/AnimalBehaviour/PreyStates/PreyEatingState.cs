@@ -1,11 +1,11 @@
-using Ecosystem.Util;
+﻿using Ecosystem.Util;
 using UnityEngine;
 
-namespace Ecosystem.AnimalBehaviour.PredatorStates
+namespace Ecosystem.AnimalBehaviour.PreyStates
 {
-  internal sealed class BearLookingForFoodState : AbstractAnimalState
+  internal sealed class PreyEatingState : AbstractAnimalState
   {
-    public BearLookingForFoodState(StateData data)
+    public PreyEatingState(StateData data)
     {
       Consumer = data.Consumer;
       WaterConsumer = data.WaterConsumer;
@@ -13,25 +13,28 @@ namespace Ecosystem.AnimalBehaviour.PredatorStates
       AnimationController = data.AnimationController;
       MemoryController = data.MemoryController;
       Reproducer = data.Reproducer;
-      Genome = data.Genome;
     }
 
     public override void Begin(GameObject target)
     {
-      Target = GetClosestInVision(Layers.PreyMask);
-      MovementController.StartWander();
-      AnimationController.MoveAnimation();
+      Target = target;
+      AnimationController.IdleAnimation();
+      MovementController.StandStill(true);
     }
 
     public override AnimalState Tick()
     {
-      if (Target)
+      if (Tags.IsPredator(Target))
       {
-        return AnimalState.ChasingPrey;
+        return AnimalState.Fleeing;
+      }
+
+      if (Consumer.EatingFromGameObject)
+      {
+        return Type();
       }
       else
       {
-        MovementController.UpdateWander();
         return base.Tick();
       }
     }
@@ -39,11 +42,7 @@ namespace Ecosystem.AnimalBehaviour.PredatorStates
     public override void OnTriggerEnter(Collider other)
     {
       var otherObject = other.gameObject;
-      if (otherObject.CompareTag("Water"))
-      {
-        MemoryController.SaveToMemory(otherObject);
-      }
-      else if (Tags.IsPrey(otherObject))
+      if (Tags.IsPredator(otherObject))
       {
         Target = otherObject;
       }
@@ -51,7 +50,7 @@ namespace Ecosystem.AnimalBehaviour.PredatorStates
 
     public override AnimalState Type()
     {
-      return AnimalState.LookingForPrey;
+      return AnimalState.Eating;
     }
   }
 }
