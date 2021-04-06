@@ -38,7 +38,6 @@ namespace Ecosystem
         GameObject carrion = Instantiate(meatModel, _gameObject.transform.position, Quaternion.identity);
         NutritionController nutritionController = carrion.AddComponent<NutritionController>();
         nutritionController.SetNutrition(Nutrition.getNutrition(_gameObject));
-        Debug.Log(nutritionController.nutritionalValue);
       }
     }
 

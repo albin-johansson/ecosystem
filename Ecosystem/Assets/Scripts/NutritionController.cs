@@ -27,7 +27,6 @@ namespace Ecosystem
         }
         public double Consume(Double hunger)
         {
-            Debug.Log("Consume: " + hunger);
             if (hunger < nutritionalValue)
             {
                 nutritionalValue -= hunger;
