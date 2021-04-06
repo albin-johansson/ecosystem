@@ -16,6 +16,7 @@ namespace Ecosystem
     [SerializeField] private Reproducer reproducer;
     private bool _isDead;
 
+    public GameObject EatingFromGameObject { get; set; }
     public double Hunger { get; set; }
     public bool IsAttacking { get; set; }
 
@@ -38,6 +39,15 @@ namespace Ecosystem
         return;
       }
 
+      if (EatingFromGameObject && EatingFromGameObject.activeSelf)
+      {
+        Hunger -= 4 * Time.deltaTime;
+      }
+      else
+      {
+        EatingFromGameObject = null;
+      }
+
       if (reproducer.IsPregnant)
       {
         Hunger += genome.Metabolism * genome.GetChildFoodConsumtionFactor() * Time.deltaTime;
@@ -46,6 +56,7 @@ namespace Ecosystem
       {
         Hunger += genome.Metabolism * Time.deltaTime;
       }
+
       resourceBar.SetValue((float) Hunger);
       if (Hunger > maxHunger)
       {
@@ -56,6 +67,12 @@ namespace Ecosystem
 
     private void OnTriggerEnter(Collider other)
     {
+      if (Tags.IsStaticFood(other.gameObject))
+      {
+        OnFoodEaten?.Invoke(other.gameObject);
+        EatingFromGameObject = other.gameObject;
+      }
+
       if (Tags.IsFood(other.gameObject))
       {
         if (other.TryGetComponent(out NutritionController nutritionController))

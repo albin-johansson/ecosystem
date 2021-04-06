@@ -18,6 +18,8 @@ namespace Ecosystem
     private bool _isDead;
 
     public bool IsAttacking { get; set; }
+    
+    public GameObject EatingFromGameObject { get; set; }
 
     public double Hunger { get; set; }
 

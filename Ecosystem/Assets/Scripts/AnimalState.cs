@@ -13,6 +13,7 @@ namespace Ecosystem
     ChasingPrey,
     LookingForMate,
     Attacking,
+    Eating,
     GoingToMeat
   }
 }
