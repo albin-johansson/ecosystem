@@ -10,9 +10,13 @@ namespace Ecosystem.Util
       switch (animal.tag)
       {
         case "Rabbit":
-          return 100;
+          return 50;
         case "Deer":
-          return 500;
+          return 300;
+        case "Wolf":
+          return 200;
+        case "Bear":
+          return 400;
         default:
           return 100;
       }

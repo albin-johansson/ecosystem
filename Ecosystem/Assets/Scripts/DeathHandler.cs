@@ -33,17 +33,14 @@ namespace Ecosystem
       OnDeath?.Invoke(_cause, _gameObject.gameObject);
       animationController.EnterDeathAnimation();
       StartCoroutine(InactivateAfterDelay(3));
-      if (Tags.IsPrey(_gameObject))
-      {
-        
-        GameObject carrion = ObjectPoolHandler.instance.GetFromPool(meatKeyToPool);
-        carrion.transform.position = _gameObject.transform.position;
-        carrion.transform.rotation = _gameObject.transform.rotation;
-        carrion.SetActive(true);
-        NutritionController nutritionController = carrion.GetComponent<NutritionController>();
-        nutritionController.SetNutrition(Nutrition.getNutrition(_gameObject));
-        nutritionController.SetKeyToPool("Meat");
-      }
+
+      GameObject carrion = ObjectPoolHandler.instance.GetFromPool(meatKeyToPool);
+      carrion.transform.position = _gameObject.transform.position;
+      carrion.transform.rotation = _gameObject.transform.rotation;
+      carrion.SetActive(true);
+      NutritionController nutritionController = carrion.GetComponent<NutritionController>();
+      nutritionController.SetNutrition(Nutrition.getNutrition(_gameObject));
+      nutritionController.SetKeyToPool("Meat");
     }
 
     private IEnumerator InactivateAfterDelay(int delay)
