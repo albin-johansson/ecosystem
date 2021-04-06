@@ -27,42 +27,43 @@ namespace Ecosystem.Systems.Collisions
       var preyFromEntity = GetComponentDataFromEntity<Prey>(true);
       var deadFromEntity = GetComponentDataFromEntity<Dead>(true);
 
-      Entities.WithAll<Predator, SpatialTrigger, PhysicsCollider>()
-              .WithAll<Roaming>()
-              .WithNone<NavFollow, Dead>()
-              .WithChangeFilter<SpatialEntry>()
-              .WithReadOnly(preyFromEntity)
-              .WithReadOnly(deadFromEntity)
-              .ForEach((Entity entity,
-                      int entityInQueryIndex,
-                      in Predator predator,
-                      in DynamicBuffer<SpatialEntry> entries) =>
+      Entities
+        .WithAll<Predator, SpatialTrigger, PhysicsCollider>()
+        .WithAll<Roaming>()
+        .WithNone<NavFollow, Dead>()
+        .WithChangeFilter<SpatialEntry>()
+        .WithReadOnly(preyFromEntity)
+        .WithReadOnly(deadFromEntity)
+        .ForEach((Entity entity,
+          int entityInQueryIndex,
+          in Predator predator,
+          in DynamicBuffer<SpatialEntry> entries) =>
+        {
+          // Traverse from the end of the buffer for performance reasons.
+          for (var i = entries.Length - 1; i >= 0; --i)
+          {
+            var activator = entries[i].Value.Activator;
+
+            // Only chase prey that isn't dead
+            if (preyFromEntity.HasComponent(activator) && !deadFromEntity.HasComponent(activator))
+            {
+              // Stop roaming and pursue the detected prey
+              buffer.RemoveComponent<Roaming>(entityInQueryIndex, entity);
+              buffer.AddComponent(entityInQueryIndex, entity, new NavStop());
+              buffer.AddComponent(entityInQueryIndex, entity, new NavFollow
               {
-                // Traverse from the end of the buffer for performance reasons.
-                for (var i = entries.Length - 1; i >= 0; --i)
-                {
-                  var activator = entries[i].Value.Activator;
+                Target = activator,
+                MinDistance = 0,
+                MaxDistance = predator.maxChaseDistance
+              });
 
-                  // Only chase prey that isn't dead
-                  if (preyFromEntity.HasComponent(activator) && !deadFromEntity.HasComponent(activator))
-                  {
-                    // Stop roaming and pursue the detected prey
-                    buffer.RemoveComponent<Roaming>(entityInQueryIndex, entity);
-                    buffer.AddComponent(entityInQueryIndex, entity, new NavStop());
-                    buffer.AddComponent(entityInQueryIndex, entity, new NavFollow
-                    {
-                            Target = activator,
-                            MinDistance = 0,
-                            MaxDistance = predator.maxChaseDistance
-                    });
-
-                    break;
-                  }
-                }
-              })
-              .WithName("RoamingPredatorCollisionSystemJob")
-              .WithBurst()
-              .ScheduleParallel();
+              break;
+            }
+          }
+        })
+        .WithName("RoamingPredatorCollisionSystemJob")
+        .WithBurst()
+        .ScheduleParallel();
 
       _barrier.AddJobHandleForProducer(Dependency);
     }

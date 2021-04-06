@@ -39,47 +39,48 @@ namespace Ecosystem.Systems.Movement
       var randomArray = _randomSystem.RandomArray;
       var settings = _navSystem.Settings;
 
-      Entities.WithAll<Roaming>()
-              .WithNone<NavProblem, NavDestination, NavPlanning>()
-              .WithNone<Dead>()
-              .WithReadOnly(jumpableBufferFromEntity)
-              .WithReadOnly(renderBoundsFromEntity)
-              .WithReadOnly(physicsWorld)
-              .WithNativeDisableParallelForRestriction(randomArray)
-              .ForEach((Entity entity,
-                      int entityInQueryIndex,
-                      int nativeThreadIndex,
-                      ref NavAgent agent,
-                      in Parent surface,
-                      in LocalToWorld localToWorld) =>
-              {
-                if (surface.Value.Equals(Entity.Null) || !jumpableBufferFromEntity.HasComponent(surface.Value))
-                {
-                  return;
-                }
+      Entities
+        .WithAll<Roaming>()
+        .WithNone<NavProblem, NavDestination, NavPlanning>()
+        .WithNone<Dead>()
+        .WithReadOnly(jumpableBufferFromEntity)
+        .WithReadOnly(renderBoundsFromEntity)
+        .WithReadOnly(physicsWorld)
+        .WithNativeDisableParallelForRestriction(randomArray)
+        .ForEach((Entity entity,
+          int entityInQueryIndex,
+          int nativeThreadIndex,
+          ref NavAgent agent,
+          in Parent surface,
+          in LocalToWorld localToWorld) =>
+        {
+          if (surface.Value.Equals(Entity.Null) || !jumpableBufferFromEntity.HasComponent(surface.Value))
+          {
+            return;
+          }
 
-                var random = randomArray[nativeThreadIndex];
-                var surfaceAabb = renderBoundsFromEntity[surface.Value].Value;
-                var randomPoint = NavUtil.GetRandomPointInBounds(ref random, surfaceAabb, 99);
+          var random = randomArray[nativeThreadIndex];
+          var surfaceAabb = renderBoundsFromEntity[surface.Value].Value;
+          var randomPoint = NavUtil.GetRandomPointInBounds(ref random, surfaceAabb, 99);
 
-                if (physicsWorld.GetPointOnSurfaceLayer(localToWorld,
-                        randomPoint,
-                        out var validDestination,
-                        settings.ObstacleRaycastDistanceMax,
-                        settings.ColliderLayer,
-                        settings.SurfaceLayer))
-                {
-                  buffer.AddComponent(entityInQueryIndex, entity, new NavDestination
-                  {
-                          WorldPoint = validDestination
-                  });
-                }
+          if (physicsWorld.GetPointOnSurfaceLayer(localToWorld,
+            randomPoint,
+            out var validDestination,
+            settings.ObstacleRaycastDistanceMax,
+            settings.ColliderLayer,
+            settings.SurfaceLayer))
+          {
+            buffer.AddComponent(entityInQueryIndex, entity, new NavDestination
+            {
+              WorldPoint = validDestination
+            });
+          }
 
-                randomArray[nativeThreadIndex] = random;
-              })
-              .WithName("RoamingSystemJob")
-              .WithBurst()
-              .ScheduleParallel();
+          randomArray[nativeThreadIndex] = random;
+        })
+        .WithName("RoamingSystemJob")
+        .WithBurst()
+        .ScheduleParallel();
 
       _barrier.AddJobHandleForProducer(Dependency);
       _buildPhysicsWorld.AddInputDependency(Dependency);

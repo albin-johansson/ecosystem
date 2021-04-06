@@ -20,19 +20,20 @@ namespace Ecosystem.Systems
       var buffer = _barrier.CreateCommandBuffer().AsParallelWriter();
       var time = Time;
 
-      Entities.WithAll<Hunger>()
-              .WithNone<Dead>()
-              .ForEach((Entity entity, int entityInQueryIndex, ref Hunger hunger) =>
-              {
-                hunger.value += hunger.rate * time.DeltaTime;
-                if (hunger.value > hunger.max)
-                {
-                  EcsUtils.Kill(ref buffer, entityInQueryIndex, entity, time.ElapsedTime, CauseOfDeath.Starvation);
-                }
-              })
-              .WithName("HungerSystemJob")
-              .WithBurst()
-              .ScheduleParallel();
+      Entities
+        .WithAll<Hunger>()
+        .WithNone<Dead>()
+        .ForEach((Entity entity, int entityInQueryIndex, ref Hunger hunger) =>
+        {
+          hunger.value += hunger.rate * time.DeltaTime;
+          if (hunger.value > hunger.max)
+          {
+            EcsUtils.Kill(ref buffer, entityInQueryIndex, entity, time.ElapsedTime, CauseOfDeath.Starvation);
+          }
+        })
+        .WithName("HungerSystemJob")
+        .WithBurst()
+        .ScheduleParallel();
 
       _barrier.AddJobHandleForProducer(Dependency);
     }

@@ -29,11 +29,11 @@ namespace Ecosystem.Systems
       _factorySystem = World.GetOrCreateSystem<FactorySystem>();
       EntityManager.AddSingleton(new InitialSimulationData
       {
-              initialRabbitCount = InitialRabbitCount,
-              initialDeerCount = InitialDeerCount,
-              initialWolfCount = InitialWolfCount,
-              initialBearCount = InitialBearCount,
-              initialCarrotCount = InitialCarrotCount
+        initialRabbitCount = InitialRabbitCount,
+        initialDeerCount = InitialDeerCount,
+        initialWolfCount = InitialWolfCount,
+        initialBearCount = InitialBearCount,
+        initialCarrotCount = InitialCarrotCount
       });
     }
 

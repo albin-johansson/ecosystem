@@ -60,17 +60,17 @@ namespace Ecosystem.Systems
       var initialData = EntityManager.GetSingleton<InitialSimulationData>();
       var data = new JsonData
       {
-              duration = Time.ElapsedTime * 1000,
+        duration = Time.ElapsedTime * 1000,
 
-              initialAliveCount = initialData.initialRabbitCount + initialData.initialDeerCount +
-                                  initialData.initialWolfCount + initialData.initialBearCount,
-              initialAlivePreyCount = initialData.initialRabbitCount + initialData.initialDeerCount,
-              initialAlivePredatorCount = initialData.initialWolfCount + initialData.initialBearCount,
-              initialAliveRabbitsCount = initialData.initialRabbitCount,
-              initialAliveDeerCount = initialData.initialDeerCount,
-              initialAliveWolvesCount = initialData.initialWolfCount,
-              initialAliveBearsCount = initialData.initialBearCount,
-              initialFoodCount = initialData.initialCarrotCount
+        initialAliveCount = initialData.initialRabbitCount + initialData.initialDeerCount +
+                            initialData.initialWolfCount + initialData.initialBearCount,
+        initialAlivePreyCount = initialData.initialRabbitCount + initialData.initialDeerCount,
+        initialAlivePredatorCount = initialData.initialWolfCount + initialData.initialBearCount,
+        initialAliveRabbitsCount = initialData.initialRabbitCount,
+        initialAliveDeerCount = initialData.initialDeerCount,
+        initialAliveWolvesCount = initialData.initialWolfCount,
+        initialAliveBearsCount = initialData.initialBearCount,
+        initialFoodCount = initialData.initialCarrotCount
       };
 
       ProcessDeaths(data);
@@ -85,78 +85,81 @@ namespace Ecosystem.Systems
 
     private void ProcessDeaths(JsonData data)
     {
-      Entities.WithAll<Dead>()
-              .ForEach((Entity entity, in Dead dead) =>
-              {
-                var tag = "";
-                if (HasComponent<Rabbit>(entity))
-                {
-                  tag = "Rabbit";
-                }
-                else if (HasComponent<Deer>(entity))
-                {
-                  tag = "Deer";
-                }
-                else if (HasComponent<Wolf>(entity))
-                {
-                  tag = "Wolf";
-                }
-                else if (HasComponent<Bear>(entity))
-                {
-                  tag = "Bear";
-                }
+      Entities
+        .WithAll<Dead>()
+        .ForEach((Entity entity, in Dead dead) =>
+        {
+          var tag = "";
+          if (HasComponent<Rabbit>(entity))
+          {
+            tag = "Rabbit";
+          }
+          else if (HasComponent<Deer>(entity))
+          {
+            tag = "Deer";
+          }
+          else if (HasComponent<Wolf>(entity))
+          {
+            tag = "Wolf";
+          }
+          else if (HasComponent<Bear>(entity))
+          {
+            tag = "Bear";
+          }
 
-                data.events.Add(new SimulationEvent
-                {
-                        time = dead.when * 1000,
-                        type = "death",
-                        tag = tag,
-                        deathIndex = data.deaths.Count
-                });
+          data.events.Add(new SimulationEvent
+          {
+            time = dead.when * 1000,
+            type = "death",
+            tag = tag,
+            deathIndex = data.deaths.Count
+          });
 
-                data.deaths.Add(new DeathEvent
-                {
-                        cause = dead.cause
-                });
+          data.deaths.Add(new DeathEvent
+          {
+            cause = dead.cause
+          });
 
-                ++data.deadCount;
+          ++data.deadCount;
 
-                if (dead.cause == CauseOfDeath.Eaten)
-                {
-                  ++data.preyConsumedCount;
-                }
-              })
-              .WithName("LogSystemProcessDeathsJob")
-              .WithoutBurst()
-              .Run();
+          if (dead.cause == CauseOfDeath.Eaten)
+          {
+            ++data.preyConsumedCount;
+          }
+        })
+        .WithName("LogSystemProcessDeathsJob")
+        .WithoutBurst()
+        .Run();
     }
 
     private void ProcessFoodConsumption(JsonData data)
     {
-      Entities.WithAll<Consumption>()
-              .ForEach((Entity entity, in Consumption consumed) =>
-              {
-                data.events.Add(new SimulationEvent
-                {
-                        time = consumed.when * 1000,
-                        type = "consumption",
-                        tag = "Carrot",
-                        deathIndex = -1,
-                });
-              })
-              .WithName("LogSystemProcessFoodConsumptionJob")
-              .WithoutBurst()
-              .Run();
+      Entities
+        .WithAll<Consumption>()
+        .ForEach((Entity entity, in Consumption consumed) =>
+        {
+          data.events.Add(new SimulationEvent
+          {
+            time = consumed.when * 1000,
+            type = "consumption",
+            tag = "Carrot",
+            deathIndex = -1,
+          });
+        })
+        .WithName("LogSystemProcessFoodConsumptionJob")
+        .WithoutBurst()
+        .Run();
     }
 
     private void ProcessSurvivors(JsonData data)
     {
-      Entities.WithAny<Predator, Prey>()
-              .WithNone<Dead>()
-              .ForEach((Entity entity) => ++data.aliveCount)
-              .WithName("LogSystemCountAnimalsJob")
-              .WithoutBurst()
-              .Run();
+      Entities
+        .WithAny<Predator, Prey>()
+        .WithNone<Dead>()
+        .ForEach((Entity entity) => ++data.aliveCount)
+        .WithName("LogSystemCountAnimalsJob")
+        .WithoutBurst()
+        .Run();
     }
   }
 }

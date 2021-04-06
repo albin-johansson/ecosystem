@@ -33,8 +33,10 @@ namespace Ecosystem.Systems.Collisions
     protected override void OnUpdate()
     {
       var buffer = _barrier.CreateCommandBuffer().AsParallelWriter();
+
       var localToWorldFromEntity = GetComponentDataFromEntity<LocalToWorld>(true);
       var deadFromEntity = GetComponentDataFromEntity<Dead>(true);
+
       var time = Time;
 
       Entities.WithAll<Predator, NavFollow, LocalToWorld>()
@@ -44,8 +46,7 @@ namespace Ecosystem.Systems.Collisions
               .ForEach((Entity entity,
                       int entityInQueryIndex,
                       in Predator predator,
-                      in NavFollow follow,
-                      in LocalToWorld localToWorld) =>
+                      in NavFollow follow) =>
               {
                 var preyEntity = follow.Target;
 
@@ -56,7 +57,7 @@ namespace Ecosystem.Systems.Collisions
                   return;
                 }
 
-                var predatorPosition = localToWorld.Position;
+                var predatorPosition = localToWorldFromEntity[entity].Position;
                 var preyPosition = localToWorldFromEntity[preyEntity].Position;
 
                 var distance = math.distance(predatorPosition, preyPosition);

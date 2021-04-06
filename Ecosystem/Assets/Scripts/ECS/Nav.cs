@@ -22,10 +22,10 @@ namespace Ecosystem.ECS
     {
       buffer.AddComponent(index, entity, new NavDestination
       {
-              Teleport = false,
-              Tolerance = 2.0f,
-              CustomLerp = false,
-              WorldPoint = destination
+        Teleport = false,
+        Tolerance = 2.0f,
+        CustomLerp = false,
+        WorldPoint = destination
       });
     }
   }

@@ -20,19 +20,20 @@ namespace Ecosystem.Systems
       var buffer = _barrier.CreateCommandBuffer().AsParallelWriter();
       var time = Time;
 
-      Entities.WithAll<Thirst>()
-              .WithNone<Dead>()
-              .ForEach((Entity entity, int entityInQueryIndex, ref Thirst thirst) =>
-              {
-                thirst.value += thirst.rate * time.DeltaTime;
-                if (thirst.value > thirst.max)
-                {
-                  EcsUtils.Kill(ref buffer, entityInQueryIndex, entity, time.ElapsedTime, CauseOfDeath.Dehydration);
-                }
-              })
-              .WithName("ThirstSystemJob")
-              .WithBurst()
-              .ScheduleParallel();
+      Entities
+        .WithAll<Thirst>()
+        .WithNone<Dead>()
+        .ForEach((Entity entity, int entityInQueryIndex, ref Thirst thirst) =>
+        {
+          thirst.value += thirst.rate * time.DeltaTime;
+          if (thirst.value > thirst.max)
+          {
+            EcsUtils.Kill(ref buffer, entityInQueryIndex, entity, time.ElapsedTime, CauseOfDeath.Dehydration);
+          }
+        })
+        .WithName("ThirstSystemJob")
+        .WithBurst()
+        .ScheduleParallel();
 
       _barrier.AddJobHandleForProducer(Dependency);
     }

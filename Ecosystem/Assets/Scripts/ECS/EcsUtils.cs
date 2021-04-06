@@ -35,8 +35,8 @@ namespace Ecosystem.ECS
     {
       buffer.AddComponent(index, entity, new Dead
       {
-              when = time,
-              cause = cause
+        when = time,
+        cause = cause
       });
       buffer.AddComponent<NavStop>(index, entity);
     }

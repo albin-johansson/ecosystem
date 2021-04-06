@@ -21,7 +21,7 @@ namespace Ecosystem.ECS
       var entity = buffer.CreateEntity(index);
       buffer.AddComponent(index, entity, new Consumption
       {
-              when = when
+        when = when
       });
     }
 

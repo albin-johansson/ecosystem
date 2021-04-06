@@ -26,7 +26,7 @@ namespace Ecosystem.Systems
     {
       EntityManager.SetComponentData(entity, new Translation
       {
-              Value = position
+        Value = position
       });
     }
 
