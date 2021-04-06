@@ -14,6 +14,6 @@ namespace Ecosystem
     LookingForMate,
     Attacking,
     Eating,
-    GoingToMeat
+    GoingToFood
   }
 }

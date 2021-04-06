@@ -3,9 +3,9 @@ using UnityEngine;
 
 namespace Ecosystem.AnimalBehaviour.WolfStates
 {
-  internal sealed class WolfGoingToFoodState : AbstractAnimalState
+  internal sealed class WolfRunningTowardsFoodState : AbstractAnimalState
   {
-    public WolfGoingToFoodState(WolfStateData data)
+    public WolfRunningTowardsFoodState(WolfStateData data)
     {
       Consumer = data.Consumer;
       WaterConsumer = data.WaterConsumer;

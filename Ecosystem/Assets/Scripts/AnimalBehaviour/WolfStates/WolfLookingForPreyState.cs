@@ -30,7 +30,7 @@ namespace Ecosystem.AnimalBehaviour.WolfStates
       {
         if (Tags.IsMeat(Target))
         {
-          return AnimalState.GoingToMeat;
+          return AnimalState.GoingToFood;
         }
         else if(Tags.IsPrey(Target))
         {

@@ -99,7 +99,7 @@ namespace Ecosystem.AnimalBehaviour.WolfStates
           State = _attacking;
           break;
         
-        case AnimalState.GoingToMeat:
+        case AnimalState.GoingToFood:
           State = _goingToFood;
           consumer.CollideActive = true;
           break;

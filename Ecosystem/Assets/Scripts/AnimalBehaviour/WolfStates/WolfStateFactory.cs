@@ -44,7 +44,7 @@ namespace Ecosystem.AnimalBehaviour.WolfStates
     
     public static IAnimalState CreateGoingToFoodState(WolfStateData data)
     {
-      return new WolfGoingToFoodState(data);
+      return new WolfRunningTowardsFoodState(data);
     }
   }
 }
