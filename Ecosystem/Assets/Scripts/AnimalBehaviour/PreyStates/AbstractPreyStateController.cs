@@ -9,6 +9,7 @@ namespace Ecosystem.AnimalBehaviour.PreyStates
     private IAnimalState _drinking;
     private IAnimalState _runningTowardsWater;
     private IAnimalState _fleeing;
+    private IAnimalState _eating;
 
     protected IAnimalState RunningTowardsFood;
     protected IAnimalState LookingForMate;
@@ -19,7 +20,7 @@ namespace Ecosystem.AnimalBehaviour.PreyStates
       Data = new StateData
       {
         StaminaController = staminaController,
-        Consumer = consumer,
+        Consumer = Consumer,
         AnimationController = animationController,
         MemoryController = memoryController,
         MovementController = movementController,
@@ -33,6 +34,7 @@ namespace Ecosystem.AnimalBehaviour.PreyStates
       _drinking = PreyStateFactory.CreatePreyDrinking(Data);
       _runningTowardsWater = PreyStateFactory.CreatePreyRunningTowardsWater(Data);
       _fleeing = PreyStateFactory.CreatePreyFleeing(Data);
+      _eating = PreyStateFactory.CreatePreyEating(Data);
 
       sphereCollider.radius = genome.GetVision().Value;
 
@@ -81,6 +83,10 @@ namespace Ecosystem.AnimalBehaviour.PreyStates
 
         case AnimalState.LookingForMate:
           State = LookingForMate;
+          break;
+
+        case AnimalState.Eating:
+          State = _eating;
           break;
 
         default:
