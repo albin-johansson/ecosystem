@@ -14,7 +14,6 @@ namespace Ecosystem
     [SerializeField] private double maxHunger = 100;
     [SerializeField] private EcoAnimationController animationController;
     [SerializeField] private Reproducer reproducer;
-    [SerializeField] private GameObject meat;
     private bool _isDead;
 
     public bool IsAttacking { get; set; }
