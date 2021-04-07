@@ -96,7 +96,6 @@ namespace Ecosystem.Systems.Collisions
     private static void StopChaseAndRoam(ref ParallelBuffer buffer, int index, in Entity entity)
     {
       buffer.RemoveComponent<NavFollow>(index, entity);
-      buffer.AddComponent<NavStop>(index, entity);
       buffer.AddComponent<Roaming>(index, entity);
     }
   }
