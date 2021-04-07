@@ -5,7 +5,7 @@ namespace Ecosystem.Systems.Movement
 {
   [UpdateInGroup(typeof(FixedStepSimulationSystemGroup))]
   [UpdateBefore(typeof(BuildPhysicsWorld))]
-  public class MovementSystemGroup : ComponentSystemGroup
+  public sealed class MovementSystemGroup : ComponentSystemGroup
   {
   }
 }
