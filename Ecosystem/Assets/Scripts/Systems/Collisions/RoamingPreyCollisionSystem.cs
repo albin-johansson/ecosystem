@@ -1,10 +1,13 @@
 using Ecosystem.Components;
 using Ecosystem.ECS;
+using Reese.Nav;
 using Reese.Spatial;
+using Unity.Burst;
 using Unity.Entities;
+using Unity.Mathematics;
 using Unity.Physics;
 using Unity.Transforms;
-using UnityEngine;
+using ParallelBuffer = Unity.Entities.EntityCommandBuffer.ParallelWriter;
 
 namespace Ecosystem.Systems.Collisions
 {
@@ -61,7 +64,7 @@ namespace Ecosystem.Systems.Collisions
               });
 
               var position = localToWorldFromEntity[activator].Position;
-              Nav.SetDestination(ref buffer, entityInQueryIndex, entity, position);
+              SetDestination(ref buffer, entityInQueryIndex, entity, position);
 
               break;
             }
@@ -72,6 +75,18 @@ namespace Ecosystem.Systems.Collisions
         .ScheduleParallel();
 
       _barrier.AddJobHandleForProducer(Dependency);
+    }
+
+    [BurstCompile]
+    private static void SetDestination(ref ParallelBuffer buffer, int index, in Entity entity, in float3 destination)
+    {
+      buffer.AddComponent(index, entity, new NavDestination
+      {
+        Teleport = false,
+        Tolerance = 2.0f,
+        CustomLerp = false,
+        WorldPoint = destination
+      });
     }
   }
 }
