@@ -19,7 +19,8 @@ namespace Ecosystem.ECS
     /// <param name="manager">the source entity manager.</param>
     /// <param name="singleton">the component that will be added to the entity manager as a singleton.</param>
     /// <typeparam name="T">the type of the singleton component.</typeparam>
-    public static void AddSingleton<T>(this EntityManager manager, T singleton) where T : struct, IComponentData
+    [BurstCompile]
+    public static void AddSingleton<T>(this EntityManager manager, in T singleton) where T : struct, IComponentData
     {
       manager.AddComponentData(manager.CreateEntity(), singleton);
     }
@@ -31,19 +32,10 @@ namespace Ecosystem.ECS
     /// <param name="manager">the source entity manager.</param>
     /// <typeparam name="T">the type of the singleton component.</typeparam>
     /// <returns>the singleton component.</returns>
+    [BurstCompile]
     public static T GetSingleton<T>(this EntityManager manager) where T : struct, IComponentData
     {
       return manager.CreateEntityQuery(typeof(T)).GetSingleton<T>();
-    }
-
-    /// <summary>
-    ///   Indicates whether or not a scene supports the ECS simulation framework.
-    /// </summary>
-    /// <param name="scene">the scene that will be checked.</param>
-    /// <returns><c>true</c> if the scene supports the ECS framework; <c>false</c> otherwise.</returns>
-    public static bool IsEcsCapable(Scene scene)
-    {
-      return scene.name == "ECSDemo";
     }
 
     /// <summary>
@@ -63,6 +55,16 @@ namespace Ecosystem.ECS
         cause = cause
       });
       buffer.AddComponent<NavStop>(index, entity);
+    }
+
+    /// <summary>
+    ///   Indicates whether or not a scene supports the ECS simulation framework.
+    /// </summary>
+    /// <param name="scene">the scene that will be checked.</param>
+    /// <returns><c>true</c> if the scene supports the ECS framework; <c>false</c> otherwise.</returns>
+    public static bool IsEcsCapable(Scene scene)
+    {
+      return scene.name == "ECSDemo";
     }
   }
 }
