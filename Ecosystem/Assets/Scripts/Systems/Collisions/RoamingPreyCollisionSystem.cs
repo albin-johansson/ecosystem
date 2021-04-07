@@ -1,5 +1,4 @@
 using Ecosystem.Components;
-using Ecosystem.ECS;
 using Reese.Nav;
 using Reese.Spatial;
 using Unity.Burst;
