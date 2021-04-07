@@ -1,9 +1,9 @@
 using Ecosystem.Components;
-using Ecosystem.ECS;
+using Unity.Burst;
 using Unity.Entities;
 using Unity.Mathematics;
 using Unity.Transforms;
-using UnityEngine;
+using ParallelBuffer = Unity.Entities.EntityCommandBuffer.ParallelWriter;
 
 namespace Ecosystem.Systems.Collisions
 {
@@ -49,15 +49,19 @@ namespace Ecosystem.Systems.Collisions
           {
             if (carrotFromEntity.HasComponent(resourceEntity))
             {
-              PreyUtils.RegisterFoodConsumption(ref buffer, entityInQueryIndex, time.ElapsedTime);
-              PreyUtils.ConsumeFood(ref buffer, entityInQueryIndex, entity, hunger);
+              buffer.AddComponent(entityInQueryIndex, buffer.CreateEntity(entityInQueryIndex), new Consumption
+              {
+                when = time.ElapsedTime
+              });
+              ConsumeFood(ref buffer, entityInQueryIndex, entity, hunger);
             }
             else if (waterFromEntity.HasComponent(resourceEntity))
             {
-              PreyUtils.ConsumeWater(ref buffer, entityInQueryIndex, entity, thirst);
+              ConsumeWater(ref buffer, entityInQueryIndex, entity, thirst);
             }
 
-            PreyUtils.StopGoingForResourceAndRoam(ref buffer, entityInQueryIndex, entity);
+            buffer.RemoveComponent<MovingTowardsResource>(entityInQueryIndex, entity);
+            buffer.AddComponent<Roaming>(entityInQueryIndex, entity);
           }
         })
         .WithName("PreyMovingTowardsResourceCollisionSystemJob")
@@ -65,6 +69,24 @@ namespace Ecosystem.Systems.Collisions
         .ScheduleParallel();
 
       _barrier.AddJobHandleForProducer(Dependency);
+    }
+
+    [BurstCompile]
+    private static void ConsumeFood(ref ParallelBuffer buffer, int index, in Entity entity, in Hunger hunger)
+    {
+      var newHunger = hunger;
+      newHunger.value -= 0.75f * newHunger.max;
+      newHunger.value = math.clamp(newHunger.value, 0, newHunger.max);
+      buffer.SetComponent(index, entity, newHunger);
+    }
+
+    [BurstCompile]
+    private static void ConsumeWater(ref ParallelBuffer buffer, int index, in Entity entity, in Thirst thirst)
+    {
+      var newThirst = thirst;
+      newThirst.value -= 0.75f * newThirst.max;
+      newThirst.value = math.clamp(newThirst.value, 0, newThirst.max);
+      buffer.SetComponent(index, entity, newThirst);
     }
   }
 }
