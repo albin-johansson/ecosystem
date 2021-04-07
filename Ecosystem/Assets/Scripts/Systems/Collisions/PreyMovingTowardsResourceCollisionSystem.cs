@@ -45,7 +45,7 @@ namespace Ecosystem.Systems.Collisions
           var resourceEntity = movingTowardsResource.Resource;
           var resourcePosition = localToWorldFromEntity[resourceEntity].Position;
 
-          if (math.distance(localToWorld.Position, resourcePosition) < prey.consumptionDistance)
+          if (math.distance(localToWorld.Position, resourcePosition) <= prey.consumptionDistance)
           {
             if (carrotFromEntity.HasComponent(resourceEntity))
             {
