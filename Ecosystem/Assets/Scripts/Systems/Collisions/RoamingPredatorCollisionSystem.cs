@@ -1,8 +1,10 @@
 using Ecosystem.Components;
+using Ecosystem.ECS;
 using Reese.Nav;
 using Reese.Spatial;
 using Unity.Entities;
 using Unity.Physics;
+using Unity.Transforms;
 
 namespace Ecosystem.Systems.Collisions
 {
@@ -26,17 +28,23 @@ namespace Ecosystem.Systems.Collisions
 
       var preyFromEntity = GetComponentDataFromEntity<Prey>(true);
       var deadFromEntity = GetComponentDataFromEntity<Dead>(true);
+      var waterFromEntity = GetComponentDataFromEntity<Water>(true);
+      var localToWorldFromEntity = GetComponentDataFromEntity<LocalToWorld>(true);
 
       Entities
         .WithAll<Predator, SpatialTrigger, PhysicsCollider>()
-        .WithAll<Roaming>()
+        .WithAll<Roaming, Hunger, Thirst>()
         .WithNone<NavFollow, Dead>()
         .WithChangeFilter<SpatialEntry>()
         .WithReadOnly(preyFromEntity)
         .WithReadOnly(deadFromEntity)
+        .WithReadOnly(waterFromEntity)
+        .WithReadOnly(localToWorldFromEntity)
         .ForEach((Entity entity,
           int entityInQueryIndex,
           in Predator predator,
+          in Hunger hunger,
+          in Thirst thirst,
           in DynamicBuffer<SpatialEntry> entries) =>
         {
           // Traverse from the end of the buffer for performance reasons.
@@ -45,7 +53,8 @@ namespace Ecosystem.Systems.Collisions
             var activator = entries[i].Value.Activator;
 
             // Only chase prey that isn't dead
-            if (preyFromEntity.HasComponent(activator) && !deadFromEntity.HasComponent(activator))
+            if (preyFromEntity.HasComponent(activator) && !deadFromEntity.HasComponent(activator) &&
+                EcsUtils.IsHungry(hunger))
             {
               // Stop roaming and pursue the detected prey
               buffer.RemoveComponent<Roaming>(entityInQueryIndex, entity);
@@ -56,6 +65,20 @@ namespace Ecosystem.Systems.Collisions
                 MinDistance = 0,
                 MaxDistance = predator.maxChaseDistance
               });
+
+              break;
+            }
+            else if (waterFromEntity.HasComponent(activator) && EcsUtils.IsThirsty(thirst))
+            {
+              buffer.RemoveComponent<Roaming>(entityInQueryIndex, entity);
+
+              buffer.AddComponent(entityInQueryIndex, entity, new MovingTowardsResource
+              {
+                Resource = activator
+              });
+
+              var position = localToWorldFromEntity[activator].Position;
+              EcsUtils.SetDestination(ref buffer, entityInQueryIndex, entity, position);
 
               break;
             }

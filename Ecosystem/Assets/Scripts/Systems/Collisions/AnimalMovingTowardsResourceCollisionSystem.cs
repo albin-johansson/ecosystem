@@ -7,9 +7,18 @@ using ParallelBuffer = Unity.Entities.EntityCommandBuffer.ParallelWriter;
 
 namespace Ecosystem.Systems.Collisions
 {
+  /// <summary>
+  ///   This system is responsible for checking that animals that are moving towards food and water resources consume
+  ///   the resources when they close enough. 
+  /// </summary>
+  /// <remarks>
+  ///   This system doesn't make use of colliders, instead the raw distance between entities is used. This is because of
+  ///   an apparent limitation with the third-party collision library, which prevents multiple overlapping colliders on
+  ///   a single animal (or rather, it is *extremely* slow).
+  /// </remarks>
   [UpdateInGroup(typeof(CollisionSystemGroup))]
   [UpdateAfter(typeof(RoamingPreyCollisionSystem))]
-  public sealed class PreyMovingTowardsResourceCollisionSystem : AbstractSystem
+  public sealed class AnimalMovingTowardsResourceCollisionSystem : AbstractSystem
   {
     private EntityCommandBufferSystem _barrier;
 
@@ -28,7 +37,7 @@ namespace Ecosystem.Systems.Collisions
       var time = Time;
 
       Entities
-        .WithAll<Prey, LocalToWorld, MovingTowardsResource>()
+        .WithAll<MovingTowardsResource, Animal, LocalToWorld>()
         .WithAll<Hunger, Thirst>()
         .WithNone<Dead>()
         .WithReadOnly(localToWorldFromEntity)
@@ -36,16 +45,16 @@ namespace Ecosystem.Systems.Collisions
         .WithReadOnly(carrotFromEntity)
         .ForEach((Entity entity,
           int entityInQueryIndex,
-          in Prey prey,
-          in LocalToWorld localToWorld,
           in MovingTowardsResource movingTowardsResource,
+          in Animal animal,
+          in LocalToWorld localToWorld,
           in Hunger hunger,
           in Thirst thirst) =>
         {
           var resourceEntity = movingTowardsResource.Resource;
           var resourcePosition = localToWorldFromEntity[resourceEntity].Position;
 
-          if (math.distance(localToWorld.Position, resourcePosition) <= prey.consumptionDistance)
+          if (math.distance(localToWorld.Position, resourcePosition) <= animal.resourceConsumptionDistance)
           {
             if (carrotFromEntity.HasComponent(resourceEntity))
             {
@@ -64,7 +73,7 @@ namespace Ecosystem.Systems.Collisions
             buffer.AddComponent<Roaming>(entityInQueryIndex, entity);
           }
         })
-        .WithName("PreyMovingTowardsResourceCollisionSystemJob")
+        .WithName("AnimalMovingTowardsResourceCollisionSystemJob")
         .WithBurst()
         .ScheduleParallel();
 

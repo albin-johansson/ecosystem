@@ -1,4 +1,5 @@
 using Ecosystem.Components;
+using Ecosystem.ECS;
 using Reese.Nav;
 using Reese.Spatial;
 using Unity.Burst;
@@ -52,8 +53,8 @@ namespace Ecosystem.Systems.Collisions
               continue;
             }
 
-            if (carrotFromEntity.HasComponent(activator) && hunger.value >= 0.05 * hunger.max ||
-                waterFromEntity.HasComponent(activator) && thirst.value >= 0.05 * thirst.max)
+            if (carrotFromEntity.HasComponent(activator) && EcsUtils.IsHungry(hunger) ||
+                waterFromEntity.HasComponent(activator) && EcsUtils.IsThirsty(thirst))
             {
               buffer.RemoveComponent<Roaming>(entityInQueryIndex, entity);
 
@@ -63,7 +64,7 @@ namespace Ecosystem.Systems.Collisions
               });
 
               var position = localToWorldFromEntity[activator].Position;
-              SetDestination(ref buffer, entityInQueryIndex, entity, position);
+              EcsUtils.SetDestination(ref buffer, entityInQueryIndex, entity, position);
 
               break;
             }
@@ -74,18 +75,6 @@ namespace Ecosystem.Systems.Collisions
         .ScheduleParallel();
 
       _barrier.AddJobHandleForProducer(Dependency);
-    }
-
-    [BurstCompile]
-    private static void SetDestination(ref ParallelBuffer buffer, int index, in Entity entity, in float3 destination)
-    {
-      buffer.AddComponent(index, entity, new NavDestination
-      {
-        Teleport = false,
-        Tolerance = 2.0f,
-        CustomLerp = false,
-        WorldPoint = destination
-      });
     }
   }
 }
