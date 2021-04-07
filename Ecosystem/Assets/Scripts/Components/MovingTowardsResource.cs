@@ -4,8 +4,8 @@ using Unity.Entities;
 namespace Ecosystem.Components
 {
   [Serializable]
-  public struct MovingTowardsWater : IComponentData
+  public struct MovingTowardsResource : IComponentData
   {
-    public Entity Water;
+    public Entity Resource;
   }
 }
