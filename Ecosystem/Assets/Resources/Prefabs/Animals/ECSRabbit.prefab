@@ -86,7 +86,7 @@ MonoBehaviour:
   jumpGravity: 100
   jumpSpeedMultiplierX: 1.5
   jumpSpeedMultiplierY: 2
-  translationSpeed: 15
+  translationSpeed: 19
   rotationSpeed: 0.3
   type: Humanoid
   offset: {x: 0, y: 0, z: 0}
@@ -177,8 +177,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   value: 0
-  rate: 1
-  max: 500
+  rate: 0.5
+  max: 600
 --- !u!114 &8902540027125052898
 MonoBehaviour:
   m_ObjectHideFlags: 0
