@@ -4,6 +4,7 @@ using Reese.Spatial;
 using Unity.Entities;
 using Unity.Physics;
 using Unity.Transforms;
+using UnityEngine;
 
 namespace Ecosystem.Systems.Collisions
 {
@@ -20,33 +21,43 @@ namespace Ecosystem.Systems.Collisions
     protected override void OnUpdate()
     {
       var buffer = _barrier.CreateCommandBuffer().AsParallelWriter();
+
       var carrotFromEntity = GetComponentDataFromEntity<Carrot>(true);
+      var waterFromEntity = GetComponentDataFromEntity<Water>(true);
       var localToWorldFromEntity = GetComponentDataFromEntity<LocalToWorld>(true);
 
       Entities
         .WithAll<Prey, SpatialTrigger, PhysicsCollider>()
-        .WithAll<Roaming, Hunger>()
-        .WithNone<Dead, MovingTowardsFood, MovingTowardsWater>()
+        .WithAll<Roaming, Hunger, Thirst>()
+        .WithNone<Dead, MovingTowardsResource>()
         .WithChangeFilter<SpatialEntry>()
         .WithReadOnly(carrotFromEntity)
+        .WithReadOnly(waterFromEntity)
         .WithReadOnly(localToWorldFromEntity)
-        .ForEach((Entity entity, int entityInQueryIndex, in Hunger hunger, in DynamicBuffer<SpatialEntry> entries) =>
+        .ForEach((Entity entity,
+          int entityInQueryIndex,
+          in Hunger hunger,
+          in Thirst thirst,
+          in DynamicBuffer<SpatialEntry> entries) =>
         {
           // Traverse from the end of the buffer for performance reasons.
           for (var i = entries.Length - 1; i >= 0; --i)
           {
             var activator = entries[i].Value.Activator;
 
-            if (carrotFromEntity.HasComponent(activator) &&
-                localToWorldFromEntity.HasComponent(activator) &&
-                hunger.value >= 0.1 * hunger.max)
+            if (!localToWorldFromEntity.HasComponent(activator))
             {
-              // Stop roaming and target the detected carrot
+              continue;
+            }
+
+            if (carrotFromEntity.HasComponent(activator) && hunger.value >= 0.05 * hunger.max ||
+                waterFromEntity.HasComponent(activator) && thirst.value >= 0.05 * thirst.max)
+            {
               buffer.RemoveComponent<Roaming>(entityInQueryIndex, entity);
 
-              buffer.AddComponent(entityInQueryIndex, entity, new MovingTowardsFood
+              buffer.AddComponent(entityInQueryIndex, entity, new MovingTowardsResource
               {
-                Food = activator
+                Resource = activator
               });
 
               var position = localToWorldFromEntity[activator].Position;
