@@ -10,7 +10,7 @@ namespace Ecosystem.Util
     public static readonly int FoodMask = LayerMask.GetMask("Food");
     public static readonly int RabbitMask = LayerMask.GetMask("Rabbit");
     public static readonly int DeerMask = LayerMask.GetMask("Deer");
-    public static readonly int PreyMask = LayerMask.GetMask("Rabbit","Deer");
+    public static readonly int PreyMask = LayerMask.GetMask("Rabbit", "Deer");
     public static readonly int PredatorMask = LayerMask.GetMask("Wolf", "Bear");
 
     public static bool IsPredatorLayer(LayerMask layer)
