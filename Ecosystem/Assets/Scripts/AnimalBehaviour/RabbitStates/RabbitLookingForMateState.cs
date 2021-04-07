@@ -23,6 +23,15 @@ namespace Ecosystem.AnimalBehaviour.RabbitStates
       MovementController.StartWander();
       AnimationController.MoveAnimation();
       Target = GetClosestInVision(Layers.PreyMask);
+      Target = GetClosestMateInVision(Layers.PredatorMask);
+      if (Target)
+      {
+        MovementController.RunToTarget(target.transform.position);
+      }
+      else
+      {
+        MovementController.StartWander();
+      }
     }
 
     public override AnimalState Type()
