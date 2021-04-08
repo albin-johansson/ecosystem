@@ -64,7 +64,7 @@ namespace Ecosystem
       if (!CollideActive || IsAttacking) return;
       if (Tags.IsPrey(other.gameObject))
       {
-        DeathHandler _deathHandler = other.gameObject.GetComponent<DeathHandler>();
+        DeathHandler _deathHandler = other.gameObject.GetComponentInParent<DeathHandler>();
         if (!_deathHandler._isDead)
         {
           _deathHandler.Die(CauseOfDeath.Eaten);
