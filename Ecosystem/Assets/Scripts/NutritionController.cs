@@ -24,11 +24,9 @@ namespace Ecosystem
       if (nutritionalValue > 0)
       {
         nutritionalValue = (double) Mathf.Max((float) 0, (float) nutritionalValue - Time.deltaTime * 0.1f);
-        if (nutritionalValue == 0)
-        {
-          ReturnToPool();
-        }
-      }
+        return;
+      } 
+      ReturnToPool();
     }
 
     public double Consume(Double hunger)
