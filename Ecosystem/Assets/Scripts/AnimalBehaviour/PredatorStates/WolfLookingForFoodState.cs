@@ -3,9 +3,9 @@ using UnityEngine;
 
 namespace Ecosystem.AnimalBehaviour.PredatorStates
 {
-  internal sealed class WolfLookingForPreyState : AbstractAnimalState
+  internal sealed class WolfLookingForFoodState : AbstractAnimalState
   {
-    public WolfLookingForPreyState(StateData data)
+    public WolfLookingForFoodState(StateData data)
     {
       StaminaController = data.StaminaController;
       Consumer = data.Consumer;
