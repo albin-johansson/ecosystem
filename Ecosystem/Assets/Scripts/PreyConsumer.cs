@@ -72,7 +72,9 @@ namespace Ecosystem
         DeathHandler _deathHandler = other.gameObject.GetComponentInParent<DeathHandler>();
         if (!_deathHandler._isDead)
         {
-          _deathHandler.Die(CauseOfDeath.Eaten);
+          NutritionController prey = _deathHandler.Kill();
+          Hunger -= prey.Consume(Hunger);
+          
           IsAttacking = true;
           OnPreyConsumed?.Invoke();
         }

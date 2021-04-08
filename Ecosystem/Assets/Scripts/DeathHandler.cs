@@ -25,14 +25,9 @@ namespace Ecosystem
     /// </summary>
     public static event DeathEvent OnDeath;
 
-    public void Die(CauseOfDeath cause)
+    public NutritionController Kill()
     {
-      _isDead = true; //temporary bug fix so that multiple wolves can´t eat the same prey
-      _gameObject = gameObject;
-      _cause = cause;
-      OnDeath?.Invoke(_cause, _gameObject.gameObject);
-      animationController.EnterDeathAnimation();
-      StartCoroutine(InactivateAfterDelay(3));
+      Die(CauseOfDeath.Eaten);
 
       GameObject carrion = ObjectPoolHandler.instance.GetFromPool(meatKeyToPool);
       carrion.transform.position = _gameObject.transform.position;
@@ -41,6 +36,18 @@ namespace Ecosystem
       NutritionController nutritionController = carrion.GetComponent<NutritionController>();
       nutritionController.SetNutrition(Nutrition.getNutrition(_gameObject));
       nutritionController.SetKeyToPool("Meat");
+
+      return nutritionController;
+    }
+    
+    public void Die(CauseOfDeath cause)
+    {
+      _isDead = true; //temporary bug fix so that multiple wolves can´t eat the same prey
+      _gameObject = gameObject;
+      _cause = cause;
+      OnDeath?.Invoke(_cause, _gameObject.gameObject);
+      animationController.EnterDeathAnimation();
+      StartCoroutine(InactivateAfterDelay(3));
     }
 
     private IEnumerator InactivateAfterDelay(int delay)

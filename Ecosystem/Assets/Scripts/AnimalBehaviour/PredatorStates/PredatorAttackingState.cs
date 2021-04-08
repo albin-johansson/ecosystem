@@ -28,7 +28,7 @@ namespace Ecosystem.AnimalBehaviour.PredatorStates
       if (AnimationController.IsIdle())
       {
         Consumer.IsAttacking = false;
-        return AnimalState.LookingForFood;
+        return base.Tick();
       }
 
       return Type();
