@@ -1692,7 +1692,7 @@ GameObject:
   - component: {fileID: 4209797981683069471}
   - component: {fileID: 6405190242370463797}
   - component: {fileID: 6008664309968109715}
-  - component: {fileID: 6410639263071043262}
+  - component: {fileID: 4584893245619885066}
   m_Layer: 0
   m_Name: StateMachine
   m_TagString: Untagged
@@ -1739,7 +1739,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 61c23cb0a96b9f243b4a54dd181e22d4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &6410639263071043262
+--- !u!114 &4584893245619885066
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -1748,7 +1748,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 7699429469363064798}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3cd94d57fb1da52439641dc290534ae7, type: 3}
+  m_Script: {fileID: 11500000, guid: 5c03968dbe8ecf640a08e7ea00a381af, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   stateText: {fileID: 7034133904784691590}
@@ -1760,7 +1760,7 @@ MonoBehaviour:
   reproducer: {fileID: 3460790299832027449}
   genome: {fileID: 1080774011748047759}
   sphereCollider: {fileID: 6405190242370463797}
-  consumer: {fileID: 3973268693136602879}
+  preyConsumer: {fileID: 3973268693136602879}
 --- !u!1 &8421346663248798016
 GameObject:
   m_ObjectHideFlags: 0
