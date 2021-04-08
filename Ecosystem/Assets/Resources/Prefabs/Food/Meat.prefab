@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 6034043334718517479}
   - component: {fileID: 5397723642851313545}
   - component: {fileID: 6318471318033541788}
-  m_Layer: 12
+  m_Layer: 13
   m_Name: Meat
   m_TagString: Meat
   m_Icon: {fileID: 0}
@@ -61,6 +61,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   nutritionalValue: 0
+  keyToPool: 
 --- !u!1001 &4920864006477584015
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -71,6 +72,10 @@ PrefabInstance:
     - target: {fileID: 1163349787249006, guid: 733d22330513541ecaf4fc75aa46e9a6, type: 3}
       propertyPath: m_Name
       value: Bone
+      objectReference: {fileID: 0}
+    - target: {fileID: 1163349787249006, guid: 733d22330513541ecaf4fc75aa46e9a6, type: 3}
+      propertyPath: m_Layer
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4177177137040110, guid: 733d22330513541ecaf4fc75aa46e9a6, type: 3}
       propertyPath: m_RootOrder

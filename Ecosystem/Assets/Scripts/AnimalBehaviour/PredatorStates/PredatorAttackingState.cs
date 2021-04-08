@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using Ecosystem.Util;
+using UnityEngine;
 
 namespace Ecosystem.AnimalBehaviour.PredatorStates
 {
@@ -27,7 +28,9 @@ namespace Ecosystem.AnimalBehaviour.PredatorStates
       if (AnimationController.IsIdle())
       {
         Consumer.IsAttacking = false;
-        return base.Tick();
+        Target = GetClosestInVision(Layers.MeatMask);
+        Debug.Log(Target);
+        return AnimalState.GoingToFood;
       }
 
       return Type();
