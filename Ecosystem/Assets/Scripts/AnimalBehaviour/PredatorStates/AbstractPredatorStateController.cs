@@ -9,6 +9,7 @@ namespace Ecosystem.AnimalBehaviour.PredatorStates
     private IAnimalState _drinking;
     private IAnimalState _runningTowardsWater;
     private IAnimalState _attacking;
+    private IAnimalState _goingToFood;
 
     protected IAnimalState ChasingPrey;
     protected IAnimalState LookingForMate;
@@ -34,6 +35,7 @@ namespace Ecosystem.AnimalBehaviour.PredatorStates
       _drinking = PredatorStateFactory.CreatePredatorDrinking(Data);
       _runningTowardsWater = PredatorStateFactory.CreatePredatorRunningTowardsWater(Data);
       _attacking = PredatorStateFactory.CreatePredatorAttackingState(Data);
+      _goingToFood = PredatorStateFactory.CreateGoingToFoodState(Data);
 
       sphereCollider.radius = genome.GetVision().Value;
 
@@ -89,6 +91,11 @@ namespace Ecosystem.AnimalBehaviour.PredatorStates
 
         case AnimalState.Attacking:
           State = _attacking;
+          break;
+        
+        case AnimalState.GoingToFood:
+          State = _goingToFood;
+          Consumer.CollideActive = true;
           break;
 
         default:

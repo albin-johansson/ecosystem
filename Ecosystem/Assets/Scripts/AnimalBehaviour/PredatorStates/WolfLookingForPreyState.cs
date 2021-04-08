@@ -32,7 +32,7 @@ namespace Ecosystem.AnimalBehaviour.PredatorStates
         {
           return AnimalState.GoingToFood;
         }
-        else if(Tags.IsPrey(Target))
+        if(Tags.IsPrey(Target))
         {
           return AnimalState.ChasingPrey;
         }

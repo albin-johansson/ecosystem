@@ -1,3 +1,5 @@
+using Ecosystem.AnimalBehaviour.WolfStates;
+
 namespace Ecosystem.AnimalBehaviour.PredatorStates
 {
   public static class PredatorStateFactory
@@ -57,7 +59,7 @@ namespace Ecosystem.AnimalBehaviour.PredatorStates
       return new BearLookingForMateState(data);
     }
     
-    public static IAnimalState CreateGoingToFoodState(WolfStateData data)
+    public static IAnimalState CreateGoingToFoodState(StateData data)
     {
       return new WolfRunningTowardsFoodState(data);
     }

@@ -5,7 +5,7 @@ namespace Ecosystem.AnimalBehaviour.WolfStates
 {
   internal sealed class WolfRunningTowardsFoodState : AbstractAnimalState
   {
-    public WolfRunningTowardsFoodState(WolfStateData data)
+    public WolfRunningTowardsFoodState(StateData data)
     {
       Consumer = data.Consumer;
       WaterConsumer = data.WaterConsumer;

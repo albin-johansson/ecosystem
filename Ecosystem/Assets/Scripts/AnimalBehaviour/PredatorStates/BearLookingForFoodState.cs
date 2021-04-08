@@ -27,13 +27,18 @@ namespace Ecosystem.AnimalBehaviour.PredatorStates
     {
       if (Target)
       {
-        return AnimalState.ChasingPrey;
+        if (Tags.IsMeat(Target))
+        {
+          return AnimalState.GoingToFood;
+        }
+        if (Tags.IsPrey(Target))
+        {
+          return AnimalState.ChasingPrey;
+        }
       }
-      else
-      {
-        MovementController.UpdateWander();
-        return base.Tick();
-      }
+
+      MovementController.UpdateWander();
+      return base.Tick();
     }
 
     public override void OnTriggerEnter(Collider other)
@@ -43,7 +48,7 @@ namespace Ecosystem.AnimalBehaviour.PredatorStates
       {
         MemoryController.SaveToMemory(otherObject);
       }
-      else if (Tags.IsPrey(otherObject))
+      else if (Tags.IsPrey(otherObject) || Tags.IsMeat(otherObject))
       {
         Target = otherObject;
       }
