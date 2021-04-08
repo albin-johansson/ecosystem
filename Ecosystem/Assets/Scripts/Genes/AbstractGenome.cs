@@ -37,7 +37,7 @@ namespace Ecosystem.Genes
     {
       if (gameObject.TryGetComponent(out NavMeshAgent navMeshAgent))
       {
-        navMeshAgent.speed *= GetSpeed().Value;
+        navMeshAgent.speed = GetSpeed().Value;
       }
       
       gameObject.transform.localScale *= GetSizeFactor().Value;

@@ -248,7 +248,7 @@ namespace Ecosystem
     {
       if (staminaController.IsRunning)
       {
-        navAgent.speed = genome.WalkingSpeed * 2;
+        navAgent.speed = genome.WalkingSpeed * 1.5f;
       }
       else
       {
