@@ -20,7 +20,7 @@ namespace Ecosystem.AnimalBehaviour.WolfStates
     public override void Begin(GameObject target)
     {
       Reproducer.isWilling = true;
-      AnimationController.RunAnimation();
+      AnimationController.MoveAnimation();
       Target = GetClosestMateInVision(Layers.PredatorMask);
       if (Target)
       {
