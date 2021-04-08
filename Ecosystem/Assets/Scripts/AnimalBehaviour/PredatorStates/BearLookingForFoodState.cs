@@ -18,7 +18,7 @@ namespace Ecosystem.AnimalBehaviour.PredatorStates
 
     public override void Begin(GameObject target)
     {
-      Target = GetClosestInVision(Layers.PreyMask);
+      Target = GetClosestInVision(Layers.PreyMask | Layers.MeatMask);
       MovementController.StartWander();
       AnimationController.MoveAnimation();
     }

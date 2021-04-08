@@ -28,9 +28,7 @@ namespace Ecosystem.AnimalBehaviour.PredatorStates
       if (AnimationController.IsIdle())
       {
         Consumer.IsAttacking = false;
-        Target = GetClosestInVision(Layers.MeatMask);
-        Debug.Log(Target);
-        return AnimalState.GoingToFood;
+        return AnimalState.LookingForFood;
       }
 
       return Type();
