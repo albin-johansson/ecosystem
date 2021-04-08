@@ -4,10 +4,10 @@ namespace Ecosystem.Genes
 {
   public sealed class WolfGenome : AbstractGenome
   {
-    private static readonly Gene HungerRate = new Gene(0.5f, 0.1f, 1f);
-    private static readonly Gene HungerThreshold = new Gene(5, 0, 10);
-    private static readonly Gene ThirstRate = new Gene(0.5f, 0.1f, 1f);
-    private static readonly Gene ThirstThreshold = new Gene(5, 0, 10);
+    private static readonly Gene HungerRate = new Gene(0.2f, 0.1f, 1f);
+    private static readonly Gene HungerThreshold = new Gene(25, 0, 50);
+    private static readonly Gene ThirstRate = new Gene(0.3f, 0.1f, 1f);
+    private static readonly Gene ThirstThreshold = new Gene(25, 0, 50);
     private static readonly Gene Vision = new Gene(8f, 4f, 12f);
     private static readonly Gene SpeedFactor = new Gene(1f, .5f, 1.5f);
     private static readonly Gene SizeFactor = new Gene(1, 0.5f, 1.5f);
