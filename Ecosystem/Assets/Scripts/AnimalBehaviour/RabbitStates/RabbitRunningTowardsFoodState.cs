@@ -47,7 +47,7 @@ namespace Ecosystem.AnimalBehaviour.RabbitStates
     public override void OnTriggerEnter(Collider other)
     {
       var otherObject = other.gameObject;
-      if (otherObject.CompareTag("Food"))
+      if (Tags.IsFood(otherObject))
       {
         Target = SelectCloser(otherObject, Target);
       }
