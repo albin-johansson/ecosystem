@@ -1,4 +1,4 @@
-namespace Ecosystem
+namespace Ecosystem.AnimalBehaviour
 {
   public enum AnimalState
   {
