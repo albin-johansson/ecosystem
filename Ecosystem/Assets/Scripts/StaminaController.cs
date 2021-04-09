@@ -27,7 +27,7 @@ namespace Ecosystem
     {
       if (IsRunning)
       {
-        Exhaustion += _exhaustionMultiplier * genome.GetSpeedFactor().Value * Time.deltaTime;
+        Exhaustion += _exhaustionMultiplier * genome.GetSpeed().Value * Time.deltaTime;
         staminaBar.SetValue((float) Exhaustion);
       }
       else if (Exhaustion > 0)
