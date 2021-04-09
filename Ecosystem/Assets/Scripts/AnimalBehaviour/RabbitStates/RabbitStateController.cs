@@ -16,7 +16,7 @@ namespace Ecosystem.AnimalBehaviour.RabbitStates
     private IAnimalState _lookingForMate;
     private IAnimalState _eating;
 
-    public override void Start()
+    private void Start()
     {
       var data = new RabbitStateData
       {
@@ -46,7 +46,7 @@ namespace Ecosystem.AnimalBehaviour.RabbitStates
       SwitchState(AnimalState.Idle);
     }
 
-    public override void SwitchState(AnimalState state)
+    protected override void SwitchState(AnimalState state)
     {
       var target = State.End();
       switch (state)
@@ -79,20 +79,17 @@ namespace Ecosystem.AnimalBehaviour.RabbitStates
           State = _runningTowardsFood;
           break;
 
-        case AnimalState.LookingForPrey:
-          break;
-
-        case AnimalState.ChasingPrey:
-          break;
-
         case AnimalState.LookingForMate:
           State = _lookingForMate;
           break;
-        
+
         case AnimalState.Eating:
           State = _eating;
           break;
 
+        case AnimalState.ChasingPrey:
+        case AnimalState.LookingForPrey:
+        case AnimalState.Attacking:
         default:
           break;
       }

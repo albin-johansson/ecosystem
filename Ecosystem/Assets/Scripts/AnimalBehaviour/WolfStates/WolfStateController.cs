@@ -6,7 +6,6 @@ namespace Ecosystem.AnimalBehaviour.WolfStates
   {
     [SerializeField] private PreyConsumer consumer;
 
-
     private IAnimalState _idle;
     private IAnimalState _lookingForPrey;
     private IAnimalState _lookingForWater;
@@ -16,7 +15,7 @@ namespace Ecosystem.AnimalBehaviour.WolfStates
     private IAnimalState _lookingForMate;
     private IAnimalState _attacking;
 
-    public override void Start()
+    private void Start()
     {
       var data = new WolfStateData
       {
@@ -39,14 +38,13 @@ namespace Ecosystem.AnimalBehaviour.WolfStates
       _lookingForMate = WolfStateFactory.CreateLookingForMate(data);
       _attacking = WolfStateFactory.CreateAttackingState(data);
 
-
       sphereCollider.radius = genome.GetVision().Value;
 
       State = _idle;
       SwitchState(AnimalState.Idle);
     }
 
-    public override void SwitchState(AnimalState state)
+    protected override void SwitchState(AnimalState state)
     {
       var target = State.End();
       switch (state)
@@ -64,19 +62,12 @@ namespace Ecosystem.AnimalBehaviour.WolfStates
           State = _idle;
           break;
 
-        case AnimalState.Fleeing:
-
-          break;
-
         case AnimalState.Drinking:
           State = _drinking;
           break;
 
         case AnimalState.RunningTowardsWater:
           State = _runningTowardsWater;
-          break;
-
-        case AnimalState.RunningTowardsFood:
           break;
 
         case AnimalState.ChasingPrey:
@@ -96,6 +87,9 @@ namespace Ecosystem.AnimalBehaviour.WolfStates
           State = _attacking;
           break;
 
+        case AnimalState.Fleeing:
+        case AnimalState.Eating:
+        case AnimalState.RunningTowardsFood:
         default:
           break;
       }
