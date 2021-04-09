@@ -24,7 +24,7 @@ namespace Ecosystem.AnimalBehaviour.WolfStates
       Target = GetClosestMateInVision(Layers.PredatorMask);
       if (Target)
       {
-        MovementController.RunToTarget(target.transform.position);
+        MovementController.SetDestinationIfValid(target.transform.position);
       }
       else
       {
@@ -42,9 +42,9 @@ namespace Ecosystem.AnimalBehaviour.WolfStates
       if (Target)
       {
         if (Reproducer.CompatibleAsParents(Target) &&
-            MovementController.IsTargetInRange(Target.transform.position))
+            MovementController.IsWithinSphere(Target.transform.position))
         {
-          MovementController.RunToTarget(Target.transform.position);
+          MovementController.SetDestinationIfValid(Target.transform.position);
           return Type();
         }
         else

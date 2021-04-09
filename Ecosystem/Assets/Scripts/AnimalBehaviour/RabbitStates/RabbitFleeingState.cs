@@ -20,7 +20,7 @@ namespace Ecosystem.AnimalBehaviour.RabbitStates
     public override void Begin(GameObject target)
     {
       Target = target;
-      MovementController.StartFleeing(Target.transform.position);
+      MovementController.FleeFrom(Target.transform.position);
     }
 
     public override AnimalState Tick()

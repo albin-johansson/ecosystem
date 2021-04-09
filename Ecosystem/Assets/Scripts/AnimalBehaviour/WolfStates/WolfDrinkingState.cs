@@ -18,7 +18,7 @@ namespace Ecosystem.AnimalBehaviour.WolfStates
     public override void Begin(GameObject target)
     {
       Target = target;
-      MovementController.StandStill(true);
+      MovementController.SetStandingStill(true);
       AnimationController.IdleAnimation();
       WaterConsumer.StartDrinking();
     }
@@ -31,7 +31,7 @@ namespace Ecosystem.AnimalBehaviour.WolfStates
       }
       else
       {
-        MovementController.StandStill(false);
+        MovementController.SetStandingStill(false);
         return base.Tick();
       }
     }

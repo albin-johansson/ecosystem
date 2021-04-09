@@ -25,7 +25,7 @@ namespace Ecosystem.AnimalBehaviour.RabbitStates
       Target = GetClosestMateInVision(Layers.PreyMask);
       if (Target)
       {
-        MovementController.RunToTarget(target.transform.position);
+        MovementController.SetDestinationIfValid(target.transform.position);
       }
       else
       {
@@ -56,7 +56,7 @@ namespace Ecosystem.AnimalBehaviour.RabbitStates
         }
         else if (Reproducer.CompatibleAsParents(Target))
         {
-          MovementController.RunToTarget(Target.transform.position);
+          MovementController.SetDestinationIfValid(Target.transform.position);
         }
         else
         {

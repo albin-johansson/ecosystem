@@ -19,7 +19,7 @@ namespace Ecosystem.AnimalBehaviour.RabbitStates
     public override void Begin(GameObject target)
     {
       Target = target;
-      MovementController.RunToTarget(Target.transform.position);
+      MovementController.SetDestinationIfValid(Target.transform.position);
       AnimationController.MoveAnimation();
     }
 
@@ -39,7 +39,7 @@ namespace Ecosystem.AnimalBehaviour.RabbitStates
       }
       else
       {
-        MovementController.RunToTarget(Target.transform.position);
+        MovementController.SetDestinationIfValid(Target.transform.position);
         return Type();
       }
     }

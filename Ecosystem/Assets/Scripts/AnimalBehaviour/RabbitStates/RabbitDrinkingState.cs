@@ -20,7 +20,7 @@ namespace Ecosystem.AnimalBehaviour.RabbitStates
     {
       Target = target;
       AnimationController.IdleAnimation();
-      MovementController.StandStill(true);
+      MovementController.SetStandingStill(true);
       WaterConsumer.StartDrinking();
       // TODO: Add animationController.DrinkAnimation();
     }

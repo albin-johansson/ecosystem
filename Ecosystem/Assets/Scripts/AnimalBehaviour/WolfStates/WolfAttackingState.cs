@@ -19,7 +19,7 @@ namespace Ecosystem.AnimalBehaviour.WolfStates
     {
       Target = target;
       AnimationController.EnterAttackAnimation();
-      MovementController.StandStill(true);
+      MovementController.SetStandingStill(true);
     }
 
     public override AnimalState Tick()

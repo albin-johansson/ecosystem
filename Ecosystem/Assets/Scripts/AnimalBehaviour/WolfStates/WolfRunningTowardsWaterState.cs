@@ -19,7 +19,7 @@ namespace Ecosystem.AnimalBehaviour.WolfStates
     public override void Begin(GameObject target)
     {
       Target = target;
-      MovementController.RunToTarget(Target.transform.position);
+      MovementController.SetDestinationIfValid(Target.transform.position);
       AnimationController.MoveAnimation();
     }
 
@@ -35,7 +35,7 @@ namespace Ecosystem.AnimalBehaviour.WolfStates
       }
       else
       {
-        MovementController.RunToTarget(Target.transform.position);
+        MovementController.SetDestinationIfValid(Target.transform.position);
         return Type();
       }
     }

@@ -20,7 +20,7 @@ namespace Ecosystem.AnimalBehaviour.WolfStates
     public override void Begin(GameObject target)
     {
       Target = target;
-      MovementController.StartHunting(Target.transform.position);
+      MovementController.SetDestination(Target.transform.position);
     }
 
     public override AnimalState Tick()
@@ -34,7 +34,7 @@ namespace Ecosystem.AnimalBehaviour.WolfStates
       {
         return base.Tick();
       }
-      else if (!Target.activeSelf || !MovementController.IsTargetInRange(Target.transform.position))
+      else if (!Target.activeSelf || !MovementController.IsWithinSphere(Target.transform.position))
       {
         Target = GetClosestInVision(Layers.PreyMask);
         return Type();
@@ -50,7 +50,7 @@ namespace Ecosystem.AnimalBehaviour.WolfStates
         {
           AnimationController.MoveAnimation();
         }
-        MovementController.UpdateHunting(Target.transform.position);
+        MovementController.SetDestination(Target.transform.position);
       }
 
       return Type();
