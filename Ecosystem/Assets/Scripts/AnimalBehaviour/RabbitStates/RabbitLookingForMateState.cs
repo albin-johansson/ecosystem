@@ -22,7 +22,15 @@ namespace Ecosystem.AnimalBehaviour.RabbitStates
       Reproducer.isWilling = true;
       MovementController.StartWander();
       AnimationController.MoveAnimation();
-      Target = GetClosestInVision(Layers.PreyMask);
+      Target = GetClosestMateInVision(Layers.PreyMask);
+      if (Target)
+      {
+        MovementController.RunToTarget(target.transform.position);
+      }
+      else
+      {
+        MovementController.StartWander();
+      }
     }
 
     public override AnimalState Type()
