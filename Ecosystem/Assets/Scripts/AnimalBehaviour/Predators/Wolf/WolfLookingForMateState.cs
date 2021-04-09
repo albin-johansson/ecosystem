@@ -49,7 +49,7 @@ namespace Ecosystem.AnimalBehaviour.Predators.Wolf
         }
         else
         {
-          Target = GetClosestMateInVision(Layers.PredatorMask);
+          Target = GetClosestMateInVision(Layers.WolfMask);
         }
       }
       else

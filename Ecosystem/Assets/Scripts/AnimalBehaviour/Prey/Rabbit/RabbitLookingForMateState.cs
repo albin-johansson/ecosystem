@@ -20,7 +20,6 @@ namespace Ecosystem.AnimalBehaviour.Prey.Rabbit
     public override void Begin(GameObject target)
     {
       Reproducer.isWilling = true;
-      MovementController.StartWander();
       AnimationController.MoveAnimation();
       Target = GetClosestMateInVision(Layers.RabbitMask);
       if (Target)

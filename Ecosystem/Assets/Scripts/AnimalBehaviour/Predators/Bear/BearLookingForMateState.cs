@@ -19,7 +19,16 @@ namespace Ecosystem.AnimalBehaviour.Predators.Bear
     public override void Begin(GameObject target)
     {
       Reproducer.isWilling = true;
+      AnimationController.MoveAnimation();
       Target = GetClosestMateInVision(Layers.BearMask);
+      if (Target)
+      {
+        MovementController.RunToTarget(target.transform.position);
+      }
+      else
+      {
+        MovementController.StartWander();
+      }
     }
 
     public override AnimalState Type()
