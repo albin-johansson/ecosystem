@@ -20,6 +20,7 @@ namespace Ecosystem.Util
 
     public static bool IsBerryConsumer(GameObject gameObject) => IsPrey(gameObject); //TODO add bear
 
+    // TODO there is no StaticFood tag, and as such, no prefab uses it, making this useless as of now
     public static bool IsStaticFood(GameObject gameObject) => gameObject.CompareTag("StaticFood");
 
     /// <summary>
