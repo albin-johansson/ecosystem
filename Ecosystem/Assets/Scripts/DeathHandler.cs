@@ -6,36 +6,40 @@ using UnityEngine;
 namespace Ecosystem
 {
   /// <summary>
-  /// Handles killing the game object.
+  ///   Handles the deaths of animals.
   /// </summary>
   public sealed class DeathHandler : MonoBehaviour
   {
-    [SerializeField] private EcoAnimationController animationController;
-    [SerializeField] private string keyToPool;
-    private CauseOfDeath _cause;
-    private GameObject _gameObject;
-    public bool _isDead; //can probebly remove this when realistic food is implemented
-
     public delegate void DeathEvent(CauseOfDeath cause, GameObject gameObject);
 
     /// <summary>
-    /// This event is emitted every time an entity dies.
+    ///   This event is emitted every time an entity dies.
     /// </summary>
     public static event DeathEvent OnDeath;
 
+    [SerializeField] private EcoAnimationController animationController;
+    [SerializeField] private string keyToPool;
+
+    private CauseOfDeath _cause;
+    private GameObject _gameObject;
+    public bool isDead; // TODO can probably remove this when realistic food is implemented
+
     public void Die(CauseOfDeath cause)
     {
-      _isDead = true; //temporary bug fix so that multiple wolves can´t eat the same prey
+      isDead = true; // TODO this is a temporary fix so that multiple wolves can´t eat the same prey
+
       _gameObject = gameObject;
       _cause = cause;
+      
       OnDeath?.Invoke(_cause, _gameObject.gameObject);
       animationController.EnterDeathAnimation();
+
       StartCoroutine(InactivateAfterDelay(3));
     }
 
-    private IEnumerator InactivateAfterDelay(int delay)
+    private IEnumerator InactivateAfterDelay(int seconds)
     {
-      yield return new WaitForSeconds(delay);
+      yield return new WaitForSeconds(seconds);
       ObjectPoolHandler.instance.ReturnToPool(keyToPool, _gameObject);
     }
   }

@@ -70,7 +70,7 @@ namespace Ecosystem
       if (Tags.IsPrey(other.gameObject))
       {
         var otherDeathHandler = other.gameObject.GetComponentInParent<DeathHandler>();
-        if (!otherDeathHandler._isDead)
+        if (!otherDeathHandler.isDead)
         {
           otherDeathHandler.Die(CauseOfDeath.Eaten);
 
