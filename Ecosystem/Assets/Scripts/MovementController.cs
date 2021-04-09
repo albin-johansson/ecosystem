@@ -71,7 +71,6 @@ namespace Ecosystem
     /// </summary>
     public void StartHunting(Vector3 targetPosition)
     {
-      SetNavAgentSpeed();
       SetTarget(targetPosition);
     }
 
@@ -91,7 +90,6 @@ namespace Ecosystem
       _fleeDestination = FindFleeDestination(threatPosition);
       if (_fleeDestination != Vector3.zero)
       {
-        SetNavAgentSpeed();
         SetTarget(_fleeDestination);
         return true;
       }
@@ -152,7 +150,6 @@ namespace Ecosystem
         var destination = position + rotatedDirection;
         if (ValidateDestination(destination, out var validPosition))
         {
-          SetNavAgentSpeed();
           SetTarget(validPosition);
           return;
         }
@@ -180,6 +177,7 @@ namespace Ecosystem
     /// </summary>
     private void SetTarget(Vector3 destination)
     {
+      SetNavAgentSpeed();
       navAgent.SetDestination(destination);
     }
 
@@ -250,11 +248,11 @@ namespace Ecosystem
     {
       if (staminaController.IsRunning)
       {
-        navAgent.speed = genome.GetSpeedFactor().Value * 2;
+        navAgent.speed = genome.WalkingSpeed * 1.5f;
       }
       else
       {
-        navAgent.speed = genome.GetSpeedFactor().Value; 
+        navAgent.speed = genome.WalkingSpeed; 
       }
     }
 
