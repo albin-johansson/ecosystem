@@ -20,7 +20,16 @@ namespace Ecosystem.AnimalBehaviour.Predators.Wolf
     public override void Begin(GameObject target)
     {
       Reproducer.isWilling = true;
+      AnimationController.MoveAnimation();
       Target = GetClosestMateInVision(Layers.WolfMask);
+      if (Target)
+      {
+        MovementController.RunToTarget(target.transform.position);
+      }
+      else
+      {
+        MovementController.StartWander();
+      }
     }
 
     public override AnimalState Type()
