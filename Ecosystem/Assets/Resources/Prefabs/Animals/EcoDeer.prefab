@@ -7398,6 +7398,7 @@ GameObject:
   - component: {fileID: 4427174813899224407}
   - component: {fileID: 6442332908797553670}
   - component: {fileID: 570846004582155358}
+  - component: {fileID: 6034667225480989615}
   m_Layer: 8
   m_Name: EcoDeer
   m_TagString: Deer
@@ -7541,6 +7542,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9414ef04b79fdc7498427d2db88290e7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!65 &6034667225480989615
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7155763010095567698}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 0.81, y: 1.75, z: 2.7}
+  m_Center: {x: -0.75, y: 0.44, z: 0.26}
 --- !u!1 &7186192348177787887
 GameObject:
   m_ObjectHideFlags: 0

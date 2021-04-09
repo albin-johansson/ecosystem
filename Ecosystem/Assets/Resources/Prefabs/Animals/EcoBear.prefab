@@ -1326,6 +1326,7 @@ GameObject:
   - component: {fileID: -4165548273840364118}
   - component: {fileID: 5519717986162146221}
   - component: {fileID: 1080774011748047759}
+  - component: {fileID: -2084139457769870699}
   m_Layer: 10
   m_Name: EcoBear
   m_TagString: Bear
@@ -1560,6 +1561,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b65414bb43209374c86329675bc191ee, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!65 &-2084139457769870699
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7237780236292801018}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 1.33, y: 1.73, z: 3.18}
+  m_Center: {x: 0.047409974, y: 0.9721463, z: 0.28451788}
 --- !u!1 &7509506793630284121
 GameObject:
   m_ObjectHideFlags: 0
