@@ -8,6 +8,8 @@ namespace Ecosystem.Util
   /// </summary>
   public static class Tags
   {
+    #region Type checks
+
     public static bool IsPredator(GameObject animal) => animal.CompareTag("Wolf") ||
                                                         animal.CompareTag("Bear");
 
@@ -34,6 +36,10 @@ namespace Ecosystem.Util
     /// <param name="gameObject">the game object that will be checked</param>
     /// <returns><c>true</c> if the game object is a water item; <c>false</c> otherwise.</returns>
     public static bool IsWater(GameObject gameObject) => gameObject.CompareTag("Water");
+
+    #endregion
+
+    #region Counting
 
     /// <summary>
     ///   Counts the current amount of game objects with the specified tag.
@@ -62,5 +68,7 @@ namespace Ecosystem.Util
     /// </summary>
     /// <returns>the current amount of food items.</returns>
     public static int CountFood() => Count("Carrot");
+
+    #endregion
   }
 }
