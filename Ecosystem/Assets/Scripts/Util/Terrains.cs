@@ -4,11 +4,12 @@ using Random = UnityEngine.Random;
 
 namespace Ecosystem.Util
 {
-  public static class Terrains 
+  public static class Terrains
   {
     private const float Range = 10.0f;
-    public static int Walkable =  1 << NavMesh.GetAreaFromName("Walkable");
-    
+
+    public static readonly int Walkable = 1 << NavMesh.GetAreaFromName("Walkable");
+
     /// <summary>
     ///   Attempts to find a random but walkable position in the specified terrain. This function
     ///   will eventually give up if it can't find a walkable position.
