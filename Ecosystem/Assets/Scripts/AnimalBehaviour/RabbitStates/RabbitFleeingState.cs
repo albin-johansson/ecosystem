@@ -39,11 +39,11 @@ namespace Ecosystem.AnimalBehaviour.RabbitStates
         if (StaminaController.CanRun())
         {
           StaminaController.IsRunning = true;
-          AnimationController.RunAnimation();
+          AnimationController.EnterRunAnimation();
         }
         else
         {
-          AnimationController.MoveAnimation();
+          AnimationController.EnterMoveAnimation();
         }
 
         MovementController.UpdateFleeing(Target.transform.position);

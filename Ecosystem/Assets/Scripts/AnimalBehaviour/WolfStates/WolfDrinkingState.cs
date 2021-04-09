@@ -19,7 +19,7 @@ namespace Ecosystem.AnimalBehaviour.WolfStates
     {
       Target = target;
       MovementController.SetStandingStill(true);
-      AnimationController.IdleAnimation();
+      AnimationController.EnterIdleAnimation();
       WaterConsumer.StartDrinking();
     }
 

@@ -18,7 +18,7 @@ namespace Ecosystem.AnimalBehaviour.WolfStates
     public override void Begin(GameObject target)
     {
       Target = null;
-      AnimationController.IdleAnimation();
+      AnimationController.EnterIdleAnimation();
     }
 
     public override AnimalState Type()

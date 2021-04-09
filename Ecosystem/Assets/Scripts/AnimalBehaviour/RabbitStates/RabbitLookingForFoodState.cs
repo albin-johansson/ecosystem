@@ -21,7 +21,7 @@ namespace Ecosystem.AnimalBehaviour.RabbitStates
     {
       Target = GetClosestInVision(Layers.FoodMask);
       MovementController.StartWander();
-      AnimationController.MoveAnimation();
+      AnimationController.EnterMoveAnimation();
     }
 
     public override AnimalState Tick()

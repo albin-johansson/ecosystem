@@ -6,6 +6,7 @@ namespace Ecosystem
   public class EcoAnimationController : MonoBehaviour
   {
     [SerializeField] private NavMeshAgent navMeshAgent;
+
     private Animator _animator;
     private int _isWalkingHash;
     private int _isRunningHash;
@@ -14,7 +15,6 @@ namespace Ecosystem
     private int _animationSpeedMultiplier;
     private float _navMeshAgentSpeed;
     private float _navMeshAgentVelocity;
-
     private bool _isDead;
 
     private void OnEnable()
@@ -58,26 +58,28 @@ namespace Ecosystem
       ResetAnimatorParameters();
       navMeshAgent.speed = 0;
       _animator.SetTrigger(_isAttackingHash);
-      IdleAnimation();
+      EnterIdleAnimation();
     }
 
-    public void MoveAnimation()
+    public void EnterMoveAnimation()
     {
       if (_isDead)
       {
         return;
       }
+
       ResetAnimatorParameters();
       navMeshAgent.speed = _navMeshAgentSpeed;
       _animator.SetBool(_isWalkingHash, true);
     }
 
-    public void RunAnimation()
+    public void EnterRunAnimation()
     {
       if (_isDead)
       {
         return;
       }
+
       ResetAnimatorParameters();
       navMeshAgent.speed = _navMeshAgentSpeed;
       _animator.SetBool(_isRunningHash, true);
@@ -91,14 +93,15 @@ namespace Ecosystem
       _isDead = true;
     }
 
-    public void IdleAnimation()
+    public void EnterIdleAnimation()
     {
       ResetAnimatorParameters();
     }
 
     public bool IsIdle()
     {
-      return !_animator.GetBool(_isAttackingHash) && _animator.GetAnimatorTransitionInfo(0).IsName("Attack -> Idle");
+      return !_animator.GetBool(_isAttackingHash) &&
+             _animator.GetAnimatorTransitionInfo(0).IsName("Attack -> Idle");
     }
   }
 }

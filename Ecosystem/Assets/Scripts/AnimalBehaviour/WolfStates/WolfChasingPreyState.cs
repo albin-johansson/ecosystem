@@ -44,11 +44,11 @@ namespace Ecosystem.AnimalBehaviour.WolfStates
         if (StaminaController.CanRun())
         {
           StaminaController.IsRunning = true;
-          AnimationController.RunAnimation();
+          AnimationController.EnterRunAnimation();
         }
         else
         {
-          AnimationController.MoveAnimation();
+          AnimationController.EnterMoveAnimation();
         }
         MovementController.SetDestination(Target.transform.position);
       }

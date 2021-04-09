@@ -21,7 +21,7 @@ namespace Ecosystem.AnimalBehaviour.RabbitStates
     {
       Reproducer.IsWilling = true;
       MovementController.StartWander();
-      AnimationController.MoveAnimation();
+      AnimationController.EnterMoveAnimation();
       Target = GetClosestMateInVision(Layers.PreyMask);
       if (Target)
       {

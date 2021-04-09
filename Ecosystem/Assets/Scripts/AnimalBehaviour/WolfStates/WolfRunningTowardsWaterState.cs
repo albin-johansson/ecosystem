@@ -20,7 +20,7 @@ namespace Ecosystem.AnimalBehaviour.WolfStates
     {
       Target = target;
       MovementController.SetDestinationIfValid(Target.transform.position);
-      AnimationController.MoveAnimation();
+      AnimationController.EnterMoveAnimation();
     }
 
     public override AnimalState Tick()
