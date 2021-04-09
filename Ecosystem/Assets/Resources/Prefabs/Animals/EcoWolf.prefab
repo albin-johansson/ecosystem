@@ -4462,7 +4462,6 @@ GameObject:
   - component: {fileID: -4792604738439377631}
   - component: {fileID: 1593158740268700976}
   - component: {fileID: 618687372982133785}
-  - component: {fileID: 3265153686313883239}
   m_Layer: 7
   m_Name: EcoWolf
   m_TagString: Wolf
@@ -4511,7 +4510,7 @@ NavMeshAgent:
   m_Height: 2
   m_BaseOffset: 0
   m_WalkableMask: 4294967295
-  m_ObstacleAvoidanceType: 1
+  m_ObstacleAvoidanceType: 0
 --- !u!95 &1850251146594700222
 Animator:
   serializedVersion: 3
@@ -4606,19 +4605,6 @@ MonoBehaviour:
   animationController: {fileID: -4792604738439377631}
   keyToPool: Wolf
   _isDead: 0
---- !u!65 &3265153686313883239
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4371145773595096147}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 0.46, y: 1, z: 1.69}
-  m_Center: {x: 0, y: 0.5, z: 0.04}
 --- !u!1 &4395386118049015763
 GameObject:
   m_ObjectHideFlags: 0

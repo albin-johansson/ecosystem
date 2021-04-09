@@ -887,7 +887,6 @@ GameObject:
   - component: {fileID: 1438288584065220351}
   - component: {fileID: 2656864231929346077}
   - component: {fileID: 3025539359171641749}
-  - component: {fileID: 488916470073406979}
   m_Layer: 8
   m_Name: EcoRabbit
   m_TagString: Rabbit
@@ -955,7 +954,7 @@ NavMeshAgent:
   m_Height: 0.25
   m_BaseOffset: 0
   m_WalkableMask: 4294967295
-  m_ObstacleAvoidanceType: 1
+  m_ObstacleAvoidanceType: 0
 --- !u!54 &5120150214073318112
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -1031,19 +1030,6 @@ MonoBehaviour:
   animationController: {fileID: 2656864231929346077}
   keyToPool: Rabbit
   _isDead: 0
---- !u!65 &488916470073406979
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3436557251021641289}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 0.27, y: 0.4, z: 0.45}
-  m_Center: {x: 0.41, y: 0.37, z: 0.24}
 --- !u!1 &3579996788643659857
 GameObject:
   m_ObjectHideFlags: 0
