@@ -25,7 +25,7 @@ namespace Ecosystem.AnimalBehaviour
 
     public virtual GameObject End()
     {
-      Consumer.CollideActive = false;
+      Consumer.ColliderActive = false;
       return Target;
     }
 

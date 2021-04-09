@@ -9,19 +9,6 @@ namespace Ecosystem
 {
   public sealed class FoodConsumer : MonoBehaviour, IConsumer
   {
-    [SerializeField] private AbstractGenome genome;
-    [SerializeField] private ResourceBar resourceBar;
-    [SerializeField] private DeathHandler deathHandler;
-    [SerializeField] private double maxHunger = 100;
-    [SerializeField] private Reproducer reproducer;
-    private bool _isDead;
-
-    public GameObject EatingFromGameObject { get; set; }
-    public double Hunger { get; set; }
-    public bool IsAttacking { get; set; }
-
-    public bool CollideActive { get; set; }
-
     public delegate void FoodEatenEvent(GameObject food);
 
     /// <summary>
@@ -29,9 +16,25 @@ namespace Ecosystem
     /// </summary>
     public static event FoodEatenEvent OnFoodEaten;
 
+    [SerializeField] private AbstractGenome genome;
+    [SerializeField] private ResourceBar resourceBar;
+    [SerializeField] private DeathHandler deathHandler;
+    [SerializeField] private Reproducer reproducer;
+    [SerializeField] private float maxHunger = 100;
+
+    private bool _isDead;
+
+    public float Hunger { get; private set; }
+
+    public bool ColliderActive { get; set; }
+
+    public bool IsAttacking { get; set; }
+
+    public GameObject EatingFromGameObject { get; set; }
+
     private void OnEnable()
     {
-      resourceBar.SetMaxValue((float) maxHunger);
+      resourceBar.SetMaxValue(maxHunger);
     }
 
     private void OnDisable()
@@ -69,7 +72,7 @@ namespace Ecosystem
         Hunger += genome.Metabolism * Time.deltaTime;
       }
 
-      resourceBar.SetValue((float) Hunger);
+      resourceBar.SetValue(Hunger);
       if (Hunger > maxHunger)
       {
         _isDead = true;
@@ -88,8 +91,9 @@ namespace Ecosystem
       if (Tags.IsFood(other.gameObject))
       {
         OnFoodEaten?.Invoke(other.gameObject);
-        var gameObjectTag = other.gameObject.tag;
         Hunger = 0;
+
+        var gameObjectTag = other.gameObject.tag;
         if (ObjectPoolHandler.instance.isPoolValid(gameObjectTag))
         {
           ObjectPoolHandler.instance.ReturnToPool(gameObjectTag, other.gameObject);

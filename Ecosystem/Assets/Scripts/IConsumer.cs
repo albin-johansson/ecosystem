@@ -7,15 +7,15 @@ namespace Ecosystem
   /// </summary>
   public interface IConsumer
   {
-    double Hunger { get; }
+    float Hunger { get; }
 
-    bool CollideActive { get; set; }
-    
+    bool ColliderActive { get; set; }
+
+    bool IsAttacking { get; set; }
+
     GameObject EatingFromGameObject { get; set; }
 
     bool IsHungry();
-
-    bool IsAttacking { get; set; }
 
     void SetSaturation(float value);
   }
