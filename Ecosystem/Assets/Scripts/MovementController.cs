@@ -187,8 +187,8 @@ namespace Ecosystem
     #region Wandering
 
     /// <summary>
-    ///   Sets a target at the edge of the vision range in an angle within a half circle
-    ///   of the direction the animal look.
+    ///   Make the animal move towards a position at the edge of the vision range, at an angle within a half circle of
+    ///   the direction that the animal is currently facing.
     /// </summary>
     public void StartWander()
     {
@@ -211,8 +211,8 @@ namespace Ecosystem
     }
 
     /// <summary>
-    ///  Gets called from Tick in the wander state, updates a random position if it is sufficiently
-    ///  close to its last destination
+    ///   Updates the wandering of the animal if it has no current destination of if it is close to its current
+    ///   destination.
     /// </summary>
     public void UpdateWander()
     {
