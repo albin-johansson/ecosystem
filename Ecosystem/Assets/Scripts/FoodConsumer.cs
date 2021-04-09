@@ -53,6 +53,7 @@ namespace Ecosystem
       {
         Hunger += genome.Metabolism * Time.deltaTime;
       }
+
       resourceBar.SetValue((float) Hunger);
       if (Hunger > maxHunger)
       {

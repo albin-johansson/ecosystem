@@ -66,7 +66,6 @@ namespace Ecosystem.UI
     }
 
 
-
     private static void ToggleSet(bool isOn, out Dictionary<GeneType, Preset> preset,
       Dictionary<GeneType, Preset> single, Dictionary<GeneType, Preset> multi)
     {
