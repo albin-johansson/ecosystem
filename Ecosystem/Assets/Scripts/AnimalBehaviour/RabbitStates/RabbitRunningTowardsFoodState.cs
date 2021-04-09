@@ -51,7 +51,7 @@ namespace Ecosystem.AnimalBehaviour.RabbitStates
       {
         Target = SelectCloser(otherObject, Target);
       }
-      else if (otherObject.CompareTag("Water"))
+      else if (Tags.IsWater(otherObject))
       {
         MemoryController.SaveToMemory(otherObject);
       }

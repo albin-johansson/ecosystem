@@ -1,5 +1,6 @@
 using System;
 using Ecosystem.Genes;
+using Ecosystem.Util;
 using UnityEngine;
 
 namespace Ecosystem.AnimalBehaviour
@@ -51,9 +52,10 @@ namespace Ecosystem.AnimalBehaviour
 
     public virtual void OnTriggerEnter(Collider other)
     {
-      if (other.gameObject.CompareTag("Water"))
+      var otherObject = other.gameObject;
+      if (Tags.IsWater(otherObject))
       {
-        MemoryController.SaveToMemory(other.gameObject);
+        MemoryController.SaveToMemory(otherObject);
       }
     }
 
