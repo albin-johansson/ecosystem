@@ -17,7 +17,7 @@ namespace Ecosystem.Genes
       {GeneType.ThirstRate, new Preset(0, 10, new[] {0.5f, 3f, 6f, 9f})},
       {GeneType.ThirstThreshold, new Preset(0, 10, new[] {1f, 5f, 7f})},
       {GeneType.Vision, new Preset(1, 50, new[] {5f, 10f, 25f, 40f, 45f})},
-      {GeneType.SpeedFactor, new Preset(1, 2, new[] {1f, 1.5f, 2f})},
+      {GeneType.Speed, new Preset(1, 2, new[] {1f, 1.5f, 2f})},
       {GeneType.SizeFactor, new Preset(0.5f, 1.5f, new[] {0.5f, 1f, 1.5f})},
       {GeneType.DesirabilityScore, new Preset(1, 10, new[] {1f, 5f, 10f})},
       {GeneType.GestationPeriod, new Preset(10, 120, new[] {12f, 20f, 50f, 70f, 90f, 110f})},
@@ -46,7 +46,7 @@ namespace Ecosystem.Genes
       var thirstRate = GeneUtil.CreateGeneFromPreset(presets[GeneType.ThirstRate]);
       var thirstThreshold = GeneUtil.CreateGeneFromPreset(presets[GeneType.ThirstThreshold]);
       var vision = GeneUtil.CreateGeneFromPreset(presets[GeneType.Vision]);
-      var speedFactor = GeneUtil.CreateGeneFromPreset(presets[GeneType.SpeedFactor]);
+      var speedFactor = GeneUtil.CreateGeneFromPreset(presets[GeneType.Speed]);
       var sizeFactor = GeneUtil.CreateGeneFromPreset(presets[GeneType.SizeFactor]);
       var desirabilityFactor = GeneUtil.CreateGeneFromPreset(presets[GeneType.DesirabilityScore]);
       var gestationPeriod = GeneUtil.CreateGeneFromPreset(presets[GeneType.GestationPeriod]);
@@ -59,7 +59,7 @@ namespace Ecosystem.Genes
         {GeneType.ThirstRate, thirstRate},
         {GeneType.ThirstThreshold, thirstThreshold},
         {GeneType.Vision, vision},
-        {GeneType.SpeedFactor, speedFactor},
+        {GeneType.Speed, speedFactor},
         {GeneType.SizeFactor, sizeFactor},
         {GeneType.DesirabilityScore, desirabilityFactor},
         {GeneType.GestationPeriod, gestationPeriod},
@@ -86,13 +86,10 @@ namespace Ecosystem.Genes
 
     public float GetChildFoodConsumtionFactor() => ChildFoodConsumtionFactor;
 
-    public float Speed => GetHungerRate().Value *
-                          GetSpeedFactor().Value *
-                          GetSizeFactor().ValueAsDecimal();
+    public float WalkingSpeed => GetSpeed().Value * GetSizeFactor().Value;
 
     public float Metabolism => GetHungerRate().Value * GetSizeFactor().Value *
-                               (1 + MetabolismFactor *
-                                 (GetVision().ValueAsDecimal() + GetSpeedFactor().ValueAsDecimal()));
+                               (1 + MetabolismFactor * (GetVision().ValueAsDecimal() + GetSpeed().ValueAsDecimal()));
 
     public float Attractiveness => GetDesirabilityScore().Value;
 
@@ -100,7 +97,7 @@ namespace Ecosystem.Genes
     {
       if (gameObject.TryGetComponent(out NavMeshAgent navMeshAgent))
       {
-        navMeshAgent.speed *= Speed;
+        navMeshAgent.speed = GetSpeed().Value;
       }
 
       gameObject.transform.localScale *= GetSizeFactor().Value;
@@ -116,7 +113,7 @@ namespace Ecosystem.Genes
 
     public Gene GetVision() => Data.Vision;
 
-    public Gene GetSpeedFactor() => Data.SpeedFactor;
+    public Gene GetSpeed() => Data.Speed;
 
     public Gene GetSizeFactor() => Data.SizeFactor;
 

@@ -7,6 +7,7 @@ namespace Ecosystem.AnimalBehaviour.RabbitStates
   {
     public RabbitRunningTowardsFoodState(RabbitStateData data)
     {
+      StaminaController = data.StaminaController;
       Consumer = data.Consumer;
       WaterConsumer = data.WaterConsumer;
       MovementController = data.MovementController;
@@ -24,13 +25,17 @@ namespace Ecosystem.AnimalBehaviour.RabbitStates
 
     public override AnimalState Tick()
     {
-      if (!Target || !Consumer.IsHungry())
+      if (!Target || !Consumer.IsHungry() || !Target.activeSelf)
       {
         return base.Tick();
       }
       else if (Tags.IsPredator(Target))
       {
         return AnimalState.Fleeing;
+      }
+      else if (Consumer.EatingFromGameObject)
+      {
+        return AnimalState.Eating;
       }
       else
       {

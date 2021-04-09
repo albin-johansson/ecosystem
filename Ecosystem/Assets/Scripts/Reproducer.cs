@@ -83,7 +83,9 @@ namespace Ecosystem
     }
     public bool CompatibleAsParents(GameObject other)
     {
-      return CanMate && other.TryGetComponent(out AbstractGenome otherGenome) &&
+      return other.TryGetComponent(out Reproducer otherReproducer) &&
+             other.TryGetComponent(out AbstractGenome otherGenome) &&
+             otherReproducer.CanMate &&
              Genomes.CompatibleAsParents(genome, otherGenome);
     }
 
@@ -120,8 +122,7 @@ namespace Ecosystem
 
     private void OnTriggerEnter(Collider other)
     {
-      if (other.CompareTag("Reproducer") &&
-          other.TryGetComponent(out Reproducer otherReproducer) &&
+      if (other.TryGetComponent(out Reproducer otherReproducer) &&
           Genomes.CompatibleAsParents(genome, otherReproducer.genome) &&
           otherReproducer.CanMate && CanMate)
       {

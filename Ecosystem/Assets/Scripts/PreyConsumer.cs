@@ -17,6 +17,8 @@ namespace Ecosystem
     private bool _isDead;
 
     public bool IsAttacking { get; set; }
+    
+    public GameObject EatingFromGameObject { get; set; }
 
     public double Hunger { get; set; }
 
@@ -62,10 +64,14 @@ namespace Ecosystem
       if (!CollideActive || IsAttacking) return;
       if (Tags.IsPrey(other.gameObject))
       {
-        IsAttacking = true;
-        OnPreyConsumed?.Invoke();
-        other.gameObject.GetComponent<DeathHandler>().Die(CauseOfDeath.Eaten);
-        Hunger = 0;
+        DeathHandler _deathHandler = other.gameObject.GetComponentInParent<DeathHandler>();
+        if (!_deathHandler._isDead)
+        {
+          _deathHandler.Die(CauseOfDeath.Eaten);
+          IsAttacking = true;
+          OnPreyConsumed?.Invoke();
+          Hunger = 0;
+        }
       }
     }
 

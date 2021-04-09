@@ -338,7 +338,7 @@ namespace Ecosystem.Logging
       CreateGeneInfo(GeneType.ThirstRate, genome.GetThirstRate()),
       CreateGeneInfo(GeneType.ThirstThreshold, genome.GetThirstThreshold()),
       CreateGeneInfo(GeneType.Vision, genome.GetVision()),
-      CreateGeneInfo(GeneType.SpeedFactor, genome.GetSpeedFactor()),
+      CreateGeneInfo(GeneType.Speed, genome.GetSpeed()),
       CreateGeneInfo(GeneType.SizeFactor, genome.GetSizeFactor()),
       CreateGeneInfo(GeneType.DesirabilityScore, genome.GetDesirabilityScore()),
       CreateGeneInfo(GeneType.GestationPeriod, genome.GetGestationPeriod()),

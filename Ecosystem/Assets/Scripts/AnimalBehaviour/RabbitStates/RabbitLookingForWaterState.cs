@@ -7,6 +7,7 @@ namespace Ecosystem.AnimalBehaviour.RabbitStates
   {
     public RabbitLookingForWaterState(RabbitStateData data)
     {
+      StaminaController = data.StaminaController;
       Consumer = data.Consumer;
       WaterConsumer = data.WaterConsumer;
       MovementController = data.MovementController;
@@ -18,7 +19,7 @@ namespace Ecosystem.AnimalBehaviour.RabbitStates
 
     public override void Begin(GameObject target)
     {
-      Target = GetClosestInVision(Layers.WaterLayer);
+      Target = GetClosestInVision(Layers.WaterMask);
       if (!Target)
       {
         Target = MemoryController.GetClosestInMemory(Tags.IsWater, MovementController.GetPosition());

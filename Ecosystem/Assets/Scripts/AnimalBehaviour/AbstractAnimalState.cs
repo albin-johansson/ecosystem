@@ -6,6 +6,7 @@ namespace Ecosystem.AnimalBehaviour
 {
   public abstract class AbstractAnimalState : IAnimalState
   {
+    protected StaminaController StaminaController;
     protected IConsumer Consumer;
     protected WaterConsumer WaterConsumer;
     protected MemoryController MemoryController;
@@ -37,7 +38,7 @@ namespace Ecosystem.AnimalBehaviour
       for (var index = 0; index < nColliders; ++index)
       {
         var colliderGameObject = _colliderBuffer[index].gameObject;
-        if (predicate != null && predicate(colliderGameObject))
+        if (predicate != null && !predicate(colliderGameObject))
         {
           continue;
         }

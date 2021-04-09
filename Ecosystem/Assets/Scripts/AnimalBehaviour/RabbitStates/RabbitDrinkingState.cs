@@ -7,6 +7,7 @@ namespace Ecosystem.AnimalBehaviour.RabbitStates
   {
     public RabbitDrinkingState(RabbitStateData data)
     {
+      StaminaController = data.StaminaController;
       Consumer = data.Consumer;
       WaterConsumer = data.WaterConsumer;
       MovementController = data.MovementController;
