@@ -19,7 +19,7 @@ namespace Ecosystem.AnimalBehaviour.RabbitStates
 
     public override void Begin(GameObject target)
     {
-      Reproducer.isWilling = true;
+      Reproducer.IsWilling = true;
       MovementController.StartWander();
       AnimationController.MoveAnimation();
       Target = GetClosestMateInVision(Layers.PreyMask);
@@ -73,7 +73,7 @@ namespace Ecosystem.AnimalBehaviour.RabbitStates
 
     public override GameObject End()
     {
-      Reproducer.isWilling = false;
+      Reproducer.IsWilling = false;
       return base.End();
     }
 
