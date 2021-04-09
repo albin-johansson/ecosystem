@@ -26,7 +26,7 @@ namespace Ecosystem
 
     public void Die(CauseOfDeath cause)
     {
-      isDead = true; // TODO this is a temporary fix so that multiple wolves can´t eat the same prey
+      isDead = true; // TODO this is a temporary fix so that multiple wolves can't eat the same prey
 
       _gameObject = gameObject;
       _cause = cause;
