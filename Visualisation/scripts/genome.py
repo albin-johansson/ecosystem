@@ -35,7 +35,7 @@ def tmp(data: LogData, directory: Path):
 
 
 def int_to_gene_type(code):
-  switcher = {
+  return {
     0: "HungerRate",
     1: "HungerThreshold",
     2: "ThirstRate",
@@ -46,8 +46,7 @@ def int_to_gene_type(code):
     7: "DesirabilityScore",
     8: "GestationPeriod",
     9: "SexualMaturityTime"
-  }
-  return switcher.get(code)
+  }[code]
 
 
 def visualise_genome_changes(data: LogData, directory: Path):

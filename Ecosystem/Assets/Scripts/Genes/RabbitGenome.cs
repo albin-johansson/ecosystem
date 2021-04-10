@@ -31,6 +31,7 @@ namespace Ecosystem.Genes
 
     protected override void Initialize()
     {
+      key = GenerateKey(10);
       Data = GenomeData.Create(DefaultGenes);
       ConvertGenesToAttributes();
     }

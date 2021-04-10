@@ -1,5 +1,7 @@
-﻿using UnityEngine;
+﻿using System.Linq;
+using UnityEngine;
 using UnityEngine.AI;
+using Random = System.Random;
 
 namespace Ecosystem.Genes
 {
@@ -9,6 +11,15 @@ namespace Ecosystem.Genes
 
     private const float MetabolismFactor = 1.495f; // 1.15 (Vision) * 1.30 (Speed)
     private const float ChildFoodConsumtionFactor = 4f / 3f;
+    public string key;
+    private static Random _random = new Random();
+    private const string _chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
+
+    protected static string GenerateKey(int length)
+    {
+      return new string(Enumerable.Repeat(_chars, length)
+        .Select(s => s[_random.Next(s.Length)]).ToArray());
+    }
 
     private void Awake()
     {
@@ -23,9 +34,9 @@ namespace Ecosystem.Genes
     public delegate void GenomeCreateEvent(string animalTag, Gene gene);
 
 
-
     public void Initialize(IGenome first, IGenome second)
     {
+      key = GenerateKey(10);
       Data = Genomes.Merge(first, second);
       ConvertGenesToAttributes();
       //GenomeCreate?.Invoke("rabbit", GetHungerRate());
@@ -39,7 +50,9 @@ namespace Ecosystem.Genes
                           GetSpeedFactor().Value *
                           GetSizeFactor().ValueAsDecimal();
 
-    public float Metabolism => GetHungerRate().Value * GetSizeFactor().Value * (1 + MetabolismFactor * (GetVision().ValueAsDecimal() + GetSpeedFactor().ValueAsDecimal()));
+    public float Metabolism => GetHungerRate().Value * GetSizeFactor().Value *
+                               (1 + MetabolismFactor *
+                                 (GetVision().ValueAsDecimal() + GetSpeedFactor().ValueAsDecimal()));
 
     public float Attractiveness => GetDesirabilityScore().Value;
 

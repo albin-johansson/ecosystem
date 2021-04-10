@@ -29,5 +29,10 @@ namespace Ecosystem.Logging
     /// All tracked genes.
     /// </summary>
     public List<GeneInfo> genes;
+
+    /// <summary>
+    /// ID from genome. 
+    /// </summary>
+    public string key;
   }
 }

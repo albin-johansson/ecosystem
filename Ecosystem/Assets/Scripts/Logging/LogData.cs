@@ -251,14 +251,14 @@ namespace Ecosystem.Logging
     /// <param name="cause">the cause of death for the animal.</param>
     public void AddDeath(GameObject deadObject, CauseOfDeath cause)
     {
-      //Tmp add genes on death
       GenomeData genomeData = deadObject.GetComponent<AbstractGenome>().GetGenes();
-      //TODO: move to better spot/onBirth
+      //TODO: move to birth, on death find by key and set end time.
       genomes.Add(new GenomeInfo()
       {
-        endTime = 0,
         tag = deadObject.tag,
         time = SessionTime.Now(),
+        endTime = -1,
+        key = deadObject.GetComponent<AbstractGenome>().key,
         genes = new List<GeneInfo>()
         {
           new GeneInfo()
