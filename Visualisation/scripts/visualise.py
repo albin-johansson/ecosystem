@@ -14,6 +14,7 @@ from logdata import LogData
 from animalpopulation import visualise_animal_populations
 from foodconsumption import visualise_food_consumption
 from causeofdeath import visualise_cause_of_death
+from genome import visualise_genome_changes
 
 
 # Runs all available visualisations on a simulation data file
@@ -27,6 +28,7 @@ def visualise(input_file: Path):
   visualise_animal_populations(data, directory)
   visualise_food_consumption(data, directory)
   visualise_cause_of_death(data, directory)
+  visualise_genome_changes(data,directory)
 
 
 def main(argv):

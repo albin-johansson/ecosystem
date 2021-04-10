@@ -1,5 +1,6 @@
 using System;
 using Ecosystem.Genes;
+using UnityEngine.Serialization;
 
 namespace Ecosystem.Logging
 {
@@ -9,7 +10,7 @@ namespace Ecosystem.Logging
   [Serializable]
   public struct GeneInfo
   {
-    public GeneType gene;
+    public GeneType geneType;
     public float value;
   }
 }

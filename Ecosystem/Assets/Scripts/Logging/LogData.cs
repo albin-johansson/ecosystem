@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using Ecosystem.Genes;
 using Ecosystem.Util;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 namespace Ecosystem.Logging
 {
@@ -93,22 +94,22 @@ namespace Ecosystem.Logging
     /// <summary>
     ///   The base rabbit genome.
     /// </summary>
-    [SerializeField] private GenomeInfo rabbitGenome;
-    
+    //[SerializeField] private GenomeInfo rabbitGenome;
+
     /// <summary>
     ///   The base deer genome.
     /// </summary>
-    [SerializeField] private GenomeInfo deerGenome;
-    
+    //[SerializeField] private GenomeInfo deerGenome;
+
     /// <summary>
     ///   The base wolf genome.
     /// </summary>
-    [SerializeField] private GenomeInfo wolfGenome;
-    
+    //[SerializeField] private GenomeInfo wolfGenome;
+
     /// <summary>
     ///   The base bear genome.
     /// </summary>
-    [SerializeField] private GenomeInfo bearGenome;
+    //[SerializeField] private GenomeInfo bearGenome;
 
     /// <summary>
     ///   The history of simulation events, stored in chronological order. 
@@ -124,6 +125,32 @@ namespace Ecosystem.Logging
     ///   Additional information about death events.
     /// </summary>
     [SerializeField] private List<Death> deaths = new List<Death>(64);
+
+    /// <summary>
+    ///   list of one type genes
+    /// </summary>
+    [SerializeField] private List<GenomeInfo> genomes = new List<GenomeInfo>(64);
+
+    /// <summary>
+    /// 
+    /// </summary>
+    //[SerializeField] private List<Gene> genes = new List<Gene>(64);
+
+
+    /*
+    public void AddHungerRate(Gene gene, string tag)
+    {
+      GeneInfo gi = new GeneInfo();
+      gi.gene = GeneType.HungerRate;
+      gi.value = gene.Value;
+      hungerRates.Add(new GenomeEvent()
+      {
+        hungerRate = gi,
+        tag = tag,
+        time = SessionTime.Now()
+      });
+    }
+    */
 
     /// <summary>
     ///   Prepares the data with the initial simulation state. Used to determine the
@@ -157,10 +184,12 @@ namespace Ecosystem.Logging
 
     private void CaptureInitialGenomes()
     {
+      /*
       rabbitGenome = CaptureGenome(RabbitGenome.DefaultGenes);
       deerGenome = CaptureGenome(DeerGenome.DefaultGenes);
       wolfGenome = CaptureGenome(WolfGenome.DefaultGenes);
       bearGenome = CaptureGenome(BearGenome.DefaultGenes);
+      */
     }
 
     /// <summary>
@@ -182,12 +211,12 @@ namespace Ecosystem.Logging
     {
       events.Add(new SimulationEvent
       {
-              time = SessionTime.Now(),
-              type = "mating",
-              tag = animalTag,
-              position = position,
-              matingIndex = matings.Count,
-              deathIndex = -1
+        time = SessionTime.Now(),
+        type = "mating",
+        tag = animalTag,
+        position = position,
+        matingIndex = matings.Count,
+        deathIndex = -1
       });
 
       matings.Add(CreateMatingInfo(male, female));
@@ -202,16 +231,17 @@ namespace Ecosystem.Logging
     {
       events.Add(new SimulationEvent
       {
-              time = SessionTime.Now(),
-              type = "birth",
-              tag = animal.tag,
-              position = animal.transform.position,
-              matingIndex = -1,
-              deathIndex = -1
+        time = SessionTime.Now(),
+        type = "birth",
+        tag = animal.tag,
+        position = animal.transform.position,
+        matingIndex = -1,
+        deathIndex = -1
       });
 
       ++birthCount;
       ++aliveCount;
+      //TODO: move genome add to here?
     }
 
     /// <summary>
@@ -221,23 +251,66 @@ namespace Ecosystem.Logging
     /// <param name="cause">the cause of death for the animal.</param>
     public void AddDeath(GameObject deadObject, CauseOfDeath cause)
     {
+      //Tmp add genes on death
+      /*
+      Gene gene = deadObject.GetComponent<AbstractGenome>().GetHungerRate();
+      Debug.Log("hr dead, value: " + gene.Value);
+      GeneInfo gi = new GeneInfo();
+      gi.geneType = GeneType.HungerRate;
+      gi.value = gene.Value;
+      hungerRates.Add(new GenomeInfo()
+      {
+        hungerRate = gi,
+        tag = "Rabbit",
+        time = SessionTime.Now()
+      });
+      */
+
+
+      //Debug.Log("Number of genes: " + hungerRates.Count);
+
+
+      GenomeData genomeData = deadObject.GetComponent<AbstractGenome>().GetGenes();
+      GenomeInfo genomeInfo = new GenomeInfo();
+
+      AddGeneToGenome(genomeData.Vision, GeneType.Vision, ref genomeInfo);
+      AddGeneToGenome(genomeData.DesirabilityScore, GeneType.DesirabilityScore, ref genomeInfo);
+      AddGeneToGenome(genomeData.GestationPeriod, GeneType.GestationPeriod, ref genomeInfo);
+      AddGeneToGenome(genomeData.HungerRate, GeneType.HungerRate, ref genomeInfo);
+      AddGeneToGenome(genomeData.HungerThreshold, GeneType.HungerThreshold, ref genomeInfo);
+      AddGeneToGenome(genomeData.SizeFactor, GeneType.SizeFactor, ref genomeInfo);
+      AddGeneToGenome(genomeData.SpeedFactor, GeneType.SpeedFactor, ref genomeInfo);
+      AddGeneToGenome(genomeData.ThirstRate, GeneType.ThirstRate, ref genomeInfo);
+      AddGeneToGenome(genomeData.ThirstThreshold, GeneType.ThirstThreshold, ref genomeInfo);
+      AddGeneToGenome(genomeData.SexualMaturityTime, GeneType.SexualMaturityTime, ref genomeInfo);
+
+
       events.Add(new SimulationEvent
       {
-              time = SessionTime.Now(),
-              type = "death",
-              tag = deadObject.tag,
-              position = deadObject.transform.position,
-              matingIndex = -1,
-              deathIndex = deaths.Count
+        time = SessionTime.Now(),
+        type = "death",
+        tag = deadObject.tag,
+        position = deadObject.transform.position,
+        matingIndex = -1,
+        deathIndex = deaths.Count
       });
 
       deaths.Add(new Death
       {
-              cause = cause
+        cause = cause
       });
 
       --aliveCount;
       ++deadCount;
+    }
+
+    private static void AddGeneToGenome(Gene gene, GeneType type, ref GenomeInfo genomeInfo)
+    {
+      genomeInfo.genes.Add(new GeneInfo()
+      {
+        value = gene.Value,
+        geneType = type
+      });
     }
 
     /// <summary>
@@ -248,12 +321,12 @@ namespace Ecosystem.Logging
     {
       events.Add(new SimulationEvent
       {
-              time = SessionTime.Now(),
-              type = "consumption",
-              tag = food.tag,
-              position = food.transform.position,
-              matingIndex = -1,
-              deathIndex = -1
+        time = SessionTime.Now(),
+        type = "consumption",
+        tag = food.tag,
+        position = food.transform.position,
+        matingIndex = -1,
+        deathIndex = -1
       });
 
       --foodCount;
@@ -326,28 +399,28 @@ namespace Ecosystem.Logging
 
     private static Mating CreateMatingInfo(IGenome male, IGenome female) => new Mating
     {
-            male = RecordGenes(male),
-            female = RecordGenes(female)
+      male = RecordGenes(male),
+      female = RecordGenes(female)
     };
 
     private static List<GeneInfo> RecordGenes(IGenome genome) => new List<GeneInfo>(GeneCount)
     {
-            CreateGeneInfo(GeneType.HungerRate, genome.GetHungerRate()),
-            CreateGeneInfo(GeneType.HungerThreshold, genome.GetHungerThreshold()),
-            CreateGeneInfo(GeneType.ThirstRate, genome.GetThirstRate()),
-            CreateGeneInfo(GeneType.ThirstThreshold, genome.GetThirstThreshold()),
-            CreateGeneInfo(GeneType.Vision, genome.GetVision()),
-            CreateGeneInfo(GeneType.SpeedFactor, genome.GetSpeedFactor()),
-            CreateGeneInfo(GeneType.SizeFactor, genome.GetSizeFactor()),
-            CreateGeneInfo(GeneType.DesirabilityScore, genome.GetDesirabilityScore()),
-            CreateGeneInfo(GeneType.GestationPeriod, genome.GetGestationPeriod()),
-            CreateGeneInfo(GeneType.SexualMaturityTime, genome.GetSexualMaturityTime())
+      CreateGeneInfo(GeneType.HungerRate, genome.GetHungerRate()),
+      CreateGeneInfo(GeneType.HungerThreshold, genome.GetHungerThreshold()),
+      CreateGeneInfo(GeneType.ThirstRate, genome.GetThirstRate()),
+      CreateGeneInfo(GeneType.ThirstThreshold, genome.GetThirstThreshold()),
+      CreateGeneInfo(GeneType.Vision, genome.GetVision()),
+      CreateGeneInfo(GeneType.SpeedFactor, genome.GetSpeedFactor()),
+      CreateGeneInfo(GeneType.SizeFactor, genome.GetSizeFactor()),
+      CreateGeneInfo(GeneType.DesirabilityScore, genome.GetDesirabilityScore()),
+      CreateGeneInfo(GeneType.GestationPeriod, genome.GetGestationPeriod()),
+      CreateGeneInfo(GeneType.SexualMaturityTime, genome.GetSexualMaturityTime())
     };
 
     private static GeneInfo CreateGeneInfo(GeneType type, Gene gene) => new GeneInfo
     {
-            gene = type,
-            value = gene.Value
+      geneType = type,
+      value = gene.Value
     };
   }
 }

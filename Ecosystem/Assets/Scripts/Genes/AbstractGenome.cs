@@ -13,18 +13,26 @@ namespace Ecosystem.Genes
     private void Awake()
     {
       Initialize();
+      //GenomeCreate?.Invoke("rabbit", GetHungerRate());
     }
 
     protected abstract void Initialize();
+
+    public static event GenomeCreateEvent GenomeCreate;
+
+    public delegate void GenomeCreateEvent(string animalTag, Gene gene);
+
+
 
     public void Initialize(IGenome first, IGenome second)
     {
       Data = Genomes.Merge(first, second);
       ConvertGenesToAttributes();
+      //GenomeCreate?.Invoke("rabbit", GetHungerRate());
     }
 
     public bool IsMale => Data.IsMale;
-    
+
     public float GetChildFoodConsumtionFactor() => ChildFoodConsumtionFactor;
 
     public float Speed => GetHungerRate().Value *
@@ -34,14 +42,14 @@ namespace Ecosystem.Genes
     public float Metabolism => GetHungerRate().Value * GetSizeFactor().Value * (1 + MetabolismFactor * (GetVision().ValueAsDecimal() + GetSpeedFactor().ValueAsDecimal()));
 
     public float Attractiveness => GetDesirabilityScore().Value;
-    
+
     protected void ConvertGenesToAttributes()
     {
       if (gameObject.TryGetComponent(out NavMeshAgent navMeshAgent))
       {
         navMeshAgent.speed *= Speed;
       }
-      
+
       gameObject.transform.localScale *= GetSizeFactor().Value;
     }
 

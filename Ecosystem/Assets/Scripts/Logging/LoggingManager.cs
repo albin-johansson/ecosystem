@@ -34,11 +34,26 @@ namespace Ecosystem.Logging
       PreyConsumer.OnPreyConsumed += LogPreyConsumed;
       Reproducer.OnBirth += LogBirth;
       Reproducer.OnMating += LogMating;
+      //AbstractGenome.GenomeCreate += LogGenome;
 
       _data.PrepareData();
 
       aliveCountText.text = _data.AliveCount().ToString();
       foodCountText.text = _data.FoodCount().ToString();
+    }
+    private void LogGenome(string animalTag, Gene gene)
+    {
+      
+      /*
+      GenomeEvent ge = new GenomeEvent();
+      GeneInfo gi = new GeneInfo();
+      gi.gene = GeneType.HungerRate;
+      gi.value = gene.Value;
+      ge.hungerRate = gi;
+      ge.tag = animalTag;
+      
+      _data.AddHungerRate(gene, animalTag);
+      */
     }
 
     private void Update()
@@ -49,6 +64,13 @@ namespace Ecosystem.Logging
         var seconds = milliseconds / 1_000;
         timePassedText.text = seconds.ToString();
         _nextUpdateTime = milliseconds + 1_000;
+      }
+
+      //TODO: tmp save button, for testing
+      if (Input.GetKeyUp(KeyCode.X))
+      {
+        _data.MarkAsDone();
+        LogFileWriter.Save(_data);
       }
     }
 
@@ -69,7 +91,7 @@ namespace Ecosystem.Logging
     private void LogMating(Vector3 position, string animalTag, IGenome male, IGenome female)
     {
       _data.AddMating(position, animalTag, male, female);
-      
+
       matingCountText.text = _data.MatingCount().ToString();
     }
 

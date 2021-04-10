@@ -65,6 +65,9 @@ class LogData:
   def mating_info(self, index: int):
     return self.data["matings"][index]
 
+  def genome_info(self):
+    return self.data["genome"]
+
   def __getitem__(self, item):  # operator[]
     return self.data[item]
 
