@@ -1,6 +1,5 @@
 using System;
 using Ecosystem.Genes;
-using UnityEngine.Serialization;
 
 namespace Ecosystem.Logging
 {

@@ -4,7 +4,7 @@ namespace Ecosystem.Genes
 {
   public sealed class RabbitGenome : AbstractGenome
   {
-    private static readonly Gene HungerRate = new Gene(0.5f, 0.1f, 1f);
+    private static readonly Gene HungerRate = new Gene(15f, 0.1f, 100f);
     private static readonly Gene HungerThreshold = new Gene(5, 0, 10);
     private static readonly Gene ThirstRate = new Gene(0.5f, 0.1f, 1f);
     private static readonly Gene ThirstThreshold = new Gene(5, 0, 10);
@@ -17,16 +17,16 @@ namespace Ecosystem.Genes
 
     public static readonly Dictionary<GeneType, Gene> DefaultGenes = new Dictionary<GeneType, Gene>
     {
-            {GeneType.HungerRate, HungerRate},
-            {GeneType.HungerThreshold, HungerThreshold},
-            {GeneType.ThirstRate, ThirstRate},
-            {GeneType.ThirstThreshold, ThirstThreshold},
-            {GeneType.Vision, Vision},
-            {GeneType.SpeedFactor, SpeedFactor},
-            {GeneType.SizeFactor, SizeFactor},
-            {GeneType.DesirabilityScore, DesirabilityFactor},
-            {GeneType.GestationPeriod, GestationPeriod},
-            {GeneType.SexualMaturityTime, SexualMaturityTime},
+      {GeneType.HungerRate, HungerRate},
+      {GeneType.HungerThreshold, HungerThreshold},
+      {GeneType.ThirstRate, ThirstRate},
+      {GeneType.ThirstThreshold, ThirstThreshold},
+      {GeneType.Vision, Vision},
+      {GeneType.SpeedFactor, SpeedFactor},
+      {GeneType.SizeFactor, SizeFactor},
+      {GeneType.DesirabilityScore, DesirabilityFactor},
+      {GeneType.GestationPeriod, GestationPeriod},
+      {GeneType.SexualMaturityTime, SexualMaturityTime},
     };
 
     protected override void Initialize()

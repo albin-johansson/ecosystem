@@ -8,42 +8,58 @@ from logdata import *
 
 
 def tmp(data: LogData, directory: Path):
-    #TODO: example does not contain hungerRates.
-    """
-    Produces a stackplot of how the animals populations changed over the course of the simulation.
+  # TODO: example does not contain hungerRates.
+  """
+  Produces a stackplot of how the animals populations changed over the course of the simulation.
 
-    :param data: the simulation data to read from.
-    :param directory:
-    :return: the directory to which the plot will be saved.
+  :param data: the simulation data to read from.
+  :param directory:
+  :return: the directory to which the plot will be saved.
 
 
-    times, population_by_tag = create_stackplot_data(data)
+  times, population_by_tag = create_stackplot_data(data)
 
-    figure, axes = plot.subplots()
-    colors = [rabbit_color, deer_color, wolf_color, bear_color]
-    axes.stackplot(times, population_by_tag.values(), labels=population_by_tag.keys(), colors=colors)
-    axes.legend(loc='lower left')
-    axes.set_title("Population size changes")
-    axes.set_xlabel("Time (seconds)")
-    axes.set_ylabel("Population size")
-    axes.set_xlim(0, data.duration_secs())
-    axes.set_ylim(0, max(data.initial_total_alive_count(), data.alive_count()) + 20)
+  figure, axes = plot.subplots()
+  colors = [rabbit_color, deer_color, wolf_color, bear_color]
+  axes.stackplot(times, population_by_tag.values(), labels=population_by_tag.keys(), colors=colors)
+  axes.legend(loc='lower left')
+  axes.set_title("Population size changes")
+  axes.set_xlabel("Time (seconds)")
+  axes.set_ylabel("Population size")
+  axes.set_xlim(0, data.duration_secs())
+  axes.set_ylim(0, max(data.initial_total_alive_count(), data.alive_count()) + 20)
 
-    plot.savefig(directory / Path("animal_populations_stackplot.png"))
-    plot.close()
-    """
+  plot.savefig(directory / Path("animal_populations_stackplot.png"))
+  plot.close()
+  """
+
+
+def int_to_gene_type(code):
+  switcher = {
+    0: "HungerRate",
+    1: "HungerThreshold",
+    2: "ThirstRate",
+    3: "ThirstThreshold",
+    4: "Vision",
+    5: "SpeedFactor",
+    6: "SizeFactor",
+    7: "DesirabilityScore",
+    8: "GestationPeriod",
+    9: "SexualMaturityTime"
+  }
+  return switcher.get(code)
 
 
 def visualise_genome_changes(data: LogData, directory: Path):
-    """
-    Produces two plots of how the predator and prey populations changed over the course
-    of the simulation.
+  """
+  Produces two plots of how the predator and prey populations changed over the course
+  of the simulation.
 
-    :param data: the simulation data to read from.
-    :param directory: the directory to which the plot will be saved.
-    """
-    """
-    visualise_animal_populations_standard(data, directory)
-    visualise_animal_populations_stackplot(data, directory)
-    """
-    tmp(LogData, Path)
+  :param data: the simulation data to read from.
+  :param directory: the directory to which the plot will be saved.
+  """
+  """
+  visualise_animal_populations_standard(data, directory)
+  visualise_animal_populations_stackplot(data, directory)
+  """
+  tmp(LogData, Path)

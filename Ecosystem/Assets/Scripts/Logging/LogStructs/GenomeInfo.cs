@@ -23,7 +23,7 @@ namespace Ecosystem.Logging
     /// <summary>
     ///   hungerRateGene only for testing. 
     /// </summary>
-    public GeneInfo hungerRate;
+    //public GeneInfo hungerRate;
 
     /// <summary>
     /// All tracked genes.

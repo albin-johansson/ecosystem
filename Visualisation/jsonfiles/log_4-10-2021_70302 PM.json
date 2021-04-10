@@ -1,0 +1,2466 @@
+{
+    "duration": 15291,
+    "initialFoodCount": 7,
+    "initialAliveCount": 39,
+    "initialAlivePredatorCount": 0,
+    "initialAlivePreyCount": 39,
+    "initialAliveRabbitsCount": 39,
+    "initialAliveDeerCount": 0,
+    "initialAliveWolvesCount": 0,
+    "initialAliveBearsCount": 0,
+    "foodCount": 5,
+    "aliveCount": 0,
+    "deadCount": 39,
+    "matingCount": 0,
+    "birthCount": 0,
+    "preyConsumedCount": 0,
+    "events": [
+        {
+            "time": 1746,
+            "tag": "Carrot",
+            "type": "consumption",
+            "position": {
+                "x": 34.63999938964844,
+                "y": 2.5409998893737795,
+                "z": 19.459999084472658
+            },
+            "matingIndex": -1,
+            "deathIndex": -1
+        },
+        {
+            "time": 2907,
+            "tag": "Rabbit",
+            "type": "death",
+            "position": {
+                "x": 27.431838989257814,
+                "y": 2.5,
+                "z": 21.59023666381836
+            },
+            "matingIndex": -1,
+            "deathIndex": 0
+        },
+        {
+            "time": 2909,
+            "tag": "Rabbit",
+            "type": "death",
+            "position": {
+                "x": 35.74992370605469,
+                "y": 2.5,
+                "z": 21.32424545288086
+            },
+            "matingIndex": -1,
+            "deathIndex": 1
+        },
+        {
+            "time": 2909,
+            "tag": "Rabbit",
+            "type": "death",
+            "position": {
+                "x": 34.784507751464847,
+                "y": 2.5,
+                "z": 23.132335662841798
+            },
+            "matingIndex": -1,
+            "deathIndex": 2
+        },
+        {
+            "time": 2909,
+            "tag": "Rabbit",
+            "type": "death",
+            "position": {
+                "x": 28.030637741088868,
+                "y": 2.5,
+                "z": 24.420034408569337
+            },
+            "matingIndex": -1,
+            "deathIndex": 3
+        },
+        {
+            "time": 2909,
+            "tag": "Rabbit",
+            "type": "death",
+            "position": {
+                "x": 40.15139389038086,
+                "y": 2.5,
+                "z": 22.337392807006837
+            },
+            "matingIndex": -1,
+            "deathIndex": 4
+        },
+        {
+            "time": 2909,
+            "tag": "Rabbit",
+            "type": "death",
+            "position": {
+                "x": 38.672706604003909,
+                "y": 2.5,
+                "z": 23.632015228271486
+            },
+            "matingIndex": -1,
+            "deathIndex": 5
+        },
+        {
+            "time": 2909,
+            "tag": "Rabbit",
+            "type": "death",
+            "position": {
+                "x": 39.068939208984378,
+                "y": 2.5,
+                "z": 23.32080078125
+            },
+            "matingIndex": -1,
+            "deathIndex": 6
+        },
+        {
+            "time": 2909,
+            "tag": "Rabbit",
+            "type": "death",
+            "position": {
+                "x": 31.3929386138916,
+                "y": 2.5,
+                "z": 21.806215286254884
+            },
+            "matingIndex": -1,
+            "deathIndex": 7
+        },
+        {
+            "time": 2909,
+            "tag": "Rabbit",
+            "type": "death",
+            "position": {
+                "x": 22.3870906829834,
+                "y": 2.517042875289917,
+                "z": 9.635952949523926
+            },
+            "matingIndex": -1,
+            "deathIndex": 8
+        },
+        {
+            "time": 2909,
+            "tag": "Rabbit",
+            "type": "death",
+            "position": {
+                "x": 35.33464050292969,
+                "y": 2.5,
+                "z": 22.1964111328125
+            },
+            "matingIndex": -1,
+            "deathIndex": 9
+        },
+        {
+            "time": 2909,
+            "tag": "Rabbit",
+            "type": "death",
+            "position": {
+                "x": 29.74173927307129,
+                "y": 2.5,
+                "z": 21.4514217376709
+            },
+            "matingIndex": -1,
+            "deathIndex": 10
+        },
+        {
+            "time": 2909,
+            "tag": "Rabbit",
+            "type": "death",
+            "position": {
+                "x": 6.067771911621094,
+                "y": 2.5,
+                "z": 41.328208923339847
+            },
+            "matingIndex": -1,
+            "deathIndex": 11
+        },
+        {
+            "time": 2909,
+            "tag": "Rabbit",
+            "type": "death",
+            "position": {
+                "x": 30.548044204711915,
+                "y": 2.5,
+                "z": 22.070772171020509
+            },
+            "matingIndex": -1,
+            "deathIndex": 12
+        },
+        {
+            "time": 2909,
+            "tag": "Rabbit",
+            "type": "death",
+            "position": {
+                "x": 26.458580017089845,
+                "y": 2.5,
+                "z": 17.737197875976564
+            },
+            "matingIndex": -1,
+            "deathIndex": 13
+        },
+        {
+            "time": 2909,
+            "tag": "Rabbit",
+            "type": "death",
+            "position": {
+                "x": 40.00511932373047,
+                "y": 2.5,
+                "z": 23.664888381958009
+            },
+            "matingIndex": -1,
+            "deathIndex": 14
+        },
+        {
+            "time": 2909,
+            "tag": "Rabbit",
+            "type": "death",
+            "position": {
+                "x": 10.96256160736084,
+                "y": 2.5,
+                "z": 55.477787017822269
+            },
+            "matingIndex": -1,
+            "deathIndex": 15
+        },
+        {
+            "time": 2909,
+            "tag": "Rabbit",
+            "type": "death",
+            "position": {
+                "x": 26.601104736328126,
+                "y": 2.5,
+                "z": 22.434978485107423
+            },
+            "matingIndex": -1,
+            "deathIndex": 16
+        },
+        {
+            "time": 2909,
+            "tag": "Rabbit",
+            "type": "death",
+            "position": {
+                "x": 29.530656814575197,
+                "y": 2.5,
+                "z": 20.65044403076172
+            },
+            "matingIndex": -1,
+            "deathIndex": 17
+        },
+        {
+            "time": 2909,
+            "tag": "Rabbit",
+            "type": "death",
+            "position": {
+                "x": 31.51474952697754,
+                "y": 2.5,
+                "z": 22.77249526977539
+            },
+            "matingIndex": -1,
+            "deathIndex": 18
+        },
+        {
+            "time": 2910,
+            "tag": "Rabbit",
+            "type": "death",
+            "position": {
+                "x": 1.6864471435546876,
+                "y": 2.5,
+                "z": 49.438018798828128
+            },
+            "matingIndex": -1,
+            "deathIndex": 19
+        },
+        {
+            "time": 2910,
+            "tag": "Rabbit",
+            "type": "death",
+            "position": {
+                "x": 24.034818649291993,
+                "y": 2.5,
+                "z": 19.927976608276368
+            },
+            "matingIndex": -1,
+            "deathIndex": 20
+        },
+        {
+            "time": 2910,
+            "tag": "Rabbit",
+            "type": "death",
+            "position": {
+                "x": 27.370908737182618,
+                "y": 2.5,
+                "z": 20.566247940063478
+            },
+            "matingIndex": -1,
+            "deathIndex": 21
+        },
+        {
+            "time": 2910,
+            "tag": "Rabbit",
+            "type": "death",
+            "position": {
+                "x": 31.865224838256837,
+                "y": 2.5,
+                "z": 24.147106170654298
+            },
+            "matingIndex": -1,
+            "deathIndex": 22
+        },
+        {
+            "time": 2910,
+            "tag": "Rabbit",
+            "type": "death",
+            "position": {
+                "x": 39.42290496826172,
+                "y": 2.5,
+                "z": 24.683591842651368
+            },
+            "matingIndex": -1,
+            "deathIndex": 23
+        },
+        {
+            "time": 2910,
+            "tag": "Rabbit",
+            "type": "death",
+            "position": {
+                "x": 15.847460746765137,
+                "y": 2.5,
+                "z": 51.56724166870117
+            },
+            "matingIndex": -1,
+            "deathIndex": 24
+        },
+        {
+            "time": 2910,
+            "tag": "Rabbit",
+            "type": "death",
+            "position": {
+                "x": 34.63044357299805,
+                "y": 2.5,
+                "z": 25.940574645996095
+            },
+            "matingIndex": -1,
+            "deathIndex": 25
+        },
+        {
+            "time": 2910,
+            "tag": "Rabbit",
+            "type": "death",
+            "position": {
+                "x": 33.26002502441406,
+                "y": 2.5,
+                "z": 20.290639877319337
+            },
+            "matingIndex": -1,
+            "deathIndex": 26
+        },
+        {
+            "time": 2910,
+            "tag": "Rabbit",
+            "type": "death",
+            "position": {
+                "x": 32.62733840942383,
+                "y": 2.5,
+                "z": 20.408693313598634
+            },
+            "matingIndex": -1,
+            "deathIndex": 27
+        },
+        {
+            "time": 2910,
+            "tag": "Rabbit",
+            "type": "death",
+            "position": {
+                "x": 31.632183074951173,
+                "y": 2.5,
+                "z": 24.593931198120118
+            },
+            "matingIndex": -1,
+            "deathIndex": 28
+        },
+        {
+            "time": 2910,
+            "tag": "Rabbit",
+            "type": "death",
+            "position": {
+                "x": 12.064790725708008,
+                "y": 2.5,
+                "z": 60.163917541503909
+            },
+            "matingIndex": -1,
+            "deathIndex": 29
+        },
+        {
+            "time": 2910,
+            "tag": "Rabbit",
+            "type": "death",
+            "position": {
+                "x": 11.270512580871582,
+                "y": 2.5,
+                "z": 43.50263977050781
+            },
+            "matingIndex": -1,
+            "deathIndex": 30
+        },
+        {
+            "time": 2910,
+            "tag": "Rabbit",
+            "type": "death",
+            "position": {
+                "x": 39.561676025390628,
+                "y": 2.5,
+                "z": 23.425615310668947
+            },
+            "matingIndex": -1,
+            "deathIndex": 31
+        },
+        {
+            "time": 2910,
+            "tag": "Rabbit",
+            "type": "death",
+            "position": {
+                "x": 26.395116806030275,
+                "y": 2.5,
+                "z": 20.346784591674806
+            },
+            "matingIndex": -1,
+            "deathIndex": 32
+        },
+        {
+            "time": 2910,
+            "tag": "Rabbit",
+            "type": "death",
+            "position": {
+                "x": 29.23331069946289,
+                "y": 2.5,
+                "z": 21.415298461914064
+            },
+            "matingIndex": -1,
+            "deathIndex": 33
+        },
+        {
+            "time": 2910,
+            "tag": "Rabbit",
+            "type": "death",
+            "position": {
+                "x": 26.12299156188965,
+                "y": 2.5,
+                "z": 18.96459197998047
+            },
+            "matingIndex": -1,
+            "deathIndex": 34
+        },
+        {
+            "time": 2910,
+            "tag": "Rabbit",
+            "type": "death",
+            "position": {
+                "x": 28.691253662109376,
+                "y": 2.5,
+                "z": 22.969194412231447
+            },
+            "matingIndex": -1,
+            "deathIndex": 35
+        },
+        {
+            "time": 2910,
+            "tag": "Rabbit",
+            "type": "death",
+            "position": {
+                "x": 25.542949676513673,
+                "y": 2.5,
+                "z": 20.766584396362306
+            },
+            "matingIndex": -1,
+            "deathIndex": 36
+        },
+        {
+            "time": 2910,
+            "tag": "Rabbit",
+            "type": "death",
+            "position": {
+                "x": 28.82728385925293,
+                "y": 2.5,
+                "z": 23.5130672454834
+            },
+            "matingIndex": -1,
+            "deathIndex": 37
+        },
+        {
+            "time": 4323,
+            "tag": "Rabbit",
+            "type": "death",
+            "position": {
+                "x": 39.71210479736328,
+                "y": 2.5,
+                "z": 24.578462600708009
+            },
+            "matingIndex": -1,
+            "deathIndex": 38
+        },
+        {
+            "time": 5143,
+            "tag": "Carrot",
+            "type": "consumption",
+            "position": {
+                "x": 17.546716690063478,
+                "y": 2.512566328048706,
+                "z": 11.96606731414795
+            },
+            "matingIndex": -1,
+            "deathIndex": -1
+        }
+    ],
+    "matings": [],
+    "deaths": [
+        {
+            "cause": 0
+        },
+        {
+            "cause": 0
+        },
+        {
+            "cause": 0
+        },
+        {
+            "cause": 0
+        },
+        {
+            "cause": 0
+        },
+        {
+            "cause": 0
+        },
+        {
+            "cause": 0
+        },
+        {
+            "cause": 0
+        },
+        {
+            "cause": 0
+        },
+        {
+            "cause": 0
+        },
+        {
+            "cause": 0
+        },
+        {
+            "cause": 0
+        },
+        {
+            "cause": 0
+        },
+        {
+            "cause": 0
+        },
+        {
+            "cause": 0
+        },
+        {
+            "cause": 0
+        },
+        {
+            "cause": 0
+        },
+        {
+            "cause": 0
+        },
+        {
+            "cause": 0
+        },
+        {
+            "cause": 0
+        },
+        {
+            "cause": 0
+        },
+        {
+            "cause": 0
+        },
+        {
+            "cause": 0
+        },
+        {
+            "cause": 0
+        },
+        {
+            "cause": 0
+        },
+        {
+            "cause": 0
+        },
+        {
+            "cause": 0
+        },
+        {
+            "cause": 0
+        },
+        {
+            "cause": 0
+        },
+        {
+            "cause": 0
+        },
+        {
+            "cause": 0
+        },
+        {
+            "cause": 0
+        },
+        {
+            "cause": 0
+        },
+        {
+            "cause": 0
+        },
+        {
+            "cause": 0
+        },
+        {
+            "cause": 0
+        },
+        {
+            "cause": 0
+        },
+        {
+            "cause": 0
+        },
+        {
+            "cause": 0
+        }
+    ],
+    "genomes": [
+        {
+            "time": 2907,
+            "endTime": 0,
+            "tag": "Rabbit",
+            "genes": [
+                {
+                    "geneType": 0,
+                    "value": 15.0
+                },
+                {
+                    "geneType": 1,
+                    "value": 5.0
+                },
+                {
+                    "geneType": 2,
+                    "value": 0.5
+                },
+                {
+                    "geneType": 3,
+                    "value": 5.0
+                },
+                {
+                    "geneType": 4,
+                    "value": 1.0
+                },
+                {
+                    "geneType": 7,
+                    "value": 0.5
+                },
+                {
+                    "geneType": 8,
+                    "value": 20.0
+                },
+                {
+                    "geneType": 6,
+                    "value": 1.0
+                },
+                {
+                    "geneType": 5,
+                    "value": 3.0
+                },
+                {
+                    "geneType": 9,
+                    "value": 20.0
+                }
+            ]
+        },
+        {
+            "time": 2908,
+            "endTime": 0,
+            "tag": "Rabbit",
+            "genes": [
+                {
+                    "geneType": 0,
+                    "value": 15.0
+                },
+                {
+                    "geneType": 1,
+                    "value": 5.0
+                },
+                {
+                    "geneType": 2,
+                    "value": 0.5
+                },
+                {
+                    "geneType": 3,
+                    "value": 5.0
+                },
+                {
+                    "geneType": 4,
+                    "value": 1.0
+                },
+                {
+                    "geneType": 7,
+                    "value": 0.5
+                },
+                {
+                    "geneType": 8,
+                    "value": 20.0
+                },
+                {
+                    "geneType": 6,
+                    "value": 1.0
+                },
+                {
+                    "geneType": 5,
+                    "value": 3.0
+                },
+                {
+                    "geneType": 9,
+                    "value": 20.0
+                }
+            ]
+        },
+        {
+            "time": 2909,
+            "endTime": 0,
+            "tag": "Rabbit",
+            "genes": [
+                {
+                    "geneType": 0,
+                    "value": 15.0
+                },
+                {
+                    "geneType": 1,
+                    "value": 5.0
+                },
+                {
+                    "geneType": 2,
+                    "value": 0.5
+                },
+                {
+                    "geneType": 3,
+                    "value": 5.0
+                },
+                {
+                    "geneType": 4,
+                    "value": 1.0
+                },
+                {
+                    "geneType": 7,
+                    "value": 0.5
+                },
+                {
+                    "geneType": 8,
+                    "value": 20.0
+                },
+                {
+                    "geneType": 6,
+                    "value": 1.0
+                },
+                {
+                    "geneType": 5,
+                    "value": 3.0
+                },
+                {
+                    "geneType": 9,
+                    "value": 20.0
+                }
+            ]
+        },
+        {
+            "time": 2909,
+            "endTime": 0,
+            "tag": "Rabbit",
+            "genes": [
+                {
+                    "geneType": 0,
+                    "value": 15.0
+                },
+                {
+                    "geneType": 1,
+                    "value": 5.0
+                },
+                {
+                    "geneType": 2,
+                    "value": 0.5
+                },
+                {
+                    "geneType": 3,
+                    "value": 5.0
+                },
+                {
+                    "geneType": 4,
+                    "value": 1.0
+                },
+                {
+                    "geneType": 7,
+                    "value": 0.5
+                },
+                {
+                    "geneType": 8,
+                    "value": 20.0
+                },
+                {
+                    "geneType": 6,
+                    "value": 1.0
+                },
+                {
+                    "geneType": 5,
+                    "value": 3.0
+                },
+                {
+                    "geneType": 9,
+                    "value": 20.0
+                }
+            ]
+        },
+        {
+            "time": 2909,
+            "endTime": 0,
+            "tag": "Rabbit",
+            "genes": [
+                {
+                    "geneType": 0,
+                    "value": 15.0
+                },
+                {
+                    "geneType": 1,
+                    "value": 5.0
+                },
+                {
+                    "geneType": 2,
+                    "value": 0.5
+                },
+                {
+                    "geneType": 3,
+                    "value": 5.0
+                },
+                {
+                    "geneType": 4,
+                    "value": 1.0
+                },
+                {
+                    "geneType": 7,
+                    "value": 0.5
+                },
+                {
+                    "geneType": 8,
+                    "value": 20.0
+                },
+                {
+                    "geneType": 6,
+                    "value": 1.0
+                },
+                {
+                    "geneType": 5,
+                    "value": 3.0
+                },
+                {
+                    "geneType": 9,
+                    "value": 20.0
+                }
+            ]
+        },
+        {
+            "time": 2909,
+            "endTime": 0,
+            "tag": "Rabbit",
+            "genes": [
+                {
+                    "geneType": 0,
+                    "value": 15.0
+                },
+                {
+                    "geneType": 1,
+                    "value": 5.0
+                },
+                {
+                    "geneType": 2,
+                    "value": 0.5
+                },
+                {
+                    "geneType": 3,
+                    "value": 5.0
+                },
+                {
+                    "geneType": 4,
+                    "value": 1.0
+                },
+                {
+                    "geneType": 7,
+                    "value": 0.5
+                },
+                {
+                    "geneType": 8,
+                    "value": 20.0
+                },
+                {
+                    "geneType": 6,
+                    "value": 1.0
+                },
+                {
+                    "geneType": 5,
+                    "value": 3.0
+                },
+                {
+                    "geneType": 9,
+                    "value": 20.0
+                }
+            ]
+        },
+        {
+            "time": 2909,
+            "endTime": 0,
+            "tag": "Rabbit",
+            "genes": [
+                {
+                    "geneType": 0,
+                    "value": 15.0
+                },
+                {
+                    "geneType": 1,
+                    "value": 5.0
+                },
+                {
+                    "geneType": 2,
+                    "value": 0.5
+                },
+                {
+                    "geneType": 3,
+                    "value": 5.0
+                },
+                {
+                    "geneType": 4,
+                    "value": 1.0
+                },
+                {
+                    "geneType": 7,
+                    "value": 0.5
+                },
+                {
+                    "geneType": 8,
+                    "value": 20.0
+                },
+                {
+                    "geneType": 6,
+                    "value": 1.0
+                },
+                {
+                    "geneType": 5,
+                    "value": 3.0
+                },
+                {
+                    "geneType": 9,
+                    "value": 20.0
+                }
+            ]
+        },
+        {
+            "time": 2909,
+            "endTime": 0,
+            "tag": "Rabbit",
+            "genes": [
+                {
+                    "geneType": 0,
+                    "value": 15.0
+                },
+                {
+                    "geneType": 1,
+                    "value": 5.0
+                },
+                {
+                    "geneType": 2,
+                    "value": 0.5
+                },
+                {
+                    "geneType": 3,
+                    "value": 5.0
+                },
+                {
+                    "geneType": 4,
+                    "value": 1.0
+                },
+                {
+                    "geneType": 7,
+                    "value": 0.5
+                },
+                {
+                    "geneType": 8,
+                    "value": 20.0
+                },
+                {
+                    "geneType": 6,
+                    "value": 1.0
+                },
+                {
+                    "geneType": 5,
+                    "value": 3.0
+                },
+                {
+                    "geneType": 9,
+                    "value": 20.0
+                }
+            ]
+        },
+        {
+            "time": 2909,
+            "endTime": 0,
+            "tag": "Rabbit",
+            "genes": [
+                {
+                    "geneType": 0,
+                    "value": 15.0
+                },
+                {
+                    "geneType": 1,
+                    "value": 5.0
+                },
+                {
+                    "geneType": 2,
+                    "value": 0.5
+                },
+                {
+                    "geneType": 3,
+                    "value": 5.0
+                },
+                {
+                    "geneType": 4,
+                    "value": 1.0
+                },
+                {
+                    "geneType": 7,
+                    "value": 0.5
+                },
+                {
+                    "geneType": 8,
+                    "value": 20.0
+                },
+                {
+                    "geneType": 6,
+                    "value": 1.0
+                },
+                {
+                    "geneType": 5,
+                    "value": 3.0
+                },
+                {
+                    "geneType": 9,
+                    "value": 20.0
+                }
+            ]
+        },
+        {
+            "time": 2909,
+            "endTime": 0,
+            "tag": "Rabbit",
+            "genes": [
+                {
+                    "geneType": 0,
+                    "value": 15.0
+                },
+                {
+                    "geneType": 1,
+                    "value": 5.0
+                },
+                {
+                    "geneType": 2,
+                    "value": 0.5
+                },
+                {
+                    "geneType": 3,
+                    "value": 5.0
+                },
+                {
+                    "geneType": 4,
+                    "value": 1.0
+                },
+                {
+                    "geneType": 7,
+                    "value": 0.5
+                },
+                {
+                    "geneType": 8,
+                    "value": 20.0
+                },
+                {
+                    "geneType": 6,
+                    "value": 1.0
+                },
+                {
+                    "geneType": 5,
+                    "value": 3.0
+                },
+                {
+                    "geneType": 9,
+                    "value": 20.0
+                }
+            ]
+        },
+        {
+            "time": 2909,
+            "endTime": 0,
+            "tag": "Rabbit",
+            "genes": [
+                {
+                    "geneType": 0,
+                    "value": 15.0
+                },
+                {
+                    "geneType": 1,
+                    "value": 5.0
+                },
+                {
+                    "geneType": 2,
+                    "value": 0.5
+                },
+                {
+                    "geneType": 3,
+                    "value": 5.0
+                },
+                {
+                    "geneType": 4,
+                    "value": 1.0
+                },
+                {
+                    "geneType": 7,
+                    "value": 0.5
+                },
+                {
+                    "geneType": 8,
+                    "value": 20.0
+                },
+                {
+                    "geneType": 6,
+                    "value": 1.0
+                },
+                {
+                    "geneType": 5,
+                    "value": 3.0
+                },
+                {
+                    "geneType": 9,
+                    "value": 20.0
+                }
+            ]
+        },
+        {
+            "time": 2909,
+            "endTime": 0,
+            "tag": "Rabbit",
+            "genes": [
+                {
+                    "geneType": 0,
+                    "value": 15.0
+                },
+                {
+                    "geneType": 1,
+                    "value": 5.0
+                },
+                {
+                    "geneType": 2,
+                    "value": 0.5
+                },
+                {
+                    "geneType": 3,
+                    "value": 5.0
+                },
+                {
+                    "geneType": 4,
+                    "value": 1.0
+                },
+                {
+                    "geneType": 7,
+                    "value": 0.5
+                },
+                {
+                    "geneType": 8,
+                    "value": 20.0
+                },
+                {
+                    "geneType": 6,
+                    "value": 1.0
+                },
+                {
+                    "geneType": 5,
+                    "value": 3.0
+                },
+                {
+                    "geneType": 9,
+                    "value": 20.0
+                }
+            ]
+        },
+        {
+            "time": 2909,
+            "endTime": 0,
+            "tag": "Rabbit",
+            "genes": [
+                {
+                    "geneType": 0,
+                    "value": 15.0
+                },
+                {
+                    "geneType": 1,
+                    "value": 5.0
+                },
+                {
+                    "geneType": 2,
+                    "value": 0.5
+                },
+                {
+                    "geneType": 3,
+                    "value": 5.0
+                },
+                {
+                    "geneType": 4,
+                    "value": 1.0
+                },
+                {
+                    "geneType": 7,
+                    "value": 0.5
+                },
+                {
+                    "geneType": 8,
+                    "value": 20.0
+                },
+                {
+                    "geneType": 6,
+                    "value": 1.0
+                },
+                {
+                    "geneType": 5,
+                    "value": 3.0
+                },
+                {
+                    "geneType": 9,
+                    "value": 20.0
+                }
+            ]
+        },
+        {
+            "time": 2909,
+            "endTime": 0,
+            "tag": "Rabbit",
+            "genes": [
+                {
+                    "geneType": 0,
+                    "value": 15.0
+                },
+                {
+                    "geneType": 1,
+                    "value": 5.0
+                },
+                {
+                    "geneType": 2,
+                    "value": 0.5
+                },
+                {
+                    "geneType": 3,
+                    "value": 5.0
+                },
+                {
+                    "geneType": 4,
+                    "value": 1.0
+                },
+                {
+                    "geneType": 7,
+                    "value": 0.5
+                },
+                {
+                    "geneType": 8,
+                    "value": 20.0
+                },
+                {
+                    "geneType": 6,
+                    "value": 1.0
+                },
+                {
+                    "geneType": 5,
+                    "value": 3.0
+                },
+                {
+                    "geneType": 9,
+                    "value": 20.0
+                }
+            ]
+        },
+        {
+            "time": 2909,
+            "endTime": 0,
+            "tag": "Rabbit",
+            "genes": [
+                {
+                    "geneType": 0,
+                    "value": 15.0
+                },
+                {
+                    "geneType": 1,
+                    "value": 5.0
+                },
+                {
+                    "geneType": 2,
+                    "value": 0.5
+                },
+                {
+                    "geneType": 3,
+                    "value": 5.0
+                },
+                {
+                    "geneType": 4,
+                    "value": 1.0
+                },
+                {
+                    "geneType": 7,
+                    "value": 0.5
+                },
+                {
+                    "geneType": 8,
+                    "value": 20.0
+                },
+                {
+                    "geneType": 6,
+                    "value": 1.0
+                },
+                {
+                    "geneType": 5,
+                    "value": 3.0
+                },
+                {
+                    "geneType": 9,
+                    "value": 20.0
+                }
+            ]
+        },
+        {
+            "time": 2909,
+            "endTime": 0,
+            "tag": "Rabbit",
+            "genes": [
+                {
+                    "geneType": 0,
+                    "value": 15.0
+                },
+                {
+                    "geneType": 1,
+                    "value": 5.0
+                },
+                {
+                    "geneType": 2,
+                    "value": 0.5
+                },
+                {
+                    "geneType": 3,
+                    "value": 5.0
+                },
+                {
+                    "geneType": 4,
+                    "value": 1.0
+                },
+                {
+                    "geneType": 7,
+                    "value": 0.5
+                },
+                {
+                    "geneType": 8,
+                    "value": 20.0
+                },
+                {
+                    "geneType": 6,
+                    "value": 1.0
+                },
+                {
+                    "geneType": 5,
+                    "value": 3.0
+                },
+                {
+                    "geneType": 9,
+                    "value": 20.0
+                }
+            ]
+        },
+        {
+            "time": 2909,
+            "endTime": 0,
+            "tag": "Rabbit",
+            "genes": [
+                {
+                    "geneType": 0,
+                    "value": 15.0
+                },
+                {
+                    "geneType": 1,
+                    "value": 5.0
+                },
+                {
+                    "geneType": 2,
+                    "value": 0.5
+                },
+                {
+                    "geneType": 3,
+                    "value": 5.0
+                },
+                {
+                    "geneType": 4,
+                    "value": 1.0
+                },
+                {
+                    "geneType": 7,
+                    "value": 0.5
+                },
+                {
+                    "geneType": 8,
+                    "value": 20.0
+                },
+                {
+                    "geneType": 6,
+                    "value": 1.0
+                },
+                {
+                    "geneType": 5,
+                    "value": 3.0
+                },
+                {
+                    "geneType": 9,
+                    "value": 20.0
+                }
+            ]
+        },
+        {
+            "time": 2909,
+            "endTime": 0,
+            "tag": "Rabbit",
+            "genes": [
+                {
+                    "geneType": 0,
+                    "value": 15.0
+                },
+                {
+                    "geneType": 1,
+                    "value": 5.0
+                },
+                {
+                    "geneType": 2,
+                    "value": 0.5
+                },
+                {
+                    "geneType": 3,
+                    "value": 5.0
+                },
+                {
+                    "geneType": 4,
+                    "value": 1.0
+                },
+                {
+                    "geneType": 7,
+                    "value": 0.5
+                },
+                {
+                    "geneType": 8,
+                    "value": 20.0
+                },
+                {
+                    "geneType": 6,
+                    "value": 1.0
+                },
+                {
+                    "geneType": 5,
+                    "value": 3.0
+                },
+                {
+                    "geneType": 9,
+                    "value": 20.0
+                }
+            ]
+        },
+        {
+            "time": 2909,
+            "endTime": 0,
+            "tag": "Rabbit",
+            "genes": [
+                {
+                    "geneType": 0,
+                    "value": 15.0
+                },
+                {
+                    "geneType": 1,
+                    "value": 5.0
+                },
+                {
+                    "geneType": 2,
+                    "value": 0.5
+                },
+                {
+                    "geneType": 3,
+                    "value": 5.0
+                },
+                {
+                    "geneType": 4,
+                    "value": 1.0
+                },
+                {
+                    "geneType": 7,
+                    "value": 0.5
+                },
+                {
+                    "geneType": 8,
+                    "value": 20.0
+                },
+                {
+                    "geneType": 6,
+                    "value": 1.0
+                },
+                {
+                    "geneType": 5,
+                    "value": 3.0
+                },
+                {
+                    "geneType": 9,
+                    "value": 20.0
+                }
+            ]
+        },
+        {
+            "time": 2910,
+            "endTime": 0,
+            "tag": "Rabbit",
+            "genes": [
+                {
+                    "geneType": 0,
+                    "value": 15.0
+                },
+                {
+                    "geneType": 1,
+                    "value": 5.0
+                },
+                {
+                    "geneType": 2,
+                    "value": 0.5
+                },
+                {
+                    "geneType": 3,
+                    "value": 5.0
+                },
+                {
+                    "geneType": 4,
+                    "value": 1.0
+                },
+                {
+                    "geneType": 7,
+                    "value": 0.5
+                },
+                {
+                    "geneType": 8,
+                    "value": 20.0
+                },
+                {
+                    "geneType": 6,
+                    "value": 1.0
+                },
+                {
+                    "geneType": 5,
+                    "value": 3.0
+                },
+                {
+                    "geneType": 9,
+                    "value": 20.0
+                }
+            ]
+        },
+        {
+            "time": 2910,
+            "endTime": 0,
+            "tag": "Rabbit",
+            "genes": [
+                {
+                    "geneType": 0,
+                    "value": 15.0
+                },
+                {
+                    "geneType": 1,
+                    "value": 5.0
+                },
+                {
+                    "geneType": 2,
+                    "value": 0.5
+                },
+                {
+                    "geneType": 3,
+                    "value": 5.0
+                },
+                {
+                    "geneType": 4,
+                    "value": 1.0
+                },
+                {
+                    "geneType": 7,
+                    "value": 0.5
+                },
+                {
+                    "geneType": 8,
+                    "value": 20.0
+                },
+                {
+                    "geneType": 6,
+                    "value": 1.0
+                },
+                {
+                    "geneType": 5,
+                    "value": 3.0
+                },
+                {
+                    "geneType": 9,
+                    "value": 20.0
+                }
+            ]
+        },
+        {
+            "time": 2910,
+            "endTime": 0,
+            "tag": "Rabbit",
+            "genes": [
+                {
+                    "geneType": 0,
+                    "value": 15.0
+                },
+                {
+                    "geneType": 1,
+                    "value": 5.0
+                },
+                {
+                    "geneType": 2,
+                    "value": 0.5
+                },
+                {
+                    "geneType": 3,
+                    "value": 5.0
+                },
+                {
+                    "geneType": 4,
+                    "value": 1.0
+                },
+                {
+                    "geneType": 7,
+                    "value": 0.5
+                },
+                {
+                    "geneType": 8,
+                    "value": 20.0
+                },
+                {
+                    "geneType": 6,
+                    "value": 1.0
+                },
+                {
+                    "geneType": 5,
+                    "value": 3.0
+                },
+                {
+                    "geneType": 9,
+                    "value": 20.0
+                }
+            ]
+        },
+        {
+            "time": 2910,
+            "endTime": 0,
+            "tag": "Rabbit",
+            "genes": [
+                {
+                    "geneType": 0,
+                    "value": 15.0
+                },
+                {
+                    "geneType": 1,
+                    "value": 5.0
+                },
+                {
+                    "geneType": 2,
+                    "value": 0.5
+                },
+                {
+                    "geneType": 3,
+                    "value": 5.0
+                },
+                {
+                    "geneType": 4,
+                    "value": 1.0
+                },
+                {
+                    "geneType": 7,
+                    "value": 0.5
+                },
+                {
+                    "geneType": 8,
+                    "value": 20.0
+                },
+                {
+                    "geneType": 6,
+                    "value": 1.0
+                },
+                {
+                    "geneType": 5,
+                    "value": 3.0
+                },
+                {
+                    "geneType": 9,
+                    "value": 20.0
+                }
+            ]
+        },
+        {
+            "time": 2910,
+            "endTime": 0,
+            "tag": "Rabbit",
+            "genes": [
+                {
+                    "geneType": 0,
+                    "value": 15.0
+                },
+                {
+                    "geneType": 1,
+                    "value": 5.0
+                },
+                {
+                    "geneType": 2,
+                    "value": 0.5
+                },
+                {
+                    "geneType": 3,
+                    "value": 5.0
+                },
+                {
+                    "geneType": 4,
+                    "value": 1.0
+                },
+                {
+                    "geneType": 7,
+                    "value": 0.5
+                },
+                {
+                    "geneType": 8,
+                    "value": 20.0
+                },
+                {
+                    "geneType": 6,
+                    "value": 1.0
+                },
+                {
+                    "geneType": 5,
+                    "value": 3.0
+                },
+                {
+                    "geneType": 9,
+                    "value": 20.0
+                }
+            ]
+        },
+        {
+            "time": 2910,
+            "endTime": 0,
+            "tag": "Rabbit",
+            "genes": [
+                {
+                    "geneType": 0,
+                    "value": 15.0
+                },
+                {
+                    "geneType": 1,
+                    "value": 5.0
+                },
+                {
+                    "geneType": 2,
+                    "value": 0.5
+                },
+                {
+                    "geneType": 3,
+                    "value": 5.0
+                },
+                {
+                    "geneType": 4,
+                    "value": 1.0
+                },
+                {
+                    "geneType": 7,
+                    "value": 0.5
+                },
+                {
+                    "geneType": 8,
+                    "value": 20.0
+                },
+                {
+                    "geneType": 6,
+                    "value": 1.0
+                },
+                {
+                    "geneType": 5,
+                    "value": 3.0
+                },
+                {
+                    "geneType": 9,
+                    "value": 20.0
+                }
+            ]
+        },
+        {
+            "time": 2910,
+            "endTime": 0,
+            "tag": "Rabbit",
+            "genes": [
+                {
+                    "geneType": 0,
+                    "value": 15.0
+                },
+                {
+                    "geneType": 1,
+                    "value": 5.0
+                },
+                {
+                    "geneType": 2,
+                    "value": 0.5
+                },
+                {
+                    "geneType": 3,
+                    "value": 5.0
+                },
+                {
+                    "geneType": 4,
+                    "value": 1.0
+                },
+                {
+                    "geneType": 7,
+                    "value": 0.5
+                },
+                {
+                    "geneType": 8,
+                    "value": 20.0
+                },
+                {
+                    "geneType": 6,
+                    "value": 1.0
+                },
+                {
+                    "geneType": 5,
+                    "value": 3.0
+                },
+                {
+                    "geneType": 9,
+                    "value": 20.0
+                }
+            ]
+        },
+        {
+            "time": 2910,
+            "endTime": 0,
+            "tag": "Rabbit",
+            "genes": [
+                {
+                    "geneType": 0,
+                    "value": 15.0
+                },
+                {
+                    "geneType": 1,
+                    "value": 5.0
+                },
+                {
+                    "geneType": 2,
+                    "value": 0.5
+                },
+                {
+                    "geneType": 3,
+                    "value": 5.0
+                },
+                {
+                    "geneType": 4,
+                    "value": 1.0
+                },
+                {
+                    "geneType": 7,
+                    "value": 0.5
+                },
+                {
+                    "geneType": 8,
+                    "value": 20.0
+                },
+                {
+                    "geneType": 6,
+                    "value": 1.0
+                },
+                {
+                    "geneType": 5,
+                    "value": 3.0
+                },
+                {
+                    "geneType": 9,
+                    "value": 20.0
+                }
+            ]
+        },
+        {
+            "time": 2910,
+            "endTime": 0,
+            "tag": "Rabbit",
+            "genes": [
+                {
+                    "geneType": 0,
+                    "value": 15.0
+                },
+                {
+                    "geneType": 1,
+                    "value": 5.0
+                },
+                {
+                    "geneType": 2,
+                    "value": 0.5
+                },
+                {
+                    "geneType": 3,
+                    "value": 5.0
+                },
+                {
+                    "geneType": 4,
+                    "value": 1.0
+                },
+                {
+                    "geneType": 7,
+                    "value": 0.5
+                },
+                {
+                    "geneType": 8,
+                    "value": 20.0
+                },
+                {
+                    "geneType": 6,
+                    "value": 1.0
+                },
+                {
+                    "geneType": 5,
+                    "value": 3.0
+                },
+                {
+                    "geneType": 9,
+                    "value": 20.0
+                }
+            ]
+        },
+        {
+            "time": 2910,
+            "endTime": 0,
+            "tag": "Rabbit",
+            "genes": [
+                {
+                    "geneType": 0,
+                    "value": 15.0
+                },
+                {
+                    "geneType": 1,
+                    "value": 5.0
+                },
+                {
+                    "geneType": 2,
+                    "value": 0.5
+                },
+                {
+                    "geneType": 3,
+                    "value": 5.0
+                },
+                {
+                    "geneType": 4,
+                    "value": 1.0
+                },
+                {
+                    "geneType": 7,
+                    "value": 0.5
+                },
+                {
+                    "geneType": 8,
+                    "value": 20.0
+                },
+                {
+                    "geneType": 6,
+                    "value": 1.0
+                },
+                {
+                    "geneType": 5,
+                    "value": 3.0
+                },
+                {
+                    "geneType": 9,
+                    "value": 20.0
+                }
+            ]
+        },
+        {
+            "time": 2910,
+            "endTime": 0,
+            "tag": "Rabbit",
+            "genes": [
+                {
+                    "geneType": 0,
+                    "value": 15.0
+                },
+                {
+                    "geneType": 1,
+                    "value": 5.0
+                },
+                {
+                    "geneType": 2,
+                    "value": 0.5
+                },
+                {
+                    "geneType": 3,
+                    "value": 5.0
+                },
+                {
+                    "geneType": 4,
+                    "value": 1.0
+                },
+                {
+                    "geneType": 7,
+                    "value": 0.5
+                },
+                {
+                    "geneType": 8,
+                    "value": 20.0
+                },
+                {
+                    "geneType": 6,
+                    "value": 1.0
+                },
+                {
+                    "geneType": 5,
+                    "value": 3.0
+                },
+                {
+                    "geneType": 9,
+                    "value": 20.0
+                }
+            ]
+        },
+        {
+            "time": 2910,
+            "endTime": 0,
+            "tag": "Rabbit",
+            "genes": [
+                {
+                    "geneType": 0,
+                    "value": 15.0
+                },
+                {
+                    "geneType": 1,
+                    "value": 5.0
+                },
+                {
+                    "geneType": 2,
+                    "value": 0.5
+                },
+                {
+                    "geneType": 3,
+                    "value": 5.0
+                },
+                {
+                    "geneType": 4,
+                    "value": 1.0
+                },
+                {
+                    "geneType": 7,
+                    "value": 0.5
+                },
+                {
+                    "geneType": 8,
+                    "value": 20.0
+                },
+                {
+                    "geneType": 6,
+                    "value": 1.0
+                },
+                {
+                    "geneType": 5,
+                    "value": 3.0
+                },
+                {
+                    "geneType": 9,
+                    "value": 20.0
+                }
+            ]
+        },
+        {
+            "time": 2910,
+            "endTime": 0,
+            "tag": "Rabbit",
+            "genes": [
+                {
+                    "geneType": 0,
+                    "value": 15.0
+                },
+                {
+                    "geneType": 1,
+                    "value": 5.0
+                },
+                {
+                    "geneType": 2,
+                    "value": 0.5
+                },
+                {
+                    "geneType": 3,
+                    "value": 5.0
+                },
+                {
+                    "geneType": 4,
+                    "value": 1.0
+                },
+                {
+                    "geneType": 7,
+                    "value": 0.5
+                },
+                {
+                    "geneType": 8,
+                    "value": 20.0
+                },
+                {
+                    "geneType": 6,
+                    "value": 1.0
+                },
+                {
+                    "geneType": 5,
+                    "value": 3.0
+                },
+                {
+                    "geneType": 9,
+                    "value": 20.0
+                }
+            ]
+        },
+        {
+            "time": 2910,
+            "endTime": 0,
+            "tag": "Rabbit",
+            "genes": [
+                {
+                    "geneType": 0,
+                    "value": 15.0
+                },
+                {
+                    "geneType": 1,
+                    "value": 5.0
+                },
+                {
+                    "geneType": 2,
+                    "value": 0.5
+                },
+                {
+                    "geneType": 3,
+                    "value": 5.0
+                },
+                {
+                    "geneType": 4,
+                    "value": 1.0
+                },
+                {
+                    "geneType": 7,
+                    "value": 0.5
+                },
+                {
+                    "geneType": 8,
+                    "value": 20.0
+                },
+                {
+                    "geneType": 6,
+                    "value": 1.0
+                },
+                {
+                    "geneType": 5,
+                    "value": 3.0
+                },
+                {
+                    "geneType": 9,
+                    "value": 20.0
+                }
+            ]
+        },
+        {
+            "time": 2910,
+            "endTime": 0,
+            "tag": "Rabbit",
+            "genes": [
+                {
+                    "geneType": 0,
+                    "value": 15.0
+                },
+                {
+                    "geneType": 1,
+                    "value": 5.0
+                },
+                {
+                    "geneType": 2,
+                    "value": 0.5
+                },
+                {
+                    "geneType": 3,
+                    "value": 5.0
+                },
+                {
+                    "geneType": 4,
+                    "value": 1.0
+                },
+                {
+                    "geneType": 7,
+                    "value": 0.5
+                },
+                {
+                    "geneType": 8,
+                    "value": 20.0
+                },
+                {
+                    "geneType": 6,
+                    "value": 1.0
+                },
+                {
+                    "geneType": 5,
+                    "value": 3.0
+                },
+                {
+                    "geneType": 9,
+                    "value": 20.0
+                }
+            ]
+        },
+        {
+            "time": 2910,
+            "endTime": 0,
+            "tag": "Rabbit",
+            "genes": [
+                {
+                    "geneType": 0,
+                    "value": 15.0
+                },
+                {
+                    "geneType": 1,
+                    "value": 5.0
+                },
+                {
+                    "geneType": 2,
+                    "value": 0.5
+                },
+                {
+                    "geneType": 3,
+                    "value": 5.0
+                },
+                {
+                    "geneType": 4,
+                    "value": 1.0
+                },
+                {
+                    "geneType": 7,
+                    "value": 0.5
+                },
+                {
+                    "geneType": 8,
+                    "value": 20.0
+                },
+                {
+                    "geneType": 6,
+                    "value": 1.0
+                },
+                {
+                    "geneType": 5,
+                    "value": 3.0
+                },
+                {
+                    "geneType": 9,
+                    "value": 20.0
+                }
+            ]
+        },
+        {
+            "time": 2910,
+            "endTime": 0,
+            "tag": "Rabbit",
+            "genes": [
+                {
+                    "geneType": 0,
+                    "value": 15.0
+                },
+                {
+                    "geneType": 1,
+                    "value": 5.0
+                },
+                {
+                    "geneType": 2,
+                    "value": 0.5
+                },
+                {
+                    "geneType": 3,
+                    "value": 5.0
+                },
+                {
+                    "geneType": 4,
+                    "value": 1.0
+                },
+                {
+                    "geneType": 7,
+                    "value": 0.5
+                },
+                {
+                    "geneType": 8,
+                    "value": 20.0
+                },
+                {
+                    "geneType": 6,
+                    "value": 1.0
+                },
+                {
+                    "geneType": 5,
+                    "value": 3.0
+                },
+                {
+                    "geneType": 9,
+                    "value": 20.0
+                }
+            ]
+        },
+        {
+            "time": 2910,
+            "endTime": 0,
+            "tag": "Rabbit",
+            "genes": [
+                {
+                    "geneType": 0,
+                    "value": 15.0
+                },
+                {
+                    "geneType": 1,
+                    "value": 5.0
+                },
+                {
+                    "geneType": 2,
+                    "value": 0.5
+                },
+                {
+                    "geneType": 3,
+                    "value": 5.0
+                },
+                {
+                    "geneType": 4,
+                    "value": 1.0
+                },
+                {
+                    "geneType": 7,
+                    "value": 0.5
+                },
+                {
+                    "geneType": 8,
+                    "value": 20.0
+                },
+                {
+                    "geneType": 6,
+                    "value": 1.0
+                },
+                {
+                    "geneType": 5,
+                    "value": 3.0
+                },
+                {
+                    "geneType": 9,
+                    "value": 20.0
+                }
+            ]
+        },
+        {
+            "time": 2910,
+            "endTime": 0,
+            "tag": "Rabbit",
+            "genes": [
+                {
+                    "geneType": 0,
+                    "value": 15.0
+                },
+                {
+                    "geneType": 1,
+                    "value": 5.0
+                },
+                {
+                    "geneType": 2,
+                    "value": 0.5
+                },
+                {
+                    "geneType": 3,
+                    "value": 5.0
+                },
+                {
+                    "geneType": 4,
+                    "value": 1.0
+                },
+                {
+                    "geneType": 7,
+                    "value": 0.5
+                },
+                {
+                    "geneType": 8,
+                    "value": 20.0
+                },
+                {
+                    "geneType": 6,
+                    "value": 1.0
+                },
+                {
+                    "geneType": 5,
+                    "value": 3.0
+                },
+                {
+                    "geneType": 9,
+                    "value": 20.0
+                }
+            ]
+        },
+        {
+            "time": 4323,
+            "endTime": 0,
+            "tag": "Rabbit",
+            "genes": [
+                {
+                    "geneType": 0,
+                    "value": 15.0
+                },
+                {
+                    "geneType": 1,
+                    "value": 5.0
+                },
+                {
+                    "geneType": 2,
+                    "value": 0.5
+                },
+                {
+                    "geneType": 3,
+                    "value": 5.0
+                },
+                {
+                    "geneType": 4,
+                    "value": 1.0
+                },
+                {
+                    "geneType": 7,
+                    "value": 0.5
+                },
+                {
+                    "geneType": 8,
+                    "value": 20.0
+                },
+                {
+                    "geneType": 6,
+                    "value": 1.0
+                },
+                {
+                    "geneType": 5,
+                    "value": 3.0
+                },
+                {
+                    "geneType": 9,
+                    "value": 20.0
+                }
+            ]
+        }
+    ]
+}
