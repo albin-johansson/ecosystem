@@ -29,12 +29,12 @@ namespace Ecosystem.AnimalBehaviour.WolfStates
       {
         return AnimalState.Attacking;
       }
-      
+
       if (!Target || !Consumer.IsHungry())
       {
         return base.Tick();
       }
-      else if (!Target.activeSelf || !MovementController.IsWithinSphere(Target.transform.position))
+      else if (!Target.transform.parent.activeSelf || !MovementController.IsWithinSphere(Target.transform.position))
       {
         Target = GetClosestInVision(Layers.PreyMask);
         return Type();

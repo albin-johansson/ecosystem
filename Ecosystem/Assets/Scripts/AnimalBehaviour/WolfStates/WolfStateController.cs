@@ -7,7 +7,7 @@ namespace Ecosystem.AnimalBehaviour.WolfStates
     [SerializeField] private PreyConsumer consumer;
 
     private IAnimalState _idle;
-    private IAnimalState _lookingForPrey;
+    private IAnimalState _lookingForFood;
     private IAnimalState _lookingForWater;
     private IAnimalState _drinking;
     private IAnimalState _runningTowardsWater;
@@ -30,7 +30,7 @@ namespace Ecosystem.AnimalBehaviour.WolfStates
       };
 
       _idle = WolfStateFactory.CreateIdle(data);
-      _lookingForPrey = WolfStateFactory.CreateLookingForPrey(data);
+      _lookingForFood = WolfStateFactory.CreateLookingForFood(data);
       _lookingForWater = WolfStateFactory.CreateLookingForWater(data);
       _drinking = WolfStateFactory.CreateDrinking(data);
       _runningTowardsWater = WolfStateFactory.CreateRunningTowardsWater(data);
@@ -53,11 +53,6 @@ namespace Ecosystem.AnimalBehaviour.WolfStates
           State = _lookingForWater;
           break;
 
-        case AnimalState.LookingForPrey:
-          State = _lookingForPrey;
-          consumer.ColliderActive = true;
-          break;
-
         case AnimalState.Idle:
           State = _idle;
           break;
@@ -76,7 +71,8 @@ namespace Ecosystem.AnimalBehaviour.WolfStates
           break;
 
         case AnimalState.LookingForFood:
-          State = _lookingForPrey;
+          State = _lookingForFood;
+          consumer.CollideActive = true;
           break;
 
         case AnimalState.LookingForMate:
