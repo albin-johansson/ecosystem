@@ -132,27 +132,6 @@ namespace Ecosystem.Logging
     [SerializeField] private List<GenomeInfo> genomes = new List<GenomeInfo>(64);
 
     /// <summary>
-    /// 
-    /// </summary>
-    //[SerializeField] private List<Gene> genes = new List<Gene>(64);
-
-
-    /*
-    public void AddHungerRate(Gene gene, string tag)
-    {
-      GeneInfo gi = new GeneInfo();
-      gi.gene = GeneType.HungerRate;
-      gi.value = gene.Value;
-      hungerRates.Add(new GenomeEvent()
-      {
-        hungerRate = gi,
-        tag = tag,
-        time = SessionTime.Now()
-      });
-    }
-    */
-
-    /// <summary>
     ///   Prepares the data with the initial simulation state. Used to determine the
     ///   initial population sizes, etc.
     /// </summary>
@@ -198,6 +177,13 @@ namespace Ecosystem.Logging
     public void MarkAsDone()
     {
       duration = SessionTime.Now();
+      foreach (var genome in genomes)
+      {
+        if (genome.endTime.Equals(-1))
+        {
+          genome.SetEndTime(duration);
+        }
+      }
     }
 
     /// <summary>
@@ -252,7 +238,7 @@ namespace Ecosystem.Logging
     public void AddDeath(GameObject deadObject, CauseOfDeath cause)
     {
       GenomeData genomeData = deadObject.GetComponent<AbstractGenome>().GetGenes();
-      //TODO: move to birth, on death find by key and set end time.
+      //TODO: move to birth and call SetEndTime
       genomes.Add(new GenomeInfo()
       {
         tag = deadObject.tag,
@@ -333,18 +319,10 @@ namespace Ecosystem.Logging
       ++deadCount;
     }
 
-    private static void AddGeneToGenome(float value, GeneType type, ref GenomeInfo genomeInfo)
+    //call when animal dies to set end time. 
+    private void SetEndTime(AbstractGenome endedGenome)
     {
-      //TODO: only for testing if added correctly.
-      Debug.Log("value=" + value + ", type=" + type);
-      /*
-      GeneInfo gi = new GeneInfo()
-      {
-        value = value,
-        geneType = type
-      };
-      genomeInfo.genes.Add(gi);
-      */
+      genomes.Find(genome => genome.key.Equals(endedGenome.key)).SetEndTime(SessionTime.Now());
     }
 
     /// <summary>
