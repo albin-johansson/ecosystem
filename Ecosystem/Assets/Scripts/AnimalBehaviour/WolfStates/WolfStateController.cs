@@ -72,7 +72,7 @@ namespace Ecosystem.AnimalBehaviour.WolfStates
 
         case AnimalState.LookingForFood:
           State = _lookingForFood;
-          consumer.CollideActive = true;
+          consumer.ColliderActive = true;
           break;
 
         case AnimalState.LookingForMate:
