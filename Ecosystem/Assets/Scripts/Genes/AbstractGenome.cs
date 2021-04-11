@@ -46,13 +46,11 @@ namespace Ecosystem.Genes
 
     public float GetChildFoodConsumtionFactor() => ChildFoodConsumtionFactor;
 
-    public float Speed => GetHungerRate().Value *
-                          GetSpeedFactor().Value *
-                          GetSizeFactor().ValueAsDecimal();
+    public float WalkingSpeed => GetSpeed().Value * GetSizeFactor().Value;
+
 
     public float Metabolism => GetHungerRate().Value * GetSizeFactor().Value *
-                               (1 + MetabolismFactor *
-                                 (GetVision().ValueAsDecimal() + GetSpeedFactor().ValueAsDecimal()));
+                               (1 + MetabolismFactor * (GetVision().ValueAsDecimal() + GetSpeed().ValueAsDecimal()));
 
     public float Attractiveness => GetDesirabilityScore().Value;
 
@@ -60,7 +58,7 @@ namespace Ecosystem.Genes
     {
       if (gameObject.TryGetComponent(out NavMeshAgent navMeshAgent))
       {
-        navMeshAgent.speed *= Speed;
+        navMeshAgent.speed = GetSpeed().Value;
       }
 
       gameObject.transform.localScale *= GetSizeFactor().Value;
@@ -76,7 +74,7 @@ namespace Ecosystem.Genes
 
     public Gene GetVision() => Data.Vision;
 
-    public Gene GetSpeedFactor() => Data.SpeedFactor;
+    public Gene GetSpeed() => Data.Speed;
 
     public Gene GetSizeFactor() => Data.SizeFactor;
 

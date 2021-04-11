@@ -1,4 +1,3 @@
-using Ecosystem.Genes;
 using UnityEngine;
 
 namespace Ecosystem.AnimalBehaviour.RabbitStates
@@ -6,13 +5,6 @@ namespace Ecosystem.AnimalBehaviour.RabbitStates
   public sealed class RabbitStateController : AbstractStateController
   {
     [SerializeField] private FoodConsumer consumer;
-    [SerializeField] private WaterConsumer waterConsumer;
-    [SerializeField] private MovementController movementController;
-    [SerializeField] private EcoAnimationController animationController;
-    [SerializeField] private MemoryController memoryController;
-    [SerializeField] private Reproducer reproducer;
-    [SerializeField] private SphereCollider sphereCollider;
-    [SerializeField] private AbstractGenome genome;
 
     private IAnimalState _idle;
     private IAnimalState _lookingForFood;
@@ -22,17 +14,20 @@ namespace Ecosystem.AnimalBehaviour.RabbitStates
     private IAnimalState _runningTowardsFood;
     private IAnimalState _fleeing;
     private IAnimalState _lookingForMate;
+    private IAnimalState _eating;
 
     public override void Start()
     {
       var data = new RabbitStateData
       {
+        StaminaController = staminaController,
         Consumer = consumer,
         AnimationController = animationController,
         MemoryController = memoryController,
         MovementController = movementController,
         WaterConsumer = waterConsumer,
-        Reproducer = reproducer
+        Reproducer = reproducer,
+        Genome = genome,
       };
 
       _idle = RabbitStateFactory.CreateIdle(data);
@@ -43,8 +38,9 @@ namespace Ecosystem.AnimalBehaviour.RabbitStates
       _runningTowardsFood = RabbitStateFactory.CreateRunningTowardsFood(data);
       _fleeing = RabbitStateFactory.CreateFleeing(data);
       _lookingForMate = RabbitStateFactory.CreateLookingForMate(data);
-      
-      sphereCollider.radius = (sphereCollider.radius / sphereCollider.transform.lossyScale.magnitude) * genome.GetVision().Value;
+      _eating = RabbitStateFactory.CreateEating(data);
+
+      sphereCollider.radius = genome.GetVision().Value;
 
       State = _idle;
       SwitchState(AnimalState.Idle);
@@ -91,6 +87,10 @@ namespace Ecosystem.AnimalBehaviour.RabbitStates
 
         case AnimalState.LookingForMate:
           State = _lookingForMate;
+          break;
+        
+        case AnimalState.Eating:
+          State = _eating;
           break;
 
         default:

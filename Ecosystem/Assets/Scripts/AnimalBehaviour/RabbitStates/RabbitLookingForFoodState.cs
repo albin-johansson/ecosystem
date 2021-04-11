@@ -7,17 +7,19 @@ namespace Ecosystem.AnimalBehaviour.RabbitStates
   {
     public RabbitLookingForFoodState(RabbitStateData data)
     {
+      StaminaController = data.StaminaController;
       Consumer = data.Consumer;
       WaterConsumer = data.WaterConsumer;
       MovementController = data.MovementController;
       AnimationController = data.AnimationController;
       MemoryController = data.MemoryController;
       Reproducer = data.Reproducer;
+      Genome = data.Genome;
     }
 
     public override void Begin(GameObject target)
     {
-      Target = null;
+      Target = GetClosestInVision(Layers.FoodMask);
       MovementController.StartWander();
       AnimationController.MoveAnimation();
     }
@@ -30,7 +32,7 @@ namespace Ecosystem.AnimalBehaviour.RabbitStates
         {
           return AnimalState.Fleeing;
         }
-        else if (Tags.IsFood(Target))
+        else if (Tags.IsFood(Target) || Tags.IsStaticFood(Target))
         {
           return AnimalState.RunningTowardsFood;
         }
@@ -49,20 +51,17 @@ namespace Ecosystem.AnimalBehaviour.RabbitStates
     public override void OnTriggerEnter(Collider other)
     {
       var otherObject = other.gameObject;
-      if (MovementController.IsReachable(otherObject.transform.position))
+      if (otherObject.CompareTag("Water"))
       {
-        if (otherObject.CompareTag("Water"))
-        {
-          MemoryController.SaveToMemory(otherObject);
-        }
-        else if (Tags.IsFood(otherObject))
-        {
-          Target = otherObject;
-        }
-        else if (Tags.IsPredator(otherObject))
-        {
-          Target = otherObject;
-        }
+        MemoryController.SaveToMemory(otherObject);
+      }
+      else if (Tags.IsFood(otherObject) || Tags.IsStaticFood(otherObject))
+      {
+        Target = otherObject;
+      }
+      else if (Tags.IsPredator(otherObject))
+      {
+        Target = otherObject;
       }
     }
 

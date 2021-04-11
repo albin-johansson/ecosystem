@@ -119,8 +119,11 @@ def get_food_history(data: LogData) -> dict[TimePoint, Amount]:
 
   for event in data.events():
     time: TimePoint = event["time"] / 1_000
+    event_type: str = event["type"]
 
-    food_count = food_count - 1
+    if event_type == "consumption":
+      food_count = food_count - 1
+
     food_history[time] = food_count
 
   food_history[data.duration_secs()] = food_count

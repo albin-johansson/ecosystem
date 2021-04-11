@@ -17,7 +17,7 @@ namespace Ecosystem.Genes
     ///   genes.
     /// </summary>
     /// <returns>the speed value, based on the associated genes.</returns>
-    float Speed { get; }
+    float WalkingSpeed { get; }
 
     /// <summary>
     ///   Returns the metabolism value. This value depends on the hunger rate, and size genes.
@@ -47,7 +47,7 @@ namespace Ecosystem.Genes
 
     Gene GetVision();
 
-    Gene GetSpeedFactor();
+    Gene GetSpeed();
 
     Gene GetSizeFactor();
 

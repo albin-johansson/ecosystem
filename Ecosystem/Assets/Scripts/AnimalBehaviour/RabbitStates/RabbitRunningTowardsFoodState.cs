@@ -7,6 +7,7 @@ namespace Ecosystem.AnimalBehaviour.RabbitStates
   {
     public RabbitRunningTowardsFoodState(RabbitStateData data)
     {
+      StaminaController = data.StaminaController;
       Consumer = data.Consumer;
       WaterConsumer = data.WaterConsumer;
       MovementController = data.MovementController;
@@ -20,18 +21,21 @@ namespace Ecosystem.AnimalBehaviour.RabbitStates
       Target = target;
       MovementController.RunToTarget(Target.transform.position);
       AnimationController.MoveAnimation();
-      //TODO Check memory
     }
 
     public override AnimalState Tick()
     {
-      if (!Target)
+      if (!Target || !Consumer.IsHungry() || !Target.activeSelf)
       {
         return base.Tick();
       }
       else if (Tags.IsPredator(Target))
       {
         return AnimalState.Fleeing;
+      }
+      else if (Consumer.EatingFromGameObject)
+      {
+        return AnimalState.Eating;
       }
       else
       {
@@ -43,16 +47,17 @@ namespace Ecosystem.AnimalBehaviour.RabbitStates
     public override void OnTriggerEnter(Collider other)
     {
       var otherObject = other.gameObject;
-      if (MovementController.IsReachable(otherObject.transform.position))
+      if (otherObject.CompareTag("Food"))
       {
-        if (otherObject.CompareTag("Water"))
-        {
-          MemoryController.SaveToMemory(otherObject);
-        }
-        else if (Tags.IsPredator(otherObject))
-        {
-          Target = otherObject;
-        }
+        Target = SelectCloser(otherObject, Target);
+      }
+      else if (otherObject.CompareTag("Water"))
+      {
+        MemoryController.SaveToMemory(otherObject);
+      }
+      else if (Tags.IsPredator(otherObject))
+      {
+        Target = otherObject;
       }
     }
 

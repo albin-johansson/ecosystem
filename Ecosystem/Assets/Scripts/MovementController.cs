@@ -16,6 +16,7 @@ namespace Ecosystem
     [SerializeField] private NavMeshAgent navAgent;
     [SerializeField] private AbstractGenome genome;
     [SerializeField] private SphereCollider sphereCollider;
+    [SerializeField] private StaminaController staminaController;
 
     private Vector3 _fleeDestination;
     private float _previousSpeed;
@@ -47,6 +48,11 @@ namespace Ecosystem
       return ValidateDestination(targetPosition, out var destination);
     }
 
+    public Vector3 GetPosition()
+    {
+      return navAgent.transform.position;
+    }
+
 
     /// <summary>
     ///   Makes the animal run to target if target is valid.
@@ -65,7 +71,6 @@ namespace Ecosystem
     /// </summary>
     public void StartHunting(Vector3 targetPosition)
     {
-      SetNavAgentSpeed();
       SetTarget(targetPosition);
     }
 
@@ -85,7 +90,6 @@ namespace Ecosystem
       _fleeDestination = FindFleeDestination(threatPosition);
       if (_fleeDestination != Vector3.zero)
       {
-        SetNavAgentSpeed();
         SetTarget(_fleeDestination);
         return true;
       }
@@ -146,7 +150,6 @@ namespace Ecosystem
         var destination = position + rotatedDirection;
         if (ValidateDestination(destination, out var validPosition))
         {
-          SetNavAgentSpeed();
           SetTarget(validPosition);
           return;
         }
@@ -174,6 +177,7 @@ namespace Ecosystem
     /// </summary>
     private void SetTarget(Vector3 destination)
     {
+      SetNavAgentSpeed();
       navAgent.SetDestination(destination);
     }
 
@@ -242,8 +246,14 @@ namespace Ecosystem
 
     private void SetNavAgentSpeed()
     {
-      //TODO: Should use stamina or energy from genome (not implemented in genome yet)
-      navAgent.speed = genome.GetSpeedFactor().Value;
+      if (staminaController.IsRunning)
+      {
+        navAgent.speed = genome.WalkingSpeed * 1.5f;
+      }
+      else
+      {
+        navAgent.speed = genome.WalkingSpeed; 
+      }
     }
 
     #endregion
