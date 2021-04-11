@@ -179,7 +179,7 @@ namespace Ecosystem.Logging
       duration = SessionTime.Now();
       foreach (var genome in genomes)
       {
-        if (genome.endTime.Equals(-1))
+        if (genome.endTime == -1)
         {
           genome.SetEndTime(duration);
         }
@@ -228,23 +228,14 @@ namespace Ecosystem.Logging
       ++birthCount;
       ++aliveCount;
       //TODO: move genome add to here?
-    }
-
-    /// <summary>
-    ///   Adds a simulation event that represents the death of an animal.
-    /// </summary>
-    /// <param name="deadObject">the game object associated with the animal that died.</param>
-    /// <param name="cause">the cause of death for the animal.</param>
-    public void AddDeath(GameObject deadObject, CauseOfDeath cause)
-    {
-      GenomeData genomeData = deadObject.GetComponent<AbstractGenome>().GetGenes();
-      //TODO: move to birth and call SetEndTime
+      GenomeData genomeData = animal.GetComponent<AbstractGenome>().GetGenes();
+      //TODO: clean up the initialization. 
       genomes.Add(new GenomeInfo()
       {
-        tag = deadObject.tag,
+        tag = animal.tag,
         time = SessionTime.Now(),
         endTime = -1,
-        key = deadObject.GetComponent<AbstractGenome>().key,
+        key = animal.GetComponent<AbstractGenome>().key,
         genes = new List<GeneInfo>()
         {
           new GeneInfo()
@@ -299,7 +290,15 @@ namespace Ecosystem.Logging
           }
         }
       });
+    }
 
+    /// <summary>
+    ///   Adds a simulation event that represents the death of an animal.
+    /// </summary>
+    /// <param name="deadObject">the game object associated with the animal that died.</param>
+    /// <param name="cause">the cause of death for the animal.</param>
+    public void AddDeath(GameObject deadObject, CauseOfDeath cause)
+    {
       events.Add(new SimulationEvent
       {
         time = SessionTime.Now(),
@@ -317,13 +316,18 @@ namespace Ecosystem.Logging
 
       --aliveCount;
       ++deadCount;
+
+      genomes.Find(genome => genome.key == deadObject.GetComponent<AbstractGenome>().key)
+        .SetEndTime(SessionTime.Now());
     }
 
     //call when animal dies to set end time. 
+    /*
     private void SetEndTime(AbstractGenome endedGenome)
     {
       genomes.Find(genome => genome.key.Equals(endedGenome.key)).SetEndTime(SessionTime.Now());
     }
+    */
 
     /// <summary>
     ///   Adds a simulation event that represents a food item being consumed.
