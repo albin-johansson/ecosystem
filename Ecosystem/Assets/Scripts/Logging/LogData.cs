@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using Ecosystem.Genes;
 using Ecosystem.Util;
+using NUnit.Framework;
 using UnityEngine;
 using UnityEngine.Serialization;
 
@@ -14,7 +15,9 @@ namespace Ecosystem.Logging
   [Serializable]
   public sealed partial class LogData
   {
-    [SerializeField] public string msg = "This is the correct version";
+    [SerializeField] public string msg = "version: ";
+
+    [SerializeField] private Dictionary<string, long> keyEnd = new Dictionary<string, long>();
 
     private static readonly int GeneCount = Enum.GetValues(typeof(GeneType)).Length;
 
@@ -134,6 +137,8 @@ namespace Ecosystem.Logging
     /// </summary>
     [SerializeField] private List<GenomeInfo> genomes = new List<GenomeInfo>(64);
 
+    [SerializeField] private List<GenomeInfo> finalGenomes = new List<GenomeInfo>(64);
+
     /// <summary>
     ///   Prepares the data with the initial simulation state. Used to determine the
     ///   initial population sizes, etc.
@@ -180,24 +185,38 @@ namespace Ecosystem.Logging
     public void MarkAsDone()
     {
       duration = SessionTime.Now();
-      /*
-      foreach (GenomeInfo genome in genomes)
+      MatchGenomeToTime();
+    }
+
+    private void MatchGenomeToTime()
+    {
+      foreach (var kt in keyEnd)
       {
-        if (genome.endTime == -1)
+        GenomeInfo temp = genomes.Find(genome => genome.key.Equals(kt.Key));
+
+        finalGenomes.Add(new GenomeInfo()
         {
-          //genome.endTime = this.duration;
-          genome.endTime = duration;
-          Debug.Log("Found unended genome!");
-        }
+          tag = temp.tag,
+          endTime = kt.Value,
+          genes = temp.genes,
+          key = temp.key,
+          time = temp.time
+        });
       }
-      */
-      GenomeInfo gi;
-      for (int i = 0; i < genomes.Count; i++)
+
+      foreach (var genome in genomes)
       {
-        if (genomes[i].endTime == -1)
+        //Find unended/unadded genomes
+        if (genome.endTime.Equals(-1))
         {
-          gi = genomes[i];
-          gi.endTime = duration;
+          finalGenomes.Add(new GenomeInfo()
+          {
+            tag = genome.tag,
+            endTime = duration,
+            genes = genome.genes,
+            key = genome.key,
+            time = genome.time
+          });
         }
       }
     }
@@ -333,8 +352,9 @@ namespace Ecosystem.Logging
       --aliveCount;
       ++deadCount;
 
-      GenomeInfo gi = genomes.Find(genome => genome.key == deadObject.GetComponent<AbstractGenome>().key);
-      gi.endTime = SessionTime.Now();
+      keyEnd.Add(deadObject.GetComponent<AbstractGenome>().key, SessionTime.Now());
+      //GenomeInfo gi = genomes.Find(genome => genome.key == deadObject.GetComponent<AbstractGenome>().key);
+      //gi.endTime = SessionTime.Now();
     }
 
     //call when animal dies to set end time. 
