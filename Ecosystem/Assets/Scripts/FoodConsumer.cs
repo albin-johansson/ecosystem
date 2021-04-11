@@ -65,7 +65,7 @@ namespace Ecosystem
 
       if (reproducer.IsPregnant)
       {
-        Hunger += genome.Metabolism * genome.GetChildFoodConsumtionFactor() * Time.deltaTime;
+        Hunger += genome.Metabolism * AbstractGenome.ChildFoodConsumptionFactor * Time.deltaTime;
       }
       else
       {

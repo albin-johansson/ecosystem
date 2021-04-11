@@ -72,7 +72,7 @@ namespace Ecosystem
 
       if (IsPregnant)
       {
-        _childSaturation += genome.Metabolism * genome.GetChildFoodConsumtionFactor() * Time.deltaTime;
+        _childSaturation += genome.Metabolism * AbstractGenome.ChildFoodConsumptionFactor * Time.deltaTime;
         _pregnancyElapsedTime += Time.deltaTime;
         if (_pregnancyElapsedTime >= _gestationPeriod)
         {
