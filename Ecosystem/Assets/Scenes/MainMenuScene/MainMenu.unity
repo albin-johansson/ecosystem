@@ -134,11 +134,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5f7201a12d95ffc409449d95f23cf332, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!1 &62789227 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 8200321083332431840, guid: 1ded045ed96889543bd7186fc2ea0381, type: 3}
-  m_PrefabInstance: {fileID: 793687911}
-  m_PrefabAsset: {fileID: 0}
 --- !u!4 &91879529 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 6317102523152618976, guid: ad44e96043516fa45908a398544073e2, type: 3}
@@ -859,8 +854,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3f84cff6da476ae4da132381bd2c775c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ppVolume: {fileID: 511763984}
-  ppLayer: {fileID: 1170735245}
+  volume: {fileID: 511763984}
+  layer: {fileID: 1170735245}
 --- !u!1 &511815063
 GameObject:
   m_ObjectHideFlags: 0
@@ -1028,6 +1023,14 @@ PrefabInstance:
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5703634410337215407, guid: 1ded045ed96889543bd7186fc2ea0381, type: 3}
+      propertyPath: layer
+      value: 
+      objectReference: {fileID: 1170735245}
+    - target: {fileID: 5703634410337215407, guid: 1ded045ed96889543bd7186fc2ea0381, type: 3}
+      propertyPath: volume
+      value: 
+      objectReference: {fileID: 511763984}
+    - target: {fileID: 5703634410337215407, guid: 1ded045ed96889543bd7186fc2ea0381, type: 3}
       propertyPath: mainMenuWindow
       value: 
       objectReference: {fileID: 1071901118}
@@ -1115,13 +1118,25 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 6936665491603894906, guid: 1ded045ed96889543bd7186fc2ea0381, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 1952800703}
+    - target: {fileID: 6936665491603894906, guid: 1ded045ed96889543bd7186fc2ea0381, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: EnterMainMenu
+      objectReference: {fileID: 0}
     - target: {fileID: 7296354168450833532, guid: 1ded045ed96889543bd7186fc2ea0381, type: 3}
       propertyPath: m_Name
       value: Settings
       objectReference: {fileID: 0}
-    - target: {fileID: 7863612202765630121, guid: 1ded045ed96889543bd7186fc2ea0381, type: 3}
+    - target: {fileID: 7296354168450833532, guid: 1ded045ed96889543bd7186fc2ea0381, type: 3}
       propertyPath: m_IsActive
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7863612202765630121, guid: 1ded045ed96889543bd7186fc2ea0381, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 1ded045ed96889543bd7186fc2ea0381, type: 3}
@@ -2139,6 +2154,18 @@ PrefabInstance:
     - target: {fileID: 2375912396134378180, guid: 6096d776666406e4193d9ad1245833ac, type: 3}
       propertyPath: m_AnchoredPosition.y
       value: -84
+      objectReference: {fileID: 0}
+    - target: {fileID: 2494221177567994652, guid: 6096d776666406e4193d9ad1245833ac, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 1952800703}
+    - target: {fileID: 2494221177567994652, guid: 6096d776666406e4193d9ad1245833ac, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: EnterSettingsMenu
+      objectReference: {fileID: 0}
+    - target: {fileID: 2494221177567994652, guid: 6096d776666406e4193d9ad1245833ac, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: Ecosystem.UI.MenuManager, ScriptsAssembly
       objectReference: {fileID: 0}
     - target: {fileID: 2684955486960352763, guid: 6096d776666406e4193d9ad1245833ac, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
@@ -7424,9 +7451,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   mainMenu: {fileID: 1071901118}
+  settingsMenu: {fileID: 1974818446}
   dynamicSceneMenu: {fileID: 2026068121}
   ecsDemoSceneMenu: {fileID: 2134742667}
-  settingsButton: {fileID: 62789227}
   dynamicSceneStartButton: {fileID: 162799715}
   dynamicRabbitCount: {fileID: 1815966860}
   dynamicDeerCount: {fileID: 54312118}
@@ -7440,6 +7467,11 @@ MonoBehaviour:
   ecsBearCount: {fileID: 246206654}
   ecsCarrotCount: {fileID: 246206653}
   ecsWaterCount: {fileID: 246206656}
+--- !u!1 &1974818446 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 7296354168450833532, guid: 1ded045ed96889543bd7186fc2ea0381, type: 3}
+  m_PrefabInstance: {fileID: 793687911}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &2026068119
 PrefabInstance:
   m_ObjectHideFlags: 0
