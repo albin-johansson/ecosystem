@@ -42,7 +42,7 @@ namespace Ecosystem.AnimalBehaviour.Prey.Deer
       {
         if (!Target.activeSelf)
         {
-          Target = GetClosestMateInVision(Layers.RabbitMask);
+          Target = GetClosestMateInVision(Layers.DeerMask);
           if (!Target)
           {
             return base.Tick();
