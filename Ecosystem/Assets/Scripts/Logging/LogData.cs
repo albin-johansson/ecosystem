@@ -14,6 +14,8 @@ namespace Ecosystem.Logging
   [Serializable]
   public sealed partial class LogData
   {
+    [SerializeField] public string msg = "This is the correct version";
+
     private static readonly int GeneCount = Enum.GetValues(typeof(GeneType)).Length;
 
     /// <summary>
@@ -90,6 +92,7 @@ namespace Ecosystem.Logging
     ///   The amount of prey that were consumed.
     /// </summary>
     [SerializeField] private int preyConsumedCount;
+
 
     /// <summary>
     ///   The base rabbit genome.
@@ -177,11 +180,24 @@ namespace Ecosystem.Logging
     public void MarkAsDone()
     {
       duration = SessionTime.Now();
-      foreach (var genome in genomes)
+      /*
+      foreach (GenomeInfo genome in genomes)
       {
         if (genome.endTime == -1)
         {
-          genome.SetEndTime(duration);
+          //genome.endTime = this.duration;
+          genome.endTime = duration;
+          Debug.Log("Found unended genome!");
+        }
+      }
+      */
+      GenomeInfo gi;
+      for (int i = 0; i < genomes.Count; i++)
+      {
+        if (genomes[i].endTime == -1)
+        {
+          gi = genomes[i];
+          gi.endTime = duration;
         }
       }
     }
@@ -317,8 +333,8 @@ namespace Ecosystem.Logging
       --aliveCount;
       ++deadCount;
 
-      genomes.Find(genome => genome.key == deadObject.GetComponent<AbstractGenome>().key)
-        .SetEndTime(SessionTime.Now());
+      GenomeInfo gi = genomes.Find(genome => genome.key == deadObject.GetComponent<AbstractGenome>().key);
+      gi.endTime = SessionTime.Now();
     }
 
     //call when animal dies to set end time. 

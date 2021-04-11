@@ -41,9 +41,9 @@ namespace Ecosystem.Logging
       aliveCountText.text = _data.AliveCount().ToString();
       foodCountText.text = _data.FoodCount().ToString();
     }
+
     private void LogGenome(string animalTag, Gene gene)
     {
-      
       /*
       GenomeEvent ge = new GenomeEvent();
       GeneInfo gi = new GeneInfo();
@@ -69,6 +69,7 @@ namespace Ecosystem.Logging
       //TODO: tmp save button, for testing
       if (Input.GetKeyUp(KeyCode.X))
       {
+        _data.msg += "Pressed X";
         _data.MarkAsDone();
         LogFileWriter.Save(_data);
       }
@@ -76,6 +77,7 @@ namespace Ecosystem.Logging
 
     private void OnApplicationQuit()
     {
+      _data.msg += "ApplicationQuit";
       _data.MarkAsDone();
       LogFileWriter.Save(_data);
     }

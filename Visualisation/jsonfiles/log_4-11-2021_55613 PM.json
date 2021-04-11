@@ -1,0 +1,3145 @@
+{
+    "duration": 37355,
+    "initialFoodCount": 7,
+    "initialAliveCount": 78,
+    "initialAlivePredatorCount": 0,
+    "initialAlivePreyCount": 78,
+    "initialAliveRabbitsCount": 78,
+    "initialAliveDeerCount": 0,
+    "initialAliveWolvesCount": 0,
+    "initialAliveBearsCount": 0,
+    "foodCount": -1,
+    "aliveCount": 79,
+    "deadCount": 16,
+    "matingCount": 18,
+    "birthCount": 17,
+    "preyConsumedCount": 0,
+    "events": [
+        {
+            "time": 6188,
+            "tag": "Rabbit",
+            "type": "mating",
+            "position": {
+                "x": 29.27256965637207,
+                "y": 2.5026497840881349,
+                "z": 15.91136646270752
+            },
+            "matingIndex": 0,
+            "deathIndex": -1
+        },
+        {
+            "time": 6208,
+            "tag": "Rabbit",
+            "type": "mating",
+            "position": {
+                "x": 28.40241050720215,
+                "y": 2.503079891204834,
+                "z": 15.723845481872559
+            },
+            "matingIndex": 1,
+            "deathIndex": -1
+        },
+        {
+            "time": 6208,
+            "tag": "Rabbit",
+            "type": "mating",
+            "position": {
+                "x": 29.2728328704834,
+                "y": 2.5019450187683107,
+                "z": 16.2186222076416
+            },
+            "matingIndex": 2,
+            "deathIndex": -1
+        },
+        {
+            "time": 6254,
+            "tag": "Rabbit",
+            "type": "mating",
+            "position": {
+                "x": 29.440431594848634,
+                "y": 2.502960681915283,
+                "z": 15.775793075561524
+            },
+            "matingIndex": 3,
+            "deathIndex": -1
+        },
+        {
+            "time": 6254,
+            "tag": "Rabbit",
+            "type": "mating",
+            "position": {
+                "x": 29.486330032348634,
+                "y": 2.502141237258911,
+                "z": 16.133075714111329
+            },
+            "matingIndex": 4,
+            "deathIndex": -1
+        },
+        {
+            "time": 6272,
+            "tag": "Rabbit",
+            "type": "mating",
+            "position": {
+                "x": 29.17208480834961,
+                "y": 2.503061294555664,
+                "z": 15.731956481933594
+            },
+            "matingIndex": 5,
+            "deathIndex": -1
+        },
+        {
+            "time": 6291,
+            "tag": "Rabbit",
+            "type": "mating",
+            "position": {
+                "x": 28.41463279724121,
+                "y": 2.502023220062256,
+                "z": 16.184541702270509
+            },
+            "matingIndex": 6,
+            "deathIndex": -1
+        },
+        {
+            "time": 6454,
+            "tag": "Rabbit",
+            "type": "mating",
+            "position": {
+                "x": 29.04421615600586,
+                "y": 2.504020929336548,
+                "z": 15.313546180725098
+            },
+            "matingIndex": 7,
+            "deathIndex": -1
+        },
+        {
+            "time": 6552,
+            "tag": "Rabbit",
+            "type": "mating",
+            "position": {
+                "x": 29.85057258605957,
+                "y": 2.501558303833008,
+                "z": 16.38719367980957
+            },
+            "matingIndex": 8,
+            "deathIndex": -1
+        },
+        {
+            "time": 6728,
+            "tag": "Rabbit",
+            "type": "mating",
+            "position": {
+                "x": 29.678062438964845,
+                "y": 2.502164125442505,
+                "z": 16.123106002807618
+            },
+            "matingIndex": 9,
+            "deathIndex": -1
+        },
+        {
+            "time": 6974,
+            "tag": "Rabbit",
+            "type": "mating",
+            "position": {
+                "x": 28.817405700683595,
+                "y": 2.5,
+                "z": 17.73244857788086
+            },
+            "matingIndex": 10,
+            "deathIndex": -1
+        },
+        {
+            "time": 7295,
+            "tag": "Rabbit",
+            "type": "mating",
+            "position": {
+                "x": 29.98621368408203,
+                "y": 2.500136137008667,
+                "z": 17.007247924804689
+            },
+            "matingIndex": 11,
+            "deathIndex": -1
+        },
+        {
+            "time": 7612,
+            "tag": "Rabbit",
+            "type": "mating",
+            "position": {
+                "x": 28.7959041595459,
+                "y": 2.5,
+                "z": 17.86517906188965
+            },
+            "matingIndex": 12,
+            "deathIndex": -1
+        },
+        {
+            "time": 9409,
+            "tag": "Carrot",
+            "type": "consumption",
+            "position": {
+                "x": 34.63999938964844,
+                "y": 2.5409998893737795,
+                "z": 19.459999084472658
+            },
+            "matingIndex": -1,
+            "deathIndex": -1
+        },
+        {
+            "time": 11072,
+            "tag": "Rabbit",
+            "type": "mating",
+            "position": {
+                "x": 31.451208114624025,
+                "y": 2.5,
+                "z": 29.576688766479493
+            },
+            "matingIndex": 13,
+            "deathIndex": -1
+        },
+        {
+            "time": 11185,
+            "tag": "Rabbit",
+            "type": "birth",
+            "position": {
+                "x": 29.048473358154298,
+                "y": 2.5003132820129396,
+                "z": 16.93011474609375
+            },
+            "matingIndex": -1,
+            "deathIndex": -1
+        },
+        {
+            "time": 11210,
+            "tag": "Rabbit",
+            "type": "birth",
+            "position": {
+                "x": 29.95761489868164,
+                "y": 2.500241756439209,
+                "z": 16.96123504638672
+            },
+            "matingIndex": -1,
+            "deathIndex": -1
+        },
+        {
+            "time": 11211,
+            "tag": "Rabbit",
+            "type": "birth",
+            "position": {
+                "x": 29.194738388061525,
+                "y": 2.5010173320770265,
+                "z": 16.623058319091798
+            },
+            "matingIndex": -1,
+            "deathIndex": -1
+        },
+        {
+            "time": 11257,
+            "tag": "Rabbit",
+            "type": "birth",
+            "position": {
+                "x": 28.556894302368165,
+                "y": 2.5007970333099367,
+                "z": 16.719154357910158
+            },
+            "matingIndex": -1,
+            "deathIndex": -1
+        },
+        {
+            "time": 11258,
+            "tag": "Rabbit",
+            "type": "birth",
+            "position": {
+                "x": 28.619604110717775,
+                "y": 2.5014145374298097,
+                "z": 16.449909210205079
+            },
+            "matingIndex": -1,
+            "deathIndex": -1
+        },
+        {
+            "time": 11279,
+            "tag": "Rabbit",
+            "type": "birth",
+            "position": {
+                "x": 29.369796752929689,
+                "y": 2.5003225803375246,
+                "z": 16.925994873046876
+            },
+            "matingIndex": -1,
+            "deathIndex": -1
+        },
+        {
+            "time": 11296,
+            "tag": "Rabbit",
+            "type": "birth",
+            "position": {
+                "x": 29.522016525268556,
+                "y": 2.5008316040039064,
+                "z": 16.704090118408204
+            },
+            "matingIndex": -1,
+            "deathIndex": -1
+        },
+        {
+            "time": 11453,
+            "tag": "Rabbit",
+            "type": "birth",
+            "position": {
+                "x": 29.80193519592285,
+                "y": 2.5011980533599855,
+                "z": 16.54438018798828
+            },
+            "matingIndex": -1,
+            "deathIndex": -1
+        },
+        {
+            "time": 11549,
+            "tag": "Rabbit",
+            "type": "birth",
+            "position": {
+                "x": 28.832353591918947,
+                "y": 2.500741720199585,
+                "z": 16.743297576904298
+            },
+            "matingIndex": -1,
+            "deathIndex": -1
+        },
+        {
+            "time": 11727,
+            "tag": "Rabbit",
+            "type": "birth",
+            "position": {
+                "x": 28.620845794677736,
+                "y": 2.5005128383636476,
+                "z": 16.843055725097658
+            },
+            "matingIndex": -1,
+            "deathIndex": -1
+        },
+        {
+            "time": 11970,
+            "tag": "Rabbit",
+            "type": "birth",
+            "position": {
+                "x": 29.605731964111329,
+                "y": 2.5,
+                "z": 18.37018585205078
+            },
+            "matingIndex": -1,
+            "deathIndex": -1
+        },
+        {
+            "time": 12296,
+            "tag": "Rabbit",
+            "type": "birth",
+            "position": {
+                "x": 29.981969833374025,
+                "y": 2.5,
+                "z": 18.01704978942871
+            },
+            "matingIndex": -1,
+            "deathIndex": -1
+        },
+        {
+            "time": 12612,
+            "tag": "Rabbit",
+            "type": "birth",
+            "position": {
+                "x": 28.792936325073243,
+                "y": 2.5,
+                "z": 18.910444259643556
+            },
+            "matingIndex": -1,
+            "deathIndex": -1
+        },
+        {
+            "time": 13657,
+            "tag": "Rabbit",
+            "type": "mating",
+            "position": {
+                "x": 21.250553131103517,
+                "y": 2.5,
+                "z": 36.172245025634769
+            },
+            "matingIndex": 14,
+            "deathIndex": -1
+        },
+        {
+            "time": 16113,
+            "tag": "Rabbit",
+            "type": "birth",
+            "position": {
+                "x": 31.651796340942384,
+                "y": 2.5,
+                "z": 30.57858657836914
+            },
+            "matingIndex": -1,
+            "deathIndex": -1
+        },
+        {
+            "time": 17883,
+            "tag": "Rabbit",
+            "type": "death",
+            "position": {
+                "x": 30.500185012817384,
+                "y": 2.508146047592163,
+                "z": 2.927476644515991
+            },
+            "matingIndex": -1,
+            "deathIndex": 0
+        },
+        {
+            "time": 17939,
+            "tag": "Rabbit",
+            "type": "death",
+            "position": {
+                "x": 46.87250518798828,
+                "y": 2.5,
+                "z": 9.281449317932129
+            },
+            "matingIndex": -1,
+            "deathIndex": 1
+        },
+        {
+            "time": 17940,
+            "tag": "Rabbit",
+            "type": "death",
+            "position": {
+                "x": 42.797000885009769,
+                "y": 2.5,
+                "z": 22.90955924987793
+            },
+            "matingIndex": -1,
+            "deathIndex": 2
+        },
+        {
+            "time": 17996,
+            "tag": "Rabbit",
+            "type": "death",
+            "position": {
+                "x": 32.67893600463867,
+                "y": 2.5,
+                "z": 33.85344314575195
+            },
+            "matingIndex": -1,
+            "deathIndex": 3
+        },
+        {
+            "time": 17998,
+            "tag": "Rabbit",
+            "type": "death",
+            "position": {
+                "x": 35.08831787109375,
+                "y": 2.5,
+                "z": 30.548233032226564
+            },
+            "matingIndex": -1,
+            "deathIndex": 4
+        },
+        {
+            "time": 17999,
+            "tag": "Rabbit",
+            "type": "death",
+            "position": {
+                "x": 30.995044708251954,
+                "y": 2.5070364475250246,
+                "z": 0.6902497410774231
+            },
+            "matingIndex": -1,
+            "deathIndex": 5
+        },
+        {
+            "time": 18000,
+            "tag": "Rabbit",
+            "type": "death",
+            "position": {
+                "x": 13.738911628723145,
+                "y": 2.510228395462036,
+                "z": 15.713876724243164
+            },
+            "matingIndex": -1,
+            "deathIndex": 6
+        },
+        {
+            "time": 18181,
+            "tag": "Rabbit",
+            "type": "death",
+            "position": {
+                "x": 15.546350479125977,
+                "y": 2.5328938961029054,
+                "z": 8.559666633605957
+            },
+            "matingIndex": -1,
+            "deathIndex": 7
+        },
+        {
+            "time": 18246,
+            "tag": "Rabbit",
+            "type": "death",
+            "position": {
+                "x": 25.602144241333009,
+                "y": 2.5,
+                "z": 33.80690383911133
+            },
+            "matingIndex": -1,
+            "deathIndex": 8
+        },
+        {
+            "time": 18413,
+            "tag": "Rabbit",
+            "type": "death",
+            "position": {
+                "x": 23.258289337158204,
+                "y": 2.5034313201904299,
+                "z": 1.0534814596176148
+            },
+            "matingIndex": -1,
+            "deathIndex": 9
+        },
+        {
+            "time": 18647,
+            "tag": "Rabbit",
+            "type": "death",
+            "position": {
+                "x": 37.06507873535156,
+                "y": 2.5,
+                "z": 33.51935958862305
+            },
+            "matingIndex": -1,
+            "deathIndex": 10
+        },
+        {
+            "time": 18667,
+            "tag": "Rabbit",
+            "type": "birth",
+            "position": {
+                "x": 21.413471221923829,
+                "y": 2.5,
+                "z": 37.189903259277347
+            },
+            "matingIndex": -1,
+            "deathIndex": -1
+        },
+        {
+            "time": 18983,
+            "tag": "Rabbit",
+            "type": "death",
+            "position": {
+                "x": 31.252029418945314,
+                "y": 2.5,
+                "z": 35.8886604309082
+            },
+            "matingIndex": -1,
+            "deathIndex": 11
+        },
+        {
+            "time": 19286,
+            "tag": "Rabbit",
+            "type": "death",
+            "position": {
+                "x": 34.609859466552737,
+                "y": 2.5,
+                "z": 35.765289306640628
+            },
+            "matingIndex": -1,
+            "deathIndex": 12
+        },
+        {
+            "time": 19995,
+            "tag": "Carrot",
+            "type": "consumption",
+            "position": {
+                "x": 34.15781021118164,
+                "y": 2.5,
+                "z": 38.02599334716797
+            },
+            "matingIndex": -1,
+            "deathIndex": -1
+        },
+        {
+            "time": 20175,
+            "tag": "Rabbit",
+            "type": "mating",
+            "position": {
+                "x": 53.71857833862305,
+                "y": 2.5,
+                "z": 12.392485618591309
+            },
+            "matingIndex": 15,
+            "deathIndex": -1
+        },
+        {
+            "time": 21015,
+            "tag": "Carrot",
+            "type": "consumption",
+            "position": {
+                "x": 36.36957931518555,
+                "y": 2.5,
+                "z": 40.885231018066409
+            },
+            "matingIndex": -1,
+            "deathIndex": -1
+        },
+        {
+            "time": 21629,
+            "tag": "Carrot",
+            "type": "consumption",
+            "position": {
+                "x": 33.081268310546878,
+                "y": 2.543541431427002,
+                "z": 42.78635787963867
+            },
+            "matingIndex": -1,
+            "deathIndex": -1
+        },
+        {
+            "time": 22815,
+            "tag": "Rabbit",
+            "type": "death",
+            "position": {
+                "x": 29.200178146362306,
+                "y": 2.5,
+                "z": 48.494388580322269
+            },
+            "matingIndex": -1,
+            "deathIndex": 13
+        },
+        {
+            "time": 24907,
+            "tag": "Carrot",
+            "type": "consumption",
+            "position": {
+                "x": 53.377952575683597,
+                "y": 2.5,
+                "z": 44.04471206665039
+            },
+            "matingIndex": -1,
+            "deathIndex": -1
+        },
+        {
+            "time": 25169,
+            "tag": "Rabbit",
+            "type": "birth",
+            "position": {
+                "x": 54.74346923828125,
+                "y": 2.5,
+                "z": 12.436260223388672
+            },
+            "matingIndex": -1,
+            "deathIndex": -1
+        },
+        {
+            "time": 25360,
+            "tag": "Rabbit",
+            "type": "death",
+            "position": {
+                "x": 30.03939437866211,
+                "y": 2.5,
+                "z": 53.333831787109378
+            },
+            "matingIndex": -1,
+            "deathIndex": 14
+        },
+        {
+            "time": 27733,
+            "tag": "Rabbit",
+            "type": "mating",
+            "position": {
+                "x": 17.15060043334961,
+                "y": 2.5,
+                "z": 58.41004943847656
+            },
+            "matingIndex": 16,
+            "deathIndex": -1
+        },
+        {
+            "time": 28670,
+            "tag": "Carrot",
+            "type": "consumption",
+            "position": {
+                "x": 50.5433235168457,
+                "y": 2.5435433387756349,
+                "z": 68.87815856933594
+            },
+            "matingIndex": -1,
+            "deathIndex": -1
+        },
+        {
+            "time": 31839,
+            "tag": "Rabbit",
+            "type": "death",
+            "position": {
+                "x": 72.02095794677735,
+                "y": 2.5,
+                "z": 17.794471740722658
+            },
+            "matingIndex": -1,
+            "deathIndex": 15
+        },
+        {
+            "time": 32586,
+            "tag": "Rabbit",
+            "type": "mating",
+            "position": {
+                "x": 1.2314698696136475,
+                "y": 2.5,
+                "z": 70.52238464355469
+            },
+            "matingIndex": 17,
+            "deathIndex": -1
+        },
+        {
+            "time": 32725,
+            "tag": "Rabbit",
+            "type": "birth",
+            "position": {
+                "x": 16.36522102355957,
+                "y": 2.5,
+                "z": 59.0731201171875
+            },
+            "matingIndex": -1,
+            "deathIndex": -1
+        },
+        {
+            "time": 33135,
+            "tag": "Carrot",
+            "type": "consumption",
+            "position": {
+                "x": 17.923254013061525,
+                "y": 2.5,
+                "z": 46.345069885253909
+            },
+            "matingIndex": -1,
+            "deathIndex": -1
+        },
+        {
+            "time": 34171,
+            "tag": "Carrot",
+            "type": "consumption",
+            "position": {
+                "x": 13.48147964477539,
+                "y": 2.5,
+                "z": 62.09696578979492
+            },
+            "matingIndex": -1,
+            "deathIndex": -1
+        }
+    ],
+    "matings": [
+        {
+            "male": [
+                {
+                    "geneType": 0,
+                    "value": 0.10000000149011612
+                },
+                {
+                    "geneType": 1,
+                    "value": 10.0
+                },
+                {
+                    "geneType": 2,
+                    "value": 0.10000000149011612
+                },
+                {
+                    "geneType": 3,
+                    "value": 10.0
+                },
+                {
+                    "geneType": 4,
+                    "value": 1.0
+                },
+                {
+                    "geneType": 5,
+                    "value": 3.0
+                },
+                {
+                    "geneType": 6,
+                    "value": 1.0
+                },
+                {
+                    "geneType": 7,
+                    "value": 0.5
+                },
+                {
+                    "geneType": 8,
+                    "value": 5.0
+                },
+                {
+                    "geneType": 9,
+                    "value": 5.0
+                }
+            ],
+            "female": [
+                {
+                    "geneType": 0,
+                    "value": 0.10000000149011612
+                },
+                {
+                    "geneType": 1,
+                    "value": 10.0
+                },
+                {
+                    "geneType": 2,
+                    "value": 0.10000000149011612
+                },
+                {
+                    "geneType": 3,
+                    "value": 10.0
+                },
+                {
+                    "geneType": 4,
+                    "value": 1.0
+                },
+                {
+                    "geneType": 5,
+                    "value": 3.0
+                },
+                {
+                    "geneType": 6,
+                    "value": 1.0
+                },
+                {
+                    "geneType": 7,
+                    "value": 0.5
+                },
+                {
+                    "geneType": 8,
+                    "value": 5.0
+                },
+                {
+                    "geneType": 9,
+                    "value": 5.0
+                }
+            ]
+        },
+        {
+            "male": [
+                {
+                    "geneType": 0,
+                    "value": 0.10000000149011612
+                },
+                {
+                    "geneType": 1,
+                    "value": 10.0
+                },
+                {
+                    "geneType": 2,
+                    "value": 0.10000000149011612
+                },
+                {
+                    "geneType": 3,
+                    "value": 10.0
+                },
+                {
+                    "geneType": 4,
+                    "value": 1.0
+                },
+                {
+                    "geneType": 5,
+                    "value": 3.0
+                },
+                {
+                    "geneType": 6,
+                    "value": 1.0
+                },
+                {
+                    "geneType": 7,
+                    "value": 0.5
+                },
+                {
+                    "geneType": 8,
+                    "value": 5.0
+                },
+                {
+                    "geneType": 9,
+                    "value": 5.0
+                }
+            ],
+            "female": [
+                {
+                    "geneType": 0,
+                    "value": 0.10000000149011612
+                },
+                {
+                    "geneType": 1,
+                    "value": 10.0
+                },
+                {
+                    "geneType": 2,
+                    "value": 0.10000000149011612
+                },
+                {
+                    "geneType": 3,
+                    "value": 10.0
+                },
+                {
+                    "geneType": 4,
+                    "value": 1.0
+                },
+                {
+                    "geneType": 5,
+                    "value": 3.0
+                },
+                {
+                    "geneType": 6,
+                    "value": 1.0
+                },
+                {
+                    "geneType": 7,
+                    "value": 0.5
+                },
+                {
+                    "geneType": 8,
+                    "value": 5.0
+                },
+                {
+                    "geneType": 9,
+                    "value": 5.0
+                }
+            ]
+        },
+        {
+            "male": [
+                {
+                    "geneType": 0,
+                    "value": 0.10000000149011612
+                },
+                {
+                    "geneType": 1,
+                    "value": 10.0
+                },
+                {
+                    "geneType": 2,
+                    "value": 0.10000000149011612
+                },
+                {
+                    "geneType": 3,
+                    "value": 10.0
+                },
+                {
+                    "geneType": 4,
+                    "value": 1.0
+                },
+                {
+                    "geneType": 5,
+                    "value": 3.0
+                },
+                {
+                    "geneType": 6,
+                    "value": 1.0
+                },
+                {
+                    "geneType": 7,
+                    "value": 0.5
+                },
+                {
+                    "geneType": 8,
+                    "value": 5.0
+                },
+                {
+                    "geneType": 9,
+                    "value": 5.0
+                }
+            ],
+            "female": [
+                {
+                    "geneType": 0,
+                    "value": 0.10000000149011612
+                },
+                {
+                    "geneType": 1,
+                    "value": 10.0
+                },
+                {
+                    "geneType": 2,
+                    "value": 0.10000000149011612
+                },
+                {
+                    "geneType": 3,
+                    "value": 10.0
+                },
+                {
+                    "geneType": 4,
+                    "value": 1.0
+                },
+                {
+                    "geneType": 5,
+                    "value": 3.0
+                },
+                {
+                    "geneType": 6,
+                    "value": 1.0
+                },
+                {
+                    "geneType": 7,
+                    "value": 0.5
+                },
+                {
+                    "geneType": 8,
+                    "value": 5.0
+                },
+                {
+                    "geneType": 9,
+                    "value": 5.0
+                }
+            ]
+        },
+        {
+            "male": [
+                {
+                    "geneType": 0,
+                    "value": 0.10000000149011612
+                },
+                {
+                    "geneType": 1,
+                    "value": 10.0
+                },
+                {
+                    "geneType": 2,
+                    "value": 0.10000000149011612
+                },
+                {
+                    "geneType": 3,
+                    "value": 10.0
+                },
+                {
+                    "geneType": 4,
+                    "value": 1.0
+                },
+                {
+                    "geneType": 5,
+                    "value": 3.0
+                },
+                {
+                    "geneType": 6,
+                    "value": 1.0
+                },
+                {
+                    "geneType": 7,
+                    "value": 0.5
+                },
+                {
+                    "geneType": 8,
+                    "value": 5.0
+                },
+                {
+                    "geneType": 9,
+                    "value": 5.0
+                }
+            ],
+            "female": [
+                {
+                    "geneType": 0,
+                    "value": 0.10000000149011612
+                },
+                {
+                    "geneType": 1,
+                    "value": 10.0
+                },
+                {
+                    "geneType": 2,
+                    "value": 0.10000000149011612
+                },
+                {
+                    "geneType": 3,
+                    "value": 10.0
+                },
+                {
+                    "geneType": 4,
+                    "value": 1.0
+                },
+                {
+                    "geneType": 5,
+                    "value": 3.0
+                },
+                {
+                    "geneType": 6,
+                    "value": 1.0
+                },
+                {
+                    "geneType": 7,
+                    "value": 0.5
+                },
+                {
+                    "geneType": 8,
+                    "value": 5.0
+                },
+                {
+                    "geneType": 9,
+                    "value": 5.0
+                }
+            ]
+        },
+        {
+            "male": [
+                {
+                    "geneType": 0,
+                    "value": 0.10000000149011612
+                },
+                {
+                    "geneType": 1,
+                    "value": 10.0
+                },
+                {
+                    "geneType": 2,
+                    "value": 0.10000000149011612
+                },
+                {
+                    "geneType": 3,
+                    "value": 10.0
+                },
+                {
+                    "geneType": 4,
+                    "value": 1.0
+                },
+                {
+                    "geneType": 5,
+                    "value": 3.0
+                },
+                {
+                    "geneType": 6,
+                    "value": 1.0
+                },
+                {
+                    "geneType": 7,
+                    "value": 0.5
+                },
+                {
+                    "geneType": 8,
+                    "value": 5.0
+                },
+                {
+                    "geneType": 9,
+                    "value": 5.0
+                }
+            ],
+            "female": [
+                {
+                    "geneType": 0,
+                    "value": 0.10000000149011612
+                },
+                {
+                    "geneType": 1,
+                    "value": 10.0
+                },
+                {
+                    "geneType": 2,
+                    "value": 0.10000000149011612
+                },
+                {
+                    "geneType": 3,
+                    "value": 10.0
+                },
+                {
+                    "geneType": 4,
+                    "value": 1.0
+                },
+                {
+                    "geneType": 5,
+                    "value": 3.0
+                },
+                {
+                    "geneType": 6,
+                    "value": 1.0
+                },
+                {
+                    "geneType": 7,
+                    "value": 0.5
+                },
+                {
+                    "geneType": 8,
+                    "value": 5.0
+                },
+                {
+                    "geneType": 9,
+                    "value": 5.0
+                }
+            ]
+        },
+        {
+            "male": [
+                {
+                    "geneType": 0,
+                    "value": 0.10000000149011612
+                },
+                {
+                    "geneType": 1,
+                    "value": 10.0
+                },
+                {
+                    "geneType": 2,
+                    "value": 0.10000000149011612
+                },
+                {
+                    "geneType": 3,
+                    "value": 10.0
+                },
+                {
+                    "geneType": 4,
+                    "value": 1.0
+                },
+                {
+                    "geneType": 5,
+                    "value": 3.0
+                },
+                {
+                    "geneType": 6,
+                    "value": 1.0
+                },
+                {
+                    "geneType": 7,
+                    "value": 0.5
+                },
+                {
+                    "geneType": 8,
+                    "value": 5.0
+                },
+                {
+                    "geneType": 9,
+                    "value": 5.0
+                }
+            ],
+            "female": [
+                {
+                    "geneType": 0,
+                    "value": 0.10000000149011612
+                },
+                {
+                    "geneType": 1,
+                    "value": 10.0
+                },
+                {
+                    "geneType": 2,
+                    "value": 0.10000000149011612
+                },
+                {
+                    "geneType": 3,
+                    "value": 10.0
+                },
+                {
+                    "geneType": 4,
+                    "value": 1.0
+                },
+                {
+                    "geneType": 5,
+                    "value": 3.0
+                },
+                {
+                    "geneType": 6,
+                    "value": 1.0
+                },
+                {
+                    "geneType": 7,
+                    "value": 0.5
+                },
+                {
+                    "geneType": 8,
+                    "value": 5.0
+                },
+                {
+                    "geneType": 9,
+                    "value": 5.0
+                }
+            ]
+        },
+        {
+            "male": [
+                {
+                    "geneType": 0,
+                    "value": 0.10000000149011612
+                },
+                {
+                    "geneType": 1,
+                    "value": 10.0
+                },
+                {
+                    "geneType": 2,
+                    "value": 0.10000000149011612
+                },
+                {
+                    "geneType": 3,
+                    "value": 10.0
+                },
+                {
+                    "geneType": 4,
+                    "value": 1.0
+                },
+                {
+                    "geneType": 5,
+                    "value": 3.0
+                },
+                {
+                    "geneType": 6,
+                    "value": 1.0
+                },
+                {
+                    "geneType": 7,
+                    "value": 0.5
+                },
+                {
+                    "geneType": 8,
+                    "value": 5.0
+                },
+                {
+                    "geneType": 9,
+                    "value": 5.0
+                }
+            ],
+            "female": [
+                {
+                    "geneType": 0,
+                    "value": 0.10000000149011612
+                },
+                {
+                    "geneType": 1,
+                    "value": 10.0
+                },
+                {
+                    "geneType": 2,
+                    "value": 0.10000000149011612
+                },
+                {
+                    "geneType": 3,
+                    "value": 10.0
+                },
+                {
+                    "geneType": 4,
+                    "value": 1.0
+                },
+                {
+                    "geneType": 5,
+                    "value": 3.0
+                },
+                {
+                    "geneType": 6,
+                    "value": 1.0
+                },
+                {
+                    "geneType": 7,
+                    "value": 0.5
+                },
+                {
+                    "geneType": 8,
+                    "value": 5.0
+                },
+                {
+                    "geneType": 9,
+                    "value": 5.0
+                }
+            ]
+        },
+        {
+            "male": [
+                {
+                    "geneType": 0,
+                    "value": 0.10000000149011612
+                },
+                {
+                    "geneType": 1,
+                    "value": 10.0
+                },
+                {
+                    "geneType": 2,
+                    "value": 0.10000000149011612
+                },
+                {
+                    "geneType": 3,
+                    "value": 10.0
+                },
+                {
+                    "geneType": 4,
+                    "value": 1.0
+                },
+                {
+                    "geneType": 5,
+                    "value": 3.0
+                },
+                {
+                    "geneType": 6,
+                    "value": 1.0
+                },
+                {
+                    "geneType": 7,
+                    "value": 0.5
+                },
+                {
+                    "geneType": 8,
+                    "value": 5.0
+                },
+                {
+                    "geneType": 9,
+                    "value": 5.0
+                }
+            ],
+            "female": [
+                {
+                    "geneType": 0,
+                    "value": 0.10000000149011612
+                },
+                {
+                    "geneType": 1,
+                    "value": 10.0
+                },
+                {
+                    "geneType": 2,
+                    "value": 0.10000000149011612
+                },
+                {
+                    "geneType": 3,
+                    "value": 10.0
+                },
+                {
+                    "geneType": 4,
+                    "value": 1.0
+                },
+                {
+                    "geneType": 5,
+                    "value": 3.0
+                },
+                {
+                    "geneType": 6,
+                    "value": 1.0
+                },
+                {
+                    "geneType": 7,
+                    "value": 0.5
+                },
+                {
+                    "geneType": 8,
+                    "value": 5.0
+                },
+                {
+                    "geneType": 9,
+                    "value": 5.0
+                }
+            ]
+        },
+        {
+            "male": [
+                {
+                    "geneType": 0,
+                    "value": 0.10000000149011612
+                },
+                {
+                    "geneType": 1,
+                    "value": 10.0
+                },
+                {
+                    "geneType": 2,
+                    "value": 0.10000000149011612
+                },
+                {
+                    "geneType": 3,
+                    "value": 10.0
+                },
+                {
+                    "geneType": 4,
+                    "value": 1.0
+                },
+                {
+                    "geneType": 5,
+                    "value": 3.0
+                },
+                {
+                    "geneType": 6,
+                    "value": 1.0
+                },
+                {
+                    "geneType": 7,
+                    "value": 0.5
+                },
+                {
+                    "geneType": 8,
+                    "value": 5.0
+                },
+                {
+                    "geneType": 9,
+                    "value": 5.0
+                }
+            ],
+            "female": [
+                {
+                    "geneType": 0,
+                    "value": 0.10000000149011612
+                },
+                {
+                    "geneType": 1,
+                    "value": 10.0
+                },
+                {
+                    "geneType": 2,
+                    "value": 0.10000000149011612
+                },
+                {
+                    "geneType": 3,
+                    "value": 10.0
+                },
+                {
+                    "geneType": 4,
+                    "value": 1.0
+                },
+                {
+                    "geneType": 5,
+                    "value": 3.0
+                },
+                {
+                    "geneType": 6,
+                    "value": 1.0
+                },
+                {
+                    "geneType": 7,
+                    "value": 0.5
+                },
+                {
+                    "geneType": 8,
+                    "value": 5.0
+                },
+                {
+                    "geneType": 9,
+                    "value": 5.0
+                }
+            ]
+        },
+        {
+            "male": [
+                {
+                    "geneType": 0,
+                    "value": 0.10000000149011612
+                },
+                {
+                    "geneType": 1,
+                    "value": 10.0
+                },
+                {
+                    "geneType": 2,
+                    "value": 0.10000000149011612
+                },
+                {
+                    "geneType": 3,
+                    "value": 10.0
+                },
+                {
+                    "geneType": 4,
+                    "value": 1.0
+                },
+                {
+                    "geneType": 5,
+                    "value": 3.0
+                },
+                {
+                    "geneType": 6,
+                    "value": 1.0
+                },
+                {
+                    "geneType": 7,
+                    "value": 0.5
+                },
+                {
+                    "geneType": 8,
+                    "value": 5.0
+                },
+                {
+                    "geneType": 9,
+                    "value": 5.0
+                }
+            ],
+            "female": [
+                {
+                    "geneType": 0,
+                    "value": 0.10000000149011612
+                },
+                {
+                    "geneType": 1,
+                    "value": 10.0
+                },
+                {
+                    "geneType": 2,
+                    "value": 0.10000000149011612
+                },
+                {
+                    "geneType": 3,
+                    "value": 10.0
+                },
+                {
+                    "geneType": 4,
+                    "value": 1.0
+                },
+                {
+                    "geneType": 5,
+                    "value": 3.0
+                },
+                {
+                    "geneType": 6,
+                    "value": 1.0
+                },
+                {
+                    "geneType": 7,
+                    "value": 0.5
+                },
+                {
+                    "geneType": 8,
+                    "value": 5.0
+                },
+                {
+                    "geneType": 9,
+                    "value": 5.0
+                }
+            ]
+        },
+        {
+            "male": [
+                {
+                    "geneType": 0,
+                    "value": 0.10000000149011612
+                },
+                {
+                    "geneType": 1,
+                    "value": 10.0
+                },
+                {
+                    "geneType": 2,
+                    "value": 0.10000000149011612
+                },
+                {
+                    "geneType": 3,
+                    "value": 10.0
+                },
+                {
+                    "geneType": 4,
+                    "value": 1.0
+                },
+                {
+                    "geneType": 5,
+                    "value": 3.0
+                },
+                {
+                    "geneType": 6,
+                    "value": 1.0
+                },
+                {
+                    "geneType": 7,
+                    "value": 0.5
+                },
+                {
+                    "geneType": 8,
+                    "value": 5.0
+                },
+                {
+                    "geneType": 9,
+                    "value": 5.0
+                }
+            ],
+            "female": [
+                {
+                    "geneType": 0,
+                    "value": 0.10000000149011612
+                },
+                {
+                    "geneType": 1,
+                    "value": 10.0
+                },
+                {
+                    "geneType": 2,
+                    "value": 0.10000000149011612
+                },
+                {
+                    "geneType": 3,
+                    "value": 10.0
+                },
+                {
+                    "geneType": 4,
+                    "value": 1.0
+                },
+                {
+                    "geneType": 5,
+                    "value": 3.0
+                },
+                {
+                    "geneType": 6,
+                    "value": 1.0
+                },
+                {
+                    "geneType": 7,
+                    "value": 0.5
+                },
+                {
+                    "geneType": 8,
+                    "value": 5.0
+                },
+                {
+                    "geneType": 9,
+                    "value": 5.0
+                }
+            ]
+        },
+        {
+            "male": [
+                {
+                    "geneType": 0,
+                    "value": 0.10000000149011612
+                },
+                {
+                    "geneType": 1,
+                    "value": 10.0
+                },
+                {
+                    "geneType": 2,
+                    "value": 0.10000000149011612
+                },
+                {
+                    "geneType": 3,
+                    "value": 10.0
+                },
+                {
+                    "geneType": 4,
+                    "value": 1.0
+                },
+                {
+                    "geneType": 5,
+                    "value": 3.0
+                },
+                {
+                    "geneType": 6,
+                    "value": 1.0
+                },
+                {
+                    "geneType": 7,
+                    "value": 0.5
+                },
+                {
+                    "geneType": 8,
+                    "value": 5.0
+                },
+                {
+                    "geneType": 9,
+                    "value": 5.0
+                }
+            ],
+            "female": [
+                {
+                    "geneType": 0,
+                    "value": 0.10000000149011612
+                },
+                {
+                    "geneType": 1,
+                    "value": 10.0
+                },
+                {
+                    "geneType": 2,
+                    "value": 0.10000000149011612
+                },
+                {
+                    "geneType": 3,
+                    "value": 10.0
+                },
+                {
+                    "geneType": 4,
+                    "value": 1.0
+                },
+                {
+                    "geneType": 5,
+                    "value": 3.0
+                },
+                {
+                    "geneType": 6,
+                    "value": 1.0
+                },
+                {
+                    "geneType": 7,
+                    "value": 0.5
+                },
+                {
+                    "geneType": 8,
+                    "value": 5.0
+                },
+                {
+                    "geneType": 9,
+                    "value": 5.0
+                }
+            ]
+        },
+        {
+            "male": [
+                {
+                    "geneType": 0,
+                    "value": 0.10000000149011612
+                },
+                {
+                    "geneType": 1,
+                    "value": 10.0
+                },
+                {
+                    "geneType": 2,
+                    "value": 0.10000000149011612
+                },
+                {
+                    "geneType": 3,
+                    "value": 10.0
+                },
+                {
+                    "geneType": 4,
+                    "value": 1.0
+                },
+                {
+                    "geneType": 5,
+                    "value": 3.0
+                },
+                {
+                    "geneType": 6,
+                    "value": 1.0
+                },
+                {
+                    "geneType": 7,
+                    "value": 0.5
+                },
+                {
+                    "geneType": 8,
+                    "value": 5.0
+                },
+                {
+                    "geneType": 9,
+                    "value": 5.0
+                }
+            ],
+            "female": [
+                {
+                    "geneType": 0,
+                    "value": 0.10000000149011612
+                },
+                {
+                    "geneType": 1,
+                    "value": 10.0
+                },
+                {
+                    "geneType": 2,
+                    "value": 0.10000000149011612
+                },
+                {
+                    "geneType": 3,
+                    "value": 10.0
+                },
+                {
+                    "geneType": 4,
+                    "value": 1.0
+                },
+                {
+                    "geneType": 5,
+                    "value": 3.0
+                },
+                {
+                    "geneType": 6,
+                    "value": 1.0
+                },
+                {
+                    "geneType": 7,
+                    "value": 0.5
+                },
+                {
+                    "geneType": 8,
+                    "value": 5.0
+                },
+                {
+                    "geneType": 9,
+                    "value": 5.0
+                }
+            ]
+        },
+        {
+            "male": [
+                {
+                    "geneType": 0,
+                    "value": 0.10000000149011612
+                },
+                {
+                    "geneType": 1,
+                    "value": 10.0
+                },
+                {
+                    "geneType": 2,
+                    "value": 0.10000000149011612
+                },
+                {
+                    "geneType": 3,
+                    "value": 10.0
+                },
+                {
+                    "geneType": 4,
+                    "value": 1.0
+                },
+                {
+                    "geneType": 5,
+                    "value": 3.0
+                },
+                {
+                    "geneType": 6,
+                    "value": 1.0
+                },
+                {
+                    "geneType": 7,
+                    "value": 0.5
+                },
+                {
+                    "geneType": 8,
+                    "value": 5.0
+                },
+                {
+                    "geneType": 9,
+                    "value": 5.0
+                }
+            ],
+            "female": [
+                {
+                    "geneType": 0,
+                    "value": 0.10000000149011612
+                },
+                {
+                    "geneType": 1,
+                    "value": 10.0
+                },
+                {
+                    "geneType": 2,
+                    "value": 0.10000000149011612
+                },
+                {
+                    "geneType": 3,
+                    "value": 10.0
+                },
+                {
+                    "geneType": 4,
+                    "value": 1.0
+                },
+                {
+                    "geneType": 5,
+                    "value": 3.0
+                },
+                {
+                    "geneType": 6,
+                    "value": 1.0
+                },
+                {
+                    "geneType": 7,
+                    "value": 0.5
+                },
+                {
+                    "geneType": 8,
+                    "value": 5.0
+                },
+                {
+                    "geneType": 9,
+                    "value": 5.0
+                }
+            ]
+        },
+        {
+            "male": [
+                {
+                    "geneType": 0,
+                    "value": 0.10000000149011612
+                },
+                {
+                    "geneType": 1,
+                    "value": 10.0
+                },
+                {
+                    "geneType": 2,
+                    "value": 0.10000000149011612
+                },
+                {
+                    "geneType": 3,
+                    "value": 10.0
+                },
+                {
+                    "geneType": 4,
+                    "value": 1.0
+                },
+                {
+                    "geneType": 5,
+                    "value": 3.0
+                },
+                {
+                    "geneType": 6,
+                    "value": 1.0
+                },
+                {
+                    "geneType": 7,
+                    "value": 0.5
+                },
+                {
+                    "geneType": 8,
+                    "value": 5.0
+                },
+                {
+                    "geneType": 9,
+                    "value": 5.0
+                }
+            ],
+            "female": [
+                {
+                    "geneType": 0,
+                    "value": 0.10000000149011612
+                },
+                {
+                    "geneType": 1,
+                    "value": 10.0
+                },
+                {
+                    "geneType": 2,
+                    "value": 0.10000000149011612
+                },
+                {
+                    "geneType": 3,
+                    "value": 10.0
+                },
+                {
+                    "geneType": 4,
+                    "value": 1.0
+                },
+                {
+                    "geneType": 5,
+                    "value": 3.0
+                },
+                {
+                    "geneType": 6,
+                    "value": 1.0
+                },
+                {
+                    "geneType": 7,
+                    "value": 0.5
+                },
+                {
+                    "geneType": 8,
+                    "value": 5.0
+                },
+                {
+                    "geneType": 9,
+                    "value": 5.0
+                }
+            ]
+        },
+        {
+            "male": [
+                {
+                    "geneType": 0,
+                    "value": 0.10000000149011612
+                },
+                {
+                    "geneType": 1,
+                    "value": 10.0
+                },
+                {
+                    "geneType": 2,
+                    "value": 0.10000000149011612
+                },
+                {
+                    "geneType": 3,
+                    "value": 10.0
+                },
+                {
+                    "geneType": 4,
+                    "value": 1.0
+                },
+                {
+                    "geneType": 5,
+                    "value": 3.0
+                },
+                {
+                    "geneType": 6,
+                    "value": 1.0
+                },
+                {
+                    "geneType": 7,
+                    "value": 0.5
+                },
+                {
+                    "geneType": 8,
+                    "value": 5.0
+                },
+                {
+                    "geneType": 9,
+                    "value": 5.0
+                }
+            ],
+            "female": [
+                {
+                    "geneType": 0,
+                    "value": 0.10000000149011612
+                },
+                {
+                    "geneType": 1,
+                    "value": 10.0
+                },
+                {
+                    "geneType": 2,
+                    "value": 0.10000000149011612
+                },
+                {
+                    "geneType": 3,
+                    "value": 10.0
+                },
+                {
+                    "geneType": 4,
+                    "value": 1.0
+                },
+                {
+                    "geneType": 5,
+                    "value": 3.0
+                },
+                {
+                    "geneType": 6,
+                    "value": 1.0
+                },
+                {
+                    "geneType": 7,
+                    "value": 0.5
+                },
+                {
+                    "geneType": 8,
+                    "value": 5.0
+                },
+                {
+                    "geneType": 9,
+                    "value": 5.0
+                }
+            ]
+        },
+        {
+            "male": [
+                {
+                    "geneType": 0,
+                    "value": 0.10000000149011612
+                },
+                {
+                    "geneType": 1,
+                    "value": 10.0
+                },
+                {
+                    "geneType": 2,
+                    "value": 0.10000000149011612
+                },
+                {
+                    "geneType": 3,
+                    "value": 10.0
+                },
+                {
+                    "geneType": 4,
+                    "value": 1.0
+                },
+                {
+                    "geneType": 5,
+                    "value": 3.0
+                },
+                {
+                    "geneType": 6,
+                    "value": 1.0
+                },
+                {
+                    "geneType": 7,
+                    "value": 0.5
+                },
+                {
+                    "geneType": 8,
+                    "value": 5.0
+                },
+                {
+                    "geneType": 9,
+                    "value": 5.0
+                }
+            ],
+            "female": [
+                {
+                    "geneType": 0,
+                    "value": 0.10000000149011612
+                },
+                {
+                    "geneType": 1,
+                    "value": 10.0
+                },
+                {
+                    "geneType": 2,
+                    "value": 0.10000000149011612
+                },
+                {
+                    "geneType": 3,
+                    "value": 10.0
+                },
+                {
+                    "geneType": 4,
+                    "value": 1.0
+                },
+                {
+                    "geneType": 5,
+                    "value": 3.0
+                },
+                {
+                    "geneType": 6,
+                    "value": 1.0
+                },
+                {
+                    "geneType": 7,
+                    "value": 0.5
+                },
+                {
+                    "geneType": 8,
+                    "value": 5.0
+                },
+                {
+                    "geneType": 9,
+                    "value": 5.0
+                }
+            ]
+        },
+        {
+            "male": [
+                {
+                    "geneType": 0,
+                    "value": 0.10000000149011612
+                },
+                {
+                    "geneType": 1,
+                    "value": 10.0
+                },
+                {
+                    "geneType": 2,
+                    "value": 0.10000000149011612
+                },
+                {
+                    "geneType": 3,
+                    "value": 10.0
+                },
+                {
+                    "geneType": 4,
+                    "value": 1.0
+                },
+                {
+                    "geneType": 5,
+                    "value": 3.0
+                },
+                {
+                    "geneType": 6,
+                    "value": 1.0
+                },
+                {
+                    "geneType": 7,
+                    "value": 0.5
+                },
+                {
+                    "geneType": 8,
+                    "value": 5.0
+                },
+                {
+                    "geneType": 9,
+                    "value": 5.0
+                }
+            ],
+            "female": [
+                {
+                    "geneType": 0,
+                    "value": 0.10000000149011612
+                },
+                {
+                    "geneType": 1,
+                    "value": 10.0
+                },
+                {
+                    "geneType": 2,
+                    "value": 0.10000000149011612
+                },
+                {
+                    "geneType": 3,
+                    "value": 10.0
+                },
+                {
+                    "geneType": 4,
+                    "value": 1.0
+                },
+                {
+                    "geneType": 5,
+                    "value": 3.0
+                },
+                {
+                    "geneType": 6,
+                    "value": 1.0
+                },
+                {
+                    "geneType": 7,
+                    "value": 0.5
+                },
+                {
+                    "geneType": 8,
+                    "value": 5.0
+                },
+                {
+                    "geneType": 9,
+                    "value": 5.0
+                }
+            ]
+        }
+    ],
+    "deaths": [
+        {
+            "cause": 0
+        },
+        {
+            "cause": 0
+        },
+        {
+            "cause": 0
+        },
+        {
+            "cause": 0
+        },
+        {
+            "cause": 0
+        },
+        {
+            "cause": 0
+        },
+        {
+            "cause": 0
+        },
+        {
+            "cause": 0
+        },
+        {
+            "cause": 0
+        },
+        {
+            "cause": 0
+        },
+        {
+            "cause": 0
+        },
+        {
+            "cause": 0
+        },
+        {
+            "cause": 0
+        },
+        {
+            "cause": 0
+        },
+        {
+            "cause": 0
+        },
+        {
+            "cause": 0
+        }
+    ],
+    "genomes": [
+        {
+            "time": 11185,
+            "endTime": -1,
+            "tag": "Rabbit",
+            "genes": [
+                {
+                    "geneType": 0,
+                    "value": 0.10000000149011612
+                },
+                {
+                    "geneType": 1,
+                    "value": 10.0
+                },
+                {
+                    "geneType": 2,
+                    "value": 0.10000000149011612
+                },
+                {
+                    "geneType": 3,
+                    "value": 10.0
+                },
+                {
+                    "geneType": 4,
+                    "value": 1.0
+                },
+                {
+                    "geneType": 5,
+                    "value": 3.0
+                },
+                {
+                    "geneType": 6,
+                    "value": 1.0
+                },
+                {
+                    "geneType": 7,
+                    "value": 0.5
+                },
+                {
+                    "geneType": 8,
+                    "value": 5.0
+                },
+                {
+                    "geneType": 9,
+                    "value": 5.0
+                }
+            ],
+            "key": "HG9Y280TJS"
+        },
+        {
+            "time": 11210,
+            "endTime": -1,
+            "tag": "Rabbit",
+            "genes": [
+                {
+                    "geneType": 0,
+                    "value": 0.10000000149011612
+                },
+                {
+                    "geneType": 1,
+                    "value": 10.0
+                },
+                {
+                    "geneType": 2,
+                    "value": 0.10000000149011612
+                },
+                {
+                    "geneType": 3,
+                    "value": 10.0
+                },
+                {
+                    "geneType": 4,
+                    "value": 1.0
+                },
+                {
+                    "geneType": 5,
+                    "value": 3.0
+                },
+                {
+                    "geneType": 6,
+                    "value": 1.0
+                },
+                {
+                    "geneType": 7,
+                    "value": 0.5
+                },
+                {
+                    "geneType": 8,
+                    "value": 5.0
+                },
+                {
+                    "geneType": 9,
+                    "value": 5.0
+                }
+            ],
+            "key": "RK5CTF31HX"
+        },
+        {
+            "time": 11211,
+            "endTime": -1,
+            "tag": "Rabbit",
+            "genes": [
+                {
+                    "geneType": 0,
+                    "value": 0.10000000149011612
+                },
+                {
+                    "geneType": 1,
+                    "value": 10.0
+                },
+                {
+                    "geneType": 2,
+                    "value": 0.10000000149011612
+                },
+                {
+                    "geneType": 3,
+                    "value": 10.0
+                },
+                {
+                    "geneType": 4,
+                    "value": 1.0
+                },
+                {
+                    "geneType": 5,
+                    "value": 3.0
+                },
+                {
+                    "geneType": 6,
+                    "value": 1.0
+                },
+                {
+                    "geneType": 7,
+                    "value": 0.5
+                },
+                {
+                    "geneType": 8,
+                    "value": 5.0
+                },
+                {
+                    "geneType": 9,
+                    "value": 5.0
+                }
+            ],
+            "key": "YOG2DN6OKJ"
+        },
+        {
+            "time": 11257,
+            "endTime": -1,
+            "tag": "Rabbit",
+            "genes": [
+                {
+                    "geneType": 0,
+                    "value": 0.10000000149011612
+                },
+                {
+                    "geneType": 1,
+                    "value": 10.0
+                },
+                {
+                    "geneType": 2,
+                    "value": 0.10000000149011612
+                },
+                {
+                    "geneType": 3,
+                    "value": 10.0
+                },
+                {
+                    "geneType": 4,
+                    "value": 1.0
+                },
+                {
+                    "geneType": 5,
+                    "value": 3.0
+                },
+                {
+                    "geneType": 6,
+                    "value": 1.0
+                },
+                {
+                    "geneType": 7,
+                    "value": 0.5
+                },
+                {
+                    "geneType": 8,
+                    "value": 5.0
+                },
+                {
+                    "geneType": 9,
+                    "value": 5.0
+                }
+            ],
+            "key": "LGJGIFRSB4"
+        },
+        {
+            "time": 11258,
+            "endTime": -1,
+            "tag": "Rabbit",
+            "genes": [
+                {
+                    "geneType": 0,
+                    "value": 0.10000000149011612
+                },
+                {
+                    "geneType": 1,
+                    "value": 10.0
+                },
+                {
+                    "geneType": 2,
+                    "value": 0.10000000149011612
+                },
+                {
+                    "geneType": 3,
+                    "value": 10.0
+                },
+                {
+                    "geneType": 4,
+                    "value": 1.0
+                },
+                {
+                    "geneType": 5,
+                    "value": 3.0
+                },
+                {
+                    "geneType": 6,
+                    "value": 1.0
+                },
+                {
+                    "geneType": 7,
+                    "value": 0.5
+                },
+                {
+                    "geneType": 8,
+                    "value": 5.0
+                },
+                {
+                    "geneType": 9,
+                    "value": 5.0
+                }
+            ],
+            "key": "DH6L24BNOH"
+        },
+        {
+            "time": 11279,
+            "endTime": -1,
+            "tag": "Rabbit",
+            "genes": [
+                {
+                    "geneType": 0,
+                    "value": 0.10000000149011612
+                },
+                {
+                    "geneType": 1,
+                    "value": 10.0
+                },
+                {
+                    "geneType": 2,
+                    "value": 0.10000000149011612
+                },
+                {
+                    "geneType": 3,
+                    "value": 10.0
+                },
+                {
+                    "geneType": 4,
+                    "value": 1.0
+                },
+                {
+                    "geneType": 5,
+                    "value": 3.0
+                },
+                {
+                    "geneType": 6,
+                    "value": 1.0
+                },
+                {
+                    "geneType": 7,
+                    "value": 0.5
+                },
+                {
+                    "geneType": 8,
+                    "value": 5.0
+                },
+                {
+                    "geneType": 9,
+                    "value": 5.0
+                }
+            ],
+            "key": "ADEVE29GUO"
+        },
+        {
+            "time": 11296,
+            "endTime": -1,
+            "tag": "Rabbit",
+            "genes": [
+                {
+                    "geneType": 0,
+                    "value": 0.10000000149011612
+                },
+                {
+                    "geneType": 1,
+                    "value": 10.0
+                },
+                {
+                    "geneType": 2,
+                    "value": 0.10000000149011612
+                },
+                {
+                    "geneType": 3,
+                    "value": 10.0
+                },
+                {
+                    "geneType": 4,
+                    "value": 1.0
+                },
+                {
+                    "geneType": 5,
+                    "value": 3.0
+                },
+                {
+                    "geneType": 6,
+                    "value": 1.0
+                },
+                {
+                    "geneType": 7,
+                    "value": 0.5
+                },
+                {
+                    "geneType": 8,
+                    "value": 5.0
+                },
+                {
+                    "geneType": 9,
+                    "value": 5.0
+                }
+            ],
+            "key": "BMJAHLAY3N"
+        },
+        {
+            "time": 11453,
+            "endTime": -1,
+            "tag": "Rabbit",
+            "genes": [
+                {
+                    "geneType": 0,
+                    "value": 0.10000000149011612
+                },
+                {
+                    "geneType": 1,
+                    "value": 10.0
+                },
+                {
+                    "geneType": 2,
+                    "value": 0.10000000149011612
+                },
+                {
+                    "geneType": 3,
+                    "value": 10.0
+                },
+                {
+                    "geneType": 4,
+                    "value": 1.0
+                },
+                {
+                    "geneType": 5,
+                    "value": 3.0
+                },
+                {
+                    "geneType": 6,
+                    "value": 1.0
+                },
+                {
+                    "geneType": 7,
+                    "value": 0.5
+                },
+                {
+                    "geneType": 8,
+                    "value": 5.0
+                },
+                {
+                    "geneType": 9,
+                    "value": 5.0
+                }
+            ],
+            "key": "YK0MUQS4AI"
+        },
+        {
+            "time": 11549,
+            "endTime": -1,
+            "tag": "Rabbit",
+            "genes": [
+                {
+                    "geneType": 0,
+                    "value": 0.10000000149011612
+                },
+                {
+                    "geneType": 1,
+                    "value": 10.0
+                },
+                {
+                    "geneType": 2,
+                    "value": 0.10000000149011612
+                },
+                {
+                    "geneType": 3,
+                    "value": 10.0
+                },
+                {
+                    "geneType": 4,
+                    "value": 1.0
+                },
+                {
+                    "geneType": 5,
+                    "value": 3.0
+                },
+                {
+                    "geneType": 6,
+                    "value": 1.0
+                },
+                {
+                    "geneType": 7,
+                    "value": 0.5
+                },
+                {
+                    "geneType": 8,
+                    "value": 5.0
+                },
+                {
+                    "geneType": 9,
+                    "value": 5.0
+                }
+            ],
+            "key": "MT9CIHBXCP"
+        },
+        {
+            "time": 11727,
+            "endTime": -1,
+            "tag": "Rabbit",
+            "genes": [
+                {
+                    "geneType": 0,
+                    "value": 0.10000000149011612
+                },
+                {
+                    "geneType": 1,
+                    "value": 10.0
+                },
+                {
+                    "geneType": 2,
+                    "value": 0.10000000149011612
+                },
+                {
+                    "geneType": 3,
+                    "value": 10.0
+                },
+                {
+                    "geneType": 4,
+                    "value": 1.0
+                },
+                {
+                    "geneType": 5,
+                    "value": 3.0
+                },
+                {
+                    "geneType": 6,
+                    "value": 1.0
+                },
+                {
+                    "geneType": 7,
+                    "value": 0.5
+                },
+                {
+                    "geneType": 8,
+                    "value": 5.0
+                },
+                {
+                    "geneType": 9,
+                    "value": 5.0
+                }
+            ],
+            "key": "4MTBTZN2BX"
+        },
+        {
+            "time": 11970,
+            "endTime": -1,
+            "tag": "Rabbit",
+            "genes": [
+                {
+                    "geneType": 0,
+                    "value": 0.10000000149011612
+                },
+                {
+                    "geneType": 1,
+                    "value": 10.0
+                },
+                {
+                    "geneType": 2,
+                    "value": 0.10000000149011612
+                },
+                {
+                    "geneType": 3,
+                    "value": 10.0
+                },
+                {
+                    "geneType": 4,
+                    "value": 1.0
+                },
+                {
+                    "geneType": 5,
+                    "value": 3.0
+                },
+                {
+                    "geneType": 6,
+                    "value": 1.0
+                },
+                {
+                    "geneType": 7,
+                    "value": 0.5
+                },
+                {
+                    "geneType": 8,
+                    "value": 5.0
+                },
+                {
+                    "geneType": 9,
+                    "value": 5.0
+                }
+            ],
+            "key": "KFGMCSMH1A"
+        },
+        {
+            "time": 12296,
+            "endTime": -1,
+            "tag": "Rabbit",
+            "genes": [
+                {
+                    "geneType": 0,
+                    "value": 0.10000000149011612
+                },
+                {
+                    "geneType": 1,
+                    "value": 10.0
+                },
+                {
+                    "geneType": 2,
+                    "value": 0.10000000149011612
+                },
+                {
+                    "geneType": 3,
+                    "value": 10.0
+                },
+                {
+                    "geneType": 4,
+                    "value": 1.0
+                },
+                {
+                    "geneType": 5,
+                    "value": 3.0
+                },
+                {
+                    "geneType": 6,
+                    "value": 1.0
+                },
+                {
+                    "geneType": 7,
+                    "value": 0.5
+                },
+                {
+                    "geneType": 8,
+                    "value": 5.0
+                },
+                {
+                    "geneType": 9,
+                    "value": 5.0
+                }
+            ],
+            "key": "KNWNHNMCT3"
+        },
+        {
+            "time": 12612,
+            "endTime": -1,
+            "tag": "Rabbit",
+            "genes": [
+                {
+                    "geneType": 0,
+                    "value": 0.10000000149011612
+                },
+                {
+                    "geneType": 1,
+                    "value": 10.0
+                },
+                {
+                    "geneType": 2,
+                    "value": 0.10000000149011612
+                },
+                {
+                    "geneType": 3,
+                    "value": 10.0
+                },
+                {
+                    "geneType": 4,
+                    "value": 1.0
+                },
+                {
+                    "geneType": 5,
+                    "value": 3.0
+                },
+                {
+                    "geneType": 6,
+                    "value": 1.0
+                },
+                {
+                    "geneType": 7,
+                    "value": 0.5
+                },
+                {
+                    "geneType": 8,
+                    "value": 5.0
+                },
+                {
+                    "geneType": 9,
+                    "value": 5.0
+                }
+            ],
+            "key": "SV0SO998ST"
+        },
+        {
+            "time": 16113,
+            "endTime": -1,
+            "tag": "Rabbit",
+            "genes": [
+                {
+                    "geneType": 0,
+                    "value": 0.10000000149011612
+                },
+                {
+                    "geneType": 1,
+                    "value": 10.0
+                },
+                {
+                    "geneType": 2,
+                    "value": 0.10000000149011612
+                },
+                {
+                    "geneType": 3,
+                    "value": 10.0
+                },
+                {
+                    "geneType": 4,
+                    "value": 1.0
+                },
+                {
+                    "geneType": 5,
+                    "value": 3.0
+                },
+                {
+                    "geneType": 6,
+                    "value": 1.0
+                },
+                {
+                    "geneType": 7,
+                    "value": 0.5
+                },
+                {
+                    "geneType": 8,
+                    "value": 5.0
+                },
+                {
+                    "geneType": 9,
+                    "value": 5.0
+                }
+            ],
+            "key": "3JWOEAEWVK"
+        },
+        {
+            "time": 18667,
+            "endTime": -1,
+            "tag": "Rabbit",
+            "genes": [
+                {
+                    "geneType": 0,
+                    "value": 0.10000000149011612
+                },
+                {
+                    "geneType": 1,
+                    "value": 10.0
+                },
+                {
+                    "geneType": 2,
+                    "value": 0.10000000149011612
+                },
+                {
+                    "geneType": 3,
+                    "value": 10.0
+                },
+                {
+                    "geneType": 4,
+                    "value": 1.0
+                },
+                {
+                    "geneType": 5,
+                    "value": 3.0
+                },
+                {
+                    "geneType": 6,
+                    "value": 1.0
+                },
+                {
+                    "geneType": 7,
+                    "value": 0.5
+                },
+                {
+                    "geneType": 8,
+                    "value": 5.0
+                },
+                {
+                    "geneType": 9,
+                    "value": 5.0
+                }
+            ],
+            "key": "O0FDHQZF3G"
+        },
+        {
+            "time": 25169,
+            "endTime": -1,
+            "tag": "Rabbit",
+            "genes": [
+                {
+                    "geneType": 0,
+                    "value": 0.10000000149011612
+                },
+                {
+                    "geneType": 1,
+                    "value": 10.0
+                },
+                {
+                    "geneType": 2,
+                    "value": 0.10000000149011612
+                },
+                {
+                    "geneType": 3,
+                    "value": 10.0
+                },
+                {
+                    "geneType": 4,
+                    "value": 1.0
+                },
+                {
+                    "geneType": 5,
+                    "value": 3.0
+                },
+                {
+                    "geneType": 6,
+                    "value": 1.0
+                },
+                {
+                    "geneType": 7,
+                    "value": 0.5
+                },
+                {
+                    "geneType": 8,
+                    "value": 5.0
+                },
+                {
+                    "geneType": 9,
+                    "value": 5.0
+                }
+            ],
+            "key": "FK8X2076ER"
+        },
+        {
+            "time": 32725,
+            "endTime": -1,
+            "tag": "Rabbit",
+            "genes": [
+                {
+                    "geneType": 0,
+                    "value": 0.10000000149011612
+                },
+                {
+                    "geneType": 1,
+                    "value": 10.0
+                },
+                {
+                    "geneType": 2,
+                    "value": 0.10000000149011612
+                },
+                {
+                    "geneType": 3,
+                    "value": 10.0
+                },
+                {
+                    "geneType": 4,
+                    "value": 1.0
+                },
+                {
+                    "geneType": 5,
+                    "value": 3.0
+                },
+                {
+                    "geneType": 6,
+                    "value": 1.0
+                },
+                {
+                    "geneType": 7,
+                    "value": 0.5
+                },
+                {
+                    "geneType": 8,
+                    "value": 5.0
+                },
+                {
+                    "geneType": 9,
+                    "value": 5.0
+                }
+            ],
+            "key": "HG9Y280TJS"
+        }
+    ]
+}
