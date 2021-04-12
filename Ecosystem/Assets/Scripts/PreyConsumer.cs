@@ -87,6 +87,21 @@ namespace Ecosystem
         }
       }
     }
+    
+    private void OnTriggerStay(Collider other)
+    {
+      if (CollideActive)
+      {
+        if (Tags.IsMeat(other.gameObject))
+        {
+          if (other.TryGetComponent(out NutritionController nutritionController))
+          {
+            Hunger -= nutritionController.Consume(Hunger);
+            CollideActive = false;
+          }
+        }
+      }
+    }
 
     public bool IsHungry()
     {
