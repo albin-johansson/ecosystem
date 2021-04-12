@@ -48,7 +48,7 @@ namespace Ecosystem.AnimalBehaviour.Prey
     {
       var otherObject = other.gameObject;
 
-      if (otherObject.CompareTag("Water"))
+      if (Tags.IsWater(otherObject))
       {
         MemoryController.SaveToMemory(otherObject);
         Target = SelectCloser(otherObject, Target);

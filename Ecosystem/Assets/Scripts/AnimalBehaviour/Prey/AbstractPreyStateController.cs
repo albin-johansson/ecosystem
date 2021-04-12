@@ -75,9 +75,6 @@ namespace Ecosystem.AnimalBehaviour.Prey
           State = RunningTowardsFood;
           break;
 
-        case AnimalState.LookingForPrey:
-          break;
-
         case AnimalState.ChasingPrey:
           break;
 

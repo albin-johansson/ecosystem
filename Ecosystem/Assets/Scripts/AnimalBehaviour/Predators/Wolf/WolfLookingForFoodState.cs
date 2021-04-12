@@ -5,11 +5,7 @@ namespace Ecosystem.AnimalBehaviour.Predators.Wolf
 {
   internal sealed class WolfLookingForFoodState : AbstractAnimalState
   {
-<<<<<<< HEAD:Ecosystem/Assets/Scripts/AnimalBehaviour/Predators/Wolf/WolfLookingForPreyState.cs
-    public WolfLookingForPreyState(StateData data)
-=======
-    public WolfLookingForFoodState(WolfStateData data)
->>>>>>> dev:Ecosystem/Assets/Scripts/AnimalBehaviour/Predators/WolfLookingForFoodState.cs
+    public WolfLookingForFoodState(StateData data)
     {
       StaminaController = data.StaminaController;
       Consumer = data.Consumer;
@@ -44,7 +40,7 @@ namespace Ecosystem.AnimalBehaviour.Predators.Wolf
     public override void OnTriggerEnter(Collider other)
     {
       var otherObject = other.gameObject;
-      if (otherObject.CompareTag("Water"))
+      if (Tags.IsWater(otherObject))
       {
         MemoryController.SaveToMemory(otherObject);
       }

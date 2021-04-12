@@ -39,7 +39,7 @@ namespace Ecosystem.AnimalBehaviour.Predators.Bear
     public override void OnTriggerEnter(Collider other)
     {
       var otherObject = other.gameObject;
-      if (otherObject.CompareTag("Water"))
+      if (Tags.IsWater(otherObject))
       {
         MemoryController.SaveToMemory(otherObject);
       }
@@ -51,7 +51,7 @@ namespace Ecosystem.AnimalBehaviour.Predators.Bear
 
     public override AnimalState Type()
     {
-      return AnimalState.LookingForPrey;
+      return AnimalState.LookingForFood;
     }
   }
 }
