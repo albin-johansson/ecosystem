@@ -5,7 +5,7 @@ namespace Ecosystem.AnimalBehaviour.Predators.Wolf
 {
   internal sealed class WolfLookingForPreyState : AbstractAnimalState
   {
-    public WolfLookingForFoodState(StateData data)
+    public WolfLookingForPreyState(StateData data)
     {
       StaminaController = data.StaminaController;
       Consumer = data.Consumer;
