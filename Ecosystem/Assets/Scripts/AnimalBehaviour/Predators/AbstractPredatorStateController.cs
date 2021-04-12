@@ -38,7 +38,7 @@ namespace Ecosystem.AnimalBehaviour.Predators
       sphereCollider.radius = genome.GetVision().Value;
 
       State = _idle;
-      SwitchState(AnimalState.Idle);
+      stateText.SetText(State.Type().ToString());
     }
 
     public override void SwitchState(AnimalState state)
