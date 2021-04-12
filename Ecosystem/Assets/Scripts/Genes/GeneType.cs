@@ -10,7 +10,7 @@ namespace Ecosystem.Genes
     ThirstRate,
     ThirstThreshold,
     Vision,
-    SpeedFactor,
+    Speed,
     SizeFactor,
     DesirabilityScore,
     GestationPeriod,

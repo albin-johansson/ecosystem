@@ -38,7 +38,7 @@ namespace Ecosystem.AnimalBehaviour
       for (var index = 0; index < nColliders; ++index)
       {
         var colliderGameObject = _colliderBuffer[index].gameObject;
-        if (predicate != null && predicate(colliderGameObject))
+        if (predicate != null && !predicate(colliderGameObject))
         {
           continue;
         }
