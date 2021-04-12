@@ -3,9 +3,9 @@ using UnityEngine;
 
 namespace Ecosystem.AnimalBehaviour.WolfStates
 {
-  internal sealed class WolfLookingForPreyState : AbstractAnimalState
+  internal sealed class WolfLookingForFoodState : AbstractAnimalState
   {
-    public WolfLookingForPreyState(WolfStateData data)
+    public WolfLookingForFoodState(WolfStateData data)
     {
       StaminaController = data.StaminaController;
       Consumer = data.Consumer;
@@ -52,7 +52,7 @@ namespace Ecosystem.AnimalBehaviour.WolfStates
 
     public override AnimalState Type()
     {
-      return AnimalState.LookingForPrey;
+      return AnimalState.LookingForFood;
     }
   }
 }
