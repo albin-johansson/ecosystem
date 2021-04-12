@@ -1,7 +1,5 @@
-using System;
 using Ecosystem.Util;
 using UnityEngine;
-using UnityEngine.Serialization;
 
 namespace Ecosystem.UI
 {
@@ -9,31 +7,52 @@ namespace Ecosystem.UI
   {
     [SerializeField] private float speed = 8;
     [SerializeField] private Rigidbody cameraRigidBody;
-    private float _x;
-    private float _y;
+
+    private const KeyCode QuitKey = KeyCode.Escape;
+    private const KeyCode QuitTrackKey = KeyCode.Q;
+    private const KeyCode BoostKey = KeyCode.LeftShift;
+    private const KeyCode FreeLookKey = KeyCode.Mouse1;
+    private const KeyCode ForwardKey = KeyCode.W;
+    private const KeyCode LeftKey = KeyCode.A;
+    private const KeyCode BackwardKey = KeyCode.S;
+    private const KeyCode RightKey = KeyCode.D;
+    private const KeyCode AscendKey = KeyCode.R;
+    private const KeyCode DescendKey = KeyCode.F;
+    private const float BoostFactor = 2;
+
     private Vector3 _rotateValue;
     private Transform _transform;
     private Transform _trackedTarget;
-    private bool _track = false;
+    private Camera _camera;
+    private float _x;
+    private float _y;
     private float _distance = 20;
-    private float _boostFactor = 2;
-    private bool _boosted = false;
-    private bool _lookLocked = false;
+    private bool _tracking;
+    private bool _boosted;
 
     private void Start()
     {
-      //Cache specifically that transform. 
+      _camera = Camera.main;
       _transform = cameraRigidBody.transform;
     }
 
     private void Update()
     {
-      Boost();
-      SelectTracked();
-      TrackingOrWASD();
-      Rotate();
+      UpdateBoost();
+      UpdateTrackingState();
 
-      if (Input.GetKeyUp(KeyCode.Escape))
+      if (_tracking)
+      {
+        TrackAnimal();
+      }
+      else
+      {
+        UpdateVelocity();
+      }
+
+      UpdateRotation();
+
+      if (Input.GetKeyUp(QuitKey))
       {
         Application.Quit();
       }
@@ -41,128 +60,100 @@ namespace Ecosystem.UI
       cameraRigidBody.velocity = cameraRigidBody.velocity.normalized * speed;
     }
 
-    private Vector3 adjustmentVector3 = new Vector3(0, 0, 0);
-
-    private void TrackingOrWASD()
+    private void UpdateBoost()
     {
-      if (_track)
+      if (Input.GetKey(BoostKey) && !_boosted)
       {
-        if (_trackedTarget != null)
-        {
-          _distance += Input.mouseScrollDelta.y;
-          _distance = Math.Max(_distance, 5);
-          if (_lookLocked)
-          {
-            adjustmentVector3 = _trackedTarget.forward;
-            _transform.LookAt(_trackedTarget);
-          }
-          else
-          {
-            adjustmentVector3 = Vector3.zero;
-          }
+        _boosted = true;
+        speed *= BoostFactor;
+      }
 
-          _transform.position = _trackedTarget.position + Vector3.up * _distance - adjustmentVector3 * _distance;
-        }
-        else
+      if (Input.GetKeyUp(BoostKey) && _boosted)
+      {
+        _boosted = false;
+        speed /= BoostFactor;
+      }
+    }
+
+    private void UpdateTrackingState()
+    {
+      if (Input.GetKey(QuitTrackKey))
+      {
+        _tracking = false;
+      }
+      else if (Input.GetKey(KeyCode.Mouse0))
+      {
+        var ray = _camera.ScreenPointToRay(Input.mousePosition);
+        if (Physics.Raycast(ray, out var hit, 100, Layers.AnimalMask))
         {
-          _track = false;
-          _lookLocked = false;
+          _trackedTarget = hit.transform;
+          _tracking = true;
         }
+      }
+    }
+
+    private void TrackAnimal()
+    {
+      if (_trackedTarget)
+      {
+        _distance -= Input.mouseScrollDelta.y;
+        _distance = Mathf.Max(_distance, 5);
+
+        _transform.LookAt(_trackedTarget);
+        _transform.position = _trackedTarget.position + Vector3.up * _distance - _trackedTarget.forward * _distance;
       }
       else
       {
-        Translate();
+        _tracking = false;
       }
     }
 
-    private void SelectTracked()
+    private void UpdateVelocity()
     {
-      if (Input.GetKey(KeyCode.Q))
-      {
-        _track = false;
-        _lookLocked = false;
-      }
-
-      if (Input.GetKey(KeyCode.Mouse0))
-      {
-        Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-        RaycastHit hit;
-
-        if (Physics.Raycast(ray, out hit, 100))
-        {
-          if (Tags.IsAnimal(hit.transform.gameObject))
-          {
-            _trackedTarget = hit.transform;
-            _track = true;
-            _lookLocked = true;
-          }
-        }
-      }
-
-      if (Input.GetKeyUp(KeyCode.F))
-      {
-        _lookLocked = !_lookLocked;
-      }
-    }
-
-    private void Boost()
-    {
-      if (Input.GetKey(KeyCode.LeftShift) && !_boosted)
-      {
-        _boosted = true;
-        speed *= _boostFactor;
-      }
-
-      if (Input.GetKeyUp(KeyCode.LeftShift) && _boosted)
-      {
-        _boosted = false;
-        speed /= _boostFactor;
-      }
-    }
-
-    private void Translate()
-    {
-      if (Input.GetKey(KeyCode.W))
+      if (Input.GetKey(ForwardKey))
       {
         cameraRigidBody.velocity += speed * Time.deltaTime * _transform.forward;
       }
 
-      if (Input.GetKey(KeyCode.S))
+      if (Input.GetKey(BackwardKey))
       {
         cameraRigidBody.velocity -= speed * Time.deltaTime * _transform.forward;
       }
 
-      if (Input.GetKey(KeyCode.D))
+      if (Input.GetKey(RightKey))
       {
         cameraRigidBody.velocity += speed * Time.deltaTime * _transform.right;
       }
 
-      if (Input.GetKey(KeyCode.A))
+      if (Input.GetKey(LeftKey))
       {
         cameraRigidBody.velocity -= speed * Time.deltaTime * _transform.right;
       }
 
-      if (Input.GetKey(KeyCode.R))
+      if (Input.GetKey(AscendKey))
       {
         cameraRigidBody.velocity += speed * Time.deltaTime * Vector3.up;
       }
 
-      if (Input.GetKey(KeyCode.F))
+      if (Input.GetKey(DescendKey))
       {
         cameraRigidBody.velocity += speed * Time.deltaTime * Vector3.down;
       }
 
-      //Key up
-      if (Input.GetKeyUp(KeyCode.W) || Input.GetKeyUp(KeyCode.S) || Input.GetKeyUp(KeyCode.D) ||
-          Input.GetKeyUp(KeyCode.A) || Input.GetKeyUp(KeyCode.R) || Input.GetKeyUp(KeyCode.F))
+      if (Input.GetKeyUp(ForwardKey) ||
+          Input.GetKeyUp(BackwardKey) ||
+          Input.GetKeyUp(RightKey) ||
+          Input.GetKeyUp(LeftKey) ||
+          Input.GetKeyUp(AscendKey) ||
+          Input.GetKeyUp(DescendKey))
       {
         cameraRigidBody.velocity = Vector3.zero;
       }
     }
 
-    private void Rotate()
+    private void UpdateRotation()
     {
-      if (!Input.GetKey(KeyCode.LeftControl) && !_lookLocked)
+      if (!_tracking && Input.GetKey(FreeLookKey))
       {
         _y = Input.GetAxis("Mouse X") * 1.5f;
         _x = Input.GetAxis("Mouse Y") * 1.5f;
