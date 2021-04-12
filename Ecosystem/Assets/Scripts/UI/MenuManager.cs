@@ -11,9 +11,10 @@ namespace Ecosystem.UI
   public sealed class MenuManager : MonoBehaviour
   {
     [SerializeField] private GameObject mainMenu;
+    [SerializeField] private GameObject settingsMenu;
     [SerializeField] private GameObject dynamicSceneMenu;
     [SerializeField] private GameObject ecsDemoSceneMenu;
-    [SerializeField] private GameObject settingsButton;
+    [SerializeField] private GameObject genomeSettingsMenu;
 
     [SerializeField] private Button dynamicSceneStartButton;
     [SerializeField] private Text dynamicRabbitCount;
@@ -37,25 +38,37 @@ namespace Ecosystem.UI
 
     public void EnterMainMenu()
     {
+      settingsMenu.SetActive(false);
       dynamicSceneMenu.SetActive(false);
-      mainMenu.SetActive(true);
       ecsDemoSceneMenu.SetActive(false);
-      settingsButton.SetActive(true);
+      genomeSettingsMenu.SetActive(false);
+
+      mainMenu.SetActive(true);
+    }
+
+    public void EnterSettingsMenu()
+    {
+      mainMenu.SetActive(false);
+      genomeSettingsMenu.SetActive(false);
+      settingsMenu.SetActive(true);
+    }
+
+    public void EnterGeneSettingsMenu()
+    {
+      mainMenu.SetActive(false);
+      settingsMenu.SetActive(false);
+      genomeSettingsMenu.SetActive(true);
     }
 
     public void EnterDynamicSceneMenu()
     {
       mainMenu.SetActive(false);
-      settingsButton.SetActive(false);
-      ecsDemoSceneMenu.SetActive(false);
       dynamicSceneMenu.SetActive(true);
     }
 
     public void EnterEcsDemoSceneMenu()
     {
       mainMenu.SetActive(false);
-      settingsButton.SetActive(false);
-      dynamicSceneMenu.SetActive(false);
       ecsDemoSceneMenu.SetActive(true);
     }
 

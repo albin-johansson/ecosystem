@@ -29,12 +29,13 @@ namespace Ecosystem.AnimalBehaviour.WolfStates
       {
         return AnimalState.Attacking;
       }
-      
+
       if (!Target || !Consumer.IsHungry())
       {
         return base.Tick();
       }
-      else if (!Target.activeSelf || !MovementController.IsTargetInRange(Target.transform.position))
+      else if (!Target.transform.parent.gameObject.activeSelf ||
+               !MovementController.IsTargetInRange(Target.transform.position))
       {
         Target = GetClosestInVision(Layers.PreyMask);
         return Type();
@@ -50,6 +51,7 @@ namespace Ecosystem.AnimalBehaviour.WolfStates
         {
           AnimationController.MoveAnimation();
         }
+
         MovementController.UpdateHunting(Target.transform.position);
       }
 
