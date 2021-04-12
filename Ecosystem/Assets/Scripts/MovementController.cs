@@ -20,7 +20,7 @@ namespace Ecosystem
 
     private Vector3 _fleeDestination;
     private float _previousSpeed;
-    private readonly float[] _fleeingAngles = {-45, 90, 45, -180, -90};
+    private readonly float[] _fleeingAngles = {-45, 45, -90, 90, -135, 135, 180};
 
     #region PublicFunctions
 
@@ -226,18 +226,19 @@ namespace Ecosystem
       var navAgentPosition = navAgent.transform.position;
       var visionRange =sphereCollider.radius;
       var directionFromThreat = (navAgentPosition - threatPosition).normalized * visionRange;
+      var fleeingDirection = directionFromThreat;
 
 
       foreach (var angle in _fleeingAngles)
       {
-        _fleeDestination = navAgentPosition + (directionFromThreat.normalized * visionRange);
+        _fleeDestination = navAgentPosition + (fleeingDirection.normalized * visionRange);
         if (ValidateDestination(_fleeDestination, out var validPosition))
         {
           return validPosition;
         }
         else
         {
-          directionFromThreat = RotateDirection(_fleeDestination - navAgentPosition, angle);
+          fleeingDirection = RotateDirection(directionFromThreat, angle);
         }
       }
 
