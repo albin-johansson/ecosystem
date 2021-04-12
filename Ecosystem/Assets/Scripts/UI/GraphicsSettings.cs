@@ -5,7 +5,7 @@ using UnityEngine.UI;
 
 namespace Ecosystem.UI
 {
-  public sealed class Settings : MonoBehaviour
+  public sealed class GraphicsSettings : MonoBehaviour
   {
     [SerializeField] private Sprite cogwheel;
     [SerializeField] private Sprite arrow;

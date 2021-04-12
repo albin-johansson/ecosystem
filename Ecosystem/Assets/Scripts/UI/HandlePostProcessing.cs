@@ -22,10 +22,10 @@ namespace Ecosystem.UI
 
     private void Update()
     {
-      if (_starting || Settings._update)
+      if (_starting || GraphicsSettings._update)
       {
         _starting = false;
-        switch (Settings._antiAliasingMode)
+        switch (GraphicsSettings._antiAliasingMode)
         {
           case MSAA:
             ppLayer.antialiasingMode = PostProcessLayer.Antialiasing.SubpixelMorphologicalAntialiasing;
@@ -42,9 +42,9 @@ namespace Ecosystem.UI
           default: break;
         }
 
-        ppVolume.profile.GetSetting<AmbientOcclusion>().active = Settings._ambientOcclusionActive;
+        ppVolume.profile.GetSetting<AmbientOcclusion>().active = GraphicsSettings._ambientOcclusionActive;
         ppVolume.profile.GetSetting<AmbientOcclusion>().intensity.value =
-          (float) Settings._ambientOcclusionIntensity / 100;
+          (float) GraphicsSettings._ambientOcclusionIntensity / 100;
       }
     }
   }
