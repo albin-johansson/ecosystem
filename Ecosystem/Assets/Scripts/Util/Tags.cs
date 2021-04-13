@@ -25,7 +25,14 @@ namespace Ecosystem.Util
     /// </summary>
     /// <param name="gameObject">the game object that will be checked</param>
     /// <returns><c>true</c> if the game object is a food item; <c>false</c> otherwise.</returns>
-    public static bool IsFood(GameObject gameObject) => gameObject.CompareTag("Carrot");
+    public static bool IsFood(GameObject gameObject) => gameObject.CompareTag("Carrot") || gameObject.CompareTag("Berry");
+
+    /// <summary>
+    ///   Indicates whether or not the supplied game object has a tag that indicates that it's a meat item.
+    /// </summary>
+    /// <param name="gameObject">the game object that will be checked</param>
+    /// <returns><c>true</c> if the game object is a meat item; <c>false</c> otherwise.</returns>
+    public static bool IsMeat(GameObject gameObject) => gameObject.CompareTag("Meat");
 
     /// <summary>
     ///   Indicates whether or not the supplied game object has a tag that indicates that it's a water item.
