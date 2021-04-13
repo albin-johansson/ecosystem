@@ -75,7 +75,7 @@ namespace Ecosystem
         {
           otherDeathHandler.Die(CauseOfDeath.Eaten);
 
-          var otherNutritionController = otherObject.GetComponent<NutritionController>();
+          var otherNutritionController = otherObject.GetComponentInParent<NutritionController>();
           Hunger -= otherNutritionController.Consume(Hunger);
 
           IsAttacking = true;
