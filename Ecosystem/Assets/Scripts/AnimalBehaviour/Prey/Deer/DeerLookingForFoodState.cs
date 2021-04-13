@@ -20,7 +20,7 @@ namespace Ecosystem.AnimalBehaviour.Prey.Deer
     {
       Target = GetClosestInVision(Layers.FoodMask);
       MovementController.StartWander();
-      AnimationController.MoveAnimation();
+      AnimationController.EnterMoveAnimation();
     }
 
     public override AnimalState Tick()

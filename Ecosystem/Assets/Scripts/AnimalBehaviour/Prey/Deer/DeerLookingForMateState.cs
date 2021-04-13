@@ -18,12 +18,12 @@ namespace Ecosystem.AnimalBehaviour.Prey.Deer
 
     public override void Begin(GameObject target)
     {
-      Reproducer.isWilling = true;
-      AnimationController.MoveAnimation();
+      Reproducer.IsWilling = true;
+      AnimationController.EnterMoveAnimation();
       Target = GetClosestMateInVision(Layers.DeerMask);
       if (Target)
       {
-        MovementController.RunToTarget(target.transform.position);
+        MovementController.SetDestination(target.transform.position);
       }
       else
       {
@@ -54,7 +54,7 @@ namespace Ecosystem.AnimalBehaviour.Prey.Deer
         }
         else if (Reproducer.CompatibleAsParents(Target))
         {
-          MovementController.RunToTarget(Target.transform.position);
+          MovementController.SetDestination(Target.transform.position);
         }
         else
         {
@@ -73,7 +73,7 @@ namespace Ecosystem.AnimalBehaviour.Prey.Deer
 
     public override GameObject End()
     {
-      Reproducer.isWilling = false;
+      Reproducer.IsWilling = false;
       return base.End();
     }
 

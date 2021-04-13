@@ -1,8 +1,10 @@
+using UnityEngine;
+
 namespace Ecosystem.AnimalBehaviour.Prey
 {
   public abstract class AbstractPreyStateController : AbstractStateController
   {
-    protected StateData Data;
+    [SerializeField] private FoodConsumer consumer;
 
     private IAnimalState _idle;
     private IAnimalState _lookingForWater;
@@ -15,12 +17,16 @@ namespace Ecosystem.AnimalBehaviour.Prey
     protected IAnimalState LookingForMate;
     protected IAnimalState LookingForFood;
 
-    private void Start()
+    protected StateData Data;
+
+    protected override void Initialize()
     {
+      base.Initialize();
+
       Data = new StateData
       {
         StaminaController = staminaController,
-        Consumer = Consumer,
+        Consumer = consumer,
         AnimationController = animationController,
         MemoryController = memoryController,
         MovementController = movementController,
@@ -84,7 +90,6 @@ namespace Ecosystem.AnimalBehaviour.Prey
           break;
 
         case AnimalState.ChasingPrey:
-        case AnimalState.LookingForPrey:
         case AnimalState.Attacking:
         default:
           break;
