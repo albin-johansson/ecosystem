@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using Ecosystem.Logging;
 using Ecosystem.Spawning;
+using Ecosystem.Util;
 using UnityEngine;
 
 namespace Ecosystem
@@ -19,9 +20,12 @@ namespace Ecosystem
 
     [SerializeField] private EcoAnimationController animationController;
     [SerializeField] private string keyToPool;
+    [SerializeField] private string meatKeyToPool;
 
     private CauseOfDeath _cause;
     private GameObject _gameObject;
+
+    public NutritionController nutritionController;
     public bool isDead; // TODO can probably remove this when realistic food is implemented
 
     public void Die(CauseOfDeath cause)
@@ -35,12 +39,26 @@ namespace Ecosystem
       animationController.EnterDeathAnimation();
 
       StartCoroutine(InactivateAfterDelay(3));
+
+      InstantiateCarrion();
     }
 
     private IEnumerator InactivateAfterDelay(int seconds)
     {
       yield return new WaitForSeconds(seconds);
       ObjectPoolHandler.instance.ReturnToPool(keyToPool, _gameObject);
+    }
+
+    private void InstantiateCarrion()
+    {
+      var carrion = ObjectPoolHandler.instance.GetFromPool(meatKeyToPool);
+      carrion.transform.position = _gameObject.transform.position;
+      carrion.transform.rotation = _gameObject.transform.rotation;
+      carrion.SetActive(true);
+
+      nutritionController = carrion.GetComponent<NutritionController>();
+      nutritionController.SetNutrition(Nutrition.GetNutritionalValue(_gameObject));
+      nutritionController.SetKeyToPool("Meat");
     }
   }
 }

@@ -91,7 +91,6 @@ namespace Ecosystem
       if (Tags.IsFood(other.gameObject))
       {
         OnFoodEaten?.Invoke(other.gameObject);
-        Hunger = 0;
 
         var gameObjectTag = other.gameObject.tag;
         if (ObjectPoolHandler.instance.isPoolValid(gameObjectTag))
@@ -101,6 +100,11 @@ namespace Ecosystem
         else
         {
           Destroy(other.gameObject);
+        }
+
+        if (other.TryGetComponent(out NutritionController nutritionController))
+        {
+          Hunger -= nutritionController.Consume(Hunger);
         }
       }
     }

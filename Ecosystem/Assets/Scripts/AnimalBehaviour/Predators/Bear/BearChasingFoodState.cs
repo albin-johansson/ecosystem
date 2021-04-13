@@ -1,4 +1,5 @@
 using Ecosystem.Util;
+using UnityEditor.Experimental.GraphView;
 using UnityEngine;
 
 namespace Ecosystem.AnimalBehaviour.Predators.Bear
@@ -52,7 +53,7 @@ namespace Ecosystem.AnimalBehaviour.Predators.Bear
     {
       if (other.gameObject == Target)
       {
-        Target = GetClosestInVision(Layers.PreyMask);
+        Target = GetClosestInVision(Layers.PreyMask | Layers.MeatMask);
       }
     }
 

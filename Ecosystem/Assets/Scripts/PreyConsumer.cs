@@ -67,17 +67,28 @@ namespace Ecosystem
         return;
       }
 
-      if (Tags.IsPrey(other.gameObject))
+      var otherObject = other.gameObject;
+      if (Tags.IsPrey(otherObject))
       {
-        var otherDeathHandler = other.gameObject.GetComponentInParent<DeathHandler>();
+        var otherDeathHandler = otherObject.GetComponentInParent<DeathHandler>();
         if (!otherDeathHandler.isDead)
         {
           otherDeathHandler.Die(CauseOfDeath.Eaten);
+
+          var otherNutritionController = otherDeathHandler.nutritionController;
+          Hunger -= otherNutritionController.Consume(Hunger);
 
           IsAttacking = true;
           Hunger = 0;
 
           OnPreyConsumed?.Invoke();
+        }
+      }
+      else if (Tags.IsMeat(otherObject))
+      {
+        if (otherObject.TryGetComponent(out NutritionController otherNutritionController))
+        {
+          Hunger -= otherNutritionController.Consume(Hunger);
         }
       }
     }

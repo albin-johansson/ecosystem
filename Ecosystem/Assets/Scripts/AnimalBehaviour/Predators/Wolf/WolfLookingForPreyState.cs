@@ -1,19 +1,27 @@
 using Ecosystem.Util;
 using UnityEngine;
 
-namespace Ecosystem.AnimalBehaviour.Predators.Bear
+namespace Ecosystem.AnimalBehaviour.Predators.Wolf
 {
-  internal sealed class BearLookingForFoodState : AbstractAnimalState
+  internal sealed class WolfLookingForPreyState : AbstractAnimalState
   {
-    internal BearLookingForFoodState(StateData data) : base(data)
+    public WolfLookingForPreyState(StateData data)
     {
+      StaminaController = data.StaminaController;
+      Consumer = data.Consumer;
+      WaterConsumer = data.WaterConsumer;
+      MovementController = data.MovementController;
+      AnimationController = data.AnimationController;
+      MemoryController = data.MemoryController;
+      Reproducer = data.Reproducer;
+      Genome = data.Genome;
     }
 
     public override void Begin(GameObject target)
     {
       Target = GetClosestInVision(Layers.PreyMask | Layers.MeatMask);
       MovementController.StartWander();
-      AnimationController.EnterMoveAnimation();
+      AnimationController.MoveAnimation();
     }
 
     public override AnimalState Tick()
@@ -24,12 +32,11 @@ namespace Ecosystem.AnimalBehaviour.Predators.Bear
         {
           return AnimalState.GoingToFood;
         }
-        if (Tags.IsPrey(Target))
+        if(Tags.IsPrey(Target))
         {
           return AnimalState.ChasingPrey;
         }
       }
-
       MovementController.UpdateWander();
       return base.Tick();
     }
@@ -37,7 +44,7 @@ namespace Ecosystem.AnimalBehaviour.Predators.Bear
     public override void OnTriggerEnter(Collider other)
     {
       var otherObject = other.gameObject;
-      if (Tags.IsWater(otherObject))
+      if (otherObject.CompareTag("Water"))
       {
         MemoryController.SaveToMemory(otherObject);
       }

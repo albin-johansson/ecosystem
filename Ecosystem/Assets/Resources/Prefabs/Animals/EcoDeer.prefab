@@ -4878,7 +4878,7 @@ MonoBehaviour:
   reproducer: {fileID: 7965410119150201383}
   genome: {fileID: 570846004582155358}
   sphereCollider: {fileID: 6776153342693034266}
-  consumer: {fileID: 5346017003192509530}
+  foodConsumer: {fileID: 5346017003192509530}
 --- !u!1 &4759522730638570450
 GameObject:
   m_ObjectHideFlags: 0
@@ -5508,8 +5508,8 @@ MonoBehaviour:
   genome: {fileID: 570846004582155358}
   resourceBar: {fileID: 6078427025632469203}
   deathHandler: {fileID: 6442332908797553670}
-  reproducer: {fileID: 7965410119150201383}
   maxHunger: 100
+  reproducer: {fileID: 7965410119150201383}
 --- !u!114 &7965410119150201383
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5525,6 +5525,7 @@ MonoBehaviour:
   genome: {fileID: 570846004582155358}
   prefab: {fileID: 7155763010095567698}
   keyToPool: Deer
+  isWilling: 0
 --- !u!1 &5456374639049524137
 GameObject:
   m_ObjectHideFlags: 0
@@ -7527,7 +7528,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   animationController: {fileID: 4427174813899224407}
   keyToPool: Deer
-  isDead: 0
+  meatKeyToPool: Meat
+  _isDead: 0
 --- !u!114 &570846004582155358
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -10046,6 +10048,10 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 8623289280508370884, guid: b11869fe3d5ecbf4b912f33fa4a312db, type: 3}
+      propertyPath: textMesh
+      value: 
+      objectReference: {fileID: 6148813586097505375}
     - target: {fileID: 8703765452308408067, guid: b11869fe3d5ecbf4b912f33fa4a312db, type: 3}
       propertyPath: m_Layer
       value: 0
@@ -10057,17 +10063,6 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 7770376172294729736, guid: b11869fe3d5ecbf4b912f33fa4a312db, type: 3}
   m_PrefabInstance: {fileID: 7871571146252701932}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &1914420894457515816 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 8623289280508370884, guid: b11869fe3d5ecbf4b912f33fa4a312db, type: 3}
-  m_PrefabInstance: {fileID: 7871571146252701932}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 920e87bfe7fe9274dbe2c10fc8c06029, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &6078427025632469203 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 4136443473164136511, guid: b11869fe3d5ecbf4b912f33fa4a312db, type: 3}
@@ -10099,5 +10094,21 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 0f33f2c7a1419e740be5570d71daa2bf, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!102 &6148813586097505375 stripped
+TextMesh:
+  m_CorrespondingSourceObject: {fileID: 4064930911256007859, guid: b11869fe3d5ecbf4b912f33fa4a312db, type: 3}
+  m_PrefabInstance: {fileID: 7871571146252701932}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1914420894457515816 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 8623289280508370884, guid: b11869fe3d5ecbf4b912f33fa4a312db, type: 3}
+  m_PrefabInstance: {fileID: 7871571146252701932}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 920e87bfe7fe9274dbe2c10fc8c06029, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 

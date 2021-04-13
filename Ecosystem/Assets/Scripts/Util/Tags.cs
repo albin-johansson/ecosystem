@@ -10,15 +10,21 @@ namespace Ecosystem.Util
   {
     #region Type checks
 
-    public static bool IsPredator(GameObject animal) => animal.CompareTag("Wolf") ||
-                                                        animal.CompareTag("Bear");
+    public static bool IsRabbit(GameObject animal) => animal.CompareTag("Rabbit");
+    
+    public static bool IsDeer(GameObject animal) => animal.CompareTag("Deer");
 
-    public static bool IsPrey(GameObject animal) => animal.CompareTag("Rabbit") ||
-                                                    animal.CompareTag("Deer");
+    public static bool IsWolf(GameObject animal) => animal.CompareTag("Wolf");
+
+    public static bool IsBear(GameObject animal) => animal.CompareTag("Bear");
+    
+    public static bool IsPredator(GameObject animal) => IsWolf(animal) || IsBear(animal);
+
+    public static bool IsPrey(GameObject animal) => IsRabbit(animal) || IsDeer(animal);
 
     public static bool IsAnimal(GameObject gameObject) => IsPrey(gameObject) || IsPredator(gameObject);
 
-    public static bool IsBerryConsumer(GameObject gameObject) => IsPrey(gameObject); //TODO add bear
+    public static bool IsBerryConsumer(GameObject gameObject) => IsPrey(gameObject); // TODO add bear
 
     public static bool IsStaticFood(GameObject gameObject) => gameObject.CompareTag("StaticFood");
 
@@ -29,6 +35,13 @@ namespace Ecosystem.Util
     /// <returns><c>true</c> if the game object is a food item; <c>false</c> otherwise.</returns>
     public static bool IsFood(GameObject gameObject) => gameObject.CompareTag("Berry") ||
                                                         gameObject.CompareTag("Carrot");
+
+    /// <summary>
+    ///   Indicates whether or not the supplied game object has a tag that indicates that it's a meat item.
+    /// </summary>
+    /// <param name="gameObject">the game object that will be checked</param>
+    /// <returns><c>true</c> if the game object is a meat item; <c>false</c> otherwise.</returns>
+    public static bool IsMeat(GameObject gameObject) => gameObject.CompareTag("Meat");
 
     /// <summary>
     ///   Indicates whether or not the supplied game object has a tag that indicates that it's a water item.
