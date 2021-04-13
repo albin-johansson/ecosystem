@@ -1,4 +1,4 @@
-using Ecosystem.Genes;
+﻿using Ecosystem.Genes;
 using Ecosystem.Logging;
 using Ecosystem.Spawning;
 using Ecosystem.UI;
@@ -7,7 +7,7 @@ using UnityEngine;
 
 namespace Ecosystem
 {
-  public sealed class FoodConsumer : MonoBehaviour, IConsumer
+  public sealed class GrassConsumer : MonoBehaviour, IConsumer
   {
     [SerializeField] private AbstractGenome genome;
     [SerializeField] private ResourceBar resourceBar;
@@ -15,20 +15,14 @@ namespace Ecosystem
     [SerializeField] private double maxHunger = 100;
     [SerializeField] private Reproducer reproducer;
     private bool _isDead;
+    private double _consumed = 0;
+    private double _limit = 30;
 
     public GameObject EatingFromGameObject { get; set; }
     public double Hunger { get; set; }
     public bool IsConsuming { get; set; }
 
     public bool CollideActive { get; set; }
-
-    public delegate void FoodEatenEvent(GameObject food);
-
-    /// <summary>
-    /// This event is emitted every time a food resource is consumed.
-    /// </summary>
-    public static event FoodEatenEvent OnFoodEaten;
-
     private void OnEnable()
     {
       resourceBar.SetMaxValue((float) maxHunger);
@@ -46,18 +40,15 @@ namespace Ecosystem
         return;
       }
 
-      if (EatingFromGameObject && EatingFromGameObject.activeSelf)
+      if (IsConsuming)
       {
         Hunger -= 4 * Time.deltaTime;
-        if (Hunger <= 0)
+        _consumed += 4 * Time.deltaTime;
+        if (Hunger <= 0 || _consumed > _limit)
         {
-          Hunger = 0;
-          EatingFromGameObject = null;
+          _consumed = 0;
+          IsConsuming = false;
         }
-      }
-      else
-      {
-        EatingFromGameObject = null;
       }
 
       if (reproducer.IsPregnant)
@@ -74,30 +65,6 @@ namespace Ecosystem
       {
         _isDead = true;
         deathHandler.Die(CauseOfDeath.Starvation);
-      }
-    }
-
-    private void OnTriggerEnter(Collider other)
-    {
-      if (Tags.IsStaticFood(other.gameObject))
-      {
-        OnFoodEaten?.Invoke(other.gameObject);
-        EatingFromGameObject = other.gameObject;
-      }
-
-      if (Tags.IsFood(other.gameObject))
-      {
-        OnFoodEaten?.Invoke(other.gameObject);
-        var gameObjectTag = other.gameObject.tag;
-        Hunger = 0;
-        if (ObjectPoolHandler.instance.isPoolValid(gameObjectTag))
-        {
-          ObjectPoolHandler.instance.ReturnToPool(gameObjectTag, other.gameObject);
-        }
-        else
-        {
-          Destroy(other.gameObject);
-        }
       }
     }
 

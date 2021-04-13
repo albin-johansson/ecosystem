@@ -64,5 +64,15 @@ namespace Ecosystem.AnimalBehaviour.Prey
     {
       return new PreyEatingState(data);
     }
+
+    public static IAnimalState CreateRabbitEatingState(StateData data)
+    {
+      return new RabbitEatingState(data);
+    }
+
+    public static IAnimalState CreateDeerEatingState(StateData data)
+    {
+      return new DeerEatingState(data);
+    }
   }
 }

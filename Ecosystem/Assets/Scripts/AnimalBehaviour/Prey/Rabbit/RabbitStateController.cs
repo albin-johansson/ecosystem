@@ -13,6 +13,7 @@ namespace Ecosystem.AnimalBehaviour.Prey.Rabbit
       LookingForFood = PreyStateFactory.CreateRabbitLookingForFood(Data);
       RunningTowardsFood = PreyStateFactory.CreateRabbitRunningTowardsFood(Data);
       LookingForMate = PreyStateFactory.CreateRabbitLookingForMate(Data);
+      Eating = PreyStateFactory.CreateRabbitEatingState(Data);
     }
   }
 }

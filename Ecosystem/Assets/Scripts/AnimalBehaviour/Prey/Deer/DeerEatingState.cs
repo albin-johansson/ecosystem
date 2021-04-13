@@ -1,13 +1,12 @@
+﻿using Ecosystem.Components;
 using Ecosystem.Util;
 using UnityEngine;
 
 namespace Ecosystem.AnimalBehaviour.Prey.Deer
 {
-  internal sealed class DeerLookingForFoodState : AbstractAnimalState
+  internal sealed class DeerEatingState : AbstractAnimalState
   {
-    private double _time;
-    private double _limit = 10;
-    public DeerLookingForFoodState(StateData data)
+    public DeerEatingState(StateData data)
     {
       Consumer = data.Consumer;
       WaterConsumer = data.WaterConsumer;
@@ -15,15 +14,14 @@ namespace Ecosystem.AnimalBehaviour.Prey.Deer
       AnimationController = data.AnimationController;
       MemoryController = data.MemoryController;
       Reproducer = data.Reproducer;
-      Genome = data.Genome;
     }
 
     public override void Begin(GameObject target)
     {
-      Target = GetClosestInVision(Layers.FoodMask);
-      MovementController.StartWander();
-      AnimationController.MoveAnimation();
-      _time = 0;
+      Target = target;
+      AnimationController.EatingAnimation();
+      MovementController.StandStill(true);
+      Consumer.IsConsuming = true;
     }
 
     public override AnimalState Tick()
@@ -33,7 +31,7 @@ namespace Ecosystem.AnimalBehaviour.Prey.Deer
         if (Tags.IsPredator(Target))
         {
           return AnimalState.Fleeing;
-        }
+        } 
       }
 
       if (Consumer.Hunger < WaterConsumer.Thirst && WaterConsumer.IsThirsty())
@@ -41,26 +39,26 @@ namespace Ecosystem.AnimalBehaviour.Prey.Deer
         return AnimalState.LookingForWater;
       }
 
-      if (_time > _limit)
+      if (Consumer.IsConsuming)
       {
-        return AnimalState.Eating;
+        return Type();
       }
+      else
+      {
+        return base.Tick();
+      }
+    }
 
-      _time += Time.deltaTime;
-
-      MovementController.UpdateWander();
-
-      return Type();
+    public override GameObject End()
+    {
+      Consumer.IsConsuming = false;
+      return base.End();
     }
 
     public override void OnTriggerEnter(Collider other)
     {
       var otherObject = other.gameObject;
-      if (Tags.IsWater(otherObject))
-      {
-        MemoryController.SaveToMemory(otherObject);
-      }
-      else if (Tags.IsPredator(otherObject))
+      if (Tags.IsPredator(otherObject))
       {
         Target = otherObject;
       }
@@ -68,7 +66,7 @@ namespace Ecosystem.AnimalBehaviour.Prey.Deer
 
     public override AnimalState Type()
     {
-      return AnimalState.LookingForFood;
+      return AnimalState.Eating;
     }
   }
 }

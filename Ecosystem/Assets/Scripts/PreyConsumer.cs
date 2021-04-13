@@ -16,7 +16,7 @@ namespace Ecosystem
     [SerializeField] private Reproducer reproducer;
     private bool _isDead;
 
-    public bool IsAttacking { get; set; }
+    public bool IsConsuming { get; set; }
     
     public GameObject EatingFromGameObject { get; set; }
 
@@ -61,14 +61,14 @@ namespace Ecosystem
 
     private void OnTriggerEnter(Collider other)
     {
-      if (!CollideActive || IsAttacking) return;
+      if (!CollideActive || IsConsuming) return;
       if (Tags.IsPrey(other.gameObject))
       {
         DeathHandler _deathHandler = other.gameObject.GetComponentInParent<DeathHandler>();
         if (!_deathHandler._isDead)
         {
           _deathHandler.Die(CauseOfDeath.Eaten);
-          IsAttacking = true;
+          IsConsuming = true;
           OnPreyConsumed?.Invoke();
           Hunger = 0;
         }

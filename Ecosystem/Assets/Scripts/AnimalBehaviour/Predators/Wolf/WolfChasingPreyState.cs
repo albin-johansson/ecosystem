@@ -25,7 +25,7 @@ namespace Ecosystem.AnimalBehaviour.Predators.Wolf
 
     public override AnimalState Tick()
     {
-      if (Consumer.IsAttacking)
+      if (Consumer.IsConsuming)
       {
         return AnimalState.Attacking;
       }
