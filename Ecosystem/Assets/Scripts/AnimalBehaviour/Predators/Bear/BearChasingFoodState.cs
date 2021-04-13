@@ -5,15 +5,8 @@ namespace Ecosystem.AnimalBehaviour.Predators.Bear
 {
   internal sealed class BearChasingFoodState : AbstractAnimalState
   {
-    public BearChasingFoodState(StateData data)
+    internal BearChasingFoodState(StateData data) : base(data)
     {
-      Consumer = data.Consumer;
-      WaterConsumer = data.WaterConsumer;
-      MovementController = data.MovementController;
-      AnimationController = data.AnimationController;
-      MemoryController = data.MemoryController;
-      Reproducer = data.Reproducer;
-      Genome = data.Genome;
     }
 
     public override void Begin(GameObject target)

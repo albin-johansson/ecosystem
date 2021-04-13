@@ -5,16 +5,8 @@ namespace Ecosystem.AnimalBehaviour.Prey.Rabbit
 {
   public class RabbitLookingForMateState : AbstractAnimalState
   {
-    public RabbitLookingForMateState(StateData data)
+    internal RabbitLookingForMateState(StateData data) : base(data)
     {
-      StaminaController = data.StaminaController;
-      Consumer = data.Consumer;
-      WaterConsumer = data.WaterConsumer;
-      MovementController = data.MovementController;
-      AnimationController = data.AnimationController;
-      MemoryController = data.MemoryController;
-      Reproducer = data.Reproducer;
-      Genome = data.Genome;
     }
 
     public override void Begin(GameObject target)

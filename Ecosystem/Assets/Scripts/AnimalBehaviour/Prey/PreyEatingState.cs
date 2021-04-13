@@ -5,14 +5,8 @@ namespace Ecosystem.AnimalBehaviour.Prey
 {
   internal sealed class PreyEatingState : AbstractAnimalState
   {
-    public PreyEatingState(StateData data)
+    internal PreyEatingState(StateData data) : base(data)
     {
-      Consumer = data.Consumer;
-      WaterConsumer = data.WaterConsumer;
-      MovementController = data.MovementController;
-      AnimationController = data.AnimationController;
-      MemoryController = data.MemoryController;
-      Reproducer = data.Reproducer;
     }
 
     public override void Begin(GameObject target)

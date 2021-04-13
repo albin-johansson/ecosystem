@@ -5,16 +5,8 @@ namespace Ecosystem.AnimalBehaviour.Predators.Wolf
 {
   internal sealed class WolfLookingForFoodState : AbstractAnimalState
   {
-    public WolfLookingForFoodState(StateData data)
+    internal WolfLookingForFoodState(StateData data) : base(data)
     {
-      StaminaController = data.StaminaController;
-      Consumer = data.Consumer;
-      WaterConsumer = data.WaterConsumer;
-      MovementController = data.MovementController;
-      AnimationController = data.AnimationController;
-      MemoryController = data.MemoryController;
-      Reproducer = data.Reproducer;
-      Genome = data.Genome;
     }
 
     public override void Begin(GameObject target)

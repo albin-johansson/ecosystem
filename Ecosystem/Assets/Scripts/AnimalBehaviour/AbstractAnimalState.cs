@@ -7,18 +7,30 @@ namespace Ecosystem.AnimalBehaviour
 {
   public abstract class AbstractAnimalState : IAnimalState
   {
-    protected StaminaController StaminaController;
-    protected IConsumer Consumer;
-    protected WaterConsumer WaterConsumer;
-    protected MemoryController MemoryController;
-    protected MovementController MovementController;
-    protected EcoAnimationController AnimationController;
-    protected Reproducer Reproducer;
-    protected GameObject Target;
-    protected AbstractGenome Genome;
-
     // This is used to avoid repeated allocations
     private readonly Collider[] _colliderBuffer = new Collider[10];
+
+    protected readonly StaminaController StaminaController;
+    protected readonly IConsumer Consumer;
+    protected readonly WaterConsumer WaterConsumer;
+    protected readonly MemoryController MemoryController;
+    protected readonly MovementController MovementController;
+    protected readonly EcoAnimationController AnimationController;
+    protected readonly Reproducer Reproducer;
+    protected readonly AbstractGenome Genome;
+    protected GameObject Target;
+
+    protected AbstractAnimalState(StateData data)
+    {
+      StaminaController = data.StaminaController;
+      Consumer = data.Consumer;
+      WaterConsumer = data.WaterConsumer;
+      MemoryController = data.MemoryController;
+      MovementController = data.MovementController;
+      AnimationController = data.AnimationController;
+      Reproducer = data.Reproducer;
+      Genome = data.Genome;
+    }
 
     public virtual void Begin(GameObject target)
     {

@@ -5,15 +5,8 @@ namespace Ecosystem.AnimalBehaviour.Prey.Rabbit
 {
   internal sealed class RabbitRunningTowardsFoodState : AbstractAnimalState
   {
-    public RabbitRunningTowardsFoodState(StateData data)
+    internal RabbitRunningTowardsFoodState(StateData data) : base(data)
     {
-      StaminaController = data.StaminaController;
-      Consumer = data.Consumer;
-      WaterConsumer = data.WaterConsumer;
-      MovementController = data.MovementController;
-      AnimationController = data.AnimationController;
-      MemoryController = data.MemoryController;
-      Reproducer = data.Reproducer;
     }
 
     public override void Begin(GameObject target)

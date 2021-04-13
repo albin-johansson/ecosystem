@@ -5,16 +5,8 @@ namespace Ecosystem.AnimalBehaviour.Prey
 {
   internal sealed class PreyLookingForWaterState : AbstractAnimalState
   {
-    public PreyLookingForWaterState(StateData data)
+    internal PreyLookingForWaterState(StateData data) : base(data)
     {
-      StaminaController = data.StaminaController;
-      Consumer = data.Consumer;
-      WaterConsumer = data.WaterConsumer;
-      MovementController = data.MovementController;
-      AnimationController = data.AnimationController;
-      MemoryController = data.MemoryController;
-      Reproducer = data.Reproducer;
-      Genome = data.Genome;
     }
 
     public override void Begin(GameObject target)
