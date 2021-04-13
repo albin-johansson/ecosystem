@@ -7,6 +7,7 @@ namespace Ecosystem.AnimalBehaviour
   public abstract class AbstractStateController : MonoBehaviour, IStateController
   {
     protected IAnimalState State;
+    protected IConsumer Consumer;
     [SerializeField] protected StateText stateText;
     [SerializeField] protected StaminaController staminaController;
     [SerializeField] protected WaterConsumer waterConsumer;
