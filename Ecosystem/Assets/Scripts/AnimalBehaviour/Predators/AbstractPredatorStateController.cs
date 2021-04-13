@@ -16,8 +16,10 @@ namespace Ecosystem.AnimalBehaviour.Predators
 
     protected StateData Data;
 
-    private void Start()
+    protected override void Initialize()
     {
+      base.Initialize();
+      
       Data = new StateData
       {
         StaminaController = staminaController,

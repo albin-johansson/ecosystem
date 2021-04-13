@@ -20,6 +20,15 @@ namespace Ecosystem.AnimalBehaviour
 
     protected abstract void SwitchState(AnimalState state);
 
+    protected virtual void Initialize()
+    {
+    }
+
+    private void Start()
+    {
+      Initialize();
+    }
+
     private void Update()
     {
       var newState = State.Tick();

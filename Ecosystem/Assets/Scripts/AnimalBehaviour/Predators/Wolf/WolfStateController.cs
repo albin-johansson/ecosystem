@@ -1,15 +1,10 @@
-using UnityEngine;
-
 namespace Ecosystem.AnimalBehaviour.Predators.Wolf
 {
   public sealed class WolfStateController : AbstractPredatorStateController
   {
-    [SerializeField] private PreyConsumer preyConsumer;
-
-    public override void Start()
+    protected override void Initialize()
     {
-      Consumer = preyConsumer;
-      base.Start();
+      base.Initialize();
       LookingForFood = PredatorStateFactory.CreateWolfLookingForFood(Data);
       ChasingPrey = PredatorStateFactory.CreateWolfChasingPrey(Data);
       LookingForMate = PredatorStateFactory.CreateWolfLookingForMate(Data);

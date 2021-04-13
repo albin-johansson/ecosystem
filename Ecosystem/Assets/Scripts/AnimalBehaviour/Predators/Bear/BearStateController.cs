@@ -1,15 +1,10 @@
-using UnityEngine;
-
 namespace Ecosystem.AnimalBehaviour.Predators.Bear
 {
   public sealed class BearStateController : AbstractPredatorStateController
   {
-    [SerializeField] private PreyConsumer preyConsumer;
-
-    public override void Start()
+    protected override void Initialize()
     {
-      Consumer = preyConsumer;
-      base.Start();
+      base.Initialize();
       LookingForFood = PredatorStateFactory.CreateBearLookingForFood(Data);
       ChasingPrey = PredatorStateFactory.CreateBearChasingFood(Data);
       LookingForMate = PredatorStateFactory.CreateBearLookingForMate(Data);
