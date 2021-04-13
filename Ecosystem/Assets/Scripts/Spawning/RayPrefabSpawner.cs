@@ -9,25 +9,28 @@ namespace Ecosystem.Spawning
   {
     [SerializeField] private Terrain terrain;
     [SerializeField] private GameObject prefab;
-    [SerializeField] private Transform directory; // This will be overwritten if object pooling is used
+    [SerializeField] private Transform directory;
     [SerializeField] private bool useRadius;
     [SerializeField] private float radius;
-    [SerializeField] private float spawnRate;
+
+    [SerializeField, Tooltip("How many times an object is spawned, per second")]
+    private float spawnRate;
 
     private string _keyInPool;
-    private float _elapsedTime;
+    private float _spawnRateRatio;
+    private float _nextSpawnTime;
     private bool _usePool;
 
     private void Start()
     {
       _keyInPool = prefab.tag;
+      _spawnRateRatio = 1.0f / spawnRate;
       _usePool = ObjectPoolHandler.Instance.HasPool(_keyInPool);
     }
 
     private void Update()
     {
-      _elapsedTime += Time.deltaTime;
-      if (_elapsedTime > spawnRate)
+      if (Time.unscaledTime > _nextSpawnTime)
       {
         if (useRadius)
         {
@@ -37,8 +40,8 @@ namespace Ecosystem.Spawning
         {
           SpawnOnNavMesh();
         }
-
-        _elapsedTime = 0;
+        
+        _nextSpawnTime = Time.unscaledTime + _spawnRateRatio;
       }
     }
 

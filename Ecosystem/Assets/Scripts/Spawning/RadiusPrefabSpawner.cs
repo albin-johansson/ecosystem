@@ -1,33 +1,47 @@
 using UnityEngine;
+using Random = UnityEngine.Random;
 
-// Will spawn a given prefab inside a radius if it hits something with a ground tag.
-public sealed class RadiusPrefabSpawner : MonoBehaviour
+namespace Ecosystem.Spawning
 {
-  [SerializeField] private GameObject prefab;
-  [SerializeField] private float rate;
-  [SerializeField] private float radius;
-  private float _elapsedTime;
-
-  private void Update()
+  // Will spawn a given prefab inside a radius if it hits something with a ground tag.
+  public sealed class RadiusPrefabSpawner : MonoBehaviour
   {
-    _elapsedTime += Time.deltaTime;
-    if (rate < _elapsedTime)
+    [SerializeField] private GameObject prefab;
+    [SerializeField] private float radius;
+
+    [SerializeField, Tooltip("How many times an object is spawned, per second")]
+    private float spawnRate;
+
+    private float _spawnRateRatio;
+    private float _nextSpawnTime;
+
+    private void Start()
     {
-      _elapsedTime = 0;
+      _spawnRateRatio = 1.0f / spawnRate;
+    }
 
-      var distance = Random.Range(0, radius);
-      var dir = Random.insideUnitCircle;
-      var position = transform.position + distance * new Vector3(dir.x, 0, dir.y);
-
-      if (!Physics.Raycast(position + new Vector3(0, transform.position.y + 5, 0), Vector3.down, out var hit,
-        200.0f))
+    private void Update()
+    {
+      if (Time.unscaledTime > _nextSpawnTime)
       {
-        return;
-      }
+        var distance = Random.Range(0, radius);
+        var dir = Random.insideUnitCircle;
 
-      if (hit.transform.CompareTag("Terrain"))
-      {
-        Instantiate(prefab, hit.point, Quaternion.identity);
+        var transformPosition = transform.position;
+        var position = transformPosition + distance * new Vector3(dir.x, 0, dir.y);
+        var origin = position + new Vector3(0, transformPosition.y + 5, 0);
+
+        if (!Physics.Raycast(origin, Vector3.down, out var hit, 200.0f))
+        {
+          return;
+        }
+
+        if (hit.transform.CompareTag("Terrain"))
+        {
+          Instantiate(prefab, hit.point, Quaternion.identity);
+        }
+
+        _nextSpawnTime = Time.unscaledTime + _spawnRateRatio;
       }
     }
   }
