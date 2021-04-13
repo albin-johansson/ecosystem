@@ -4604,7 +4604,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   animationController: {fileID: -4792604738439377631}
   keyToPool: Wolf
-  _isDead: 0
+  isDead: 0
 --- !u!1 &4395386118049015763
 GameObject:
   m_ObjectHideFlags: 0
@@ -7400,7 +7400,7 @@ MonoBehaviour:
   reproducer: {fileID: 879403422808574330}
   genome: {fileID: 1593158740268700976}
   sphereCollider: {fileID: 651377425655632140}
-  preyConsumer: {fileID: 5694940851676850990}
+  consumer: {fileID: 5694940851676850990}
 --- !u!1 &7116156556552470170
 GameObject:
   m_ObjectHideFlags: 0
@@ -8725,9 +8725,8 @@ MonoBehaviour:
   genome: {fileID: 1593158740268700976}
   resourceBar: {fileID: 1012572782683633382}
   deathHandler: {fileID: 618687372982133785}
-  maxHunger: 100
-  animationController: {fileID: -4792604738439377631}
   reproducer: {fileID: 879403422808574330}
+  maxHunger: 100
 --- !u!114 &3242938931952141863
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -8759,7 +8758,6 @@ MonoBehaviour:
   genome: {fileID: 1593158740268700976}
   prefab: {fileID: 4371145773595096147}
   keyToPool: Wolf
-  isWilling: 0
 --- !u!1 &8435827863820940907
 GameObject:
   m_ObjectHideFlags: 0
@@ -10117,6 +10115,17 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 7770376172294729736, guid: b11869fe3d5ecbf4b912f33fa4a312db, type: 3}
   m_PrefabInstance: {fileID: 3993277767788021465}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &4667676523914516765 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 8623289280508370884, guid: b11869fe3d5ecbf4b912f33fa4a312db, type: 3}
+  m_PrefabInstance: {fileID: 3993277767788021465}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 920e87bfe7fe9274dbe2c10fc8c06029, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &1012572782683633382 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 4136443473164136511, guid: b11869fe3d5ecbf4b912f33fa4a312db, type: 3}
@@ -10148,16 +10157,5 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 0f33f2c7a1419e740be5570d71daa2bf, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!114 &4667676523914516765 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 8623289280508370884, guid: b11869fe3d5ecbf4b912f33fa4a312db, type: 3}
-  m_PrefabInstance: {fileID: 3993277767788021465}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 920e87bfe7fe9274dbe2c10fc8c06029, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
