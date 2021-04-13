@@ -4,7 +4,6 @@ namespace Ecosystem.AnimalBehaviour
   {
     LookingForWater,
     LookingForFood,
-    LookingForPrey,
     Idle,
     Fleeing,
     Drinking,

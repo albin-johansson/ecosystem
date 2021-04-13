@@ -17,7 +17,7 @@ namespace Ecosystem
     [SerializeField] private SphereCollider sphereCollider;
     [SerializeField] private StaminaController staminaController;
 
-    private static readonly float[] FleeingAngles = {-45, 90, 45, -180, -90};
+    private static readonly float[] FleeingAngles = {-45, 45, -90, 90, -135, 135, 180};
     private static readonly float[] WanderAngles = {0f, -90f, 90f, 180f};
 
     private float _previousSpeed;
