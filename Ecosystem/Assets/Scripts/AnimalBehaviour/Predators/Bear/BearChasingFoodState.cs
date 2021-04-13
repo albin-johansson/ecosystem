@@ -8,6 +8,7 @@ namespace Ecosystem.AnimalBehaviour.Predators.Bear
   {
     public BearChasingFoodState(StateData data)
     {
+      StaminaController = data.StaminaController;
       Consumer = data.Consumer;
       WaterConsumer = data.WaterConsumer;
       MovementController = data.MovementController;
@@ -26,6 +27,11 @@ namespace Ecosystem.AnimalBehaviour.Predators.Bear
 
     public override AnimalState Tick()
     {
+      if (Consumer.IsConsuming)
+      {
+        return AnimalState.Attacking;
+      }
+      
       if (!Target || !Consumer.IsHungry())
       {
         return base.Tick();
@@ -35,16 +41,27 @@ namespace Ecosystem.AnimalBehaviour.Predators.Bear
         Target = GetClosestInVision(Layers.PreyMask);
         return Type();
       }
-      else if (Consumer.IsConsuming)
-      {
-        return AnimalState.Attacking;
-      }
       else
       {
+        if (StaminaController.CanRun())
+        {
+          StaminaController.IsRunning = true;
+          AnimationController.RunAnimation();
+        }
+        else
+        {
+          AnimationController.MoveAnimation();
+        }
         MovementController.UpdateHunting(Target.transform.position);
       }
 
       return Type();
+    }
+
+    public override GameObject End()
+    {
+      StaminaController.IsRunning = false;
+      return base.End();
     }
 
     public override void OnTriggerEnter(Collider other)
