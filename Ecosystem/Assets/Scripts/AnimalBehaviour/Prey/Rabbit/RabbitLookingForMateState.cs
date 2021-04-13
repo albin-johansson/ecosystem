@@ -1,4 +1,5 @@
 using Ecosystem.Util;
+using UnityEditor;
 using UnityEngine;
 
 namespace Ecosystem.AnimalBehaviour.Prey.Rabbit
@@ -22,14 +23,7 @@ namespace Ecosystem.AnimalBehaviour.Prey.Rabbit
       Reproducer.isWilling = true;
       AnimationController.MoveAnimation();
       Target = GetClosestMateInVision(Layers.RabbitMask);
-      if (Target)
-      {
-        MovementController.RunToTarget(target.transform.position);
-      }
-      else
-      {
-        MovementController.StartWander();
-      }
+      MovementController.StartWander();
     }
 
     public override AnimalState Type()
