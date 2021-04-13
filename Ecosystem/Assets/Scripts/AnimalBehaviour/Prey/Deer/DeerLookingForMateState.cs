@@ -80,7 +80,7 @@ namespace Ecosystem.AnimalBehaviour.Prey.Deer
     public override void OnTriggerEnter(Collider other)
     {
       var otherObject = other.gameObject;
-      if (otherObject.CompareTag("Water"))
+      if (Tags.IsWater(otherObject))
       {
         MemoryController.SaveToMemory(otherObject);
       }

@@ -39,7 +39,7 @@ namespace Ecosystem.AnimalBehaviour.Prey
       sphereCollider.radius = genome.GetVision().Value;
 
       State = _idle;
-      SwitchState(AnimalState.Idle);
+      stateText.SetText(State.Type().ToString());
     }
 
     public override void SwitchState(AnimalState state)
@@ -73,9 +73,6 @@ namespace Ecosystem.AnimalBehaviour.Prey
 
         case AnimalState.RunningTowardsFood:
           State = RunningTowardsFood;
-          break;
-
-        case AnimalState.LookingForPrey:
           break;
 
         case AnimalState.ChasingPrey:

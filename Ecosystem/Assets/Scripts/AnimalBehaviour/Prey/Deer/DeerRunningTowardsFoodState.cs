@@ -46,11 +46,11 @@ namespace Ecosystem.AnimalBehaviour.Prey.Deer
     public override void OnTriggerEnter(Collider other)
     {
       var otherObject = other.gameObject;
-      if (otherObject.CompareTag("Food"))
+      if (Tags.IsFood(otherObject))
       {
         Target = SelectCloser(otherObject, Target);
       }
-      else if (otherObject.CompareTag("Water"))
+      else if (Tags.IsWater(otherObject))
       {
         MemoryController.SaveToMemory(otherObject);
       }

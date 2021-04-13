@@ -70,7 +70,7 @@ namespace Ecosystem.AnimalBehaviour.Predators.Wolf
     {
       var otherObject = other.gameObject;
 
-      if (otherObject.CompareTag("Water"))
+      if (Tags.IsWater(otherObject))
       {
         MemoryController.SaveToMemory(otherObject);
       }

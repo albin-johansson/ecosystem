@@ -1,11 +1,11 @@
 using Ecosystem.Util;
 using UnityEngine;
 
-namespace Ecosystem.AnimalBehaviour.Prey
+namespace Ecosystem.AnimalBehaviour.Predators.Wolf
 {
-  internal sealed class PreyRunningTowardsWaterState : AbstractAnimalState
+  internal sealed class WolfLookingForFoodState : AbstractAnimalState
   {
-    public PreyRunningTowardsWaterState(StateData data)
+    public WolfLookingForFoodState(StateData data)
     {
       StaminaController = data.StaminaController;
       Consumer = data.Consumer;
@@ -14,46 +14,37 @@ namespace Ecosystem.AnimalBehaviour.Prey
       AnimationController = data.AnimationController;
       MemoryController = data.MemoryController;
       Reproducer = data.Reproducer;
+      Genome = data.Genome;
     }
 
     public override void Begin(GameObject target)
     {
-      Target = target;
-      MovementController.RunToTarget(Target.transform.position);
+      Target = GetClosestInVision(Layers.PreyMask);
+      MovementController.StartWander();
       AnimationController.MoveAnimation();
     }
 
     public override AnimalState Tick()
     {
-      if (!Target)
+      if (Target)
       {
-        return base.Tick();
-      }
-      else if (Tags.IsPredator(Target))
-      {
-        return AnimalState.Fleeing;
-      }
-      else if (WaterConsumer.CanDrink)
-      {
-        return AnimalState.Drinking;
+        return AnimalState.ChasingPrey;
       }
       else
       {
-        MovementController.RunToTarget(Target.transform.position);
-        return Type();
+        MovementController.UpdateWander();
+        return base.Tick();
       }
     }
 
     public override void OnTriggerEnter(Collider other)
     {
       var otherObject = other.gameObject;
-
       if (Tags.IsWater(otherObject))
       {
         MemoryController.SaveToMemory(otherObject);
-        Target = SelectCloser(otherObject, Target);
       }
-      else if (Tags.IsPredator(otherObject))
+      else if (Tags.IsPrey(otherObject))
       {
         Target = otherObject;
       }
@@ -61,7 +52,7 @@ namespace Ecosystem.AnimalBehaviour.Prey
 
     public override AnimalState Type()
     {
-      return AnimalState.RunningTowardsWater;
+      return AnimalState.LookingForFood;
     }
   }
 }

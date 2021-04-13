@@ -4,7 +4,6 @@ namespace Ecosystem
   {
     LookingForWater,
     LookingForFood,
-    LookingForPrey,
     Idle,
     Fleeing,
     Drinking,
