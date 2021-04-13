@@ -8,7 +8,7 @@ namespace Ecosystem
 {
   public class NutritionController : MonoBehaviour
   {
-    public double nutritionalValue;
+    [SerializeField] private float nutritionalValue;
     [SerializeField] private string keyToPool;
 
     public delegate void FoodEatenEvent(GameObject food);
@@ -18,37 +18,40 @@ namespace Ecosystem
     /// </summary>
     public static event FoodEatenEvent OnFoodEaten;
 
-    public void Update()
+    private void Update()
     {
-      // Simulates nutritional decay.
+      // Simulates nutritional decay
       if (nutritionalValue > 0)
       {
-        nutritionalValue = (double) Mathf.Max((float) 0, (float) nutritionalValue - Time.deltaTime * 0.1f);
-        return;
-      } 
-      ReturnToPool();
-    }
-
-    public double Consume(Double hunger)
-    {
-      if (hunger < nutritionalValue)
-      {
-        nutritionalValue -= hunger;
-        return hunger;
+        nutritionalValue = Mathf.Max(0, nutritionalValue - Time.deltaTime * 0.1f);
       }
-
-      OnFoodEaten?.Invoke(gameObject);
-      ReturnToPool();
-
-      return nutritionalValue;
+      else
+      {
+        ReturnToPool();
+      }
     }
 
-    public void SetNutrition(double value)
+    public float Consume(float amount)
+    {
+      if (amount < nutritionalValue)
+      {
+        nutritionalValue -= amount;
+        return amount;
+      }
+      else
+      {
+        OnFoodEaten?.Invoke(gameObject);
+        ReturnToPool();
+        return nutritionalValue;
+      }
+    }
+
+    public void SetNutrition(float value)
     {
       nutritionalValue = value;
     }
-    
-    public void SetKeyToPool(String key)
+
+    public void SetKeyToPool(string key)
     {
       keyToPool = key;
     }

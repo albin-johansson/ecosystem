@@ -5,23 +5,15 @@ namespace Ecosystem.AnimalBehaviour.Predators.Wolf
 {
   internal sealed class WolfLookingForPreyState : AbstractAnimalState
   {
-    public WolfLookingForPreyState(StateData data)
+    internal WolfLookingForPreyState(StateData data) : base(data)
     {
-      StaminaController = data.StaminaController;
-      Consumer = data.Consumer;
-      WaterConsumer = data.WaterConsumer;
-      MovementController = data.MovementController;
-      AnimationController = data.AnimationController;
-      MemoryController = data.MemoryController;
-      Reproducer = data.Reproducer;
-      Genome = data.Genome;
     }
 
     public override void Begin(GameObject target)
     {
       Target = GetClosestInVision(Layers.PreyMask | Layers.MeatMask);
       MovementController.StartWander();
-      AnimationController.MoveAnimation();
+      AnimationController.EnterMoveAnimation();
     }
 
     public override AnimalState Tick()
@@ -32,11 +24,13 @@ namespace Ecosystem.AnimalBehaviour.Predators.Wolf
         {
           return AnimalState.GoingToFood;
         }
-        if(Tags.IsPrey(Target))
+
+        if (Tags.IsPrey(Target))
         {
           return AnimalState.ChasingPrey;
         }
       }
+
       MovementController.UpdateWander();
       return base.Tick();
     }
