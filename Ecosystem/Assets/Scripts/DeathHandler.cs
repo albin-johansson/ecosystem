@@ -20,7 +20,7 @@ namespace Ecosystem
 
     [SerializeField] private EcoAnimationController animationController;
     [SerializeField] private string keyToPool;
-    [SerializeField] private string meatKeyToPool;
+    [SerializeField] private string keyToMeatPool;
 
     private CauseOfDeath _cause;
     private GameObject _gameObject;
@@ -46,19 +46,18 @@ namespace Ecosystem
     private IEnumerator InactivateAfterDelay(int seconds)
     {
       yield return new WaitForSeconds(seconds);
-      ObjectPoolHandler.instance.ReturnToPool(keyToPool, _gameObject);
+      ObjectPoolHandler.Instance.ReturnToPool(keyToPool, _gameObject);
     }
 
     private void InstantiateCarrion()
     {
-      var carrion = ObjectPoolHandler.instance.GetFromPool(meatKeyToPool);
+      var carrion = ObjectPoolHandler.Instance.Construct(keyToMeatPool);
       carrion.transform.position = _gameObject.transform.position;
       carrion.transform.rotation = _gameObject.transform.rotation;
       carrion.SetActive(true);
 
       nutritionController = carrion.GetComponent<NutritionController>();
-      nutritionController.SetNutrition(Nutrition.GetNutritionalValue(_gameObject));
-      nutritionController.SetKeyToPool("Meat");
+      nutritionController.SetNutritionalValue(Nutrition.GetNutritionalValue(_gameObject));
     }
   }
 }

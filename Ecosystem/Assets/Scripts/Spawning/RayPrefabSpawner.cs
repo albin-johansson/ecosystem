@@ -1,8 +1,6 @@
-using System;
 using Ecosystem.Util;
 using UnityEngine;
 using UnityEngine.AI;
-using UnityEngine.UI;
 using Random = UnityEngine.Random;
 
 namespace Ecosystem.Spawning
@@ -11,45 +9,36 @@ namespace Ecosystem.Spawning
   {
     [SerializeField] private Terrain terrain;
     [SerializeField] private GameObject prefab;
-
-    [Tooltip("This directory will be overwritten if objectPool is used")] [SerializeField]
-    private Transform directory;
-
+    [SerializeField] private Transform directory; // This will be overwritten if object pooling is used
     [SerializeField] private bool useRadius;
     [SerializeField] private float radius;
-
-    [Tooltip("Fill this field if using objectPooling for the spawning gameObject")] [SerializeField]
-    private string keyInPool;
-
     [SerializeField] private float spawnRate;
 
+    private string _keyInPool;
     private float _elapsedTime;
     private bool _usePool;
-    private bool _haveCheckedPool;
+
+    private void Start()
+    {
+      _keyInPool = prefab.tag;
+      _usePool = ObjectPoolHandler.Instance.HasPool(_keyInPool);
+    }
 
     private void Update()
     {
-      if (!_haveCheckedPool)
-      {
-        _usePool = ObjectPoolHandler.instance.isPoolValid(keyInPool);
-        _haveCheckedPool = true;
-      }
-
       _elapsedTime += Time.deltaTime;
-      if (spawnRate > _elapsedTime)
+      if (_elapsedTime > spawnRate)
       {
-        return;
-      }
+        if (useRadius)
+        {
+          SpawnInRadius();
+        }
+        else
+        {
+          SpawnOnNavMesh();
+        }
 
-      _elapsedTime = 0;
-
-      if (useRadius)
-      {
-        SpawnInRadius();
-      }
-      else
-      {
-        SpawnOnNavMesh();
+        _elapsedTime = 0;
       }
     }
 
@@ -57,7 +46,6 @@ namespace Ecosystem.Spawning
     {
       var dir = Random.insideUnitCircle * radius;
       var position = transform.position + new Vector3(dir.x, 0, dir.y);
-
       Spawn(position, radius);
     }
 
@@ -67,7 +55,7 @@ namespace Ecosystem.Spawning
       {
         if (_usePool)
         {
-          var spawnedObject = ObjectPoolHandler.instance.GetFromPool(keyInPool);
+          var spawnedObject = ObjectPoolHandler.Instance.Construct(_keyInPool);
           spawnedObject.transform.position = hit.position;
           spawnedObject.transform.parent = directory;
           spawnedObject.SetActive(true);

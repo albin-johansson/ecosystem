@@ -82,25 +82,17 @@ namespace Ecosystem
 
     private void OnTriggerEnter(Collider other)
     {
-      if (Tags.IsStaticFood(other.gameObject))
+      var otherObject = other.gameObject;
+
+      if (Tags.IsStaticFood(otherObject))
       {
-        OnFoodEaten?.Invoke(other.gameObject);
-        EatingFromGameObject = other.gameObject;
+        OnFoodEaten?.Invoke(otherObject);
+        EatingFromGameObject = otherObject;
       }
-
-      if (Tags.IsFood(other.gameObject))
+      else if (Tags.IsFood(otherObject))
       {
-        OnFoodEaten?.Invoke(other.gameObject);
-
-        var gameObjectTag = other.gameObject.tag;
-        if (ObjectPoolHandler.instance.isPoolValid(gameObjectTag))
-        {
-          ObjectPoolHandler.instance.ReturnToPool(gameObjectTag, other.gameObject);
-        }
-        else
-        {
-          Destroy(other.gameObject);
-        }
+        OnFoodEaten?.Invoke(otherObject);
+        ObjectPoolHandler.Instance.ReturnOrDestroy(otherObject.tag, otherObject);
 
         if (other.TryGetComponent(out NutritionController nutritionController))
         {

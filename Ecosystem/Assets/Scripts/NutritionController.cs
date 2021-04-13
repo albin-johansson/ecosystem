@@ -1,15 +1,11 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
 using Ecosystem.Spawning;
 using UnityEngine;
 
 namespace Ecosystem
 {
-  public class NutritionController : MonoBehaviour
+  public sealed class NutritionController : MonoBehaviour
   {
     [SerializeField] private float nutritionalValue;
-    [SerializeField] private string keyToPool;
 
     public delegate void FoodEatenEvent(GameObject food);
 
@@ -17,6 +13,13 @@ namespace Ecosystem
     /// This event is emitted every time a food resource is consumed.
     /// </summary>
     public static event FoodEatenEvent OnFoodEaten;
+
+    private string _keyToPool;
+
+    private void Start()
+    {
+      _keyToPool = gameObject.tag;
+    }
 
     private void Update()
     {
@@ -27,7 +30,7 @@ namespace Ecosystem
       }
       else
       {
-        ReturnToPool();
+        ObjectPoolHandler.Instance.ReturnOrDestroy(_keyToPool, gameObject);
       }
     }
 
@@ -41,31 +44,14 @@ namespace Ecosystem
       else
       {
         OnFoodEaten?.Invoke(gameObject);
-        ReturnToPool();
+        ObjectPoolHandler.Instance.ReturnOrDestroy(_keyToPool, gameObject);
         return nutritionalValue;
       }
     }
 
-    public void SetNutrition(float value)
+    public void SetNutritionalValue(float value)
     {
       nutritionalValue = value;
-    }
-
-    public void SetKeyToPool(string key)
-    {
-      keyToPool = key;
-    }
-
-    private void ReturnToPool()
-    {
-      if (ObjectPoolHandler.instance.isPoolValid(keyToPool))
-      {
-        ObjectPoolHandler.instance.ReturnToPool(keyToPool, gameObject);
-      }
-      else
-      {
-        Destroy(gameObject);
-      }
     }
   }
 }
