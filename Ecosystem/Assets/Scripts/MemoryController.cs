@@ -40,6 +40,7 @@ namespace Ecosystem
         {
           continue;
         }
+
         if (!closest)
         {
           closest = memoryObject;
@@ -50,7 +51,7 @@ namespace Ecosystem
           closest = memoryObject;
         }
       }
-      
+
       return closest;
     }
   }

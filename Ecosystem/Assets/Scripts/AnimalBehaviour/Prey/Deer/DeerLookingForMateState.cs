@@ -61,8 +61,6 @@ namespace Ecosystem.AnimalBehaviour.Prey.Deer
 
       return base.Tick();
     }
-    
-    
 
     public override GameObject End()
     {

@@ -69,7 +69,7 @@ namespace Ecosystem.Logging
     private void LogMating(Vector3 position, string animalTag, IGenome male, IGenome female)
     {
       _data.AddMating(position, animalTag, male, female);
-      
+
       matingCountText.text = _data.MatingCount().ToString();
     }
 

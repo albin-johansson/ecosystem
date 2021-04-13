@@ -40,8 +40,8 @@ namespace Ecosystem.Genes
       else
       {
         return GeneUtil.RandomWithChance(50)
-                ? new Gene(first)
-                : new Gene(second);
+          ? new Gene(first)
+          : new Gene(second);
       }
     }
   }

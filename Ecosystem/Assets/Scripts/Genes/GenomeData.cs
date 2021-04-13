@@ -21,16 +21,16 @@ namespace Ecosystem.Genes
 
     internal static GenomeData Create(Dictionary<GeneType, Gene> initial) => new GenomeData
     {
-            HungerRate = initial[GeneType.HungerRate],
-            HungerThreshold = initial[GeneType.HungerThreshold],
-            ThirstRate = initial[GeneType.ThirstRate],
-            ThirstThreshold = initial[GeneType.ThirstThreshold],
-            Vision = initial[GeneType.Vision],
-            Speed = initial[GeneType.Speed],
-            SizeFactor = initial[GeneType.SizeFactor],
-            DesirabilityScore = initial[GeneType.DesirabilityScore],
-            GestationPeriod = initial[GeneType.GestationPeriod],
-            SexualMaturityTime = initial[GeneType.SexualMaturityTime]
+      HungerRate = initial[GeneType.HungerRate],
+      HungerThreshold = initial[GeneType.HungerThreshold],
+      ThirstRate = initial[GeneType.ThirstRate],
+      ThirstThreshold = initial[GeneType.ThirstThreshold],
+      Vision = initial[GeneType.Vision],
+      Speed = initial[GeneType.Speed],
+      SizeFactor = initial[GeneType.SizeFactor],
+      DesirabilityScore = initial[GeneType.DesirabilityScore],
+      GestationPeriod = initial[GeneType.GestationPeriod],
+      SexualMaturityTime = initial[GeneType.SexualMaturityTime]
     };
   }
 }

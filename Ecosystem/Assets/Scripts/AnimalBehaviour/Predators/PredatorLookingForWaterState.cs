@@ -16,6 +16,7 @@ namespace Ecosystem.AnimalBehaviour.Predators
       {
         Target = MemoryController.GetClosestInMemory(Tags.IsWater, MovementController.GetPosition());
       }
+
       MovementController.StartWander();
       AnimationController.EnterMoveAnimation();
     }
@@ -26,6 +27,7 @@ namespace Ecosystem.AnimalBehaviour.Predators
       {
         return AnimalState.RunningTowardsWater;
       }
+
       MovementController.UpdateWander();
       return base.Tick();
     }

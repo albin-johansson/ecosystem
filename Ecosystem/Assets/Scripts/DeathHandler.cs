@@ -30,7 +30,7 @@ namespace Ecosystem
 
       _gameObject = gameObject;
       _cause = cause;
-      
+
       OnDeath?.Invoke(_cause, _gameObject.gameObject);
       animationController.EnterDeathAnimation();
 

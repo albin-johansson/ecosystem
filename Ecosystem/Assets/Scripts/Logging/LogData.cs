@@ -94,17 +94,17 @@ namespace Ecosystem.Logging
     ///   The base rabbit genome.
     /// </summary>
     [SerializeField] private GenomeInfo rabbitGenome;
-    
+
     /// <summary>
     ///   The base deer genome.
     /// </summary>
     [SerializeField] private GenomeInfo deerGenome;
-    
+
     /// <summary>
     ///   The base wolf genome.
     /// </summary>
     [SerializeField] private GenomeInfo wolfGenome;
-    
+
     /// <summary>
     ///   The base bear genome.
     /// </summary>
@@ -182,12 +182,12 @@ namespace Ecosystem.Logging
     {
       events.Add(new SimulationEvent
       {
-              time = SessionTime.Now(),
-              type = "mating",
-              tag = animalTag,
-              position = position,
-              matingIndex = matings.Count,
-              deathIndex = -1
+        time = SessionTime.Now(),
+        type = "mating",
+        tag = animalTag,
+        position = position,
+        matingIndex = matings.Count,
+        deathIndex = -1
       });
 
       matings.Add(CreateMatingInfo(male, female));
@@ -202,12 +202,12 @@ namespace Ecosystem.Logging
     {
       events.Add(new SimulationEvent
       {
-              time = SessionTime.Now(),
-              type = "birth",
-              tag = animal.tag,
-              position = animal.transform.position,
-              matingIndex = -1,
-              deathIndex = -1
+        time = SessionTime.Now(),
+        type = "birth",
+        tag = animal.tag,
+        position = animal.transform.position,
+        matingIndex = -1,
+        deathIndex = -1
       });
 
       ++birthCount;
@@ -223,17 +223,17 @@ namespace Ecosystem.Logging
     {
       events.Add(new SimulationEvent
       {
-              time = SessionTime.Now(),
-              type = "death",
-              tag = deadObject.tag,
-              position = deadObject.transform.position,
-              matingIndex = -1,
-              deathIndex = deaths.Count
+        time = SessionTime.Now(),
+        type = "death",
+        tag = deadObject.tag,
+        position = deadObject.transform.position,
+        matingIndex = -1,
+        deathIndex = deaths.Count
       });
 
       deaths.Add(new Death
       {
-              cause = cause
+        cause = cause
       });
 
       --aliveCount;
@@ -248,12 +248,12 @@ namespace Ecosystem.Logging
     {
       events.Add(new SimulationEvent
       {
-              time = SessionTime.Now(),
-              type = "consumption",
-              tag = food.tag,
-              position = food.transform.position,
-              matingIndex = -1,
-              deathIndex = -1
+        time = SessionTime.Now(),
+        type = "consumption",
+        tag = food.tag,
+        position = food.transform.position,
+        matingIndex = -1,
+        deathIndex = -1
       });
 
       --foodCount;
@@ -326,28 +326,28 @@ namespace Ecosystem.Logging
 
     private static Mating CreateMatingInfo(IGenome male, IGenome female) => new Mating
     {
-            male = RecordGenes(male),
-            female = RecordGenes(female)
+      male = RecordGenes(male),
+      female = RecordGenes(female)
     };
 
     private static List<GeneInfo> RecordGenes(IGenome genome) => new List<GeneInfo>(GeneCount)
     {
-            CreateGeneInfo(GeneType.HungerRate, genome.GetHungerRate()),
-            CreateGeneInfo(GeneType.HungerThreshold, genome.GetHungerThreshold()),
-            CreateGeneInfo(GeneType.ThirstRate, genome.GetThirstRate()),
-            CreateGeneInfo(GeneType.ThirstThreshold, genome.GetThirstThreshold()),
-            CreateGeneInfo(GeneType.Vision, genome.GetVision()),
-            CreateGeneInfo(GeneType.Speed, genome.GetSpeed()),
-            CreateGeneInfo(GeneType.SizeFactor, genome.GetSizeFactor()),
-            CreateGeneInfo(GeneType.DesirabilityScore, genome.GetDesirabilityScore()),
-            CreateGeneInfo(GeneType.GestationPeriod, genome.GetGestationPeriod()),
-            CreateGeneInfo(GeneType.SexualMaturityTime, genome.GetSexualMaturityTime())
+      CreateGeneInfo(GeneType.HungerRate, genome.GetHungerRate()),
+      CreateGeneInfo(GeneType.HungerThreshold, genome.GetHungerThreshold()),
+      CreateGeneInfo(GeneType.ThirstRate, genome.GetThirstRate()),
+      CreateGeneInfo(GeneType.ThirstThreshold, genome.GetThirstThreshold()),
+      CreateGeneInfo(GeneType.Vision, genome.GetVision()),
+      CreateGeneInfo(GeneType.Speed, genome.GetSpeed()),
+      CreateGeneInfo(GeneType.SizeFactor, genome.GetSizeFactor()),
+      CreateGeneInfo(GeneType.DesirabilityScore, genome.GetDesirabilityScore()),
+      CreateGeneInfo(GeneType.GestationPeriod, genome.GetGestationPeriod()),
+      CreateGeneInfo(GeneType.SexualMaturityTime, genome.GetSexualMaturityTime())
     };
 
     private static GeneInfo CreateGeneInfo(GeneType type, Gene gene) => new GeneInfo
     {
-            gene = type,
-            value = gene.Value
+      gene = type,
+      value = gene.Value
     };
   }
 }

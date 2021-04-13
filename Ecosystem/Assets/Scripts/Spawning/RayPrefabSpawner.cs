@@ -26,7 +26,7 @@ namespace Ecosystem.Spawning
     private float _elapsedTime;
     private bool _usePool;
     private bool _haveCheckedPool;
-    
+
     private void Update()
     {
       if (!_haveCheckedPool)

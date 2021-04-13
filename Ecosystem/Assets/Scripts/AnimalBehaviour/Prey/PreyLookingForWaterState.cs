@@ -16,6 +16,7 @@ namespace Ecosystem.AnimalBehaviour.Prey
       {
         Target = MemoryController.GetClosestInMemory(Tags.IsWater, MovementController.GetPosition());
       }
+
       MovementController.StartWander();
       AnimationController.EnterMoveAnimation();
     }
@@ -34,6 +35,7 @@ namespace Ecosystem.AnimalBehaviour.Prey
           return AnimalState.RunningTowardsWater;
         }
       }
+
       return base.Tick();
     }
 
