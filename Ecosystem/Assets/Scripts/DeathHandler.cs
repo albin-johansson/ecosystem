@@ -21,7 +21,6 @@ namespace Ecosystem
     [SerializeField] private EcoAnimationController animationController;
 
     private string _keyToPool;
-    private GameObject _gameObject;
 
     public bool isDead; // TODO can probably remove this when realistic food is implemented
 
@@ -34,9 +33,7 @@ namespace Ecosystem
     {
       isDead = true; // TODO this is a temporary fix so that multiple wolves can't eat the same prey
 
-      _gameObject = gameObject;
-
-      OnDeath?.Invoke(cause, _gameObject.gameObject);
+      OnDeath?.Invoke(cause, gameObject.gameObject);
       animationController.EnterDeathAnimation();
 
       StartCoroutine(InactivateAfterDelay(3));
@@ -47,18 +44,20 @@ namespace Ecosystem
     private IEnumerator InactivateAfterDelay(int seconds)
     {
       yield return new WaitForSeconds(seconds);
-      ObjectPoolHandler.Instance.ReturnToPool(_keyToPool, _gameObject);
+      ObjectPoolHandler.Instance.ReturnToPool(_keyToPool, gameObject);
     }
 
     private void InstantiateCarrion()
     {
       var carrion = ObjectPoolHandler.Instance.Construct("Meat");
-      carrion.transform.position = _gameObject.transform.position;
-      carrion.transform.rotation = _gameObject.transform.rotation;
+
+      var currentTransform = gameObject.transform;
+      carrion.transform.position = currentTransform.position;
+      carrion.transform.rotation = currentTransform.rotation;
       carrion.SetActive(true);
 
       var nutritionController = carrion.GetComponent<NutritionController>();
-      nutritionController.SetNutritionalValue(Nutrition.GetNutritionalValue(_gameObject));
+      nutritionController.SetNutritionalValue(Nutrition.GetNutritionalValue(gameObject));
     }
   }
 }
