@@ -20,12 +20,10 @@ namespace Ecosystem
 
     [SerializeField] private EcoAnimationController animationController;
     [SerializeField] private string keyToPool;
-    [SerializeField] private string keyToMeatPool;
 
     private CauseOfDeath _cause;
     private GameObject _gameObject;
 
-    public NutritionController nutritionController;
     public bool isDead; // TODO can probably remove this when realistic food is implemented
 
     public void Die(CauseOfDeath cause)
@@ -51,12 +49,12 @@ namespace Ecosystem
 
     private void InstantiateCarrion()
     {
-      var carrion = ObjectPoolHandler.Instance.Construct(keyToMeatPool);
+      var carrion = ObjectPoolHandler.Instance.Construct("Meat");
       carrion.transform.position = _gameObject.transform.position;
       carrion.transform.rotation = _gameObject.transform.rotation;
       carrion.SetActive(true);
 
-      nutritionController = carrion.GetComponent<NutritionController>();
+      var nutritionController = carrion.GetComponent<NutritionController>();
       nutritionController.SetNutritionalValue(Nutrition.GetNutritionalValue(_gameObject));
     }
   }

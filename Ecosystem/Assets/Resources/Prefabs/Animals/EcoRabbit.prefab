@@ -885,6 +885,7 @@ GameObject:
   - component: {fileID: 1768703437601898298}
   - component: {fileID: 1438288584065220351}
   - component: {fileID: 2656864231929346077}
+  - component: {fileID: 7642810798003447776}
   - component: {fileID: 3025539359171641749}
   m_Layer: 8
   m_Name: EcoRabbit
@@ -1014,6 +1015,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   navMeshAgent: {fileID: 2689415282919559664}
+--- !u!114 &7642810798003447776
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3436557251021641289}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 447cdde87036ae847b423148d5fee418, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  nutritionalValue: 10
 --- !u!114 &3025539359171641749
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1028,8 +1042,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   animationController: {fileID: 2656864231929346077}
   keyToPool: Rabbit
-  meatKeyToPool: Meat
-  nutritionController: {fileID: 0}
   isDead: 0
 --- !u!1 &3579996788643659857
 GameObject:
