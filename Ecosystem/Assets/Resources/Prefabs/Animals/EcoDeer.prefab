@@ -7435,6 +7435,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   animationController: {fileID: 4427174813899224407}
   keyToPool: Deer
+  meatKeyToPool: Meat
   _isDead: 0
 --- !u!114 &570846004582155358
 MonoBehaviour:
@@ -10016,6 +10017,10 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 8623289280508370884, guid: b11869fe3d5ecbf4b912f33fa4a312db, type: 3}
+      propertyPath: textMesh
+      value: 
+      objectReference: {fileID: 6148813586097505375}
     - target: {fileID: 8703765452308408067, guid: b11869fe3d5ecbf4b912f33fa4a312db, type: 3}
       propertyPath: m_Layer
       value: 0
@@ -10060,6 +10065,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0f33f2c7a1419e740be5570d71daa2bf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!102 &6148813586097505375 stripped
+TextMesh:
+  m_CorrespondingSourceObject: {fileID: 4064930911256007859, guid: b11869fe3d5ecbf4b912f33fa4a312db, type: 3}
+  m_PrefabInstance: {fileID: 7871571146252701932}
+  m_PrefabAsset: {fileID: 0}
 --- !u!114 &1914420894457515816 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 8623289280508370884, guid: b11869fe3d5ecbf4b912f33fa4a312db, type: 3}

@@ -11,10 +11,10 @@ GameObject:
   - component: {fileID: 6317102523152618976}
   - component: {fileID: 522567753763841389}
   - component: {fileID: 3463232439016609762}
-  - component: {fileID: 1923058271655306633}
+  - component: {fileID: 5271084562353145930}
   m_Layer: 3
   m_Name: Water Mass
-  m_TagString: Water
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 1
   m_StaticEditorFlags: 8
@@ -82,7 +82,7 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!65 &1923058271655306633
+--- !u!65 &5271084562353145930
 BoxCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -93,5 +93,5 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 1, y: 0.9, z: 1}
+  m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}

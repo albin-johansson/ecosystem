@@ -51,6 +51,7 @@ namespace Ecosystem
       {
         Hunger += genome.Metabolism * Time.deltaTime;
       }
+
       resourceBar.SetValue((float) Hunger);
       if (Hunger > maxHunger)
       {
@@ -61,16 +62,43 @@ namespace Ecosystem
 
     private void OnTriggerEnter(Collider other)
     {
-      if (!CollideActive || IsAttacking) return;
+      if (!CollideActive || IsAttacking)
+      {
+        return;
+      }
+
       if (Tags.IsPrey(other.gameObject))
       {
         DeathHandler _deathHandler = other.gameObject.GetComponentInParent<DeathHandler>();
         if (!_deathHandler._isDead)
         {
-          _deathHandler.Die(CauseOfDeath.Eaten);
+          NutritionController prey = _deathHandler.Kill();
+          Hunger -= prey.Consume(Hunger);
+          
           IsAttacking = true;
           OnPreyConsumed?.Invoke();
-          Hunger = 0;
+        }
+      }
+      else if (Tags.IsMeat(other.gameObject))
+      {
+        if (other.TryGetComponent(out NutritionController nutritionController))
+        {
+          Hunger -= nutritionController.Consume(Hunger);
+        }
+      }
+    }
+    
+    private void OnTriggerStay(Collider other)
+    {
+      if (CollideActive)
+      {
+        if (Tags.IsMeat(other.gameObject))
+        {
+          if (other.TryGetComponent(out NutritionController nutritionController))
+          {
+            Hunger -= nutritionController.Consume(Hunger);
+            CollideActive = false;
+          }
         }
       }
     }

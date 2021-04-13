@@ -1,6 +1,5 @@
 using Ecosystem.Genes;
 using Ecosystem.Logging;
-using Ecosystem.Spawning;
 using Ecosystem.UI;
 using Ecosystem.Util;
 using UnityEngine;
@@ -21,7 +20,7 @@ namespace Ecosystem
     public bool IsAttacking { get; set; }
 
     public bool CollideActive { get; set; }
-
+    
     public delegate void FoodEatenEvent(GameObject food);
 
     /// <summary>
@@ -87,16 +86,9 @@ namespace Ecosystem
 
       if (Tags.IsFood(other.gameObject))
       {
-        OnFoodEaten?.Invoke(other.gameObject);
-        var gameObjectTag = other.gameObject.tag;
-        Hunger = 0;
-        if (ObjectPoolHandler.instance.isPoolValid(gameObjectTag))
+        if (other.TryGetComponent(out NutritionController nutritionController))
         {
-          ObjectPoolHandler.instance.ReturnToPool(gameObjectTag, other.gameObject);
-        }
-        else
-        {
-          Destroy(other.gameObject);
+          Hunger -= nutritionController.Consume(Hunger);
         }
       }
     }
