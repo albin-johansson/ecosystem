@@ -24,6 +24,7 @@ namespace Ecosystem.AnimalBehaviour.Predators.Bear
         {
           return AnimalState.GoingToFood;
         }
+
         if (Tags.IsPrey(Target))
         {
           return AnimalState.ChasingPrey;

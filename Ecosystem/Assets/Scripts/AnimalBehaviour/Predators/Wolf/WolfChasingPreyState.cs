@@ -43,6 +43,7 @@ namespace Ecosystem.AnimalBehaviour.Predators.Wolf
         {
           AnimationController.EnterMoveAnimation();
         }
+
         MovementController.SetDestination(Target.transform.position);
       }
 

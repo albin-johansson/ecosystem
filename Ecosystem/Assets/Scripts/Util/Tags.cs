@@ -11,13 +11,13 @@ namespace Ecosystem.Util
     #region Type checks
 
     public static bool IsRabbit(GameObject animal) => animal.CompareTag("Rabbit");
-    
+
     public static bool IsDeer(GameObject animal) => animal.CompareTag("Deer");
 
     public static bool IsWolf(GameObject animal) => animal.CompareTag("Wolf");
 
     public static bool IsBear(GameObject animal) => animal.CompareTag("Bear");
-    
+
     public static bool IsPredator(GameObject animal) => IsWolf(animal) || IsBear(animal);
 
     public static bool IsPrey(GameObject animal) => IsRabbit(animal) || IsDeer(animal);

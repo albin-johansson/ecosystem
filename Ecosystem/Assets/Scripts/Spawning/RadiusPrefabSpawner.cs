@@ -7,14 +7,14 @@ public sealed class RadiusPrefabSpawner : MonoBehaviour
   [SerializeField] private float rate;
   [SerializeField] private float radius;
   private float _elapsedTime;
-  
+
   private void Update()
   {
     _elapsedTime += Time.deltaTime;
     if (rate < _elapsedTime)
     {
       _elapsedTime = 0;
-      
+
       var distance = Random.Range(0, radius);
       var dir = Random.insideUnitCircle;
       var position = transform.position + distance * new Vector3(dir.x, 0, dir.y);
@@ -24,6 +24,7 @@ public sealed class RadiusPrefabSpawner : MonoBehaviour
       {
         return;
       }
+
       if (hit.transform.CompareTag("Terrain"))
       {
         Instantiate(prefab, hit.point, Quaternion.identity);

@@ -17,8 +17,8 @@ namespace Ecosystem.AnimalBehaviour.Predators.Wolf
 
     public override AnimalState Tick()
     {
-      if (!Consumer.IsHungry() || 
-          !Target || 
+      if (!Consumer.IsHungry() ||
+          !Target ||
           !Target.activeSelf ||
           !MovementController.IsWithinSphere(Target.transform.position))
       {
