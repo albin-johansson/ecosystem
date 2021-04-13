@@ -29,13 +29,11 @@ namespace Ecosystem.UI
     private float _distance = 20;
     private bool _tracking;
     private bool _boosted;
-    private bool _alwaysFreeLook;
 
     private void Start()
     {
       _camera = Camera.main;
       _transform = cameraRigidBody.transform;
-      _alwaysFreeLook = !Input.mousePresent; // If we don't detect a real mouse, we are always in free look mode
     }
 
     private void Update()
@@ -155,7 +153,7 @@ namespace Ecosystem.UI
 
     private void UpdateRotation()
     {
-      if (!_tracking && (_alwaysFreeLook || Input.GetKey(FreeLookKey)))
+      if (!_tracking && Input.GetKey(FreeLookKey))
       {
         _y = Input.GetAxis("Mouse X") * 1.5f;
         _x = Input.GetAxis("Mouse Y") * 1.5f;
