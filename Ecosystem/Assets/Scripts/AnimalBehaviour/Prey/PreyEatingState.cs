@@ -22,8 +22,7 @@ namespace Ecosystem.AnimalBehaviour.Prey
       {
         return AnimalState.Fleeing;
       }
-
-      if (Consumer.EatingFromGameObject)
+      else if (Consumer.EatingFromGameObject)
       {
         return Type();
       }

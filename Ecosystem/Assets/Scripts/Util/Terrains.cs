@@ -16,7 +16,7 @@ namespace Ecosystem.Util
     /// </summary>
     /// <param name="terrain">the terrain to obtain a position in.</param>
     /// <param name="position">the resulting walkable position, set to <c>Vector3.zero</c> on failure.</param>
-    /// <returns><c>true</c> on sucess; <c>false</c> otherwise.</returns>
+    /// <returns><c>true</c> on success; <c>false</c> otherwise.</returns>
     public static bool RandomWalkablePosition(Terrain terrain, out Vector3 position)
     {
       var terrainData = terrain.terrainData;

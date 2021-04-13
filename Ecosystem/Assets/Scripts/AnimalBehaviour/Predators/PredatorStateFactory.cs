@@ -60,9 +60,9 @@ namespace Ecosystem.AnimalBehaviour.Predators
       return new WolfRunningTowardsFoodState(data);
     }
 
-    public static IAnimalState CreateWolfLookingForPrey(StateData data)
+    public static IAnimalState CreateWolfLookingForFood(StateData data)
     {
-      return new WolfLookingForPreyState(data);
+      return new WolfLookingForFoodState(data);
     }
 
     public static IAnimalState CreateWolfChasingPrey(StateData data)

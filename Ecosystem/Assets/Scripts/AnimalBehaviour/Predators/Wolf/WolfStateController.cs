@@ -5,7 +5,7 @@ namespace Ecosystem.AnimalBehaviour.Predators.Wolf
     protected override void Initialize()
     {
       base.Initialize();
-      LookingForFood = PredatorStateFactory.CreateWolfLookingForPrey(Data);
+      LookingForFood = PredatorStateFactory.CreateWolfLookingForFood(Data);
       ChasingPrey = PredatorStateFactory.CreateWolfChasingPrey(Data);
       LookingForMate = PredatorStateFactory.CreateWolfLookingForMate(Data);
     }

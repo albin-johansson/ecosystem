@@ -18,7 +18,7 @@ namespace Ecosystem
 
     public void SaveToMemory(GameObject other)
     {
-      _memory.Insert(_nextMemoryLocation, (other.gameObject));
+      _memory.Insert(_nextMemoryLocation, other.gameObject);
       ++_nextMemoryLocation;
       if (_nextMemoryLocation >= MemoryCapacity)
       {

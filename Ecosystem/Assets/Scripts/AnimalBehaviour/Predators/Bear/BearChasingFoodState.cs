@@ -1,5 +1,4 @@
 using Ecosystem.Util;
-using UnityEditor.Experimental.GraphView;
 using UnityEngine;
 
 namespace Ecosystem.AnimalBehaviour.Predators.Bear

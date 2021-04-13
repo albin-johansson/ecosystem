@@ -32,7 +32,7 @@ namespace Ecosystem.AnimalBehaviour.Prey
         MovementController = movementController,
         WaterConsumer = waterConsumer,
         Reproducer = reproducer,
-        Genome = genome,
+        Genome = genome
       };
 
       _idle = PreyStateFactory.CreatePreyIdle(Data);
@@ -91,6 +91,7 @@ namespace Ecosystem.AnimalBehaviour.Prey
 
         case AnimalState.ChasingPrey:
         case AnimalState.Attacking:
+        case AnimalState.GoingToFood:
         default:
           break;
       }

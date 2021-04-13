@@ -46,7 +46,7 @@ namespace Ecosystem
 
       if (IsDrinking)
       {
-        Thirst -= 10f * Time.deltaTime; //TODO Add drinkrate
+        Thirst -= 10f * Time.deltaTime; //TODO Add drink rate
         if (Thirst <= 0)
         {
           Thirst = 0;

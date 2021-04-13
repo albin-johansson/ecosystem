@@ -11,7 +11,7 @@ namespace Ecosystem.AnimalBehaviour.Predators.Wolf
 
     public override void Begin(GameObject target)
     {
-      Target = GetClosestInVision(Layers.PreyMask);
+      Target = GetClosestInVision(Layers.PreyMask | Layers.MeatMask);
       MovementController.StartWander();
       AnimationController.EnterMoveAnimation();
     }
@@ -20,13 +20,18 @@ namespace Ecosystem.AnimalBehaviour.Predators.Wolf
     {
       if (Target)
       {
-        return AnimalState.ChasingPrey;
+        if (Tags.IsMeat(Target))
+        {
+          return AnimalState.GoingToFood;
+        }
+        else if (Tags.IsPrey(Target))
+        {
+          return AnimalState.ChasingPrey;
+        }
       }
-      else
-      {
-        MovementController.UpdateWander();
-        return base.Tick();
-      }
+
+      MovementController.UpdateWander();
+      return base.Tick();
     }
 
     public override void OnTriggerEnter(Collider other)
@@ -36,7 +41,7 @@ namespace Ecosystem.AnimalBehaviour.Predators.Wolf
       {
         MemoryController.SaveToMemory(otherObject);
       }
-      else if (Tags.IsPrey(otherObject))
+      else if (Tags.IsPrey(otherObject) || Tags.IsMeat(otherObject))
       {
         Target = otherObject;
       }
