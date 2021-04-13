@@ -1,3 +1,5 @@
+using UnityEngine;
+
 namespace Ecosystem.AnimalBehaviour.Predators
 {
   public abstract class AbstractPredatorStateController : AbstractStateController
@@ -19,7 +21,7 @@ namespace Ecosystem.AnimalBehaviour.Predators
     protected override void Initialize()
     {
       base.Initialize();
-      
+
       Data = new StateData
       {
         StaminaController = staminaController,
@@ -67,12 +69,12 @@ namespace Ecosystem.AnimalBehaviour.Predators
 
         case AnimalState.ChasingPrey:
           State = ChasingPrey;
-          Consumer.CollideActive = true;
+          consumer.ColliderActive = true;
           break;
 
         case AnimalState.LookingForFood:
           State = LookingForFood;
-          Consumer.ColliderActive = true;
+          consumer.ColliderActive = true;
           break;
 
         case AnimalState.LookingForMate:
