@@ -1,11 +1,11 @@
 ﻿using Ecosystem.Util;
 using UnityEngine;
 
-namespace Ecosystem.AnimalBehaviour.Prey.Rabbit
+namespace Ecosystem.AnimalBehaviour.Predators.Bear
 {
-  internal sealed class RabbitEatingState : AbstractAnimalState
+  internal sealed class BearEatingState : AbstractAnimalState
   {
-    public RabbitEatingState(StateData data)
+    public BearEatingState(StateData data)
     {
       Consumer = data.Consumer;
       WaterConsumer = data.WaterConsumer;
@@ -24,14 +24,6 @@ namespace Ecosystem.AnimalBehaviour.Prey.Rabbit
 
     public override AnimalState Tick()
     {
-      if (Target)
-      {
-        if (Tags.IsPredator(Target))
-        {
-          return AnimalState.Fleeing;
-        } 
-      }
-
       if (Consumer.EatingFromGameObject)
       {
         return Type();
@@ -39,15 +31,6 @@ namespace Ecosystem.AnimalBehaviour.Prey.Rabbit
       else
       {
         return base.Tick();
-      }
-    }
-
-    public override void OnTriggerEnter(Collider other)
-    {
-      var otherObject = other.gameObject;
-      if (Tags.IsPredator(otherObject))
-      {
-        Target = otherObject;
       }
     }
 

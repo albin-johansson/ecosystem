@@ -1,3 +1,4 @@
+using Ecosystem.Consumers;
 using Ecosystem.Genes;
 
 namespace Ecosystem.AnimalBehaviour

@@ -1,4 +1,5 @@
 using System;
+using Ecosystem.Consumers;
 using Ecosystem.Genes;
 using Ecosystem.Util;
 using UnityEngine;

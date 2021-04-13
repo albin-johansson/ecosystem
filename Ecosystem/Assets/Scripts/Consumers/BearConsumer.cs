@@ -4,9 +4,9 @@ using Ecosystem.UI;
 using Ecosystem.Util;
 using UnityEngine;
 
-namespace Ecosystem
+namespace Ecosystem.Consumers
 {
-  public sealed class PreyConsumer : MonoBehaviour, IConsumer
+  public sealed class BearConsumer : MonoBehaviour, IConsumer
   {
     [SerializeField] private AbstractGenome genome;
     [SerializeField] private ResourceBar resourceBar;
@@ -41,6 +41,20 @@ namespace Ecosystem
       if (_isDead)
       {
         return;
+      }
+      
+      if (EatingFromGameObject && EatingFromGameObject.activeSelf)
+      {
+        Hunger -= 4 * Time.deltaTime;
+        if (Hunger <= 0)
+        {
+          Hunger = 0;
+          EatingFromGameObject = null;
+        }
+      }
+      else
+      {
+        EatingFromGameObject = null;
       }
 
       if (reproducer.IsPregnant)
@@ -83,6 +97,10 @@ namespace Ecosystem
         {
           Hunger -= nutritionController.Consume(Hunger);
         }
+      }
+      else if (Tags.IsStaticFood(other.gameObject))
+      {
+        EatingFromGameObject = other.gameObject;
       }
     }
     

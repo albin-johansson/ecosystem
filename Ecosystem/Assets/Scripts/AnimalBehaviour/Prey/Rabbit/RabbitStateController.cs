@@ -1,14 +1,15 @@
+using Ecosystem.Consumers;
 using UnityEngine;
 
 namespace Ecosystem.AnimalBehaviour.Prey.Rabbit
 {
   public sealed class RabbitStateController : AbstractPreyStateController
   {
-    [SerializeField] private FoodConsumer foodConsumer;
+    [SerializeField] private RabbitConsumer rabbitConsumer;
 
     public override void Start()
     {
-      Consumer = foodConsumer;
+      Consumer = rabbitConsumer;
       base.Start();
       LookingForFood = PreyStateFactory.CreateRabbitLookingForFood(Data);
       RunningTowardsFood = PreyStateFactory.CreateRabbitRunningTowardsFood(Data);

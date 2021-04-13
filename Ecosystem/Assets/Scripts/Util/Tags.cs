@@ -16,7 +16,7 @@ namespace Ecosystem.Util
 
     public static bool IsAnimal(GameObject gameObject) => IsPrey(gameObject) || IsPredator(gameObject);
 
-    public static bool IsBerryConsumer(GameObject gameObject) => IsPrey(gameObject); //TODO add bear
+    public static bool IsBerryConsumer(GameObject gameObject) => IsPrey(gameObject) || gameObject.CompareTag("Bear");
 
     public static bool IsStaticFood(GameObject gameObject) => gameObject.CompareTag("StaticFood");
 

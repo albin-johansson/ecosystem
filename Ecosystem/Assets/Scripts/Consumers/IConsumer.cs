@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace Ecosystem
+namespace Ecosystem.Consumers
 {
   /// <summary>
   ///   An interface for food consumers, although not necessarily non-meat food.

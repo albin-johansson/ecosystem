@@ -1,41 +1,39 @@
-using Ecosystem.Genes;
+﻿using Ecosystem.Genes;
 using Ecosystem.Logging;
 using Ecosystem.UI;
 using Ecosystem.Util;
 using UnityEngine;
 
-namespace Ecosystem
+namespace Ecosystem.Consumers
 {
-  public sealed class FoodConsumer : MonoBehaviour, IConsumer
+  public sealed class WolfConsumer : MonoBehaviour, IConsumer
   {
     [SerializeField] private AbstractGenome genome;
     [SerializeField] private ResourceBar resourceBar;
     [SerializeField] private DeathHandler deathHandler;
     [SerializeField] private double maxHunger = 100;
+    [SerializeField] private EcoAnimationController animationController;
     [SerializeField] private Reproducer reproducer;
     private bool _isDead;
 
-    public GameObject EatingFromGameObject { get; set; }
-    public double Hunger { get; set; }
     public bool IsConsuming { get; set; }
+    
+    public GameObject EatingFromGameObject { get; set; }
+
+    public double Hunger { get; set; }
 
     public bool CollideActive { get; set; }
-    
-    public delegate void FoodEatenEvent(GameObject food);
+
+    public delegate void PreyConsumedEvent();
 
     /// <summary>
-    /// This event is emitted every time a food resource is consumed.
+    /// This event is emitted every time a prey is consumed.
     /// </summary>
-    public static event FoodEatenEvent OnFoodEaten;
+    public static event PreyConsumedEvent OnPreyConsumed;
 
-    private void OnEnable()
+    private void Start()
     {
       resourceBar.SetMaxValue((float) maxHunger);
-    }
-
-    private void OnDisable()
-    {
-      Hunger = 0;
     }
 
     private void Update()
@@ -43,20 +41,6 @@ namespace Ecosystem
       if (_isDead)
       {
         return;
-      }
-
-      if (EatingFromGameObject && EatingFromGameObject.activeSelf)
-      {
-        Hunger -= 4 * Time.deltaTime;
-        if (Hunger <= 0)
-        {
-          Hunger = 0;
-          EatingFromGameObject = null;
-        }
-      }
-      else
-      {
-        EatingFromGameObject = null;
       }
 
       if (reproducer.IsPregnant)
@@ -78,17 +62,41 @@ namespace Ecosystem
 
     private void OnTriggerEnter(Collider other)
     {
-      if (Tags.IsStaticFood(other.gameObject))
-      {
-        OnFoodEaten?.Invoke(other.gameObject);
-        EatingFromGameObject = other.gameObject;
-      }
+      if (!CollideActive || IsConsuming) return;
 
-      if (Tags.IsFood(other.gameObject))
+
+      if (Tags.IsPrey(other.gameObject))
+      {
+        DeathHandler _deathHandler = other.gameObject.GetComponentInParent<DeathHandler>();
+        if (!_deathHandler._isDead)
+        {
+          _deathHandler.Die(CauseOfDeath.Eaten);
+          IsConsuming = true;
+          NutritionController prey = _deathHandler.Kill();
+          Hunger -= prey.Consume(Hunger);
+          OnPreyConsumed?.Invoke();
+        }
+      }
+      else if (Tags.IsMeat(other.gameObject))
       {
         if (other.TryGetComponent(out NutritionController nutritionController))
         {
           Hunger -= nutritionController.Consume(Hunger);
+        }
+      }
+    }
+    
+    private void OnTriggerStay(Collider other)
+    {
+      if (CollideActive)
+      {
+        if (Tags.IsMeat(other.gameObject))
+        {
+          if (other.TryGetComponent(out NutritionController nutritionController))
+          {
+            Hunger -= nutritionController.Consume(Hunger);
+            CollideActive = false;
+          }
         }
       }
     }
@@ -103,5 +111,6 @@ namespace Ecosystem
       Hunger = maxHunger - value;
       resourceBar.SetSaturationValue(value);
     }
+
   }
 }

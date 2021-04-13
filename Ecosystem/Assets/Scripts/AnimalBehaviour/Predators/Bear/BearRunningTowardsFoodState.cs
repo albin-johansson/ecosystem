@@ -1,11 +1,11 @@
-using System;
+﻿using System;
 using UnityEngine;
 
-namespace Ecosystem.AnimalBehaviour.Predators.Wolf
+namespace Ecosystem.AnimalBehaviour.Predators.Bear
 {
-  internal sealed class WolfRunningTowardsFoodState : AbstractAnimalState
+  internal sealed class BearRunningTowardsFoodState : AbstractAnimalState
   {
-    public WolfRunningTowardsFoodState(StateData data)
+    public BearRunningTowardsFoodState(StateData data)
     {
       Consumer = data.Consumer;
       WaterConsumer = data.WaterConsumer;
@@ -24,6 +24,10 @@ namespace Ecosystem.AnimalBehaviour.Predators.Wolf
 
     public override AnimalState Tick()
     {
+      if (Consumer.EatingFromGameObject)
+      {
+        return AnimalState.Eating;
+      }
       if (!Consumer.IsHungry() || !Target || !Target.activeSelf || !MovementController.IsTargetInRange(Target.transform.position))
       {
         return base.Tick();

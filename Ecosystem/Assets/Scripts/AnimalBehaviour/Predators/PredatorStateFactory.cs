@@ -1,6 +1,5 @@
 using Ecosystem.AnimalBehaviour.Predators.Bear;
 using Ecosystem.AnimalBehaviour.Predators.Wolf;
-using Ecosystem.AnimalBehaviour.WolfStates;
 
 namespace Ecosystem.AnimalBehaviour.Predators
 {
@@ -64,6 +63,16 @@ namespace Ecosystem.AnimalBehaviour.Predators
     public static IAnimalState CreateWolfRunningTowardsFoodState(StateData data)
     {
       return new WolfRunningTowardsFoodState(data);
+    }
+
+    public static IAnimalState CreateBearRunningTowardsFoodState(StateData data)
+    {
+      return new BearRunningTowardsFoodState(data);
+    }
+
+    public static IAnimalState CreateBearEatingState(StateData data)
+    {
+      return new BearEatingState(data);
     }
   }
 }
