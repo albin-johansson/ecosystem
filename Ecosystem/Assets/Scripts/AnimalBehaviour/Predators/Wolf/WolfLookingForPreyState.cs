@@ -56,7 +56,7 @@ namespace Ecosystem.AnimalBehaviour.Predators.Wolf
 
     public override AnimalState Type()
     {
-      return AnimalState.LookingForPrey;
+      return AnimalState.LookingForFood;
     }
   }
 }

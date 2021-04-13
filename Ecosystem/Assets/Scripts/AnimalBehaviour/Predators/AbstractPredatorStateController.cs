@@ -52,11 +52,6 @@ namespace Ecosystem.AnimalBehaviour.Predators
           State = _lookingForWater;
           break;
 
-        case AnimalState.LookingForPrey:
-          State = LookingForFood;
-          Consumer.CollideActive = true;
-          break;
-
         case AnimalState.Idle:
           State = _idle;
           break;
