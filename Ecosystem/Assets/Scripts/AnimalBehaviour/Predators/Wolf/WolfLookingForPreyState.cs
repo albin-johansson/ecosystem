@@ -1,12 +1,13 @@
 using Ecosystem.Util;
 using UnityEngine;
 
-namespace Ecosystem.AnimalBehaviour.Predators.Bear
+namespace Ecosystem.AnimalBehaviour.Predators.Wolf
 {
-  internal sealed class BearLookingForFoodState : AbstractAnimalState
+  internal sealed class WolfLookingForPreyState : AbstractAnimalState
   {
-    public BearLookingForFoodState(StateData data)
+    public WolfLookingForPreyState(StateData data)
     {
+      StaminaController = data.StaminaController;
       Consumer = data.Consumer;
       WaterConsumer = data.WaterConsumer;
       MovementController = data.MovementController;
@@ -31,12 +32,11 @@ namespace Ecosystem.AnimalBehaviour.Predators.Bear
         {
           return AnimalState.GoingToFood;
         }
-        if (Tags.IsPrey(Target))
+        if(Tags.IsPrey(Target))
         {
           return AnimalState.ChasingPrey;
         }
       }
-
       MovementController.UpdateWander();
       return base.Tick();
     }
@@ -44,7 +44,7 @@ namespace Ecosystem.AnimalBehaviour.Predators.Bear
     public override void OnTriggerEnter(Collider other)
     {
       var otherObject = other.gameObject;
-      if (Tags.IsWater(otherObject))
+      if (otherObject.CompareTag("Water"))
       {
         MemoryController.SaveToMemory(otherObject);
       }
