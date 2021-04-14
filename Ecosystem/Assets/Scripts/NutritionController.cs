@@ -1,15 +1,11 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
 using Ecosystem.Spawning;
 using UnityEngine;
 
 namespace Ecosystem
 {
-  public class NutritionController : MonoBehaviour
+  public sealed class NutritionController : MonoBehaviour
   {
-    public double nutritionalValue;
-    [SerializeField] private string keyToPool;
+    [SerializeField] private float nutritionalValue;
 
     public delegate void FoodEatenEvent(GameObject food);
 
@@ -18,51 +14,44 @@ namespace Ecosystem
     /// </summary>
     public static event FoodEatenEvent OnFoodEaten;
 
-    public void Update()
+    private string _keyToPool;
+
+    private void Start()
     {
-      // Simulates nutritional decay.
+      _keyToPool = gameObject.tag;
+    }
+
+    private void Update()
+    {
+      // Simulates nutritional decay
       if (nutritionalValue > 0)
       {
-        nutritionalValue = (double) Mathf.Max((float) 0, (float) nutritionalValue - Time.deltaTime * 0.1f);
-        return;
-      } 
-      ReturnToPool();
-    }
-
-    public double Consume(Double hunger)
-    {
-      if (hunger < nutritionalValue)
-      {
-        nutritionalValue -= hunger;
-        return hunger;
-      }
-
-      OnFoodEaten?.Invoke(gameObject);
-      ReturnToPool();
-
-      return nutritionalValue;
-    }
-
-    public void SetNutrition(double value)
-    {
-      nutritionalValue = value;
-    }
-    
-    public void SetKeyToPool(String key)
-    {
-      keyToPool = key;
-    }
-
-    private void ReturnToPool()
-    {
-      if (ObjectPoolHandler.instance.isPoolValid(keyToPool))
-      {
-        ObjectPoolHandler.instance.ReturnToPool(keyToPool, gameObject);
+        nutritionalValue = Mathf.Max(0, nutritionalValue - Time.deltaTime * 0.1f);
       }
       else
       {
-        Destroy(gameObject);
+        ObjectPoolHandler.Instance.ReturnOrDestroy(_keyToPool, gameObject);
       }
+    }
+
+    public float Consume(float amount)
+    {
+      if (amount < nutritionalValue)
+      {
+        nutritionalValue -= amount;
+        return amount;
+      }
+      else
+      {
+        OnFoodEaten?.Invoke(gameObject);
+        ObjectPoolHandler.Instance.ReturnOrDestroy(_keyToPool, gameObject);
+        return nutritionalValue;
+      }
+    }
+
+    public void SetNutritionalValue(float value)
+    {
+      nutritionalValue = value;
     }
   }
 }

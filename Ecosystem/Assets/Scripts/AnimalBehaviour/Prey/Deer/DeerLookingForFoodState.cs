@@ -5,22 +5,15 @@ namespace Ecosystem.AnimalBehaviour.Prey.Deer
 {
   internal sealed class DeerLookingForFoodState : AbstractAnimalState
   {
-    public DeerLookingForFoodState(StateData data)
+    internal DeerLookingForFoodState(StateData data) : base(data)
     {
-      Consumer = data.Consumer;
-      WaterConsumer = data.WaterConsumer;
-      MovementController = data.MovementController;
-      AnimationController = data.AnimationController;
-      MemoryController = data.MemoryController;
-      Reproducer = data.Reproducer;
-      Genome = data.Genome;
     }
 
     public override void Begin(GameObject target)
     {
       Target = GetClosestInVision(Layers.FoodMask);
       MovementController.StartWander();
-      AnimationController.MoveAnimation();
+      AnimationController.EnterMoveAnimation();
     }
 
     public override AnimalState Tick()

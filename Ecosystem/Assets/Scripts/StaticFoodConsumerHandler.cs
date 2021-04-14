@@ -1,7 +1,5 @@
-using System;
 using Ecosystem.Spawning;
 using Ecosystem.Util;
-using UnityEditor.UIElements;
 using UnityEngine;
 
 namespace Ecosystem
@@ -10,9 +8,10 @@ namespace Ecosystem
   {
     [SerializeField] private StationaryFoodGeneration stationaryFoodGeneration;
 
+    private const float Rate = 1;
+
     private int _count;
     private float _time;
-    private const float Rate = 1;
 
     private void Update()
     {

@@ -5,22 +5,15 @@ namespace Ecosystem.AnimalBehaviour.Prey.Rabbit
 {
   internal sealed class RabbitRunningTowardsFoodState : AbstractAnimalState
   {
-    public RabbitRunningTowardsFoodState(StateData data)
+    internal RabbitRunningTowardsFoodState(StateData data) : base(data)
     {
-      StaminaController = data.StaminaController;
-      Consumer = data.Consumer;
-      WaterConsumer = data.WaterConsumer;
-      MovementController = data.MovementController;
-      AnimationController = data.AnimationController;
-      MemoryController = data.MemoryController;
-      Reproducer = data.Reproducer;
     }
 
     public override void Begin(GameObject target)
     {
       Target = target;
-      MovementController.RunToTarget(Target.transform.position);
-      AnimationController.MoveAnimation();
+      MovementController.SetDestinationIfValid(Target.transform.position);
+      AnimationController.EnterMoveAnimation();
     }
 
     public override AnimalState Tick()
@@ -39,7 +32,7 @@ namespace Ecosystem.AnimalBehaviour.Prey.Rabbit
       }
       else
       {
-        MovementController.RunToTarget(Target.transform.position);
+        MovementController.SetDestinationIfValid(Target.transform.position);
         return Type();
       }
     }
@@ -47,11 +40,11 @@ namespace Ecosystem.AnimalBehaviour.Prey.Rabbit
     public override void OnTriggerEnter(Collider other)
     {
       var otherObject = other.gameObject;
-      if (otherObject.CompareTag("Food"))
+      if (Tags.IsFood(otherObject))
       {
         Target = SelectCloser(otherObject, Target);
       }
-      else if (otherObject.CompareTag("Water"))
+      else if (Tags.IsWater(otherObject))
       {
         MemoryController.SaveToMemory(otherObject);
       }

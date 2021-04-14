@@ -228,8 +228,8 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 33065438d0e433c4185335d9b2c4bf73, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
+  m_Name:
+  m_EditorClassIdentifier:
   navAgent: {fileID: 6562256236261779254}
   genome: {fileID: 1080774011748047759}
   sphereCollider: {fileID: 6405190242370463797}
@@ -244,8 +244,8 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 8f46c134da7053a4eb9051dc0a6054de, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
+  m_Name:
+  m_EditorClassIdentifier:
   genome: {fileID: 1080774011748047759}
   staminaBar: {fileID: 5003273326206078251}
   maxStamina: 100
@@ -1273,7 +1273,7 @@ Animator:
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
   m_LinearVelocityBlending: 0
-  m_WarningMessage: 
+  m_WarningMessage:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
@@ -1436,8 +1436,8 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 184edc0ef7b34b1fae4d32870830ac3f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
+  m_Name:
+  m_EditorClassIdentifier:
   navMeshAgent: {fileID: 6562256236261779254}
 --- !u!114 &5519717986162146221
 MonoBehaviour:
@@ -1449,12 +1449,12 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 04dec80f06674629b7366fcb55ec29f2, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
+  m_Name:
+  m_EditorClassIdentifier:
   animationController: {fileID: -4165548273840364118}
   keyToPool: Bear
-  meatKeyToPool: Meat
-  _isDead: 0
+  nutritionController: {fileID: 0}
+  isDead: 0
 --- !u!114 &1080774011748047759
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1465,8 +1465,8 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: b65414bb43209374c86329675bc191ee, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
+  m_Name:
+  m_EditorClassIdentifier:
 --- !u!114 &7527111564784634712
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1477,8 +1477,8 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 22eee6933ea9e9b4f90722c64ceefa7c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
+  m_Name:
+  m_EditorClassIdentifier:
   genome: {fileID: 1080774011748047759}
   prefab: {fileID: 7237780236292801018}
   keyToPool: Bear
@@ -1493,8 +1493,8 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: c2fa5581f03243c68b482d0030e00671, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
+  m_Name:
+  m_EditorClassIdentifier:
   genome: {fileID: 1080774011748047759}
   resourceBar: {fileID: 3410853300184415869}
   deathHandler: {fileID: 5519717986162146221}
@@ -1511,8 +1511,8 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 5ecc989552950f6449739af04d52bf49, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
+  m_Name:
+  m_EditorClassIdentifier:
   genome: {fileID: 1080774011748047759}
   resourceBar: {fileID: 8610027635385015251}
   deathHandler: {fileID: 5519717986162146221}
@@ -1646,8 +1646,8 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 61c23cb0a96b9f243b4a54dd181e22d4, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
+  m_Name:
+  m_EditorClassIdentifier:
 --- !u!114 &4584893245619885066
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1658,8 +1658,8 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 5c03968dbe8ecf640a08e7ea00a381af, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
+  m_Name:
+  m_EditorClassIdentifier:
   stateText: {fileID: 7034133904784691590}
   staminaController: {fileID: 560206207795770940}
   waterConsumer: {fileID: 6228758144730298485}
@@ -1669,7 +1669,7 @@ MonoBehaviour:
   reproducer: {fileID: 7527111564784634712}
   genome: {fileID: 1080774011748047759}
   sphereCollider: {fileID: 6405190242370463797}
-  preyConsumer: {fileID: 5370836701826244662}
+  consumer: {fileID: 3973268693136602879}
 --- !u!1 &8421346663248798016
 GameObject:
   m_ObjectHideFlags: 0
@@ -1947,7 +1947,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8623289280508370884, guid: b11869fe3d5ecbf4b912f33fa4a312db, type: 3}
       propertyPath: textMesh
-      value: 
+      value:
       objectReference: {fileID: 3340502475390114545}
     - target: {fileID: 8703765452308408067, guid: b11869fe3d5ecbf4b912f33fa4a312db, type: 3}
       propertyPath: m_Layer
@@ -1960,39 +1960,6 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 7770376172294729736, guid: b11869fe3d5ecbf4b912f33fa4a312db, type: 3}
   m_PrefabInstance: {fileID: 1599429246770187842}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &3410853300184415869 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 4136443473164136511, guid: b11869fe3d5ecbf4b912f33fa4a312db, type: 3}
-  m_PrefabInstance: {fileID: 1599429246770187842}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0f33f2c7a1419e740be5570d71daa2bf, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!114 &8610027635385015251 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 7011725190466901393, guid: b11869fe3d5ecbf4b912f33fa4a312db, type: 3}
-  m_PrefabInstance: {fileID: 1599429246770187842}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0f33f2c7a1419e740be5570d71daa2bf, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!114 &5003273326206078251 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 6007066303522194281, guid: b11869fe3d5ecbf4b912f33fa4a312db, type: 3}
-  m_PrefabInstance: {fileID: 1599429246770187842}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0f33f2c7a1419e740be5570d71daa2bf, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!102 &3340502475390114545 stripped
 TextMesh:
   m_CorrespondingSourceObject: {fileID: 4064930911256007859, guid: b11869fe3d5ecbf4b912f33fa4a312db, type: 3}
@@ -2007,5 +1974,38 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 920e87bfe7fe9274dbe2c10fc8c06029, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
+  m_Name:
+  m_EditorClassIdentifier:
+--- !u!114 &3410853300184415869 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 4136443473164136511, guid: b11869fe3d5ecbf4b912f33fa4a312db, type: 3}
+  m_PrefabInstance: {fileID: 1599429246770187842}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0f33f2c7a1419e740be5570d71daa2bf, type: 3}
+  m_Name:
+  m_EditorClassIdentifier:
+--- !u!114 &8610027635385015251 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 7011725190466901393, guid: b11869fe3d5ecbf4b912f33fa4a312db, type: 3}
+  m_PrefabInstance: {fileID: 1599429246770187842}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0f33f2c7a1419e740be5570d71daa2bf, type: 3}
+  m_Name:
+  m_EditorClassIdentifier:
+--- !u!114 &5003273326206078251 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 6007066303522194281, guid: b11869fe3d5ecbf4b912f33fa4a312db, type: 3}
+  m_PrefabInstance: {fileID: 1599429246770187842}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0f33f2c7a1419e740be5570d71daa2bf, type: 3}
+  m_Name:
+  m_EditorClassIdentifier:

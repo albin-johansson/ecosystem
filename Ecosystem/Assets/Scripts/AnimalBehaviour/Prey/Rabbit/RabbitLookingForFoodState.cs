@@ -5,23 +5,15 @@ namespace Ecosystem.AnimalBehaviour.Prey.Rabbit
 {
   internal sealed class RabbitLookingForFoodState : AbstractAnimalState
   {
-    public RabbitLookingForFoodState(StateData data)
+    internal RabbitLookingForFoodState(StateData data) : base(data)
     {
-      StaminaController = data.StaminaController;
-      Consumer = data.Consumer;
-      WaterConsumer = data.WaterConsumer;
-      MovementController = data.MovementController;
-      AnimationController = data.AnimationController;
-      MemoryController = data.MemoryController;
-      Reproducer = data.Reproducer;
-      Genome = data.Genome;
     }
 
     public override void Begin(GameObject target)
     {
       Target = GetClosestInVision(Layers.FoodMask);
       MovementController.StartWander();
-      AnimationController.MoveAnimation();
+      AnimationController.EnterMoveAnimation();
     }
 
     public override AnimalState Tick()
@@ -51,7 +43,7 @@ namespace Ecosystem.AnimalBehaviour.Prey.Rabbit
     public override void OnTriggerEnter(Collider other)
     {
       var otherObject = other.gameObject;
-      if (otherObject.CompareTag("Water"))
+      if (Tags.IsWater(otherObject))
       {
         MemoryController.SaveToMemory(otherObject);
       }

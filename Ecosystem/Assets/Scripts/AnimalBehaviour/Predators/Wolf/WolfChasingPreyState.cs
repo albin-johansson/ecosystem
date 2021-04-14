@@ -5,22 +5,14 @@ namespace Ecosystem.AnimalBehaviour.Predators.Wolf
 {
   internal sealed class WolfChasingPreyState : AbstractAnimalState
   {
-    public WolfChasingPreyState(StateData data)
+    internal WolfChasingPreyState(StateData data) : base(data)
     {
-      StaminaController = data.StaminaController;
-      Consumer = data.Consumer;
-      WaterConsumer = data.WaterConsumer;
-      MovementController = data.MovementController;
-      AnimationController = data.AnimationController;
-      MemoryController = data.MemoryController;
-      Reproducer = data.Reproducer;
-      Genome = data.Genome;
     }
 
     public override void Begin(GameObject target)
     {
       Target = target;
-      MovementController.StartHunting(Target.transform.position);
+      MovementController.SetDestination(Target.transform.position);
     }
 
     public override AnimalState Tick()
@@ -35,7 +27,7 @@ namespace Ecosystem.AnimalBehaviour.Predators.Wolf
         return base.Tick();
       }
       else if (!Target.activeSelf ||
-               !MovementController.IsTargetInRange(Target.transform.position))
+               !MovementController.IsWithinSphere(Target.transform.position))
       {
         Target = GetClosestInVision(Layers.PreyMask);
         return Type();
@@ -45,14 +37,14 @@ namespace Ecosystem.AnimalBehaviour.Predators.Wolf
         if (StaminaController.CanRun())
         {
           StaminaController.IsRunning = true;
-          AnimationController.RunAnimation();
+          AnimationController.EnterRunAnimation();
         }
         else
         {
-          AnimationController.MoveAnimation();
+          AnimationController.EnterMoveAnimation();
         }
 
-        MovementController.UpdateHunting(Target.transform.position);
+        MovementController.SetDestination(Target.transform.position);
       }
 
       return Type();

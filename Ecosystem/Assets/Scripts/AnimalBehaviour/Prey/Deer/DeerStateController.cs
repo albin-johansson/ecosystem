@@ -1,15 +1,10 @@
-using UnityEngine;
-
 namespace Ecosystem.AnimalBehaviour.Prey.Deer
 {
   public sealed class DeerStateController : AbstractPreyStateController
   {
-    [SerializeField] private FoodConsumer foodConsumer;
-
-    public override void Start()
+    protected override void Initialize()
     {
-      Consumer = foodConsumer;
-      base.Start();
+      base.Initialize();
       LookingForFood = PreyStateFactory.CreateDeerLookingForFood(Data);
       RunningTowardsFood = PreyStateFactory.CreateDeerRunningTowardsFood(Data);
       LookingForMate = PreyStateFactory.CreateDeerLookingForMate(Data);

@@ -5,21 +5,15 @@ namespace Ecosystem.AnimalBehaviour.Prey.Deer
 {
   internal sealed class DeerRunningTowardsFoodState : AbstractAnimalState
   {
-    public DeerRunningTowardsFoodState(StateData data)
+    internal DeerRunningTowardsFoodState(StateData data) : base(data)
     {
-      Consumer = data.Consumer;
-      WaterConsumer = data.WaterConsumer;
-      MovementController = data.MovementController;
-      AnimationController = data.AnimationController;
-      MemoryController = data.MemoryController;
-      Reproducer = data.Reproducer;
     }
 
     public override void Begin(GameObject target)
     {
       Target = target;
-      MovementController.RunToTarget(Target.transform.position);
-      AnimationController.MoveAnimation();
+      MovementController.SetDestination(Target.transform.position);
+      AnimationController.EnterMoveAnimation();
     }
 
     public override AnimalState Tick()
@@ -38,7 +32,7 @@ namespace Ecosystem.AnimalBehaviour.Prey.Deer
       }
       else
       {
-        MovementController.RunToTarget(Target.transform.position);
+        MovementController.SetDestination(Target.transform.position);
         return Type();
       }
     }

@@ -6,22 +6,14 @@ namespace Ecosystem.AnimalBehaviour.Prey.Rabbit
 {
   public class RabbitLookingForMateState : AbstractAnimalState
   {
-    public RabbitLookingForMateState(StateData data)
+    internal RabbitLookingForMateState(StateData data) : base(data)
     {
-      StaminaController = data.StaminaController;
-      Consumer = data.Consumer;
-      WaterConsumer = data.WaterConsumer;
-      MovementController = data.MovementController;
-      AnimationController = data.AnimationController;
-      MemoryController = data.MemoryController;
-      Reproducer = data.Reproducer;
-      Genome = data.Genome;
     }
 
     public override void Begin(GameObject target)
     {
-      Reproducer.isWilling = true;
-      AnimationController.MoveAnimation();
+      Reproducer.IsWilling = true;
+      AnimationController.EnterMoveAnimation();
       Target = GetClosestMateInVision(Layers.RabbitMask);
       MovementController.StartWander();
     }
@@ -49,7 +41,7 @@ namespace Ecosystem.AnimalBehaviour.Prey.Rabbit
         }
         else if (Reproducer.CompatibleAsParents(Target))
         {
-          MovementController.RunToTarget(Target.transform.position);
+          MovementController.SetDestinationIfValid(Target.transform.position);
         }
         else
         {
@@ -66,7 +58,7 @@ namespace Ecosystem.AnimalBehaviour.Prey.Rabbit
 
     public override GameObject End()
     {
-      Reproducer.isWilling = false;
+      Reproducer.IsWilling = false;
       return base.End();
     }
 

@@ -4,22 +4,15 @@ using UnityEngine;
 namespace Ecosystem.AnimalBehaviour.Prey.Deer
 {
   internal sealed class DeerLookingForMateState : AbstractAnimalState
-  { 
-    public DeerLookingForMateState(StateData data)
+  {
+    internal DeerLookingForMateState(StateData data) : base(data)
     {
-      Consumer = data.Consumer;
-      WaterConsumer = data.WaterConsumer;
-      MovementController = data.MovementController;
-      AnimationController = data.AnimationController;
-      MemoryController = data.MemoryController;
-      Reproducer = data.Reproducer;
-      Genome = data.Genome;
     }
 
     public override void Begin(GameObject target)
     {
-      Reproducer.isWilling = true;
-      AnimationController.MoveAnimation();
+      Reproducer.IsWilling = true;
+      AnimationController.EnterMoveAnimation();
       Target = GetClosestMateInVision(Layers.DeerMask);
       MovementController.StartWander();
     }
@@ -47,7 +40,7 @@ namespace Ecosystem.AnimalBehaviour.Prey.Deer
         }
         else if (Reproducer.CompatibleAsParents(Target))
         {
-          MovementController.RunToTarget(Target.transform.position);
+          MovementController.SetDestination(Target.transform.position);
         }
         else
         {
@@ -61,12 +54,10 @@ namespace Ecosystem.AnimalBehaviour.Prey.Deer
 
       return base.Tick();
     }
-    
-    
 
     public override GameObject End()
     {
-      Reproducer.isWilling = false;
+      Reproducer.IsWilling = false;
       return base.End();
     }
 
