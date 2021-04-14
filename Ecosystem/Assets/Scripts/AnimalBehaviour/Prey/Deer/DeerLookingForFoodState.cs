@@ -7,24 +7,18 @@ namespace Ecosystem.AnimalBehaviour.Prey.Deer
   {
     private double _time;
     private double _limit = 10;
-    public DeerLookingForFoodState(StateData data)
+
+    internal DeerLookingForFoodState(StateData data) : base(data)
     {
-      Consumer = data.Consumer;
-      WaterConsumer = data.WaterConsumer;
-      MovementController = data.MovementController;
-      AnimationController = data.AnimationController;
-      MemoryController = data.MemoryController;
-      Reproducer = data.Reproducer;
-      Genome = data.Genome;
     }
 
     public override void Begin(GameObject target)
     {
       Target = GetClosestInVision(Layers.FoodMask);
       MovementController.StartWander();
-      AnimationController.MoveAnimation();
       _time = 0;
       _limit = Random.Range(5, 15);
+      AnimationController.EnterMoveAnimation();
     }
 
     public override AnimalState Tick()

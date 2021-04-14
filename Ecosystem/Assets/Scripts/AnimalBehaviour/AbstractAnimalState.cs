@@ -8,57 +8,82 @@ namespace Ecosystem.AnimalBehaviour
 {
   public abstract class AbstractAnimalState : IAnimalState
   {
-    protected StaminaController StaminaController;
-    protected IConsumer Consumer;
-    protected WaterConsumer WaterConsumer;
-    protected MemoryController MemoryController;
-    protected MovementController MovementController;
-    protected EcoAnimationController AnimationController;
-    protected Reproducer Reproducer;
-    protected GameObject Target;
-    protected AbstractGenome Genome;
-    
     // This is used to avoid repeated allocations
     private readonly Collider[] _colliderBuffer = new Collider[10];
 
-    /// <summary>
-    ///   Returns the currently closest GameObject. An optional predicate can be used to filter the colliders. If the
-    ///   closest GameObject isn't reachable, this function returns null.
-    /// </summary>
-    /// <remarks>
-    ///   This function is frequently called, so efforts have been made into making it as fast as possible, which is why
-    ///   the code is somewhat "low-level". These efforts mainly include avoiding repeated allocation of lists and
-    ///   buffers.
-    /// </remarks>
-    private GameObject GetClosest(LayerMask mask, Func<GameObject, bool> predicate = null)
-    {
-      GameObject closest = null;
-      
-      var nColliders = UpdateCollisionBuffer(mask);
-      var position = MovementController.GetPosition();
-      
-      for (var index = 0; index < nColliders; ++index)
-      {
-        var colliderGameObject = _colliderBuffer[index].gameObject;
-        if (predicate != null && !predicate(colliderGameObject))
-        {
-          continue;
-        }
-        if (closest)
-        {
-          if (Vector3.Distance(position, colliderGameObject.transform.position) <
-              Vector3.Distance(position, closest.transform.position))
-          {
-            closest = colliderGameObject;
-          }
-        }
-        else
-        {
-          closest = colliderGameObject;
-        }
-      }
+    protected readonly StaminaController StaminaController;
+    protected readonly IConsumer Consumer;
+    protected readonly WaterConsumer WaterConsumer;
+    protected readonly MemoryController MemoryController;
+    protected readonly MovementController MovementController;
+    protected readonly EcoAnimationController AnimationController;
+    protected readonly Reproducer Reproducer;
+    protected readonly AbstractGenome Genome;
+    protected GameObject Target;
 
-      return closest && MovementController.IsReachable(closest.transform.position) ? closest : null;
+    protected AbstractAnimalState(StateData data)
+    {
+      StaminaController = data.StaminaController;
+      Consumer = data.Consumer;
+      WaterConsumer = data.WaterConsumer;
+      MemoryController = data.MemoryController;
+      MovementController = data.MovementController;
+      AnimationController = data.AnimationController;
+      Reproducer = data.Reproducer;
+      Genome = data.Genome;
+    }
+
+    public virtual void Begin(GameObject target)
+    {
+    }
+
+    public virtual GameObject End()
+    {
+      Consumer.ColliderActive = false;
+      return Target;
+    }
+
+    public virtual AnimalState Tick()
+    {
+      if (Consumer.Hunger > WaterConsumer.Thirst && Consumer.IsHungry())
+      {
+        return AnimalState.LookingForFood;
+      }
+      else if (WaterConsumer.Thirst > Consumer.Hunger && WaterConsumer.IsThirsty())
+      {
+        return AnimalState.LookingForWater;
+      }
+      else if (Reproducer.IsFertile)
+      {
+        return AnimalState.LookingForMate;
+      }
+      else
+      {
+        return AnimalState.Idle;
+      }
+    }
+
+    public virtual void OnTriggerEnter(Collider other)
+    {
+      var otherObject = other.gameObject;
+      if (Tags.IsWater(otherObject))
+      {
+        MemoryController.SaveToMemory(otherObject);
+      }
+    }
+
+    public virtual void OnTriggerExit(Collider other)
+    {
+    }
+
+    public abstract AnimalState Type();
+
+    protected GameObject SelectCloser(GameObject first, GameObject second)
+    {
+      var position = MovementController.GetPosition();
+      var firstMag = Vector3.SqrMagnitude(position - first.transform.position);
+      var secondMag = Vector3.SqrMagnitude(position - second.transform.position);
+      return firstMag < secondMag ? first : second;
     }
 
     /// <summary>
@@ -91,62 +116,49 @@ namespace Ecosystem.AnimalBehaviour
         return 0;
       }
 
-      var size = Physics.OverlapSphereNonAlloc(MovementController.GetPosition(), Genome.GetVision().Value, _colliderBuffer, mask);
-      return size;
-    }
-
-    protected GameObject SelectCloser(GameObject first, GameObject second)
-    {
       var position = MovementController.GetPosition();
-      var firstMag = Vector3.SqrMagnitude(position - first.transform.position);
-      var secondMag = Vector3.SqrMagnitude(position - second.transform.position);
-      return firstMag < secondMag ? first  : second;
+      return Physics.OverlapSphereNonAlloc(position, Genome.GetVision().Value, _colliderBuffer, mask);
     }
 
-
-    public abstract AnimalState Type();
-
-    public virtual AnimalState Tick()
+    /// <summary>
+    ///   Returns the currently closest GameObject. An optional predicate can be used to filter the colliders. If the
+    ///   closest GameObject isn't reachable, this function returns null.
+    /// </summary>
+    /// <remarks>
+    ///   This function is frequently called, so efforts have been made into making it as fast as possible, which is why
+    ///   the code is somewhat "low-level". These efforts mainly include avoiding repeated allocation of lists and
+    ///   buffers.
+    /// </remarks>
+    private GameObject GetClosest(LayerMask mask, Func<GameObject, bool> predicate = null)
     {
-      if (Consumer.Hunger > WaterConsumer.Thirst && Consumer.IsHungry())
-      {
-        return AnimalState.LookingForFood;
-      }
-      else if (WaterConsumer.Thirst > Consumer.Hunger && WaterConsumer.IsThirsty())
-      {
-        return AnimalState.LookingForWater;
-      }
-      else if (Reproducer.IsFertile)
-      {
-        return AnimalState.LookingForMate;
-      }
-      else
-      {
-        return AnimalState.Idle;
-      }
-    }
+      GameObject closest = null;
 
-    public virtual void Begin(GameObject target)
-    {
-    }
+      var nColliders = UpdateCollisionBuffer(mask);
+      var position = MovementController.GetPosition();
 
-    public virtual GameObject End()
-    {
-      Consumer.CollideActive = false;
-      return Target;
-    }
-
-    public virtual void OnTriggerEnter(Collider other)
-    {
-      var otherObject = other.gameObject;
-      if (Tags.IsWater(otherObject))
+      for (var index = 0; index < nColliders; ++index)
       {
-        MemoryController.SaveToMemory(otherObject);
-      }
-    }
+        var colliderGameObject = _colliderBuffer[index].gameObject;
+        if (predicate != null && !predicate(colliderGameObject))
+        {
+          continue;
+        }
 
-    public virtual void OnTriggerExit(Collider other)
-    {
+        if (closest)
+        {
+          if (Vector3.Distance(position, colliderGameObject.transform.position) <
+              Vector3.Distance(position, closest.transform.position))
+          {
+            closest = colliderGameObject;
+          }
+        }
+        else
+        {
+          closest = colliderGameObject;
+        }
+      }
+
+      return closest && MovementController.IsReachable(closest.transform.position) ? closest : null;
     }
   }
 }

@@ -2,13 +2,13 @@ using UnityEngine;
 
 namespace Ecosystem.UI
 {
-  public class StateText : MonoBehaviour
+  public sealed class StateText : MonoBehaviour
   {
     [SerializeField] private TextMesh textMesh;
 
-    public void SetText(string Text)
+    public void SetText(string text)
     {
-      textMesh.text = Text;
+      textMesh.text = text;
     }
   }
 }

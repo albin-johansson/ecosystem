@@ -1,7 +1,6 @@
 using Ecosystem.Consumers;
 using Ecosystem.Genes;
 using Ecosystem.Spawning;
-using Ecosystem.Util;
 using UnityEngine;
 
 namespace Ecosystem
@@ -38,20 +37,21 @@ namespace Ecosystem
     [SerializeField] private string keyToPool;
 
     private Transform _directoryOfAnimal;
-    public bool IsPregnant { get; private set; }
-    private double _gestationPeriod;
-    private double _sexualMaturityTime;
-    private double _pregnancyElapsedTime;
-    private double _maturityElapsedTime;
-    private float _childSaturation;
-    private IConsumer _consumer;
     private IGenome _mateGenome;
+    private float _gestationPeriod;
+    private float _sexualMaturityTime;
+    private float _pregnancyElapsedTime;
+    private float _maturityElapsedTime;
+    private float _childSaturation;
     private bool _isSexuallyMature;
-    public bool isWilling;
-    
-    private bool CanMate => !IsPregnant && _isSexuallyMature && isWilling;
-    
+
+    public bool IsWilling { get; set; }
+
+    public bool IsPregnant { get; private set; }
+
     public bool IsFertile => !IsPregnant && _isSexuallyMature;
+
+    private bool CanMate => IsFertile && IsWilling;
 
     private void Start()
     {
@@ -73,7 +73,7 @@ namespace Ecosystem
 
       if (IsPregnant)
       {
-        _childSaturation += (genome.Metabolism * genome.GetChildFoodConsumtionFactor()) * Time.deltaTime;
+        _childSaturation += genome.Metabolism * AbstractGenome.ChildFoodConsumptionFactor * Time.deltaTime;
         _pregnancyElapsedTime += Time.deltaTime;
         if (_pregnancyElapsedTime >= _gestationPeriod)
         {
@@ -82,27 +82,31 @@ namespace Ecosystem
         }
       }
     }
+
     public bool CompatibleAsParents(GameObject other)
     {
       return other.TryGetComponent(out Reproducer otherReproducer) &&
-             other.TryGetComponent(out AbstractGenome otherGenome) &&
              otherReproducer.CanMate &&
+             other.TryGetComponent(out AbstractGenome otherGenome) &&
              Genomes.CompatibleAsParents(genome, otherGenome);
     }
 
     private void GiveBirth()
     {
-      Debug.Log("Give Birth");
       var currentTransform = transform;
 
       IsPregnant = false;
       _pregnancyElapsedTime = 0;
-      var child = ObjectPoolHandler.instance.GetFromPool(keyToPool);
-      child.transform.position = currentTransform.position;
-      child.transform.rotation = currentTransform.rotation;
-      child.transform.parent = _directoryOfAnimal;
+
+      var child = ObjectPoolHandler.Instance.Construct(keyToPool);
+      var childTransform = child.transform;
+
+      childTransform.position = currentTransform.position;
+      childTransform.rotation = currentTransform.rotation;
+      childTransform.parent = _directoryOfAnimal;
       child.SetActive(true);
-      if (TryGetComponent<AbstractGenome>(out var childGenome))
+
+      if (TryGetComponent(out AbstractGenome childGenome))
       {
         childGenome.Initialize(genome, _mateGenome);
       }
@@ -125,7 +129,8 @@ namespace Ecosystem
     {
       if (other.TryGetComponent(out Reproducer otherReproducer) &&
           Genomes.CompatibleAsParents(genome, otherReproducer.genome) &&
-          otherReproducer.CanMate && CanMate)
+          otherReproducer.CanMate &&
+          CanMate)
       {
         if (Random.value >= (genome.Attractiveness + otherReproducer.genome.Attractiveness) / 2)
         {

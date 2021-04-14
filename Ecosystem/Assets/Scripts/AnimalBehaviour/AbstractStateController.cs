@@ -5,10 +5,8 @@ using UnityEngine;
 
 namespace Ecosystem.AnimalBehaviour
 {
-  public abstract class AbstractStateController : MonoBehaviour, IStateController
+  public abstract class AbstractStateController : MonoBehaviour
   {
-    protected IAnimalState State;
-    protected IConsumer Consumer;
     [SerializeField] protected StateText stateText;
     [SerializeField] protected StaminaController staminaController;
     [SerializeField] protected WaterConsumer waterConsumer;
@@ -19,23 +17,30 @@ namespace Ecosystem.AnimalBehaviour
     [SerializeField] protected AbstractGenome genome;
     [SerializeField] protected SphereCollider sphereCollider;
 
+    protected IAnimalState State;
 
-    public abstract void Start();
+    protected abstract void SwitchState(AnimalState state);
 
-    public abstract void SwitchState(AnimalState state);
+    protected virtual void Initialize()
+    {
+    }
 
-    public void Update()
+    private void Start()
+    {
+      Initialize();
+    }
+
+    private void Update()
     {
       var newState = State.Tick();
       if (newState != State.Type())
       {
         SwitchState(newState);
-        //Uncomment for debugging
         stateText.SetText(newState.ToString());
       }
     }
 
-    public void OnTriggerEnter(Collider other)
+    private void OnTriggerEnter(Collider other)
     {
       if (movementController.IsReachable(other.gameObject.transform.position))
       {
@@ -43,7 +48,7 @@ namespace Ecosystem.AnimalBehaviour
       }
     }
 
-    public void OnTriggerExit(Collider other)
+    private void OnTriggerExit(Collider other)
     {
       State.OnTriggerExit(other);
     }

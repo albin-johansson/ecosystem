@@ -5,26 +5,18 @@ namespace Ecosystem.AnimalBehaviour.Predators.Wolf
 {
   public class WolfLookingForMateState : AbstractAnimalState
   {
-    public WolfLookingForMateState(StateData data)
+    internal WolfLookingForMateState(StateData data) : base(data)
     {
-      StaminaController = data.StaminaController;
-      Consumer = data.Consumer;
-      WaterConsumer = data.WaterConsumer;
-      MovementController = data.MovementController;
-      AnimationController = data.AnimationController;
-      MemoryController = data.MemoryController;
-      Reproducer = data.Reproducer;
-      Genome = data.Genome;
     }
 
     public override void Begin(GameObject target)
     {
-      Reproducer.isWilling = true;
-      AnimationController.MoveAnimation();
+      Reproducer.IsWilling = true;
+      AnimationController.EnterMoveAnimation();
       Target = GetClosestMateInVision(Layers.WolfMask);
       if (Target)
       {
-        MovementController.RunToTarget(target.transform.position);
+        MovementController.SetDestinationIfValid(target.transform.position);
       }
       else
       {
@@ -42,9 +34,9 @@ namespace Ecosystem.AnimalBehaviour.Predators.Wolf
       if (Target)
       {
         if (Reproducer.CompatibleAsParents(Target) &&
-            MovementController.IsTargetInRange(Target.transform.position))
+            MovementController.IsWithinSphere(Target.transform.position))
         {
-          MovementController.RunToTarget(Target.transform.position);
+          MovementController.SetDestinationIfValid(Target.transform.position);
           return Type();
         }
         else
@@ -62,7 +54,7 @@ namespace Ecosystem.AnimalBehaviour.Predators.Wolf
 
     public override GameObject End()
     {
-      Reproducer.isWilling = false;
+      Reproducer.IsWilling = false;
       return base.End();
     }
 

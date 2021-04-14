@@ -8,32 +8,33 @@ namespace Ecosystem
   {
     [SerializeField] private AbstractGenome genome;
     [SerializeField] private ResourceBar staminaBar;
-    [SerializeField] private double maxStamina = 100;
+    [SerializeField] private float maxStamina = 100;
 
-    private static int _exhaustionMultiplier = 5;
-    private static int _baseRunningLevel = 20;
+    private const float ExhaustionMultiplier = 5;
+    private const float BaseRunningLevel = 20;
+
     public bool IsRunning { get; set; }
 
-    private double Exhaustion { get; set; }
+    private float Exhaustion { get; set; }
 
     private void Start()
     {
       Exhaustion = 50;
-      staminaBar.SetMaxValue((float) maxStamina);
-      staminaBar.SetValue((float) Exhaustion);
+      staminaBar.SetMaxValue(maxStamina);
+      staminaBar.SetValue(Exhaustion);
     }
 
     private void Update()
     {
       if (IsRunning)
       {
-        Exhaustion += _exhaustionMultiplier * genome.GetSpeed().Value * Time.deltaTime;
-        staminaBar.SetValue((float) Exhaustion);
+        Exhaustion += ExhaustionMultiplier * genome.GetSpeed().Value * Time.deltaTime;
+        staminaBar.SetValue(Exhaustion);
       }
       else if (Exhaustion > 0)
       {
         Exhaustion -= genome.Metabolism * Time.deltaTime;
-        staminaBar.SetValue((float) Exhaustion);
+        staminaBar.SetValue(Exhaustion);
       }
 
       if (Exhaustion >= maxStamina)
@@ -43,9 +44,6 @@ namespace Ecosystem
       }
     }
 
-    public bool CanRun()
-    {
-      return Exhaustion < maxStamina - _baseRunningLevel;
-    }
+    public bool CanRun() => Exhaustion < maxStamina - BaseRunningLevel;
   }
 }

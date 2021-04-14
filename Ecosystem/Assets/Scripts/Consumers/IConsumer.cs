@@ -7,10 +7,10 @@ namespace Ecosystem.Consumers
   /// </summary>
   public interface IConsumer
   {
-    double Hunger { get; }
+    float Hunger { get; }
 
-    bool CollideActive { get; set; }
-    
+    bool ColliderActive { get; set; }
+
     GameObject EatingFromGameObject { get; set; }
 
     bool IsHungry();

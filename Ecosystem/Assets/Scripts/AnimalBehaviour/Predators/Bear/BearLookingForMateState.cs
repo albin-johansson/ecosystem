@@ -5,25 +5,18 @@ namespace Ecosystem.AnimalBehaviour.Predators.Bear
 {
   internal sealed class BearLookingForMateState : AbstractAnimalState
   {
-    public BearLookingForMateState(StateData data)
+    internal BearLookingForMateState(StateData data) : base(data)
     {
-      Consumer = data.Consumer;
-      WaterConsumer = data.WaterConsumer;
-      MovementController = data.MovementController;
-      AnimationController = data.AnimationController;
-      MemoryController = data.MemoryController;
-      Reproducer = data.Reproducer;
-      Genome = data.Genome;
     }
 
     public override void Begin(GameObject target)
     {
-      Reproducer.isWilling = true;
-      AnimationController.MoveAnimation();
+      Reproducer.IsWilling = true;
+      AnimationController.EnterMoveAnimation();
       Target = GetClosestMateInVision(Layers.BearMask);
       if (Target)
       {
-        MovementController.RunToTarget(target.transform.position);
+        MovementController.SetDestination(target.transform.position);
       }
       else
       {
@@ -41,9 +34,9 @@ namespace Ecosystem.AnimalBehaviour.Predators.Bear
       if (Target)
       {
         if (Reproducer.CompatibleAsParents(Target) &&
-            MovementController.IsTargetInRange(Target.transform.position))
+            MovementController.IsWithinSphere(Target.transform.position))
         {
-          MovementController.RunToTarget(Target.transform.position);
+          MovementController.SetDestination(Target.transform.position);
           return Type();
         }
         else
@@ -61,7 +54,7 @@ namespace Ecosystem.AnimalBehaviour.Predators.Bear
 
     public override GameObject End()
     {
-      Reproducer.isWilling = false;
+      Reproducer.IsWilling = false;
       return base.End();
     }
 

@@ -8,22 +8,6 @@ namespace Ecosystem.Consumers
 {
   public sealed class WolfConsumer : MonoBehaviour, IConsumer
   {
-    [SerializeField] private AbstractGenome genome;
-    [SerializeField] private ResourceBar resourceBar;
-    [SerializeField] private DeathHandler deathHandler;
-    [SerializeField] private double maxHunger = 100;
-    [SerializeField] private EcoAnimationController animationController;
-    [SerializeField] private Reproducer reproducer;
-    private bool _isDead;
-
-    public bool IsConsuming { get; set; }
-    
-    public GameObject EatingFromGameObject { get; set; }
-
-    public double Hunger { get; set; }
-
-    public bool CollideActive { get; set; }
-
     public delegate void PreyConsumedEvent();
 
     /// <summary>
@@ -31,9 +15,27 @@ namespace Ecosystem.Consumers
     /// </summary>
     public static event PreyConsumedEvent OnPreyConsumed;
 
+    [SerializeField] private AbstractGenome genome;
+    [SerializeField] private ResourceBar resourceBar;
+    [SerializeField] private DeathHandler deathHandler;
+    [SerializeField] private Reproducer reproducer;
+    [SerializeField] private float maxHunger = 100;
+
+    public bool IsConsuming { get; set; }
+
+
+    private bool _isDead;
+
+
+    public float Hunger { get; private set; }
+
+    public bool ColliderActive { get; set; }
+
+    public GameObject EatingFromGameObject { get; set; }
+
     private void Start()
     {
-      resourceBar.SetMaxValue((float) maxHunger);
+      resourceBar.SetMaxValue(maxHunger);
     }
 
     private void Update()
@@ -45,14 +47,14 @@ namespace Ecosystem.Consumers
 
       if (reproducer.IsPregnant)
       {
-        Hunger += genome.Metabolism * genome.GetChildFoodConsumtionFactor() * Time.deltaTime;
+        Hunger += genome.Metabolism * AbstractGenome.ChildFoodConsumptionFactor * Time.deltaTime;
       }
       else
       {
         Hunger += genome.Metabolism * Time.deltaTime;
       }
 
-      resourceBar.SetValue((float) Hunger);
+      resourceBar.SetValue(Hunger);
       if (Hunger > maxHunger)
       {
         _isDead = true;
@@ -62,41 +64,29 @@ namespace Ecosystem.Consumers
 
     private void OnTriggerEnter(Collider other)
     {
-      if (!CollideActive || IsConsuming) return;
-
-
-      if (Tags.IsPrey(other.gameObject))
+      if (!ColliderActive || IsConsuming)
       {
-        DeathHandler _deathHandler = other.gameObject.GetComponentInParent<DeathHandler>();
-        if (!_deathHandler._isDead)
+        return;
+      }
+
+      var otherObject = other.gameObject;
+      if (Tags.IsPrey(otherObject))
+      {
+        var otherDeathHandler = otherObject.GetComponentInParent<DeathHandler>();
+        if (!otherDeathHandler.isDead)
         {
-          _deathHandler.Die(CauseOfDeath.Eaten);
           IsConsuming = true;
-          NutritionController prey = _deathHandler.Kill();
-          Hunger -= prey.Consume(Hunger);
+          otherDeathHandler.Die(CauseOfDeath.Eaten);
+          var otherNutritionController = otherObject.GetComponentInParent<NutritionController>();
+          Hunger -= otherNutritionController.Consume(Hunger);
           OnPreyConsumed?.Invoke();
         }
       }
-      else if (Tags.IsMeat(other.gameObject))
+      else if (Tags.IsMeat(otherObject))
       {
-        if (other.TryGetComponent(out NutritionController nutritionController))
+        if (otherObject.TryGetComponent(out NutritionController otherNutritionController))
         {
-          Hunger -= nutritionController.Consume(Hunger);
-        }
-      }
-    }
-    
-    private void OnTriggerStay(Collider other)
-    {
-      if (CollideActive)
-      {
-        if (Tags.IsMeat(other.gameObject))
-        {
-          if (other.TryGetComponent(out NutritionController nutritionController))
-          {
-            Hunger -= nutritionController.Consume(Hunger);
-            CollideActive = false;
-          }
+          Hunger -= otherNutritionController.Consume(Hunger);
         }
       }
     }
@@ -111,6 +101,5 @@ namespace Ecosystem.Consumers
       Hunger = maxHunger - value;
       resourceBar.SetSaturationValue(value);
     }
-
   }
 }

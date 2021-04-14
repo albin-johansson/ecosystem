@@ -26,7 +26,7 @@ namespace Ecosystem.Genes
       {GeneType.SizeFactor, SizeFactor},
       {GeneType.DesirabilityScore, DesirabilityFactor},
       {GeneType.GestationPeriod, GestationPeriod},
-      {GeneType.SexualMaturityTime, SexualMaturityTime},
+      {GeneType.SexualMaturityTime, SexualMaturityTime}
     };
 
     protected override void Initialize()

@@ -5,22 +5,14 @@ namespace Ecosystem.AnimalBehaviour.Prey
 {
   internal sealed class PreyFleeingState : AbstractAnimalState
   {
-    public PreyFleeingState(StateData data)
+    internal PreyFleeingState(StateData data) : base(data)
     {
-      StaminaController = data.StaminaController;
-      Consumer = data.Consumer;
-      WaterConsumer = data.WaterConsumer;
-      MovementController = data.MovementController;
-      AnimationController = data.AnimationController;
-      MemoryController = data.MemoryController;
-      Reproducer = data.Reproducer;
-      Genome = data.Genome;
     }
 
     public override void Begin(GameObject target)
     {
       Target = target;
-      MovementController.StartFleeing(Target.transform.position);
+      MovementController.FleeFrom(Target.transform.position);
     }
 
     public override AnimalState Tick()
@@ -39,11 +31,11 @@ namespace Ecosystem.AnimalBehaviour.Prey
         if (StaminaController.CanRun())
         {
           StaminaController.IsRunning = true;
-          AnimationController.RunAnimation();
+          AnimationController.EnterRunAnimation();
         }
         else
         {
-          AnimationController.MoveAnimation();
+          AnimationController.EnterMoveAnimation();
         }
 
         MovementController.UpdateFleeing(Target.transform.position);

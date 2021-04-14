@@ -29,10 +29,14 @@ namespace Ecosystem.Logging
 
     private void Start()
     {
+      // TODO we need to log when new food resources spawn
+
       // Yes, these are allocated once, it's fine
       DeathHandler.OnDeath += LogDeath;
       NutritionController.OnFoodEaten += LogFoodEaten;
       WolfConsumer.OnPreyConsumed += LogPreyConsumed;
+      BearConsumer.OnPreyConsumed += LogPreyConsumed;
+      RabbitConsumer.OnFoodEaten += LogFoodEaten;
       Reproducer.OnBirth += LogBirth;
       Reproducer.OnMating += LogMating;
 
@@ -70,7 +74,7 @@ namespace Ecosystem.Logging
     private void LogMating(Vector3 position, string animalTag, IGenome male, IGenome female)
     {
       _data.AddMating(position, animalTag, male, female);
-      
+
       matingCountText.text = _data.MatingCount().ToString();
     }
 

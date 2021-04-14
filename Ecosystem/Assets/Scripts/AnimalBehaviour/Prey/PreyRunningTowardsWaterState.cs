@@ -5,22 +5,15 @@ namespace Ecosystem.AnimalBehaviour.Prey
 {
   internal sealed class PreyRunningTowardsWaterState : AbstractAnimalState
   {
-    public PreyRunningTowardsWaterState(StateData data)
+    internal PreyRunningTowardsWaterState(StateData data) : base(data)
     {
-      StaminaController = data.StaminaController;
-      Consumer = data.Consumer;
-      WaterConsumer = data.WaterConsumer;
-      MovementController = data.MovementController;
-      AnimationController = data.AnimationController;
-      MemoryController = data.MemoryController;
-      Reproducer = data.Reproducer;
     }
 
     public override void Begin(GameObject target)
     {
       Target = target;
-      MovementController.RunToTarget(Target.transform.position);
-      AnimationController.MoveAnimation();
+      MovementController.SetDestinationIfValid(Target.transform.position);
+      AnimationController.EnterMoveAnimation();
     }
 
     public override AnimalState Tick()
@@ -39,7 +32,7 @@ namespace Ecosystem.AnimalBehaviour.Prey
       }
       else
       {
-        MovementController.RunToTarget(Target.transform.position);
+        MovementController.SetDestinationIfValid(Target.transform.position);
         return Type();
       }
     }

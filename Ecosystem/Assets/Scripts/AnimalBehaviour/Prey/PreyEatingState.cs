@@ -5,21 +5,15 @@ namespace Ecosystem.AnimalBehaviour.Prey
 {
   internal sealed class PreyEatingState : AbstractAnimalState
   {
-    public PreyEatingState(StateData data)
+    internal PreyEatingState(StateData data) : base(data)
     {
-      Consumer = data.Consumer;
-      WaterConsumer = data.WaterConsumer;
-      MovementController = data.MovementController;
-      AnimationController = data.AnimationController;
-      MemoryController = data.MemoryController;
-      Reproducer = data.Reproducer;
     }
 
     public override void Begin(GameObject target)
     {
       Target = target;
-      AnimationController.IdleAnimation();
-      MovementController.StandStill(true);
+      AnimationController.EnterIdleAnimation();
+      MovementController.SetStandingStill(true);
     }
 
     public override AnimalState Tick()
@@ -28,8 +22,7 @@ namespace Ecosystem.AnimalBehaviour.Prey
       {
         return AnimalState.Fleeing;
       }
-
-      if (Consumer.EatingFromGameObject)
+      else if (Consumer.EatingFromGameObject)
       {
         return Type();
       }

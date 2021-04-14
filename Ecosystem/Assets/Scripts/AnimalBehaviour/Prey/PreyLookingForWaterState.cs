@@ -5,16 +5,8 @@ namespace Ecosystem.AnimalBehaviour.Prey
 {
   internal sealed class PreyLookingForWaterState : AbstractAnimalState
   {
-    public PreyLookingForWaterState(StateData data)
+    internal PreyLookingForWaterState(StateData data) : base(data)
     {
-      StaminaController = data.StaminaController;
-      Consumer = data.Consumer;
-      WaterConsumer = data.WaterConsumer;
-      MovementController = data.MovementController;
-      AnimationController = data.AnimationController;
-      MemoryController = data.MemoryController;
-      Reproducer = data.Reproducer;
-      Genome = data.Genome;
     }
 
     public override void Begin(GameObject target)
@@ -24,8 +16,9 @@ namespace Ecosystem.AnimalBehaviour.Prey
       {
         Target = MemoryController.GetClosestInMemory(Tags.IsWater, MovementController.GetPosition());
       }
+
       MovementController.StartWander();
-      AnimationController.MoveAnimation();
+      AnimationController.EnterMoveAnimation();
     }
 
     public override AnimalState Tick()
@@ -42,6 +35,7 @@ namespace Ecosystem.AnimalBehaviour.Prey
           return AnimalState.RunningTowardsWater;
         }
       }
+
       return base.Tick();
     }
 
