@@ -14,14 +14,7 @@ namespace Ecosystem.AnimalBehaviour.Predators.Bear
       Reproducer.IsWilling = true;
       AnimationController.EnterMoveAnimation();
       Target = GetClosestMateInVision(Layers.BearMask);
-      if (Target)
-      {
-        MovementController.SetDestination(target.transform.position);
-      }
-      else
-      {
-        MovementController.StartWander();
-      }
+      MovementController.StartWander();
     }
 
     public override AnimalState Type()

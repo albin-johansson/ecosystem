@@ -14,14 +14,7 @@ namespace Ecosystem.AnimalBehaviour.Prey.Deer
       Reproducer.IsWilling = true;
       AnimationController.EnterMoveAnimation();
       Target = GetClosestMateInVision(Layers.DeerMask);
-      if (Target)
-      {
-        MovementController.SetDestination(target.transform.position);
-      }
-      else
-      {
-        MovementController.StartWander();
-      }
+      MovementController.StartWander();
     }
 
     public override AnimalState Type()

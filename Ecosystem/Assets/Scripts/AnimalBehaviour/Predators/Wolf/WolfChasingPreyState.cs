@@ -26,7 +26,7 @@ namespace Ecosystem.AnimalBehaviour.Predators.Wolf
       {
         return base.Tick();
       }
-      else if (!Target.transform.parent.gameObject.activeSelf ||
+      else if (!Target.activeSelf ||
                !MovementController.IsWithinSphere(Target.transform.position))
       {
         Target = GetClosestInVision(Layers.PreyMask);
