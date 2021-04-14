@@ -4,22 +4,15 @@ namespace Ecosystem.AnimalBehaviour.Predators
 {
   internal sealed class PredatorDrinkingState : AbstractAnimalState
   {
-    public PredatorDrinkingState(StateData data)
+    internal PredatorDrinkingState(StateData data) : base(data)
     {
-      StaminaController = data.StaminaController;
-      Consumer = data.Consumer;
-      WaterConsumer = data.WaterConsumer;
-      MovementController = data.MovementController;
-      AnimationController = data.AnimationController;
-      MemoryController = data.MemoryController;
-      Reproducer = data.Reproducer;
     }
 
     public override void Begin(GameObject target)
     {
       Target = target;
-      MovementController.StandStill(true);
-      AnimationController.IdleAnimation();
+      MovementController.SetStandingStill(true);
+      AnimationController.EnterIdleAnimation();
       WaterConsumer.StartDrinking();
     }
 
@@ -31,7 +24,7 @@ namespace Ecosystem.AnimalBehaviour.Predators
       }
       else
       {
-        MovementController.StandStill(false);
+        MovementController.SetStandingStill(false);
         return base.Tick();
       }
     }

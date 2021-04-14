@@ -1,33 +1,30 @@
-using System;
 using UnityEngine;
 
-namespace Ecosystem.AnimalBehaviour.WolfStates
+namespace Ecosystem.AnimalBehaviour.Predators.Wolf
 {
   internal sealed class WolfRunningTowardsFoodState : AbstractAnimalState
   {
-    public WolfRunningTowardsFoodState(StateData data)
+    internal WolfRunningTowardsFoodState(StateData data) : base(data)
     {
-      Consumer = data.Consumer;
-      WaterConsumer = data.WaterConsumer;
-      MovementController = data.MovementController;
-      AnimationController = data.AnimationController;
-      MemoryController = data.MemoryController;
-      Reproducer = data.Reproducer;
     }
 
     public override void Begin(GameObject target)
     {
       Target = target;
-      MovementController.StartHunting(Target.transform.position);
-      AnimationController.MoveAnimation();
+      MovementController.SetDestination(Target.transform.position);
+      AnimationController.EnterMoveAnimation();
     }
 
     public override AnimalState Tick()
     {
-      if (!Consumer.IsHungry() || !Target || !Target.activeSelf || !MovementController.IsTargetInRange(Target.transform.position))
+      if (!Consumer.IsHungry() ||
+          !Target ||
+          !Target.activeSelf ||
+          !MovementController.IsWithinSphere(Target.transform.position))
       {
         return base.Tick();
       }
+
       return Type();
     }
 

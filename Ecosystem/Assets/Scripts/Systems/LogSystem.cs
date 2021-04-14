@@ -143,7 +143,7 @@ namespace Ecosystem.Systems
             time = consumed.when * 1000,
             type = "consumption",
             tag = "Carrot",
-            deathIndex = -1,
+            deathIndex = -1
           });
         })
         .WithName("LogSystemProcessFoodConsumptionJob")

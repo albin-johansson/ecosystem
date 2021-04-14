@@ -5,22 +5,15 @@ namespace Ecosystem.AnimalBehaviour.Prey
 {
   internal sealed class PreyDrinkingState : AbstractAnimalState
   {
-    public PreyDrinkingState(StateData data)
+    internal PreyDrinkingState(StateData data) : base(data)
     {
-      StaminaController = data.StaminaController;
-      Consumer = data.Consumer;
-      WaterConsumer = data.WaterConsumer;
-      MovementController = data.MovementController;
-      AnimationController = data.AnimationController;
-      MemoryController = data.MemoryController;
-      Reproducer = data.Reproducer;
     }
 
     public override void Begin(GameObject target)
     {
       Target = target;
-      AnimationController.IdleAnimation();
-      MovementController.StandStill(true);
+      AnimationController.EnterIdleAnimation();
+      MovementController.SetStandingStill(true);
       WaterConsumer.StartDrinking();
       // TODO: Add animationController.DrinkAnimation();
     }

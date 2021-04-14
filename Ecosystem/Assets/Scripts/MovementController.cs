@@ -8,8 +8,7 @@ using Random = UnityEngine.Random;
 namespace Ecosystem
 {
   /// <summary>
-  ///  This class contains all functions used for movement and navigation. This is to be used
-  ///  with a state machine.
+  ///  This class contains all functions used for movement and navigation.
   /// </summary>
   public sealed class MovementController : MonoBehaviour
   {
@@ -18,20 +17,35 @@ namespace Ecosystem
     [SerializeField] private SphereCollider sphereCollider;
     [SerializeField] private StaminaController staminaController;
 
-    private Vector3 _fleeDestination;
-    private float _previousSpeed;
-    private readonly float[] _fleeingAngles = {-45, 45, -90, 90, -135, 135, 180};
+    private static readonly float[] FleeingAngles = {-45, 45, -90, 90, -135, 135, 180};
+    private static readonly float[] WanderAngles = {0f, -90f, 90f, 180f};
 
-    #region PublicFunctions
+    private float _previousSpeed;
+
+    public Vector3 GetPosition() => navAgent.transform.position;
+
+    #region Basic navigation
 
     /// <summary>
-    ///   Returns distance to target, zero if target is not reachable.
+    ///   Indicates whether or not the specified point is reachable in the nav mesh.
     /// </summary>
-    public bool IsTargetInRange(Vector3 targetPosition)
+    /// <param name="position">the target position that will be checked.</param>
+    /// <returns><c>true</c> if there is a valid point within a radius from the point; <c>false</c> otherwise.</returns>
+    public bool IsReachable(Vector3 position)
     {
-      if (IsReachable(targetPosition))
+      return ValidateDestination(position, out _); // Ignore the resulting valid position
+    }
+
+    /// <summary>
+    ///   Indicates whether or not the specified position is within range of the associated sphere collider.
+    /// </summary>
+    /// <param name="position">the position that will be checked.</param>
+    /// <returns><c>true</c> if the position is within the sphere collider; <c>false</c> otherwise.</returns>
+    public bool IsWithinSphere(Vector3 position)
+    {
+      if (IsReachable(position))
       {
-        return sphereCollider.radius >= Math.Floor(Vector3.Distance(navAgent.transform.position, targetPosition));
+        return sphereCollider.radius >= Math.Floor(Vector3.Distance(GetPosition(), position));
       }
       else
       {
@@ -40,86 +54,13 @@ namespace Ecosystem
     }
 
     /// <summary>
-    ///   Checks whether a point is reachable through the navMesh, will return true if there is a valid point
-    ///   within a radius from the point
+    ///   Sets whether or not the nav agent is stationary.
     /// </summary>
-    public bool IsReachable(Vector3 targetPosition)
+    /// <remarks>This function is harmless to call even if the desired action already has been taken.</remarks>
+    /// <param name="standStill"><c>true</c> if the nav agent should be stopped; <c>false</c> otherwise.</param>
+    public void SetStandingStill(bool standStill)
     {
-      return ValidateDestination(targetPosition, out var destination);
-    }
-
-    public Vector3 GetPosition()
-    {
-      return navAgent.transform.position;
-    }
-
-
-    /// <summary>
-    ///   Makes the animal run to target if target is valid.
-    /// </summary>
-    public void RunToTarget(Vector3 targetPosition)
-    {
-      if (ValidateDestination(targetPosition, out var validPosition))
-      {
-        SetTarget(validPosition);
-      }
-    }
-
-    /// <summary>
-    ///   Hunting function, sets speed and target.
-    ///   Function assumes that position of the victim is valid.
-    /// </summary>
-    public void StartHunting(Vector3 targetPosition)
-    {
-      SetTarget(targetPosition);
-    }
-
-    /// <summary>
-    ///   Updates hunting navigation uses StartHunting as of now.
-    /// </summary>
-    public void UpdateHunting(Vector3 targetPosition)
-    {
-      StartHunting(targetPosition);
-    }
-
-    /// <summary>
-    ///   Finds a destination to flee to opposite of given threat position and updates speed.
-    /// </summary>
-    public bool StartFleeing(Vector3 threatPosition)
-    {
-      _fleeDestination = FindFleeDestination(threatPosition);
-      if (_fleeDestination != Vector3.zero)
-      {
-        SetTarget(_fleeDestination);
-        return true;
-      }
-
-      return false;
-    }
-
-
-    /// <summary>
-    ///   Updates animals navigation when fleeing if it doesn't have a target destination,
-    ///   or it is getting close to it.
-    /// </summary>
-    public bool UpdateFleeing(Vector3 threatPosition)
-    {
-      if (!navAgent.hasPath || navAgent.remainingDistance < 1.0f)
-      {
-        return StartFleeing(threatPosition);
-      }
-
-      return true;
-    }
-
-
-    /// <summary>
-    ///   Pauses or resumes the navAgents movement, harmless to call even if the
-    ///   desired action already has been taken.
-    /// </summary>
-    public void StandStill(bool shouldPause)
-    {
-      if (shouldPause)
+      if (standStill)
       {
         if (_previousSpeed > 0)
         {
@@ -135,30 +76,143 @@ namespace Ecosystem
     }
 
     /// <summary>
-    ///   Sets a target at the edge of the vision range in an angle within a half circle
-    ///   of the direction the animal look.
+    ///   Updates the speed of the associated NavAgent, according to the current stamina.
+    /// </summary>
+    private void UpdateSpeed()
+    {
+      if (staminaController.IsRunning)
+      {
+        navAgent.speed = genome.WalkingSpeed * 1.5f;
+      }
+      else
+      {
+        navAgent.speed = genome.WalkingSpeed;
+      }
+    }
+
+    /// <summary>
+    ///   Sets the destination of the animal and updates the speed of the animal.
+    /// </summary>
+    /// <remarks>This function doesn't validate the specified position.</remarks>
+    /// <param name="destination">the new destination of the animal.</param>
+    public void SetDestination(Vector3 destination)
+    {
+      UpdateSpeed();
+      navAgent.SetDestination(destination);
+    }
+
+    /// <summary>
+    ///   Makes the animal go to the specified target position, if the position is valid.
+    /// </summary>
+    /// <param name="targetPosition">the target position that will be validated and potentially pursued.</param>
+    public void SetDestinationIfValid(Vector3 targetPosition)
+    {
+      if (ValidateDestination(targetPosition, out var validPosition))
+      {
+        SetDestination(validPosition);
+      }
+    }
+
+    #endregion
+
+    #region Fleeing
+
+    /// <summary>
+    ///   Attempts to start fleeing from a threat.
+    /// </summary>
+    /// <param name="threatPosition">the position of the threat.</param>
+    /// <returns><c>true</c> if the animal successfully started fleeing; <c>false</c> otherwise.</returns>
+    public bool FleeFrom(Vector3 threatPosition)
+    {
+      if (FindFleeDestination(threatPosition, out var fleeDestination))
+      {
+        SetDestination(fleeDestination);
+        return true;
+      }
+      else
+      {
+        return false;
+      }
+    }
+
+    /// <summary>
+    ///   Updates the fleeing destination of the animal if it doesn't already have a target destination, or if the
+    ///   animal has almost reached the current flee destination. 
+    /// </summary>
+    /// <param name="threatPosition">the position of the threat.</param>
+    /// <returns><c>true</c> if the fleeing destination was successfully updated; <c>false</c> otherwise.</returns>
+    public bool UpdateFleeing(Vector3 threatPosition)
+    {
+      if (!navAgent.hasPath || navAgent.remainingDistance < 1.0f)
+      {
+        return FleeFrom(threatPosition);
+      }
+
+      return true;
+    }
+
+    /// <summary>
+    ///   Attempts to find a valid flee destination to avoid a threat at the specified position. This function will try
+    ///   different destinations in the opposite direction of the threat, at the verge of the vision range of the animal.
+    /// </summary>
+    /// <param name="threatPosition">the position of the threat.</param>
+    /// <param name="fleeDestination">the resulting flee destination, set to <c>Vector3.zero</c> upon failure.</param>
+    /// <returns><c>true</c> if a valid flee destination was found; <c>false</c> otherwise.</returns>
+    private bool FindFleeDestination(in Vector3 threatPosition, out Vector3 fleeDestination)
+    {
+      var navAgentPosition = GetPosition();
+      var visionRange = sphereCollider.radius;
+      var directionFromThreat = (navAgentPosition - threatPosition).normalized * visionRange;
+
+      foreach (var angle in FleeingAngles)
+      {
+        var destination = navAgentPosition + directionFromThreat.normalized * visionRange;
+        if (ValidateDestination(destination, out var validDestination))
+        {
+          fleeDestination = validDestination;
+          return true;
+        }
+        else
+        {
+          directionFromThreat = MathUtils.RotateDirectionY(destination - navAgentPosition, angle);
+        }
+      }
+
+      fleeDestination = Vector3.zero;
+      return false;
+    }
+
+    #endregion
+
+    #region Wandering
+
+    /// <summary>
+    ///   Make the animal move towards a position at the edge of the vision range, at an angle within a half circle of
+    ///   the direction that the animal is currently facing.
     /// </summary>
     public void StartWander()
     {
-      float[] wanderAngles = {0f, -90f, 90f, 180f};
       var agentTransform = navAgent.transform;
       var direction = agentTransform.forward.normalized * sphereCollider.radius;
-      foreach (var angle in wanderAngles)
+
+      foreach (var angle in WanderAngles)
       {
-        var rotatedDirection = RotateDirection(direction, Random.Range(angle - 45f, angle + 45f));
+        var rotatedDirection = MathUtils.RotateDirectionY(direction, Random.Range(angle - 45f, angle + 45f));
+
         var position = agentTransform.position;
         var destination = position + rotatedDirection;
+
         if (ValidateDestination(destination, out var validPosition))
         {
-          SetTarget(validPosition);
+          SetDestination(validPosition);
           return;
         }
       }
     }
 
     /// <summary>
-    ///  Gets called from Tick in the wander state, updates a random position if it is sufficiently
-    ///  close to its last destination
+    ///   Updates the wandering of the animal if it has no current destination of if it is close to its current
+    ///   destination.
     /// </summary>
     public void UpdateWander()
     {
@@ -170,24 +224,7 @@ namespace Ecosystem
 
     #endregion
 
-    #region PrivateHelperFunctions
-
-    /// <summary>
-    ///   Sets the destination for the navMeshAgent
-    /// </summary>
-    private void SetTarget(Vector3 destination)
-    {
-      SetNavAgentSpeed();
-      navAgent.SetDestination(destination);
-    }
-
-    /// <summary>
-    ///   Rotates a vector the specified amount in the Y-plane
-    /// </summary>
-    private static Vector3 RotateDirection(Vector3 direction, float amount)
-    {
-      return Quaternion.Euler(0, amount, 0) * direction;
-    }
+    #region Validation
 
     /// <summary>
     ///   Validates if there is a path to a given point
@@ -195,14 +232,16 @@ namespace Ecosystem
     private bool ValidatePath(Vector3 destination)
     {
       var navMeshPath = new NavMeshPath();
-      NavMesh.CalculatePath(navAgent.transform.position, destination, Terrains.Walkable, navMeshPath);
+      NavMesh.CalculatePath(GetPosition(), destination, Terrains.Walkable, navMeshPath);
       return navMeshPath.status == NavMeshPathStatus.PathComplete;
     }
 
     /// <summary>
-    ///   Checks if a position is valid by checking if there is a valid position within 1.0f radius,
-    ///   returns that valid position. If not valid returns zero vector.
+    ///   Attempts to validate a specified destination. 
     /// </summary>
+    /// <param name="destination">the destination that will be validated.</param>
+    /// <param name="validPosition">the resulting valid position; set to <c>Vector3.zero</c> on failure.</param>
+    /// <returns><c>true</c> if a valid position was found; <c>false</c> otherwise.</returns>
     private bool ValidateDestination(Vector3 destination, out Vector3 validPosition)
     {
       destination.y = Terrain.activeTerrain.SampleHeight(destination);
@@ -211,49 +250,10 @@ namespace Ecosystem
         validPosition = hit.position;
         return ValidatePath(validPosition);
       }
-
-      validPosition = Vector3.zero;
-      return false;
-    }
-
-    /// <summary>
-    ///   Sets a destination opposite direction of threat at the verge of its vision range
-    ///   if that position isn't valid the animal will try a different rotations.
-    ///   Returns a valid position or zero vector. 
-    /// </summary>
-    private Vector3 FindFleeDestination(Vector3 threatPosition)
-    {
-      var navAgentPosition = navAgent.transform.position;
-      var visionRange =sphereCollider.radius;
-      var directionFromThreat = (navAgentPosition - threatPosition).normalized * visionRange;
-      var fleeingDirection = directionFromThreat;
-
-
-      foreach (var angle in _fleeingAngles)
-      {
-        _fleeDestination = navAgentPosition + (fleeingDirection.normalized * visionRange);
-        if (ValidateDestination(_fleeDestination, out var validPosition))
-        {
-          return validPosition;
-        }
-        else
-        {
-          fleeingDirection = RotateDirection(directionFromThreat, angle);
-        }
-      }
-
-      return Vector3.zero;
-    }
-
-    private void SetNavAgentSpeed()
-    {
-      if (staminaController.IsRunning)
-      {
-        navAgent.speed = genome.WalkingSpeed * 1.5f;
-      }
       else
       {
-        navAgent.speed = genome.WalkingSpeed; 
+        validPosition = Vector3.zero;
+        return false;
       }
     }
 

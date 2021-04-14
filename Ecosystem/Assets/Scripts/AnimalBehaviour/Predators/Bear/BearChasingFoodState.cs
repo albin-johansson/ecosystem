@@ -1,27 +1,19 @@
 using Ecosystem.Util;
-using UnityEditor.Experimental.GraphView;
 using UnityEngine;
 
 namespace Ecosystem.AnimalBehaviour.Predators.Bear
 {
   internal sealed class BearChasingFoodState : AbstractAnimalState
   {
-    public BearChasingFoodState(StateData data)
+    internal BearChasingFoodState(StateData data) : base(data)
     {
-      Consumer = data.Consumer;
-      WaterConsumer = data.WaterConsumer;
-      MovementController = data.MovementController;
-      AnimationController = data.AnimationController;
-      MemoryController = data.MemoryController;
-      Reproducer = data.Reproducer;
-      Genome = data.Genome;
     }
 
     public override void Begin(GameObject target)
     {
       Target = target;
-      MovementController.StartHunting(Target.transform.position);
-      AnimationController.MoveAnimation();
+      MovementController.SetDestination(Target.transform.position);
+      AnimationController.EnterMoveAnimation();
     }
 
     public override AnimalState Tick()
@@ -30,7 +22,7 @@ namespace Ecosystem.AnimalBehaviour.Predators.Bear
       {
         return base.Tick();
       }
-      else if (!Target.activeSelf || !MovementController.IsTargetInRange(Target.transform.position))
+      else if (!Target.activeSelf || !MovementController.IsWithinSphere(Target.transform.position))
       {
         Target = GetClosestInVision(Layers.PreyMask);
         return Type();
@@ -41,7 +33,7 @@ namespace Ecosystem.AnimalBehaviour.Predators.Bear
       }
       else
       {
-        MovementController.UpdateHunting(Target.transform.position);
+        MovementController.SetDestination(Target.transform.position);
       }
 
       return Type();

@@ -5,36 +5,33 @@ namespace Ecosystem.AnimalBehaviour.Predators.Wolf
 {
   internal sealed class WolfLookingForFoodState : AbstractAnimalState
   {
-    public WolfLookingForFoodState(StateData data)
+    internal WolfLookingForFoodState(StateData data) : base(data)
     {
-      StaminaController = data.StaminaController;
-      Consumer = data.Consumer;
-      WaterConsumer = data.WaterConsumer;
-      MovementController = data.MovementController;
-      AnimationController = data.AnimationController;
-      MemoryController = data.MemoryController;
-      Reproducer = data.Reproducer;
-      Genome = data.Genome;
     }
 
     public override void Begin(GameObject target)
     {
-      Target = GetClosestInVision(Layers.PreyMask);
+      Target = GetClosestInVision(Layers.PreyMask | Layers.MeatMask);
       MovementController.StartWander();
-      AnimationController.MoveAnimation();
+      AnimationController.EnterMoveAnimation();
     }
 
     public override AnimalState Tick()
     {
       if (Target)
       {
-        return AnimalState.ChasingPrey;
+        if (Tags.IsMeat(Target))
+        {
+          return AnimalState.GoingToFood;
+        }
+        else if (Tags.IsPrey(Target))
+        {
+          return AnimalState.ChasingPrey;
+        }
       }
-      else
-      {
-        MovementController.UpdateWander();
-        return base.Tick();
-      }
+
+      MovementController.UpdateWander();
+      return base.Tick();
     }
 
     public override void OnTriggerEnter(Collider other)
@@ -44,7 +41,7 @@ namespace Ecosystem.AnimalBehaviour.Predators.Wolf
       {
         MemoryController.SaveToMemory(otherObject);
       }
-      else if (Tags.IsPrey(otherObject))
+      else if (Tags.IsPrey(otherObject) || Tags.IsMeat(otherObject))
       {
         Target = otherObject;
       }

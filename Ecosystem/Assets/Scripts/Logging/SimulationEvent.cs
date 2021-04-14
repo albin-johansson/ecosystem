@@ -38,7 +38,7 @@ namespace Ecosystem.Logging
     ///   This is only used by mating events, it is set to <c>-1</c> otherwise.
     /// </remarks>
     public int matingIndex;
-    
+
     /// <summary>
     ///   The index of the additional death information object. 
     /// </summary>

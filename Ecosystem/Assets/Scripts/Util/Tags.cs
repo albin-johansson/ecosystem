@@ -8,15 +8,23 @@ namespace Ecosystem.Util
   /// </summary>
   public static class Tags
   {
-    public static bool IsPredator(GameObject animal) => animal.CompareTag("Wolf") ||
-                                                        animal.CompareTag("Bear");
+    #region Type checks
 
-    public static bool IsPrey(GameObject animal) => animal.CompareTag("Rabbit") ||
-                                                    animal.CompareTag("Deer");
+    public static bool IsRabbit(GameObject animal) => animal.CompareTag("Rabbit");
+
+    public static bool IsDeer(GameObject animal) => animal.CompareTag("Deer");
+
+    public static bool IsWolf(GameObject animal) => animal.CompareTag("Wolf");
+
+    public static bool IsBear(GameObject animal) => animal.CompareTag("Bear");
+
+    public static bool IsPredator(GameObject animal) => IsWolf(animal) || IsBear(animal);
+
+    public static bool IsPrey(GameObject animal) => IsRabbit(animal) || IsDeer(animal);
 
     public static bool IsAnimal(GameObject gameObject) => IsPrey(gameObject) || IsPredator(gameObject);
 
-    public static bool IsBerryConsumer(GameObject gameObject) => IsPrey(gameObject); //TODO add bear
+    public static bool IsBerryConsumer(GameObject gameObject) => IsPrey(gameObject); // TODO add bear
 
     public static bool IsStaticFood(GameObject gameObject) => gameObject.CompareTag("StaticFood");
 
@@ -25,7 +33,8 @@ namespace Ecosystem.Util
     /// </summary>
     /// <param name="gameObject">the game object that will be checked</param>
     /// <returns><c>true</c> if the game object is a food item; <c>false</c> otherwise.</returns>
-    public static bool IsFood(GameObject gameObject) => gameObject.CompareTag("Carrot") || gameObject.CompareTag("Berry");
+    public static bool IsFood(GameObject gameObject) => gameObject.CompareTag("Berry") ||
+                                                        gameObject.CompareTag("Carrot");
 
     /// <summary>
     ///   Indicates whether or not the supplied game object has a tag that indicates that it's a meat item.
@@ -40,6 +49,10 @@ namespace Ecosystem.Util
     /// <param name="gameObject">the game object that will be checked</param>
     /// <returns><c>true</c> if the game object is a water item; <c>false</c> otherwise.</returns>
     public static bool IsWater(GameObject gameObject) => gameObject.CompareTag("Water");
+
+    #endregion
+
+    #region Counting
 
     /// <summary>
     ///   Counts the current amount of game objects with the specified tag.
@@ -68,5 +81,7 @@ namespace Ecosystem.Util
     /// </summary>
     /// <returns>the current amount of food items.</returns>
     public static int CountFood() => Count("Carrot");
+
+    #endregion
   }
 }

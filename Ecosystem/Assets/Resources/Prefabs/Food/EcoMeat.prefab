@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 5397723642851313545}
   - component: {fileID: 6318471318033541788}
   m_Layer: 13
-  m_Name: Meat
+  m_Name: EcoMeat
   m_TagString: Meat
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -60,8 +60,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 447cdde87036ae847b423148d5fee418, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  nutritionalValue: 0
-  keyToPool: 
+  nutritionalValue: 10
 --- !u!1001 &4920864006477584015
 PrefabInstance:
   m_ObjectHideFlags: 0
