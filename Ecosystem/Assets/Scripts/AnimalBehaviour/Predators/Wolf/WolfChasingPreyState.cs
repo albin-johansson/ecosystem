@@ -77,7 +77,7 @@ namespace Ecosystem.AnimalBehaviour.Predators.Wolf
     {
       if (other.gameObject == Target)
       {
-        Target = GetClosestInVision(Layers.PreyMask);
+        Target = GetClosestInVision(Layers.PreyMask | Layers.MeatMask);
       }
     }
 

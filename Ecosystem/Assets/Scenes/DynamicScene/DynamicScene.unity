@@ -3014,6 +3014,135 @@ Transform:
   m_Father: {fileID: 1718093830}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &355084773
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 355084775}
+  - component: {fileID: 355084774}
+  m_Layer: 0
+  m_Name: ObjectPool
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &355084774
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 355084773}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: abc590f38b264fd09ccdb5f3f1c9f428, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  pools:
+  - key: Rabbit
+    prefab: {fileID: 3436557251021641289, guid: 52b1c190247192a42a5e36bafea08096, type: 3}
+    size: 100
+  - key: Wolf
+    prefab: {fileID: 4371145773595096147, guid: 9ad7ab249851e454e9360e8fc8284e3b, type: 3}
+    size: 100
+  - key: Deer
+    prefab: {fileID: 7155763010095567698, guid: ac935de5e4958254196cd0457e8a0df5, type: 3}
+    size: 100
+  - key: Bear
+    prefab: {fileID: 7237780236292801018, guid: a5fd4d9dd473da54c83430115c05e48c, type: 3}
+    size: 100
+  - key: Meat
+    prefab: {fileID: 5971010928584275656, guid: c08365c8448025247bde37b619fa136b, type: 3}
+    size: 100
+--- !u!4 &355084775
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 355084773}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 6
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1001 &359173983
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 213484847}
+    m_Modifications:
+    - target: {fileID: 1534203587558825071, guid: b77c916561296a7489cb363297bb031b, type: 3}
+      propertyPath: m_Name
+      value: EcoBerryBush (21)
+      objectReference: {fileID: 0}
+    - target: {fileID: 3923640641362310460, guid: b77c916561296a7489cb363297bb031b, type: 3}
+      propertyPath: m_RootOrder
+      value: 21
+      objectReference: {fileID: 0}
+    - target: {fileID: 3923640641362310460, guid: b77c916561296a7489cb363297bb031b, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 0.74999994
+      objectReference: {fileID: 0}
+    - target: {fileID: 3923640641362310460, guid: b77c916561296a7489cb363297bb031b, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 0.7500001
+      objectReference: {fileID: 0}
+    - target: {fileID: 3923640641362310460, guid: b77c916561296a7489cb363297bb031b, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 51.164
+      objectReference: {fileID: 0}
+    - target: {fileID: 3923640641362310460, guid: b77c916561296a7489cb363297bb031b, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 15.385
+      objectReference: {fileID: 0}
+    - target: {fileID: 3923640641362310460, guid: b77c916561296a7489cb363297bb031b, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 436.189
+      objectReference: {fileID: 0}
+    - target: {fileID: 3923640641362310460, guid: b77c916561296a7489cb363297bb031b, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0.98754436
+      objectReference: {fileID: 0}
+    - target: {fileID: 3923640641362310460, guid: b77c916561296a7489cb363297bb031b, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0.06313484
+      objectReference: {fileID: 0}
+    - target: {fileID: 3923640641362310460, guid: b77c916561296a7489cb363297bb031b, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0.039533947
+      objectReference: {fileID: 0}
+    - target: {fileID: 3923640641362310460, guid: b77c916561296a7489cb363297bb031b, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0.13859032
+      objectReference: {fileID: 0}
+    - target: {fileID: 3923640641362310460, guid: b77c916561296a7489cb363297bb031b, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 7.796
+      objectReference: {fileID: 0}
+    - target: {fileID: 3923640641362310460, guid: b77c916561296a7489cb363297bb031b, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: -3.506
+      objectReference: {fileID: 0}
+    - target: {fileID: 3923640641362310460, guid: b77c916561296a7489cb363297bb031b, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 15.738
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: b77c916561296a7489cb363297bb031b, type: 3}
+--- !u!4 &359173984 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 3923640641362310460, guid: b77c916561296a7489cb363297bb031b, type: 3}
+  m_PrefabInstance: {fileID: 359173983}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &361644335
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -11141,62 +11270,6 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 970672542934591370, guid: b314556e8fd159c41956b229e031fff8, type: 3}
   m_PrefabInstance: {fileID: 1147187392}
   m_PrefabAsset: {fileID: 0}
---- !u!1 &1151224321
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1151224323}
-  - component: {fileID: 1151224322}
-  m_Layer: 0
-  m_Name: ObjectPool
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!114 &1151224322
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1151224321}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: abc590f38b264fd09ccdb5f3f1c9f428, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  pools:
-  - key: Rabbit
-    prefab: {fileID: 3436557251021641289, guid: 52b1c190247192a42a5e36bafea08096, type: 3}
-    size: 100
-  - key: Wolf
-    prefab: {fileID: 4371145773595096147, guid: 9ad7ab249851e454e9360e8fc8284e3b, type: 3}
-    size: 100
-  - key: Deer
-    prefab: {fileID: 7155763010095567698, guid: ac935de5e4958254196cd0457e8a0df5, type: 3}
-    size: 100
-  - key: Bear
-    prefab: {fileID: 7237780236292801018, guid: a5fd4d9dd473da54c83430115c05e48c, type: 3}
-    size: 100
---- !u!4 &1151224323
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1151224321}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_RootOrder: 6
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &1157608176
 PrefabInstance:
   m_ObjectHideFlags: 0
