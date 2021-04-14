@@ -18,7 +18,7 @@ namespace Ecosystem.AnimalBehaviour.Predators.Bear
 
     public override void Begin(GameObject target)
     {
-      Target = GetClosestInVision(Layers.PreyMask | Layers.MeatMask);
+      Target = GetClosestInVision(Layers.PreyMask | Layers.MeatMask |Layers.StaticFoodMask);
       MovementController.StartWander();
       AnimationController.MoveAnimation();
     }
