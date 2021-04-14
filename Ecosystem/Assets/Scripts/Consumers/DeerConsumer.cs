@@ -47,6 +47,7 @@ namespace Ecosystem.Consumers
         if (Hunger <= 0 || _consumed > _limit)
         {
           _consumed = 0;
+          _limit = Random.Range(20, 40);
           IsConsuming = false;
         }
       }

@@ -24,6 +24,7 @@ namespace Ecosystem.AnimalBehaviour.Prey.Deer
       MovementController.StartWander();
       AnimationController.MoveAnimation();
       _time = 0;
+      _limit = Random.Range(5, 15);
     }
 
     public override AnimalState Tick()
