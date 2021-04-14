@@ -5,21 +5,15 @@ namespace Ecosystem.AnimalBehaviour.Predators.Bear
 {
   internal sealed class BearEatingState : AbstractAnimalState
   {
-    public BearEatingState(StateData data)
+    internal BearEatingState(StateData data) : base(data)
     {
-      Consumer = data.Consumer;
-      WaterConsumer = data.WaterConsumer;
-      MovementController = data.MovementController;
-      AnimationController = data.AnimationController;
-      MemoryController = data.MemoryController;
-      Reproducer = data.Reproducer;
     }
 
     public override void Begin(GameObject target)
     {
       Target = target;
-      AnimationController.IdleAnimation();
-      MovementController.StandStill(true);
+      AnimationController.EnterIdleAnimation();
+      MovementController.SetStandingStill(true);
     }
 
     public override AnimalState Tick()

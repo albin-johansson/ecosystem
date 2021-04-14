@@ -11,7 +11,7 @@ namespace Ecosystem.Consumers
     [SerializeField] private AbstractGenome genome;
     [SerializeField] private ResourceBar resourceBar;
     [SerializeField] private DeathHandler deathHandler;
-    [SerializeField] private double maxHunger = 100;
+    [SerializeField] private float maxHunger = 100;
     [SerializeField] private EcoAnimationController animationController;
     [SerializeField] private Reproducer reproducer;
     private bool _isDead;
@@ -20,9 +20,9 @@ namespace Ecosystem.Consumers
     
     public GameObject EatingFromGameObject { get; set; }
 
-    public double Hunger { get; set; }
+    public float Hunger { get; set; }
 
-    public bool CollideActive { get; set; }
+    public bool ColliderActive { get; set; }
 
     public delegate void PreyConsumedEvent();
 
@@ -59,7 +59,7 @@ namespace Ecosystem.Consumers
 
       if (reproducer.IsPregnant)
       {
-        Hunger += genome.Metabolism * genome.GetChildFoodConsumtionFactor() * Time.deltaTime;
+        Hunger += genome.Metabolism * AbstractGenome.ChildFoodConsumptionFactor * Time.deltaTime;
       }
       else
       {
@@ -76,18 +76,19 @@ namespace Ecosystem.Consumers
 
     private void OnTriggerEnter(Collider other)
     {
-      if (!CollideActive || IsConsuming) return;
+      if (!ColliderActive || IsConsuming) return;
 
 
-      if (Tags.IsPrey(other.gameObject))
+      var otherObject = other.gameObject;
+      if (Tags.IsPrey(otherObject))
       {
-        DeathHandler _deathHandler = other.gameObject.GetComponentInParent<DeathHandler>();
-        if (!_deathHandler._isDead)
+        var otherDeathHandler = otherObject.GetComponentInParent<DeathHandler>();
+        if (!otherDeathHandler.isDead)
         {
-          _deathHandler.Die(CauseOfDeath.Eaten);
           IsConsuming = true;
-          NutritionController prey = _deathHandler.Kill();
-          Hunger -= prey.Consume(Hunger);
+          otherDeathHandler.Die(CauseOfDeath.Eaten);
+          var otherNutritionController = otherObject.GetComponentInParent<NutritionController>();
+          Hunger -= otherNutritionController.Consume(Hunger);
           OnPreyConsumed?.Invoke();
         }
       }
@@ -106,14 +107,14 @@ namespace Ecosystem.Consumers
     
     private void OnTriggerStay(Collider other)
     {
-      if (CollideActive)
+      if (ColliderActive)
       {
         if (Tags.IsMeat(other.gameObject))
         {
           if (other.TryGetComponent(out NutritionController nutritionController))
           {
             Hunger -= nutritionController.Consume(Hunger);
-            CollideActive = false;
+            ColliderActive = false;
           }
         }
       }

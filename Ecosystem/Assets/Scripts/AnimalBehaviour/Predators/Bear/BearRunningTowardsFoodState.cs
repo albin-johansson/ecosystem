@@ -5,21 +5,15 @@ namespace Ecosystem.AnimalBehaviour.Predators.Bear
 {
   internal sealed class BearRunningTowardsFoodState : AbstractAnimalState
   {
-    public BearRunningTowardsFoodState(StateData data)
+    internal BearRunningTowardsFoodState(StateData data) : base(data)
     {
-      Consumer = data.Consumer;
-      WaterConsumer = data.WaterConsumer;
-      MovementController = data.MovementController;
-      AnimationController = data.AnimationController;
-      MemoryController = data.MemoryController;
-      Reproducer = data.Reproducer;
     }
 
     public override void Begin(GameObject target)
     {
       Target = target;
-      MovementController.StartHunting(Target.transform.position);
-      AnimationController.MoveAnimation();
+      MovementController.SetDestination(Target.transform.position);
+      AnimationController.EnterMoveAnimation();
     }
 
     public override AnimalState Tick()
@@ -28,7 +22,7 @@ namespace Ecosystem.AnimalBehaviour.Predators.Bear
       {
         return AnimalState.Eating;
       }
-      if (!Consumer.IsHungry() || !Target || !Target.activeSelf || !MovementController.IsTargetInRange(Target.transform.position))
+      if (!Consumer.IsHungry() || !Target || !Target.activeSelf || !MovementController.IsWithinSphere(Target.transform.position))
       {
         return base.Tick();
       }

@@ -6,21 +6,15 @@ namespace Ecosystem.AnimalBehaviour.Prey.Deer
 {
   internal sealed class DeerEatingState : AbstractAnimalState
   {
-    public DeerEatingState(StateData data)
+    internal DeerEatingState(StateData data) : base(data)
     {
-      Consumer = data.Consumer;
-      WaterConsumer = data.WaterConsumer;
-      MovementController = data.MovementController;
-      AnimationController = data.AnimationController;
-      MemoryController = data.MemoryController;
-      Reproducer = data.Reproducer;
     }
 
     public override void Begin(GameObject target)
     {
       Target = target;
       AnimationController.EatingAnimation();
-      MovementController.StandStill(true);
+      MovementController.SetStandingStill(true);
       Consumer.IsConsuming = true;
     }
 

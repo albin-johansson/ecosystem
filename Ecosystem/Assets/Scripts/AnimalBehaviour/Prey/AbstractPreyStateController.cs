@@ -1,10 +1,11 @@
+using Ecosystem.Consumers;
 using UnityEngine;
 
 namespace Ecosystem.AnimalBehaviour.Prey
 {
   public abstract class AbstractPreyStateController : AbstractStateController
   {
-    [SerializeField] private FoodConsumer consumer;
+    [SerializeField] private IConsumer consumer;
 
     private IAnimalState _idle;
     private IAnimalState _lookingForWater;

@@ -12,17 +12,17 @@ namespace Ecosystem.Consumers
     [SerializeField] private AbstractGenome genome;
     [SerializeField] private ResourceBar resourceBar;
     [SerializeField] private DeathHandler deathHandler;
-    [SerializeField] private double maxHunger = 100;
+    [SerializeField] private float maxHunger = 100;
     [SerializeField] private Reproducer reproducer;
     private bool _isDead;
     private double _consumed = 0;
     private double _limit = 30;
 
     public GameObject EatingFromGameObject { get; set; }
-    public double Hunger { get; set; }
+    public float Hunger { get; set; }
     public bool IsConsuming { get; set; }
 
-    public bool CollideActive { get; set; }
+    public bool ColliderActive { get; set; }
     private void OnEnable()
     {
       resourceBar.SetMaxValue((float) maxHunger);
@@ -54,7 +54,7 @@ namespace Ecosystem.Consumers
 
       if (reproducer.IsPregnant)
       {
-        Hunger += genome.Metabolism * genome.GetChildFoodConsumtionFactor() * Time.deltaTime;
+        Hunger += genome.Metabolism * AbstractGenome.ChildFoodConsumptionFactor * Time.deltaTime;
       }
       else
       {
