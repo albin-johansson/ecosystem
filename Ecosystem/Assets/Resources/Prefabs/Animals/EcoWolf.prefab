@@ -4603,9 +4603,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   animationController: {fileID: -4792604738439377631}
-  keyToPool: Wolf
-  meatKeyToPool: Meat
-  nutritionController: {fileID: 0}
   isDead: 0
 --- !u!1 &4395386118049015763
 GameObject:
@@ -7402,7 +7399,7 @@ MonoBehaviour:
   reproducer: {fileID: 879403422808574330}
   genome: {fileID: 1593158740268700976}
   sphereCollider: {fileID: 651377425655632140}
-  consumer: {fileID: 5694940851676850990}
+  wolfConsumer: {fileID: 5694940851676850990}
 --- !u!1 &7116156556552470170
 GameObject:
   m_ObjectHideFlags: 0

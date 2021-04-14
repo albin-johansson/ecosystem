@@ -4878,7 +4878,7 @@ MonoBehaviour:
   reproducer: {fileID: 7965410119150201383}
   genome: {fileID: 570846004582155358}
   sphereCollider: {fileID: 6776153342693034266}
-  consumer: {fileID: 5346017003192509530}
+  deerConsumer: {fileID: 3375908380591961721}
 --- !u!1 &4759522730638570450
 GameObject:
   m_ObjectHideFlags: 0
@@ -5441,8 +5441,8 @@ GameObject:
   - component: {fileID: 8025181674659432259}
   - component: {fileID: 4857879101199746012}
   - component: {fileID: 8855973453505120815}
-  - component: {fileID: 5346017003192509530}
   - component: {fileID: 7965410119150201383}
+  - component: {fileID: 3375908380591961721}
   m_Layer: 8
   m_Name: Consumer
   m_TagString: Deer
@@ -5493,23 +5493,6 @@ MonoBehaviour:
   resourceBar: {fileID: 897296775149995389}
   deathHandler: {fileID: 6442332908797553670}
   maxThirst: 100
---- !u!114 &5346017003192509530
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5442896545990147931}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8b0d8392b591c9448a6a95dfbc63639a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  genome: {fileID: 570846004582155358}
-  resourceBar: {fileID: 6078427025632469203}
-  deathHandler: {fileID: 6442332908797553670}
-  reproducer: {fileID: 7965410119150201383}
-  maxHunger: 100
 --- !u!114 &7965410119150201383
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5525,6 +5508,23 @@ MonoBehaviour:
   genome: {fileID: 570846004582155358}
   prefab: {fileID: 7155763010095567698}
   keyToPool: Deer
+--- !u!114 &3375908380591961721
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5442896545990147931}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7f7897e22dd145eebab7825aa545af0f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  genome: {fileID: 570846004582155358}
+  resourceBar: {fileID: 6078427025632469203}
+  deathHandler: {fileID: 6442332908797553670}
+  maxHunger: 100
+  reproducer: {fileID: 7965410119150201383}
 --- !u!1 &5456374639049524137
 GameObject:
   m_ObjectHideFlags: 0
@@ -7527,7 +7527,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   animationController: {fileID: 4427174813899224407}
-  keyToPool: Deer
   isDead: 0
 --- !u!114 &4416537634727246443
 MonoBehaviour:

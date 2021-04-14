@@ -1100,8 +1100,8 @@ GameObject:
   - component: {fileID: 4907271403018460008}
   - component: {fileID: 4475402439294125818}
   - component: {fileID: 1750528480465133566}
-  - component: {fileID: 3973268693136602879}
   - component: {fileID: 8740494391916317756}
+  - component: {fileID: 8493375441685755629}
   m_Layer: 10
   m_Name: Consumer
   m_TagString: Bear
@@ -1152,23 +1152,6 @@ MonoBehaviour:
   resourceBar: {fileID: 8610027635385015251}
   deathHandler: {fileID: 5519717986162146221}
   maxThirst: 100
---- !u!114 &3973268693136602879
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6519664316927584784}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c2fa5581f03243c68b482d0030e00671, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  genome: {fileID: 1080774011748047759}
-  resourceBar: {fileID: 3410853300184415869}
-  deathHandler: {fileID: 5519717986162146221}
-  reproducer: {fileID: 8740494391916317756}
-  maxHunger: 100
 --- !u!114 &8740494391916317756
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1184,6 +1167,24 @@ MonoBehaviour:
   genome: {fileID: 1080774011748047759}
   prefab: {fileID: 7237780236292801018}
   keyToPool: Bear
+--- !u!114 &8493375441685755629
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6519664316927584784}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 954da871482546abb9ea5046e008c846, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  genome: {fileID: 1080774011748047759}
+  resourceBar: {fileID: 3410853300184415869}
+  deathHandler: {fileID: 5519717986162146221}
+  maxHunger: 100
+  animationController: {fileID: -4165548273840364118}
+  reproducer: {fileID: 8740494391916317756}
 --- !u!1 &6570557073577150055
 GameObject:
   m_ObjectHideFlags: 0
@@ -1544,8 +1545,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   animationController: {fileID: -4165548273840364118}
-  keyToPool: Bear
-  nutritionController: {fileID: 0}
   isDead: 0
 --- !u!114 &1080774011748047759
 MonoBehaviour:
@@ -1698,7 +1697,7 @@ MonoBehaviour:
   reproducer: {fileID: 8740494391916317756}
   genome: {fileID: 1080774011748047759}
   sphereCollider: {fileID: 6405190242370463797}
-  consumer: {fileID: 3973268693136602879}
+  bearConsumer: {fileID: 8493375441685755629}
 --- !u!1 &8421346663248798016
 GameObject:
   m_ObjectHideFlags: 0
