@@ -113,7 +113,7 @@ namespace Ecosystem.UI
         Instantiate(nDeer, deer, terrain);
         Instantiate(nBears, bear, terrain);
         Instantiate(nCarrots, carrot, terrain);
-        Instantiate(nBerrybush, berrybush, terrain);
+        Instantiate(nBerrybush, berrybush, terrain, 0.3f);
       }
     }
 
@@ -143,13 +143,16 @@ namespace Ecosystem.UI
     /// <param name="count">the amount of prefabs that will be spawned</param>
     /// <param name="prefab">the prefab that will be spawned</param>
     /// <param name="terrain">the terrain on which the prefab will be spawned</param>
-    private static void Instantiate(int count, Object prefab, Terrain terrain)
+    /// <param name="offset">the offset to the terrain, this is zero by default</param>
+    private static void Instantiate(int count, Object prefab, Terrain terrain, float offset = 0)
     {
+      var offsetVector = new Vector3(0, offset, 0);
       for (var i = 0; i < count; ++i)
       {
         // There is a small risk that we fail to find a walkable position, but it's fine
         if (Terrains.RandomWalkablePosition(terrain, out var position))
         {
+          position += offsetVector;
           Instantiate(prefab, position, Quaternion.identity);
         }
       }
