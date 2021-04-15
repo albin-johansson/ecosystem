@@ -3,9 +3,9 @@ using UnityEngine;
 
 namespace Ecosystem.AnimalBehaviour.Predators.Bear
 {
-  internal sealed class BearChasingFoodState : AbstractAnimalState
+  internal sealed class BearChasingPreyState : AbstractAnimalState
   {
-    internal BearChasingFoodState(StateData data) : base(data)
+    internal BearChasingPreyState(StateData data) : base(data)
     {
     }
 
@@ -13,11 +13,15 @@ namespace Ecosystem.AnimalBehaviour.Predators.Bear
     {
       Target = target;
       MovementController.SetDestination(Target.transform.position);
-      AnimationController.EnterMoveAnimation();
     }
 
     public override AnimalState Tick()
     {
+      if (Consumer.IsConsuming)
+      {
+        return AnimalState.Attacking;
+      }
+
       if (!Target || !Consumer.IsHungry())
       {
         return base.Tick();
@@ -27,16 +31,28 @@ namespace Ecosystem.AnimalBehaviour.Predators.Bear
         Target = GetClosestInVision(Layers.PreyMask);
         return Type();
       }
-      else if (Consumer.IsConsuming)
-      {
-        return AnimalState.Attacking;
-      }
       else
       {
+        if (StaminaController.CanRun())
+        {
+          StaminaController.IsRunning = true;
+          AnimationController.EnterRunAnimation();
+        }
+        else
+        {
+          AnimationController.EnterMoveAnimation();
+        }
+
         MovementController.SetDestination(Target.transform.position);
       }
 
       return Type();
+    }
+
+    public override GameObject End()
+    {
+      StaminaController.IsRunning = false;
+      return base.End();
     }
 
     public override void OnTriggerEnter(Collider other)

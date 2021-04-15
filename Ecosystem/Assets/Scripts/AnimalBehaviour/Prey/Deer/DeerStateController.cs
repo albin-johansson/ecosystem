@@ -8,8 +8,9 @@ namespace Ecosystem.AnimalBehaviour.Prey.Deer
     [SerializeField] private DeerConsumer deerConsumer;
     protected override void Initialize()
     {
-      Data.Consumer = deerConsumer;
+      consumer = deerConsumer;
       base.Initialize();
+      Eating = PreyStateFactory.CreateDeerEating(Data);
       LookingForFood = PreyStateFactory.CreateDeerLookingForFood(Data);
       RunningTowardsFood = PreyStateFactory.CreateDeerRunningTowardsFood(Data);
       LookingForMate = PreyStateFactory.CreateDeerLookingForMate(Data);

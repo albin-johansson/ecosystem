@@ -1,4 +1,5 @@
-﻿using Ecosystem.Genes;
+﻿using System;
+using Ecosystem.Genes;
 using Ecosystem.Logging;
 using Ecosystem.UI;
 using Ecosystem.Util;
@@ -89,6 +90,21 @@ namespace Ecosystem.Consumer
         if (otherObject.TryGetComponent(out NutritionController otherNutritionController))
         {
           Hunger -= otherNutritionController.Consume(Hunger);
+        }
+      }
+    }
+
+    private void OnTriggerStay(Collider other)
+    {
+      var otherObject = other.gameObject;
+      if (ColliderActive)
+      {
+        if (Tags.IsMeat(otherObject))
+        {
+          if (otherObject.TryGetComponent(out NutritionController otherNutritionController))
+          {
+            Hunger -= otherNutritionController.Consume(Hunger);
+          }
         }
       }
     }

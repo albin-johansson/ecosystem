@@ -8,11 +8,13 @@ namespace Ecosystem.AnimalBehaviour.Predators.Bear
     [SerializeField] private BearConsumer bearConsumer;
     protected override void Initialize()
     {
-      Data.Consumer = bearConsumer;
+      consumer = bearConsumer;
       base.Initialize();
+      RunningTowardsFood = PredatorStateFactory.CreateBearRunningTowardsFood(Data);
       LookingForFood = PredatorStateFactory.CreateBearLookingForFood(Data);
-      ChasingPrey = PredatorStateFactory.CreateBearChasingFood(Data);
+      ChasingPrey = PredatorStateFactory.CreateBearChasingPrey(Data);
       LookingForMate = PredatorStateFactory.CreateBearLookingForMate(Data);
+      Eating = PredatorStateFactory.CreateBearEating(Data);
     }
   }
 }

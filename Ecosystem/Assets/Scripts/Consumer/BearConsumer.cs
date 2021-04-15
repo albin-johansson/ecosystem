@@ -118,6 +118,21 @@ namespace Ecosystem.Consumer
         EatingFromGameObject = otherObject;
       }
     }
+    
+    private void OnTriggerStay(Collider other)
+    {
+      var otherObject = other.gameObject;
+      if (ColliderActive)
+      {
+        if (Tags.IsMeat(otherObject))
+        {
+          if (otherObject.TryGetComponent(out NutritionController otherNutritionController))
+          {
+            Hunger -= otherNutritionController.Consume(Hunger);
+          }
+        }
+      }
+    }
 
     public bool IsHungry()
     {

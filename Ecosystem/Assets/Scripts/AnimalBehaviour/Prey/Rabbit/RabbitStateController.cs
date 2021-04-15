@@ -8,8 +8,9 @@ namespace Ecosystem.AnimalBehaviour.Prey.Rabbit
     [SerializeField] private RabbitConsumer rabbitConsumer;
     protected override void Initialize()
     {
-      Data.Consumer = rabbitConsumer;
+      consumer = rabbitConsumer;
       base.Initialize();
+      Eating = PreyStateFactory.CreateRabbitEating(Data);
       LookingForFood = PreyStateFactory.CreateRabbitLookingForFood(Data);
       RunningTowardsFood = PreyStateFactory.CreateRabbitRunningTowardsFood(Data);
       LookingForMate = PreyStateFactory.CreateRabbitLookingForMate(Data);

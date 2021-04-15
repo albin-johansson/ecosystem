@@ -1,3 +1,4 @@
+using Ecosystem.Consumer;
 using Ecosystem.Genes;
 using Ecosystem.UI;
 using UnityEngine;
@@ -15,6 +16,8 @@ namespace Ecosystem.AnimalBehaviour
     [SerializeField] protected Reproducer reproducer;
     [SerializeField] protected AbstractGenome genome;
     [SerializeField] protected SphereCollider sphereCollider;
+
+    protected IConsumer consumer;
 
     protected IAnimalState State;
 

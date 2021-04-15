@@ -11,7 +11,7 @@ namespace Ecosystem.AnimalBehaviour.Predators.Bear
 
     public override void Begin(GameObject target)
     {
-      Target = GetClosestInVision(Layers.PreyMask | Layers.MeatMask);
+      Target = GetClosestInVision(Layers.PreyMask | Layers.MeatMask | Layers.StaticFoodMask);
       MovementController.StartWander();
       AnimationController.EnterMoveAnimation();
     }
@@ -20,7 +20,7 @@ namespace Ecosystem.AnimalBehaviour.Predators.Bear
     {
       if (Target)
       {
-        if (Tags.IsMeat(Target))
+        if (Tags.IsMeat(Target) | Tags.IsStaticFood(Target))
         {
           return AnimalState.GoingToFood;
         }
@@ -42,7 +42,7 @@ namespace Ecosystem.AnimalBehaviour.Predators.Bear
       {
         MemoryController.SaveToMemory(otherObject);
       }
-      else if (Tags.IsPrey(otherObject) || Tags.IsMeat(otherObject))
+      else if (Tags.IsPrey(otherObject) || Tags.IsMeat(otherObject) ||Tags.IsStaticFood(otherObject))
       {
         Target = otherObject;
       }

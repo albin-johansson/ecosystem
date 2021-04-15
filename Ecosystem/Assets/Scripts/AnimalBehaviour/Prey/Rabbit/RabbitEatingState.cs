@@ -1,11 +1,11 @@
 ﻿using Ecosystem.Util;
 using UnityEngine;
 
-namespace Ecosystem.AnimalBehaviour.Prey
+namespace Ecosystem.AnimalBehaviour.Prey.Rabbit
 {
-  internal sealed class PreyEatingState : AbstractAnimalState
+  internal sealed class RabbitEatingState : AbstractAnimalState
   {
-    internal PreyEatingState(StateData data) : base(data)
+    internal RabbitEatingState(StateData data) : base(data)
     {
     }
 

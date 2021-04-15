@@ -1,22 +1,21 @@
+﻿using Ecosystem.Components;
 using Ecosystem.Util;
 using UnityEngine;
 
 namespace Ecosystem.AnimalBehaviour.Prey.Deer
 {
-  internal sealed class DeerLookingForFoodState : AbstractAnimalState
+  internal sealed class DeerEatingState : AbstractAnimalState
   {
-    private double _time;
-    private double _limit;
-    internal DeerLookingForFoodState(StateData data) : base(data)
+    internal DeerEatingState(StateData data) : base(data)
     {
     }
 
     public override void Begin(GameObject target)
     {
-      MovementController.StartWander();
-      AnimationController.EnterMoveAnimation();
-      _time = 0;
-      _limit = Random.Range(5, 15);
+      Target = target;
+      AnimationController.EnterEatingAnimation();
+      MovementController.SetStandingStill(true);
+      Consumer.IsConsuming = true;
     }
 
     public override AnimalState Tick()
@@ -26,7 +25,7 @@ namespace Ecosystem.AnimalBehaviour.Prey.Deer
         if (Tags.IsPredator(Target))
         {
           return AnimalState.Fleeing;
-        }
+        } 
       }
 
       if (Consumer.Hunger < WaterConsumer.Thirst && WaterConsumer.IsThirsty())
@@ -34,26 +33,26 @@ namespace Ecosystem.AnimalBehaviour.Prey.Deer
         return AnimalState.LookingForWater;
       }
 
-      if (_time > _limit)
+      if (Consumer.IsConsuming)
       {
-        return AnimalState.Eating;
+        return Type();
       }
+      else
+      {
+        return base.Tick();
+      }
+    }
 
-      _time += Time.deltaTime;
-
-      MovementController.UpdateWander();
-
-      return Type();
+    public override GameObject End()
+    {
+      Consumer.IsConsuming = false;
+      return base.End();
     }
 
     public override void OnTriggerEnter(Collider other)
     {
       var otherObject = other.gameObject;
-      if (Tags.IsWater(otherObject))
-      {
-        MemoryController.SaveToMemory(otherObject);
-      }
-      else if (Tags.IsPredator(otherObject))
+      if (Tags.IsPredator(otherObject))
       {
         Target = otherObject;
       }
@@ -61,7 +60,7 @@ namespace Ecosystem.AnimalBehaviour.Prey.Deer
 
     public override AnimalState Type()
     {
-      return AnimalState.LookingForFood;
+      return AnimalState.Eating;
     }
   }
 }

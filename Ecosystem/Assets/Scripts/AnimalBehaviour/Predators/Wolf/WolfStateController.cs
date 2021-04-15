@@ -8,8 +8,9 @@ namespace Ecosystem.AnimalBehaviour.Predators.Wolf
     [SerializeField] private WolfConsumer wolfConsumer;
     protected override void Initialize()
     {
-      Data.Consumer = wolfConsumer;
+      consumer = wolfConsumer;
       base.Initialize();
+      RunningTowardsFood = PredatorStateFactory.CreateWolfRunningTowardsFood(Data);
       LookingForFood = PredatorStateFactory.CreateWolfLookingForFood(Data);
       ChasingPrey = PredatorStateFactory.CreateWolfChasingPrey(Data);
       LookingForMate = PredatorStateFactory.CreateWolfLookingForMate(Data);
