@@ -9,22 +9,22 @@ namespace Ecosystem.Spawning
   /// </summary>
   public sealed class StationaryFoodGeneration : MonoBehaviour
   {
+    public delegate void GeneratedFood(GameObject food);
+
+    public static event GeneratedFood OnGeneratedFood;
+
     [SerializeField] private Transform spawner;
     [SerializeField] private float rate;
-    [SerializeField] private int numberOfBerries;
 
+    private readonly Stack<int> _placedBerries = new Stack<int>();
     private float _elapsedTime;
-    private int _spawningLocations;
 
-    public Stack<int> BerriesPlaced { get; } = new Stack<int>();
-    public int AmountOfBerries { get; set; }
+    public int AmountOfBerries { get; private set; }
 
-    //Deactivates all berries to make them invisible.  
+    /// Deactivates all berries to make them invisible.  
     private void Start()
     {
-      _spawningLocations = spawner.childCount - 1;
-
-      for (var i = 0; i < _spawningLocations; ++i)
+      for (var i = 0; i < spawner.childCount; ++i)
       {
         spawner.GetChild(i).gameObject.SetActive(false);
       }
@@ -38,7 +38,6 @@ namespace Ecosystem.Spawning
     /// </summary>
     private void Update()
     {
-      numberOfBerries = AmountOfBerries;
       _elapsedTime += Time.deltaTime;
       if (_elapsedTime > rate)
       {
@@ -50,20 +49,35 @@ namespace Ecosystem.Spawning
         _elapsedTime = 0;
         for (var i = Random.Range(1, 4); i > 0; --i)
         {
-          SpawnBerries();
+          if (AmountOfBerries < spawner.childCount)
+          {
+            SpawnBerry();
+          }
         }
       }
     }
 
-    private void SpawnBerries()
+    public void RemoveBerry()
     {
-      if (AmountOfBerries < _spawningLocations + 1)
-      {
-        var location = Random.Range(0, _spawningLocations);
-        spawner.GetChild(location).transform.gameObject.SetActive(true);
-        BerriesPlaced.Push(location);
-        AmountOfBerries += 1;
-      }
+      var index = _placedBerries.Pop();
+
+      var berryTransform = transform.GetChild(index);
+      berryTransform.gameObject.SetActive(false);
+
+      --AmountOfBerries;
+    }
+
+    private void SpawnBerry()
+    {
+      var index = Random.Range(0, spawner.childCount - 1);
+
+      var berryTransform = spawner.GetChild(index);
+      berryTransform.gameObject.SetActive(true);
+
+      _placedBerries.Push(index);
+      ++AmountOfBerries;
+
+      OnGeneratedFood?.Invoke(berryTransform.gameObject);
     }
   }
 }

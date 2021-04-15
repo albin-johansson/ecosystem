@@ -25,11 +25,7 @@ namespace Ecosystem
       {
         for (var i = 0; i < _count; ++i)
         {
-          stationaryFoodGeneration.AmountOfBerries -= 1;
-
-          var location = stationaryFoodGeneration.BerriesPlaced.Pop();
-          transform.GetChild(location).gameObject.SetActive(false);
-
+          stationaryFoodGeneration.RemoveBerry();
           if (stationaryFoodGeneration.AmountOfBerries < 1)
           {
             gameObject.SetActive(false);
