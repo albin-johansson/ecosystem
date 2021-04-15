@@ -5,14 +5,17 @@ namespace Ecosystem
 {
   public sealed class NutritionController : MonoBehaviour
   {
-    [SerializeField] private float nutritionalValue;
+    public delegate void FoodDecayed(GameObject food);
 
     public delegate void FoodEatenEvent(GameObject food);
 
-    /// <summary>
+    /// This event is emitted every time a food resource decays.
+    public static event FoodDecayed OnFoodDecayed;
+
     /// This event is emitted every time a food resource is consumed.
-    /// </summary>
     public static event FoodEatenEvent OnFoodEaten;
+
+    [SerializeField] private float nutritionalValue;
 
     private string _keyToPool;
 
@@ -31,6 +34,7 @@ namespace Ecosystem
       else
       {
         ObjectPoolHandler.Instance.ReturnOrDestroy(_keyToPool, gameObject);
+        OnFoodDecayed?.Invoke(gameObject);
       }
     }
 
