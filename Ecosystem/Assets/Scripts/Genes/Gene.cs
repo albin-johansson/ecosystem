@@ -26,7 +26,7 @@ namespace Ecosystem.Genes
     }
 
     // Returns a new mutated gene based on the current Genes range. 
-    internal Gene Mutate()
+    private Gene Mutate()
     {
       return new Gene(GeneUtil.Mutate(Min, Max), Min, Max);
     }
@@ -40,8 +40,8 @@ namespace Ecosystem.Genes
       else
       {
         return GeneUtil.RandomWithChance(50)
-                ? new Gene(first)
-                : new Gene(second);
+          ? new Gene(first)
+          : new Gene(second);
       }
     }
   }

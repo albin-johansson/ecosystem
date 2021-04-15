@@ -7,6 +7,7 @@ namespace Ecosystem.Spawning
   {
     [SerializeField] private Transform directory;
     [SerializeField] private GameObject prefab;
+
     private Camera _mainCamera;
 
     private void Start()

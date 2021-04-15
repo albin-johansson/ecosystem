@@ -688,8 +688,7 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
-    m_RemovedComponents:
-    - {fileID: 1593158740268700976, guid: 9ad7ab249851e454e9360e8fc8284e3b, type: 3}
+    m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 9ad7ab249851e454e9360e8fc8284e3b, type: 3}
 --- !u!114 &316241485 stripped
 MonoBehaviour:
@@ -1366,8 +1365,7 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
-    m_RemovedComponents:
-    - {fileID: 1438288584065220351, guid: 52b1c190247192a42a5e36bafea08096, type: 3}
+    m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 52b1c190247192a42a5e36bafea08096, type: 3}
 --- !u!1 &948666940
 GameObject:
@@ -1639,12 +1637,15 @@ PrefabInstance:
       propertyPath: m_Name
       value: EcoBear
       objectReference: {fileID: 0}
+    - target: {fileID: 7527111564784634712, guid: a5fd4d9dd473da54c83430115c05e48c, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 7699429469363064798, guid: a5fd4d9dd473da54c83430115c05e48c, type: 3}
       propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
-    m_RemovedComponents:
-    - {fileID: 1080774011748047759, guid: a5fd4d9dd473da54c83430115c05e48c, type: 3}
+    m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: a5fd4d9dd473da54c83430115c05e48c, type: 3}
 --- !u!1 &1170735244
 GameObject:
@@ -8211,6 +8212,7 @@ MonoBehaviour:
   dynamicWolfCount: {fileID: 886235166}
   dynamicBearCount: {fileID: 687530572}
   dynamicCarrotCount: {fileID: 2026068122}
+  dynamicBerryBushCount: {fileID: 0}
   ecsSceneStartButton: {fileID: 246206652}
   ecsRabbitCount: {fileID: 246206651}
   ecsDeerCount: {fileID: 246206655}
@@ -8401,6 +8403,10 @@ PrefabInstance:
     - target: {fileID: 6099479474424698292, guid: f6a6c66b57f65c648b7becd500b2a5fe, type: 3}
       propertyPath: m_OnEndEdit.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
       value: UnityEngine.Object, UnityEngine
+      objectReference: {fileID: 0}
+    - target: {fileID: 6346225417187584903, guid: f6a6c66b57f65c648b7becd500b2a5fe, type: 3}
+      propertyPath: m_RootOrder
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 7439869028756133488, guid: f6a6c66b57f65c648b7becd500b2a5fe, type: 3}
       propertyPath: m_OnEndEdit.m_PersistentCalls.m_Calls.Array.data[0].m_Target

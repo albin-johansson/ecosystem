@@ -1,5 +1,6 @@
 using Ecosystem.Util;
 using NUnit.Framework;
+using UnityEngine;
 using Assert = UnityEngine.Assertions.Assert;
 
 namespace Tests
@@ -7,14 +8,21 @@ namespace Tests
   public sealed class LayersTest
   {
     [Test]
-    public void IsPredatorLayerTest()
+    public void PredatorMask()
     {
-      Assert.IsTrue(Layers.IsPredatorLayer(Layers.WolfMask));
-      Assert.IsTrue(Layers.IsPredatorLayer(Layers.BearMask));
+      Assert.AreEqual(Layers.PredatorMask, LayerMask.GetMask("Bear", "Wolf"));
+    }
 
-      Assert.IsFalse(Layers.IsPredatorLayer(Layers.PreyMask));
-      Assert.IsFalse(Layers.IsPredatorLayer(Layers.FoodMask));
-      Assert.IsFalse(Layers.IsPredatorLayer(Layers.WaterMask));
+    [Test]
+    public void PreyMask()
+    {
+      Assert.AreEqual(Layers.PreyMask, LayerMask.GetMask("Rabbit", "Deer"));
+    }
+
+    [Test]
+    public void AnimalMask()
+    {
+      Assert.AreEqual(Layers.AnimalMask, LayerMask.GetMask("Rabbit", "Deer", "Wolf", "Bear"));
     }
   }
 }

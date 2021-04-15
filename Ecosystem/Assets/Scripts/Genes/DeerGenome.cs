@@ -19,7 +19,7 @@ namespace Ecosystem.Genes
       {GeneType.DesirabilityScore, new Preset(1, 10, new[] {1f, 5f, 9f})},
       {GeneType.GestationPeriod, new Preset(10, 120, new[] {12f, 20f, 60f, 90f, 120f})},
       {GeneType.SexualMaturityTime, new Preset(10, 150, new[] {20f, 40f, 60f, 90f, 120f, 150f})}
-    };
+  };
 
     public static readonly Dictionary<GeneType, Preset> DefaultSingular = new Dictionary<GeneType, Preset>()
     {

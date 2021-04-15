@@ -5,87 +5,84 @@ using UnityEngine.AI;
 
 namespace Ecosystem.Spawning
 {
-  public class ObjectPoolHandler : MonoBehaviour
+  public sealed class ObjectPoolHandler : MonoBehaviour
   {
-    public List<Pool> pools;
-    private Dictionary<string, Queue<GameObject>> _poolDictionary;
-    private static int _walkable;
-    public static ObjectPoolHandler instance;
-    private Transform _poolTransform;
+    [SerializeField] private List<Pool> pools;
 
-    /// <summary>
-    /// This makes the PoolHandler a 'Singleton'. This makes it so that the same instance of the class is used.
-    /// </summary>
+    public static ObjectPoolHandler Instance;
+
+    private readonly Dictionary<string, Queue<GameObject>> _poolMap = new Dictionary<string, Queue<GameObject>>();
+    private Transform _transform;
+
     private void Awake()
     {
-      instance = this;
-    }
-
-    /// <summary>
-    /// This function will initiate all pools and Instantiate the gameObjects in the pools.
-    /// </summary>
-    private void Start()
-    {
-      _poolTransform = transform;
-      _walkable = Terrains.Walkable;
-      _poolDictionary = new Dictionary<string, Queue<GameObject>>();
+      Instance = this;
+      
+      _transform = transform;
 
       foreach (var pool in pools)
       {
         var objectPool = new Queue<GameObject>();
 
-        for (var i = 0; i < pool.size; i++)
+        for (var i = 0; i < pool.size; ++i)
         {
-          NavMesh.SamplePosition(_poolTransform.position, out var hit, float.PositiveInfinity, _walkable);
-          var objectToPool = Instantiate(pool.prefab, hit.position, _poolTransform.rotation, _poolTransform);
-          objectToPool.SetActive(false);
-          objectPool.Enqueue(objectToPool);
+          if (NavMesh.SamplePosition(_transform.position, out var hit, 100, Terrains.Walkable))
+          {
+            var obj = Instantiate(pool.prefab, hit.position, _transform.rotation, _transform);
+            obj.SetActive(false);
+
+            objectPool.Enqueue(obj);
+          }
         }
 
-        _poolDictionary.Add(pool.key, objectPool);
+        _poolMap.Add(pool.prefab.tag, objectPool);
       }
     }
 
-    public bool isPoolValid(string poolKey)
+    public bool HasPool(string key)
     {
-      return _poolDictionary.ContainsKey(poolKey);
+      return _poolMap.ContainsKey(key);
     }
 
-    public GameObject GetFromPool(string poolKey)
+    public GameObject Construct(string key)
     {
-      var wantedPool = _poolDictionary[poolKey];
-      if (wantedPool.Count > 1)
-      {
-        return wantedPool.Dequeue();
-      }
-      else
-      {
-        return Instantiate(wantedPool.Peek());
-      }
+      var pool = _poolMap[key];
+      return pool.Count > 1 ? pool.Dequeue() : Instantiate(pool.Peek());
     }
 
-
-    public void ReturnToPool(string poolKey, GameObject objectToReturn)
+    public void ReturnToPool(string key, GameObject objectToReturn)
     {
-      var wantedPool = _poolDictionary[poolKey];
-      ResetObjectComponents(objectToReturn);
+      var wantedPool = _poolMap[key];
+      ResetObject(objectToReturn);
       wantedPool.Enqueue(objectToReturn);
     }
 
+    // Returns the object to the specified pool if it exists, otherwise the object is simply destroyed
+    public void ReturnOrDestroy(string key, GameObject objectToReturn)
+    {
+      if (HasPool(key))
+      {
+        ReturnToPool(key, objectToReturn);
+      }
+      else
+      {
+        Destroy(objectToReturn);
+      }
+    }
 
     /// <summary>
-    /// Resets values and variables in components that is connected to the GameObject.
-    /// Also moves inactive gameObjects to the pool in the hierarchy.
+    ///   Resets select values and variables in components that are connected to the game object. Also moves inactive
+    ///   game objects to the pool in the hierarchy.
     /// </summary>
-    private void ResetObjectComponents(GameObject objectToReset)
+    private void ResetObject(GameObject objectToReset)
     {
-      if (TryGetComponent<NavMeshAgent>(out var navMeshAgent))
+      if (TryGetComponent(out NavMeshAgent agent))
       {
-        navMeshAgent.isStopped = true;
-        navMeshAgent.ResetPath();
+        agent.isStopped = true;
+        agent.ResetPath();
       }
 
-      objectToReset.transform.parent = _poolTransform;
+      objectToReset.transform.parent = _transform;
       objectToReset.SetActive(false);
     }
   }

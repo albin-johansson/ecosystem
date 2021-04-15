@@ -7,8 +7,8 @@ namespace Ecosystem.Genes
   public abstract class AbstractGenome : MonoBehaviour, IGenome
   {
     internal GenomeData Data;
-    private const float MetabolismFactor = 1.495f; // 1.15 (Vision) * 1.30 (Speed)
-    private const float ChildFoodConsumtionFactor = 4f / 3f;
+    private const float MetabolismFactor = 1.495f;
+    public const float ChildFoodConsumptionFactor = 4f / 3f;
 
     private static readonly Dictionary<GeneType, Preset> DefaultPresets = new Dictionary<GeneType, Preset>()
     {
@@ -84,11 +84,12 @@ namespace Ecosystem.Genes
 
     public bool IsMale => Data.IsMale;
 
-    public float GetChildFoodConsumtionFactor() => ChildFoodConsumtionFactor;
+    public float GetChildFoodConsumtionFactor() => ChildFoodConsumptionFactor;
 
     public float WalkingSpeed => GetSpeed().Value * GetSizeFactor().Value;
 
-    public float Metabolism => GetHungerRate().Value * GetSizeFactor().Value *
+    public float Metabolism => GetHungerRate().Value *
+                               GetSizeFactor().Value *
                                (1 + MetabolismFactor * (GetVision().ValueAsDecimal() + GetSpeed().ValueAsDecimal()));
 
     public float Attractiveness => GetDesirabilityScore().Value;
