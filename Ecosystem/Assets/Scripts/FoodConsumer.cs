@@ -86,7 +86,6 @@ namespace Ecosystem
 
       if (Tags.IsStaticFood(otherObject))
       {
-        OnFoodEaten?.Invoke(otherObject);
         EatingFromGameObject = otherObject;
       }
       else if (Tags.IsFood(otherObject))

@@ -31,7 +31,6 @@ namespace Ecosystem.Logging
     {
       // Yes, these are allocated once, it's fine
       DeathHandler.OnDeath += LogDeath;
-      NutritionController.OnFoodEaten += LogFoodEaten;
       NutritionController.OnFoodDecayed += LogFoodDecayed;
       FoodConsumer.OnFoodEaten += LogFoodEaten;
       PreyConsumer.OnPreyConsumed += LogPreyConsumed;

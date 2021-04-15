@@ -7,13 +7,8 @@ namespace Ecosystem
   {
     public delegate void FoodDecayed(GameObject food);
 
-    public delegate void FoodEatenEvent(GameObject food);
-
     /// This event is emitted every time a food resource decays.
     public static event FoodDecayed OnFoodDecayed;
-
-    /// This event is emitted every time a food resource is consumed.
-    public static event FoodEatenEvent OnFoodEaten;
 
     [SerializeField] private float nutritionalValue;
 
@@ -47,7 +42,6 @@ namespace Ecosystem
       }
       else
       {
-        OnFoodEaten?.Invoke(gameObject);
         ObjectPoolHandler.Instance.ReturnOrDestroy(_keyToPool, gameObject);
         return nutritionalValue;
       }
