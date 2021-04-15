@@ -118,8 +118,11 @@ def get_food_history(data: LogData) -> dict[TimePoint, Amount]:
     time: TimePoint = event["time"] / 1_000
     event_type: str = event["type"]
 
-    if event_type == "consumption":
+    if event_type == "consumption" or event_type == "food_decay":
       food_count = food_count - 1
+
+    elif event_type == "food_generation":
+      food_count = food_count + 1
 
     food_history[time] = food_count
 
