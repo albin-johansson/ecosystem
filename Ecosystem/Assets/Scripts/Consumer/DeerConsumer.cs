@@ -1,19 +1,20 @@
 ﻿using Ecosystem.Genes;
 using Ecosystem.Logging;
+using Ecosystem.Spawning;
 using Ecosystem.UI;
 using Ecosystem.Util;
 using UnityEngine;
 
-namespace Ecosystem
+namespace Ecosystem.Consumer
 {
-  public sealed class PreyConsumer : MonoBehaviour, IConsumer
+  public sealed class DeerConsumer : MonoBehaviour, IConsumer
   {
-    public delegate void PreyConsumedEvent();
+    public delegate void FoodEatenEvent(GameObject food);
 
     /// <summary>
-    /// This event is emitted every time a prey is consumed.
+    /// This event is emitted every time a food resource is consumed.
     /// </summary>
-    public static event PreyConsumedEvent OnPreyConsumed;
+    public static event FoodEatenEvent OnFoodEaten;
 
     [SerializeField] private AbstractGenome genome;
     [SerializeField] private ResourceBar resourceBar;
@@ -22,18 +23,25 @@ namespace Ecosystem
     [SerializeField] private float maxHunger = 100;
 
     private bool _isDead;
+    private double _consumed = 0;
+    private double _limit = 30;
 
     public float Hunger { get; private set; }
 
     public bool ColliderActive { get; set; }
 
-    public bool IsAttacking { get; set; }
+    public bool IsConsuming { get; set; }
 
     public GameObject EatingFromGameObject { get; set; }
 
-    private void Start()
+    private void OnEnable()
     {
       resourceBar.SetMaxValue(maxHunger);
+    }
+
+    private void OnDisable()
+    {
+      Hunger = 0;
     }
 
     private void Update()
@@ -41,6 +49,18 @@ namespace Ecosystem
       if (_isDead)
       {
         return;
+      }
+
+      if (IsConsuming)
+      {
+        Hunger -= 4 * Time.deltaTime;
+        _consumed += 4 * Time.deltaTime;
+        if (Hunger <= 0 || _consumed > _limit)
+        {
+          _consumed = 0;
+          _limit = Random.Range(20, 40);
+          IsConsuming = false;
+        }
       }
 
       if (reproducer.IsPregnant)
@@ -52,44 +72,11 @@ namespace Ecosystem
         Hunger += genome.Metabolism * Time.deltaTime;
       }
 
-      resourceBar.SetValue(Hunger);
+      resourceBar.SetValue((float) Hunger);
       if (Hunger > maxHunger)
       {
         _isDead = true;
         deathHandler.Die(CauseOfDeath.Starvation);
-      }
-    }
-
-    private void OnTriggerEnter(Collider other)
-    {
-      if (!ColliderActive || IsAttacking)
-      {
-        return;
-      }
-
-      var otherObject = other.gameObject;
-      if (Tags.IsPrey(otherObject))
-      {
-        var otherDeathHandler = otherObject.GetComponentInParent<DeathHandler>();
-        if (!otherDeathHandler.isDead)
-        {
-          otherDeathHandler.Die(CauseOfDeath.Eaten);
-
-          var otherNutritionController = otherObject.GetComponentInParent<NutritionController>();
-          Hunger -= otherNutritionController.Consume(Hunger);
-
-          IsAttacking = true;
-          Hunger = 0;
-
-          OnPreyConsumed?.Invoke();
-        }
-      }
-      else if (Tags.IsMeat(otherObject))
-      {
-        if (otherObject.TryGetComponent(out NutritionController otherNutritionController))
-        {
-          Hunger -= otherNutritionController.Consume(Hunger);
-        }
       }
     }
 

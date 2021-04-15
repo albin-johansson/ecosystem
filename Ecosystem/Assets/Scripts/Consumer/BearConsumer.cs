@@ -1,14 +1,20 @@
-using Ecosystem.Genes;
+﻿using Ecosystem.Genes;
 using Ecosystem.Logging;
-using Ecosystem.Spawning;
 using Ecosystem.UI;
 using Ecosystem.Util;
 using UnityEngine;
 
-namespace Ecosystem
+namespace Ecosystem.Consumer
 {
-  public sealed class FoodConsumer : MonoBehaviour, IConsumer
+  public sealed class BearConsumer : MonoBehaviour, IConsumer
   {
+    public delegate void PreyConsumedEvent();
+
+    /// <summary>
+    /// This event is emitted every time a prey is consumed.
+    /// </summary>
+    public static event PreyConsumedEvent OnPreyConsumed;
+    
     public delegate void FoodEatenEvent(GameObject food);
 
     /// <summary>
@@ -28,18 +34,13 @@ namespace Ecosystem
 
     public bool ColliderActive { get; set; }
 
-    public bool IsAttacking { get; set; }
+    public bool IsConsuming { get; set; }
 
     public GameObject EatingFromGameObject { get; set; }
 
-    private void OnEnable()
+    private void Start()
     {
       resourceBar.SetMaxValue(maxHunger);
-    }
-
-    private void OnDisable()
-    {
-      Hunger = 0;
     }
 
     private void Update()
@@ -48,7 +49,7 @@ namespace Ecosystem
       {
         return;
       }
-
+      
       if (EatingFromGameObject && EatingFromGameObject.activeSelf)
       {
         Hunger -= 4 * Time.deltaTime;
@@ -82,22 +83,39 @@ namespace Ecosystem
 
     private void OnTriggerEnter(Collider other)
     {
-      var otherObject = other.gameObject;
+      if (!ColliderActive || IsConsuming)
+      {
+        return;
+      }
 
-      if (Tags.IsStaticFood(otherObject))
+      var otherObject = other.gameObject;
+      if (Tags.IsPrey(otherObject))
+      {
+        var otherDeathHandler = otherObject.GetComponentInParent<DeathHandler>();
+        if (!otherDeathHandler.isDead)
+        {
+          otherDeathHandler.Die(CauseOfDeath.Eaten);
+
+          var otherNutritionController = otherObject.GetComponentInParent<NutritionController>();
+          Hunger -= otherNutritionController.Consume(Hunger);
+
+          IsConsuming = true;
+          Hunger = 0;
+
+          OnPreyConsumed?.Invoke();
+        }
+      }
+      else if (Tags.IsMeat(otherObject))
+      {
+        if (otherObject.TryGetComponent(out NutritionController otherNutritionController))
+        {
+          Hunger -= otherNutritionController.Consume(Hunger);
+        }
+      }
+      else if (Tags.IsStaticFood(otherObject))
       {
         OnFoodEaten?.Invoke(otherObject);
         EatingFromGameObject = otherObject;
-      }
-      else if (Tags.IsFood(otherObject))
-      {
-        OnFoodEaten?.Invoke(otherObject);
-        ObjectPoolHandler.Instance.ReturnOrDestroy(otherObject.tag, otherObject);
-
-        if (other.TryGetComponent(out NutritionController nutritionController))
-        {
-          Hunger -= nutritionController.Consume(Hunger);
-        }
       }
     }
 

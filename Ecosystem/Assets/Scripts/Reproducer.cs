@@ -1,3 +1,4 @@
+using Ecosystem.Consumer;
 using Ecosystem.Genes;
 using Ecosystem.Spawning;
 using UnityEngine;

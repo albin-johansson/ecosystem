@@ -12,6 +12,7 @@ namespace Ecosystem
     private int _isRunningHash;
     private int _isDeadHash;
     private int _isAttackingHash;
+    private int _isEatingHash;
     private int _animationSpeedMultiplier;
     private float _navMeshAgentSpeed;
     private float _navMeshAgentVelocity;
@@ -24,6 +25,7 @@ namespace Ecosystem
       _isRunningHash = Animator.StringToHash("isRunning");
       _isDeadHash = Animator.StringToHash("isDead");
       _isAttackingHash = Animator.StringToHash("isAttacking");
+      _isEatingHash = Animator.StringToHash("isEating");
       _animationSpeedMultiplier = Animator.StringToHash("animationSpeedMultiplier");
       _navMeshAgentSpeed = navMeshAgent.speed;
       _isDead = false;
@@ -91,6 +93,17 @@ namespace Ecosystem
       navMeshAgent.speed = 0;
       _animator.SetBool(_isDeadHash, true);
       _isDead = true;
+    }
+
+    public void EnterEatingAnimation()
+    {
+      if (_isDead)
+      {
+        return;
+      }
+
+      ResetAnimatorParameters();
+      _animator.SetBool(_isEatingHash, true);
     }
 
     public void EnterIdleAnimation()

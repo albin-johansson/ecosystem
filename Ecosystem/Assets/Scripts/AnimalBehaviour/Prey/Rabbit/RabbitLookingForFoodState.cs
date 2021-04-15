@@ -11,7 +11,7 @@ namespace Ecosystem.AnimalBehaviour.Prey.Rabbit
 
     public override void Begin(GameObject target)
     {
-      Target = GetClosestInVision(Layers.FoodMask);
+      Target = GetClosestInVision(Layers.AllFoodMask);
       MovementController.StartWander();
       AnimationController.EnterMoveAnimation();
     }

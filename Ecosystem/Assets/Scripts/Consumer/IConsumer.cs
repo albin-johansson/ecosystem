@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace Ecosystem
+namespace Ecosystem.Consumer
 {
   /// <summary>
   ///   An interface for food consumers, although not necessarily non-meat food.
@@ -11,7 +11,7 @@ namespace Ecosystem
 
     bool ColliderActive { get; set; }
 
-    bool IsAttacking { get; set; }
+    bool IsConsuming { get; set; }
 
     GameObject EatingFromGameObject { get; set; }
 

@@ -1,11 +1,8 @@
-using UnityEngine;
 
 namespace Ecosystem.AnimalBehaviour.Predators
 {
   public abstract class AbstractPredatorStateController : AbstractStateController
   {
-    [SerializeField] private PreyConsumer consumer;
-
     private IAnimalState _idle;
     private IAnimalState _lookingForWater;
     private IAnimalState _drinking;
@@ -26,7 +23,7 @@ namespace Ecosystem.AnimalBehaviour.Predators
       Data = new StateData
       {
         StaminaController = staminaController,
-        Consumer = consumer,
+        //Consumer = consumer,
         AnimationController = animationController,
         MemoryController = memoryController,
         MovementController = movementController,
@@ -71,12 +68,12 @@ namespace Ecosystem.AnimalBehaviour.Predators
 
         case AnimalState.ChasingPrey:
           State = ChasingPrey;
-          consumer.ColliderActive = true;
+          Data.Consumer.ColliderActive = true;
           break;
 
         case AnimalState.LookingForFood:
           State = LookingForFood;
-          consumer.ColliderActive = true;
+          Data.Consumer.ColliderActive = true;
           break;
 
         case AnimalState.LookingForMate:
@@ -89,7 +86,7 @@ namespace Ecosystem.AnimalBehaviour.Predators
 
         case AnimalState.GoingToFood:
           State = _runningTowardsFood;
-          consumer.ColliderActive = true;
+          Data.Consumer.ColliderActive = true;
           break;
 
         case AnimalState.Fleeing:

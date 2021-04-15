@@ -27,7 +27,7 @@ namespace Ecosystem.AnimalBehaviour.Predators.Bear
         Target = GetClosestInVision(Layers.PreyMask);
         return Type();
       }
-      else if (Consumer.IsAttacking)
+      else if (Consumer.IsConsuming)
       {
         return AnimalState.Attacking;
       }
