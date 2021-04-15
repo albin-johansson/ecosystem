@@ -15,6 +15,8 @@ namespace Ecosystem.Logging
   {
     private static readonly int GeneCount = Enum.GetValues(typeof(GeneType)).Length;
 
+    #region Fields
+
     /// <summary>
     ///   Duration of simulation, in milliseconds.
     /// </summary>
@@ -125,6 +127,8 @@ namespace Ecosystem.Logging
     /// </summary>
     [SerializeField] private List<Death> deaths = new List<Death>(64);
 
+    #endregion
+
     /// <summary>
     ///   Prepares the data with the initial simulation state. Used to determine the
     ///   initial population sizes, etc.
@@ -155,14 +159,6 @@ namespace Ecosystem.Logging
       foodCount = initialFoodCount;
     }
 
-    private void CaptureInitialGenomes()
-    {
-      rabbitGenome = CaptureGenome(RabbitGenome.DefaultGenes);
-      deerGenome = CaptureGenome(DeerGenome.DefaultGenes);
-      wolfGenome = CaptureGenome(WolfGenome.DefaultGenes);
-      bearGenome = CaptureGenome(BearGenome.DefaultGenes);
-    }
-
     /// <summary>
     ///   Marks the simulation as finished. This is used to determine the duration of the simulation.
     /// </summary>
@@ -170,6 +166,8 @@ namespace Ecosystem.Logging
     {
       duration = SessionTime.Now();
     }
+
+    #region Event recording functions
 
     /// <summary>
     ///   Adds a simulation event that represents the mating of two animals.
@@ -291,6 +289,10 @@ namespace Ecosystem.Logging
       ++preyConsumedCount;
     }
 
+    #endregion
+
+    #region Public count queries
+
     /// <summary>
     ///   Returns the current count of alive animals.
     /// </summary>
@@ -326,6 +328,18 @@ namespace Ecosystem.Logging
     /// </summary>
     /// <returns>the amount of consumed prey.</returns>
     public int PreyConsumedCount() => preyConsumedCount;
+
+    #endregion
+
+    #region Genome functions
+    
+    private void CaptureInitialGenomes()
+    {
+      rabbitGenome = CaptureGenome(RabbitGenome.DefaultGenes);
+      deerGenome = CaptureGenome(DeerGenome.DefaultGenes);
+      wolfGenome = CaptureGenome(WolfGenome.DefaultGenes);
+      bearGenome = CaptureGenome(BearGenome.DefaultGenes);
+    }
 
     private GenomeInfo CaptureGenome(Dictionary<GeneType, Gene> genes)
     {
@@ -369,5 +383,7 @@ namespace Ecosystem.Logging
       gene = type,
       value = gene.Value
     };
+
+    #endregion
   }
 }
