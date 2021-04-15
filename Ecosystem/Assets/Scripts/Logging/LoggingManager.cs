@@ -87,7 +87,9 @@ namespace Ecosystem.Logging
 
     private void LogFoodEaten(GameObject food)
     {
-      _data.AddConsumption(food);
+      _data.AddFoodConsumption(food);
+      foodCountText.text = _data.FoodCount().ToString();
+    }
 
     private void LogFoodDecayed(GameObject food)
     {

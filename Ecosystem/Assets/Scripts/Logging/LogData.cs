@@ -242,7 +242,7 @@ namespace Ecosystem.Logging
     ///   Adds a simulation event that represents a food item being consumed.
     /// </summary>
     /// <param name="food">the game object associated with the food item that was consumed.</param>
-    public void AddConsumption(GameObject food)
+    public void AddFoodConsumption(GameObject food)
     {
       events.Add(new SimulationEvent
       {
