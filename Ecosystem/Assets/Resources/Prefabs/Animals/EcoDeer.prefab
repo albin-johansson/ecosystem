@@ -30,7 +30,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 3350421026760717125}
-  m_RootOrder: 2
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1611194173291749041
 MonoBehaviour:
@@ -92,7 +92,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 3350421026760717125}
-  m_RootOrder: 0
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!137 &4010159563819866433
 SkinnedMeshRenderer:
@@ -257,7 +257,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 3350421026760717125}
-  m_RootOrder: 1
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!135 &6776153342693034266
 SphereCollider:
@@ -298,14 +298,14 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   stateText: {fileID: 1914420894457515816}
   staminaController: {fileID: 1372852687320862236}
-  waterConsumer: {fileID: 4307771124938761658}
+  waterConsumer: {fileID: 8605707683808050349}
   movementController: {fileID: 1611194173291749041}
   animationController: {fileID: 4427174813899224407}
   memoryController: {fileID: 5959171333855914516}
-  reproducer: {fileID: 7396001842555942632}
+  reproducer: {fileID: 7204307409409791828}
   genome: {fileID: 570846004582155358}
   sphereCollider: {fileID: 6776153342693034266}
-  consumer: {fileID: 4086775962061167365}
+  consumer: {fileID: 6828158977763573180}
 --- !u!1 &7155763010095567698
 GameObject:
   m_ObjectHideFlags: 0
@@ -323,11 +323,7 @@ GameObject:
   - component: {fileID: 6442332908797553670}
   - component: {fileID: 4416537634727246443}
   - component: {fileID: 570846004582155358}
-  - component: {fileID: 7396001842555942632}
-  - component: {fileID: 4086775962061167365}
-  - component: {fileID: 4307771124938761658}
-  - component: {fileID: 4926014048587103253}
-  m_Layer: 12
+  m_Layer: 0
   m_Name: EcoDeer
   m_TagString: Deer
   m_Icon: {fileID: 0}
@@ -345,6 +341,7 @@ Transform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
+  - {fileID: 8938041541308147601}
   - {fileID: 2612359751320925015}
   - {fileID: 1583206724766175299}
   - {fileID: 4284669953163483551}
@@ -480,13 +477,47 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9414ef04b79fdc7498427d2db88290e7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &7396001842555942632
+--- !u!1 &8407707875291359425
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 8938041541308147601}
+  - component: {fileID: 7204307409409791828}
+  - component: {fileID: 6828158977763573180}
+  - component: {fileID: 8605707683808050349}
+  - component: {fileID: 1923680509413233333}
+  m_Layer: 12
+  m_Name: Body
+  m_TagString: Deer
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &8938041541308147601
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8407707875291359425}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 3350421026760717125}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &7204307409409791828
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7155763010095567698}
+  m_GameObject: {fileID: 8407707875291359425}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 22eee6933ea9e9b4f90722c64ceefa7c, type: 3}
@@ -495,13 +526,13 @@ MonoBehaviour:
   genome: {fileID: 570846004582155358}
   prefab: {fileID: 7155763010095567698}
   keyToPool: Deer
---- !u!114 &4086775962061167365
+--- !u!114 &6828158977763573180
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7155763010095567698}
+  m_GameObject: {fileID: 8407707875291359425}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 8b0d8392b591c9448a6a95dfbc63639a, type: 3}
@@ -510,15 +541,15 @@ MonoBehaviour:
   genome: {fileID: 570846004582155358}
   resourceBar: {fileID: 6078427025632469203}
   deathHandler: {fileID: 6442332908797553670}
-  reproducer: {fileID: 7396001842555942632}
+  reproducer: {fileID: 7204307409409791828}
   maxHunger: 100
---- !u!114 &4307771124938761658
+--- !u!114 &8605707683808050349
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7155763010095567698}
+  m_GameObject: {fileID: 8407707875291359425}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 5ecc989552950f6449739af04d52bf49, type: 3}
@@ -528,13 +559,13 @@ MonoBehaviour:
   resourceBar: {fileID: 897296775149995389}
   deathHandler: {fileID: 6442332908797553670}
   maxThirst: 100
---- !u!65 &4926014048587103253
+--- !u!65 &1923680509413233333
 BoxCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7155763010095567698}
+  m_GameObject: {fileID: 8407707875291359425}
   m_Material: {fileID: 0}
   m_IsTrigger: 1
   m_Enabled: 1
@@ -658,7 +689,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7770376172294729736, guid: b11869fe3d5ecbf4b912f33fa4a312db, type: 3}
       propertyPath: m_RootOrder
-      value: 3
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 7770376172294729736, guid: b11869fe3d5ecbf4b912f33fa4a312db, type: 3}
       propertyPath: m_LocalPosition.x
