@@ -39,7 +39,7 @@ namespace Ecosystem.AnimalBehaviour.Prey.Rabbit
         {
           return AnimalState.Fleeing;
         }
-        else if (Reproducer.CompatibleAsParents(Target))
+        else if (Reproducer.CompatibleAsParents(Target) && Reproducer.CanMate)
         {
           MovementController.SetDestinationIfValid(Target.transform.position);
         }
