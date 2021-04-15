@@ -3044,23 +3044,17 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   pools:
-  - key: Rabbit
-    prefab: {fileID: 3436557251021641289, guid: 52b1c190247192a42a5e36bafea08096, type: 3}
+  - prefab: {fileID: 3436557251021641289, guid: 52b1c190247192a42a5e36bafea08096, type: 3}
     size: 100
-  - key: Wolf
-    prefab: {fileID: 4371145773595096147, guid: 9ad7ab249851e454e9360e8fc8284e3b, type: 3}
+  - prefab: {fileID: 4371145773595096147, guid: 9ad7ab249851e454e9360e8fc8284e3b, type: 3}
     size: 100
-  - key: Deer
-    prefab: {fileID: 7155763010095567698, guid: ac935de5e4958254196cd0457e8a0df5, type: 3}
+  - prefab: {fileID: 7155763010095567698, guid: 79dc4df1db0530a4183ef9529c6ac69a, type: 3}
     size: 100
-  - key: Bear
-    prefab: {fileID: 7237780236292801018, guid: a5fd4d9dd473da54c83430115c05e48c, type: 3}
+  - prefab: {fileID: 7237780236292801018, guid: a5fd4d9dd473da54c83430115c05e48c, type: 3}
     size: 100
-  - key: Meat
-    prefab: {fileID: 5971010928584275656, guid: c08365c8448025247bde37b619fa136b, type: 3}
+  - prefab: {fileID: 5971010928584275656, guid: c08365c8448025247bde37b619fa136b, type: 3}
     size: 100
-  - key: Carrot
-    prefab: {fileID: 7332217931988766355, guid: a4692b44427bacf41ad31be76110a8f2, type: 3}
+  - prefab: {fileID: 7332217931988766355, guid: a4692b44427bacf41ad31be76110a8f2, type: 3}
     size: 100
 --- !u!4 &355084775
 Transform:
@@ -3081,7 +3075,7 @@ PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Modification:
-    m_TransformParent: {fileID: 213484847}
+    m_TransformParent: {fileID: 0}
     m_Modifications:
     - target: {fileID: 1534203587558825071, guid: b77c916561296a7489cb363297bb031b, type: 3}
       propertyPath: m_Name
@@ -3089,7 +3083,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3923640641362310460, guid: b77c916561296a7489cb363297bb031b, type: 3}
       propertyPath: m_RootOrder
-      value: 21
+      value: 7
       objectReference: {fileID: 0}
     - target: {fileID: 3923640641362310460, guid: b77c916561296a7489cb363297bb031b, type: 3}
       propertyPath: m_LocalScale.x
@@ -3141,11 +3135,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b77c916561296a7489cb363297bb031b, type: 3}
---- !u!4 &359173984 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 3923640641362310460, guid: b77c916561296a7489cb363297bb031b, type: 3}
-  m_PrefabInstance: {fileID: 359173983}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &361644335
 PrefabInstance:
   m_ObjectHideFlags: 0
