@@ -11,7 +11,7 @@ namespace Ecosystem.Logging
   ///   when the simulation has finished.
   /// </summary>
   [Serializable]
-  public sealed partial class LogData
+  public sealed class LogData
   {
     private static readonly int GeneCount = Enum.GetValues(typeof(GeneType)).Length;
 
