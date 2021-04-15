@@ -276,6 +276,24 @@ namespace Ecosystem.Logging
       --foodCount;
     }
 
+    /// <summary>
+    ///   Adds a simulation event that represents a food item being generated.
+    /// </summary>
+    /// <param name="food">the game object associated with the food item that was generated.</param>
+    public void AddFoodGeneration(GameObject food)
+    {
+      events.Add(new SimulationEvent
+      {
+        time = SessionTime.Now(),
+        type = "food_generation",
+        tag = food.tag,
+        position = food.transform.position,
+        matingIndex = -1,
+        deathIndex = -1
+      });
+
+      ++foodCount;
+    }
 
     /// <summary>
     ///   Increments the count of consumed prey.

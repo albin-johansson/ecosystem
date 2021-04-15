@@ -1,4 +1,5 @@
 ﻿using Ecosystem.Genes;
+using Ecosystem.Spawning;
 using Ecosystem.Util;
 using UnityEngine;
 using UnityEngine.UI;
@@ -28,8 +29,6 @@ namespace Ecosystem.Logging
 
     private void Start()
     {
-      // TODO we need to log when new food resources spawn
-      
       // Yes, these are allocated once, it's fine
       DeathHandler.OnDeath += LogDeath;
       NutritionController.OnFoodEaten += LogFoodEaten;
@@ -38,6 +37,9 @@ namespace Ecosystem.Logging
       PreyConsumer.OnPreyConsumed += LogPreyConsumed;
       Reproducer.OnBirth += LogBirth;
       Reproducer.OnMating += LogMating;
+      StationaryFoodGeneration.OnGeneratedFood += LogFoodGenerated;
+      RadiusPrefabSpawner.OnGeneratedFood += LogFoodGenerated;
+      RayPrefabSpawner.OnGeneratedFood += LogFoodGenerated;
 
       _data.PrepareData();
 
@@ -97,13 +99,15 @@ namespace Ecosystem.Logging
       foodCountText.text = _data.FoodCount().ToString();
     }
 
+    private void LogFoodGenerated(GameObject food)
+    {
+      _data.AddFoodGeneration(food);
       foodCountText.text = _data.FoodCount().ToString();
     }
 
     private void LogPreyConsumed()
     {
       _data.AddPreyConsumption();
-
       preyConsumedCountText.text = _data.PreyConsumedCount().ToString();
     }
   }
