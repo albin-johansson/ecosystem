@@ -34,26 +34,11 @@ namespace Ecosystem.Logging
       PreyConsumer.OnPreyConsumed += LogPreyConsumed;
       Reproducer.OnBirth += LogBirth;
       Reproducer.OnMating += LogMating;
-      //AbstractGenome.GenomeCreate += LogGenome;
 
       _data.PrepareData();
 
       aliveCountText.text = _data.AliveCount().ToString();
       foodCountText.text = _data.FoodCount().ToString();
-    }
-
-    private void LogGenome(string animalTag, Gene gene)
-    {
-      /*
-      GenomeEvent ge = new GenomeEvent();
-      GeneInfo gi = new GeneInfo();
-      gi.gene = GeneType.HungerRate;
-      gi.value = gene.Value;
-      ge.hungerRate = gi;
-      ge.tag = animalTag;
-      
-      _data.AddHungerRate(gene, animalTag);
-      */
     }
 
     private void Update()

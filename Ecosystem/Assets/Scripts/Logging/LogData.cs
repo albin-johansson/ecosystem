@@ -2,9 +2,7 @@ using System;
 using System.Collections.Generic;
 using Ecosystem.Genes;
 using Ecosystem.Util;
-using NUnit.Framework;
 using UnityEngine;
-using UnityEngine.Serialization;
 
 namespace Ecosystem.Logging
 {
@@ -111,6 +109,7 @@ namespace Ecosystem.Logging
     /// </summary>
     [SerializeField] private List<Death> deaths = new List<Death>(64);
 
+    //TODO: make this not be saved.   
     /// <summary>
     ///   Ignore list, only for constructing the finished product (due to the immutability of serializable structs)
     /// </summary>

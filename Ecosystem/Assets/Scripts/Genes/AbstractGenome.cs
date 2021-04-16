@@ -24,22 +24,15 @@ namespace Ecosystem.Genes
     private void Awake()
     {
       Initialize();
-      //GenomeCreate?.Invoke("rabbit", GetHungerRate());
     }
 
     protected abstract void Initialize();
-
-    public static event GenomeCreateEvent GenomeCreate;
-
-    public delegate void GenomeCreateEvent(string animalTag, Gene gene);
-
 
     public void Initialize(IGenome first, IGenome second)
     {
       key = GenerateKey(10);
       Data = Genomes.Merge(first, second);
       ConvertGenesToAttributes();
-      //GenomeCreate?.Invoke("rabbit", GetHungerRate());
     }
 
     public bool IsMale => Data.IsMale;
