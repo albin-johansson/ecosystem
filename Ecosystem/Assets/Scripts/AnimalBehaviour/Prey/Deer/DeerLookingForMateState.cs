@@ -38,7 +38,7 @@ namespace Ecosystem.AnimalBehaviour.Prey.Deer
         {
           return AnimalState.Fleeing;
         }
-        else if (Reproducer.CompatibleAsParents(Target))
+        else if (Reproducer.CompatibleAsParents(Target) && Reproducer.CanMate)
         {
           MovementController.SetDestination(Target.transform.position);
         }

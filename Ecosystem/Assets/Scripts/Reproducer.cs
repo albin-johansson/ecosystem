@@ -50,7 +50,7 @@ namespace Ecosystem
 
     public bool IsFertile => !IsPregnant && _isSexuallyMature;
 
-    private bool CanMate => IsFertile && IsWilling;
+    public bool CanMate => IsFertile && IsWilling;
 
     private void Start()
     {
@@ -126,22 +126,14 @@ namespace Ecosystem
 
     private void OnTriggerEnter(Collider other)
     {
-      if (other.TryGetComponent(out Reproducer otherReproducer) &&
+      if (!genome.IsMale &&
+          CanMate &&
+          other.TryGetComponent(out Reproducer otherReproducer) &&
           Genomes.CompatibleAsParents(genome, otherReproducer.genome) &&
-          otherReproducer.CanMate &&
-          CanMate)
+          otherReproducer.CanMate
+          )
       {
-        if (Random.value >= (genome.Attractiveness + otherReproducer.genome.Attractiveness) / 2)
-        {
-          if (genome.IsMale && !otherReproducer.IsPregnant)
-          {
-            otherReproducer.StartPregnancy(genome);
-          }
-          else if (!IsPregnant)
-          {
-            StartPregnancy(otherReproducer.genome);
-          }
-        }
+        StartPregnancy(otherReproducer.genome);
       }
     }
   }
