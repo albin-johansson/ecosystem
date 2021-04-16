@@ -2,6 +2,7 @@
 using Ecosystem.Genes;
 using UnityEngine;
 using UnityEngine.UI;
+using PresetMap = System.Collections.Generic.Dictionary<Ecosystem.Genes.GeneType, Ecosystem.Genes.Preset>;
 
 namespace Ecosystem.UI
 {
@@ -24,21 +25,55 @@ namespace Ecosystem.UI
     private float _wolfMutateChance = 0.05f;
     private float _deerMutateChance = 0.05f;
     private float _bearMutateChance = 0.05f;
+
     private void Start()
     {
       _rabbitPreset = RabbitGenome.DefaultSet;
       _wolfPreset = WolfGenome.DefaultSet;
       _deerPreset = DeerGenome.DefaultSet;
       _bearPreset = BearGenome.DefaultSet;
-      rabbitSet.onValueChanged.AddListener(delegate { ToggleSetRabbit(rabbitSet); AssignChanges();});
-      rabbitMutate.onValueChanged.AddListener(delegate { ToggleMutateRabbit(rabbitMutate); AssignChanges();});
-      wolfSet.onValueChanged.AddListener(delegate { ToggleSetWolf(wolfSet); AssignChanges();});
-      wolfMutate.onValueChanged.AddListener(delegate { ToggleMutateWolf(wolfMutate); AssignChanges();});
-      deerSet.onValueChanged.AddListener(delegate { ToggleSetDear(deerSet); AssignChanges();});
-      deerMutate.onValueChanged.AddListener(delegate { ToggleMutateDear(deerMutate); AssignChanges();});
-      bearSet.onValueChanged.AddListener(delegate { ToggleSetBear(bearSet); AssignChanges();});
-      bearMutate.onValueChanged.AddListener(delegate { ToggleMutateBear(bearMutate); AssignChanges();});
+      rabbitSet.onValueChanged.AddListener(delegate
+      {
+        ToggleSetRabbit(rabbitSet);
+        AssignChanges();
+      });
+      rabbitMutate.onValueChanged.AddListener(delegate
+      {
+        ToggleMutateRabbit(rabbitMutate);
+        AssignChanges();
+      });
+      wolfSet.onValueChanged.AddListener(delegate
+      {
+        ToggleSetWolf(wolfSet);
+        AssignChanges();
+      });
+      wolfMutate.onValueChanged.AddListener(delegate
+      {
+        ToggleMutateWolf(wolfMutate);
+        AssignChanges();
+      });
+      deerSet.onValueChanged.AddListener(delegate
+      {
+        ToggleSetDear(deerSet);
+        AssignChanges();
+      });
+      deerMutate.onValueChanged.AddListener(delegate
+      {
+        ToggleMutateDear(deerMutate);
+        AssignChanges();
+      });
+      bearSet.onValueChanged.AddListener(delegate
+      {
+        ToggleSetBear(bearSet);
+        AssignChanges();
+      });
+      bearMutate.onValueChanged.AddListener(delegate
+      {
+        ToggleMutateBear(bearMutate);
+        AssignChanges();
+      });
     }
+
     /// <summary>
     ///   Called when the presets should be assigned for all the animals. 
     /// </summary>
@@ -49,8 +84,9 @@ namespace Ecosystem.UI
       DeerGenome.SetPreset(_deerPreset, _deerMutateChance);
       BearGenome.SetPreset(_bearPreset, _bearMutateChance);
     }
-    private static void ToggleSet(bool isOn, out Dictionary<GeneType, Preset> preset,
-      Dictionary<GeneType, Preset> single, Dictionary<GeneType, Preset> multi)
+
+    private static void ToggleSet(bool isOn, out PresetMap preset,
+      PresetMap single, PresetMap multi)
     {
       preset = isOn ? multi : single;
     }
