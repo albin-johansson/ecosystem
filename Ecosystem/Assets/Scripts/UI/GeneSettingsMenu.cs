@@ -5,8 +5,7 @@ using UnityEngine.UI;
 
 namespace Ecosystem.UI
 {
-  public class GeneSettingsMenu : MonoBehaviour
-
+  public sealed class GeneSettingsMenu : MonoBehaviour
   {
     [SerializeField] private Toggle rabbitSet;
     [SerializeField] private Toggle rabbitMutate;
@@ -25,8 +24,6 @@ namespace Ecosystem.UI
     private float _wolfMutateChance = 0.05f;
     private float _deerMutateChance = 0.05f;
     private float _bearMutateChance = 0.05f;
-
-
     private void Start()
     {
       _rabbitPreset = RabbitGenome.DefaultSet;
@@ -42,20 +39,16 @@ namespace Ecosystem.UI
       bearSet.onValueChanged.AddListener(delegate { ToggleSetBear(bearSet); AssignChanges();});
       bearMutate.onValueChanged.AddListener(delegate { ToggleMutateBear(bearMutate); AssignChanges();});
     }
-
-
     /// <summary>
-    /// Call when the presets should be assigned for all the animals. 
+    ///   Called when the presets should be assigned for all the animals. 
     /// </summary>
-    public void AssignChanges()
+    private void AssignChanges()
     {
       RabbitGenome.SetPreset(_rabbitPreset, _rabbitMutateChance);
       WolfGenome.SetPreset(_wolfPreset, _wolfMutateChance);
       DeerGenome.SetPreset(_deerPreset, _deerMutateChance);
       BearGenome.SetPreset(_bearPreset, _bearMutateChance);
     }
-
-
     private static void ToggleSet(bool isOn, out Dictionary<GeneType, Preset> preset,
       Dictionary<GeneType, Preset> single, Dictionary<GeneType, Preset> multi)
     {
