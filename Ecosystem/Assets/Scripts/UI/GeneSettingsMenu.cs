@@ -33,24 +33,14 @@ namespace Ecosystem.UI
       _wolfPreset = WolfGenome.DefaultSet;
       _deerPreset = DeerGenome.DefaultSet;
       _bearPreset = BearGenome.DefaultSet;
-      rabbitSet.onValueChanged.AddListener(delegate { ToggleSetRabbit(rabbitSet); });
-      rabbitMutate.onValueChanged.AddListener(delegate { ToggleMutateRabbit(rabbitMutate); });
-      wolfSet.onValueChanged.AddListener(delegate { ToggleSetWolf(wolfSet); });
-      wolfMutate.onValueChanged.AddListener(delegate { ToggleMutateWolf(wolfMutate); });
-      deerSet.onValueChanged.AddListener(delegate { ToggleSetDear(deerSet); });
-      deerMutate.onValueChanged.AddListener(delegate { ToggleMutateDear(deerMutate); });
-      bearSet.onValueChanged.AddListener(delegate { ToggleSetBear(bearSet); });
-      bearMutate.onValueChanged.AddListener(delegate { ToggleMutateBear(bearMutate); });
-
-      //Update after changes. 
-      rabbitSet.onValueChanged.AddListener(delegate { AssignChanges(); });
-      rabbitMutate.onValueChanged.AddListener(delegate { AssignChanges(); });
-      wolfSet.onValueChanged.AddListener(delegate { AssignChanges(); });
-      wolfMutate.onValueChanged.AddListener(delegate { AssignChanges(); });
-      deerSet.onValueChanged.AddListener(delegate { AssignChanges(); });
-      deerMutate.onValueChanged.AddListener(delegate { AssignChanges(); });
-      bearSet.onValueChanged.AddListener(delegate { AssignChanges(); });
-      bearMutate.onValueChanged.AddListener(delegate { AssignChanges(); });
+      rabbitSet.onValueChanged.AddListener(delegate { ToggleSetRabbit(rabbitSet); AssignChanges();});
+      rabbitMutate.onValueChanged.AddListener(delegate { ToggleMutateRabbit(rabbitMutate); AssignChanges();});
+      wolfSet.onValueChanged.AddListener(delegate { ToggleSetWolf(wolfSet); AssignChanges();});
+      wolfMutate.onValueChanged.AddListener(delegate { ToggleMutateWolf(wolfMutate); AssignChanges();});
+      deerSet.onValueChanged.AddListener(delegate { ToggleSetDear(deerSet); AssignChanges();});
+      deerMutate.onValueChanged.AddListener(delegate { ToggleMutateDear(deerMutate); AssignChanges();});
+      bearSet.onValueChanged.AddListener(delegate { ToggleSetBear(bearSet); AssignChanges();});
+      bearMutate.onValueChanged.AddListener(delegate { ToggleMutateBear(bearMutate); AssignChanges();});
     }
 
 
