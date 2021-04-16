@@ -71,8 +71,7 @@ namespace Ecosystem
       var otherObject = other.gameObject;
       if (Tags.IsPrey(otherObject))
       {
-        var otherDeathHandler = otherObject.GetComponentInParent<DeathHandler>();
-        if (!otherDeathHandler.isDead)
+        if (otherObject.TryGetComponent(out DeathHandler otherDeathHandler) && !otherDeathHandler.isDead)
         {
           var nutritionController = otherDeathHandler.Die(CauseOfDeath.Eaten);
           IsAttacking = true;
