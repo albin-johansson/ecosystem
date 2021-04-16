@@ -84,8 +84,6 @@ namespace Ecosystem.Genes
 
     public bool IsMale => Data.IsMale;
 
-    public float GetChildFoodConsumtionFactor() => ChildFoodConsumptionFactor;
-
     public float WalkingSpeed => GetSpeed().Value * GetSizeFactor().Value;
 
     public float Metabolism => GetHungerRate().Value *
