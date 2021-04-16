@@ -1,4 +1,5 @@
 using Ecosystem.Spawning;
+using Ecosystem.Util;
 using UnityEngine;
 
 namespace Ecosystem
@@ -29,7 +30,12 @@ namespace Ecosystem
       else
       {
         ObjectPoolHandler.Instance.ReturnOrDestroy(_keyToPool, gameObject);
-        OnFoodDecayed?.Invoke(gameObject);
+
+        // Make sure that the object is a "food" item, i.e. not meat or anything else 
+        if (Tags.IsFood(gameObject))
+        {
+          OnFoodDecayed?.Invoke(gameObject);
+        }
       }
     }
 
