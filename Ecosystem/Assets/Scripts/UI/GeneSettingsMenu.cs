@@ -85,8 +85,7 @@ namespace Ecosystem.UI
       BearGenome.SetPreset(_bearPreset, _bearMutateChance);
     }
 
-    private static void ToggleSet(bool isOn, out PresetMap preset,
-      PresetMap single, PresetMap multi)
+    private static void ToggleSet(bool isOn, out PresetMap preset, PresetMap single, PresetMap multi)
     {
       preset = isOn ? multi : single;
     }
