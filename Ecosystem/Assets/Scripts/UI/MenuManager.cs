@@ -1,5 +1,3 @@
-using System.Collections.Generic;
-using Ecosystem.Genes;
 using Ecosystem.Systems;
 using Ecosystem.Util;
 using UnityEngine;
