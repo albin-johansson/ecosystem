@@ -353,10 +353,11 @@ namespace Ecosystem.Logging
     
     private void CaptureInitialGenomes()
     {
-      rabbitGenome = CaptureGenome(RabbitGenome.DefaultGenes);
-      deerGenome = CaptureGenome(DeerGenome.DefaultGenes);
-      wolfGenome = CaptureGenome(WolfGenome.DefaultGenes);
-      bearGenome = CaptureGenome(BearGenome.DefaultGenes);
+      // TODO current implementation breaks this somewhat. It will only get more broken as changes occur.
+      // rabbitGenome = CaptureGenome(RabbitGenome.DefaultGenes);
+      // deerGenome = CaptureGenome(DeerGenome.DefaultGenes);
+      // wolfGenome = CaptureGenome(WolfGenome.DefaultGenes);
+      // bearGenome = CaptureGenome(BearGenome.DefaultGenes);
     }
 
     private GenomeInfo CaptureGenome(Dictionary<GeneType, Gene> genes)
