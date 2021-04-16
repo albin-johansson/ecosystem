@@ -7301,7 +7301,6 @@ GameObject:
   - component: {fileID: 2884032038391043447}
   - component: {fileID: 4427174813899224407}
   - component: {fileID: 6442332908797553670}
-  - component: {fileID: 4416537634727246443}
   - component: {fileID: 570846004582155358}
   m_Layer: 0
   m_Name: EcoDeer
@@ -7433,19 +7432,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   animationController: {fileID: 4427174813899224407}
   isDead: 0
---- !u!114 &4416537634727246443
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7155763010095567698}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 447cdde87036ae847b423148d5fee418, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  nutritionalValue: 10
 --- !u!114 &570846004582155358
 MonoBehaviour:
   m_ObjectHideFlags: 0
