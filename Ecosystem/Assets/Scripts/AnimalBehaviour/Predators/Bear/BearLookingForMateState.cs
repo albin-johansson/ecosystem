@@ -27,6 +27,7 @@ namespace Ecosystem.AnimalBehaviour.Predators.Bear
       if (Target)
       {
         if (Reproducer.CompatibleAsParents(Target) &&
+            Reproducer.CanMate &&
             MovementController.IsWithinSphere(Target.transform.position))
         {
           MovementController.SetDestination(Target.transform.position);

@@ -27,6 +27,7 @@ namespace Ecosystem.AnimalBehaviour.Predators.Wolf
       if (Target)
       {
         if (Reproducer.CompatibleAsParents(Target) &&
+            Reproducer.CanMate &&
             MovementController.IsWithinSphere(Target.transform.position))
         {
           MovementController.SetDestinationIfValid(Target.transform.position);
