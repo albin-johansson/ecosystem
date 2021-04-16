@@ -96,27 +96,6 @@ namespace Ecosystem.Logging
     /// </summary>
     [SerializeField] private int preyConsumedCount;
 
-
-    /// <summary>
-    ///   The base rabbit genome.
-    /// </summary>
-    //[SerializeField] private GenomeInfo rabbitGenome;
-
-    /// <summary>
-    ///   The base deer genome.
-    /// </summary>
-    //[SerializeField] private GenomeInfo deerGenome;
-
-    /// <summary>
-    ///   The base wolf genome.
-    /// </summary>
-    //[SerializeField] private GenomeInfo wolfGenome;
-
-    /// <summary>
-    ///   The base bear genome.
-    /// </summary>
-    //[SerializeField] private GenomeInfo bearGenome;
-
     /// <summary>
     ///   The history of simulation events, stored in chronological order. 
     /// </summary>
@@ -133,11 +112,14 @@ namespace Ecosystem.Logging
     [SerializeField] private List<Death> deaths = new List<Death>(64);
 
     /// <summary>
-    ///   list of one type genes
+    ///   Ignore list, only for constructing the finished product (due to the immutability of serializable structs)
+    /// </summary>
+    [SerializeField] private List<GenomeInfo> workInProgressGenomes = new List<GenomeInfo>(64);
+
+    /// <summary>
+    ///   List of the genomes that count
     /// </summary>
     [SerializeField] private List<GenomeInfo> genomes = new List<GenomeInfo>(64);
-
-    [SerializeField] private List<GenomeInfo> finalGenomes = new List<GenomeInfo>(64);
 
     /// <summary>
     ///   Prepares the data with the initial simulation state. Used to determine the
@@ -172,73 +154,18 @@ namespace Ecosystem.Logging
     private void CaptureInitialGenomes()
     {
       List<RabbitGenome> inital = RabbitGenome.InitalGenomes;
-      Debug.Log("Number of inital rabbits: "+inital.Count);
-      /*
+      //Debug.Log("Number of initial rabbits: " + inital.Count);
       foreach (var rg in inital)
       {
-        genomes.Add(new GenomeInfo()
+        workInProgressGenomes.Add(new GenomeInfo()
         {
           endTime = -1,
-          //TODO: make this a method
-          genes = new List<GeneInfo>()
-          {
-            new GeneInfo()
-            {
-              geneType = GeneType.HungerRate,
-              value = rg.GetGenes().HungerRate.Value
-            },
-            new GeneInfo()
-            {
-              geneType = GeneType.HungerThreshold,
-              value = rg.GetGenes().HungerThreshold.Value
-            },
-            new GeneInfo()
-            {
-              geneType = GeneType.ThirstRate,
-              value = rg.GetGenes().ThirstRate.Value
-            },
-            new GeneInfo()
-            {
-              geneType = GeneType.ThirstThreshold,
-              value = rg.GetGenes().ThirstThreshold.Value
-            },
-            new GeneInfo()
-            {
-              geneType = GeneType.Vision,
-              value = rg.GetGenes().Vision.Value
-            },
-            new GeneInfo()
-            {
-              geneType = GeneType.Speed,
-              value = rg.GetGenes().Speed.Value
-            },
-            new GeneInfo()
-            {
-              geneType = GeneType.SizeFactor,
-              value = rg.GetGenes().SizeFactor.Value
-            },
-            new GeneInfo()
-            {
-              geneType = GeneType.DesirabilityScore,
-              value = rg.GetGenes().DesirabilityScore.Value
-            },
-            new GeneInfo()
-            {
-              geneType = GeneType.GestationPeriod,
-              value = rg.GetGenes().GestationPeriod.Value
-            },
-            new GeneInfo()
-            {
-              geneType = GeneType.SexualMaturityTime,
-              value = rg.GetGenes().SexualMaturityTime.Value
-            }
-          },
+          genes = GenomeDataToList(rg.Data),
           key = rg.key,
           tag = "Rabbit",
           time = 0
         });
-        
-      }*/
+      }
     }
 
     /// <summary>
@@ -248,30 +175,32 @@ namespace Ecosystem.Logging
     {
       duration = SessionTime.Now();
       MatchGenomeToTime();
+      workInProgressGenomes = new List<GenomeInfo>();
+      msg += "tmp genomes removed, should include all initial";
     }
 
     private void MatchGenomeToTime()
     {
-      foreach (var kt in keyEnd)
+      foreach (var pair in keyEnd)
       {
-        GenomeInfo temp = genomes.Find(genome => genome.key.Equals(kt.Key));
+        GenomeInfo genomeInfo = workInProgressGenomes.Find(genome => genome.key.Equals(pair.Key));
 
-        finalGenomes.Add(new GenomeInfo()
+        genomes.Add(new GenomeInfo()
         {
-          tag = temp.tag,
-          endTime = kt.Value,
-          genes = temp.genes,
-          key = temp.key,
-          time = temp.time
+          tag = genomeInfo.tag,
+          endTime = pair.Value,
+          genes = genomeInfo.genes,
+          key = genomeInfo.key,
+          time = genomeInfo.time
         });
       }
 
-      foreach (var genome in genomes)
+      foreach (var genome in workInProgressGenomes)
       {
         //Find unended/unadded genomes
         if (genome.endTime.Equals(-1))
         {
-          finalGenomes.Add(new GenomeInfo()
+          genomes.Add(new GenomeInfo()
           {
             tag = genome.tag,
             endTime = duration,
@@ -324,68 +253,15 @@ namespace Ecosystem.Logging
 
       ++birthCount;
       ++aliveCount;
-      //TODO: move genome add to here?
-      GenomeData genomeData = animal.GetComponent<AbstractGenome>().GetGenes();
-      //TODO: clean up the initialization. 
-      genomes.Add(new GenomeInfo()
+
+      AbstractGenome abstractGenome = animal.GetComponent<AbstractGenome>();
+      workInProgressGenomes.Add(new GenomeInfo()
       {
         tag = animal.tag,
         time = SessionTime.Now(),
         endTime = -1,
-        key = animal.GetComponent<AbstractGenome>().key,
-        genes = new List<GeneInfo>()
-        {
-          new GeneInfo()
-          {
-            geneType = GeneType.HungerRate,
-            value = genomeData.HungerRate.Value
-          },
-          new GeneInfo()
-          {
-            geneType = GeneType.HungerThreshold,
-            value = genomeData.HungerThreshold.Value
-          },
-          new GeneInfo()
-          {
-            geneType = GeneType.ThirstRate,
-            value = genomeData.ThirstRate.Value
-          },
-          new GeneInfo()
-          {
-            geneType = GeneType.ThirstThreshold,
-            value = genomeData.ThirstThreshold.Value
-          },
-          new GeneInfo()
-          {
-            geneType = GeneType.Vision,
-            value = genomeData.Vision.Value
-          },
-          new GeneInfo()
-          {
-            geneType = GeneType.Speed,
-            value = genomeData.Speed.Value
-          },
-          new GeneInfo()
-          {
-            geneType = GeneType.SizeFactor,
-            value = genomeData.SizeFactor.Value
-          },
-          new GeneInfo()
-          {
-            geneType = GeneType.DesirabilityScore,
-            value = genomeData.DesirabilityScore.Value
-          },
-          new GeneInfo()
-          {
-            geneType = GeneType.GestationPeriod,
-            value = genomeData.GestationPeriod.Value
-          },
-          new GeneInfo()
-          {
-            geneType = GeneType.SexualMaturityTime,
-            value = genomeData.SexualMaturityTime.Value
-          }
-        }
+        key = abstractGenome.key,
+        genes = GenomeDataToList(abstractGenome.Data)
       });
     }
 
@@ -414,18 +290,9 @@ namespace Ecosystem.Logging
       --aliveCount;
       ++deadCount;
 
+      //TODO: forest scene gives errors sometimes.
       keyEnd.Add(deadObject.GetComponent<AbstractGenome>().key, SessionTime.Now());
-      //GenomeInfo gi = genomes.Find(genome => genome.key == deadObject.GetComponent<AbstractGenome>().key);
-      //gi.endTime = SessionTime.Now();
     }
-
-    //call when animal dies to set end time. 
-    /*
-    private void SetEndTime(AbstractGenome endedGenome)
-    {
-      genomes.Find(genome => genome.key.Equals(endedGenome.key)).SetEndTime(SessionTime.Now());
-    }
-    */
 
     /// <summary>
     ///   Adds a simulation event that represents a food item being consumed.
@@ -539,5 +406,62 @@ namespace Ecosystem.Logging
       geneType = type,
       value = gene.Value
     };
+
+    private static List<GeneInfo> GenomeDataToList(GenomeData data)
+    {
+      return new List<GeneInfo>()
+      {
+        new GeneInfo()
+        {
+          geneType = GeneType.HungerRate,
+          value = data.HungerRate.Value
+        },
+        new GeneInfo()
+        {
+          geneType = GeneType.HungerThreshold,
+          value = data.HungerThreshold.Value
+        },
+        new GeneInfo()
+        {
+          geneType = GeneType.ThirstRate,
+          value = data.ThirstRate.Value
+        },
+        new GeneInfo()
+        {
+          geneType = GeneType.ThirstThreshold,
+          value = data.ThirstThreshold.Value
+        },
+        new GeneInfo()
+        {
+          geneType = GeneType.Vision,
+          value = data.Vision.Value
+        },
+        new GeneInfo()
+        {
+          geneType = GeneType.Speed,
+          value = data.Speed.Value
+        },
+        new GeneInfo()
+        {
+          geneType = GeneType.SizeFactor,
+          value = data.SizeFactor.Value
+        },
+        new GeneInfo()
+        {
+          geneType = GeneType.DesirabilityScore,
+          value = data.DesirabilityScore.Value
+        },
+        new GeneInfo()
+        {
+          geneType = GeneType.GestationPeriod,
+          value = data.GestationPeriod.Value
+        },
+        new GeneInfo()
+        {
+          geneType = GeneType.SexualMaturityTime,
+          value = data.SexualMaturityTime.Value
+        }
+      };
+    }
   }
 }
