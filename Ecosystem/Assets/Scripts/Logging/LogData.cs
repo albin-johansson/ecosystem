@@ -291,7 +291,10 @@ namespace Ecosystem.Logging
       ++deadCount;
 
       //TODO: forest scene gives errors sometimes.
-      keyEnd.Add(deadObject.GetComponent<AbstractGenome>().key, SessionTime.Now());
+      if (deadObject.tag == "Rabbit")
+      {
+        keyEnd.Add(deadObject.GetComponent<AbstractGenome>().key, SessionTime.Now());
+      }
     }
 
     /// <summary>

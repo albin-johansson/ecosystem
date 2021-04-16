@@ -69,6 +69,7 @@ namespace Ecosystem.Logging
       //TODO: tmp save button, for testing
       if (Input.GetKeyUp(KeyCode.X))
       {
+        Debug.Log("Pressed X, saving log");
         _data.msg += "Pressed X";
         _data.MarkAsDone();
         LogFileWriter.Save(_data);
