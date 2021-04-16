@@ -13,12 +13,14 @@ namespace Ecosystem
     [SerializeField] private DeathHandler deathHandler;
     [SerializeField] private float maxThirst = 100;
 
+    private int _waterSourcesAvailable;
     private bool _isDead;
-    public bool IsDrinking { get; private set; }
-    public bool CanDrink { get; private set; }
-    public float Thirst { get; private set; }
-    private int _waterSourcesAvailable = 0;
 
+    public bool IsDrinking { get; private set; }
+
+    public float Thirst { get; private set; }
+
+    public bool CanDrink => _waterSourcesAvailable > 0;
 
     private void OnEnable()
     {
@@ -30,7 +32,6 @@ namespace Ecosystem
     {
       Thirst = 0;
       IsDrinking = false;
-      CanDrink = false;
     }
 
     private void Update()
@@ -42,9 +43,10 @@ namespace Ecosystem
 
       Thirst += genome.GetThirstRate().Value * Time.deltaTime;
       resourceBar.SetValue(Thirst);
+
       if (IsDrinking)
       {
-        Thirst -= 10f * Time.deltaTime; //TODO Add drinkrate
+        Thirst -= 10f * Time.deltaTime; //TODO Add drink rate
         if (Thirst <= 0)
         {
           Thirst = 0;
@@ -63,8 +65,7 @@ namespace Ecosystem
     {
       if (Tags.IsWater(other.gameObject))
       {
-        _waterSourcesAvailable++;
-        CanDrink = _waterSourcesAvailable > 0;
+        ++_waterSourcesAvailable;
       }
     }
 
@@ -72,8 +73,7 @@ namespace Ecosystem
     {
       if (Tags.IsWater(other.gameObject))
       {
-        _waterSourcesAvailable--;
-        CanDrink = _waterSourcesAvailable > 0;
+        --_waterSourcesAvailable;
       }
     }
 
@@ -82,13 +82,12 @@ namespace Ecosystem
       IsDrinking = false;
     }
 
-    public bool StartDrinking()
+    public void StartDrinking()
     {
       if (CanDrink)
       {
         IsDrinking = true;
       }
-      return IsDrinking;
     }
 
     internal bool IsThirsty()

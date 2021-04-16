@@ -95,6 +95,26 @@ namespace Ecosystem.Logging
     [SerializeField] private int preyConsumedCount;
 
     /// <summary>
+    ///   The base rabbit genome.
+    /// </summary>
+    [SerializeField] private GenomeInfo rabbitGenome;
+
+    /// <summary>
+    ///   The base deer genome.
+    /// </summary>
+    [SerializeField] private GenomeInfo deerGenome;
+
+    /// <summary>
+    ///   The base wolf genome.
+    /// </summary>
+    [SerializeField] private GenomeInfo wolfGenome;
+
+    /// <summary>
+    ///   The base bear genome.
+    /// </summary>
+    [SerializeField] private GenomeInfo bearGenome;
+
+    /// <summary>
     ///   The history of simulation events, stored in chronological order. 
     /// </summary>
     [SerializeField] private List<SimulationEvent> events = new List<SimulationEvent>(256);

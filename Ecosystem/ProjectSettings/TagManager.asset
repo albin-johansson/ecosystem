@@ -4,7 +4,6 @@
 TagManager:
   serializedVersion: 2
   tags:
-  - Food
   - Water
   - Ground
   - Reproducer
@@ -14,6 +13,9 @@ TagManager:
   - Deer
   - Carrot
   - Terrain
+  - Berry
+  - StaticFood
+  - Meat
   layers:
   - Default
   - TransparentFX
@@ -23,11 +25,12 @@ TagManager:
   - UI
   - Food
   - Wolf
-  - Prey
+  - Rabbit
   - Post-processing
   - Bear
   - Camera
-  - 
+  - Deer
+  - Meat
   - 
   - 
   - 

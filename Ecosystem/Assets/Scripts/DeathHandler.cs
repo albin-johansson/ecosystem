@@ -1,42 +1,63 @@
 ﻿using System.Collections;
 using Ecosystem.Logging;
 using Ecosystem.Spawning;
+using Ecosystem.Util;
 using UnityEngine;
 
 namespace Ecosystem
 {
   /// <summary>
-  /// Handles killing the game object.
+  ///   Handles the deaths of animals.
   /// </summary>
   public sealed class DeathHandler : MonoBehaviour
   {
-    [SerializeField] private EcoAnimationController animationController;
-    [SerializeField] private string keyToPool;
-    private CauseOfDeath _cause;
-    private GameObject _gameObject;
-    public bool _isDead; //can probebly remove this when realistic food is implemented
-
     public delegate void DeathEvent(CauseOfDeath cause, GameObject gameObject);
 
     /// <summary>
-    /// This event is emitted every time an entity dies.
+    ///   This event is emitted every time an entity dies.
     /// </summary>
     public static event DeathEvent OnDeath;
 
-    public void Die(CauseOfDeath cause)
+    [SerializeField] private EcoAnimationController animationController;
+
+    private string _keyToPool;
+
+    public bool isDead; // TODO can probably remove this when realistic food is implemented
+
+    private void Start()
     {
-      _isDead = true; //temporary bug fix so that multiple wolves can´t eat the same prey
-      _gameObject = gameObject;
-      _cause = cause;
-      OnDeath?.Invoke(_cause, _gameObject.gameObject);
-      animationController.EnterDeathAnimation();
-      StartCoroutine(InactivateAfterDelay(3));
+      _keyToPool = gameObject.tag;
     }
 
-    private IEnumerator InactivateAfterDelay(int delay)
+    public void Die(CauseOfDeath cause)
     {
-      yield return new WaitForSeconds(delay);
-      ObjectPoolHandler.instance.ReturnToPool(keyToPool, _gameObject);
+      isDead = true; // TODO this is a temporary fix so that multiple wolves can't eat the same prey
+
+      OnDeath?.Invoke(cause, gameObject.gameObject);
+      animationController.EnterDeathAnimation();
+
+      StartCoroutine(InactivateAfterDelay(3));
+
+      InstantiateCarrion();
+    }
+
+    private IEnumerator InactivateAfterDelay(int seconds)
+    {
+      yield return new WaitForSeconds(seconds);
+      ObjectPoolHandler.Instance.ReturnToPool(_keyToPool, gameObject);
+    }
+
+    private void InstantiateCarrion()
+    {
+      var carrion = ObjectPoolHandler.Instance.Construct("Meat");
+
+      var currentTransform = gameObject.transform;
+      carrion.transform.position = currentTransform.position;
+      carrion.transform.rotation = currentTransform.rotation;
+      carrion.SetActive(true);
+
+      var nutritionController = carrion.GetComponent<NutritionController>();
+      nutritionController.SetNutritionalValue(Nutrition.GetNutritionalValue(gameObject));
     }
   }
 }

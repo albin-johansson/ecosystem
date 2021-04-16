@@ -9,9 +9,10 @@ namespace Ecosystem.UI
   public sealed class MenuManager : MonoBehaviour
   {
     [SerializeField] private GameObject mainMenu;
+    [SerializeField] private GameObject settingsMenu;
     [SerializeField] private GameObject dynamicSceneMenu;
     [SerializeField] private GameObject ecsDemoSceneMenu;
-    [SerializeField] private GameObject settingsButton;
+    [SerializeField] private GameObject genomeSettingsMenu;
 
     [SerializeField] private Button dynamicSceneStartButton;
     [SerializeField] private Text dynamicRabbitCount;
@@ -19,6 +20,7 @@ namespace Ecosystem.UI
     [SerializeField] private Text dynamicWolfCount;
     [SerializeField] private Text dynamicBearCount;
     [SerializeField] private Text dynamicCarrotCount;
+    [SerializeField] private Text dynamicBerryBushCount;
 
     [SerializeField] private Button ecsSceneStartButton;
     [SerializeField] private Text ecsRabbitCount;
@@ -36,25 +38,37 @@ namespace Ecosystem.UI
 
     public void EnterMainMenu()
     {
+      settingsMenu.SetActive(false);
       dynamicSceneMenu.SetActive(false);
-      mainMenu.SetActive(true);
       ecsDemoSceneMenu.SetActive(false);
-      settingsButton.SetActive(true);
+      genomeSettingsMenu.SetActive(false);
+
+      mainMenu.SetActive(true);
+    }
+
+    public void EnterSettingsMenu()
+    {
+      mainMenu.SetActive(false);
+      genomeSettingsMenu.SetActive(false);
+      settingsMenu.SetActive(true);
+    }
+
+    public void EnterGeneSettingsMenu()
+    {
+      mainMenu.SetActive(false);
+      settingsMenu.SetActive(false);
+      genomeSettingsMenu.SetActive(true);
     }
 
     public void EnterDynamicSceneMenu()
     {
       mainMenu.SetActive(false);
-      settingsButton.SetActive(false);
-      ecsDemoSceneMenu.SetActive(false);
       dynamicSceneMenu.SetActive(true);
     }
 
     public void EnterEcsDemoSceneMenu()
     {
       mainMenu.SetActive(false);
-      settingsButton.SetActive(false);
-      dynamicSceneMenu.SetActive(false);
       ecsDemoSceneMenu.SetActive(true);
     }
 
@@ -93,12 +107,14 @@ namespace Ecosystem.UI
         var wolf = Resources.Load("Prefabs/Animals/EcoWolf");
         var bear = Resources.Load("Prefabs/Animals/EcoBear");
         var carrot = Resources.Load("Prefabs/Food/EcoCarrot");
+        var berrybush = Resources.Load("Prefabs/Food/EcoBerryBush");
 
         var nRabbits = int.Parse(dynamicRabbitCount.text);
         var nDeer = int.Parse(dynamicDeerCount.text);
         var nWolves = int.Parse(dynamicWolfCount.text);
         var nBears = int.Parse(dynamicBearCount.text);
         var nCarrots = int.Parse(dynamicCarrotCount.text);
+        var nBerrybush = int.Parse(dynamicBerryBushCount.text);
 
         var terrain = Terrain.activeTerrain;
 
@@ -107,6 +123,7 @@ namespace Ecosystem.UI
         Instantiate(nDeer, deer, terrain);
         Instantiate(nBears, bear, terrain);
         Instantiate(nCarrots, carrot, terrain);
+        Instantiate(nBerrybush, berrybush, terrain, 0.3f);
       }
     }
 
@@ -116,7 +133,8 @@ namespace Ecosystem.UI
                                              dynamicDeerCount.text != "" &&
                                              dynamicWolfCount.text != "" &&
                                              dynamicBearCount.text != "" &&
-                                             dynamicCarrotCount.text != "";
+                                             dynamicCarrotCount.text != "" &&
+                                             dynamicBerryBushCount.text != "";
     }
 
     public void ValidateEcsDemoSceneInputs()
@@ -135,13 +153,16 @@ namespace Ecosystem.UI
     /// <param name="count">the amount of prefabs that will be spawned</param>
     /// <param name="prefab">the prefab that will be spawned</param>
     /// <param name="terrain">the terrain on which the prefab will be spawned</param>
-    private static void Instantiate(int count, Object prefab, Terrain terrain)
+    /// <param name="offset">the offset to the terrain, this is zero by default</param>
+    private static void Instantiate(int count, Object prefab, Terrain terrain, float offset = 0)
     {
+      var offsetVector = new Vector3(0, offset, 0);
       for (var i = 0; i < count; ++i)
       {
         // There is a small risk that we fail to find a walkable position, but it's fine
         if (Terrains.RandomWalkablePosition(terrain, out var position))
         {
+          position += offsetVector;
           Instantiate(prefab, position, Quaternion.identity);
         }
       }
