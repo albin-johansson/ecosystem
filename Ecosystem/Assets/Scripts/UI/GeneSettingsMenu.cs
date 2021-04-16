@@ -17,10 +17,10 @@ namespace Ecosystem.UI
     [SerializeField] private Toggle bearSet;
     [SerializeField] private Toggle bearMutate;
 
-    private Dictionary<GeneType, Preset> _rabbitPreset;
-    private Dictionary<GeneType, Preset> _wolfPreset;
-    private Dictionary<GeneType, Preset> _deerPreset;
-    private Dictionary<GeneType, Preset> _bearPreset;
+    private PresetMap _rabbitPreset;
+    private PresetMap _wolfPreset;
+    private PresetMap _deerPreset;
+    private PresetMap _bearPreset;
     private float _rabbitMutateChance = 0.05f;
     private float _wolfMutateChance = 0.05f;
     private float _deerMutateChance = 0.05f;
