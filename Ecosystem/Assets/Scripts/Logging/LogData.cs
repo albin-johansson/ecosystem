@@ -171,12 +171,74 @@ namespace Ecosystem.Logging
 
     private void CaptureInitialGenomes()
     {
+      List<RabbitGenome> inital = RabbitGenome.InitalGenomes;
+      Debug.Log("Number of inital rabbits: "+inital.Count);
       /*
-      rabbitGenome = CaptureGenome(RabbitGenome.DefaultGenes);
-      deerGenome = CaptureGenome(DeerGenome.DefaultGenes);
-      wolfGenome = CaptureGenome(WolfGenome.DefaultGenes);
-      bearGenome = CaptureGenome(BearGenome.DefaultGenes);
-      */
+      foreach (var rg in inital)
+      {
+        genomes.Add(new GenomeInfo()
+        {
+          endTime = -1,
+          //TODO: make this a method
+          genes = new List<GeneInfo>()
+          {
+            new GeneInfo()
+            {
+              geneType = GeneType.HungerRate,
+              value = rg.GetGenes().HungerRate.Value
+            },
+            new GeneInfo()
+            {
+              geneType = GeneType.HungerThreshold,
+              value = rg.GetGenes().HungerThreshold.Value
+            },
+            new GeneInfo()
+            {
+              geneType = GeneType.ThirstRate,
+              value = rg.GetGenes().ThirstRate.Value
+            },
+            new GeneInfo()
+            {
+              geneType = GeneType.ThirstThreshold,
+              value = rg.GetGenes().ThirstThreshold.Value
+            },
+            new GeneInfo()
+            {
+              geneType = GeneType.Vision,
+              value = rg.GetGenes().Vision.Value
+            },
+            new GeneInfo()
+            {
+              geneType = GeneType.Speed,
+              value = rg.GetGenes().Speed.Value
+            },
+            new GeneInfo()
+            {
+              geneType = GeneType.SizeFactor,
+              value = rg.GetGenes().SizeFactor.Value
+            },
+            new GeneInfo()
+            {
+              geneType = GeneType.DesirabilityScore,
+              value = rg.GetGenes().DesirabilityScore.Value
+            },
+            new GeneInfo()
+            {
+              geneType = GeneType.GestationPeriod,
+              value = rg.GetGenes().GestationPeriod.Value
+            },
+            new GeneInfo()
+            {
+              geneType = GeneType.SexualMaturityTime,
+              value = rg.GetGenes().SexualMaturityTime.Value
+            }
+          },
+          key = rg.key,
+          tag = "Rabbit",
+          time = 0
+        });
+        
+      }*/
     }
 
     /// <summary>

@@ -15,6 +15,8 @@ namespace Ecosystem.Genes
     private static readonly Gene GestationPeriod = new Gene(5, 5, 120);
     private static readonly Gene SexualMaturityTime = new Gene(5, 5, 120);
 
+    public static List<RabbitGenome> InitalGenomes = new List<RabbitGenome>();
+
     public static readonly Dictionary<GeneType, Gene> DefaultGenes = new Dictionary<GeneType, Gene>
     {
       {GeneType.HungerRate, HungerRate},
@@ -34,6 +36,7 @@ namespace Ecosystem.Genes
       key = GenerateKey(10);
       Data = GenomeData.Create(DefaultGenes);
       ConvertGenesToAttributes();
+      InitalGenomes.Add(this);
     }
   }
 }
