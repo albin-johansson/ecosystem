@@ -56,7 +56,7 @@ namespace Ecosystem.AnimalBehaviour.Predators.Wolf
       return base.End();
     }
 
-    public override void OnTriggerEnter(Collider other)
+    public override void OnSphereEnter(Collider other)
     {
       var otherObject = other.gameObject;
       if (Tags.IsPrey(otherObject))
@@ -65,7 +65,7 @@ namespace Ecosystem.AnimalBehaviour.Predators.Wolf
       }
     }
 
-    public override void OnTriggerExit(Collider other)
+    public override void OnSphereExit(Collider other)
     {
       if (other.gameObject == Target)
       {
