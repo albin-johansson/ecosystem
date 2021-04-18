@@ -349,15 +349,14 @@ namespace Ecosystem.Logging
 
       //TODO: forest scene gives errors sometimes.
       string key = deadObject.GetComponent<AbstractGenome>().key;
-      Debug.Log("Adding key: " + key + ", Object: " + deadObject.ToString());
+      //Debug.Log("Adding key: " + key + ", Object: " + deadObject.ToString());
       try
       {
-        // Do not initialize this variable here.
         keyEnd.Add(key, SessionTime.Now());
       }
       catch
       {
-        Debug.Log("Failed to add key: " + key + ", Object: " + deadObject.ToString());
+        //TODO: fix animals dying multiple times? If here, animal already died once.
       }
     }
 

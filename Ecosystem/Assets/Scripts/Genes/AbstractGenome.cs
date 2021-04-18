@@ -15,8 +15,6 @@ namespace Ecosystem.Genes
     public string key;
     private static Random _random = new Random();
     private const string _chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
-    private static string id = "";
-
 
     [MethodImpl(MethodImplOptions.Synchronized)]
     protected static string GenerateKey(int length)
