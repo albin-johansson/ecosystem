@@ -173,7 +173,6 @@ namespace Ecosystem.Logging
     private void CaptureInitialGenomes()
     {
       List<RabbitGenome> inital = RabbitGenome.InitalGenomes;
-      //Debug.Log("Number of initial rabbits: " + inital.Count);
       foreach (var rg in inital)
       {
         workInProgressGenomes.Add(new GenomeInfo()
@@ -182,6 +181,45 @@ namespace Ecosystem.Logging
           genes = GenomeDataToList(rg.Data),
           key = rg.key,
           tag = "Rabbit",
+          time = 0
+        });
+      }
+
+      List<WolfGenome> inital2 = WolfGenome.InitalGenomes;
+      foreach (var rg in inital2)
+      {
+        workInProgressGenomes.Add(new GenomeInfo()
+        {
+          endTime = -1,
+          genes = GenomeDataToList(rg.Data),
+          key = rg.key,
+          tag = "Wolf",
+          time = 0
+        });
+      }
+
+      List<DeerGenome> inital3 = DeerGenome.InitalGenomes;
+      foreach (var rg in inital3)
+      {
+        workInProgressGenomes.Add(new GenomeInfo()
+        {
+          endTime = -1,
+          genes = GenomeDataToList(rg.Data),
+          key = rg.key,
+          tag = "Deer",
+          time = 0
+        });
+      }
+
+      List<BearGenome> inital4 = BearGenome.InitalGenomes;
+      foreach (var rg in inital4)
+      {
+        workInProgressGenomes.Add(new GenomeInfo()
+        {
+          endTime = -1,
+          genes = GenomeDataToList(rg.Data),
+          key = rg.key,
+          tag = "Bear",
           time = 0
         });
       }
@@ -195,7 +233,7 @@ namespace Ecosystem.Logging
       duration = SessionTime.Now();
       MatchGenomeToTime();
       workInProgressGenomes = new List<GenomeInfo>();
-      msg += "tmp genomes removed, should include all initial";
+      msg += ", tmp genomes removed, should include all initial";
     }
 
     private void MatchGenomeToTime()
@@ -310,9 +348,16 @@ namespace Ecosystem.Logging
       ++deadCount;
 
       //TODO: forest scene gives errors sometimes.
-      if (deadObject.tag == "Rabbit")
+      string key = deadObject.GetComponent<AbstractGenome>().key;
+      Debug.Log("Adding key: " + key + ", Object: " + deadObject.ToString());
+      try
       {
-        keyEnd.Add(deadObject.GetComponent<AbstractGenome>().key, SessionTime.Now());
+        // Do not initialize this variable here.
+        keyEnd.Add(key, SessionTime.Now());
+      }
+      catch
+      {
+        Debug.Log("Failed to add key: " + key + ", Object: " + deadObject.ToString());
       }
     }
 
@@ -383,21 +428,6 @@ namespace Ecosystem.Logging
     /// <returns>the amount of consumed prey.</returns>
     public int PreyConsumedCount() => preyConsumedCount;
 
-    /*
-    private GenomeInfo CaptureGenome(Dictionary<GeneType, Gene> genes)
-    {
-      
-      var info = new GenomeInfo {genes = new List<GeneInfo>()};
-
-      foreach (var pair in genes)
-      {
-        info.genes.Add(CreateGeneInfo(pair.Key, pair.Value));
-      }
-
-      return info;
-      
-    }
-    */
     private static void AddGene(ICollection<GeneInfo> genes, KeyValuePair<GeneType, Gene> pair)
     {
       genes.Add(CreateGeneInfo(pair.Key, pair.Value));

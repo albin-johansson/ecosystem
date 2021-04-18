@@ -4,6 +4,8 @@ namespace Ecosystem.Genes
 {
   public sealed class WolfGenome : AbstractGenome
   {
+    public static List<WolfGenome> InitalGenomes = new List<WolfGenome>();
+
     private static float _mutateChance = 0.05f;
     private static Dictionary<GeneType, Preset> _preset;
 
@@ -42,8 +44,10 @@ namespace Ecosystem.Genes
 
     protected override void Initialize()
     {
+      key = GenerateKey(10);
       Data = CreateData();
       ConvertGenesToAttributes();
+      InitalGenomes.Add(this);
     }
 
     public static void SetPreset(Dictionary<GeneType, Preset> presets, float mutateChance = 0.05f)
