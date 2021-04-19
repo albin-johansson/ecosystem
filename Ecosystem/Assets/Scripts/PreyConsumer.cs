@@ -1,4 +1,4 @@
-﻿using Ecosystem.Genes;
+using Ecosystem.Genes;
 using Ecosystem.Logging;
 using Ecosystem.UI;
 using Ecosystem.Util;
@@ -73,14 +73,9 @@ namespace Ecosystem
         var otherDeathHandler = otherObject.GetComponentInParent<DeathHandler>();
         if (!otherDeathHandler.isDead)
         {
-          otherDeathHandler.Die(CauseOfDeath.Eaten);
-
-          var otherNutritionController = otherObject.GetComponentInParent<NutritionController>();
-          Hunger -= otherNutritionController.Consume(Hunger);
-
+          var nutritionController = otherDeathHandler.Die(CauseOfDeath.Eaten);
           IsAttacking = true;
-          Hunger = 0;
-
+          Hunger -= nutritionController.Consume(Hunger);
           OnPreyConsumed?.Invoke();
         }
       }

@@ -28,7 +28,7 @@ namespace Ecosystem.AnimalBehaviour.Predators.Wolf
       return Type();
     }
 
-    public override void OnTriggerExit(Collider other)
+    public override void OnSphereExit(Collider other)
     {
       if (other.gameObject == Target)
       {

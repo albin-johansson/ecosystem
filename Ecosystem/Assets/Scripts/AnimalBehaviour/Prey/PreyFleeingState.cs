@@ -51,7 +51,7 @@ namespace Ecosystem.AnimalBehaviour.Prey
       return base.End();
     }
 
-    public override void OnTriggerEnter(Collider other)
+    public override void OnSphereEnter(Collider other)
     {
       var otherObject = other.gameObject;
       if (Tags.IsWater(otherObject))
@@ -60,7 +60,7 @@ namespace Ecosystem.AnimalBehaviour.Prey
       }
     }
 
-    public override void OnTriggerExit(Collider other)
+    public override void OnSphereExit(Collider other)
     {
       if (other.gameObject == Target)
       {
