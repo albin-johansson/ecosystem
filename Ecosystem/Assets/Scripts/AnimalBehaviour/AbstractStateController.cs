@@ -46,13 +46,13 @@ namespace Ecosystem.AnimalBehaviour
     {
       if (movementController.IsReachable(other.gameObject.transform.position))
       {
-        State.OnTriggerEnter(other);
+        State.OnSphereEnter(other);
       }
     }
 
     private void OnTriggerExit(Collider other)
     {
-      State.OnTriggerExit(other);
+      State.OnSphereExit(other);
     }
   }
 }

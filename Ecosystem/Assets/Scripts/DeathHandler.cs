@@ -29,7 +29,7 @@ namespace Ecosystem
       _keyToPool = gameObject.tag;
     }
 
-    public void Die(CauseOfDeath cause)
+    public NutritionController Die(CauseOfDeath cause)
     {
       isDead = true; // TODO this is a temporary fix so that multiple wolves can't eat the same prey
 
@@ -38,7 +38,7 @@ namespace Ecosystem
 
       StartCoroutine(InactivateAfterDelay(3));
 
-      InstantiateCarrion();
+      return InstantiateCarrion();
     }
 
     private IEnumerator InactivateAfterDelay(int seconds)
@@ -47,7 +47,7 @@ namespace Ecosystem
       ObjectPoolHandler.Instance.ReturnToPool(_keyToPool, gameObject);
     }
 
-    private void InstantiateCarrion()
+    private NutritionController InstantiateCarrion()
     {
       var carrion = ObjectPoolHandler.Instance.Construct("Meat");
 
@@ -58,6 +58,7 @@ namespace Ecosystem
 
       var nutritionController = carrion.GetComponent<NutritionController>();
       nutritionController.SetNutritionalValue(Nutrition.GetNutritionalValue(gameObject));
+      return nutritionController;
     }
   }
 }

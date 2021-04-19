@@ -55,7 +55,7 @@ namespace Ecosystem.AnimalBehaviour.Predators.Bear
       return base.End();
     }
 
-    public override void OnTriggerEnter(Collider other)
+    public override void OnSphereEnter(Collider other)
     {
       var otherObject = other.gameObject;
       if (Tags.IsPrey(otherObject))
@@ -64,7 +64,7 @@ namespace Ecosystem.AnimalBehaviour.Predators.Bear
       }
     }
 
-    public override void OnTriggerExit(Collider other)
+    public override void OnSphereExit(Collider other)
     {
       if (other.gameObject == Target)
       {
