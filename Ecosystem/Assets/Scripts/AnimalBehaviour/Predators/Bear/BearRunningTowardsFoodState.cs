@@ -32,7 +32,7 @@ namespace Ecosystem.AnimalBehaviour.Predators.Bear
       return Type();
     }
 
-    public override void OnTriggerExit(Collider other)
+    public override void OnSphereExit(Collider other)
     {
       if (other.gameObject == Target)
       {
