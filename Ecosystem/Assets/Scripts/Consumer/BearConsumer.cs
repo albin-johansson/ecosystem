@@ -94,14 +94,9 @@ namespace Ecosystem.Consumer
         var otherDeathHandler = otherObject.GetComponentInParent<DeathHandler>();
         if (!otherDeathHandler.isDead)
         {
-          otherDeathHandler.Die(CauseOfDeath.Eaten);
-
-          var otherNutritionController = otherObject.GetComponentInParent<NutritionController>();
-          Hunger -= otherNutritionController.Consume(Hunger);
-
+          var nutritionController = otherDeathHandler.Die(CauseOfDeath.Eaten);
           IsConsuming = true;
-          Hunger = 0;
-
+          Hunger -= nutritionController.Consume(Hunger);
           OnPreyConsumed?.Invoke();
         }
       }
