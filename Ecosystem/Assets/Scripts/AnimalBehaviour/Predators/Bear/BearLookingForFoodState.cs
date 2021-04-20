@@ -42,7 +42,7 @@ namespace Ecosystem.AnimalBehaviour.Predators.Bear
       {
         MemoryController.SaveToMemory(otherObject);
       }
-      else if (Tags.IsPrey(otherObject) || Tags.IsMeat(otherObject) ||Tags.IsStaticFood(otherObject))
+      else if (Tags.IsPrey(otherObject) || Tags.IsMeat(otherObject) || Tags.IsStaticFood(otherObject))
       {
         Target = otherObject;
       }

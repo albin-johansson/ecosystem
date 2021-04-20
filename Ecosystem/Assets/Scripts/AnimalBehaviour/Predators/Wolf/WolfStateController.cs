@@ -6,6 +6,7 @@ namespace Ecosystem.AnimalBehaviour.Predators.Wolf
   public sealed class WolfStateController : AbstractPredatorStateController
   {
     [SerializeField] private WolfConsumer wolfConsumer;
+
     protected override void Initialize()
     {
       consumer = wolfConsumer;

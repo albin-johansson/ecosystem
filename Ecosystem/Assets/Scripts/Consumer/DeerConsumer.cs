@@ -9,13 +9,6 @@ namespace Ecosystem.Consumer
 {
   public sealed class DeerConsumer : MonoBehaviour, IConsumer
   {
-    public delegate void FoodEatenEvent(GameObject food);
-
-    /// <summary>
-    /// This event is emitted every time a food resource is consumed.
-    /// </summary>
-    public static event FoodEatenEvent OnFoodEaten;
-
     [SerializeField] private AbstractGenome genome;
     [SerializeField] private ResourceBar resourceBar;
     [SerializeField] private DeathHandler deathHandler;
@@ -25,6 +18,7 @@ namespace Ecosystem.Consumer
     private bool _isDead;
     private double _consumed = 0;
     private double _limit = 30;
+    private const int Scaler = 4;
 
     public float Hunger { get; private set; }
 
@@ -53,8 +47,8 @@ namespace Ecosystem.Consumer
 
       if (IsConsuming)
       {
-        Hunger -= 4 * Time.deltaTime;
-        _consumed += 4 * Time.deltaTime;
+        Hunger -= Scaler * Time.deltaTime;
+        _consumed += Scaler * Time.deltaTime;
         if (Hunger <= 0 || _consumed > _limit)
         {
           _consumed = 0;
@@ -72,7 +66,7 @@ namespace Ecosystem.Consumer
         Hunger += genome.Metabolism * Time.deltaTime;
       }
 
-      resourceBar.SetValue((float) Hunger);
+      resourceBar.SetValue(Hunger);
       if (Hunger > maxHunger)
       {
         _isDead = true;

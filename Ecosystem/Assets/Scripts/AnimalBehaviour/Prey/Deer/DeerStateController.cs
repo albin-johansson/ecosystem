@@ -6,6 +6,7 @@ namespace Ecosystem.AnimalBehaviour.Prey.Deer
   public sealed class DeerStateController : AbstractPreyStateController
   {
     [SerializeField] private DeerConsumer deerConsumer;
+
     protected override void Initialize()
     {
       consumer = deerConsumer;

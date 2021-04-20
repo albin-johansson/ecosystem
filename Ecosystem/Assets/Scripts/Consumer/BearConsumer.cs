@@ -14,7 +14,7 @@ namespace Ecosystem.Consumer
     /// This event is emitted every time a prey is consumed.
     /// </summary>
     public static event PreyConsumedEvent OnPreyConsumed;
-    
+
     public delegate void FoodEatenEvent(GameObject food);
 
     /// <summary>
@@ -29,6 +29,7 @@ namespace Ecosystem.Consumer
     [SerializeField] private float maxHunger = 100;
 
     private bool _isDead;
+    private const int Scaler = 4;
 
     public float Hunger { get; private set; }
 
@@ -49,10 +50,10 @@ namespace Ecosystem.Consumer
       {
         return;
       }
-      
+
       if (EatingFromGameObject && EatingFromGameObject.activeSelf)
       {
-        Hunger -= 4 * Time.deltaTime;
+        Hunger -= Scaler * Time.deltaTime;
         if (Hunger <= 0)
         {
           Hunger = 0;
@@ -113,7 +114,7 @@ namespace Ecosystem.Consumer
         EatingFromGameObject = otherObject;
       }
     }
-    
+
     private void OnTriggerStay(Collider other)
     {
       var otherObject = other.gameObject;

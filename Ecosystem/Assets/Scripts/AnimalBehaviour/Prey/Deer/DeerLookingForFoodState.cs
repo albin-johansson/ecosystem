@@ -5,8 +5,8 @@ namespace Ecosystem.AnimalBehaviour.Prey.Deer
 {
   internal sealed class DeerLookingForFoodState : AbstractAnimalState
   {
-    private double _time;
-    private double _limit;
+    private float _time;
+    private float _limit;
     internal DeerLookingForFoodState(StateData data) : base(data)
     {
     }
