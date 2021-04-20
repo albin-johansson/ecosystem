@@ -15,8 +15,6 @@ namespace Ecosystem.Genes
       {GeneType.ThirstThreshold, new Preset(0, 10, new[] {1f, 5f, 7f})},
       {GeneType.Vision, new Preset(1, 50, new[] {5f, 10f, 25f, 45f, 50f})},
       {GeneType.Speed, new Preset(1, 2, new[] {1f, 1.5f, 2f})},
-      {GeneType.SizeFactor, new Preset(0.1f, 1.5f, new[] {0.5f, 1f, 1.5f})},
-      {GeneType.DesirabilityScore, new Preset(1, 10, new[] {1f, 5f, 9f})},
       {GeneType.GestationPeriod, new Preset(10, 120, new[] {12f, 20f, 60f, 90f, 120f})},
       {GeneType.SexualMaturityTime, new Preset(10, 150, new[] {20f, 40f, 60f, 90f, 120f, 150f})}
   };
@@ -29,8 +27,6 @@ namespace Ecosystem.Genes
       {GeneType.ThirstThreshold, new Preset(0, 10, new[] {5f})},
       {GeneType.Vision, new Preset(1, 50, new[] {30f})},
       {GeneType.Speed, new Preset(1, 2, new[] {1.5f})},
-      {GeneType.SizeFactor, new Preset(0.1f, 1.5f, new[] {1f})},
-      {GeneType.DesirabilityScore, new Preset(1, 10, new[] {5f})},
       {GeneType.GestationPeriod, new Preset(10, 120, new[] {40f})},
       {GeneType.SexualMaturityTime, new Preset(10, 150, new[] {40f})}
     };
