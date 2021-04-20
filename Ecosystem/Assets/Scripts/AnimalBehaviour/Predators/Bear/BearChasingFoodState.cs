@@ -22,7 +22,8 @@ namespace Ecosystem.AnimalBehaviour.Predators.Bear
       {
         return base.Tick();
       }
-      else if (!Target.activeSelf || !MovementController.IsWithinSphere(Target.transform.position))
+      else if (!Target.activeInHierarchy || 
+               !MovementController.IsWithinSphere(Target.transform.position))
       {
         Target = GetClosestInVision(Layers.PreyMask);
         return Type();
@@ -39,7 +40,7 @@ namespace Ecosystem.AnimalBehaviour.Predators.Bear
       return Type();
     }
 
-    public override void OnTriggerEnter(Collider other)
+    public override void OnSphereEnter(Collider other)
     {
       var otherObject = other.gameObject;
       if (Tags.IsPrey(otherObject))
@@ -48,7 +49,7 @@ namespace Ecosystem.AnimalBehaviour.Predators.Bear
       }
     }
 
-    public override void OnTriggerExit(Collider other)
+    public override void OnSphereExit(Collider other)
     {
       if (other.gameObject == Target)
       {

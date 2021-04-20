@@ -10,9 +10,9 @@ namespace Ecosystem.AnimalBehaviour
 
     AnimalState Tick();
 
-    void OnTriggerEnter(Collider other);
+    void OnSphereEnter(Collider other);
 
-    void OnTriggerExit(Collider other);
+    void OnSphereExit(Collider other);
 
     AnimalState Type();
   }

@@ -62,7 +62,7 @@ namespace Ecosystem.AnimalBehaviour
       }
     }
 
-    public virtual void OnTriggerEnter(Collider other)
+    public virtual void OnSphereEnter(Collider other)
     {
       var otherObject = other.gameObject;
       if (Tags.IsWater(otherObject))
@@ -71,7 +71,7 @@ namespace Ecosystem.AnimalBehaviour
       }
     }
 
-    public virtual void OnTriggerExit(Collider other)
+    public virtual void OnSphereExit(Collider other)
     {
     }
 
