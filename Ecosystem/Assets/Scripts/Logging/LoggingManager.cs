@@ -29,7 +29,7 @@ namespace Ecosystem.Logging
     private void Start()
     {
       // TODO we need to log when new food resources spawn
-      
+
       // Yes, these are allocated once, it's fine
       DeathHandler.OnDeath += LogDeath;
       NutritionController.OnFoodEaten += LogFoodEaten;
@@ -61,6 +61,12 @@ namespace Ecosystem.Logging
         _data.msg += "Pressed X";
         _data.MarkAsDone();
         LogFileWriter.Save(_data);
+      }
+
+      if (Input.GetKeyDown(KeyCode.C))
+      {
+        Debug.Log(_data.tmp());
+        Debug.Log(_data.tmp2());
       }
     }
 

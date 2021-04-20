@@ -184,45 +184,48 @@ namespace Ecosystem.Logging
           time = 0
         });
       }
+      /*
+      
 
       List<WolfGenome> inital2 = WolfGenome.InitalGenomes;
-      foreach (var rg in inital2)
+      foreach (var wg in inital2)
       {
         workInProgressGenomes.Add(new GenomeInfo()
         {
           endTime = -1,
-          genes = GenomeDataToList(rg.Data),
-          key = rg.key,
+          genes = GenomeDataToList(wg.Data),
+          key = wg.key,
           tag = "Wolf",
           time = 0
         });
       }
 
       List<DeerGenome> inital3 = DeerGenome.InitalGenomes;
-      foreach (var rg in inital3)
+      foreach (var dg in inital3)
       {
         workInProgressGenomes.Add(new GenomeInfo()
         {
           endTime = -1,
-          genes = GenomeDataToList(rg.Data),
-          key = rg.key,
+          genes = GenomeDataToList(dg.Data),
+          key = dg.key,
           tag = "Deer",
           time = 0
         });
       }
 
       List<BearGenome> inital4 = BearGenome.InitalGenomes;
-      foreach (var rg in inital4)
+      foreach (var bg in inital4)
       {
         workInProgressGenomes.Add(new GenomeInfo()
         {
           endTime = -1,
-          genes = GenomeDataToList(rg.Data),
-          key = rg.key,
+          genes = GenomeDataToList(bg.Data),
+          key = bg.key,
           tag = "Bear",
           time = 0
         });
       }
+      */
     }
 
     /// <summary>
@@ -235,6 +238,17 @@ namespace Ecosystem.Logging
       workInProgressGenomes = new List<GenomeInfo>();
       msg += ", tmp genomes removed, should include all initial";
     }
+
+    public string tmp()
+    {
+      return "Genomes: " + genomes.Count;
+    }
+
+    public string tmp2()
+    {
+      return "workInProgressGenomes: " + workInProgressGenomes.Count;
+    }
+
 
     private void MatchGenomeToTime()
     {

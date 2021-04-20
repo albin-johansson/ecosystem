@@ -26,20 +26,20 @@ namespace Ecosystem.Genes
     public static readonly Dictionary<GeneType, Preset> DefaultSingular = new Dictionary<GeneType, Preset>()
     {
       {GeneType.HungerRate, new Preset(0, 10, new[] {1f})},
-      {GeneType.HungerThreshold, new Preset(0, 10, new[] {5f})},
+      {GeneType.HungerThreshold, new Preset(0, 10, new[] {10f})},
       {GeneType.ThirstRate, new Preset(0, 10, new[] {0.5f})},
-      {GeneType.ThirstThreshold, new Preset(0, 10, new[] {5f})},
+      {GeneType.ThirstThreshold, new Preset(0, 10, new[] {10f})},
       {GeneType.Vision, new Preset(1, 50, new[] {25f})},
       {GeneType.Speed, new Preset(1, 2, new[] {1.5f})},
       {GeneType.SizeFactor, new Preset(0.5f, 1.5f, new[] {1f})},
       {GeneType.DesirabilityScore, new Preset(1, 10, new[] {1f})},
-      {GeneType.GestationPeriod, new Preset(10, 120, new[] {12f})},
-      {GeneType.SexualMaturityTime, new Preset(10, 150, new[] {20f})}
+      {GeneType.GestationPeriod, new Preset(10, 120, new[] {11f})},
+      {GeneType.SexualMaturityTime, new Preset(10, 150, new[] {11f})}
     };
 
     static RabbitGenome()
     {
-      _preset = DefaultSet;
+      _preset = DefaultSingular;
     }
 
     protected override void Initialize()
@@ -52,8 +52,10 @@ namespace Ecosystem.Genes
 
     public static void SetPreset(Dictionary<GeneType, Preset> presets, float mutateChance = 0.05f)
     {
+      /*
       _preset = presets;
       _mutateChance = mutateChance;
+      */
     }
 
     protected override Dictionary<GeneType, Preset> GetPresets()
