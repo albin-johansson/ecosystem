@@ -84,17 +84,15 @@ namespace Ecosystem.AnimalBehaviour.Predators
           State = _attacking;
           break;
 
-        case AnimalState.GoingToFood:
-          State = RunningTowardsFood;
-          Data.Consumer.ColliderActive = true;
-          break;
-        
         case AnimalState.Eating:
           State = Eating;
           break;
-
-        case AnimalState.Fleeing:
+        
         case AnimalState.RunningTowardsFood:
+          State = RunningTowardsFood;
+          Data.Consumer.ColliderActive = true;
+          break;
+        case AnimalState.Fleeing:
         default:
           break;
       }

@@ -1,5 +1,4 @@
-﻿using Ecosystem.Util;
-using UnityEngine;
+﻿using UnityEngine;
 
 namespace Ecosystem.AnimalBehaviour.Predators.Bear
 {

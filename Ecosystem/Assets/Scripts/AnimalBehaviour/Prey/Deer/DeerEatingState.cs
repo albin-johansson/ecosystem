@@ -1,5 +1,4 @@
-﻿using Ecosystem.Components;
-using Ecosystem.Util;
+﻿using Ecosystem.Util;
 using UnityEngine;
 
 namespace Ecosystem.AnimalBehaviour.Prey.Deer
@@ -25,7 +24,7 @@ namespace Ecosystem.AnimalBehaviour.Prey.Deer
         if (Tags.IsPredator(Target))
         {
           return AnimalState.Fleeing;
-        } 
+        }
       }
 
       if (Consumer.Hunger < WaterConsumer.Thirst && WaterConsumer.IsThirsty())

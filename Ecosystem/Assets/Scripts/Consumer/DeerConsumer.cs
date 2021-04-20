@@ -18,7 +18,7 @@ namespace Ecosystem.Consumer
     private bool _isDead;
     private double _consumed = 0;
     private double _limit = 30;
-    private const int Scaler = 4;
+    private const float Scaler = 4;
 
     public float Hunger { get; private set; }
 
@@ -55,6 +55,8 @@ namespace Ecosystem.Consumer
           _limit = Random.Range(20, 40);
           IsConsuming = false;
         }
+
+        return;
       }
 
       if (reproducer.IsPregnant)

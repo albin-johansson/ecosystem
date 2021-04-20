@@ -87,7 +87,6 @@ namespace Ecosystem.AnimalBehaviour.Prey
 
         case AnimalState.ChasingPrey:
         case AnimalState.Attacking:
-        case AnimalState.GoingToFood:
         default:
           break;
       }

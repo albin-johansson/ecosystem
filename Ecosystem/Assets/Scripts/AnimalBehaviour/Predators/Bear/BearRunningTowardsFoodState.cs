@@ -23,7 +23,7 @@ namespace Ecosystem.AnimalBehaviour.Predators.Bear
       }
       if (!Consumer.IsHungry() ||
           !Target ||
-          !Target.activeSelf ||
+          !Target.activeInHierarchy ||
           !MovementController.IsWithinSphere(Target.transform.position))
       {
         return base.Tick();
