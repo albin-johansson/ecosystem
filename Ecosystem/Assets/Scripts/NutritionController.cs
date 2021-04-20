@@ -16,7 +16,7 @@ namespace Ecosystem
 
     private string _keyToPool;
 
-    private void Start()
+    private void Awake()
     {
       _keyToPool = gameObject.tag;
     }
@@ -44,10 +44,6 @@ namespace Ecosystem
       else
       {
         OnFoodEaten?.Invoke(gameObject);
-        if (_keyToPool == null)
-        {
-          Start();
-        }
         ObjectPoolHandler.Instance.ReturnOrDestroy(_keyToPool, gameObject);
         return nutritionalValue;
       }
