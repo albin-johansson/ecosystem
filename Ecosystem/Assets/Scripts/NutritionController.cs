@@ -44,6 +44,10 @@ namespace Ecosystem
       else
       {
         OnFoodEaten?.Invoke(gameObject);
+        if (_keyToPool == null)
+        {
+          Start();
+        }
         ObjectPoolHandler.Instance.ReturnOrDestroy(_keyToPool, gameObject);
         return nutritionalValue;
       }
