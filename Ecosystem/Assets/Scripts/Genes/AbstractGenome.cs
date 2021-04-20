@@ -12,7 +12,7 @@ namespace Ecosystem.Genes
 
     private static readonly Dictionary<GeneType, Preset> DefaultPresets = new Dictionary<GeneType, Preset>()
     {
-      {GeneType.HungerRate, new Preset(0, 10, new[] {1f, 5f, 7f})},
+      {GeneType.HungerRate, new Preset(0.5f, 1, new[] {0.5f, 0.75f, 1f})},
       {GeneType.HungerThreshold, new Preset(0, 10, new[] {1f, 5f, 7f})},
       {GeneType.ThirstRate, new Preset(0, 10, new[] {0.5f, 3f, 6f, 9f})},
       {GeneType.ThirstThreshold, new Preset(0, 10, new[] {1f, 5f, 7f})},

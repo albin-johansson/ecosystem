@@ -9,11 +9,11 @@ namespace Ecosystem.Genes
 
     public static readonly Dictionary<GeneType, Preset> DefaultSet = new Dictionary<GeneType, Preset>()
     {
-      {GeneType.HungerRate, new Preset(0, 10, new[] {1f, 5f, 7f})},
-      {GeneType.HungerThreshold, new Preset(0, 10, new[] {1f, 5f, 7f})},
-      {GeneType.ThirstRate, new Preset(0, 10, new[] {0.5f, 3f, 6f, 9f})},
-      {GeneType.ThirstThreshold, new Preset(0, 10, new[] {1f, 5f, 7f})},
-      {GeneType.Vision, new Preset(1, 50, new[] {5f, 10f, 25f, 40f, 45f})},
+      {GeneType.HungerRate, new Preset(0.5f, 1, new[] {0.5f, 0.75f, 1f})},
+      {GeneType.HungerThreshold, new Preset(5, 15, new[] {5f, 10f, 15f})},
+      {GeneType.ThirstRate, new Preset(1, 3, new[] {1f, 2f, 3f})},
+      {GeneType.ThirstThreshold, new Preset(5, 15, new[] {5f, 10f, 15f})},
+      {GeneType.Vision, new Preset(10, 20, new[] {10f, 12.5f, 15f, 17.5f, 20f})},
       {GeneType.Speed, new Preset(1, 2, new[] {1f, 1.5f, 2f})},
       {GeneType.SizeFactor, new Preset(0.5f, 1.5f, new[] {0.5f, 1f, 1.5f})},
       {GeneType.DesirabilityScore, new Preset(1, 10, new[] {1f, 5f, 10f})},
@@ -23,11 +23,11 @@ namespace Ecosystem.Genes
 
     public static readonly Dictionary<GeneType, Preset> DefaultSingular = new Dictionary<GeneType, Preset>()
     {
-      {GeneType.HungerRate, new Preset(0, 10, new[] {1f})},
-      {GeneType.HungerThreshold, new Preset(0, 10, new[] {5f})},
-      {GeneType.ThirstRate, new Preset(0, 10, new[] {0.5f})},
-      {GeneType.ThirstThreshold, new Preset(0, 10, new[] {5f})},
-      {GeneType.Vision, new Preset(1, 50, new[] {25f})},
+      {GeneType.HungerRate, new Preset(0, 1, new[] {0.5f})},
+      {GeneType.HungerThreshold, new Preset(5, 15, new[] {10f})},
+      {GeneType.ThirstRate, new Preset(0, 1, new[] {0.5f})},
+      {GeneType.ThirstThreshold, new Preset(5, 15, new[] {10f})},
+      {GeneType.Vision, new Preset(10, 20, new[] {15f})},
       {GeneType.Speed, new Preset(1, 2, new[] {1.5f})},
       {GeneType.SizeFactor, new Preset(0.5f, 1.5f, new[] {1f})},
       {GeneType.DesirabilityScore, new Preset(1, 10, new[] {1f})},

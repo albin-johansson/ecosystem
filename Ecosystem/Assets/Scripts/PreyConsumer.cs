@@ -66,7 +66,6 @@ namespace Ecosystem
       {
         return;
       }
-
       var otherObject = other.gameObject;
       if (Tags.IsPrey(otherObject))
       {
