@@ -11,8 +11,6 @@ namespace Ecosystem.Genes
     internal Gene ThirstThreshold;
     internal Gene Vision;
     internal Gene Speed;
-    internal Gene SizeFactor;
-    internal Gene DesirabilityScore;
     internal Gene GestationPeriod;
     internal Gene SexualMaturityTime;
 
@@ -29,8 +27,6 @@ namespace Ecosystem.Genes
         ThirstThreshold = initial[GeneType.ThirstThreshold],
         Vision = initial[GeneType.Vision],
         Speed = initial[GeneType.Speed],
-        SizeFactor = initial[GeneType.SizeFactor],
-        DesirabilityScore = initial[GeneType.DesirabilityScore],
         GestationPeriod = initial[GeneType.GestationPeriod],
         SexualMaturityTime = initial[GeneType.SexualMaturityTime],
         MutateChance = mutateChance
