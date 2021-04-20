@@ -172,6 +172,51 @@ namespace Ecosystem.Logging
 
     private void CaptureInitialGenomes()
     {
+      //TODO: use tags to find all animals, use tryGet to make sure each is counted once. 
+      GameObject[] animals = GameObject.FindGameObjectsWithTag("Rabbit");
+      totalAnimals += animals.Length;
+
+      foreach (var animal in animals)
+      {
+        if (animal.TryGetComponent(out AbstractGenome g))
+        {
+          correctTotalAnimals++;
+        }
+      }
+
+      GameObject[] animals2 = GameObject.FindGameObjectsWithTag("Deer");
+      totalAnimals += animals2.Length;
+
+      foreach (var animal in animals2)
+      {
+        if (animal.TryGetComponent(out AbstractGenome g))
+        {
+          correctTotalAnimals++;
+        }
+      }
+
+      GameObject[] animals3 = GameObject.FindGameObjectsWithTag("Wolf");
+      totalAnimals += animals3.Length;
+
+      foreach (var animal in animals3)
+      {
+        if (animal.TryGetComponent(out AbstractGenome g))
+        {
+          correctTotalAnimals++;
+        }
+      }
+
+      GameObject[] animals4 = GameObject.FindGameObjectsWithTag("Bear");
+      totalAnimals += animals4.Length;
+
+      foreach (var animal in animals4)
+      {
+        if (animal.TryGetComponent(out AbstractGenome g))
+        {
+          correctTotalAnimals++;
+        }
+      }
+      /*
       List<RabbitGenome> inital = RabbitGenome.InitalGenomes;
       foreach (var rg in inital)
       {
@@ -184,6 +229,8 @@ namespace Ecosystem.Logging
           time = 0
         });
       }
+      */
+
       /*
       
 
@@ -239,14 +286,20 @@ namespace Ecosystem.Logging
       msg += ", tmp genomes removed, should include all initial";
     }
 
+    private int totalAnimals = 0;
+
     public string tmp()
     {
-      return "Genomes: " + genomes.Count;
+      return "Total animals: " + totalAnimals;
+      //return "Genomes: " + genomes.Count;
     }
+
+    private int correctTotalAnimals = 0;
 
     public string tmp2()
     {
-      return "workInProgressGenomes: " + workInProgressGenomes.Count;
+      return "Adjusted total animals: " + correctTotalAnimals;
+      //return "workInProgressGenomes: " + workInProgressGenomes.Count;
     }
 
 
