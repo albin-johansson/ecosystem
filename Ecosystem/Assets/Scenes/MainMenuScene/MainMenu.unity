@@ -301,6 +301,10 @@ PrefabInstance:
       propertyPath: m_Enabled
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1851608088184565141, guid: 79dc4df1db0530a4183ef9529c6ac69a, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 3350421026760717125, guid: 79dc4df1db0530a4183ef9529c6ac69a, type: 3}
       propertyPath: m_RootOrder
       value: 2
@@ -393,6 +397,10 @@ PrefabInstance:
       propertyPath: m_Enabled
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4723033217706320744, guid: 79dc4df1db0530a4183ef9529c6ac69a, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 5776705699588922319, guid: 79dc4df1db0530a4183ef9529c6ac69a, type: 3}
       propertyPath: m_AnchorMax.y
       value: 1
@@ -432,6 +440,10 @@ PrefabInstance:
     - target: {fileID: 7155763010095567698, guid: 79dc4df1db0530a4183ef9529c6ac69a, type: 3}
       propertyPath: m_Name
       value: EcoDeer
+      objectReference: {fileID: 0}
+    - target: {fileID: 7167050597269155267, guid: 79dc4df1db0530a4183ef9529c6ac69a, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8567408443971536778, guid: 79dc4df1db0530a4183ef9529c6ac69a, type: 3}
       propertyPath: m_Enabled
@@ -885,6 +897,10 @@ PrefabInstance:
     - target: {fileID: 5965036162587312628, guid: 9ad7ab249851e454e9360e8fc8284e3b, type: 3}
       propertyPath: m_IsActive
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6391903218431404697, guid: 9ad7ab249851e454e9360e8fc8284e3b, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6849156993158474618, guid: 9ad7ab249851e454e9360e8fc8284e3b, type: 3}
       propertyPath: m_Enabled
@@ -1488,6 +1504,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 273385470277398501, guid: 52b1c190247192a42a5e36bafea08096, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 307427479530659742, guid: 52b1c190247192a42a5e36bafea08096, type: 3}
       propertyPath: m_Enabled
       value: 0
@@ -1907,6 +1927,10 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5519717986162146221, guid: a5fd4d9dd473da54c83430115c05e48c, type: 3}
       propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5585708767638295657, guid: a5fd4d9dd473da54c83430115c05e48c, type: 3}
+      propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6008664309968109715, guid: a5fd4d9dd473da54c83430115c05e48c, type: 3}
@@ -8450,6 +8474,17 @@ Transform:
   m_Father: {fileID: 486680476}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0.728, y: -0.985, z: 106.924}
+--- !u!114 &1879623616 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 5903979955362283056, guid: f6a6c66b57f65c648b7becd500b2a5fe, type: 3}
+  m_PrefabInstance: {fileID: 2026068119}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5f7201a12d95ffc409449d95f23cf332, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1952800701
 GameObject:
   m_ObjectHideFlags: 0
@@ -8509,7 +8544,7 @@ MonoBehaviour:
   dynamicWolfCount: {fileID: 886235166}
   dynamicBearCount: {fileID: 687530572}
   dynamicCarrotCount: {fileID: 2026068122}
-  dynamicBerryBushCount: {fileID: 2026068123}
+  dynamicBerryBushCount: {fileID: 1879623616}
   ecsSceneStartButton: {fileID: 246206652}
   ecsRabbitCount: {fileID: 246206651}
   ecsDeerCount: {fileID: 246206655}
@@ -8890,7 +8925,7 @@ Terrain:
   m_TreeMaximumFullLODCount: 681
   m_DetailObjectDistance: 179
   m_DetailObjectDensity: 0.657
-  m_HeightmapPixelError: 5
+  m_HegightmapPixelError: 5
   m_SplatMapDistance: 292
   m_HeightmapMaximumLOD: 0
   m_ShadowCastingMode: 2

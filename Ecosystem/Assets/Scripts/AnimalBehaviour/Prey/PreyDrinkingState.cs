@@ -34,7 +34,7 @@ namespace Ecosystem.AnimalBehaviour.Prey
       }
     }
 
-    public override void OnTriggerEnter(Collider other)
+    public override void OnSphereEnter(Collider other)
     {
       var otherObject = other.gameObject;
       if (Tags.IsWater(otherObject))
