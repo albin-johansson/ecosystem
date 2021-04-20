@@ -7,21 +7,16 @@ from logdata import LogData
 from genome import visualise_genome_changes
 
 
-def runGenome(data: LogData, directory):
-  visualise_genome_changes(data, Path())
-  print("runGenomeWasRun")
-
-
 def main2():
-  input_file: str = 'example.json'
+  input_file: str = 'with_all_animals.json'
   # directory: Path = input_file.with_suffix('')
   # if not directory.exists():
   # os.mkdir(directory)
 
   data = LogData(input_file)
   print(data.initial_rabbit_count())
-  runGenome(data)
-  print("temp main was run")
+  visualise_genome_changes(data)
+  print("temp main is done")
 
 
 if __name__ == "__main__":

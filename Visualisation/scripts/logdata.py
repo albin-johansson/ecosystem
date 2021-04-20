@@ -66,7 +66,7 @@ class LogData:
     return self.data["matings"][index]
 
   def genome_info(self):
-    return self.data["genome"]
+    return self.data["genomes"]
 
   def __getitem__(self, item):  # operator[]
     return self.data[item]
@@ -129,6 +129,14 @@ def get_food_history(data: LogData) -> dict[TimePoint, Amount]:
   food_history[data.duration_secs()] = food_count
 
   return food_history
+
+
+def get_rabbits(data: LogData):
+  data.genome_info()
+  for val in data.genome_info():
+    print(val)
+    print('\n')
+  # return [(1, 1, "x", [(0, 1), (2, 3), (4, 5)])]
 
 
 def is_predator(tag: str) -> bool:

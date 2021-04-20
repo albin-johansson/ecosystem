@@ -7,8 +7,8 @@ from pathlib import Path
 from logdata import *
 
 
-def tmp(data: LogData, directory: Path):
-  # TODO: example does not contain hungerRates.
+def tmp(data: LogData):  # , directory: Path):
+  get_rabbits(data)
   """
   Produces a stackplot of how the animals populations changed over the course of the simulation.
 
@@ -49,7 +49,7 @@ def int_to_gene_type(code):
   }[code]
 
 
-def visualise_genome_changes(data: LogData, directory: Path):
+def visualise_genome_changes(data: LogData):
   """
   Produces two plots of how the predator and prey populations changed over the course
   of the simulation.
@@ -61,4 +61,4 @@ def visualise_genome_changes(data: LogData, directory: Path):
   visualise_animal_populations_standard(data, directory)
   visualise_animal_populations_stackplot(data, directory)
   """
-  tmp(LogData, Path)
+  tmp(data)
