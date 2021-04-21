@@ -59,19 +59,6 @@ namespace Ecosystem.AnimalBehaviour.Prey.Deer
         Target = otherObject;
       }
     }
-    
-    public override void OnSphereExit(Collider other)
-    {
-      var otherObject = other.gameObject;
-
-      if (Tags.IsPredator(otherObject))
-      {
-        if (otherObject == Target)
-        {
-          Target = GetClosestInVision(Layers.PredatorMask);
-        }
-      }
-    }
 
     public override AnimalState Type()
     {
