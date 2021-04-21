@@ -1,4 +1,3 @@
-
 namespace Ecosystem.AnimalBehaviour.Prey
 {
   public abstract class AbstractPreyStateController : AbstractStateController
@@ -23,7 +22,7 @@ namespace Ecosystem.AnimalBehaviour.Prey
       Data = new StateData
       {
         StaminaController = staminaController,
-        Consumer = consumer,
+        Consumer = Consumer,
         AnimationController = animationController,
         MemoryController = memoryController,
         MovementController = movementController,

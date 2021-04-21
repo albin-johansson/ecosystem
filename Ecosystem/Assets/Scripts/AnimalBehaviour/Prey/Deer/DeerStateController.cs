@@ -9,7 +9,7 @@ namespace Ecosystem.AnimalBehaviour.Prey.Deer
 
     protected override void Initialize()
     {
-      consumer = deerConsumer;
+      Consumer = deerConsumer;
       base.Initialize();
       Eating = PreyStateFactory.CreateDeerEating(Data);
       LookingForFood = PreyStateFactory.CreateDeerLookingForFood(Data);

@@ -9,7 +9,7 @@ namespace Ecosystem.AnimalBehaviour.Predators.Wolf
 
     protected override void Initialize()
     {
-      consumer = wolfConsumer;
+      Consumer = wolfConsumer;
       base.Initialize();
       RunningTowardsFood = PredatorStateFactory.CreateWolfRunningTowardsFood(Data);
       LookingForFood = PredatorStateFactory.CreateWolfLookingForFood(Data);

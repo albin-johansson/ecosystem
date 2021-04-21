@@ -17,7 +17,7 @@ namespace Ecosystem.AnimalBehaviour
     [SerializeField] protected AbstractGenome genome;
     [SerializeField] protected SphereCollider sphereCollider;
 
-    protected IConsumer consumer;
+    protected IConsumer Consumer;
 
     protected IAnimalState State;
 

@@ -6,9 +6,10 @@ namespace Ecosystem.AnimalBehaviour.Prey.Rabbit
   public sealed class RabbitStateController : AbstractPreyStateController
   {
     [SerializeField] private RabbitConsumer rabbitConsumer;
+
     protected override void Initialize()
     {
-      consumer = rabbitConsumer;
+      Consumer = rabbitConsumer;
       base.Initialize();
       Eating = PreyStateFactory.CreateRabbitEating(Data);
       LookingForFood = PreyStateFactory.CreateRabbitLookingForFood(Data);

@@ -7,6 +7,7 @@ namespace Ecosystem.AnimalBehaviour.Prey.Deer
   {
     private float _time;
     private float _limit;
+
     internal DeerLookingForFoodState(StateData data) : base(data)
     {
     }
@@ -17,7 +18,7 @@ namespace Ecosystem.AnimalBehaviour.Prey.Deer
       MovementController.StartWander();
       AnimationController.EnterMoveAnimation();
       _time = 0;
-      _limit = Random.Range(5, 15);
+      _limit = Random.Range(1, 10);
     }
 
     public override AnimalState Tick()

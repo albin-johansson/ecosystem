@@ -21,6 +21,7 @@ namespace Ecosystem.AnimalBehaviour.Predators.Bear
       {
         return AnimalState.Eating;
       }
+
       if (!Consumer.IsHungry() ||
           !Target ||
           !Target.activeInHierarchy ||

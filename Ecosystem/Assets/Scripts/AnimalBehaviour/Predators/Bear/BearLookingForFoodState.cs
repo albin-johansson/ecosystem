@@ -20,7 +20,7 @@ namespace Ecosystem.AnimalBehaviour.Predators.Bear
     {
       if (Target)
       {
-        if (Tags.IsMeat(Target) | Tags.IsStaticFood(Target))
+        if (Tags.IsMeat(Target) || Tags.IsStaticFood(Target))
         {
           return AnimalState.RunningTowardsFood;
         }

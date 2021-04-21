@@ -9,7 +9,7 @@ namespace Ecosystem.AnimalBehaviour.Predators.Bear
 
     protected override void Initialize()
     {
-      consumer = bearConsumer;
+      Consumer = bearConsumer;
       base.Initialize();
       RunningTowardsFood = PredatorStateFactory.CreateBearRunningTowardsFood(Data);
       LookingForFood = PredatorStateFactory.CreateBearLookingForFood(Data);

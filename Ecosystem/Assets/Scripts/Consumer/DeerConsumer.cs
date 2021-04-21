@@ -14,8 +14,8 @@ namespace Ecosystem.Consumer
     [SerializeField] private float maxHunger = 100;
 
     private bool _isDead;
-    private double _consumed = 0;
-    private double _limit = 30;
+    private float _consumed = 0;
+    private float _limit = 30;
     private const float Scaler = 4;
 
     public float Hunger { get; private set; }
