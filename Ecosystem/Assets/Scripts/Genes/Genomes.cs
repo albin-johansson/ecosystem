@@ -20,8 +20,6 @@ namespace Ecosystem.Genes
         ThirstThreshold = Gene.Merge(first.ThirstThreshold, second.ThirstThreshold, mutateChance),
         Vision = Gene.Merge(first.Vision, second.Vision, mutateChance),
         Speed = Gene.Merge(first.Speed, second.Speed, mutateChance),
-        SizeFactor = Gene.Merge(first.SizeFactor, second.SizeFactor, mutateChance),
-        DesirabilityScore = Gene.Merge(first.DesirabilityScore, second.DesirabilityScore, mutateChance),
         GestationPeriod = Gene.Merge(first.GestationPeriod, second.GestationPeriod, mutateChance),
         SexualMaturityTime = Gene.Merge(first.SexualMaturityTime, second.SexualMaturityTime, mutateChance),
         MutateChance = mutateChance
