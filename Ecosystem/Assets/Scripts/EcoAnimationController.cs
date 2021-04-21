@@ -91,6 +91,7 @@ namespace Ecosystem
     {
       ResetAnimatorParameters();
       navMeshAgent.speed = 0;
+      navMeshAgent.velocity = Vector3.zero;
       _animator.SetBool(_isDeadHash, true);
       _isDead = true;
     }
