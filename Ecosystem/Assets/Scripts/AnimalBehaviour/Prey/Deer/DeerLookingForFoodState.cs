@@ -13,6 +13,7 @@ namespace Ecosystem.AnimalBehaviour.Prey.Deer
 
     public override void Begin(GameObject target)
     {
+      Target = null;
       MovementController.StartWander();
       AnimationController.EnterMoveAnimation();
       _time = 0;
@@ -56,6 +57,19 @@ namespace Ecosystem.AnimalBehaviour.Prey.Deer
       else if (Tags.IsPredator(otherObject))
       {
         Target = otherObject;
+      }
+    }
+    
+    public override void OnSphereExit(Collider other)
+    {
+      var otherObject = other.gameObject;
+
+      if (Tags.IsPredator(otherObject))
+      {
+        if (otherObject == Target)
+        {
+          Target = GetClosestInVision(Layers.PredatorMask);
+        }
       }
     }
 
