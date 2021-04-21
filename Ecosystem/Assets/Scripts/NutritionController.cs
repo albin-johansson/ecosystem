@@ -20,7 +20,7 @@ namespace Ecosystem
 
     private string _keyToPool;
 
-    private void Start()
+    private void Awake()
     {
       _keyToPool = gameObject.tag;
     }
