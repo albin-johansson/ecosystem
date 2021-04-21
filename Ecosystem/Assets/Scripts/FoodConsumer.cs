@@ -9,13 +9,6 @@ namespace Ecosystem
 {
   public sealed class FoodConsumer : MonoBehaviour, IConsumer
   {
-    public delegate void FoodEatenEvent(GameObject food);
-
-    /// <summary>
-    /// This event is emitted every time a food resource is consumed.
-    /// </summary>
-    public static event FoodEatenEvent OnFoodEaten;
-
     [SerializeField] private AbstractGenome genome;
     [SerializeField] private ResourceBar resourceBar;
     [SerializeField] private DeathHandler deathHandler;
@@ -90,7 +83,6 @@ namespace Ecosystem
       }
       else if (Tags.IsFood(otherObject))
       {
-        OnFoodEaten?.Invoke(otherObject);
         ObjectPoolHandler.Instance.ReturnOrDestroy(otherObject.tag, otherObject);
 
         if (other.TryGetComponent(out NutritionController nutritionController))

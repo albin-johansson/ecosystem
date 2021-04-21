@@ -8,8 +8,13 @@ namespace Ecosystem
   {
     public delegate void FoodDecayed(GameObject food);
 
+    public delegate void FoodEatenEvent(GameObject food);
+
     /// This event is emitted every time a food resource decays.
     public static event FoodDecayed OnFoodDecayed;
+
+    /// This event is emitted every time a food resource is consumed.
+    public static event FoodEatenEvent OnFoodEaten;
 
     [SerializeField] private float nutritionalValue;
 
@@ -29,13 +34,12 @@ namespace Ecosystem
       }
       else
       {
-        ObjectPoolHandler.Instance.ReturnOrDestroy(_keyToPool, gameObject);
-
-        // Make sure that the object is a "food" item, i.e. not meat or anything else 
         if (Tags.IsFood(gameObject))
         {
           OnFoodDecayed?.Invoke(gameObject);
         }
+
+        ObjectPoolHandler.Instance.ReturnOrDestroy(_keyToPool, gameObject);
       }
     }
 
@@ -48,6 +52,11 @@ namespace Ecosystem
       }
       else
       {
+        if (Tags.IsFood(gameObject))
+        {
+          OnFoodEaten?.Invoke(gameObject);
+        }
+
         ObjectPoolHandler.Instance.ReturnOrDestroy(_keyToPool, gameObject);
         return nutritionalValue;
       }
