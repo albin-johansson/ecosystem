@@ -61,7 +61,7 @@ namespace Ecosystem.AnimalBehaviour.Predators.Bear
       var otherObject = other.gameObject;
       if (Tags.IsPrey(otherObject))
       {
-        Target = SelectCloser(Target, otherObject);
+        Target = !Target ? otherObject : SelectCloser(Target, otherObject);
       }
     }
 

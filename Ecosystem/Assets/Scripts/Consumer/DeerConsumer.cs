@@ -50,7 +50,7 @@ namespace Ecosystem.Consumer
         if (Hunger <= 0 || _consumed > _limit)
         {
           _consumed = 0;
-          _limit = Random.Range(20, 40);
+          _limit = Random.Range(30, 50);
           IsConsuming = false;
         }
         resourceBar.SetValue(Hunger);

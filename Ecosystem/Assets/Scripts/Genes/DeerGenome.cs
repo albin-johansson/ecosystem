@@ -9,10 +9,10 @@ namespace Ecosystem.Genes
 
     public static readonly Dictionary<GeneType, Preset> DefaultSet = new Dictionary<GeneType, Preset>()
     {
-      {GeneType.HungerRate, new Preset(0.5f, 1, new[] {0.5f, 0.75f, 1f})},
-      {GeneType.HungerThreshold, new Preset(10, 20, new[] {10f, 15f, 20f})},
-      {GeneType.ThirstRate, new Preset(0.3f, 1, new[] {0.1f, 0.5f, 1f})},
-      {GeneType.ThirstThreshold, new Preset(5, 15, new[] {5f, 10f, 15f})},
+      {GeneType.HungerRate, new Preset(0.2f, 0.5f, new[] {0.2f, 0.3f, 0.4f, 0.5f})},
+      {GeneType.HungerThreshold, new Preset(30, 40, new[] {30f, 35f, 40f})},
+      {GeneType.ThirstRate, new Preset(0.3f, 0.5f, new[] {0.3f, 0.4f, 0.5f})},
+      {GeneType.ThirstThreshold, new Preset(25, 40, new[] {25f, 35f, 40f})},
       {GeneType.Vision, new Preset(10, 15, new[] {10f, 11f, 12.5f, 14f, 15f})},
       {GeneType.Speed, new Preset(2, 4, new[] {2f, 3f, 4f})},
       {GeneType.GestationPeriod, new Preset(10, 120, new[] {12f, 20f, 60f, 90f, 120f})},
@@ -21,10 +21,10 @@ namespace Ecosystem.Genes
 
     public static readonly Dictionary<GeneType, Preset> DefaultSingular = new Dictionary<GeneType, Preset>()
     {
-      {GeneType.HungerRate, new Preset(0, 1, new[] {0.5f})},
-      {GeneType.HungerThreshold, new Preset(10, 20, new[] {15f})},
-      {GeneType.ThirstRate, new Preset(0.3f, 1, new[] {0.5f})},
-      {GeneType.ThirstThreshold, new Preset(5, 15, new[] {10f})},
+      {GeneType.HungerRate, new Preset(0.2f, 0.5f, new[] {0.3f})},
+      {GeneType.HungerThreshold, new Preset(30, 40, new[] {35f})},
+      {GeneType.ThirstRate, new Preset(0.3f, 0.5f, new[] {0.4f})},
+      {GeneType.ThirstThreshold, new Preset(25, 40, new[] {30f})},
       {GeneType.Vision, new Preset(10, 15, new[] {12.5f})},
       {GeneType.Speed, new Preset(2, 4, new[] {3f})},
       {GeneType.GestationPeriod, new Preset(10, 120, new[] {40f})},
