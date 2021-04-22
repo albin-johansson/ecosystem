@@ -5,15 +5,20 @@ namespace Ecosystem.AnimalBehaviour.Prey.Deer
 {
   internal sealed class DeerLookingForFoodState : AbstractAnimalState
   {
+    private float _time;
+    private float _limit;
+
     internal DeerLookingForFoodState(StateData data) : base(data)
     {
     }
 
     public override void Begin(GameObject target)
     {
-      Target = GetClosestInVision(Layers.FoodMask);
+      Target = null;
       MovementController.StartWander();
       AnimationController.EnterMoveAnimation();
+      _time = 0;
+      _limit = Random.Range(1, 5);
     }
 
     public override AnimalState Tick()
@@ -24,16 +29,19 @@ namespace Ecosystem.AnimalBehaviour.Prey.Deer
         {
           return AnimalState.Fleeing;
         }
-        else if (Tags.IsFood(Target))
-        {
-          return AnimalState.RunningTowardsFood;
-        }
       }
 
       if (Consumer.Hunger < WaterConsumer.Thirst && WaterConsumer.IsThirsty())
       {
         return AnimalState.LookingForWater;
       }
+
+      if (_time > _limit)
+      {
+        return AnimalState.Eating;
+      }
+
+      _time += Time.deltaTime;
 
       MovementController.UpdateWander();
 
@@ -46,10 +54,6 @@ namespace Ecosystem.AnimalBehaviour.Prey.Deer
       if (Tags.IsWater(otherObject))
       {
         MemoryController.SaveToMemory(otherObject);
-      }
-      else if (Tags.IsFood(otherObject))
-      {
-        Target = otherObject;
       }
       else if (Tags.IsPredator(otherObject))
       {

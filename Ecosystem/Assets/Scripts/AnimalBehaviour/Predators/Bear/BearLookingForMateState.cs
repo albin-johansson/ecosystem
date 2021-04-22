@@ -26,6 +26,14 @@ namespace Ecosystem.AnimalBehaviour.Predators.Bear
     {
       if (Target)
       {
+        if (!Target.activeInHierarchy)
+        {
+          Target = GetClosestMateInVision(Layers.BearMask);
+          if (!Target)
+          {
+            return base.Tick();
+          }
+        }
         if (Reproducer.CompatibleAsParents(Target) &&
             Reproducer.CanMate &&
             MovementController.IsWithinSphere(Target.transform.position))
@@ -35,7 +43,7 @@ namespace Ecosystem.AnimalBehaviour.Predators.Bear
         }
         else
         {
-          Target = GetClosestMateInVision(Layers.BearMask);
+          Target = GetClosestInVision(Layers.BearMask);
         }
       }
       else

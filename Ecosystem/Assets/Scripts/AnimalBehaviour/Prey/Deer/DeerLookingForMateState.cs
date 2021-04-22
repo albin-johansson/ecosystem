@@ -26,7 +26,7 @@ namespace Ecosystem.AnimalBehaviour.Prey.Deer
     {
       if (Target)
       {
-        if (!Target.activeSelf)
+        if (!Target.activeInHierarchy)
         {
           Target = GetClosestMateInVision(Layers.DeerMask);
           if (!Target)

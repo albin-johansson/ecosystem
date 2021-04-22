@@ -1,4 +1,5 @@
-﻿using Ecosystem.Genes;
+﻿using Ecosystem.Consumer;
+using Ecosystem.Genes;
 using Ecosystem.Util;
 using UnityEngine;
 using UnityEngine.UI;
@@ -33,8 +34,10 @@ namespace Ecosystem.Logging
       // Yes, these are allocated once, it's fine
       DeathHandler.OnDeath += LogDeath;
       NutritionController.OnFoodEaten += LogFoodEaten;
-      FoodConsumer.OnFoodEaten += LogFoodEaten;
-      PreyConsumer.OnPreyConsumed += LogPreyConsumed;
+      RabbitConsumer.OnFoodEaten += LogFoodEaten;
+      WolfConsumer.OnPreyConsumed += LogPreyConsumed;
+      BearConsumer.OnPreyConsumed += LogPreyConsumed;
+      BearConsumer.OnFoodEaten += LogFoodEaten;
       Reproducer.OnBirth += LogBirth;
       Reproducer.OnMating += LogMating;
 

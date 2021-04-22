@@ -1,12 +1,13 @@
+using System;
 using Ecosystem.Genes;
 using Ecosystem.Logging;
 using Ecosystem.UI;
 using Ecosystem.Util;
 using UnityEngine;
 
-namespace Ecosystem
+namespace Ecosystem.Consumer
 {
-  public sealed class PreyConsumer : MonoBehaviour, IConsumer
+  public sealed class WolfConsumer : MonoBehaviour, IConsumer
   {
     public delegate void PreyConsumedEvent();
 
@@ -27,7 +28,7 @@ namespace Ecosystem
 
     public bool ColliderActive { get; set; }
 
-    public bool IsAttacking { get; set; }
+    public bool IsConsuming { get; set; }
 
     public GameObject EatingFromGameObject { get; set; }
 
@@ -62,11 +63,10 @@ namespace Ecosystem
 
     private void OnTriggerEnter(Collider other)
     {
-      if (!ColliderActive || IsAttacking)
+      if (!ColliderActive || IsConsuming)
       {
         return;
       }
-
       var otherObject = other.gameObject;
       if (Tags.IsPrey(otherObject))
       {
@@ -74,7 +74,7 @@ namespace Ecosystem
         if (!otherDeathHandler.isDead)
         {
           var nutritionController = otherDeathHandler.Die(CauseOfDeath.Eaten);
-          IsAttacking = true;
+          IsConsuming = true;
           Hunger -= nutritionController.Consume(Hunger);
           OnPreyConsumed?.Invoke();
         }
@@ -84,6 +84,21 @@ namespace Ecosystem
         if (otherObject.TryGetComponent(out NutritionController otherNutritionController))
         {
           Hunger -= otherNutritionController.Consume(Hunger);
+        }
+      }
+    }
+
+    private void OnTriggerStay(Collider other)
+    {
+      var otherObject = other.gameObject;
+      if (ColliderActive)
+      {
+        if (Tags.IsMeat(otherObject))
+        {
+          if (otherObject.TryGetComponent(out NutritionController otherNutritionController))
+          {
+            Hunger -= otherNutritionController.Consume(Hunger);
+          }
         }
       }
     }

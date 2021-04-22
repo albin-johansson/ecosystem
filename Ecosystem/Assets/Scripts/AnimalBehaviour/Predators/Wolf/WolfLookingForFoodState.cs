@@ -22,7 +22,7 @@ namespace Ecosystem.AnimalBehaviour.Predators.Wolf
       {
         if (Tags.IsMeat(Target))
         {
-          return AnimalState.GoingToFood;
+          return AnimalState.RunningTowardsFood;
         }
         else if (Tags.IsPrey(Target))
         {

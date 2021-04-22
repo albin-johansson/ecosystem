@@ -4878,7 +4878,7 @@ MonoBehaviour:
   reproducer: {fileID: 6785132207444153848}
   genome: {fileID: 570846004582155358}
   sphereCollider: {fileID: 6776153342693034266}
-  consumer: {fileID: 769053549123909008}
+  deerConsumer: {fileID: 6089214312461235916}
 --- !u!1 &4759522730638570450
 GameObject:
   m_ObjectHideFlags: 0
@@ -7438,9 +7438,9 @@ GameObject:
   - component: {fileID: 4704647009540235580}
   - component: {fileID: 6785132207444153848}
   - component: {fileID: 6086610748204852402}
-  - component: {fileID: 769053549123909008}
   - component: {fileID: 4450245077263169757}
   - component: {fileID: 8263177787784199112}
+  - component: {fileID: 6089214312461235916}
   m_Layer: 12
   m_Name: Body
   m_TagString: Deer
@@ -7493,23 +7493,6 @@ MonoBehaviour:
   resourceBar: {fileID: 897296775149995389}
   deathHandler: {fileID: 6442332908797553670}
   maxThirst: 100
---- !u!114 &769053549123909008
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7167050597269155267}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8b0d8392b591c9448a6a95dfbc63639a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  genome: {fileID: 570846004582155358}
-  resourceBar: {fileID: 6078427025632469203}
-  deathHandler: {fileID: 6442332908797553670}
-  reproducer: {fileID: 6785132207444153848}
-  maxHunger: 100
 --- !u!54 &4450245077263169757
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -7539,6 +7522,23 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 0.5, y: 1.5, z: 2.2}
   m_Center: {x: 0, y: 0.75, z: 0.2}
+--- !u!114 &6089214312461235916
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7167050597269155267}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 575354407f1c4bf58db3cc8e5d269697, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  genome: {fileID: 570846004582155358}
+  resourceBar: {fileID: 6078427025632469203}
+  deathHandler: {fileID: 6442332908797553670}
+  reproducer: {fileID: 6785132207444153848}
+  maxHunger: 100
 --- !u!1 &7186192348177787887
 GameObject:
   m_ObjectHideFlags: 0
