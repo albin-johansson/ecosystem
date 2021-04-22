@@ -5,9 +5,11 @@ namespace Ecosystem.AnimalBehaviour.Prey
 {
   internal sealed class PreyIdleState : AbstractAnimalState
   {
-    internal PreyIdleState(StateData data) : base(data)
-    {
-    }
+    private float _elapsedTime;
+    private float _standStillThreshold = 3f;
+    private bool _standStill = true;
+
+    internal PreyIdleState(StateData data) : base(data) { }
 
     public override void Begin(GameObject target)
     {
@@ -22,10 +24,22 @@ namespace Ecosystem.AnimalBehaviour.Prey
       {
         return AnimalState.Fleeing;
       }
+      if (_standStill)
+      {
+        _elapsedTime += Time.deltaTime;
+        if (_elapsedTime > _standStillThreshold)
+        {
+          AnimationController.EnterMoveAnimation();
+          MovementController.StartWander();
+          _elapsedTime = 0;
+          _standStill = false;
+        }
+      }
       else
       {
-        return base.Tick();
+        MovementController.UpdateWander();
       }
+      return base.Tick();
     }
 
     public override void OnSphereEnter(Collider other)
@@ -39,6 +53,12 @@ namespace Ecosystem.AnimalBehaviour.Prey
       {
         Target = otherObject;
       }
+    }
+
+    public override GameObject End()
+    {
+      _standStill = true;
+      return base.End();
     }
 
     public override AnimalState Type()
