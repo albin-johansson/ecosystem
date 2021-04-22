@@ -12,8 +12,9 @@ namespace Ecosystem.AnimalBehaviour.Predators.Wolf
     public override void Begin(GameObject target)
     {
       Target = GetClosestInVision(Layers.PreyMask | Layers.MeatMask);
-      MovementController.StartWander();
       AnimationController.EnterMoveAnimation();
+      MovementController.StartWander();
+      
     }
 
     public override AnimalState Tick()

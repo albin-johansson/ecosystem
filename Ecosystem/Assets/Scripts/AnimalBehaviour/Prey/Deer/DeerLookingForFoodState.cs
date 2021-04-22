@@ -14,9 +14,9 @@ namespace Ecosystem.AnimalBehaviour.Prey.Deer
 
     public override void Begin(GameObject target)
     {
+      AnimationController.EnterMoveAnimation();
       Target = null;
       MovementController.StartWander();
-      AnimationController.EnterMoveAnimation();
       _time = 0;
       _limit = Random.Range(1, 5);
     }

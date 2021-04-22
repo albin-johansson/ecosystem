@@ -11,9 +11,9 @@ namespace Ecosystem.AnimalBehaviour.Predators.Bear
 
     public override void Begin(GameObject target)
     {
+      AnimationController.EnterMoveAnimation();
       Target = GetClosestInVision(Layers.PreyMask | Layers.MeatMask | Layers.StaticFoodMask);
       MovementController.StartWander();
-      AnimationController.EnterMoveAnimation();
     }
 
     public override AnimalState Tick()

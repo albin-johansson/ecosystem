@@ -11,9 +11,9 @@ namespace Ecosystem.AnimalBehaviour.Prey
 
     public override void Begin(GameObject target)
     {
+      AnimationController.EnterMoveAnimation();
       Target = target;
       MovementController.SetDestinationIfValid(Target.transform.position);
-      AnimationController.EnterMoveAnimation();
     }
 
     public override AnimalState Tick()
