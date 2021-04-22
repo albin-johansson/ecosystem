@@ -76,6 +76,14 @@ namespace Ecosystem
     }
 
     /// <summary>
+    ///   Clears the destination in the navMesh agent
+    /// </summary>
+    public void ClearNavigationTarget()
+    {
+      navAgent.ResetPath();
+    }
+
+    /// <summary>
     ///   Updates the speed of the associated NavAgent, according to the current stamina.
     /// </summary>
     private void UpdateSpeed()

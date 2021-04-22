@@ -12,6 +12,7 @@ namespace Ecosystem.AnimalBehaviour.Prey
     public override void Begin(GameObject target)
     {
       Target = null;
+      MovementController.ClearNavigationTarget();
       AnimationController.EnterIdleAnimation();
     }
 

@@ -11,6 +11,7 @@ namespace Ecosystem.AnimalBehaviour.Predators
     public override void Begin(GameObject target)
     {
       Target = null;
+      MovementController.ClearNavigationTarget();
       AnimationController.EnterIdleAnimation();
     }
 
