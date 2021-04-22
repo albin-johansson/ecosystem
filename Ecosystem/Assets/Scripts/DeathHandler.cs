@@ -19,6 +19,7 @@ namespace Ecosystem
     public static event DeathEvent OnDeath;
 
     [SerializeField] private EcoAnimationController animationController;
+    [SerializeField] private MovementController movementController;
 
     private string _keyToPool;
 
@@ -33,6 +34,8 @@ namespace Ecosystem
     {
       isDead = true; // TODO this is a temporary fix so that multiple wolves can't eat the same prey
 
+      movementController.DisableNavMeshAgent();
+      
       OnDeath?.Invoke(cause, gameObject.gameObject);
       animationController.EnterDeathAnimation();
 
