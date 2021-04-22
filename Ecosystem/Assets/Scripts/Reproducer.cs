@@ -44,7 +44,7 @@ namespace Ecosystem
     private float _maturityElapsedTime;
     private float _childSaturation;
     private bool _isSexuallyMature;
-    private Vector3 _childSize = new Vector3(0.6f, 0.6f, 0.6f);
+    private readonly Vector3 _childSize = new Vector3(0.7f, 0.7f, 0.7f);
 
     public bool IsWilling { get; set; }
 
