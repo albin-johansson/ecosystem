@@ -1,3 +1,4 @@
+using Ecosystem.Util;
 using UnityEngine;
 
 namespace Ecosystem.AnimalBehaviour.Predators
@@ -35,6 +36,15 @@ namespace Ecosystem.AnimalBehaviour.Predators
         MovementController.UpdateWander();
       }
       return base.Tick();
+    }
+    
+    public override void OnSphereEnter(Collider other)
+    {
+      var otherObject = other.gameObject;
+      if (Tags.IsWater(otherObject))
+      {
+        MemoryController.SaveToMemory(otherObject);
+      }
     }
 
     public override GameObject End()
