@@ -15,7 +15,6 @@ namespace Ecosystem.AnimalBehaviour.Prey
       AnimationController.EnterIdleAnimation();
       MovementController.SetStandingStill(true);
       WaterConsumer.StartDrinking();
-      // TODO: Add animationController.DrinkAnimation();
     }
 
     public override AnimalState Tick()

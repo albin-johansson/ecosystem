@@ -28,6 +28,7 @@ namespace Ecosystem
           stationaryFoodGeneration.RemoveBerry();
           if (stationaryFoodGeneration.AmountOfBerries < 1)
           {
+            _count = 0;
             gameObject.SetActive(false);
             break;
           }

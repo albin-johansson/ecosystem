@@ -1,5 +1,6 @@
-﻿using Ecosystem.Genes;
 using Ecosystem.Spawning;
+using Ecosystem.Consumer;
+using Ecosystem.Genes;
 using Ecosystem.Util;
 using UnityEngine;
 using UnityEngine.UI;
@@ -33,7 +34,10 @@ namespace Ecosystem.Logging
       DeathHandler.OnDeath += LogDeath;
       NutritionController.OnFoodDecayed += LogFoodDecayed;
       NutritionController.OnFoodEaten += LogFoodEaten;
-      PreyConsumer.OnPreyConsumed += LogPreyConsumed;
+      RabbitConsumer.OnFoodEaten += LogFoodEaten;
+      WolfConsumer.OnPreyConsumed += LogPreyConsumed;
+      BearConsumer.OnPreyConsumed += LogPreyConsumed;
+      BearConsumer.OnFoodEaten += LogFoodEaten;
       Reproducer.OnBirth += LogBirth;
       Reproducer.OnMating += LogMating;
       StationaryFoodGeneration.OnGeneratedFood += LogFoodGenerated;

@@ -16,6 +16,9 @@ namespace Ecosystem.Util
 
     public static readonly int WaterMask = LayerMask.GetMask("Water");
     public static readonly int FoodMask = LayerMask.GetMask("Food");
+    public static readonly int StaticFoodMask = LayerMask.GetMask("StaticFood");
+    
+    public static readonly int AllFoodMask = FoodMask | StaticFoodMask;
 
     public static readonly int MeatMask = LayerMask.GetMask("Meat");
   }
