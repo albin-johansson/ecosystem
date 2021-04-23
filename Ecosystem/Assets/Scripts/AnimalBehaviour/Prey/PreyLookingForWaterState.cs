@@ -17,8 +17,8 @@ namespace Ecosystem.AnimalBehaviour.Prey
         Target = MemoryController.GetClosestInMemory(Tags.IsWater, MovementController.GetPosition());
       }
 
-      MovementController.StartWander();
       AnimationController.EnterMoveAnimation();
+      MovementController.StartWander();
     }
 
     public override AnimalState Tick()
