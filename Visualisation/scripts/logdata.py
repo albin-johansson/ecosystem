@@ -133,8 +133,10 @@ def get_food_history(data: LogData) -> dict[TimePoint, Amount]:
 
 def get_rabbits(data: LogData):
   data.genome_info()
+  i=0
   for val in data.genome_info():
-    print(val)
+    i+=1
+    print(i)
     print('\n')
   # return [(1, 1, "x", [(0, 1), (2, 3), (4, 5)])]
 

@@ -8,7 +8,7 @@ from genome import visualise_genome_changes
 
 
 def main2():
-  input_file: str = 'with_all_animals.json'
+  input_file: str = 'test2.json'
   # directory: Path = input_file.with_suffix('')
   # if not directory.exists():
   # os.mkdir(directory)

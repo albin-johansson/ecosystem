@@ -156,6 +156,7 @@ namespace Ecosystem.Logging
 
     private void CountPopulationSizes()
     {
+      //TODO: fix 
       initialAliveRabbitsCount = Tags.Count("Rabbit");
       initialAliveDeerCount = Tags.Count("Deer");
       initialAliveWolvesCount = Tags.Count("Wolf");
@@ -170,109 +171,33 @@ namespace Ecosystem.Logging
       foodCount = initialFoodCount;
     }
 
-    private void CaptureInitialGenomes()
+    private void CaptureByTag(string tag)
     {
-      //TODO: use tags to find all animals, use tryGet to make sure each is counted once. 
-      GameObject[] animals = GameObject.FindGameObjectsWithTag("Rabbit");
+      GameObject[] animals = GameObject.FindGameObjectsWithTag(tag);
       totalAnimals += animals.Length;
-
       foreach (var animal in animals)
       {
         if (animal.TryGetComponent(out AbstractGenome g))
         {
           correctTotalAnimals++;
+          workInProgressGenomes.Add(new GenomeInfo()
+          {
+            endTime = -1,
+            genes = GenomeDataToList(g.GetGenes()),
+            key = g.key,
+            tag = tag,
+            time = 0
+          });
         }
       }
+    }
 
-      GameObject[] animals2 = GameObject.FindGameObjectsWithTag("Deer");
-      totalAnimals += animals2.Length;
-
-      foreach (var animal in animals2)
-      {
-        if (animal.TryGetComponent(out AbstractGenome g))
-        {
-          correctTotalAnimals++;
-        }
-      }
-
-      GameObject[] animals3 = GameObject.FindGameObjectsWithTag("Wolf");
-      totalAnimals += animals3.Length;
-
-      foreach (var animal in animals3)
-      {
-        if (animal.TryGetComponent(out AbstractGenome g))
-        {
-          correctTotalAnimals++;
-        }
-      }
-
-      GameObject[] animals4 = GameObject.FindGameObjectsWithTag("Bear");
-      totalAnimals += animals4.Length;
-
-      foreach (var animal in animals4)
-      {
-        if (animal.TryGetComponent(out AbstractGenome g))
-        {
-          correctTotalAnimals++;
-        }
-      }
-      /*
-      List<RabbitGenome> inital = RabbitGenome.InitalGenomes;
-      foreach (var rg in inital)
-      {
-        workInProgressGenomes.Add(new GenomeInfo()
-        {
-          endTime = -1,
-          genes = GenomeDataToList(rg.Data),
-          key = rg.key,
-          tag = "Rabbit",
-          time = 0
-        });
-      }
-      */
-
-      /*
-      
-
-      List<WolfGenome> inital2 = WolfGenome.InitalGenomes;
-      foreach (var wg in inital2)
-      {
-        workInProgressGenomes.Add(new GenomeInfo()
-        {
-          endTime = -1,
-          genes = GenomeDataToList(wg.Data),
-          key = wg.key,
-          tag = "Wolf",
-          time = 0
-        });
-      }
-
-      List<DeerGenome> inital3 = DeerGenome.InitalGenomes;
-      foreach (var dg in inital3)
-      {
-        workInProgressGenomes.Add(new GenomeInfo()
-        {
-          endTime = -1,
-          genes = GenomeDataToList(dg.Data),
-          key = dg.key,
-          tag = "Deer",
-          time = 0
-        });
-      }
-
-      List<BearGenome> inital4 = BearGenome.InitalGenomes;
-      foreach (var bg in inital4)
-      {
-        workInProgressGenomes.Add(new GenomeInfo()
-        {
-          endTime = -1,
-          genes = GenomeDataToList(bg.Data),
-          key = bg.key,
-          tag = "Bear",
-          time = 0
-        });
-      }
-      */
+    private void CaptureInitialGenomes()
+    {
+      CaptureByTag("Rabbit");
+      CaptureByTag("Deer");
+      CaptureByTag("Wolf");
+      CaptureByTag("Bear");
     }
 
     /// <summary>
@@ -298,7 +223,8 @@ namespace Ecosystem.Logging
 
     public string tmp2()
     {
-      return "Adjusted total animals: " + correctTotalAnimals;
+      return "Adjusted total animals: " + correctTotalAnimals + ", work in progress genes:" +
+             workInProgressGenomes.Count + ", finished genomes: " + genomes.Count;
       //return "workInProgressGenomes: " + workInProgressGenomes.Count;
     }
 
@@ -308,6 +234,11 @@ namespace Ecosystem.Logging
       foreach (var pair in keyEnd)
       {
         GenomeInfo genomeInfo = workInProgressGenomes.Find(genome => genome.key.Equals(pair.Key));
+        //TODO: check if correct. 
+        if (workInProgressGenomes.Remove(genomeInfo))
+        {
+          Debug.Log("Removed found genome (that died before end)");
+        }
 
         genomes.Add(new GenomeInfo()
         {
