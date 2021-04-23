@@ -51,7 +51,7 @@ namespace Ecosystem.Consumer
         return;
       }
 
-      if (EatingFromGameObject && EatingFromGameObject.activeSelf)
+      if (EatingFromGameObject && EatingFromGameObject.activeInHierarchy)
       {
         Hunger -= Scaler * Time.deltaTime;
         if (Hunger <= 0)

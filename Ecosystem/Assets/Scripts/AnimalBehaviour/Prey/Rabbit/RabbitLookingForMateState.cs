@@ -27,6 +27,11 @@ namespace Ecosystem.AnimalBehaviour.Prey.Rabbit
     {
       if (Target)
       {
+        if (Tags.IsPredator(Target))
+        {
+          return AnimalState.Fleeing;
+        }
+        
         if (!Target.activeInHierarchy || !MovementController.IsWithinSphere(Target.transform.position))
         {
           Target = GetClosestMateInVision(Layers.RabbitMask);
@@ -34,10 +39,6 @@ namespace Ecosystem.AnimalBehaviour.Prey.Rabbit
           {
             return base.Tick();
           }
-        }
-        else if (Tags.IsPredator(Target))
-        {
-          return AnimalState.Fleeing;
         }
         else if (Reproducer.CompatibleAsParents(Target) && Reproducer.CanMate)
         {

@@ -49,7 +49,7 @@ namespace Ecosystem.Consumer
         return;
       }
 
-      if (EatingFromGameObject && EatingFromGameObject.activeSelf)
+      if (EatingFromGameObject && EatingFromGameObject.activeInHierarchy)
       {
         Hunger -= 4 * Time.deltaTime;
         if (Hunger <= 0)
