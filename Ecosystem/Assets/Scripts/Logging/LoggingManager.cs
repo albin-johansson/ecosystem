@@ -32,17 +32,26 @@ namespace Ecosystem.Logging
     {
       // Yes, these are allocated once, it's fine
       DeathHandler.OnDeath += LogDeath;
-      NutritionController.OnFoodDecayed += LogFoodDecayed;
+
+      // Food consumption
       NutritionController.OnFoodEaten += LogFoodEaten;
-      RabbitConsumer.OnFoodEaten += LogFoodEaten;
+      StationaryFoodGeneration.OnFoodEaten += LogFoodEaten;
+
+      // Prey consumption
       WolfConsumer.OnPreyConsumed += LogPreyConsumed;
       BearConsumer.OnPreyConsumed += LogPreyConsumed;
-      BearConsumer.OnFoodEaten += LogFoodEaten;
+
+      // Mating and births
       Reproducer.OnBirth += LogBirth;
       Reproducer.OnMating += LogMating;
+
+      // Food generation
       StationaryFoodGeneration.OnGeneratedFood += LogFoodGenerated;
       RadiusPrefabSpawner.OnGeneratedFood += LogFoodGenerated;
       RayPrefabSpawner.OnGeneratedFood += LogFoodGenerated;
+
+      // Food decay
+      NutritionController.OnFoodDecayed += LogFoodDecayed;
 
       _data.PrepareData();
 
