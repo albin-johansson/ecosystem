@@ -83,12 +83,12 @@ namespace Ecosystem.Consumer
       }
       else if (Tags.IsFood(otherObject))
       {
-        ObjectPoolHandler.Instance.ReturnOrDestroy(otherObject.tag, otherObject);
-
         if (other.TryGetComponent(out NutritionController nutritionController))
         {
           Hunger -= nutritionController.Consume(Hunger);
         }
+
+        ObjectPoolHandler.Instance.ReturnOrDestroy(otherObject.tag, otherObject);
       }
     }
 
