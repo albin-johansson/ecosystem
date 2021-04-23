@@ -20,7 +20,7 @@ namespace Ecosystem.AnimalBehaviour.Predators
     {
       if (AnimationController.IsIdle())
       {
-        Consumer.IsAttacking = false;
+        Consumer.IsConsuming = false;
         return base.Tick();
       }
 

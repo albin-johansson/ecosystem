@@ -161,7 +161,7 @@ namespace Ecosystem
     private bool FindFleeDestination(in Vector3 threatPosition, out Vector3 fleeDestination)
     {
       var navAgentPosition = GetPosition();
-      var visionRange = sphereCollider.radius;
+      var visionRange = 4;
       var directionFromThreat = (navAgentPosition - threatPosition).normalized * visionRange;
 
       foreach (var angle in FleeingAngles)

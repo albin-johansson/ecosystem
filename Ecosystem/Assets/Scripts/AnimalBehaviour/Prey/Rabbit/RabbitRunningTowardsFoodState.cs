@@ -40,7 +40,7 @@ namespace Ecosystem.AnimalBehaviour.Prey.Rabbit
     public override void OnSphereEnter(Collider other)
     {
       var otherObject = other.gameObject;
-      if (Tags.IsFood(otherObject))
+      if (Tags.IsFood(otherObject) || Tags.IsStaticFood(otherObject))
       {
         Target = SelectCloser(otherObject, Target);
       }

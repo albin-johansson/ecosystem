@@ -1,21 +1,19 @@
-using UnityEngine;
 
 namespace Ecosystem.AnimalBehaviour.Predators
 {
   public abstract class AbstractPredatorStateController : AbstractStateController
   {
-    [SerializeField] private PreyConsumer consumer;
-
     private IAnimalState _idle;
     private IAnimalState _lookingForWater;
     private IAnimalState _drinking;
     private IAnimalState _runningTowardsWater;
     private IAnimalState _attacking;
-    private IAnimalState _runningTowardsFood;
-
+    
+    protected IAnimalState RunningTowardsFood;
     protected IAnimalState ChasingPrey;
     protected IAnimalState LookingForMate;
     protected IAnimalState LookingForFood;
+    protected IAnimalState Eating;
 
     protected StateData Data;
 
@@ -26,7 +24,7 @@ namespace Ecosystem.AnimalBehaviour.Predators
       Data = new StateData
       {
         StaminaController = staminaController,
-        Consumer = consumer,
+        Consumer = Consumer,
         AnimationController = animationController,
         MemoryController = memoryController,
         MovementController = movementController,
@@ -40,7 +38,6 @@ namespace Ecosystem.AnimalBehaviour.Predators
       _drinking = PredatorStateFactory.CreatePredatorDrinking(Data);
       _runningTowardsWater = PredatorStateFactory.CreatePredatorRunningTowardsWater(Data);
       _attacking = PredatorStateFactory.CreatePredatorAttackingState(Data);
-      _runningTowardsFood = PredatorStateFactory.CreateWolfRunningTowardsFood(Data);
 
       sphereCollider.radius = genome.GetVision().Value;
 
@@ -71,12 +68,12 @@ namespace Ecosystem.AnimalBehaviour.Predators
 
         case AnimalState.ChasingPrey:
           State = ChasingPrey;
-          consumer.ColliderActive = true;
+          Data.Consumer.ColliderActive = true;
           break;
 
         case AnimalState.LookingForFood:
           State = LookingForFood;
-          consumer.ColliderActive = true;
+          Data.Consumer.ColliderActive = true;
           break;
 
         case AnimalState.LookingForMate:
@@ -87,14 +84,15 @@ namespace Ecosystem.AnimalBehaviour.Predators
           State = _attacking;
           break;
 
-        case AnimalState.GoingToFood:
-          State = _runningTowardsFood;
-          consumer.ColliderActive = true;
-          break;
-
-        case AnimalState.Fleeing:
         case AnimalState.Eating:
+          State = Eating;
+          break;
+        
         case AnimalState.RunningTowardsFood:
+          State = RunningTowardsFood;
+          Data.Consumer.ColliderActive = true;
+          break;
+        case AnimalState.Fleeing:
         default:
           break;
       }

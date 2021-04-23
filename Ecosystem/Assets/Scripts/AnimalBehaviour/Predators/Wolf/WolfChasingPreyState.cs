@@ -17,7 +17,7 @@ namespace Ecosystem.AnimalBehaviour.Predators.Wolf
 
     public override AnimalState Tick()
     {
-      if (Consumer.IsAttacking)
+      if (Consumer.IsConsuming)
       {
         return AnimalState.Attacking;
       }
@@ -61,7 +61,7 @@ namespace Ecosystem.AnimalBehaviour.Predators.Wolf
       var otherObject = other.gameObject;
       if (Tags.IsPrey(otherObject))
       {
-        Target = SelectCloser(Target, otherObject);
+        Target = !Target ? otherObject : SelectCloser(Target, otherObject);
       }
     }
 

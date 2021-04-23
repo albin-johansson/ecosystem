@@ -26,6 +26,14 @@ namespace Ecosystem.AnimalBehaviour.Predators.Wolf
     {
       if (Target)
       {
+        if (!Target.activeInHierarchy)
+        {
+          Target = GetClosestMateInVision(Layers.WolfMask);
+          if (!Target)
+          {
+            return base.Tick();
+          }
+        }
         if (Reproducer.CompatibleAsParents(Target) &&
             Reproducer.CanMate &&
             MovementController.IsWithinSphere(Target.transform.position))
