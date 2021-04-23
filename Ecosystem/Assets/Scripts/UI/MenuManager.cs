@@ -107,14 +107,14 @@ namespace Ecosystem.UI
         var wolf = Resources.Load("Prefabs/Animals/EcoWolf");
         var bear = Resources.Load("Prefabs/Animals/EcoBear");
         var carrot = Resources.Load("Prefabs/Food/EcoCarrot");
-        var berrybush = Resources.Load("Prefabs/Food/EcoBerryBush");
+        var berryBush = Resources.Load("Prefabs/Food/EcoBerryBush");
 
         var nRabbits = int.Parse(dynamicRabbitCount.text);
         var nDeer = int.Parse(dynamicDeerCount.text);
         var nWolves = int.Parse(dynamicWolfCount.text);
         var nBears = int.Parse(dynamicBearCount.text);
         var nCarrots = int.Parse(dynamicCarrotCount.text);
-        var nBerrybush = int.Parse(dynamicBerryBushCount.text);
+        var nBerryBushes = int.Parse(dynamicBerryBushCount.text);
 
         var terrain = Terrain.activeTerrain;
 
@@ -123,7 +123,7 @@ namespace Ecosystem.UI
         Instantiate(nDeer, deer, terrain);
         Instantiate(nBears, bear, terrain);
         Instantiate(nCarrots, carrot, terrain);
-        Instantiate(nBerrybush, berrybush, terrain, 0.3f);
+        Instantiate(nBerryBushes, berryBush, terrain, 0.3f);
       }
     }
 
