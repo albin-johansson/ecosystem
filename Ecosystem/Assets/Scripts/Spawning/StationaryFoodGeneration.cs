@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using Ecosystem.Consumer;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
@@ -13,12 +14,12 @@ namespace Ecosystem.Spawning
 
     public static event GeneratedFood OnGeneratedFood;
 
+    public static event NutritionController.FoodEatenEvent OnFoodEaten;
+
     [SerializeField] private Transform spawner;
     [SerializeField] private float rate;
 
     private const int TotalBerryCount = 34;
-
-    private readonly Stack<int> _placedBerries = new Stack<int>();
     private float _elapsedTime;
 
     public int AmountOfBerries { get; private set; }
@@ -61,12 +62,16 @@ namespace Ecosystem.Spawning
 
     public void RemoveBerry()
     {
-      if (_placedBerries.Count != 0)
+      if (AmountOfBerries != 0)
       {
-        var index = _placedBerries.Pop();
+        var index = AmountOfBerries - 1;
 
-        var berryTransform = transform.GetChild(index);
-        berryTransform.gameObject.SetActive(false);
+        var berryTransform = spawner.GetChild(index);
+        var berryObject = berryTransform.gameObject;
+
+        OnFoodEaten?.Invoke(berryObject);
+
+        berryObject.SetActive(false);
 
         --AmountOfBerries;
       }
@@ -74,15 +79,18 @@ namespace Ecosystem.Spawning
 
     private void SpawnBerry()
     {
+      Debug.Assert(AmountOfBerries < TotalBerryCount);
+
       var index = Random.Range(0, TotalBerryCount);
 
       var berryTransform = spawner.GetChild(index);
-      berryTransform.gameObject.SetActive(true);
+      var berryObject = berryTransform.gameObject;
+      
+      berryObject.SetActive(true);
 
-      _placedBerries.Push(index);
       ++AmountOfBerries;
 
-      OnGeneratedFood?.Invoke(berryTransform.gameObject);
+      OnGeneratedFood?.Invoke(berryObject);
     }
   }
 }
