@@ -4586,6 +4586,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   animationController: {fileID: -4792604738439377631}
+  movementController: {fileID: 6378755894846735859}
   isDead: 0
 --- !u!1 &4395386118049015763
 GameObject:
@@ -7495,7 +7496,7 @@ MonoBehaviour:
   reproducer: {fileID: 2283435568278984849}
   genome: {fileID: 1593158740268700976}
   sphereCollider: {fileID: 651377425655632140}
-  consumer: {fileID: 6492342758930200447}
+  wolfConsumer: {fileID: 6492342758930200447}
 --- !u!1 &7116156556552470170
 GameObject:
   m_ObjectHideFlags: 0

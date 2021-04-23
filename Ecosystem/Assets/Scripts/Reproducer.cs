@@ -1,3 +1,4 @@
+using Ecosystem.Consumer;
 using Ecosystem.Genes;
 using Ecosystem.Spawning;
 using UnityEngine;
@@ -90,8 +91,7 @@ namespace Ecosystem
     {
       return other.TryGetComponent(out Reproducer otherReproducer) &&
              otherReproducer.CanMate &&
-             other.TryGetComponent(out AbstractGenome otherGenome) &&
-             Genomes.CompatibleAsParents(genome, otherGenome);
+             Genomes.CompatibleAsParents(genome, otherReproducer.genome);
     }
 
     private void GiveBirth()

@@ -12,7 +12,6 @@ namespace Ecosystem.AnimalBehaviour
     ChasingPrey,
     LookingForMate,
     Attacking,
-    Eating,
-    GoingToFood
+    Eating
   }
 }

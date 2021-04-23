@@ -1069,10 +1069,10 @@ GameObject:
   m_Component:
   - component: {fileID: 6202726201221624531}
   - component: {fileID: 3758653412035503687}
-  - component: {fileID: 8411831466427816920}
   - component: {fileID: 6136384459513985097}
   - component: {fileID: 1672266294726091963}
   - component: {fileID: 321669334472154265}
+  - component: {fileID: 6591436959469574999}
   m_Layer: 10
   m_Name: Body
   m_TagString: Bear
@@ -1110,23 +1110,6 @@ MonoBehaviour:
   resourceBar: {fileID: 8610027635385015251}
   deathHandler: {fileID: 5519717986162146221}
   maxThirst: 100
---- !u!114 &8411831466427816920
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5585708767638295657}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c2fa5581f03243c68b482d0030e00671, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  genome: {fileID: 1080774011748047759}
-  resourceBar: {fileID: 3410853300184415869}
-  deathHandler: {fileID: 5519717986162146221}
-  reproducer: {fileID: 6136384459513985097}
-  maxHunger: 100
 --- !u!114 &6136384459513985097
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1172,6 +1155,23 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!114 &6591436959469574999
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5585708767638295657}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c751ce67ed4141e1806699f73b328d45, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  genome: {fileID: 1080774011748047759}
+  resourceBar: {fileID: 3410853300184415869}
+  deathHandler: {fileID: 5519717986162146221}
+  reproducer: {fileID: 6136384459513985097}
+  maxHunger: 100
 --- !u!1 &5640401654706578902
 GameObject:
   m_ObjectHideFlags: 0
@@ -1545,6 +1545,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   animationController: {fileID: -4165548273840364118}
+  movementController: {fileID: 7401787944804568421}
   isDead: 0
 --- !u!114 &1080774011748047759
 MonoBehaviour:
@@ -1697,7 +1698,7 @@ MonoBehaviour:
   reproducer: {fileID: 6136384459513985097}
   genome: {fileID: 1080774011748047759}
   sphereCollider: {fileID: 6405190242370463797}
-  consumer: {fileID: 8411831466427816920}
+  bearConsumer: {fileID: 6591436959469574999}
 --- !u!1 &8421346663248798016
 GameObject:
   m_ObjectHideFlags: 0

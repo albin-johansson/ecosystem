@@ -9,28 +9,24 @@ namespace Ecosystem.Genes
 
     public static readonly Dictionary<GeneType, Preset> DefaultSet = new Dictionary<GeneType, Preset>()
     {
-      {GeneType.HungerRate, new Preset(0, 10, new[] {1f, 5f, 7f})},
-      {GeneType.HungerThreshold, new Preset(0, 10, new[] {1f, 5f, 7f})},
-      {GeneType.ThirstRate, new Preset(0, 10, new[] {0.5f, 3f, 6f, 9f})},
-      {GeneType.ThirstThreshold, new Preset(0, 10, new[] {1f, 5f, 7f})},
-      {GeneType.Vision, new Preset(1, 50, new[] {5f, 10f, 25f, 40f, 45f})},
-      {GeneType.Speed, new Preset(1, 2, new[] {1f, 1.5f, 2f})},
-      {GeneType.SizeFactor, new Preset(0.5f, 1.5f, new[] {0.5f, 1f, 1.5f})},
-      {GeneType.DesirabilityScore, new Preset(1, 10, new[] {1f, 5f, 10f})},
+      {GeneType.HungerRate, new Preset(0.2f, 0.5f, new[] {0.2f, 0.3f, 0.4f, 0.5f})},
+      {GeneType.HungerThreshold, new Preset(30, 40, new[] {30f, 35f, 40f})},
+      {GeneType.ThirstRate, new Preset(0.3f, 0.5f, new[] {0.3f, 0.4f, 0.5f})},
+      {GeneType.ThirstThreshold, new Preset(25, 40, new[] {25f, 35f, 40f})},
+      {GeneType.Vision, new Preset(5, 10, new[] {5f, 6f, 7.5f, 9f, 10f})},
+      {GeneType.Speed, new Preset(2, 4, new[] {2f, 3f, 4f})},
       {GeneType.GestationPeriod, new Preset(10, 120, new[] {12f, 20f, 50f, 70f, 90f, 110f})},
-      {GeneType.SexualMaturityTime, new Preset(10, 150, new[] {20f, 50f, 90f, 140f})}
+      {GeneType.SexualMaturityTime, new Preset(10, 50, new[] {10f, 20f, 30f, 40f, 50f})}
     };
 
     public static readonly Dictionary<GeneType, Preset> DefaultSingular = new Dictionary<GeneType, Preset>()
     {
-      {GeneType.HungerRate, new Preset(0, 10, new[] {1f})},
-      {GeneType.HungerThreshold, new Preset(0, 10, new[] {5f})},
-      {GeneType.ThirstRate, new Preset(0, 10, new[] {0.5f})},
-      {GeneType.ThirstThreshold, new Preset(0, 10, new[] {5f})},
-      {GeneType.Vision, new Preset(1, 50, new[] {25f})},
-      {GeneType.Speed, new Preset(1, 2, new[] {1.5f})},
-      {GeneType.SizeFactor, new Preset(0.5f, 1.5f, new[] {1f})},
-      {GeneType.DesirabilityScore, new Preset(1, 10, new[] {1f})},
+      {GeneType.HungerRate, new Preset(0.2f, 0.5f, new[] {0.3f})},
+      {GeneType.HungerThreshold, new Preset(30, 40, new[] {35f})},
+      {GeneType.ThirstRate, new Preset(0.3f, 0.5f, new[] {0.4f})},
+      {GeneType.ThirstThreshold, new Preset(25, 40, new[] {30f})},
+      {GeneType.Vision, new Preset(5, 10, new[] {7.5f})},
+      {GeneType.Speed, new Preset(2, 4, new[] {3f})},
       {GeneType.GestationPeriod, new Preset(10, 120, new[] {12f})},
       {GeneType.SexualMaturityTime, new Preset(10, 150, new[] {20f})}
     };

@@ -36,9 +36,13 @@ namespace Ecosystem.AnimalBehaviour.Predators
 
     #region Bear factory functions
 
-    public static IAnimalState CreateBearChasingFood(StateData data)
+    public static IAnimalState CreateBearRunningTowardsFood(StateData data)
     {
-      return new BearChasingFoodState(data);
+      return new BearRunningTowardsFoodState(data);
+    }
+    public static IAnimalState CreateBearChasingPrey(StateData data)
+    {
+      return new BearChasingPreyState(data);
     }
 
     public static IAnimalState CreateBearLookingForMate(StateData data)
@@ -49,6 +53,11 @@ namespace Ecosystem.AnimalBehaviour.Predators
     public static IAnimalState CreateBearLookingForFood(StateData data)
     {
       return new BearLookingForFoodState(data);
+    }
+
+    public static IAnimalState CreateBearEating(StateData data)
+    {
+      return new BearEatingState(data);
     }
 
     #endregion
