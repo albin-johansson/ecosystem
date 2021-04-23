@@ -16,6 +16,8 @@ namespace Ecosystem.Spawning
     [SerializeField] private Transform spawner;
     [SerializeField] private float rate;
 
+    private const int TotalBerryCount = 34;
+
     private readonly Stack<int> _placedBerries = new Stack<int>();
     private float _elapsedTime;
 
@@ -59,17 +61,20 @@ namespace Ecosystem.Spawning
 
     public void RemoveBerry()
     {
-      var index = _placedBerries.Pop();
+      if (_placedBerries.Count != 0)
+      {
+        var index = _placedBerries.Pop();
 
-      var berryTransform = transform.GetChild(index);
-      berryTransform.gameObject.SetActive(false);
+        var berryTransform = transform.GetChild(index);
+        berryTransform.gameObject.SetActive(false);
 
-      --AmountOfBerries;
+        --AmountOfBerries;
+      }
     }
 
     private void SpawnBerry()
     {
-      var index = Random.Range(0, spawner.childCount - 1);
+      var index = Random.Range(0, TotalBerryCount);
 
       var berryTransform = spawner.GetChild(index);
       berryTransform.gameObject.SetActive(true);
