@@ -35,6 +35,7 @@ namespace Ecosystem
     [SerializeField] private AbstractGenome genome;
     [SerializeField] private GameObject prefab;
     [SerializeField] private string keyToPool;
+    [SerializeField] private GameObject animalModel;
 
     private Transform _directoryOfAnimal;
     private IGenome _mateGenome;
@@ -44,6 +45,7 @@ namespace Ecosystem
     private float _maturityElapsedTime;
     private float _childSaturation;
     private bool _isSexuallyMature;
+    private static readonly Vector3 ChildSize = new Vector3(0.7f, 0.7f, 0.7f);
 
     public bool IsWilling { get; set; }
 
@@ -58,6 +60,7 @@ namespace Ecosystem
       _sexualMaturityTime = genome.GetSexualMaturityTime().Value;
       _gestationPeriod = genome.GetGestationPeriod().Value;
       _directoryOfAnimal = gameObject.transform.parent;
+      animalModel.transform.localScale = ChildSize;
     }
 
     private void Update()
@@ -65,9 +68,10 @@ namespace Ecosystem
       if (!_isSexuallyMature)
       {
         _maturityElapsedTime += Time.deltaTime;
-        if (_maturityElapsedTime >= _sexualMaturityTime)
+        if (_maturityElapsedTime >= _sexualMaturityTime && !_isSexuallyMature)
         {
           _isSexuallyMature = true;
+          animalModel.transform.localScale = Vector3.one;
         }
       }
 
