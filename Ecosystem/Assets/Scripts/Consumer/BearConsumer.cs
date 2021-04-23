@@ -95,9 +95,11 @@ namespace Ecosystem.Consumer
         var otherDeathHandler = otherObject.GetComponentInParent<DeathHandler>();
         if (!otherDeathHandler.isDead)
         {
-          var nutritionController = otherDeathHandler.Die(CauseOfDeath.Eaten);
           IsConsuming = true;
+
+          var nutritionController = otherDeathHandler.Die(CauseOfDeath.Eaten);
           Hunger -= nutritionController.Consume(Hunger);
+
           OnPreyConsumed?.Invoke();
         }
       }
@@ -110,7 +112,6 @@ namespace Ecosystem.Consumer
       }
       else if (Tags.IsStaticFood(otherObject))
       {
-        OnFoodEaten?.Invoke(otherObject);
         EatingFromGameObject = otherObject;
       }
     }
