@@ -141,6 +141,11 @@ namespace Ecosystem.Logging
     /// </summary>
     [SerializeField] private List<GenomeInfo> genomes = new List<GenomeInfo>(64);
 
+    [SerializeField] private AverageGenomes rabbitAverageGenomes;
+    [SerializeField] private AverageGenomes wolfAverageGenomes;
+    [SerializeField] private AverageGenomes deerAverageGenomes;
+    [SerializeField] private AverageGenomes bearAverageGenomes;
+
     /// <summary>
     ///   Prepares the data with the initial simulation state. Used to determine the
     ///   initial population sizes, etc.
@@ -214,10 +219,6 @@ namespace Ecosystem.Logging
       AssignAverages();
     }
 
-    private AverageGenomes rabbitAverageGenomes;
-    private AverageGenomes wolfAverageGenomes;
-    private AverageGenomes deerAverageGenomes;
-    private AverageGenomes bearAverageGenomes;
     private long freq = 100;
 
     private void AssignAverages()
@@ -286,9 +287,8 @@ namespace Ecosystem.Logging
       var rabbitGenomes = genomes.FindAll(genome => genome.tag.Equals(tag));
       for (long i = 0; i < duration; i += freq)
       {
-        List<GeneInfo> current = new List<GeneInfo>();
         //Find all genomes active during that period
-        List<GenomeInfo> currentGI = rabbitGenomes.FindAll(g => g.time >= i && g.endTime <= i + freq);
+        List<GenomeInfo> currentGI = rabbitGenomes.FindAll(g => i >= g.time && i <= g.endTime);
         List<float> vals = new List<float>();
         foreach (var gi in currentGI)
         {
@@ -296,17 +296,20 @@ namespace Ecosystem.Logging
         }
 
         //TODO: check if should adjust for 0 vals and "count"
-        var avrg = vals.Sum() / vals.Count;
+        var average = vals.Sum() / vals.Count;
+        //Debug.Log("avrg: " + avrg);
+        //Debug.Log("vals.Sum(x => Convert.ToInt32(x)): " + vals.Sum(x => Convert.ToInt32(x)));
+        //Debug.Log("vals.count: " + vals.Count);
+        //Debug.Log("#currentGI: " + currentGI.Count);
         averages.Add(new GeneAverageInfo()
         {
           animal = tag,
           entryTime = i,
-          type = type,
-          value = avrg
+          //type = type,
+          value = average
         });
       }
 
-      Debug.Log("Averages: " + averages.Count);
       return averages;
     }
 
@@ -331,12 +334,7 @@ namespace Ecosystem.Logging
       foreach (var pair in keyEnd)
       {
         GenomeInfo genomeInfo = workInProgressGenomes.Find(genome => genome.key.Equals(pair.Key));
-        //TODO: check if correct. 
-        if (workInProgressGenomes.Remove(genomeInfo))
-        {
-          Debug.Log("Removed found genome (that died before end)");
-        }
-
+        workInProgressGenomes.Remove(genomeInfo);
         genomes.Add(new GenomeInfo()
         {
           tag = genomeInfo.tag,
@@ -444,7 +442,6 @@ namespace Ecosystem.Logging
 
       //TODO: forest scene gives errors sometimes.
       string key = deadObject.GetComponent<AbstractGenome>().key;
-      //Debug.Log("Adding key: " + key + ", Object: " + deadObject.ToString());
       try
       {
         keyEnd.Add(key, SessionTime.Now());
