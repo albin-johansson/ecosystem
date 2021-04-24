@@ -9,12 +9,17 @@ namespace Ecosystem.UI
 
     private bool _isNight;
     private float _rotation;
-    private const float CycleSpeed = 0.02f;
+    private float Rate = 0.08f;
+    private float CycleSpeed;
+    private float CycleSpeedYZ;
 
     private void Start()
     {
       particles.lights.light.intensity = 0;
       particles.Stop();
+
+      CycleSpeed = Rate;
+      CycleSpeedYZ = Rate / 2;
     }
 
     /// <summary>
@@ -24,23 +29,23 @@ namespace Ecosystem.UI
     /// </summary>
     private void Update()
     {
-      sun.transform.Rotate(CycleSpeed, 0, 0, Space.Self);
+      sun.transform.Rotate(CycleSpeed, CycleSpeedYZ, CycleSpeedYZ, Space.Self);
       particles.transform.Rotate(0, 0, CycleSpeed * 0.25f, Space.Self);
       _rotation += CycleSpeed;
 
       AdjustStarBrightness();
 
-      if (_rotation >= 180 && !_isNight)
+      if (_rotation >= 120 && !_isNight)
       {
         TransformToNight();
       }
 
-      if (_rotation >= 359 && _isNight)
+      if (_rotation >= 269 && _isNight)
       {
         TransformToDay();
       }
 
-      if (_rotation >= 360)
+      if (_rotation >= 270)
       {
         _rotation = 0;
       }
