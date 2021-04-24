@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using Ecosystem.Genes;
 using Ecosystem.Util;
 using UnityEngine;
@@ -209,6 +210,104 @@ namespace Ecosystem.Logging
       MatchGenomeToTime();
       workInProgressGenomes = new List<GenomeInfo>();
       msg += ", tmp genomes removed, should include all initial";
+      //TODO: create all additional lists:
+      AssignAverages();
+    }
+
+    private AverageGenomes rabbitAverageGenomes;
+    private AverageGenomes wolfAverageGenomes;
+    private AverageGenomes deerAverageGenomes;
+    private AverageGenomes bearAverageGenomes;
+    private long freq = 100;
+
+    private void AssignAverages()
+    {
+      rabbitAverageGenomes = new AverageGenomes()
+      {
+        animal = "Rabbit",
+        HungerRate = CreateAverages("Rabbit", GeneType.HungerRate),
+        HungerThreshold = CreateAverages("Rabbit", GeneType.HungerThreshold),
+        ThirstRate = CreateAverages("Rabbit", GeneType.ThirstRate),
+        ThirstThreshold = CreateAverages("Rabbit", GeneType.ThirstThreshold),
+        Vision = CreateAverages("Rabbit", GeneType.Vision),
+        Speed = CreateAverages("Rabbit", GeneType.Speed),
+        SizeFactor = CreateAverages("Rabbit", GeneType.SizeFactor),
+        DesirabilityScore = CreateAverages("Rabbit", GeneType.DesirabilityScore),
+        GestationPeriod = CreateAverages("Rabbit", GeneType.GestationPeriod),
+        SexualMaturityTime = CreateAverages("Rabbit", GeneType.SexualMaturityTime),
+      };
+      wolfAverageGenomes = new AverageGenomes()
+      {
+        animal = "Wolf",
+        HungerRate = CreateAverages("Wolf", GeneType.HungerRate),
+        HungerThreshold = CreateAverages("Wolf", GeneType.HungerThreshold),
+        ThirstRate = CreateAverages("Wolf", GeneType.ThirstRate),
+        ThirstThreshold = CreateAverages("Wolf", GeneType.ThirstThreshold),
+        Vision = CreateAverages("Wolf", GeneType.Vision),
+        Speed = CreateAverages("Wolf", GeneType.Speed),
+        SizeFactor = CreateAverages("Wolf", GeneType.SizeFactor),
+        DesirabilityScore = CreateAverages("Wolf", GeneType.DesirabilityScore),
+        GestationPeriod = CreateAverages("Wolf", GeneType.GestationPeriod),
+        SexualMaturityTime = CreateAverages("Wolf", GeneType.SexualMaturityTime),
+      };
+      deerAverageGenomes = new AverageGenomes()
+      {
+        animal = "Deer",
+        HungerRate = CreateAverages("Deer", GeneType.HungerRate),
+        HungerThreshold = CreateAverages("Deer", GeneType.HungerThreshold),
+        ThirstRate = CreateAverages("Deer", GeneType.ThirstRate),
+        ThirstThreshold = CreateAverages("Deer", GeneType.ThirstThreshold),
+        Vision = CreateAverages("Deer", GeneType.Vision),
+        Speed = CreateAverages("Deer", GeneType.Speed),
+        SizeFactor = CreateAverages("Deer", GeneType.SizeFactor),
+        DesirabilityScore = CreateAverages("Deer", GeneType.DesirabilityScore),
+        GestationPeriod = CreateAverages("Deer", GeneType.GestationPeriod),
+        SexualMaturityTime = CreateAverages("Deer", GeneType.SexualMaturityTime),
+      };
+      bearAverageGenomes = new AverageGenomes()
+      {
+        animal = "Bear",
+        HungerRate = CreateAverages("Bear", GeneType.HungerRate),
+        HungerThreshold = CreateAverages("Bear", GeneType.HungerThreshold),
+        ThirstRate = CreateAverages("Bear", GeneType.ThirstRate),
+        ThirstThreshold = CreateAverages("Bear", GeneType.ThirstThreshold),
+        Vision = CreateAverages("Bear", GeneType.Vision),
+        Speed = CreateAverages("Bear", GeneType.Speed),
+        SizeFactor = CreateAverages("Bear", GeneType.SizeFactor),
+        DesirabilityScore = CreateAverages("Bear", GeneType.DesirabilityScore),
+        GestationPeriod = CreateAverages("Bear", GeneType.GestationPeriod),
+        SexualMaturityTime = CreateAverages("Bear", GeneType.SexualMaturityTime),
+      };
+    }
+
+    private List<GeneAverageInfo> CreateAverages(string tag, GeneType type)
+    {
+      List<GeneAverageInfo> averages = new List<GeneAverageInfo>();
+      var rabbitGenomes = genomes.FindAll(genome => genome.tag.Equals(tag));
+      for (long i = 0; i < duration; i += freq)
+      {
+        List<GeneInfo> current = new List<GeneInfo>();
+        //Find all genomes active during that period
+        List<GenomeInfo> currentGI = rabbitGenomes.FindAll(g => g.time >= i && g.endTime <= i + freq);
+        List<float> vals = new List<float>();
+        foreach (var gi in currentGI)
+        {
+          vals.Add(gi.genes.Find(g => g.geneType.Equals(type)).value);
+        }
+
+        //TODO: check if should adjust for 0 vals and "count"
+        var avrg = vals.Sum() / vals.Count;
+        averages.Add(new GeneAverageInfo()
+        {
+          animal = tag,
+          entryTime = i,
+          type = type,
+          value = avrg
+        });
+      }
+
+      Debug.Log("Averages: " + averages.Count);
+      return averages;
     }
 
     private int totalAnimals = 0;
@@ -216,7 +315,6 @@ namespace Ecosystem.Logging
     public string tmp()
     {
       return "Total animals: " + totalAnimals;
-      //return "Genomes: " + genomes.Count;
     }
 
     private int correctTotalAnimals = 0;
@@ -225,7 +323,6 @@ namespace Ecosystem.Logging
     {
       return "Adjusted total animals: " + correctTotalAnimals + ", work in progress genes:" +
              workInProgressGenomes.Count + ", finished genomes: " + genomes.Count;
-      //return "workInProgressGenomes: " + workInProgressGenomes.Count;
     }
 
 
