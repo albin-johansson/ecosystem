@@ -8,7 +8,7 @@ from logdata import *
 
 
 def tmp(data: LogData):  # , directory: Path):
-  get_rabbits(data)
+  #get_rabbits(data)
   """
   Produces a stackplot of how the animals populations changed over the course of the simulation.
 
@@ -32,6 +32,8 @@ def tmp(data: LogData):  # , directory: Path):
   plot.savefig(directory / Path("animal_populations_stackplot.png"))
   plot.close()
   """
+  
+
 
 
 def int_to_gene_type(code):
@@ -61,4 +63,7 @@ def visualise_genome_changes(data: LogData):
   visualise_animal_populations_standard(data, directory)
   visualise_animal_populations_stackplot(data, directory)
   """
-  tmp(data)
+  # tmp(data)
+  list = data.rabbitHungerRate()
+  for v in list:
+    print(v.value, v.time)

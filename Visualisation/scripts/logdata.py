@@ -71,6 +71,54 @@ class LogData:
   def __getitem__(self, item):  # operator[]
     return self.data[item]
 
+  def averageGenomes(self, animal: str, gene: str):
+    # animal = "rabbitAverageGenomes"
+    # gene = "HungerRate"
+    list = self.data[animal][gene]
+    list2 = []
+    for v in list:
+      list2.append(AverageGenomeEntry(v["entryTime"], v["value"]))
+    return list2
+
+  def rabbitHungerRate(self):
+    return self.averageGenomes("rabbitAverageGenomes", "HungerRate")
+
+  def rabbitHungerThreshold(self):
+    return self.averageGenomes("rabbitAverageGenomes", "HungerThreshold")
+
+  def rabbitThirstRate(self):
+    return self.averageGenomes("rabbitAverageGenomes", "ThirstRate")
+
+  def rabbitThirstThreshold(self):
+    return self.averageGenomes("rabbitAverageGenomes", "ThirstThreshold")
+
+  def rabbitVision(self):
+    return self.averageGenomes("rabbitAverageGenomes", "Vision")
+
+  def rabbitSpeed(self):
+    return self.averageGenomes("rabbitAverageGenomes", "Speed")
+
+  def rabbitSizeFactor(self):
+    return self.averageGenomes("rabbitAverageGenomes", "SizeFactor")
+
+  def rabbitDesirabilityScore(self):
+    return self.averageGenomes("rabbitAverageGenomes", "DesirabilityScore")
+
+  def rabbitGestationPeriod(self):
+    return self.averageGenomes("rabbitAverageGenomes", "GestationPeriod")
+
+  def rabbitSexualMaturityTime(self):
+    return self.averageGenomes("rabbitAverageGenomes", "SexualMaturityTime")
+
+
+class AverageGenomeEntry:
+  time = 0
+  value = 0
+
+  def __init__(self, time: int, value: int):
+    self.time = time
+    self.value = value
+
 
 def get_population_history(data: LogData, tags: list[str], initial_count: Amount) -> dict[TimePoint, Amount]:
   """
@@ -133,9 +181,9 @@ def get_food_history(data: LogData) -> dict[TimePoint, Amount]:
 
 def get_rabbits(data: LogData):
   data.genome_info()
-  i=0
+  i = 0
   for val in data.genome_info():
-    i+=1
+    i += 1
     print(i)
     print('\n')
   # return [(1, 1, "x", [(0, 1), (2, 3), (4, 5)])]

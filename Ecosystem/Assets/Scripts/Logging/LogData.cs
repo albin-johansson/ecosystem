@@ -219,7 +219,7 @@ namespace Ecosystem.Logging
       AssignAverages();
     }
 
-    private long freq = 100;
+    private long freq = 1000; //1/sec
 
     private void AssignAverages()
     {
@@ -289,25 +289,28 @@ namespace Ecosystem.Logging
       {
         //Find all genomes active during that period
         List<GenomeInfo> currentGI = rabbitGenomes.FindAll(g => i >= g.time && i <= g.endTime);
-        List<float> vals = new List<float>();
-        foreach (var gi in currentGI)
+        //only care if some values exist. 
+        if (currentGI.Count > 0)
         {
-          vals.Add(gi.genes.Find(g => g.geneType.Equals(type)).value);
-        }
+          List<float> vals = new List<float>();
+          foreach (var gi in currentGI)
+          {
+            vals.Add(gi.genes.Find(g => g.geneType.Equals(type)).value);
+          }
 
-        //TODO: check if should adjust for 0 vals and "count"
-        var average = vals.Sum() / vals.Count;
-        //Debug.Log("avrg: " + avrg);
-        //Debug.Log("vals.Sum(x => Convert.ToInt32(x)): " + vals.Sum(x => Convert.ToInt32(x)));
-        //Debug.Log("vals.count: " + vals.Count);
-        //Debug.Log("#currentGI: " + currentGI.Count);
-        averages.Add(new GeneAverageInfo()
-        {
-          animal = tag,
-          entryTime = i,
-          //type = type,
-          value = average
-        });
+          var average = vals.Sum() / vals.Count;
+          //Debug.Log("avrg: " + avrg);
+          //Debug.Log("vals.Sum(x => Convert.ToInt32(x)): " + vals.Sum(x => Convert.ToInt32(x)));
+          //Debug.Log("vals.count: " + vals.Count);
+          //Debug.Log("#currentGI: " + currentGI.Count);
+          averages.Add(new GeneAverageInfo()
+          {
+            animal = tag,
+            entryTime = i,
+            //type = type,
+            value = average
+          });
+        }
       }
 
       return averages;
