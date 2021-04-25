@@ -73,7 +73,7 @@ namespace Ecosystem.Systems
       var initialData = EntityManager.GetSingleton<InitialSimulationData>();
       var data = new JsonData
       {
-        duration = Time.ElapsedTime * 1000,
+        duration = (Time.ElapsedTime - _startTime) * 1000.0,
 
         initialAliveCount = initialData.initialRabbitCount + initialData.initialDeerCount +
                             initialData.initialWolfCount + initialData.initialBearCount,
