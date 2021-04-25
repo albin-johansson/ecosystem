@@ -39,7 +39,7 @@ namespace Ecosystem.Genes
 
     static RabbitGenome()
     {
-      _preset = DefaultSingular;
+      _preset = DefaultSet;
     }
 
     protected override void Initialize()
@@ -52,10 +52,8 @@ namespace Ecosystem.Genes
 
     public static void SetPreset(Dictionary<GeneType, Preset> presets, float mutateChance = 0.05f)
     {
-      /*
       _preset = presets;
       _mutateChance = mutateChance;
-      */
     }
 
     protected override Dictionary<GeneType, Preset> GetPresets()

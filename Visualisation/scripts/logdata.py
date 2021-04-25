@@ -80,6 +80,7 @@ class LogData:
       list2.append(AverageGenomeEntry(v["entryTime"], v["value"]))
     return list2
 
+  # Rabbit gets
   def rabbitHungerRate(self):
     return self.averageGenomes("rabbitAverageGenomes", "HungerRate")
 
@@ -109,6 +110,99 @@ class LogData:
 
   def rabbitSexualMaturityTime(self):
     return self.averageGenomes("rabbitAverageGenomes", "SexualMaturityTime")
+
+  # Wolf gets
+  def wolfHungerRate(self):
+    return self.averageGenomes("wolfAverageGenomes", "HungerRate")
+
+  def wolfHungerThreshold(self):
+    return self.averageGenomes("wolfAverageGenomes", "HungerThreshold")
+
+  def wolfThirstRate(self):
+    return self.averageGenomes("wolfAverageGenomes", "ThirstRate")
+
+  def wolfThirstThreshold(self):
+    return self.averageGenomes("wolfAverageGenomes", "ThirstThreshold")
+
+  def wolfVision(self):
+    return self.averageGenomes("wolfAverageGenomes", "Vision")
+
+  def wolfSpeed(self):
+    return self.averageGenomes("wolfAverageGenomes", "Speed")
+
+  def wolfSizeFactor(self):
+    return self.averageGenomes("wolfAverageGenomes", "SizeFactor")
+
+  def wolfDesirabilityScore(self):
+    return self.averageGenomes("wolfAverageGenomes", "DesirabilityScore")
+
+  def wolfGestationPeriod(self):
+    return self.averageGenomes("wolfAverageGenomes", "GestationPeriod")
+
+  def wolfSexualMaturityTime(self):
+    return self.averageGenomes("wolfAverageGenomes", "SexualMaturityTime")
+
+  # Deer gets
+  def deerHungerRate(self):
+    return self.averageGenomes("deerAverageGenomes", "HungerRate")
+
+  def deerHungerThreshold(self):
+    return self.averageGenomes("deerAverageGenomes", "HungerThreshold")
+
+  def deerThirstRate(self):
+    return self.averageGenomes("deerAverageGenomes", "ThirstRate")
+
+  def deerThirstThreshold(self):
+    return self.averageGenomes("deerAverageGenomes", "ThirstThreshold")
+
+  def deerVision(self):
+    return self.averageGenomes("deerAverageGenomes", "Vision")
+
+  def deerSpeed(self):
+    return self.averageGenomes("deerAverageGenomes", "Speed")
+
+  def deerSizeFactor(self):
+    return self.averageGenomes("deerAverageGenomes", "SizeFactor")
+
+  def deerDesirabilityScore(self):
+    return self.averageGenomes("deerAverageGenomes", "DesirabilityScore")
+
+  def deerGestationPeriod(self):
+    return self.averageGenomes("deerAverageGenomes", "GestationPeriod")
+
+  def deerSexualMaturityTime(self):
+    return self.averageGenomes("deerAverageGenomes", "SexualMaturityTime")
+
+  # Bear gets
+  def bearHungerRate(self):
+    return self.averageGenomes("bearAverageGenomes", "HungerRate")
+
+  def bearHungerThreshold(self):
+    return self.averageGenomes("bearAverageGenomes", "HungerThreshold")
+
+  def bearThirstRate(self):
+    return self.averageGenomes("bearAverageGenomes", "ThirstRate")
+
+  def bearThirstThreshold(self):
+    return self.averageGenomes("bearAverageGenomes", "ThirstThreshold")
+
+  def bearVision(self):
+    return self.averageGenomes("bearAverageGenomes", "Vision")
+
+  def bearSpeed(self):
+    return self.averageGenomes("bearAverageGenomes", "Speed")
+
+  def bearSizeFactor(self):
+    return self.averageGenomes("bearAverageGenomes", "SizeFactor")
+
+  def bearDesirabilityScore(self):
+    return self.averageGenomes("bearAverageGenomes", "DesirabilityScore")
+
+  def bearGestationPeriod(self):
+    return self.averageGenomes("bearAverageGenomes", "GestationPeriod")
+
+  def bearSexualMaturityTime(self):
+    return self.averageGenomes("bearAverageGenomes", "SexualMaturityTime")
 
 
 class AverageGenomeEntry:
