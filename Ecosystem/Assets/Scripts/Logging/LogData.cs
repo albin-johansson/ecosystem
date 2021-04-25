@@ -92,6 +92,10 @@ namespace Ecosystem.Logging
     /// </summary>
     [SerializeField] private int preyConsumedCount;
 
+    [SerializeField] private float minimumFps;
+    [SerializeField] private float maximumFps;
+    [SerializeField] private float averageFps;
+
     /// <summary>
     ///   The base rabbit genome.
     /// </summary>
@@ -161,10 +165,29 @@ namespace Ecosystem.Logging
 
     /// <summary>
     ///   Marks the simulation as finished. This is used to determine the duration of the simulation.
+    /// <param name="startTime">the time of the start of the simulation.</param>
     /// </summary>
-    public void MarkAsDone()
+    public void MarkAsDone(long startTime)
     {
-      duration = SessionTime.Now();
+      duration = SessionTime.Now() - startTime;
+    }
+
+    /// Sets the minimum FPS associated with the simulation.
+    public void SetMinFPS(float fps)
+    {
+      minimumFps = fps;
+    }
+
+    /// Sets the maximum FPS associated with the simulation.
+    public void SetMaxFPS(float fps)
+    {
+      maximumFps = fps;
+    }
+
+    /// Sets the average FPS associated with the simulation.
+    public void SetAverageFPS(float fps)
+    {
+      averageFps = fps;
     }
 
     #region Event recording functions
@@ -256,7 +279,7 @@ namespace Ecosystem.Logging
 
       --foodCount;
     }
-    
+
     /// <summary>
     ///   Adds a simulation event that represents a food item decaying.
     /// </summary>
@@ -350,7 +373,7 @@ namespace Ecosystem.Logging
     #endregion
 
     #region Genome functions
-    
+
     private void CaptureInitialGenomes()
     {
       // TODO current implementation breaks this somewhat. It will only get more broken as changes occur.

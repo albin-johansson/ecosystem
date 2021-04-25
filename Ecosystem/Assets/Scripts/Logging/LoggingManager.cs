@@ -1,6 +1,7 @@
 using Ecosystem.Spawning;
 using Ecosystem.Consumer;
 using Ecosystem.Genes;
+using Ecosystem.UI;
 using Ecosystem.Util;
 using UnityEngine;
 using UnityEngine.UI;
@@ -27,9 +28,12 @@ namespace Ecosystem.Logging
 
     private readonly LogData _data = new LogData();
     private long _nextUpdateTime;
+    private long _startTime;
 
     private void Start()
     {
+      _startTime = SessionTime.Now();
+
       // Yes, these are allocated once, it's fine
       DeathHandler.OnDeath += LogDeath;
 
@@ -61,7 +65,7 @@ namespace Ecosystem.Logging
 
     private void Update()
     {
-      var milliseconds = SessionTime.Now();
+      var milliseconds = SessionTime.Now() - _startTime;
       if (milliseconds > _nextUpdateTime)
       {
         var seconds = milliseconds / 1_000;
@@ -72,7 +76,12 @@ namespace Ecosystem.Logging
 
     private void OnApplicationQuit()
     {
-      _data.MarkAsDone();
+      _data.MarkAsDone(_startTime);
+
+      _data.SetMinFPS(FPSCounter.GetMinimumFPS());
+      _data.SetMaxFPS(FPSCounter.GetMaximumFPS());
+      _data.SetAverageFPS(FPSCounter.GetAverageFPS());
+
       LogFileWriter.Save(_data);
     }
 
