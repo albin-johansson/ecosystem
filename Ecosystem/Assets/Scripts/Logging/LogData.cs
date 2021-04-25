@@ -14,10 +14,6 @@ namespace Ecosystem.Logging
   [Serializable]
   public sealed partial class LogData
   {
-    [SerializeField] public string msg = "version: ";
-
-    [SerializeField] private Dictionary<string, long> keyEnd = new Dictionary<string, long>();
-
     private static readonly int GeneCount = Enum.GetValues(typeof(GeneType)).Length;
 
     /// <summary>
@@ -141,12 +137,20 @@ namespace Ecosystem.Logging
     /// </summary>
     [SerializeField] private List<GenomeInfo> genomes = new List<GenomeInfo>(64);
 
+    /// <summary>
+    ///   Maps death of genome by key to the death time. 
+    /// </summary>
+    [SerializeField] private Dictionary<string, long> keyEnd = new Dictionary<string, long>();
+
+
+    //   Saved averages for python 
     [SerializeField] private AverageGenomes rabbitAverageGenomes;
     [SerializeField] private AverageGenomes wolfAverageGenomes;
     [SerializeField] private AverageGenomes deerAverageGenomes;
     [SerializeField] private AverageGenomes bearAverageGenomes;
 
 
+    //   Saved box spreads for python
     [SerializeField] private BoxGenomes rabbitBoxGenomes;
     [SerializeField] private BoxGenomes wolfBoxGenomes;
     [SerializeField] private BoxGenomes deerBoxGenomes;
@@ -167,28 +171,7 @@ namespace Ecosystem.Logging
     /// </remarks>
     public void PrepareData()
     {
-      CountPopulationSizes();
       CaptureInitialGenomes();
-    }
-
-    //Replaced by CaptureInitialGenomes. 
-    private void CountPopulationSizes()
-    {
-      //TODO: fix 
-      /*
-      initialAliveRabbitsCount = Tags.Count("Rabbit");
-      initialAliveDeerCount = Tags.Count("Deer");
-      initialAliveWolvesCount = Tags.Count("Wolf");
-      initialAliveBearsCount = Tags.Count("Bear");
-
-      initialAlivePredatorCount = Tags.CountPredators();
-      initialAlivePreyCount = Tags.CountPrey();
-      initialFoodCount = Tags.CountFood();
-      initialAliveCount = initialAlivePreyCount + initialAlivePredatorCount;
-
-      aliveCount = initialAliveCount;
-      foodCount = initialFoodCount;
-      */
     }
 
     private int CaptureByTag(string tag)
@@ -240,7 +223,6 @@ namespace Ecosystem.Logging
       duration = SessionTime.Now();
       MatchGenomeToTime();
       workInProgressGenomes = new List<GenomeInfo>();
-      msg += ", tmp genomes removed, should include all initial";
       AssignAverages();
       AssignBoxes();
     }
@@ -421,22 +403,6 @@ namespace Ecosystem.Logging
 
       return box;
     }
-
-    private int totalAnimals = 0;
-
-    public string tmp()
-    {
-      return "Total animals: " + totalAnimals;
-    }
-
-    private int correctTotalAnimals = 0;
-
-    public string tmp2()
-    {
-      return "Adjusted total animals: " + correctTotalAnimals + ", work in progress genes:" +
-             workInProgressGenomes.Count + ", finished genomes: " + genomes.Count;
-    }
-
 
     private void MatchGenomeToTime()
     {

@@ -8,10 +8,10 @@ from genome import visualise_genome_changes
 
 
 def main2():
-  input_file: str = 'test4.json'
-  directory: Path = input_file.with_suffix('')
-  if not directory.exists():
-    os.mkdir(directory)
+  input_file: str = 'test5.json'
+  # directory: Path = input_file.with_suffix('')
+  # if not directory.exists():
+  # os.mkdir(directory)
 
   data = LogData(input_file)
   visualise_genome_changes(data)

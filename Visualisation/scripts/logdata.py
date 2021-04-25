@@ -81,128 +81,271 @@ class LogData:
     return list2
 
   # Rabbit gets
-  def rabbitHungerRate(self):
+  def rabbit_hunger_rate(self):
     return self.averageGenomes("rabbitAverageGenomes", "HungerRate")
 
-  def rabbitHungerThreshold(self):
+  def rabbit_hunger_threshold(self):
     return self.averageGenomes("rabbitAverageGenomes", "HungerThreshold")
 
-  def rabbitThirstRate(self):
+  def rabbit_thirst_rate(self):
     return self.averageGenomes("rabbitAverageGenomes", "ThirstRate")
 
-  def rabbitThirstThreshold(self):
+  def rabbit_thirst_threshold(self):
     return self.averageGenomes("rabbitAverageGenomes", "ThirstThreshold")
 
-  def rabbitVision(self):
+  def rabbit_vision(self):
     return self.averageGenomes("rabbitAverageGenomes", "Vision")
 
-  def rabbitSpeed(self):
+  def rabbit_speed(self):
     return self.averageGenomes("rabbitAverageGenomes", "Speed")
 
-  def rabbitSizeFactor(self):
+  def rabbit_size_factor(self):
     return self.averageGenomes("rabbitAverageGenomes", "SizeFactor")
 
-  def rabbitDesirabilityScore(self):
+  def rabbit_desirability_score(self):
     return self.averageGenomes("rabbitAverageGenomes", "DesirabilityScore")
 
-  def rabbitGestationPeriod(self):
+  def rabbit_gestation_period(self):
     return self.averageGenomes("rabbitAverageGenomes", "GestationPeriod")
 
-  def rabbitSexualMaturityTime(self):
+  def rabbit_sexual_maturity_time(self):
     return self.averageGenomes("rabbitAverageGenomes", "SexualMaturityTime")
 
   # Wolf gets
-  def wolfHungerRate(self):
+  def wolf_hunger_rate(self):
     return self.averageGenomes("wolfAverageGenomes", "HungerRate")
 
-  def wolfHungerThreshold(self):
+  def wolf_hunger_threshold(self):
     return self.averageGenomes("wolfAverageGenomes", "HungerThreshold")
 
-  def wolfThirstRate(self):
+  def wolf_thirst_rate(self):
     return self.averageGenomes("wolfAverageGenomes", "ThirstRate")
 
-  def wolfThirstThreshold(self):
+  def wolf_thirst_threshold(self):
     return self.averageGenomes("wolfAverageGenomes", "ThirstThreshold")
 
-  def wolfVision(self):
+  def wolf_vision(self):
     return self.averageGenomes("wolfAverageGenomes", "Vision")
 
-  def wolfSpeed(self):
+  def wolf_speed(self):
     return self.averageGenomes("wolfAverageGenomes", "Speed")
 
-  def wolfSizeFactor(self):
+  def wolf_size_factor(self):
     return self.averageGenomes("wolfAverageGenomes", "SizeFactor")
 
-  def wolfDesirabilityScore(self):
+  def wolf_desirability_score(self):
     return self.averageGenomes("wolfAverageGenomes", "DesirabilityScore")
 
-  def wolfGestationPeriod(self):
+  def wolf_gestation_period(self):
     return self.averageGenomes("wolfAverageGenomes", "GestationPeriod")
 
-  def wolfSexualMaturityTime(self):
+  def wolf_sexual_maturity_time(self):
     return self.averageGenomes("wolfAverageGenomes", "SexualMaturityTime")
 
   # Deer gets
-  def deerHungerRate(self):
+  def deer_hunger_rate(self):
     return self.averageGenomes("deerAverageGenomes", "HungerRate")
 
-  def deerHungerThreshold(self):
+  def deer_hunger_threshold(self):
     return self.averageGenomes("deerAverageGenomes", "HungerThreshold")
 
-  def deerThirstRate(self):
+  def deer_thirst_rate(self):
     return self.averageGenomes("deerAverageGenomes", "ThirstRate")
 
-  def deerThirstThreshold(self):
+  def deer_thirst_threshold(self):
     return self.averageGenomes("deerAverageGenomes", "ThirstThreshold")
 
-  def deerVision(self):
+  def deer_vision(self):
     return self.averageGenomes("deerAverageGenomes", "Vision")
 
-  def deerSpeed(self):
+  def deer_speed(self):
     return self.averageGenomes("deerAverageGenomes", "Speed")
 
-  def deerSizeFactor(self):
+  def deer_size_factor(self):
     return self.averageGenomes("deerAverageGenomes", "SizeFactor")
 
-  def deerDesirabilityScore(self):
+  def deer_desirability_score(self):
     return self.averageGenomes("deerAverageGenomes", "DesirabilityScore")
 
-  def deerGestationPeriod(self):
+  def deer_gestation_period(self):
     return self.averageGenomes("deerAverageGenomes", "GestationPeriod")
 
-  def deerSexualMaturityTime(self):
+  def deer_sexual_maturity_time(self):
     return self.averageGenomes("deerAverageGenomes", "SexualMaturityTime")
 
   # Bear gets
-  def bearHungerRate(self):
+  def bear_hunger_rate(self):
     return self.averageGenomes("bearAverageGenomes", "HungerRate")
 
-  def bearHungerThreshold(self):
+  def bear_hunger_threshold(self):
     return self.averageGenomes("bearAverageGenomes", "HungerThreshold")
 
-  def bearThirstRate(self):
+  def bear_thirst_rate(self):
     return self.averageGenomes("bearAverageGenomes", "ThirstRate")
 
-  def bearThirstThreshold(self):
+  def bear_thirst_threshold(self):
     return self.averageGenomes("bearAverageGenomes", "ThirstThreshold")
 
-  def bearVision(self):
+  def bear_vision(self):
     return self.averageGenomes("bearAverageGenomes", "Vision")
 
-  def bearSpeed(self):
+  def bear_speed(self):
     return self.averageGenomes("bearAverageGenomes", "Speed")
 
-  def bearSizeFactor(self):
+  def bear_size_factor(self):
     return self.averageGenomes("bearAverageGenomes", "SizeFactor")
 
-  def bearDesirabilityScore(self):
+  def bear_desirability_score(self):
     return self.averageGenomes("bearAverageGenomes", "DesirabilityScore")
 
-  def bearGestationPeriod(self):
+  def bear_gestation_period(self):
     return self.averageGenomes("bearAverageGenomes", "GestationPeriod")
 
-  def bearSexualMaturityTime(self):
+  def bear_sexual_maturity_time(self):
     return self.averageGenomes("bearAverageGenomes", "SexualMaturityTime")
+
+  def box_genomes(self, animal: str, gene: str):
+    animal = "rabbitBoxGenomes"
+    gene = "HungerRate"
+    list = self.data[animal][gene]
+    list2 = []
+    for v in list:
+      list2.append(BoxGenomeEntry(v["entryTime"], v["value"]))
+    return list2
+
+    # Rabbit gets
+
+  def rabbit_hunger_rate_box(self):
+    return self.averageGenomes("rabbitBoxGenomes", "HungerRate")
+
+  def rabbit_hunger_threshold_box(self):
+    return self.box_genomes("rabbitBoxGenomes", "HungerThreshold")
+
+  def rabbit_thirst_rate_box(self):
+    return self.box_genomes("rabbitBoxGenomes", "ThirstRate")
+
+  def rabbit_thirst_threshold_box(self):
+    return self.box_genomes("rabbitBoxGenomes", "ThirstThreshold")
+
+  def rabbit_vision_box(self):
+    return self.box_genomes("rabbitBoxGenomes", "Vision")
+
+  def rabbit_speed_box(self):
+    return self.box_genomes("rabbitBoxGenomes", "Speed")
+
+  def rabbit_size_factor_box(self):
+    return self.box_genomes("rabbitBoxGenomes", "SizeFactor")
+
+  def rabbit_desirability_score_box(self):
+    return self.box_genomes("rabbitBoxGenomes", "DesirabilityScore")
+
+  def rabbit_gestation_period_box(self):
+    return self.box_genomes("rabbitBoxGenomes", "GestationPeriod")
+
+  def rabbit_sexual_maturity_time_box(self):
+    return self.box_genomes("rabbitBoxGenomes", "SexualMaturityTime")
+
+  # Wolf gets
+  def wolf_hunger_rate_box(self):
+    return self.box_genomes("wolfBoxGenomes", "HungerRate")
+
+  def wolf_hunger_threshold_box(self):
+    return self.box_genomes("wolfBoxGenomes", "HungerThreshold")
+
+  def wolf_thirst_rate_box(self):
+    return self.box_genomes("wolfBoxGenomes", "ThirstRate")
+
+  def wolf_thirst_threshold_box(self):
+    return self.box_genomes("wolfBoxGenomes", "ThirstThreshold")
+
+  def wolf_vision_box(self):
+    return self.box_genomes("wolfBoxGenomes", "Vision")
+
+  def wolf_speed_box(self):
+    return self.box_genomes("wolfBoxGenomes", "Speed")
+
+  def wolf_size_factor_box(self):
+    return self.box_genomes("wolfBoxGenomes", "SizeFactor")
+
+  def wolf_desirability_score_box(self):
+    return self.box_genomes("wolfBoxGenomes", "DesirabilityScore")
+
+  def wolf_gestation_period_box(self):
+    return self.box_genomes("wolfBoxGenomes", "GestationPeriod")
+
+  def wolf_sexual_maturity_time_box(self):
+    return self.box_genomes("wolfBoxGenomes", "SexualMaturityTime")
+
+  # Deer gets
+  def deer_hunger_rate_box(self):
+    return self.box_genomes("deerBoxGenomes", "HungerRate")
+
+  def deer_hunger_threshold_box(self):
+    return self.box_genomes("deerBoxGenomes", "HungerThreshold")
+
+  def deer_thirst_rate_box(self):
+    return self.box_genomes("deerBoxGenomes", "ThirstRate")
+
+  def deer_thirst_threshold_box(self):
+    return self.box_genomes("deerBoxGenomes", "ThirstThreshold")
+
+  def deer_vision_box(self):
+    return self.box_genomes("deerBoxGenomes", "Vision")
+
+  def deer_speed_box(self):
+    return self.box_genomes("deerBoxGenomes", "Speed")
+
+  def deer_size_factor_box(self):
+    return self.box_genomes("deerBoxGenomes", "SizeFactor")
+
+  def deer_desirability_score_box(self):
+    return self.box_genomes("deerBoxGenomes", "DesirabilityScore")
+
+  def deer_gestation_period_box(self):
+    return self.box_genomes("deerBoxGenomes", "GestationPeriod")
+
+  def deer_sexual_maturity_time_box(self):
+    return self.box_genomes("deerBoxGenomes", "SexualMaturityTime")
+
+  # Bear gets
+  def bear_hunger_rate_box(self):
+    return self.box_genomes("bearBoxGenomes", "HungerRate")
+
+  def bear_hunger_threshold_box(self):
+    return self.box_genomes("bearBoxGenomes", "HungerThreshold")
+
+  def bear_thirst_rate_box(self):
+    return self.box_genomes("bearBoxGenomes", "ThirstRate")
+
+  def bear_thirst_threshold_box(self):
+    return self.box_genomes("bearBoxGenomes", "ThirstThreshold")
+
+  def bear_vision_box(self):
+    return self.box_genomes("bearBoxGenomes", "Vision")
+
+  def bear_speed_box(self):
+    return self.box_genomes("bearBoxGenomes", "Speed")
+
+  def bear_size_factor_box(self):
+    return self.box_genomes("bearBoxGenomes", "SizeFactor")
+
+  def bear_desirability_score_box(self):
+    return self.box_genomes("bearBoxGenomes", "DesirabilityScore")
+
+  def bear_gestation_period_box(self):
+    return self.box_genomes("bearBoxGenomes", "GestationPeriod")
+
+  def bear_sexual_maturity_time_box(self):
+    return self.box_genomes("bearBoxGenomes", "SexualMaturityTime")
+
+
+class BoxGenomeEntry:
+  time = 0
+  value = []
+
+  def __init__(self, time: int, value: []):
+    self.time = time
+    self.value = value
 
 
 class AverageGenomeEntry:

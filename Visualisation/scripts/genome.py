@@ -7,16 +7,35 @@ from pathlib import Path
 from logdata import *
 
 
-def tmp(data: LogData):  # , directory: Path):
+def averages(data: LogData):  # , directory: Path):
   # TODO: make into method, call for each animals genes.
   values = []
   times = []
-  for g in data.wolfHungerRate():
+  for g in data.wolf_hunger_rate():
     values.append(g.value)
     times.append(g.time)
 
   plot.plot(times, values, 'ro')
   plot.show()
+
+
+def boxplots(data: LogData):
+  # TODO make into method, call for each animals genes.
+
+  values = []
+  times = []
+  for g in data.rabbit_hunger_rate_box():
+    values.append(g.value)
+    times.append(g.time)
+  fig, ax = plot.subplots()
+  ax.boxplot(values)
+  ax.set_xticklabels(times)
+  plot.show()
+
+
+#  for g in data.rabbitHungerRateBox():
+#   print(g.time)
+# return 0
 
 
 def int_to_gene_type(code):
@@ -46,4 +65,5 @@ def visualise_genome_changes(data: LogData):
   visualise_animal_populations_standard(data, directory)
   visualise_animal_populations_stackplot(data, directory)
   """
-  tmp(data)
+  # averages(data)
+  boxplots(data)

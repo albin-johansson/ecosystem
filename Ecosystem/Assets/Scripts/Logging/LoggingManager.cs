@@ -53,26 +53,10 @@ namespace Ecosystem.Logging
         timePassedText.text = seconds.ToString();
         _nextUpdateTime = milliseconds + 1_000;
       }
-
-      //TODO: tmp save button, for testing
-      if (Input.GetKeyUp(KeyCode.X))
-      {
-        Debug.Log("Pressed X, saving log");
-        _data.msg += "Pressed X";
-        _data.MarkAsDone();
-        LogFileWriter.Save(_data);
-      }
-
-      if (Input.GetKeyDown(KeyCode.C))
-      {
-        Debug.Log(_data.tmp());
-        Debug.Log(_data.tmp2());
-      }
     }
 
     private void OnApplicationQuit()
     {
-      _data.msg += "ApplicationQuit";
       _data.MarkAsDone();
       LogFileWriter.Save(_data);
     }
