@@ -3612,6 +3612,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5f7201a12d95ffc409449d95f23cf332, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &1847581437 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 5903979955362283056, guid: f6a6c66b57f65c648b7becd500b2a5fe, type: 3}
+  m_PrefabInstance: {fileID: 2026068119}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5f7201a12d95ffc409449d95f23cf332, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1879225894
 GameObject:
   m_ObjectHideFlags: 0
@@ -8544,7 +8555,7 @@ MonoBehaviour:
   dynamicWolfCount: {fileID: 886235166}
   dynamicBearCount: {fileID: 687530572}
   dynamicCarrotCount: {fileID: 2026068122}
-  dynamicBerryBushCount: {fileID: 1879623616}
+  dynamicBerryBushCount: {fileID: 1847581437}
   ecsSceneStartButton: {fileID: 246206652}
   ecsRabbitCount: {fileID: 246206651}
   ecsDeerCount: {fileID: 246206655}

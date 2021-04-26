@@ -26,17 +26,18 @@ namespace Ecosystem.AnimalBehaviour.Prey.Deer
     {
       if (Target)
       {
-        if (!Target.activeSelf)
+        if (Tags.IsPredator(Target))
+        {
+          return AnimalState.Fleeing;
+        }
+
+        if (!Target.activeInHierarchy || !MovementController.IsWithinSphere(Target.transform.position))
         {
           Target = GetClosestMateInVision(Layers.DeerMask);
           if (!Target)
           {
             return base.Tick();
           }
-        }
-        else if (Tags.IsPredator(Target))
-        {
-          return AnimalState.Fleeing;
         }
         else if (Reproducer.CompatibleAsParents(Target) && Reproducer.CanMate)
         {

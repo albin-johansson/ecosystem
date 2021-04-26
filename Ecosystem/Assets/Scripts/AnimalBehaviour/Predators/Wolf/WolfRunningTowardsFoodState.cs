@@ -10,16 +10,16 @@ namespace Ecosystem.AnimalBehaviour.Predators.Wolf
 
     public override void Begin(GameObject target)
     {
+      AnimationController.EnterMoveAnimation();
       Target = target;
       MovementController.SetDestination(Target.transform.position);
-      AnimationController.EnterMoveAnimation();
     }
 
     public override AnimalState Tick()
     {
       if (!Consumer.IsHungry() ||
           !Target ||
-          !Target.activeSelf ||
+          !Target.activeInHierarchy ||
           !MovementController.IsWithinSphere(Target.transform.position))
       {
         return base.Tick();

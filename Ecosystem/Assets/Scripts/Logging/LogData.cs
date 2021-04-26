@@ -199,7 +199,7 @@ namespace Ecosystem.Logging
       duration = SessionTime.Now();
       MatchGenomeToTime();
       workInProgressGenomes = new List<GenomeInfo>();
-      boxFreqFactor = 5; //might need changes if simulation is too long.  
+      boxFreqFactor = 20; //might need changes if simulation is too long.  
       AssignAverages();
       AssignBoxes();
     }
@@ -215,8 +215,6 @@ namespace Ecosystem.Logging
         ThirstThreshold = CreateAverages("Rabbit", GeneType.ThirstThreshold),
         Vision = CreateAverages("Rabbit", GeneType.Vision),
         Speed = CreateAverages("Rabbit", GeneType.Speed),
-        SizeFactor = CreateAverages("Rabbit", GeneType.SizeFactor),
-        DesirabilityScore = CreateAverages("Rabbit", GeneType.DesirabilityScore),
         GestationPeriod = CreateAverages("Rabbit", GeneType.GestationPeriod),
         SexualMaturityTime = CreateAverages("Rabbit", GeneType.SexualMaturityTime),
       };
@@ -229,8 +227,6 @@ namespace Ecosystem.Logging
         ThirstThreshold = CreateAverages("Wolf", GeneType.ThirstThreshold),
         Vision = CreateAverages("Wolf", GeneType.Vision),
         Speed = CreateAverages("Wolf", GeneType.Speed),
-        SizeFactor = CreateAverages("Wolf", GeneType.SizeFactor),
-        DesirabilityScore = CreateAverages("Wolf", GeneType.DesirabilityScore),
         GestationPeriod = CreateAverages("Wolf", GeneType.GestationPeriod),
         SexualMaturityTime = CreateAverages("Wolf", GeneType.SexualMaturityTime),
       };
@@ -243,8 +239,6 @@ namespace Ecosystem.Logging
         ThirstThreshold = CreateAverages("Deer", GeneType.ThirstThreshold),
         Vision = CreateAverages("Deer", GeneType.Vision),
         Speed = CreateAverages("Deer", GeneType.Speed),
-        SizeFactor = CreateAverages("Deer", GeneType.SizeFactor),
-        DesirabilityScore = CreateAverages("Deer", GeneType.DesirabilityScore),
         GestationPeriod = CreateAverages("Deer", GeneType.GestationPeriod),
         SexualMaturityTime = CreateAverages("Deer", GeneType.SexualMaturityTime),
       };
@@ -257,8 +251,6 @@ namespace Ecosystem.Logging
         ThirstThreshold = CreateAverages("Bear", GeneType.ThirstThreshold),
         Vision = CreateAverages("Bear", GeneType.Vision),
         Speed = CreateAverages("Bear", GeneType.Speed),
-        SizeFactor = CreateAverages("Bear", GeneType.SizeFactor),
-        DesirabilityScore = CreateAverages("Bear", GeneType.DesirabilityScore),
         GestationPeriod = CreateAverages("Bear", GeneType.GestationPeriod),
         SexualMaturityTime = CreateAverages("Bear", GeneType.SexualMaturityTime),
       };
@@ -275,8 +267,6 @@ namespace Ecosystem.Logging
         ThirstThreshold = CreateBoxes("Rabbit", GeneType.ThirstThreshold),
         Vision = CreateBoxes("Rabbit", GeneType.Vision),
         Speed = CreateBoxes("Rabbit", GeneType.Speed),
-        SizeFactor = CreateBoxes("Rabbit", GeneType.SizeFactor),
-        DesirabilityScore = CreateBoxes("Rabbit", GeneType.DesirabilityScore),
         GestationPeriod = CreateBoxes("Rabbit", GeneType.GestationPeriod),
         SexualMaturityTime = CreateBoxes("Rabbit", GeneType.SexualMaturityTime),
       };
@@ -289,8 +279,6 @@ namespace Ecosystem.Logging
         ThirstThreshold = CreateBoxes("Wolf", GeneType.ThirstThreshold),
         Vision = CreateBoxes("Wolf", GeneType.Vision),
         Speed = CreateBoxes("Wolf", GeneType.Speed),
-        SizeFactor = CreateBoxes("Wolf", GeneType.SizeFactor),
-        DesirabilityScore = CreateBoxes("Wolf", GeneType.DesirabilityScore),
         GestationPeriod = CreateBoxes("Wolf", GeneType.GestationPeriod),
         SexualMaturityTime = CreateBoxes("Wolf", GeneType.SexualMaturityTime),
       };
@@ -303,8 +291,6 @@ namespace Ecosystem.Logging
         ThirstThreshold = CreateBoxes("Deer", GeneType.ThirstThreshold),
         Vision = CreateBoxes("Deer", GeneType.Vision),
         Speed = CreateBoxes("Deer", GeneType.Speed),
-        SizeFactor = CreateBoxes("Deer", GeneType.SizeFactor),
-        DesirabilityScore = CreateBoxes("Deer", GeneType.DesirabilityScore),
         GestationPeriod = CreateBoxes("Deer", GeneType.GestationPeriod),
         SexualMaturityTime = CreateBoxes("Deer", GeneType.SexualMaturityTime),
       };
@@ -317,8 +303,6 @@ namespace Ecosystem.Logging
         ThirstThreshold = CreateBoxes("Bear", GeneType.ThirstThreshold),
         Vision = CreateBoxes("Bear", GeneType.Vision),
         Speed = CreateBoxes("Bear", GeneType.Speed),
-        SizeFactor = CreateBoxes("Bear", GeneType.SizeFactor),
-        DesirabilityScore = CreateBoxes("Bear", GeneType.DesirabilityScore),
         GestationPeriod = CreateBoxes("Bear", GeneType.GestationPeriod),
         SexualMaturityTime = CreateBoxes("Bear", GeneType.SexualMaturityTime),
       };
@@ -584,8 +568,6 @@ namespace Ecosystem.Logging
       CreateGeneInfo(GeneType.ThirstThreshold, genome.GetThirstThreshold()),
       CreateGeneInfo(GeneType.Vision, genome.GetVision()),
       CreateGeneInfo(GeneType.Speed, genome.GetSpeed()),
-      CreateGeneInfo(GeneType.SizeFactor, genome.GetSizeFactor()),
-      CreateGeneInfo(GeneType.DesirabilityScore, genome.GetDesirabilityScore()),
       CreateGeneInfo(GeneType.GestationPeriod, genome.GetGestationPeriod()),
       CreateGeneInfo(GeneType.SexualMaturityTime, genome.GetSexualMaturityTime())
     };
@@ -629,16 +611,6 @@ namespace Ecosystem.Logging
         {
           geneType = GeneType.Speed,
           value = data.Speed.Value
-        },
-        new GeneInfo()
-        {
-          geneType = GeneType.SizeFactor,
-          value = data.SizeFactor.Value
-        },
-        new GeneInfo()
-        {
-          geneType = GeneType.DesirabilityScore,
-          value = data.DesirabilityScore.Value
         },
         new GeneInfo()
         {

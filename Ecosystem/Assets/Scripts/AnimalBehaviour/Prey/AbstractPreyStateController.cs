@@ -1,18 +1,14 @@
-using UnityEngine;
-
 namespace Ecosystem.AnimalBehaviour.Prey
 {
   public abstract class AbstractPreyStateController : AbstractStateController
   {
-    [SerializeField] private FoodConsumer consumer;
-
     private IAnimalState _idle;
     private IAnimalState _lookingForWater;
     private IAnimalState _drinking;
     private IAnimalState _runningTowardsWater;
     private IAnimalState _fleeing;
-    private IAnimalState _eating;
-
+    
+    protected IAnimalState Eating;
     protected IAnimalState RunningTowardsFood;
     protected IAnimalState LookingForMate;
     protected IAnimalState LookingForFood;
@@ -26,7 +22,7 @@ namespace Ecosystem.AnimalBehaviour.Prey
       Data = new StateData
       {
         StaminaController = staminaController,
-        Consumer = consumer,
+        Consumer = Consumer,
         AnimationController = animationController,
         MemoryController = memoryController,
         MovementController = movementController,
@@ -40,7 +36,6 @@ namespace Ecosystem.AnimalBehaviour.Prey
       _drinking = PreyStateFactory.CreatePreyDrinking(Data);
       _runningTowardsWater = PreyStateFactory.CreatePreyRunningTowardsWater(Data);
       _fleeing = PreyStateFactory.CreatePreyFleeing(Data);
-      _eating = PreyStateFactory.CreatePreyEating(Data);
 
       sphereCollider.radius = genome.GetVision().Value;
 
@@ -86,12 +81,11 @@ namespace Ecosystem.AnimalBehaviour.Prey
           break;
 
         case AnimalState.Eating:
-          State = _eating;
+          State = Eating;
           break;
 
         case AnimalState.ChasingPrey:
         case AnimalState.Attacking:
-        case AnimalState.GoingToFood:
         default:
           break;
       }

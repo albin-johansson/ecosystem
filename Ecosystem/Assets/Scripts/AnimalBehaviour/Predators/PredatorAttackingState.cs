@@ -12,15 +12,16 @@ namespace Ecosystem.AnimalBehaviour.Predators
     public override void Begin(GameObject target)
     {
       Target = target;
-      AnimationController.EnterAttackAnimation();
+      MovementController.ClearNavigationTarget();
       MovementController.SetStandingStill(true);
+      AnimationController.EnterAttackAnimation();
     }
 
     public override AnimalState Tick()
     {
       if (AnimationController.IsIdle())
       {
-        Consumer.IsAttacking = false;
+        Consumer.IsConsuming = false;
         return base.Tick();
       }
 

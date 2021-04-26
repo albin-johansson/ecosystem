@@ -76,6 +76,22 @@ namespace Ecosystem
     }
 
     /// <summary>
+    ///   Clears the destination in the navMesh agent
+    /// </summary>
+    public void ClearNavigationTarget()
+    {
+      navAgent.ResetPath();
+    }
+
+    /// <summary>
+    ///   Disables the navMesh agent
+    /// </summary>
+    public void DisableNavMeshAgent()
+    {
+      navAgent.isStopped = true;
+    }
+
+    /// <summary>
     ///   Updates the speed of the associated NavAgent, according to the current stamina.
     /// </summary>
     private void UpdateSpeed()
@@ -161,7 +177,7 @@ namespace Ecosystem
     private bool FindFleeDestination(in Vector3 threatPosition, out Vector3 fleeDestination)
     {
       var navAgentPosition = GetPosition();
-      var visionRange = sphereCollider.radius;
+      var visionRange = 4;
       var directionFromThreat = (navAgentPosition - threatPosition).normalized * visionRange;
 
       foreach (var angle in FleeingAngles)
