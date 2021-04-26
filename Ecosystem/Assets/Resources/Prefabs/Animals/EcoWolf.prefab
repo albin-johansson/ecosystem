@@ -10124,18 +10124,13 @@ PrefabInstance:
     - target: {fileID: 8623289280508370884, guid: b11869fe3d5ecbf4b912f33fa4a312db, type: 3}
       propertyPath: textMesh
       value: 
-      objectReference: {fileID: 1081833510434706026}
+      objectReference: {fileID: 6185153468862058513}
     - target: {fileID: 8703765452308408067, guid: b11869fe3d5ecbf4b912f33fa4a312db, type: 3}
       propertyPath: m_Layer
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b11869fe3d5ecbf4b912f33fa4a312db, type: 3}
---- !u!102 &1081833510434706026 stripped
-TextMesh:
-  m_CorrespondingSourceObject: {fileID: 4064930911256007859, guid: b11869fe3d5ecbf4b912f33fa4a312db, type: 3}
-  m_PrefabInstance: {fileID: 3993277767788021465}
-  m_PrefabAsset: {fileID: 0}
 --- !u!114 &4667676523914516765 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 8623289280508370884, guid: b11869fe3d5ecbf4b912f33fa4a312db, type: 3}
@@ -10145,6 +10140,17 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 920e87bfe7fe9274dbe2c10fc8c06029, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &6185153468862058513 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 7114821785126966984, guid: b11869fe3d5ecbf4b912f33fa4a312db, type: 3}
+  m_PrefabInstance: {fileID: 3993277767788021465}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!114 &1012572782683633382 stripped
