@@ -137,10 +137,10 @@ namespace Ecosystem.Logging
     [SerializeField] private BoxGenomes deerBoxGenomes;
     [SerializeField] private BoxGenomes bearBoxGenomes;
 
-    private long freq = 1000; //1/sec
+    [SerializeField] private long freq = 1000; //1/sec
 
     //Because to many boxes are bad. 
-    private int boxFreqFactor = 5;
+    [SerializeField] private int boxFreqFactor = 5;
 
     /// <summary>
     ///   Prepares the data with the initial simulation state. Used to determine the
@@ -199,7 +199,7 @@ namespace Ecosystem.Logging
       duration = SessionTime.Now();
       MatchGenomeToTime();
       workInProgressGenomes = new List<GenomeInfo>();
-      //boxFreqFactor = 5; //#20 boxes max or figure become unreadable 
+      boxFreqFactor = 5; //might need changes if simulation is too long.  
       AssignAverages();
       AssignBoxes();
     }

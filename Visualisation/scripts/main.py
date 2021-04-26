@@ -10,7 +10,7 @@ from genome import visualise_genome_changes
 # TODO: remove file before merge
 
 def main2():
-  input_file: str = 'test5.json'
+  input_file: str = 'example.json'
   directory: Path = input_file.with_suffix('')
   if not directory.exists():
     os.mkdir(directory)

@@ -13,7 +13,7 @@ def averages(list: [], directory: Path, animal: str, gene: str):
   times = []
   for g in list:
     values.append(g.value)
-    times.append(g.time / 1000)
+    times.append((int)(g.time / 1000))
 
   plot.plot(times, values, label=animal + "_" + gene, color="green")
   axes.set_xlabel("Time (sec)")
@@ -30,8 +30,7 @@ def boxplots(list: [], directory: Path, animal: str, gene: str):
   times = []
   for g in list:
     values.append(g.value)
-    times.append(g.time / 1000)
-
+    times.append((int)(g.time / 1000))
   figure, axes = plot.subplots()
   axes.boxplot(values)
   axes.set_xticklabels(times)
