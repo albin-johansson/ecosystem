@@ -2136,6 +2136,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   stateText: {fileID: 105660128847220486}
+  genderIcon: {fileID: 1959161780467721370}
   staminaController: {fileID: 7209563887956031154}
   waterConsumer: {fileID: 3009705713561102233}
   movementController: {fileID: 5874587009778383877}
@@ -2435,6 +2436,22 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b11869fe3d5ecbf4b912f33fa4a312db, type: 3}
+--- !u!4 &2093779445486166218 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 7770376172294729736, guid: b11869fe3d5ecbf4b912f33fa4a312db, type: 3}
+  m_PrefabInstance: {fileID: 8564565261024153794}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1959161780467721370 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 7920466116889162840, guid: b11869fe3d5ecbf4b912f33fa4a312db, type: 3}
+  m_PrefabInstance: {fileID: 8564565261024153794}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b3baef1edf6649c48fbeb87da97e26f8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &105660128847220486 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 8623289280508370884, guid: b11869fe3d5ecbf4b912f33fa4a312db, type: 3}
@@ -2490,8 +2507,3 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0f33f2c7a1419e740be5570d71daa2bf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!4 &2093779445486166218 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 7770376172294729736, guid: b11869fe3d5ecbf4b912f33fa4a312db, type: 3}
-  m_PrefabInstance: {fileID: 8564565261024153794}
-  m_PrefabAsset: {fileID: 0}
