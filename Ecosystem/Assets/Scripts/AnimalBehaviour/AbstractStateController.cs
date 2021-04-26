@@ -8,6 +8,7 @@ namespace Ecosystem.AnimalBehaviour
   public abstract class AbstractStateController : MonoBehaviour
   {
     [SerializeField] protected StateText stateText;
+    [SerializeField] protected GenderIcon genderIcon;
     [SerializeField] protected StaminaController staminaController;
     [SerializeField] protected WaterConsumer waterConsumer;
     [SerializeField] protected MovementController movementController;
@@ -30,6 +31,7 @@ namespace Ecosystem.AnimalBehaviour
     private void Start()
     {
       Initialize();
+      genderIcon.SetGenderIcon(genome.IsMale);
     }
 
     private void Update()
