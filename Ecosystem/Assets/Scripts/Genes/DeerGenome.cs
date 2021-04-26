@@ -4,8 +4,6 @@ namespace Ecosystem.Genes
 {
   public sealed class DeerGenome : AbstractGenome
   {
-    public static List<DeerGenome> InitalGenomes = new List<DeerGenome>();
-
     private static float _mutateChance = 0.05f;
     private static Dictionary<GeneType, Preset> _preset;
 
@@ -19,7 +17,7 @@ namespace Ecosystem.Genes
       {GeneType.Speed, new Preset(2, 4, new[] {2f, 3f, 4f})},
       {GeneType.GestationPeriod, new Preset(10, 120, new[] {12f, 20f, 60f, 90f, 120f})},
       {GeneType.SexualMaturityTime, new Preset(10, 50, new[] {10f, 20f, 30f, 40f, 50f})}
-  };
+    };
 
     public static readonly Dictionary<GeneType, Preset> DefaultSingular = new Dictionary<GeneType, Preset>()
     {
@@ -44,7 +42,6 @@ namespace Ecosystem.Genes
       key = GenerateKey(10);
       Data = CreateData();
       ConvertGenesToAttributes();
-      InitalGenomes.Add(this);
     }
 
     public static void SetPreset(Dictionary<GeneType, Preset> presets, float mutateChance = 0.05f)

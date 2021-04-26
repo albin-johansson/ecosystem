@@ -4,8 +4,6 @@ namespace Ecosystem.Genes
 {
   public sealed class RabbitGenome : AbstractGenome
   {
-    public static List<RabbitGenome> InitalGenomes = new List<RabbitGenome>();
-
     private static float _mutateChance = 0.05f;
     private static Dictionary<GeneType, Preset> _preset;
 
@@ -43,7 +41,6 @@ namespace Ecosystem.Genes
       key = GenerateKey(10);
       Data = CreateData();
       ConvertGenesToAttributes();
-      InitalGenomes.Add(this);
     }
 
     public static void SetPreset(Dictionary<GeneType, Preset> presets, float mutateChance = 0.05f)
