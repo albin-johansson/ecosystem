@@ -72,8 +72,6 @@ class LogData:
     return self.data[item]
 
   def averageGenomes(self, animal: str, gene: str):
-    # animal = "rabbitAverageGenomes"
-    # gene = "HungerRate"
     list = self.data[animal][gene]
     list2 = []
     for v in list:
@@ -205,8 +203,6 @@ class LogData:
     return self.averageGenomes("bearAverageGenomes", "SexualMaturityTime")
 
   def box_genomes(self, animal: str, gene: str):
-    animal = "rabbitBoxGenomes"
-    gene = "HungerRate"
     list = self.data[animal][gene]
     list2 = []
     for v in list:

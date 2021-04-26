@@ -13,10 +13,10 @@ def averages(list: [], directory: Path, animal: str, gene: str):
   times = []
   for g in list:
     values.append(g.value)
-    times.append(g.time)
+    times.append(g.time / 1000)
 
   plot.plot(times, values, label=animal + "_" + gene, color="green")
-  axes.set_xlabel("Time (ms)")
+  axes.set_xlabel("Time (sec)")
   axes.set_ylabel("Average value")
   axes.set_title("Average gene value: " + gene)
   plot.savefig(directory / Path("Average_" + animal + "_" + gene + ".png"))
@@ -30,12 +30,12 @@ def boxplots(list: [], directory: Path, animal: str, gene: str):
   times = []
   for g in list:
     values.append(g.value)
-    times.append(g.time)
+    times.append(g.time / 1000)
 
   figure, axes = plot.subplots()
-  axes.boxplot(values)  # , label=animal + "_" + gene, color="blue")
+  axes.boxplot(values)
   axes.set_xticklabels(times)
-  axes.set_xlabel("Time (ms)")
+  axes.set_xlabel("Time (sec)")
   axes.set_ylabel("Box plot")
   axes.set_title("Boxplot gene value: " + gene)
   plot.savefig(directory / Path("Boxplot_" + animal + "_" + gene + ".png"))

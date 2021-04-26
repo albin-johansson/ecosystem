@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using Ecosystem.Genes;
 using Ecosystem.Util;
+using Unity.Mathematics;
 using UnityEngine;
 
 namespace Ecosystem.Logging
@@ -198,6 +199,7 @@ namespace Ecosystem.Logging
       duration = SessionTime.Now();
       MatchGenomeToTime();
       workInProgressGenomes = new List<GenomeInfo>();
+      //boxFreqFactor = 5; //#20 boxes max or figure become unreadable 
       AssignAverages();
       AssignBoxes();
     }
@@ -334,12 +336,6 @@ namespace Ecosystem.Logging
         if (currentGI.Count > 0)
         {
           List<float> vals = new List<float>();
-          /*
-          foreach (var gi in currentGI)
-          {
-            vals.Add(gi.genes.Find(g => g.geneType.Equals(type)).value);
-          }
-          */
           currentGI.ForEach(genomeInfo =>
             vals.Add(genomeInfo.genes.Find(geneInfo => geneInfo.geneType.Equals(type)).value));
 
@@ -366,12 +362,6 @@ namespace Ecosystem.Logging
         if (currentGI.Count > 0)
         {
           List<float> vals = new List<float>();
-          /*
-          foreach (var gi in currentGI)
-          {
-            vals.Add(gi.genes.Find(g => g.geneType.Equals(type)).value);
-          }
-          */
           currentGI.ForEach(genomeInfo =>
             vals.Add(genomeInfo.genes.Find(geneInfo => geneInfo.geneType.Equals(type)).value));
           box.Add(new GeneBoxInfo()
