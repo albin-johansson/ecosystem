@@ -102,6 +102,8 @@ namespace Ecosystem
 
       IsPregnant = false;
       _pregnancyElapsedTime = 0;
+      
+      _genderIcon.SetPregnancyIcon(false);
 
       var child = ObjectPoolHandler.Instance.Construct(keyToPool);
       var childTransform = child.transform;
@@ -126,6 +128,8 @@ namespace Ecosystem
     {
       IsPregnant = true;
       _mateGenome = mateGenome;
+
+      _genderIcon.SetPregnancyIcon(true);
 
       OnMating?.Invoke(gameObject.transform.position, prefab.tag, mateGenome, genome);
     }
