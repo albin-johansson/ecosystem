@@ -92,26 +92,6 @@ namespace Ecosystem.Logging
     [SerializeField] private int preyConsumedCount;
 
     /// <summary>
-    ///   The base rabbit genome.
-    /// </summary>
-    [SerializeField] private GenomeInfo rabbitGenome;
-
-    /// <summary>
-    ///   The base deer genome.
-    /// </summary>
-    [SerializeField] private GenomeInfo deerGenome;
-
-    /// <summary>
-    ///   The base wolf genome.
-    /// </summary>
-    [SerializeField] private GenomeInfo wolfGenome;
-
-    /// <summary>
-    ///   The base bear genome.
-    /// </summary>
-    [SerializeField] private GenomeInfo bearGenome;
-
-    /// <summary>
     ///   The history of simulation events, stored in chronological order. 
     /// </summary>
     [SerializeField] private List<SimulationEvent> events = new List<SimulationEvent>(256);
@@ -165,13 +145,26 @@ namespace Ecosystem.Logging
     ///   Prepares the data with the initial simulation state. Used to determine the
     ///   initial population sizes, etc.
     /// </summary>
-    /// <remarks>
-    ///   The counting logic assumes that only the root objects of our prefabs feature the
-    ///   identifying tags. If that wouldn't be the case, this approach would overestimate the amounts.
-    /// </remarks>
     public void PrepareData()
     {
       CaptureInitialGenomes();
+    }
+
+    private void CaptureInitialGenomes()
+    {
+      //breaks design principle.
+      initialAliveRabbitsCount = CaptureByTag("Rabbit");
+      initialAliveDeerCount = CaptureByTag("Deer");
+      initialAliveWolvesCount = CaptureByTag("Wolf");
+      initialAliveBearsCount = CaptureByTag("Bear");
+      initialAlivePredatorCount = initialAliveBearsCount + initialAliveWolvesCount;
+      initialAlivePreyCount = initialAliveRabbitsCount + initialAliveDeerCount;
+      initialAliveCount = initialAlivePredatorCount + initialAlivePreyCount;
+
+      initialFoodCount = Tags.CountFood();
+
+      aliveCount = initialAliveCount;
+      foodCount = initialFoodCount;
     }
 
     private int CaptureByTag(string tag)
@@ -195,24 +188,6 @@ namespace Ecosystem.Logging
       }
 
       return count;
-    }
-
-    private void CaptureInitialGenomes()
-    {
-      //TODO: breaks design principle.
-      initialAliveRabbitsCount = CaptureByTag("Rabbit");
-      initialAliveDeerCount = CaptureByTag("Deer");
-      initialAliveWolvesCount = CaptureByTag("Wolf");
-      initialAliveBearsCount = CaptureByTag("Bear");
-      initialAlivePredatorCount = initialAliveBearsCount + initialAliveWolvesCount;
-      initialAlivePreyCount = initialAliveRabbitsCount + initialAliveDeerCount;
-      initialAliveCount = initialAlivePredatorCount + initialAlivePreyCount;
-
-      //TODO: does this still work?
-      initialFoodCount = Tags.CountFood();
-
-      aliveCount = initialAliveCount;
-      foodCount = initialFoodCount;
     }
 
     /// <summary>
@@ -359,16 +334,19 @@ namespace Ecosystem.Logging
         if (currentGI.Count > 0)
         {
           List<float> vals = new List<float>();
+          /*
           foreach (var gi in currentGI)
           {
             vals.Add(gi.genes.Find(g => g.geneType.Equals(type)).value);
           }
+          */
+          currentGI.ForEach(genomeInfo =>
+            vals.Add(genomeInfo.genes.Find(geneInfo => geneInfo.geneType.Equals(type)).value));
 
-          var average = vals.Sum() / vals.Count;
           averages.Add(new GeneAverageInfo()
           {
             entryTime = i,
-            value = average
+            value = vals.Sum() / vals.Count
           });
         }
       }
@@ -388,11 +366,14 @@ namespace Ecosystem.Logging
         if (currentGI.Count > 0)
         {
           List<float> vals = new List<float>();
+          /*
           foreach (var gi in currentGI)
           {
             vals.Add(gi.genes.Find(g => g.geneType.Equals(type)).value);
           }
-
+          */
+          currentGI.ForEach(genomeInfo =>
+            vals.Add(genomeInfo.genes.Find(geneInfo => geneInfo.geneType.Equals(type)).value));
           box.Add(new GeneBoxInfo()
           {
             entryTime = i,
@@ -515,7 +496,6 @@ namespace Ecosystem.Logging
       --aliveCount;
       ++deadCount;
 
-      //TODO: forest scene gives errors sometimes.
       string key = deadObject.GetComponent<AbstractGenome>().key;
       try
       {
@@ -523,7 +503,7 @@ namespace Ecosystem.Logging
       }
       catch
       {
-        //TODO: fix animals dying multiple times? If here, animal already died once.
+        //animals dying multiple times, causing warning messages. If here, animal already died once.
       }
     }
 
@@ -594,6 +574,7 @@ namespace Ecosystem.Logging
     /// <returns>the amount of consumed prey.</returns>
     public int PreyConsumedCount() => preyConsumedCount;
 
+    //not used, remove?
     private static void AddGene(ICollection<GeneInfo> genes, KeyValuePair<GeneType, Gene> pair)
     {
       genes.Add(CreateGeneInfo(pair.Key, pair.Value));
