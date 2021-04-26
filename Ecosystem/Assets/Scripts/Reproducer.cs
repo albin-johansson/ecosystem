@@ -1,6 +1,7 @@
 using Ecosystem.Consumer;
 using Ecosystem.Genes;
 using Ecosystem.Spawning;
+using Ecosystem.UI;
 using UnityEngine;
 
 namespace Ecosystem
@@ -36,6 +37,7 @@ namespace Ecosystem
     [SerializeField] private GameObject prefab;
     [SerializeField] private string keyToPool;
     [SerializeField] private GameObject animalModel;
+    [SerializeField] private GenderIcon _genderIcon;
 
     private Transform _directoryOfAnimal;
     private IGenome _mateGenome;
