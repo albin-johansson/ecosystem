@@ -1,24 +1,31 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 using UnityEngine.UI;
 
 namespace Ecosystem.UI
 {
   public sealed class GenderIcon : MonoBehaviour
   {
-    private Sprite _sprite;
-    
+    [SerializeField] private Image image;
+    private Sprite _maleSprite;
+    private Sprite _femaleSprite;
+
+    private void Start()
+    {
+      _maleSprite =  Resources.Load <Sprite>("Sprites/male");
+      _femaleSprite =  Resources.Load <Sprite>("Sprites/female");
+    }
+
     public void SetGenderIcon(bool isMale)
     {
-      var image = gameObject.GetComponent<Image>();
+      
       if (isMale)
       {
-        _sprite =  Resources.Load <Sprite>("Sprites/male");
-        image.sprite = _sprite;
+        image.sprite = _maleSprite;
       }
       else
       {
-        _sprite =  Resources.Load <Sprite>("Sprites/female");
-        image.sprite = _sprite;
+        image.sprite = _femaleSprite;
       }
       image.color = Color.white;
     }
