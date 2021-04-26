@@ -7,15 +7,17 @@ from logdata import LogData
 from genome import visualise_genome_changes
 
 
+# TODO: remove file before merge
+
 def main2():
   input_file: str = 'test5.json'
-  # directory: Path = input_file.with_suffix('')
-  # if not directory.exists():
-  # os.mkdir(directory)
+  directory: Path = input_file.with_suffix('')
+  if not directory.exists():
+    os.mkdir(directory)
 
   data = LogData(input_file)
-  visualise_genome_changes(data)
-  print("temp main is done")
+  visualise_genome_changes(data, directory)
+  # print("temp main is done")
 
 
 if __name__ == "__main__":
