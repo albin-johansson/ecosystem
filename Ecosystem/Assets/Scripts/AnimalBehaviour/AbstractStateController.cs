@@ -38,7 +38,7 @@ namespace Ecosystem.AnimalBehaviour
       if (newState != State.Type())
       {
         SwitchState(newState);
-        stateText.SetText(newState.ToString());
+        stateText.SetText(newState);
       }
     }
 
