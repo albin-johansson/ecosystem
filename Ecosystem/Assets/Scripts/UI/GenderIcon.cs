@@ -20,6 +20,7 @@ namespace Ecosystem.UI
         _sprite =  Resources.Load <Sprite>("Sprites/female");
         image.sprite = _sprite;
       }
+      image.color = Color.white;
     }
   }
 }
