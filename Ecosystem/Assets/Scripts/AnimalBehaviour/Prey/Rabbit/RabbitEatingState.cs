@@ -18,11 +18,15 @@ namespace Ecosystem.AnimalBehaviour.Prey.Rabbit
 
     public override AnimalState Tick()
     {
-      if (Tags.IsPredator(Target))
+      if (Target)
       {
-        return AnimalState.Fleeing;
-      }
-      else if (Consumer.EatingFromGameObject)
+        if (Tags.IsPredator(Target))
+        {
+          return AnimalState.Fleeing;
+        }
+      } 
+      
+      if (Consumer.EatingFromGameObject)
       {
         return Type();
       }
