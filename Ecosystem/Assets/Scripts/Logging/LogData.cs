@@ -503,51 +503,48 @@ namespace Ecosystem.Logging
       value = gene.Value
     };
 
-    private static List<GeneInfo> GenomeDataToList(GenomeData data)
+    private static List<GeneInfo> GenomeDataToList(GenomeData data) => new List<GeneInfo>
     {
-      return new List<GeneInfo>()
+      new GeneInfo
       {
-        new GeneInfo()
-        {
-          geneType = GeneType.HungerRate,
-          value = data.HungerRate.Value
-        },
-        new GeneInfo()
-        {
-          geneType = GeneType.HungerThreshold,
-          value = data.HungerThreshold.Value
-        },
-        new GeneInfo()
-        {
-          geneType = GeneType.ThirstRate,
-          value = data.ThirstRate.Value
-        },
-        new GeneInfo()
-        {
-          geneType = GeneType.ThirstThreshold,
-          value = data.ThirstThreshold.Value
-        },
-        new GeneInfo()
-        {
-          geneType = GeneType.Vision,
-          value = data.Vision.Value
-        },
-        new GeneInfo()
-        {
-          geneType = GeneType.Speed,
-          value = data.Speed.Value
-        },
-        new GeneInfo()
-        {
-          geneType = GeneType.GestationPeriod,
-          value = data.GestationPeriod.Value
-        },
-        new GeneInfo()
-        {
-          geneType = GeneType.SexualMaturityTime,
-          value = data.SexualMaturityTime.Value
-        }
-      };
-    }
+        geneType = GeneType.HungerRate,
+        value = data.HungerRate.Value
+      },
+      new GeneInfo
+      {
+        geneType = GeneType.HungerThreshold,
+        value = data.HungerThreshold.Value
+      },
+      new GeneInfo
+      {
+        geneType = GeneType.ThirstRate,
+        value = data.ThirstRate.Value
+      },
+      new GeneInfo
+      {
+        geneType = GeneType.ThirstThreshold,
+        value = data.ThirstThreshold.Value
+      },
+      new GeneInfo
+      {
+        geneType = GeneType.Vision,
+        value = data.Vision.Value
+      },
+      new GeneInfo
+      {
+        geneType = GeneType.Speed,
+        value = data.Speed.Value
+      },
+      new GeneInfo
+      {
+        geneType = GeneType.GestationPeriod,
+        value = data.GestationPeriod.Value
+      },
+      new GeneInfo
+      {
+        geneType = GeneType.SexualMaturityTime,
+        value = data.SexualMaturityTime.Value
+      }
+    };
   }
 }
