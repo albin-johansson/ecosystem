@@ -32,9 +32,8 @@ def visualise_animal_populations_standard(data: LogData, directory: Path):
   axes.plot(wolf_history.keys(), wolf_history.values(), label="Wolves", color=wolf_color, **{"ls": "-."})
   axes.plot(bear_history.keys(), bear_history.values(), label="Bears", color=bear_color, **{"ls": "--"})
 
-  axes.legend(loc="upper left")
+  axes.legend(loc="lower left")
   axes.set_xlim(0, data.duration_secs())
-  axes.set_ylim(0, max(data.initial_total_alive_count(), data.alive_count()) + 20)
   axes.set_xlabel("Time (seconds)")
   axes.set_ylabel("Population size")
   axes.set_title("Population sizes")
@@ -142,7 +141,6 @@ def visualise_animal_populations_stackplot(data: LogData, directory: Path):
   axes.set_xlabel("Time (seconds)")
   axes.set_ylabel("Population size")
   axes.set_xlim(0, data.duration_secs())
-  axes.set_ylim(0, max(data.initial_total_alive_count(), data.alive_count()) + 20)
 
   plot.savefig(directory / Path("animal_populations_stackplot.png"))
   plot.close()

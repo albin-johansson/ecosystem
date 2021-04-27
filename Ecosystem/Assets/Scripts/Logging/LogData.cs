@@ -107,12 +107,6 @@ namespace Ecosystem.Logging
     /// </summary>
     [SerializeField] private List<Death> deaths = new List<Death>(64);
 
-    //TODO: make this not be saved.   
-    /// <summary>
-    ///   Ignore list, only for constructing the finished product (due to the immutability of serializable structs)
-    /// </summary>
-    [SerializeField] private List<GenomeInfo> workInProgressGenomes = new List<GenomeInfo>(64);
-
     /// <summary>
     ///   List of the genomes that count
     /// </summary>
@@ -137,6 +131,9 @@ namespace Ecosystem.Logging
 
     [SerializeField] private long freq = 1000; // 1 update per second
     [SerializeField] private long boxFreqFactor; // Because to many boxes are bad. 
+
+    /// Only used for constructing the finished product (due to the immutability of serializable structs)
+    [NonSerialized] private List<GenomeInfo> _workInProgressGenomes = new List<GenomeInfo>(64);
 
     /// <summary>
     ///   Prepares the data with the initial simulation state. Used to determine the
@@ -171,7 +168,7 @@ namespace Ecosystem.Logging
         if (animal.TryGetComponent(out AbstractGenome genome))
         {
           ++count;
-          workInProgressGenomes.Add(new GenomeInfo()
+          _workInProgressGenomes.Add(new GenomeInfo()
           {
             endTime = -1,
             genes = GenomeDataToList(genome.GetGenes()),
@@ -192,7 +189,7 @@ namespace Ecosystem.Logging
     {
       duration = SessionTime.Now();
       MatchGenomeToTime();
-      workInProgressGenomes = new List<GenomeInfo>();
+      _workInProgressGenomes = new List<GenomeInfo>();
       boxFreqFactor = 20; //might need changes if simulation is too long.  
       AssignAverages();
       AssignBoxes();
@@ -290,8 +287,8 @@ namespace Ecosystem.Logging
     {
       foreach (var pair in keyEnd)
       {
-        var genomeInfo = workInProgressGenomes.Find(genome => genome.key.Equals(pair.Key));
-        workInProgressGenomes.Remove(genomeInfo);
+        var genomeInfo = _workInProgressGenomes.Find(genome => genome.key.Equals(pair.Key));
+        _workInProgressGenomes.Remove(genomeInfo);
         genomes.Add(new GenomeInfo
         {
           tag = genomeInfo.tag,
@@ -302,7 +299,7 @@ namespace Ecosystem.Logging
         });
       }
 
-      foreach (var genome in workInProgressGenomes)
+      foreach (var genome in _workInProgressGenomes)
       {
         // Find unended/unadded genomes
         if (genome.endTime.Equals(-1))
@@ -362,7 +359,7 @@ namespace Ecosystem.Logging
       ++aliveCount;
 
       var abstractGenome = animal.GetComponent<AbstractGenome>();
-      workInProgressGenomes.Add(new GenomeInfo
+      _workInProgressGenomes.Add(new GenomeInfo
       {
         tag = animal.tag,
         time = SessionTime.Now(),
