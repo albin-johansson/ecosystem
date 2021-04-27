@@ -149,7 +149,6 @@ namespace Ecosystem.Logging
 
     private void CaptureInitialGenomes()
     {
-      //breaks design principle.
       initialAliveRabbitsCount = CaptureByTag("Rabbit");
       initialAliveDeerCount = CaptureByTag("Deer");
       initialAliveWolvesCount = CaptureByTag("Wolf");
