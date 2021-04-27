@@ -7,7 +7,7 @@ namespace Ecosystem.Logging
   [Serializable]
   public struct GeneBoxInfo
   {
-    public List<float> value;
+    public List<float> value; // TODO please rename to values
     public long entryTime;
   }
 }
