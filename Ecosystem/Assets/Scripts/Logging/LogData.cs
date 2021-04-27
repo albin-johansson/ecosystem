@@ -136,7 +136,7 @@ namespace Ecosystem.Logging
     [SerializeField] private BoxGenomes bearBoxGenomes;
 
     [SerializeField] private long freq = 1000; // 1 update per second
-    [SerializeField] private int boxFreqFactor = 5; // Because to many boxes are bad. 
+    [SerializeField] private long boxFreqFactor; // Because to many boxes are bad. 
 
     /// <summary>
     ///   Prepares the data with the initial simulation state. Used to determine the
@@ -240,10 +240,10 @@ namespace Ecosystem.Logging
       bearBoxGenomes = CreateBoxGenomes("Bear");
     }
 
-    private void ForEachInfo(string tag, GeneType type, Action<long, List<float>> action)
+    private void ForEachInfo(string tag, GeneType type, long freqFactor, Action<long, List<float>> action)
     {
       var animalGenomes = genomes.FindAll(genome => genome.tag.Equals(tag));
-      for (long time = 0; time < duration; time += freq)
+      for (long time = 0; time < duration; time += freq * freqFactor)
       {
         // Find all genomes active during that period
         var infos = animalGenomes.FindAll(info => time >= info.time && time <= info.endTime);
@@ -264,7 +264,7 @@ namespace Ecosystem.Logging
     {
       var averages = new List<GeneAverageInfo>();
 
-      ForEachInfo(tag, type, (time, values) => averages.Add(new GeneAverageInfo
+      ForEachInfo(tag, type, 1, (time, values) => averages.Add(new GeneAverageInfo
       {
         entryTime = time,
         value = values.Sum() / values.Count
@@ -277,7 +277,7 @@ namespace Ecosystem.Logging
     {
       var box = new List<GeneBoxInfo>();
 
-      ForEachInfo(tag, type, (time, values) => box.Add(new GeneBoxInfo
+      ForEachInfo(tag, type, boxFreqFactor, (time, values) => box.Add(new GeneBoxInfo
       {
         entryTime = time,
         value = values
