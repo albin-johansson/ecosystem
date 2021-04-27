@@ -49,6 +49,36 @@ def make_boxplot(data: list[BoxGenomeEntry], directory: Path, animal: str, gene:
   plot.close()
 
 
+def make_gene_pop_plot(data: list[BoxGenomeEntry], directory: Path, animal: str, gene: str):
+  # Find all possible values:
+  value_set = set[int]()
+  times: [int] = []
+  for entry in data:
+    times.append(int(entry.time / 1000))
+    for value in entry.values:
+      value_set.add(value)  # Round maybe? to n sig fig
+
+  # Populate with tuples of values and zeros. (list comprehension)
+  pop_lists: [(float, [int])] = [(value, [0] * len(data)) for value in value_set]
+
+  # Count occurrences for each value.
+  for i in range(0, len(data)):
+    for entry in data[i].values:
+      for pop in pop_lists:
+        if pop[0] == entry:
+          pop[1][i] += 1
+
+  # plot each line/gene_pop
+  figure, axes = plot.subplots()
+  for pop in pop_lists:
+    axes.plot(times, pop[1], label="value: " + str(pop[0]))
+  axes.legend(loc=0)
+  axes.set_xlabel("Time (seconds)")
+  axes.set_ylabel("#Active genes")
+  plot.savefig(directory / Path("gene_pop_" + animal + "_" + gene + ".png"))
+  plot.close()
+
+
 def plot_data(data: LogData, directory: Path, animal: str):
   if not os.path.exists(directory):
     os.makedirs(directory)
@@ -71,47 +101,14 @@ def plot_data(data: LogData, directory: Path, animal: str):
   make_boxplot(data.box_gestation_period(animal), directory, animal, "gestation_period")
   make_boxplot(data.box_sexual_maturity_time(animal), directory, animal, "sexual_maturity_time")
 
-  pop_plot(data.box_hunger_rate(animal), directory, animal, "hunger_rate")
-  pop_plot(data.box_hunger_threshold(animal), directory, animal, "hunger_threshold")
-  pop_plot(data.box_thirst_rate(animal), directory, animal, "thirst_rate")
-  pop_plot(data.box_thirst_threshold(animal), directory, animal, "thirst_threshold")
-  pop_plot(data.box_vision(animal), directory, animal, "vision")
-  pop_plot(data.box_speed(animal), directory, animal, "speed")
-  pop_plot(data.box_gestation_period(animal), directory, animal, "gestation_period")
-  pop_plot(data.box_sexual_maturity_time(animal), directory, animal, "sexual_maturity_time")
-
-
-def pop_plot(data: list[BoxGenomeEntry], directory: Path, animal: str, gene: str):
-  # Find all possible values:
-  value_set = set[int]()
-  times: [int] = []
-  for entry in data:
-    times.append(int(entry.time / 1000))
-    for value in entry.values:
-      value_set.add(value)
-
-  # Populate with tuples of values and zeros.
-  pop_lists: [(float, [int])] = []
-  zeros: [int] = [0] * len(data)
-  for value in value_set:
-    pop_lists.append((value, zeros.copy()))
-
-  # Count occurrences for each value.
-  for i in range(0, len(data)):
-    for entry in data[i].values:
-      for pop in pop_lists:
-        if pop[0] == entry:
-          pop[1][i] += 1
-
-  # plot each line/gene_pop
-  figure, axes = plot.subplots()
-  for pop in pop_lists:
-    axes.plot(times, pop[1], label="value: " + str(pop[0]))
-  axes.legend(loc=0)
-  axes.set_xlabel("Time (seconds)")
-  axes.set_ylabel("#Active genes")
-  plot.savefig(directory / Path("gene_pop_" + animal + "_" + gene + ".png"))
-  plot.close()
+  make_gene_pop_plot(data.box_hunger_rate(animal), directory, animal, "hunger_rate")
+  make_gene_pop_plot(data.box_hunger_threshold(animal), directory, animal, "hunger_threshold")
+  make_gene_pop_plot(data.box_thirst_rate(animal), directory, animal, "thirst_rate")
+  make_gene_pop_plot(data.box_thirst_threshold(animal), directory, animal, "thirst_threshold")
+  make_gene_pop_plot(data.box_vision(animal), directory, animal, "vision")
+  make_gene_pop_plot(data.box_speed(animal), directory, animal, "speed")
+  make_gene_pop_plot(data.box_gestation_period(animal), directory, animal, "gestation_period")
+  make_gene_pop_plot(data.box_sexual_maturity_time(animal), directory, animal, "sexual_maturity_time")
 
 
 def visualise_genome_changes(data: LogData, directory: Path):
