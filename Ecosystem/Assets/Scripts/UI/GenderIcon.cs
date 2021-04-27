@@ -1,4 +1,5 @@
 ﻿using System;
+using Ecosystem.Genes;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -7,22 +8,22 @@ namespace Ecosystem.UI
   public sealed class GenderIcon : MonoBehaviour
   {
     [SerializeField] private Image image;
+    [SerializeField] private AbstractGenome genome;
     private Sprite _maleSprite;
     private Sprite _femaleSprite;
     private Sprite _femalePregnantSprite;
 
-    private void Start()
+    private void OnEnable()
     {
       _maleSprite =  Resources.Load <Sprite>("Sprites/male");
       _femaleSprite =  Resources.Load <Sprite>("Sprites/female");
       _femalePregnantSprite = Resources.Load <Sprite>("Sprites/female_pregnant");
-        
     }
 
-    public void SetGenderIcon(bool isMale)
+    public void SetGenderIcon()
     {
       
-      if (isMale)
+      if (genome.IsMale)
       {
         image.sprite = _maleSprite;
       }
