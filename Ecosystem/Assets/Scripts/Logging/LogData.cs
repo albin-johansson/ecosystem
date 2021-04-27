@@ -399,13 +399,11 @@ namespace Ecosystem.Logging
       ++deadCount;
 
       var key = deadObject.GetComponent<AbstractGenome>().key;
-      try
+
+      // Animals die multiple times :/. So the key might already exist.
+      if (!keyEnd.ContainsKey(key))
       {
-        keyEnd.Add(key, SessionTime.Now()); // TODO FIXME
-      }
-      catch
-      {
-        // Animals die multiple times. If we get here, the animal already died once.
+        keyEnd.Add(key, SessionTime.Now());
       }
     }
 
