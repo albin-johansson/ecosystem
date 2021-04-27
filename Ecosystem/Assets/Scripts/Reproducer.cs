@@ -61,7 +61,7 @@ namespace Ecosystem
     {
       _sexualMaturityTime = genome.GetSexualMaturityTime().Value;
       _gestationPeriod = genome.GetGestationPeriod().Value;
-      _directoryOfAnimal = gameObject.transform.parent;
+      _directoryOfAnimal = gameObject.transform.parent.parent;
       animalModel.transform.localScale = ChildSize;
     }
 
