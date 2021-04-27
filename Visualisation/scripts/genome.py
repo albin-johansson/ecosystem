@@ -71,41 +71,45 @@ def plot_data(data: LogData, directory: Path, animal: str):
   make_boxplot(data.box_gestation_period(animal), directory, animal, "gestation_period")
   make_boxplot(data.box_sexual_maturity_time(animal), directory, animal, "sexual_maturity_time")
 
+  pop_plot(data.box_hunger_rate(animal), directory, animal, "hunger_rate")
+  pop_plot(data.box_hunger_threshold(animal), directory, animal, "hunger_threshold")
+  pop_plot(data.box_thirst_rate(animal), directory, animal, "thirst_rate")
+  pop_plot(data.box_thirst_threshold(animal), directory, animal, "thirst_threshold")
+  pop_plot(data.box_vision(animal), directory, animal, "vision")
+  pop_plot(data.box_speed(animal), directory, animal, "speed")
+  pop_plot(data.box_gestation_period(animal), directory, animal, "gestation_period")
+  pop_plot(data.box_sexual_maturity_time(animal), directory, animal, "sexual_maturity_time")
+
 
 def pop_plot(data: list[BoxGenomeEntry], directory: Path, animal: str, gene: str):
-  # TODO: tmp always speed
-  # data = data.box_speed("rabbit")
+  # Find all possible values:
   value_set = set[int]()
+  times: [int] = []
   for entry in data:
+    times.append(int(entry.time / 1000))
     for value in entry.values:
       value_set.add(value)
-  # Populate list with list for each possible value
-  pop_lists: [(float, list(int))] = []
-  times: [int] = []
-  temps: [int] = [0] * len(data)
 
-  # TODO: make section into fewer loops.
-  for i in range(0, len(data)):
-    times.append(data[i].time)
-
+  # Populate with tuples of values and zeros.
+  pop_lists: [(float, [int])] = []
+  zeros: [int] = [0] * len(data)
   for value in value_set:
-    pop_lists.append((value, temps.copy()))
-  # </TODO>
+    pop_lists.append((value, zeros.copy()))
 
+  # Count occurrences for each value.
   for i in range(0, len(data)):
     for entry in data[i].values:
       for pop in pop_lists:
         if pop[0] == entry:
-          pop[1][i] = pop[1][i] + 1
+          pop[1][i] += 1
 
+  # plot each line/gene_pop
   figure, axes = plot.subplots()
-  # TODO: add time to the bottom
-  colours: [(float, str)] = []
   for pop in pop_lists:
-    p = axes.plot(pop[1], label="value: " + str(pop[0]))
-    colours.append((pop[0], p[0].get_color()))
-  # plot.show()
+    axes.plot(times, pop[1], label="value: " + str(pop[0]))
   axes.legend(loc=0)
+  axes.set_xlabel("Time (seconds)")
+  axes.set_ylabel("#Active genes")
   plot.savefig(directory / Path("gene_pop_" + animal + "_" + gene + ".png"))
   plot.close()
 
@@ -118,8 +122,7 @@ def visualise_genome_changes(data: LogData, directory: Path):
   :param data: the simulation data to read from.
   :param directory: the directory to which the plot will be saved.
   """
-  pop_plot(data.box_speed("rabbit"), directory, "rabbit", "speed")
-  # plot_data(data, Path(os.path.join(directory, "rabbit")), "rabbit")
-  # plot_data(data, Path(os.path.join(directory, "deer")), "deer")
-  # plot_data(data, Path(os.path.join(directory, "wolf")), "wolf")
-  # plot_data(data, Path(os.path.join(directory, "bear")), "bear")
+  plot_data(data, Path(os.path.join(directory, "rabbit")), "rabbit")
+  plot_data(data, Path(os.path.join(directory, "deer")), "deer")
+  plot_data(data, Path(os.path.join(directory, "wolf")), "wolf")
+  plot_data(data, Path(os.path.join(directory, "bear")), "bear")
