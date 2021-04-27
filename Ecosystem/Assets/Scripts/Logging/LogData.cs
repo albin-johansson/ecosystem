@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Linq;
 using Ecosystem.Genes;
 using Ecosystem.Util;
-using Unity.Mathematics;
 using UnityEngine;
 
 namespace Ecosystem.Logging
