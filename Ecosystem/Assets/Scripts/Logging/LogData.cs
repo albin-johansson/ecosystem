@@ -123,13 +123,11 @@ namespace Ecosystem.Logging
     /// </summary>
     [SerializeField] private Dictionary<string, long> keyEnd = new Dictionary<string, long>();
 
-
     //   Saved averages for python 
     [SerializeField] private AverageGenomes rabbitAverageGenomes;
     [SerializeField] private AverageGenomes wolfAverageGenomes;
     [SerializeField] private AverageGenomes deerAverageGenomes;
     [SerializeField] private AverageGenomes bearAverageGenomes;
-
 
     //   Saved box spreads for python
     [SerializeField] private BoxGenomes rabbitBoxGenomes;
@@ -137,10 +135,8 @@ namespace Ecosystem.Logging
     [SerializeField] private BoxGenomes deerBoxGenomes;
     [SerializeField] private BoxGenomes bearBoxGenomes;
 
-    [SerializeField] private long freq = 1000; //1/sec
-
-    //Because to many boxes are bad. 
-    [SerializeField] private int boxFreqFactor = 5;
+    [SerializeField] private long freq = 1000; // 1 update per second
+    [SerializeField] private int boxFreqFactor = 5; // Because to many boxes are bad. 
 
     /// <summary>
     ///   Prepares the data with the initial simulation state. Used to determine the
@@ -170,18 +166,17 @@ namespace Ecosystem.Logging
 
     private int CaptureByTag(string tag)
     {
-      int count = 0;
-      GameObject[] animals = GameObject.FindGameObjectsWithTag(tag);
-      foreach (var animal in animals)
+      var count = 0;
+      foreach (var animal in GameObject.FindGameObjectsWithTag(tag))
       {
-        if (animal.TryGetComponent(out AbstractGenome g))
+        if (animal.TryGetComponent(out AbstractGenome genome))
         {
-          count++;
+          ++count;
           workInProgressGenomes.Add(new GenomeInfo()
           {
             endTime = -1,
-            genes = GenomeDataToList(g.GetGenes()),
-            key = g.key,
+            genes = GenomeDataToList(genome.GetGenes()),
+            key = genome.key,
             tag = tag,
             time = 0
           });
@@ -204,157 +199,90 @@ namespace Ecosystem.Logging
       AssignBoxes();
     }
 
+    private AverageGenomes CreateAverageGenomes(string animal) => new AverageGenomes
+    {
+      animal = animal,
+      HungerRate = CreateAverages(animal, GeneType.HungerRate),
+      HungerThreshold = CreateAverages(animal, GeneType.HungerThreshold),
+      ThirstRate = CreateAverages(animal, GeneType.ThirstRate),
+      ThirstThreshold = CreateAverages(animal, GeneType.ThirstThreshold),
+      Vision = CreateAverages(animal, GeneType.Vision),
+      Speed = CreateAverages(animal, GeneType.Speed),
+      GestationPeriod = CreateAverages(animal, GeneType.GestationPeriod),
+      SexualMaturityTime = CreateAverages(animal, GeneType.SexualMaturityTime),
+    };
+
+    private BoxGenomes CreateBoxGenomes(string animal) => new BoxGenomes
+    {
+      animal = animal,
+      HungerRate = CreateBoxes(animal, GeneType.HungerRate),
+      HungerThreshold = CreateBoxes(animal, GeneType.HungerThreshold),
+      ThirstRate = CreateBoxes(animal, GeneType.ThirstRate),
+      ThirstThreshold = CreateBoxes(animal, GeneType.ThirstThreshold),
+      Vision = CreateBoxes(animal, GeneType.Vision),
+      Speed = CreateBoxes(animal, GeneType.Speed),
+      GestationPeriod = CreateBoxes(animal, GeneType.GestationPeriod),
+      SexualMaturityTime = CreateBoxes(animal, GeneType.SexualMaturityTime),
+    };
+
     private void AssignAverages()
     {
-      rabbitAverageGenomes = new AverageGenomes()
-      {
-        animal = "Rabbit",
-        HungerRate = CreateAverages("Rabbit", GeneType.HungerRate),
-        HungerThreshold = CreateAverages("Rabbit", GeneType.HungerThreshold),
-        ThirstRate = CreateAverages("Rabbit", GeneType.ThirstRate),
-        ThirstThreshold = CreateAverages("Rabbit", GeneType.ThirstThreshold),
-        Vision = CreateAverages("Rabbit", GeneType.Vision),
-        Speed = CreateAverages("Rabbit", GeneType.Speed),
-        GestationPeriod = CreateAverages("Rabbit", GeneType.GestationPeriod),
-        SexualMaturityTime = CreateAverages("Rabbit", GeneType.SexualMaturityTime),
-      };
-      wolfAverageGenomes = new AverageGenomes()
-      {
-        animal = "Wolf",
-        HungerRate = CreateAverages("Wolf", GeneType.HungerRate),
-        HungerThreshold = CreateAverages("Wolf", GeneType.HungerThreshold),
-        ThirstRate = CreateAverages("Wolf", GeneType.ThirstRate),
-        ThirstThreshold = CreateAverages("Wolf", GeneType.ThirstThreshold),
-        Vision = CreateAverages("Wolf", GeneType.Vision),
-        Speed = CreateAverages("Wolf", GeneType.Speed),
-        GestationPeriod = CreateAverages("Wolf", GeneType.GestationPeriod),
-        SexualMaturityTime = CreateAverages("Wolf", GeneType.SexualMaturityTime),
-      };
-      deerAverageGenomes = new AverageGenomes()
-      {
-        animal = "Deer",
-        HungerRate = CreateAverages("Deer", GeneType.HungerRate),
-        HungerThreshold = CreateAverages("Deer", GeneType.HungerThreshold),
-        ThirstRate = CreateAverages("Deer", GeneType.ThirstRate),
-        ThirstThreshold = CreateAverages("Deer", GeneType.ThirstThreshold),
-        Vision = CreateAverages("Deer", GeneType.Vision),
-        Speed = CreateAverages("Deer", GeneType.Speed),
-        GestationPeriod = CreateAverages("Deer", GeneType.GestationPeriod),
-        SexualMaturityTime = CreateAverages("Deer", GeneType.SexualMaturityTime),
-      };
-      bearAverageGenomes = new AverageGenomes()
-      {
-        animal = "Bear",
-        HungerRate = CreateAverages("Bear", GeneType.HungerRate),
-        HungerThreshold = CreateAverages("Bear", GeneType.HungerThreshold),
-        ThirstRate = CreateAverages("Bear", GeneType.ThirstRate),
-        ThirstThreshold = CreateAverages("Bear", GeneType.ThirstThreshold),
-        Vision = CreateAverages("Bear", GeneType.Vision),
-        Speed = CreateAverages("Bear", GeneType.Speed),
-        GestationPeriod = CreateAverages("Bear", GeneType.GestationPeriod),
-        SexualMaturityTime = CreateAverages("Bear", GeneType.SexualMaturityTime),
-      };
+      rabbitAverageGenomes = CreateAverageGenomes("Rabbit");
+      deerAverageGenomes = CreateAverageGenomes("Deer");
+      wolfAverageGenomes = CreateAverageGenomes("Wolf");
+      bearAverageGenomes = CreateAverageGenomes("Bear");
     }
 
     private void AssignBoxes()
     {
-      rabbitBoxGenomes = new BoxGenomes()
+      rabbitBoxGenomes = CreateBoxGenomes("Rabbit");
+      deerBoxGenomes = CreateBoxGenomes("Deer");
+      wolfBoxGenomes = CreateBoxGenomes("Wolf");
+      bearBoxGenomes = CreateBoxGenomes("Bear");
+    }
+
+    private void ForEachInfo(string tag, GeneType type, Action<long, List<float>> action)
+    {
+      var animalGenomes = genomes.FindAll(genome => genome.tag.Equals(tag));
+      for (long time = 0; time < duration; time += freq)
       {
-        animal = "Rabbit",
-        HungerRate = CreateBoxes("Rabbit", GeneType.HungerRate),
-        HungerThreshold = CreateBoxes("Rabbit", GeneType.HungerThreshold),
-        ThirstRate = CreateBoxes("Rabbit", GeneType.ThirstRate),
-        ThirstThreshold = CreateBoxes("Rabbit", GeneType.ThirstThreshold),
-        Vision = CreateBoxes("Rabbit", GeneType.Vision),
-        Speed = CreateBoxes("Rabbit", GeneType.Speed),
-        GestationPeriod = CreateBoxes("Rabbit", GeneType.GestationPeriod),
-        SexualMaturityTime = CreateBoxes("Rabbit", GeneType.SexualMaturityTime),
-      };
-      wolfBoxGenomes = new BoxGenomes()
-      {
-        animal = "Wolf",
-        HungerRate = CreateBoxes("Wolf", GeneType.HungerRate),
-        HungerThreshold = CreateBoxes("Wolf", GeneType.HungerThreshold),
-        ThirstRate = CreateBoxes("Wolf", GeneType.ThirstRate),
-        ThirstThreshold = CreateBoxes("Wolf", GeneType.ThirstThreshold),
-        Vision = CreateBoxes("Wolf", GeneType.Vision),
-        Speed = CreateBoxes("Wolf", GeneType.Speed),
-        GestationPeriod = CreateBoxes("Wolf", GeneType.GestationPeriod),
-        SexualMaturityTime = CreateBoxes("Wolf", GeneType.SexualMaturityTime),
-      };
-      deerBoxGenomes = new BoxGenomes()
-      {
-        animal = "Deer",
-        HungerRate = CreateBoxes("Deer", GeneType.HungerRate),
-        HungerThreshold = CreateBoxes("Deer", GeneType.HungerThreshold),
-        ThirstRate = CreateBoxes("Deer", GeneType.ThirstRate),
-        ThirstThreshold = CreateBoxes("Deer", GeneType.ThirstThreshold),
-        Vision = CreateBoxes("Deer", GeneType.Vision),
-        Speed = CreateBoxes("Deer", GeneType.Speed),
-        GestationPeriod = CreateBoxes("Deer", GeneType.GestationPeriod),
-        SexualMaturityTime = CreateBoxes("Deer", GeneType.SexualMaturityTime),
-      };
-      bearBoxGenomes = new BoxGenomes()
-      {
-        animal = "Bear",
-        HungerRate = CreateBoxes("Bear", GeneType.HungerRate),
-        HungerThreshold = CreateBoxes("Bear", GeneType.HungerThreshold),
-        ThirstRate = CreateBoxes("Bear", GeneType.ThirstRate),
-        ThirstThreshold = CreateBoxes("Bear", GeneType.ThirstThreshold),
-        Vision = CreateBoxes("Bear", GeneType.Vision),
-        Speed = CreateBoxes("Bear", GeneType.Speed),
-        GestationPeriod = CreateBoxes("Bear", GeneType.GestationPeriod),
-        SexualMaturityTime = CreateBoxes("Bear", GeneType.SexualMaturityTime),
-      };
+        // Find all genomes active during that period
+        var infos = animalGenomes.FindAll(info => time >= info.time && time <= info.endTime);
+
+        // Only care if some values exist. 
+        if (infos.Count > 0)
+        {
+          var values = new List<float>();
+
+          infos.ForEach(info => values.Add(info.genes.Find(otherInfo => otherInfo.geneType == type).value));
+
+          action.Invoke(time, values);
+        }
+      }
     }
 
     private List<GeneAverageInfo> CreateAverages(string tag, GeneType type)
     {
-      List<GeneAverageInfo> averages = new List<GeneAverageInfo>();
-      var animalGenomes = genomes.FindAll(genome => genome.tag.Equals(tag));
-      for (long i = 0; i < duration; i += freq)
-      {
-        //Find all genomes active during that period
-        List<GenomeInfo> currentGI = animalGenomes.FindAll(g => i >= g.time && i <= g.endTime);
-        //only care if some values exist. 
-        if (currentGI.Count > 0)
-        {
-          List<float> vals = new List<float>();
-          currentGI.ForEach(genomeInfo =>
-            vals.Add(genomeInfo.genes.Find(geneInfo => geneInfo.geneType.Equals(type)).value));
+      var averages = new List<GeneAverageInfo>();
 
-          averages.Add(new GeneAverageInfo()
-          {
-            entryTime = i,
-            value = vals.Sum() / vals.Count
-          });
-        }
-      }
+      ForEachInfo(tag, type, (time, values) => averages.Add(new GeneAverageInfo
+      {
+        entryTime = time,
+        value = values.Sum() / values.Count
+      }));
 
       return averages;
     }
 
     private List<GeneBoxInfo> CreateBoxes(string tag, GeneType type)
     {
-      var animalGenomes = genomes.FindAll(genome => genome.tag.Equals(tag));
-      List<GeneBoxInfo> box = new List<GeneBoxInfo>();
-      for (long i = 0; i < duration; i += (freq * boxFreqFactor))
+      var box = new List<GeneBoxInfo>();
+
+      ForEachInfo(tag, type, (time, values) => box.Add(new GeneBoxInfo
       {
-        //Find all genomes active during that period
-        List<GenomeInfo> currentGI = animalGenomes.FindAll(g => i >= g.time && i <= g.endTime);
-        //only care if some values exist. 
-        if (currentGI.Count > 0)
-        {
-          List<float> vals = new List<float>();
-          currentGI.ForEach(genomeInfo =>
-            vals.Add(genomeInfo.genes.Find(geneInfo => geneInfo.geneType.Equals(type)).value));
-          box.Add(new GeneBoxInfo()
-          {
-            entryTime = i,
-            value = vals
-          });
-        }
-      }
+        entryTime = time,
+        value = values
+      }));
 
       return box;
     }
@@ -363,9 +291,9 @@ namespace Ecosystem.Logging
     {
       foreach (var pair in keyEnd)
       {
-        GenomeInfo genomeInfo = workInProgressGenomes.Find(genome => genome.key.Equals(pair.Key));
+        var genomeInfo = workInProgressGenomes.Find(genome => genome.key.Equals(pair.Key));
         workInProgressGenomes.Remove(genomeInfo);
-        genomes.Add(new GenomeInfo()
+        genomes.Add(new GenomeInfo
         {
           tag = genomeInfo.tag,
           endTime = pair.Value,
@@ -377,10 +305,10 @@ namespace Ecosystem.Logging
 
       foreach (var genome in workInProgressGenomes)
       {
-        //Find unended/unadded genomes
+        // Find unended/unadded genomes
         if (genome.endTime.Equals(-1))
         {
-          genomes.Add(new GenomeInfo()
+          genomes.Add(new GenomeInfo
           {
             tag = genome.tag,
             endTime = duration,
@@ -434,8 +362,8 @@ namespace Ecosystem.Logging
       ++birthCount;
       ++aliveCount;
 
-      AbstractGenome abstractGenome = animal.GetComponent<AbstractGenome>();
-      workInProgressGenomes.Add(new GenomeInfo()
+      var abstractGenome = animal.GetComponent<AbstractGenome>();
+      workInProgressGenomes.Add(new GenomeInfo
       {
         tag = animal.tag,
         time = SessionTime.Now(),
@@ -470,7 +398,7 @@ namespace Ecosystem.Logging
       --aliveCount;
       ++deadCount;
 
-      string key = deadObject.GetComponent<AbstractGenome>().key;
+      var key = deadObject.GetComponent<AbstractGenome>().key;
       try
       {
         keyEnd.Add(key, SessionTime.Now());
