@@ -401,11 +401,11 @@ namespace Ecosystem.Logging
       var key = deadObject.GetComponent<AbstractGenome>().key;
       try
       {
-        keyEnd.Add(key, SessionTime.Now());
+        keyEnd.Add(key, SessionTime.Now()); // TODO FIXME
       }
       catch
       {
-        //animals dying multiple times, causing warning messages. If here, animal already died once.
+        // Animals die multiple times. If we get here, the animal already died once.
       }
     }
 
