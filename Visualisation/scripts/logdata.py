@@ -8,6 +8,24 @@ TimePoint = int
 Amount = int
 
 
+class BoxGenomeEntry:
+  time: int = 0
+  values: list[float] = []
+
+  def __init__(self, time: int, values: list[float]):
+    self.time = time
+    self.values = values
+
+
+class AverageGenomeEntry:
+  time: int = 0
+  value: float = 0
+
+  def __init__(self, time: int, value: float):
+    self.time = time
+    self.value = value
+
+
 class LogData:
   """
   A wrapper around simulation data obtained from a JSON file.
@@ -71,286 +89,83 @@ class LogData:
   def __getitem__(self, item):  # operator[]
     return self.data[item]
 
-  def averageGenomes(self, animal: str, gene: str):
-    list = self.data[animal][gene]
-    list2 = []
-    for v in list:
-      list2.append(AverageGenomeEntry(v["entryTime"], v["value"]))
-    return list2
+  def average_genomes(self, animal: str, gene: str) -> list[AverageGenomeEntry]:
+    obj = self.data[animal][gene]
+    result: list[AverageGenomeEntry] = []
 
-  # Rabbit gets
-  def rabbit_hunger_rate(self):
-    return self.averageGenomes("rabbitAverageGenomes", "HungerRate")
+    for entry in obj:
+      result.append(AverageGenomeEntry(entry["entryTime"], entry["value"]))
 
-  def rabbit_hunger_threshold(self):
-    return self.averageGenomes("rabbitAverageGenomes", "HungerThreshold")
+    return result
 
-  def rabbit_thirst_rate(self):
-    return self.averageGenomes("rabbitAverageGenomes", "ThirstRate")
+  def box_genomes(self, animal: str, gene: str) -> list[BoxGenomeEntry]:
+    data = self.data[animal][gene]
 
-  def rabbit_thirst_threshold(self):
-    return self.averageGenomes("rabbitAverageGenomes", "ThirstThreshold")
+    result = []
+    for entry in data:
+      result.append(BoxGenomeEntry(entry["entryTime"], entry["value"]))
 
-  def rabbit_vision(self):
-    return self.averageGenomes("rabbitAverageGenomes", "Vision")
+    return result
 
-  def rabbit_speed(self):
-    return self.averageGenomes("rabbitAverageGenomes", "Speed")
+  def average_hunger_rate(self, animal: str) -> list[AverageGenomeEntry]:
+    return self.average_genomes(animal + "AverageGenomes", "HungerRate")
 
-  def rabbit_size_factor(self):
-    return self.averageGenomes("rabbitAverageGenomes", "SizeFactor")
+  def average_hunger_threshold(self, animal: str) -> list[AverageGenomeEntry]:
+    return self.average_genomes(animal + "AverageGenomes", "HungerThreshold")
 
-  def rabbit_desirability_score(self):
-    return self.averageGenomes("rabbitAverageGenomes", "DesirabilityScore")
+  def average_thirst_rate(self, animal: str) -> list[AverageGenomeEntry]:
+    return self.average_genomes(animal + "AverageGenomes", "ThirstRate")
 
-  def rabbit_gestation_period(self):
-    return self.averageGenomes("rabbitAverageGenomes", "GestationPeriod")
+  def average_thirst_threshold(self, animal: str) -> list[AverageGenomeEntry]:
+    return self.average_genomes(animal + "AverageGenomes", "ThirstThreshold")
 
-  def rabbit_sexual_maturity_time(self):
-    return self.averageGenomes("rabbitAverageGenomes", "SexualMaturityTime")
+  def average_vision(self, animal: str) -> list[AverageGenomeEntry]:
+    return self.average_genomes(animal + "AverageGenomes", "Vision")
 
-  # Wolf gets
-  def wolf_hunger_rate(self):
-    return self.averageGenomes("wolfAverageGenomes", "HungerRate")
+  def average_speed(self, animal: str) -> list[AverageGenomeEntry]:
+    return self.average_genomes(animal + "AverageGenomes", "Speed")
 
-  def wolf_hunger_threshold(self):
-    return self.averageGenomes("wolfAverageGenomes", "HungerThreshold")
+  def average_size_factor(self, animal: str) -> list[AverageGenomeEntry]:
+    return self.average_genomes(animal + "AverageGenomes", "SizeFactor")
 
-  def wolf_thirst_rate(self):
-    return self.averageGenomes("wolfAverageGenomes", "ThirstRate")
+  def average_desirability_score(self, animal: str) -> list[AverageGenomeEntry]:
+    return self.average_genomes(animal + "AverageGenomes", "DesirabilityScore")
 
-  def wolf_thirst_threshold(self):
-    return self.averageGenomes("wolfAverageGenomes", "ThirstThreshold")
+  def average_gestation_period(self, animal: str) -> list[AverageGenomeEntry]:
+    return self.average_genomes(animal + "AverageGenomes", "GestationPeriod")
 
-  def wolf_vision(self):
-    return self.averageGenomes("wolfAverageGenomes", "Vision")
+  def average_sexual_maturity_time(self, animal: str) -> list[AverageGenomeEntry]:
+    return self.average_genomes(animal + "AverageGenomes", "SexualMaturityTime")
 
-  def wolf_speed(self):
-    return self.averageGenomes("wolfAverageGenomes", "Speed")
+  def box_hunger_rate(self, animal: str) -> list[BoxGenomeEntry]:
+    return self.box_genomes(animal + "BoxGenomes", "HungerRate")
 
-  def wolf_size_factor(self):
-    return self.averageGenomes("wolfAverageGenomes", "SizeFactor")
+  def box_hunger_threshold(self, animal: str) -> list[BoxGenomeEntry]:
+    return self.box_genomes(animal + "BoxGenomes", "HungerThreshold")
 
-  def wolf_desirability_score(self):
-    return self.averageGenomes("wolfAverageGenomes", "DesirabilityScore")
+  def box_thirst_rate(self, animal: str) -> list[BoxGenomeEntry]:
+    return self.box_genomes(animal + "BoxGenomes", "ThirstRate")
 
-  def wolf_gestation_period(self):
-    return self.averageGenomes("wolfAverageGenomes", "GestationPeriod")
+  def box_thirst_threshold(self, animal: str) -> list[BoxGenomeEntry]:
+    return self.box_genomes(animal + "BoxGenomes", "ThirstThreshold")
 
-  def wolf_sexual_maturity_time(self):
-    return self.averageGenomes("wolfAverageGenomes", "SexualMaturityTime")
+  def box_vision(self, animal: str) -> list[BoxGenomeEntry]:
+    return self.box_genomes(animal + "BoxGenomes", "Vision")
 
-  # Deer gets
-  def deer_hunger_rate(self):
-    return self.averageGenomes("deerAverageGenomes", "HungerRate")
+  def box_speed(self, animal: str) -> list[BoxGenomeEntry]:
+    return self.box_genomes(animal + "BoxGenomes", "Speed")
 
-  def deer_hunger_threshold(self):
-    return self.averageGenomes("deerAverageGenomes", "HungerThreshold")
+  def box_size_factor(self, animal: str) -> list[BoxGenomeEntry]:
+    return self.box_genomes(animal + "BoxGenomes", "SizeFactor")
 
-  def deer_thirst_rate(self):
-    return self.averageGenomes("deerAverageGenomes", "ThirstRate")
+  def box_desirability_score(self, animal: str) -> list[BoxGenomeEntry]:
+    return self.box_genomes(animal + "BoxGenomes", "DesirabilityScore")
 
-  def deer_thirst_threshold(self):
-    return self.averageGenomes("deerAverageGenomes", "ThirstThreshold")
+  def box_gestation_period(self, animal: str) -> list[BoxGenomeEntry]:
+    return self.box_genomes(animal + "BoxGenomes", "GestationPeriod")
 
-  def deer_vision(self):
-    return self.averageGenomes("deerAverageGenomes", "Vision")
-
-  def deer_speed(self):
-    return self.averageGenomes("deerAverageGenomes", "Speed")
-
-  def deer_size_factor(self):
-    return self.averageGenomes("deerAverageGenomes", "SizeFactor")
-
-  def deer_desirability_score(self):
-    return self.averageGenomes("deerAverageGenomes", "DesirabilityScore")
-
-  def deer_gestation_period(self):
-    return self.averageGenomes("deerAverageGenomes", "GestationPeriod")
-
-  def deer_sexual_maturity_time(self):
-    return self.averageGenomes("deerAverageGenomes", "SexualMaturityTime")
-
-  # Bear gets
-  def bear_hunger_rate(self):
-    return self.averageGenomes("bearAverageGenomes", "HungerRate")
-
-  def bear_hunger_threshold(self):
-    return self.averageGenomes("bearAverageGenomes", "HungerThreshold")
-
-  def bear_thirst_rate(self):
-    return self.averageGenomes("bearAverageGenomes", "ThirstRate")
-
-  def bear_thirst_threshold(self):
-    return self.averageGenomes("bearAverageGenomes", "ThirstThreshold")
-
-  def bear_vision(self):
-    return self.averageGenomes("bearAverageGenomes", "Vision")
-
-  def bear_speed(self):
-    return self.averageGenomes("bearAverageGenomes", "Speed")
-
-  def bear_size_factor(self):
-    return self.averageGenomes("bearAverageGenomes", "SizeFactor")
-
-  def bear_desirability_score(self):
-    return self.averageGenomes("bearAverageGenomes", "DesirabilityScore")
-
-  def bear_gestation_period(self):
-    return self.averageGenomes("bearAverageGenomes", "GestationPeriod")
-
-  def bear_sexual_maturity_time(self):
-    return self.averageGenomes("bearAverageGenomes", "SexualMaturityTime")
-
-  def box_genomes(self, animal: str, gene: str):
-    list = self.data[animal][gene]
-    list2 = []
-    for v in list:
-      list2.append(BoxGenomeEntry(v["entryTime"], v["value"]))
-    return list2
-
-    # Rabbit gets
-
-  def rabbit_hunger_rate_box(self):
-    return self.averageGenomes("rabbitBoxGenomes", "HungerRate")
-
-  def rabbit_hunger_threshold_box(self):
-    return self.box_genomes("rabbitBoxGenomes", "HungerThreshold")
-
-  def rabbit_thirst_rate_box(self):
-    return self.box_genomes("rabbitBoxGenomes", "ThirstRate")
-
-  def rabbit_thirst_threshold_box(self):
-    return self.box_genomes("rabbitBoxGenomes", "ThirstThreshold")
-
-  def rabbit_vision_box(self):
-    return self.box_genomes("rabbitBoxGenomes", "Vision")
-
-  def rabbit_speed_box(self):
-    return self.box_genomes("rabbitBoxGenomes", "Speed")
-
-  def rabbit_size_factor_box(self):
-    return self.box_genomes("rabbitBoxGenomes", "SizeFactor")
-
-  def rabbit_desirability_score_box(self):
-    return self.box_genomes("rabbitBoxGenomes", "DesirabilityScore")
-
-  def rabbit_gestation_period_box(self):
-    return self.box_genomes("rabbitBoxGenomes", "GestationPeriod")
-
-  def rabbit_sexual_maturity_time_box(self):
-    return self.box_genomes("rabbitBoxGenomes", "SexualMaturityTime")
-
-  # Wolf gets
-  def wolf_hunger_rate_box(self):
-    return self.box_genomes("wolfBoxGenomes", "HungerRate")
-
-  def wolf_hunger_threshold_box(self):
-    return self.box_genomes("wolfBoxGenomes", "HungerThreshold")
-
-  def wolf_thirst_rate_box(self):
-    return self.box_genomes("wolfBoxGenomes", "ThirstRate")
-
-  def wolf_thirst_threshold_box(self):
-    return self.box_genomes("wolfBoxGenomes", "ThirstThreshold")
-
-  def wolf_vision_box(self):
-    return self.box_genomes("wolfBoxGenomes", "Vision")
-
-  def wolf_speed_box(self):
-    return self.box_genomes("wolfBoxGenomes", "Speed")
-
-  def wolf_size_factor_box(self):
-    return self.box_genomes("wolfBoxGenomes", "SizeFactor")
-
-  def wolf_desirability_score_box(self):
-    return self.box_genomes("wolfBoxGenomes", "DesirabilityScore")
-
-  def wolf_gestation_period_box(self):
-    return self.box_genomes("wolfBoxGenomes", "GestationPeriod")
-
-  def wolf_sexual_maturity_time_box(self):
-    return self.box_genomes("wolfBoxGenomes", "SexualMaturityTime")
-
-  # Deer gets
-  def deer_hunger_rate_box(self):
-    return self.box_genomes("deerBoxGenomes", "HungerRate")
-
-  def deer_hunger_threshold_box(self):
-    return self.box_genomes("deerBoxGenomes", "HungerThreshold")
-
-  def deer_thirst_rate_box(self):
-    return self.box_genomes("deerBoxGenomes", "ThirstRate")
-
-  def deer_thirst_threshold_box(self):
-    return self.box_genomes("deerBoxGenomes", "ThirstThreshold")
-
-  def deer_vision_box(self):
-    return self.box_genomes("deerBoxGenomes", "Vision")
-
-  def deer_speed_box(self):
-    return self.box_genomes("deerBoxGenomes", "Speed")
-
-  def deer_size_factor_box(self):
-    return self.box_genomes("deerBoxGenomes", "SizeFactor")
-
-  def deer_desirability_score_box(self):
-    return self.box_genomes("deerBoxGenomes", "DesirabilityScore")
-
-  def deer_gestation_period_box(self):
-    return self.box_genomes("deerBoxGenomes", "GestationPeriod")
-
-  def deer_sexual_maturity_time_box(self):
-    return self.box_genomes("deerBoxGenomes", "SexualMaturityTime")
-
-  # Bear gets
-  def bear_hunger_rate_box(self):
-    return self.box_genomes("bearBoxGenomes", "HungerRate")
-
-  def bear_hunger_threshold_box(self):
-    return self.box_genomes("bearBoxGenomes", "HungerThreshold")
-
-  def bear_thirst_rate_box(self):
-    return self.box_genomes("bearBoxGenomes", "ThirstRate")
-
-  def bear_thirst_threshold_box(self):
-    return self.box_genomes("bearBoxGenomes", "ThirstThreshold")
-
-  def bear_vision_box(self):
-    return self.box_genomes("bearBoxGenomes", "Vision")
-
-  def bear_speed_box(self):
-    return self.box_genomes("bearBoxGenomes", "Speed")
-
-  def bear_size_factor_box(self):
-    return self.box_genomes("bearBoxGenomes", "SizeFactor")
-
-  def bear_desirability_score_box(self):
-    return self.box_genomes("bearBoxGenomes", "DesirabilityScore")
-
-  def bear_gestation_period_box(self):
-    return self.box_genomes("bearBoxGenomes", "GestationPeriod")
-
-  def bear_sexual_maturity_time_box(self):
-    return self.box_genomes("bearBoxGenomes", "SexualMaturityTime")
-
-
-class BoxGenomeEntry:
-  time = 0
-  value = []
-
-  def __init__(self, time: int, value: []):
-    self.time = time
-    self.value = value
-
-
-class AverageGenomeEntry:
-  time = 0
-  value = 0
-
-  def __init__(self, time: int, value: int):
-    self.time = time
-    self.value = value
+  def box_sexual_maturity_time(self, animal: str) -> list[BoxGenomeEntry]:
+    return self.box_genomes(animal + "BoxGenomes", "SexualMaturityTime")
 
 
 def get_population_history(data: LogData, tags: list[str], initial_count: Amount) -> dict[TimePoint, Amount]:
