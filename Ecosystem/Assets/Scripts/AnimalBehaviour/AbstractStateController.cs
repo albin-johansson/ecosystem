@@ -27,11 +27,10 @@ namespace Ecosystem.AnimalBehaviour
     protected virtual void Initialize()
     {
     }
-
+    
     private void Start()
     {
       Initialize();
-      genderIcon.SetGenderIcon(genome.IsMale);
     }
 
     private void Update()

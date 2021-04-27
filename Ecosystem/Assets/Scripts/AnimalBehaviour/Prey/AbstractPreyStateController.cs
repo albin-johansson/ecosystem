@@ -41,6 +41,8 @@ namespace Ecosystem.AnimalBehaviour.Prey
 
       State = _idle;
       stateText.SetText(State.Type());
+      
+      genderIcon.SetGenderIcon();
     }
 
     protected override void SwitchState(AnimalState state)

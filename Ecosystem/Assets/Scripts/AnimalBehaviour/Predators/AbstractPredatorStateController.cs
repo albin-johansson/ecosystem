@@ -43,6 +43,8 @@ namespace Ecosystem.AnimalBehaviour.Predators
 
       State = _idle;
       stateText.SetText(State.Type());
+      
+      genderIcon.SetGenderIcon();
     }
 
     protected override void SwitchState(AnimalState state)
