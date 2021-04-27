@@ -9,20 +9,20 @@ namespace Ecosystem.UI
   {
     [SerializeField] private Image image;
     [SerializeField] private AbstractGenome genome;
+    
     private Sprite _maleSprite;
     private Sprite _femaleSprite;
     private Sprite _femalePregnantSprite;
 
     private void OnEnable()
     {
-      _maleSprite =  Resources.Load <Sprite>("Sprites/male");
-      _femaleSprite =  Resources.Load <Sprite>("Sprites/female");
-      _femalePregnantSprite = Resources.Load <Sprite>("Sprites/female_pregnant");
+      _maleSprite =  Resources.Load<Sprite>("Sprites/male");
+      _femaleSprite =  Resources.Load<Sprite>("Sprites/female");
+      _femalePregnantSprite = Resources.Load<Sprite>("Sprites/female_pregnant");
     }
 
     public void SetGenderIcon()
     {
-      
       if (genome.IsMale)
       {
         image.sprite = _maleSprite;
@@ -36,14 +36,7 @@ namespace Ecosystem.UI
 
     public void SetPregnancyIcon(bool isPregnant)
     {
-      if (isPregnant)
-      {
-        image.sprite = _femalePregnantSprite;
-      }
-      else
-      {
-        image.sprite = _femaleSprite;
-      }
+      image.sprite = isPregnant ? _femalePregnantSprite : _femaleSprite;
     }
   }
 }
