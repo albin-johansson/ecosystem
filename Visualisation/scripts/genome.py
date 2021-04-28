@@ -32,11 +32,11 @@ def make_averages(data: list[AverageGenomeEntry], directory: Path, animal: str, 
 def make_boxplot(data: list[BoxGenomeEntry], directory: Path, animal: str, gene: str):
   max_entries: int = 10
   i: int = 0
-  print("data length: " + str(len(data)))
+  # print("data length: " + str(len(data)))
   while len(data) > max_entries:
     del data[i + 1]
     i = (i + 1) % (len(data) - 1)
-  print("data length: " + str(len(data)))
+  # print("data length: " + str(len(data)))
 
   values: list[list[float]] = []
   times: list[int] = []
@@ -58,19 +58,28 @@ def make_boxplot(data: list[BoxGenomeEntry], directory: Path, animal: str, gene:
 
 
 def make_gene_pop_plot(data: list[BoxGenomeEntry], directory: Path, animal: str, gene: str):
+  # decimal precision:
+  deci: int = 1
+
+  # Round to decimal point specified by "deci"
+  r_data: list[BoxGenomeEntry] = [BoxGenomeEntry(e.time, [round(i, deci) for i in e.values]) for e in data]
+
   # Find all possible values:
   value_set = set[int]()
   times: [int] = []
-  for entry in data:
+  for entry in r_data:
     times.append(int(entry.time / 1000))
     for value in entry.values:
-      value_set.add(value)  # Round maybe? to n sig fig
+      value_set.add(value)
+
+  value_list: [float] = list(value_set)
+  value_list.sort()
 
   # Populate with tuples of values and zeros. (list comprehension)
-  pop_lists: [(float, [int])] = [(value, [0] * len(data)) for value in value_set]
+  pop_lists: [(float, [int])] = [(value, [0] * len(r_data)) for value in value_list]
 
   # Count occurrences for each value.
-  for i in range(0, len(data)):
+  for i in range(0, len(r_data)):
     for entry in data[i].values:
       for pop in pop_lists:
         if pop[0] == entry:
@@ -126,10 +135,10 @@ def visualise_genome_changes(data: LogData, directory: Path):
 
   :param data: the simulation data to read from.
   :param directory: the directory to which the plot will be saved.
+  make_gene_pop_plot(data.box_speed("rabbit"), directory, "rabbit", "speed")
 
+  """
   plot_data(data, Path(os.path.join(directory, "rabbit")), "rabbit")
   plot_data(data, Path(os.path.join(directory, "deer")), "deer")
   plot_data(data, Path(os.path.join(directory, "wolf")), "wolf")
   plot_data(data, Path(os.path.join(directory, "bear")), "bear")
-  """
-  make_boxplot(data.box_speed("rabbit"), directory, "rabbit", "speed")
