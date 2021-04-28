@@ -12,6 +12,9 @@ class BoxGenomeEntry:
   time: int = 0
   values: list[float] = []
 
+  def merge(self, other):
+    self.values.append(other.values)
+
   def __init__(self, time: int, values: list[float]):
     self.time = time
     self.values = values

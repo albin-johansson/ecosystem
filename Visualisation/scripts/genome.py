@@ -30,7 +30,13 @@ def make_averages(data: list[AverageGenomeEntry], directory: Path, animal: str, 
 
 
 def make_boxplot(data: list[BoxGenomeEntry], directory: Path, animal: str, gene: str):
-  # TODO: set max number for entries in data:
+  max_entries: int = 10
+  i: int = 0
+  print("data length: " + str(len(data)))
+  while len(data) > max_entries:
+    del data[i + 1]
+    i = (i + 1) % (len(data) - 1)
+  print("data length: " + str(len(data)))
 
   values: list[list[float]] = []
   times: list[int] = []
@@ -120,8 +126,10 @@ def visualise_genome_changes(data: LogData, directory: Path):
 
   :param data: the simulation data to read from.
   :param directory: the directory to which the plot will be saved.
-  """
+
   plot_data(data, Path(os.path.join(directory, "rabbit")), "rabbit")
   plot_data(data, Path(os.path.join(directory, "deer")), "deer")
   plot_data(data, Path(os.path.join(directory, "wolf")), "wolf")
   plot_data(data, Path(os.path.join(directory, "bear")), "bear")
+  """
+  make_boxplot(data.box_speed("rabbit"), directory, "rabbit", "speed")
