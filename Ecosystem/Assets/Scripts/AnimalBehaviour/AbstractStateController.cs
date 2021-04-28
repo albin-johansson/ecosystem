@@ -8,6 +8,7 @@ namespace Ecosystem.AnimalBehaviour
   public abstract class AbstractStateController : MonoBehaviour
   {
     [SerializeField] protected StateText stateText;
+    [SerializeField] protected GenderIcon genderIcon;
     [SerializeField] protected StaminaController staminaController;
     [SerializeField] protected WaterConsumer waterConsumer;
     [SerializeField] protected MovementController movementController;
@@ -26,7 +27,7 @@ namespace Ecosystem.AnimalBehaviour
     protected virtual void Initialize()
     {
     }
-
+    
     private void Start()
     {
       Initialize();
@@ -38,7 +39,7 @@ namespace Ecosystem.AnimalBehaviour
       if (newState != State.Type())
       {
         SwitchState(newState);
-        stateText.SetText(newState.ToString());
+        stateText.SetText(newState);
       }
     }
 
