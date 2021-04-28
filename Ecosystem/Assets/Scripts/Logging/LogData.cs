@@ -189,7 +189,7 @@ namespace Ecosystem.Logging
       duration = SessionTime.Now();
       MatchGenomeToTime();
       _workInProgressGenomes = new List<GenomeInfo>();
-      boxFreqFactor = 20; //might need changes if simulation is too long.  
+      boxFreqFactor = 2; //might need changes if simulation is too long.  
       AssignAverages();
       AssignBoxes();
     }
