@@ -2,8 +2,10 @@
 This module is responsible for visualising changes in the animal populations.
 """
 
-import matplotlib.pyplot as plot
 from pathlib import Path
+
+import matplotlib.pyplot as plot
+
 from logdata import *
 
 rabbit_color = "#1f77b4"
