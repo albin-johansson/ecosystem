@@ -74,7 +74,7 @@ def make_gene_pop_plot(data: list[BoxGenomeEntry], directory: Path, animal: str,
     axes.plot(times, pop[1], label="value: " + str(pop[0]))
   axes.legend(loc=0)
   axes.set_xlabel("Time (seconds)")
-  axes.set_ylabel("#Active genes")
+  axes.set_ylabel("Amount of active genes")
   plot.savefig(directory / Path("gene_pop_" + animal + "_" + gene + ".png"))
   plot.close()
 
