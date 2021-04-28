@@ -30,6 +30,8 @@ def make_averages(data: list[AverageGenomeEntry], directory: Path, animal: str, 
 
 
 def make_boxplot(data: list[BoxGenomeEntry], directory: Path, animal: str, gene: str):
+  # TODO: set max number for entries in data:
+
   values: list[list[float]] = []
   times: list[int] = []
 
