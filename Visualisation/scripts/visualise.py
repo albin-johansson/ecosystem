@@ -25,10 +25,10 @@ def visualise(input_file: Path):
     os.mkdir(directory)
 
   data = LogData(input_file)
-  #visualise_animal_populations(data, directory)
-  #visualise_food_consumption(data, directory)
-  #visualise_cause_of_death(data, directory)
-  visualise_genome_changes(data,directory)
+  visualise_animal_populations(data, directory)
+  visualise_food_consumption(data, directory)
+  visualise_cause_of_death(data, directory)
+  visualise_genome_changes(data, directory)
 
 
 def main(argv):

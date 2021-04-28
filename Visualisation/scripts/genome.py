@@ -30,14 +30,15 @@ def make_averages(data: list[AverageGenomeEntry], directory: Path, animal: str, 
 
 
 def make_boxplot(data: list[BoxGenomeEntry], directory: Path, animal: str, gene: str):
+  # reduce number of entries until max is not exceeded:
   max_entries: int = 10
   i: int = 0
-  # print("data length: " + str(len(data)))
+
   while len(data) > max_entries:
     del data[i + 1]
     i = (i + 1) % (len(data) - 1)
-  # print("data length: " + str(len(data)))
 
+  # create lists for the boxplot:
   values: list[list[float]] = []
   times: list[int] = []
 
@@ -45,14 +46,13 @@ def make_boxplot(data: list[BoxGenomeEntry], directory: Path, animal: str, gene:
     values.append(entry.values)
     times.append(int(entry.time / 1000))
 
+  # plot all:
   figure, axes = plot.subplots()
-
   axes.boxplot(values)
   axes.set_xticklabels(times)
   axes.set_xlabel("Time (seconds)")
   axes.set_ylabel("Values")
   axes.set_title("Boxplot of values for the gene: " + gene)
-
   plot.savefig(directory / Path("boxplot_" + animal + "_" + gene + ".png"))
   plot.close()
 
@@ -64,8 +64,8 @@ def make_gene_pop_plot(data: list[BoxGenomeEntry], directory: Path, animal: str,
   # Round to decimal point specified by "deci"
   r_data: list[BoxGenomeEntry] = [BoxGenomeEntry(e.time, [round(i, deci) for i in e.values]) for e in data]
 
-  # Find all possible values:
-  value_set = set[int]()
+  # Find all possible values and extract times:
+  value_set: set[int] = set[int]()
   times: [int] = []
   for entry in r_data:
     times.append(int(entry.time / 1000))
@@ -80,7 +80,7 @@ def make_gene_pop_plot(data: list[BoxGenomeEntry], directory: Path, animal: str,
 
   # Count occurrences for each value.
   for i in range(0, len(r_data)):
-    for entry in data[i].values:
+    for entry in r_data[i].values:
       for pop in pop_lists:
         if pop[0] == entry:
           pop[1][i] += 1
@@ -91,7 +91,7 @@ def make_gene_pop_plot(data: list[BoxGenomeEntry], directory: Path, animal: str,
     axes.plot(times, pop[1], label="value: " + str(pop[0]))
   axes.legend(loc=0)
   axes.set_xlabel("Time (seconds)")
-  axes.set_ylabel("Amount of active genes")
+  axes.set_ylabel("Number of active genes")
   plot.savefig(directory / Path("gene_pop_" + animal + "_" + gene + ".png"))
   plot.close()
 
