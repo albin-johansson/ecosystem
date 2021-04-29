@@ -1,6 +1,7 @@
 using Ecosystem.Consumer;
 using Ecosystem.Genes;
 using Ecosystem.Spawning;
+using Ecosystem.UI;
 using UnityEngine;
 
 namespace Ecosystem
@@ -36,6 +37,7 @@ namespace Ecosystem
     [SerializeField] private GameObject prefab;
     [SerializeField] private string keyToPool;
     [SerializeField] private GameObject animalModel;
+    [SerializeField] private GenderIcon _genderIcon;
 
     private Transform _directoryOfAnimal;
     private IGenome _mateGenome;
@@ -59,7 +61,7 @@ namespace Ecosystem
     {
       _sexualMaturityTime = genome.GetSexualMaturityTime().Value;
       _gestationPeriod = genome.GetGestationPeriod().Value;
-      _directoryOfAnimal = gameObject.transform.parent;
+      _directoryOfAnimal = gameObject.transform.parent.parent;
       animalModel.transform.localScale = ChildSize;
     }
 
@@ -100,6 +102,8 @@ namespace Ecosystem
 
       IsPregnant = false;
       _pregnancyElapsedTime = 0;
+      
+      _genderIcon.SetPregnancyIcon(false);
 
       var child = ObjectPoolHandler.Instance.Construct(keyToPool);
       var childTransform = child.transform;
@@ -124,6 +128,8 @@ namespace Ecosystem
     {
       IsPregnant = true;
       _mateGenome = mateGenome;
+
+      _genderIcon.SetPregnancyIcon(true);
 
       OnMating?.Invoke(gameObject.transform.position, prefab.tag, mateGenome, genome);
     }

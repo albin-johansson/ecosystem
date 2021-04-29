@@ -25,7 +25,6 @@ namespace Ecosystem.AnimalBehaviour.Prey.Rabbit
           return AnimalState.Fleeing;
         }
       }
-
       if (Consumer.EatingFromGameObject)
       {
         return Type();
