@@ -5,15 +5,16 @@ is meant to be used from the command line using "python visualise.py -i my_log_f
 create a directory called "my_log_file" with all of the generated plots in it.
 """
 
+import getopt
 import os
 import sys
-import getopt
 from pathlib import Path
 
-from logdata import LogData
 from animalpopulation import visualise_animal_populations
-from foodconsumption import visualise_food_consumption
 from causeofdeath import visualise_cause_of_death
+from foodconsumption import visualise_food_consumption
+from genome import visualise_genome_changes
+from logdata import LogData
 
 
 # Runs all available visualisations on a simulation data file
@@ -27,6 +28,7 @@ def visualise(input_file: Path):
   visualise_animal_populations(data, directory)
   visualise_food_consumption(data, directory)
   visualise_cause_of_death(data, directory)
+  visualise_genome_changes(data, directory)
 
 
 def main(argv):

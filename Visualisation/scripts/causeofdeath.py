@@ -2,12 +2,13 @@
 This module provides visualisations for the causes of animal deaths.
 """
 
+from enum import Enum
+from pathlib import Path
+
 import matplotlib.pyplot as plot
 import numpy
 
-from pathlib import Path
 from logdata import *
-from enum import Enum
 
 
 class CauseOfDeath(Enum):

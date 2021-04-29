@@ -1,6 +1,9 @@
+using System.Linq;
 using System.Collections.Generic;
+using System.Runtime.CompilerServices;
 using UnityEngine;
 using UnityEngine.AI;
+using Random = System.Random;
 
 namespace Ecosystem.Genes
 {
@@ -9,6 +12,15 @@ namespace Ecosystem.Genes
     internal GenomeData Data;
     private const float MetabolismFactor = 1.495f;
     public const float ChildFoodConsumptionFactor = 4f / 3f;
+    public string key;
+    private static Random _random = new Random();
+    private const string _chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
+
+    protected static string GenerateKey(int length)
+    {
+      return new string(Enumerable.Repeat(_chars, length)
+        .Select(s => s[_random.Next(s.Length)]).ToArray());
+    }
 
     private static readonly Dictionary<GeneType, Preset> DefaultPresets = new Dictionary<GeneType, Preset>()
     {
@@ -72,6 +84,7 @@ namespace Ecosystem.Genes
 
     public void Initialize(IGenome first, IGenome second)
     {
+      key = GenerateKey(10);
       Data = Genomes.Merge(first, second);
       ConvertGenesToAttributes();
     }
