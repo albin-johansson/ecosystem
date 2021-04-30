@@ -7,6 +7,8 @@ namespace Ecosystem.Spawning
 {
   public sealed class RayPrefabSpawner : MonoBehaviour
   {
+    public static event StationaryFoodGeneration.GeneratedFood OnGeneratedFood;
+    
     [SerializeField] private Terrain terrain;
     [SerializeField] private GameObject prefab;
     [SerializeField] private Transform directory;
@@ -62,10 +64,19 @@ namespace Ecosystem.Spawning
           spawnedObject.transform.position = hit.position;
           spawnedObject.transform.parent = directory;
           spawnedObject.SetActive(true);
+
+          if (Tags.IsFood(spawnedObject))
+          {
+            OnGeneratedFood?.Invoke(spawnedObject);
+          }
         }
         else
         {
-          Instantiate(prefab, hit.position, Quaternion.identity, directory);
+          var spawnedObject = Instantiate(prefab, hit.position, Quaternion.identity, directory);
+          if (Tags.IsFood(spawnedObject))
+          {
+            OnGeneratedFood?.Invoke(spawnedObject);
+          }
         }
       }
     }

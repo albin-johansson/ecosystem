@@ -1,4 +1,5 @@
-﻿using Ecosystem.Consumer;
+using Ecosystem.Spawning;
+using Ecosystem.Consumer;
 using Ecosystem.Genes;
 using Ecosystem.Util;
 using UnityEngine;
@@ -29,17 +30,28 @@ namespace Ecosystem.Logging
 
     private void Start()
     {
-      // TODO we need to log when new food resources spawn
-
       // Yes, these are allocated once, it's fine
       DeathHandler.OnDeath += LogDeath;
+
+      // Food consumption
       NutritionController.OnFoodEaten += LogFoodEaten;
-      RabbitConsumer.OnFoodEaten += LogFoodEaten;
+      StationaryFoodGeneration.OnFoodEaten += LogFoodEaten;
+
+      // Prey consumption
       WolfConsumer.OnPreyConsumed += LogPreyConsumed;
       BearConsumer.OnPreyConsumed += LogPreyConsumed;
-      BearConsumer.OnFoodEaten += LogFoodEaten;
+
+      // Mating and births
       Reproducer.OnBirth += LogBirth;
       Reproducer.OnMating += LogMating;
+
+      // Food generation
+      StationaryFoodGeneration.OnGeneratedFood += LogFoodGenerated;
+      RadiusPrefabSpawner.OnGeneratedFood += LogFoodGenerated;
+      RayPrefabSpawner.OnGeneratedFood += LogFoodGenerated;
+
+      // Food decay
+      NutritionController.OnFoodDecayed += LogFoodDecayed;
 
       _data.PrepareData();
 
@@ -89,15 +101,25 @@ namespace Ecosystem.Logging
 
     private void LogFoodEaten(GameObject food)
     {
-      _data.AddConsumption(food);
+      _data.AddFoodConsumption(food);
+      foodCountText.text = _data.FoodCount().ToString();
+    }
 
+    private void LogFoodDecayed(GameObject food)
+    {
+      _data.AddFoodDecayed(food);
+      foodCountText.text = _data.FoodCount().ToString();
+    }
+
+    private void LogFoodGenerated(GameObject food)
+    {
+      _data.AddFoodGeneration(food);
       foodCountText.text = _data.FoodCount().ToString();
     }
 
     private void LogPreyConsumed()
     {
       _data.AddPreyConsumption();
-
       preyConsumedCountText.text = _data.PreyConsumedCount().ToString();
     }
   }
