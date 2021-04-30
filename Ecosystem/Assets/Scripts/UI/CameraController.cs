@@ -34,6 +34,7 @@ namespace Ecosystem.UI
     {
       _camera = Camera.main;
       _transform = cameraRigidBody.transform;
+      Cursor.visible = false;
     }
 
     private void Update()

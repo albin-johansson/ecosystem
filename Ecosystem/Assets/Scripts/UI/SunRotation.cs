@@ -5,7 +5,6 @@ namespace Ecosystem.UI
   public sealed class SunRotation : MonoBehaviour
   {
     [SerializeField] private Light sun;
-    [SerializeField] private GameObject moon;
     [SerializeField] private ParticleSystem particles;
 
     private bool _isNight;
@@ -14,6 +13,8 @@ namespace Ecosystem.UI
     private float CycleSpeed;
     private float CycleSpeedYZ;
 
+    private Quaternion startPos;
+
     private void Start()
     {
       particles.lights.light.intensity = 0;
@@ -21,6 +22,7 @@ namespace Ecosystem.UI
 
       CycleSpeed = Rate;
       CycleSpeedYZ = Rate / 2;
+      startPos = sun.transform.rotation;
     }
 
     /// <summary>
@@ -36,12 +38,7 @@ namespace Ecosystem.UI
 
       AdjustStarBrightness();
 
-      var temp = moon.transform;
-      
-      temp.Rotate(CycleSpeed, 0, 0, Space.Self);
-      temp.position = temp.forward + temp.position;
-
-      if (_rotation >= 120 && !_isNight)
+      if (_rotation >= 110 && !_isNight)
       {
         TransformToNight();
       }
@@ -51,9 +48,10 @@ namespace Ecosystem.UI
         TransformToDay();
       }
 
-      if (_rotation >= 270)
+      if (_rotation >= 295)
       {
         _rotation = 0;
+        sun.transform.rotation = startPos;
       }
     }
 
