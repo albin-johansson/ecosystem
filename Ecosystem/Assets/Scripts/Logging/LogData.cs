@@ -175,11 +175,10 @@ namespace Ecosystem.Logging
 
     /// <summary>
     ///   Marks the simulation as finished. This is used to determine the duration of the simulation.
-    /// <param name="startTime">the time of the start of the simulation.</param>
     /// </summary>
-    public void MarkAsDone(long startTime)
+    public void MarkAsDone()
     {
-      duration = SessionTime.Now() - startTime;
+      duration = SessionTime.NowSinceSceneStart();
       MatchGenomeToTime();
       _workInProgressGenomes = new List<GenomeInfo>();
       boxFreqFactor = 2; //might need changes if simulation is too long.  
@@ -339,7 +338,7 @@ namespace Ecosystem.Logging
     {
       events.Add(new SimulationEvent
       {
-        time = SessionTime.Now(),
+        time = SessionTime.NowSinceSceneStart(),
         type = "mating",
         tag = animalTag,
         position = position,
@@ -359,7 +358,7 @@ namespace Ecosystem.Logging
     {
       events.Add(new SimulationEvent
       {
-        time = SessionTime.Now(),
+        time = SessionTime.NowSinceSceneStart(),
         type = "birth",
         tag = animal.tag,
         position = animal.transform.position,
@@ -374,7 +373,7 @@ namespace Ecosystem.Logging
       _workInProgressGenomes.Add(new GenomeInfo
       {
         tag = animal.tag,
-        time = SessionTime.Now(),
+        time = SessionTime.NowSinceSceneStart(),
         endTime = -1,
         key = abstractGenome.key,
         genes = GenomeDataToList(abstractGenome.Data)
@@ -390,7 +389,7 @@ namespace Ecosystem.Logging
     {
       events.Add(new SimulationEvent
       {
-        time = SessionTime.Now(),
+        time = SessionTime.NowSinceSceneStart(),
         type = "death",
         tag = deadObject.tag,
         position = deadObject.transform.position,
@@ -423,7 +422,7 @@ namespace Ecosystem.Logging
     {
       events.Add(new SimulationEvent
       {
-        time = SessionTime.Now(),
+        time = SessionTime.NowSinceSceneStart(),
         type = "consumption",
         tag = food.tag,
         position = food.transform.position,
@@ -442,7 +441,7 @@ namespace Ecosystem.Logging
     {
       events.Add(new SimulationEvent
       {
-        time = SessionTime.Now(),
+        time = SessionTime.NowSinceSceneStart(),
         type = "food_decay",
         tag = food.tag,
         position = food.transform.position,
@@ -461,7 +460,7 @@ namespace Ecosystem.Logging
     {
       events.Add(new SimulationEvent
       {
-        time = SessionTime.Now(),
+        time = SessionTime.NowSinceSceneStart(),
         type = "food_generation",
         tag = food.tag,
         position = food.transform.position,

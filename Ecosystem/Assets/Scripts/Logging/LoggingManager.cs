@@ -33,6 +33,7 @@ namespace Ecosystem.Logging
     private void Start()
     {
       _startTime = SessionTime.Now();
+      SessionTime.SetSceneStart(_startTime);
 
       // Yes, these are allocated once, it's fine
       DeathHandler.OnDeath += LogDeath;
@@ -65,7 +66,7 @@ namespace Ecosystem.Logging
 
     private void Update()
     {
-      var milliseconds = SessionTime.Now() - _startTime;
+      var milliseconds = SessionTime.NowSinceSceneStart();
       if (milliseconds > _nextUpdateTime)
       {
         var seconds = milliseconds / 1_000;
@@ -76,7 +77,7 @@ namespace Ecosystem.Logging
 
     private void OnApplicationQuit()
     {
-      _data.MarkAsDone(_startTime);
+      _data.MarkAsDone();
 
       _data.SetMinFPS(FPSCounter.GetMinimumFPS());
       _data.SetMaxFPS(FPSCounter.GetMaximumFPS());
