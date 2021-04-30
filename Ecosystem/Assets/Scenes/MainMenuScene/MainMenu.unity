@@ -8485,6 +8485,17 @@ Transform:
   m_Father: {fileID: 486680476}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0.728, y: -0.985, z: 106.924}
+--- !u!114 &1879623616 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 5903979955362283056, guid: f6a6c66b57f65c648b7becd500b2a5fe, type: 3}
+  m_PrefabInstance: {fileID: 2026068119}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5f7201a12d95ffc409449d95f23cf332, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1952800701
 GameObject:
   m_ObjectHideFlags: 0
@@ -8847,6 +8858,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5f7201a12d95ffc409449d95f23cf332, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &2026068123 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 5903979955362283056, guid: f6a6c66b57f65c648b7becd500b2a5fe, type: 3}
+  m_PrefabInstance: {fileID: 2026068119}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5f7201a12d95ffc409449d95f23cf332, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &2075576680 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 2724991801197716499, guid: 051f357ceb8f22d42aae984edd2a6324, type: 3}
@@ -8914,7 +8936,7 @@ Terrain:
   m_TreeMaximumFullLODCount: 681
   m_DetailObjectDistance: 179
   m_DetailObjectDensity: 0.657
-  m_HeightmapPixelError: 5
+  m_HegightmapPixelError: 5
   m_SplatMapDistance: 292
   m_HeightmapMaximumLOD: 0
   m_ShadowCastingMode: 2

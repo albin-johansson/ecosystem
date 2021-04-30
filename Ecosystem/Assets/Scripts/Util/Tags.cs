@@ -24,7 +24,7 @@ namespace Ecosystem.Util
 
     public static bool IsAnimal(GameObject gameObject) => IsPrey(gameObject) || IsPredator(gameObject);
 
-    public static bool IsBerryConsumer(GameObject gameObject) => IsPrey(gameObject) || IsBear(gameObject); 
+    public static bool IsBerryConsumer(GameObject gameObject) => IsPrey(gameObject) || IsBear(gameObject);
 
     public static bool IsStaticFood(GameObject gameObject) => gameObject.CompareTag("StaticFood");
 
@@ -79,7 +79,7 @@ namespace Ecosystem.Util
     ///   Returns the current amount of food item game objects.
     /// </summary>
     /// <returns>the current amount of food items.</returns>
-    public static int CountFood() => Count("Carrot") + Count("Berry");
+    public static int CountFood() => Count("Carrot");
 
     #endregion
   }

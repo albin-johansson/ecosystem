@@ -9,7 +9,7 @@ namespace Ecosystem.Logging
   [Serializable]
   public struct GeneInfo
   {
-    public GeneType gene;
+    public GeneType geneType;
     public float value;
   }
 }
