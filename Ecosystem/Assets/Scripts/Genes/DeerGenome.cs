@@ -17,7 +17,7 @@ namespace Ecosystem.Genes
       {GeneType.Speed, new Preset(2, 4, new[] {2f, 3f, 4f})},
       {GeneType.GestationPeriod, new Preset(10, 120, new[] {12f, 20f, 60f, 90f, 120f})},
       {GeneType.SexualMaturityTime, new Preset(10, 50, new[] {10f, 20f, 30f, 40f, 50f})}
-  };
+    };
 
     public static readonly Dictionary<GeneType, Preset> DefaultSingular = new Dictionary<GeneType, Preset>()
     {
@@ -39,6 +39,7 @@ namespace Ecosystem.Genes
 
     protected override void Initialize()
     {
+      key = GenerateKey(10);
       Data = CreateData();
       ConvertGenesToAttributes();
     }
