@@ -93,6 +93,10 @@ namespace Ecosystem.Logging
     /// </summary>
     [SerializeField] private int preyConsumedCount;
 
+    [SerializeField] private float minimumFps;
+    [SerializeField] private float maximumFps;
+    [SerializeField] private float averageFps;
+
     /// <summary>
     ///   The history of simulation events, stored in chronological order. 
     /// </summary>
@@ -174,12 +178,30 @@ namespace Ecosystem.Logging
     /// </summary>
     public void MarkAsDone()
     {
-      duration = SessionTime.Now();
+      duration = SessionTime.NowSinceSceneStart();
       MatchGenomeToTime();
       _workInProgressGenomes = new List<GenomeInfo>();
       boxFreqFactor = 2; //might need changes if simulation is too long.  
       AssignAverages();
       AssignBoxes();
+    }
+
+    /// Sets the minimum FPS associated with the simulation.
+    public void SetMinFPS(float fps)
+    {
+      minimumFps = fps;
+    }
+
+    /// Sets the maximum FPS associated with the simulation.
+    public void SetMaxFPS(float fps)
+    {
+      maximumFps = fps;
+    }
+
+    /// Sets the average FPS associated with the simulation.
+    public void SetAverageFPS(float fps)
+    {
+      averageFps = fps;
     }
 
     private AverageGenomes CreateAverageGenomes(string animal) => new AverageGenomes
@@ -316,7 +338,7 @@ namespace Ecosystem.Logging
     {
       events.Add(new SimulationEvent
       {
-        time = SessionTime.Now(),
+        time = SessionTime.NowSinceSceneStart(),
         type = "mating",
         tag = animalTag,
         position = position,
@@ -336,7 +358,7 @@ namespace Ecosystem.Logging
     {
       events.Add(new SimulationEvent
       {
-        time = SessionTime.Now(),
+        time = SessionTime.NowSinceSceneStart(),
         type = "birth",
         tag = animal.tag,
         position = animal.transform.position,
@@ -351,7 +373,7 @@ namespace Ecosystem.Logging
       _workInProgressGenomes.Add(new GenomeInfo
       {
         tag = animal.tag,
-        time = SessionTime.Now(),
+        time = SessionTime.NowSinceSceneStart(),
         endTime = -1,
         key = abstractGenome.key,
         genes = GenomeDataToList(abstractGenome.Data)
@@ -367,7 +389,7 @@ namespace Ecosystem.Logging
     {
       events.Add(new SimulationEvent
       {
-        time = SessionTime.Now(),
+        time = SessionTime.NowSinceSceneStart(),
         type = "death",
         tag = deadObject.tag,
         position = deadObject.transform.position,
@@ -400,7 +422,7 @@ namespace Ecosystem.Logging
     {
       events.Add(new SimulationEvent
       {
-        time = SessionTime.Now(),
+        time = SessionTime.NowSinceSceneStart(),
         type = "consumption",
         tag = food.tag,
         position = food.transform.position,
@@ -419,7 +441,7 @@ namespace Ecosystem.Logging
     {
       events.Add(new SimulationEvent
       {
-        time = SessionTime.Now(),
+        time = SessionTime.NowSinceSceneStart(),
         type = "food_decay",
         tag = food.tag,
         position = food.transform.position,
@@ -438,7 +460,7 @@ namespace Ecosystem.Logging
     {
       events.Add(new SimulationEvent
       {
-        time = SessionTime.Now(),
+        time = SessionTime.NowSinceSceneStart(),
         type = "food_generation",
         tag = food.tag,
         position = food.transform.position,
