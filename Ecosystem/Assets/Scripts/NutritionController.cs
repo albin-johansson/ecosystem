@@ -1,18 +1,22 @@
 using Ecosystem.Spawning;
+using Ecosystem.Util;
 using UnityEngine;
 
 namespace Ecosystem
 {
   public sealed class NutritionController : MonoBehaviour
   {
-    [SerializeField] private float nutritionalValue;
+    public delegate void FoodDecayed(GameObject food);
 
     public delegate void FoodEatenEvent(GameObject food);
 
-    /// <summary>
+    /// This event is emitted every time a food resource decays.
+    public static event FoodDecayed OnFoodDecayed;
+
     /// This event is emitted every time a food resource is consumed.
-    /// </summary>
     public static event FoodEatenEvent OnFoodEaten;
+
+    [SerializeField] private float nutritionalValue;
 
     private string _keyToPool;
 
@@ -30,6 +34,11 @@ namespace Ecosystem
       }
       else
       {
+        if (Tags.IsFood(gameObject))
+        {
+          OnFoodDecayed?.Invoke(gameObject);
+        }
+
         ObjectPoolHandler.Instance.ReturnOrDestroy(_keyToPool, gameObject);
       }
     }
@@ -43,7 +52,11 @@ namespace Ecosystem
       }
       else
       {
-        OnFoodEaten?.Invoke(gameObject);
+        if (Tags.IsFood(gameObject))
+        {
+          OnFoodEaten?.Invoke(gameObject);
+        }
+
         ObjectPoolHandler.Instance.ReturnOrDestroy(_keyToPool, gameObject);
         return nutritionalValue;
       }

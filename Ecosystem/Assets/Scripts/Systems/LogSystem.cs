@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using Ecosystem.Components;
 using Ecosystem.ECS;
 using Ecosystem.Logging;
+using Ecosystem.UI;
 using JetBrains.Annotations;
 using Unity.Entities;
 
@@ -45,8 +46,20 @@ namespace Ecosystem.Systems
       [UsedImplicitly] public int birthCount;
       [UsedImplicitly] public int matingCount;
 
+      [UsedImplicitly] public float minimumFps;
+      [UsedImplicitly] public float maximumFps;
+      [UsedImplicitly] public float averageFps;
+
       public List<SimulationEvent> events = new List<SimulationEvent>();
       public List<DeathEvent> deaths = new List<DeathEvent>();
+    }
+
+    private double _startTime;
+
+    protected override void OnStartRunning()
+    {
+      base.OnStartRunning();
+      _startTime = Time.ElapsedTime;
     }
 
     protected override void OnDestroy()
@@ -60,7 +73,7 @@ namespace Ecosystem.Systems
       var initialData = EntityManager.GetSingleton<InitialSimulationData>();
       var data = new JsonData
       {
-        duration = Time.ElapsedTime * 1000,
+        duration = (Time.ElapsedTime - _startTime) * 1000.0,
 
         initialAliveCount = initialData.initialRabbitCount + initialData.initialDeerCount +
                             initialData.initialWolfCount + initialData.initialBearCount,
@@ -70,7 +83,11 @@ namespace Ecosystem.Systems
         initialAliveDeerCount = initialData.initialDeerCount,
         initialAliveWolvesCount = initialData.initialWolfCount,
         initialAliveBearsCount = initialData.initialBearCount,
-        initialFoodCount = initialData.initialCarrotCount
+        initialFoodCount = initialData.initialCarrotCount,
+        
+        minimumFps = FPSCounter.GetMinimumFPS(),
+        maximumFps = FPSCounter.GetMaximumFPS(),
+        averageFps = FPSCounter.GetAverageFPS()
       };
 
       ProcessDeaths(data);
