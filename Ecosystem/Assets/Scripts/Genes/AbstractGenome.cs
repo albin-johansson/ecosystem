@@ -39,7 +39,6 @@ namespace Ecosystem.Genes
       Initialize();
     }
 
-
     /// <summary>
     /// Default for creating genes for new animals without
     /// its presets already defined.

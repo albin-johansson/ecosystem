@@ -36,7 +36,6 @@ namespace Ecosystem.Genes
       _preset = DefaultSet;
     }
 
-
     protected override void Initialize()
     {
       key = GenerateKey(10);
