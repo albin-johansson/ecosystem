@@ -39,6 +39,14 @@ namespace Ecosystem.UI
 
     private void Update()
     {
+      if (Input.GetKeyUp(QuitKey))
+      {
+        optionsMenu.SetActive(!optionsMenu.activeSelf);
+      }
+      if (optionsMenu.activeSelf)
+      {
+        return;
+      }
       UpdateBoost();
       UpdateTrackingState();
 
@@ -52,11 +60,6 @@ namespace Ecosystem.UI
       }
 
       UpdateRotation();
-
-      if (Input.GetKeyUp(QuitKey))
-      {
-        optionsMenu.SetActive(true);
-      }
 
       cameraRigidBody.velocity = cameraRigidBody.velocity.normalized * speed;
     }

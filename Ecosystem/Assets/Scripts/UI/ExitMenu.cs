@@ -7,6 +7,7 @@ namespace Ecosystem.UI
     public class ExitMenu : MonoBehaviour
     {
         [SerializeField] private LoggingManager loggingManager;
+        [SerializeField] private string currentScene;
         public void CloseExitMenu()
         {
             gameObject.SetActive(false);
@@ -21,7 +22,7 @@ namespace Ecosystem.UI
         public void RestartScene()
         {
             loggingManager.SceneExit();
-            SceneManager.LoadScene("ForestScene");
+            SceneManager.LoadScene(currentScene);
         }
 
         public void Exit()
