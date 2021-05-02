@@ -132,6 +132,11 @@ namespace Ecosystem.Consumer
     public void SetSaturation(float value)
     {
       Hunger = maxHunger - value;
+      if (Hunger < 0)
+      {
+        Hunger = 0;
+      }
+      _isDead = false;
       resourceBar.SetSaturationValue(value);
     }
   }

@@ -66,7 +66,7 @@ namespace Ecosystem.Consumer
       }
 
       resourceBar.SetValue(Hunger);
-      if (Hunger > maxHunger)
+      if (Hunger >= maxHunger)
       {
         _isDead = true;
         deathHandler.Die(CauseOfDeath.Starvation);
@@ -100,6 +100,11 @@ namespace Ecosystem.Consumer
     public void SetSaturation(float value)
     {
       Hunger = maxHunger - value;
+      if (Hunger < 0)
+      {
+        Hunger = 0;
+      }
+      _isDead = false;
       resourceBar.SetSaturationValue(value);
     }
   }
