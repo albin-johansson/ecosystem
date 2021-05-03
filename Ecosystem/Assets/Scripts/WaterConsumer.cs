@@ -82,6 +82,17 @@ namespace Ecosystem
       IsDrinking = false;
     }
 
+    public void SetHydration(float hydration)
+    {
+      Thirst = maxThirst - hydration;
+      if (Thirst < 0)
+      {
+        Thirst = 0;
+      }
+      resourceBar.SetValue(Thirst);
+      _isDead = false;
+    }
+
     public void StartDrinking()
     {
       if (CanDrink)
