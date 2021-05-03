@@ -123,6 +123,14 @@ namespace Ecosystem.Consumer
         }
       }
     }
+    
+    private void OnTriggerExit(Collider other)
+    {
+      if (other.gameObject == EatingFromGameObject)
+      {
+        EatingFromGameObject = null;
+      }
+    }
 
     public bool IsHungry()
     {
