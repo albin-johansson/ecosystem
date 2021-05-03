@@ -58,5 +58,10 @@ namespace Ecosystem.Genes
     {
       return _mutateChance;
     }
+
+    public override string GetTag()
+    {
+      return "Wolf";
+    }
   }
 }
