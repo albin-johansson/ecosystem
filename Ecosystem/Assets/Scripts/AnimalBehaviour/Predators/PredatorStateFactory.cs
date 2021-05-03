@@ -40,6 +40,7 @@ namespace Ecosystem.AnimalBehaviour.Predators
     {
       return new BearRunningTowardsFoodState(data);
     }
+
     public static IAnimalState CreateBearChasingPrey(StateData data)
     {
       return new BearChasingPreyState(data);

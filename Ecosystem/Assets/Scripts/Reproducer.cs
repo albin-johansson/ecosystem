@@ -102,7 +102,7 @@ namespace Ecosystem
 
       IsPregnant = false;
       _pregnancyElapsedTime = 0;
-      
+
       _genderIcon.SetPregnancyIcon(false);
 
       var child = ObjectPoolHandler.Instance.Construct(keyToPool);
@@ -141,7 +141,7 @@ namespace Ecosystem
           other.TryGetComponent(out Reproducer otherReproducer) &&
           Genomes.CompatibleAsParents(genome, otherReproducer.genome) &&
           otherReproducer.CanMate
-          )
+      )
       {
         StartPregnancy(otherReproducer.genome);
       }

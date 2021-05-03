@@ -27,7 +27,7 @@ namespace Ecosystem.AnimalBehaviour
     protected virtual void Initialize()
     {
     }
-    
+
     private void Start()
     {
       Initialize();

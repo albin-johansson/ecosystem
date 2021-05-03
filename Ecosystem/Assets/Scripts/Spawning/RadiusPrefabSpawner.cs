@@ -8,7 +8,7 @@ namespace Ecosystem.Spawning
   public sealed class RadiusPrefabSpawner : MonoBehaviour
   {
     public static event StationaryFoodGeneration.GeneratedFood OnGeneratedFood;
-    
+
     [SerializeField] private GameObject prefab;
     [SerializeField] private float radius;
 

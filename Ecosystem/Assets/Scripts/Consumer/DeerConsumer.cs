@@ -53,6 +53,7 @@ namespace Ecosystem.Consumer
           _limit = Random.Range(30, 50);
           IsConsuming = false;
         }
+
         resourceBar.SetValue(Hunger);
         return;
       }

@@ -34,6 +34,7 @@ namespace Ecosystem.AnimalBehaviour.Predators.Wolf
             return base.Tick();
           }
         }
+
         if (Reproducer.CompatibleAsParents(Target) &&
             Reproducer.CanMate &&
             MovementController.IsWithinSphere(Target.transform.position))

@@ -85,7 +85,7 @@ namespace Ecosystem.Spawning
 
       var berryTransform = spawner.GetChild(index);
       var berryObject = berryTransform.gameObject;
-      
+
       berryObject.SetActive(true);
 
       ++AmountOfBerries;

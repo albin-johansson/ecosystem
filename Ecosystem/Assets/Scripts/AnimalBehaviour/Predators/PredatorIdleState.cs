@@ -9,7 +9,9 @@ namespace Ecosystem.AnimalBehaviour.Predators
     private float _standStillThreshold = 3f;
     private bool _standStill = true;
 
-    internal PredatorIdleState(StateData data) : base(data) { }
+    internal PredatorIdleState(StateData data) : base(data)
+    {
+    }
 
     public override void Begin(GameObject target)
     {
@@ -35,9 +37,10 @@ namespace Ecosystem.AnimalBehaviour.Predators
       {
         MovementController.UpdateWander();
       }
+
       return base.Tick();
     }
-    
+
     public override void OnSphereEnter(Collider other)
     {
       var otherObject = other.gameObject;
