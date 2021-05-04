@@ -27,7 +27,7 @@ namespace Ecosystem.Genes
       {GeneType.ThirstThreshold, new Preset(25, 40, new[] {30f})},
       {GeneType.Vision, new Preset(5, 10, new[] {7.5f})},
       {GeneType.Speed, new Preset(2, 4, new[] {3f})},
-      {GeneType.GestationPeriod, new Preset(10, 120, new[] {12f})},
+      {GeneType.GestationPeriod, new Preset(10, 120, new[] {30f})},
       {GeneType.SexualMaturityTime, new Preset(10, 150, new[] {20f})}
     };
 
