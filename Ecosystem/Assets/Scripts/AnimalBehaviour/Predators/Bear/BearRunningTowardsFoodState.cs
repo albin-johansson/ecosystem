@@ -13,6 +13,7 @@ namespace Ecosystem.AnimalBehaviour.Predators.Bear
       AnimationController.EnterMoveAnimation();
       Target = target;
       MovementController.SetDestination(Target.transform.position);
+      Consumer.CheckLastCollision();
     }
 
     public override AnimalState Tick()

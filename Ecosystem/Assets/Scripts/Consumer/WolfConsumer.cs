@@ -19,6 +19,8 @@ namespace Ecosystem.Consumer
     [SerializeField] private Reproducer reproducer;
     [SerializeField] private float maxHunger = 100;
 
+    private Collider _lastCollision;
+
     private bool _isDead;
 
     public float Hunger { get; private set; }
@@ -62,6 +64,7 @@ namespace Ecosystem.Consumer
     {
       if (!ColliderActive || IsConsuming)
       {
+        _lastCollision = other;
         return;
       }
 
@@ -88,20 +91,52 @@ namespace Ecosystem.Consumer
       }
     }
 
+    public void CheckLastCollision()
+    {
+      if (!_lastCollision)
+      {
+        return;
+      }
+      var temp = Vector3.Distance(_lastCollision.transform.position, gameObject.transform.position);
+      if (temp > 5)
+      {
+        Debug.Log(temp + " distance away");
+        return;
+      }
+      OnTriggerEnter(_lastCollision);
+    }
+    
+    /*
     private void OnTriggerStay(Collider other)
     {
       var otherObject = other.gameObject;
-      if (ColliderActive)
+      if (!ColliderActive || IsConsuming)
       {
-        if (Tags.IsMeat(otherObject))
+        Debug.Log("wolf redundant");
+        return;
+      }
+      if (Tags.IsPrey(otherObject))
+      {
+        var otherDeathHandler = otherObject.GetComponentInParent<DeathHandler>();
+        if (!otherDeathHandler.isDead)
         {
-          if (otherObject.TryGetComponent(out NutritionController otherNutritionController))
-          {
-            Hunger -= otherNutritionController.Consume(Hunger);
-          }
+          IsConsuming = true;
+
+          var nutritionController = otherDeathHandler.Die(CauseOfDeath.Eaten);
+          Hunger -= nutritionController.Consume(Hunger);
+
+          OnPreyConsumed?.Invoke();
+        }
+      }
+      else if (Tags.IsMeat(otherObject))
+      {
+        if (otherObject.TryGetComponent(out NutritionController otherNutritionController))
+        {
+          Hunger -= otherNutritionController.Consume(Hunger);
         }
       }
     }
+    */
 
     public bool IsHungry()
     {

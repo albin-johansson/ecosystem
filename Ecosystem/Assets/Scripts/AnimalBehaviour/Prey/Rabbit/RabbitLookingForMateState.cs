@@ -70,7 +70,7 @@ namespace Ecosystem.AnimalBehaviour.Prey.Rabbit
       {
         MemoryController.SaveToMemory(otherObject);
       }
-      else if (Reproducer.CompatibleAsParents(otherObject) || Tags.IsPredator(otherObject))
+      else if (Reproducer.CompatibleAsParents(other.transform.parent.gameObject) || Tags.IsPredator(otherObject))
       {
         Target = otherObject;
       }

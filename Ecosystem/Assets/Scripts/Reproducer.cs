@@ -94,8 +94,8 @@ namespace Ecosystem
 
     public bool CompatibleAsParents(GameObject other)
     {
-      return other.transform.parent.GetChild(0).TryGetComponent(out Reproducer otherReproducer) &&
-             otherReproducer.CanMate &&
+      var otherReproducer = other.GetComponentInChildren<Reproducer>();
+      return otherReproducer.CanMate &&
              Genomes.CompatibleAsParents(genome, otherReproducer.genome);
     }
 
