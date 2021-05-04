@@ -39,7 +39,6 @@ namespace Ecosystem.Genes
       Initialize();
     }
 
-
     /// <summary>
     /// Default for creating genes for new animals without
     /// its presets already defined.
@@ -76,6 +75,7 @@ namespace Ecosystem.Genes
     protected abstract void Initialize();
     protected abstract Dictionary<GeneType, Preset> GetPresets();
     protected abstract float GetClassMutateChance();
+    public abstract string GetTag();
 
     protected GenomeData CreateData()
     {

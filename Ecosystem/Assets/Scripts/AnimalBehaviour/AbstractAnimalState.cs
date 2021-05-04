@@ -81,6 +81,15 @@ namespace Ecosystem.AnimalBehaviour
     protected GameObject SelectCloser(GameObject first, GameObject second)
     {
       var position = MovementController.GetPosition();
+      if (!first)
+      {
+        return second;
+      }
+      else if (!second)
+      {
+        return first;
+      }
+
       var firstMag = Vector3.SqrMagnitude(position - first.transform.position);
       var secondMag = Vector3.SqrMagnitude(position - second.transform.position);
       return firstMag < secondMag ? first : second;

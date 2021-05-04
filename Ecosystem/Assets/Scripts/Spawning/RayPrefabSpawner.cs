@@ -8,7 +8,7 @@ namespace Ecosystem.Spawning
   public sealed class RayPrefabSpawner : MonoBehaviour
   {
     public static event StationaryFoodGeneration.GeneratedFood OnGeneratedFood;
-    
+
     [SerializeField] private Terrain terrain;
     [SerializeField] private GameObject prefab;
     [SerializeField] private Transform directory;
@@ -42,7 +42,7 @@ namespace Ecosystem.Spawning
         {
           SpawnOnNavMesh();
         }
-        
+
         _nextSpawnTime = Time.unscaledTime + _spawnRateRatio;
       }
     }

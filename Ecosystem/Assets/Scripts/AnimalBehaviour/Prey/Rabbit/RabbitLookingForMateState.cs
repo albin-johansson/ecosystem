@@ -31,7 +31,7 @@ namespace Ecosystem.AnimalBehaviour.Prey.Rabbit
         {
           return AnimalState.Fleeing;
         }
-        
+
         if (!Target.activeInHierarchy || !MovementController.IsWithinSphere(Target.transform.position))
         {
           Target = GetClosestMateInVision(Layers.RabbitMask);

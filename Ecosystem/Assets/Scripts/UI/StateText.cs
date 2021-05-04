@@ -38,6 +38,7 @@ namespace Ecosystem.UI
           _text = state.ToString();
           break;
       }
+
       textMesh.text = _text;
     }
   }

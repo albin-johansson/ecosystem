@@ -46,6 +46,7 @@ namespace Ecosystem
     private float _pregnancyElapsedTime;
     private float _maturityElapsedTime;
     private float _childSaturation;
+    private float _childHydration;
     private bool _isSexuallyMature;
     private static readonly Vector3 ChildSize = new Vector3(0.7f, 0.7f, 0.7f);
 
@@ -80,11 +81,13 @@ namespace Ecosystem
       if (IsPregnant)
       {
         _childSaturation += genome.Metabolism * AbstractGenome.ChildFoodConsumptionFactor * Time.deltaTime;
+        _childHydration += genome.GetThirstRate().Value * Time.deltaTime;
         _pregnancyElapsedTime += Time.deltaTime;
         if (_pregnancyElapsedTime >= _gestationPeriod)
         {
           GiveBirth();
           _childSaturation = 0;
+          _childHydration = 0;
         }
       }
     }
@@ -102,7 +105,7 @@ namespace Ecosystem
 
       IsPregnant = false;
       _pregnancyElapsedTime = 0;
-      
+
       _genderIcon.SetPregnancyIcon(false);
 
       var child = ObjectPoolHandler.Instance.Construct(keyToPool);
@@ -119,6 +122,9 @@ namespace Ecosystem
       }
 
       var childConsumer = child.GetComponentInChildren<IConsumer>();
+      var childWaterConsumer = child.GetComponentInChildren<WaterConsumer>();
+
+      childWaterConsumer.SetHydration(_childHydration);
       childConsumer.SetSaturation(_childSaturation);
 
       OnBirth?.Invoke(child);
@@ -141,7 +147,7 @@ namespace Ecosystem
           other.TryGetComponent(out Reproducer otherReproducer) &&
           Genomes.CompatibleAsParents(genome, otherReproducer.genome) &&
           otherReproducer.CanMate
-          )
+      )
       {
         StartPregnancy(otherReproducer.genome);
       }

@@ -17,7 +17,7 @@ namespace Ecosystem.Spawning
     private void Awake()
     {
       Instance = this;
-      
+
       _transform = transform;
 
       foreach (var pool in pools)
