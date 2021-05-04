@@ -74,17 +74,7 @@ namespace Ecosystem.Logging
         _nextUpdateTime = milliseconds + 1_000;
       }
     }
-
-    public void SceneExit()
-    {
-      _data.MarkAsDone();
-
-      _data.SetMinFPS(FPSCounter.GetMinimumFPS());
-      _data.SetMaxFPS(FPSCounter.GetMaximumFPS());
-      _data.SetAverageFPS(FPSCounter.GetAverageFPS());
-
-      LogFileWriter.Save(_data);
-    }
+    
     private void OnApplicationQuit()
     {
       _data.MarkAsDone();
