@@ -100,7 +100,8 @@ namespace Ecosystem.UI
         _distance = Mathf.Max(_distance, 5);
 
         _transform.LookAt(_trackedTarget);
-        _transform.position = _trackedTarget.position + Vector3.up * _distance - _trackedTarget.forward * _distance;
+        var target = _trackedTarget.position + Vector3.up * _distance - _trackedTarget.forward * _distance;
+        _transform.position = Vector3.Lerp(_transform.position, target, 0.1f);
       }
       else
       {

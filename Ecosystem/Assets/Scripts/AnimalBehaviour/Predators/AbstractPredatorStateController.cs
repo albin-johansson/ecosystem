@@ -1,4 +1,3 @@
-
 namespace Ecosystem.AnimalBehaviour.Predators
 {
   public abstract class AbstractPredatorStateController : AbstractStateController
@@ -8,7 +7,7 @@ namespace Ecosystem.AnimalBehaviour.Predators
     private IAnimalState _drinking;
     private IAnimalState _runningTowardsWater;
     private IAnimalState _attacking;
-    
+
     protected IAnimalState RunningTowardsFood;
     protected IAnimalState ChasingPrey;
     protected IAnimalState LookingForMate;
@@ -43,7 +42,7 @@ namespace Ecosystem.AnimalBehaviour.Predators
 
       State = _idle;
       stateText.SetText(State.Type());
-      
+
       genderIcon.SetGenderIcon();
     }
 
@@ -89,7 +88,7 @@ namespace Ecosystem.AnimalBehaviour.Predators
         case AnimalState.Eating:
           State = Eating;
           break;
-        
+
         case AnimalState.RunningTowardsFood:
           State = RunningTowardsFood;
           Data.Consumer.ColliderActive = true;

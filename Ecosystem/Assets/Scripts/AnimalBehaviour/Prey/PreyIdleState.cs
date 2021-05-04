@@ -9,7 +9,9 @@ namespace Ecosystem.AnimalBehaviour.Prey
     private float _standStillThreshold = 3f;
     private bool _standStill = true;
 
-    internal PreyIdleState(StateData data) : base(data) { }
+    internal PreyIdleState(StateData data) : base(data)
+    {
+    }
 
     public override void Begin(GameObject target)
     {
@@ -24,6 +26,7 @@ namespace Ecosystem.AnimalBehaviour.Prey
       {
         return AnimalState.Fleeing;
       }
+
       if (_standStill)
       {
         _elapsedTime += Time.deltaTime;
@@ -39,6 +42,7 @@ namespace Ecosystem.AnimalBehaviour.Prey
       {
         MovementController.UpdateWander();
       }
+
       return base.Tick();
     }
 

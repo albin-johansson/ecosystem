@@ -84,7 +84,7 @@ namespace Ecosystem.Systems
         initialAliveWolvesCount = initialData.initialWolfCount,
         initialAliveBearsCount = initialData.initialBearCount,
         initialFoodCount = initialData.initialCarrotCount,
-        
+
         minimumFps = FPSCounter.GetMinimumFPS(),
         maximumFps = FPSCounter.GetMaximumFPS(),
         averageFps = FPSCounter.GetAverageFPS()
