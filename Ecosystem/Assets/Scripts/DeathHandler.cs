@@ -30,6 +30,11 @@ namespace Ecosystem
       _keyToPool = gameObject.tag;
     }
 
+    private void OnEnable()
+    {
+      isDead = false;
+    }
+
     public NutritionController Die(CauseOfDeath cause)
     {
       isDead = true; // TODO this is a temporary fix so that multiple wolves can't eat the same prey
