@@ -107,7 +107,7 @@ namespace Ecosystem
       _pregnancyElapsedTime = 0;
 
       _genderIcon.SetPregnancyIcon(false);
-      
+
       var child = ObjectPoolHandler.Instance.Construct(keyToPool);
       var childTransform = child.transform;
 

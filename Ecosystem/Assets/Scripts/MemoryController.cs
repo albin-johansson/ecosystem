@@ -28,9 +28,11 @@ namespace Ecosystem
 
     public void ClearMemory()
     {
-      if (_memory == null) return;
-      _memory.Clear();
-      _nextMemoryLocation = 0;
+      if (_memory != null)
+      {
+        _memory.Clear();
+        _nextMemoryLocation = 0;
+      }
     }
 
     /// <summary>
