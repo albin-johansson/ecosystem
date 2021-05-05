@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using Ecosystem.Genes;
 using Ecosystem.Util;
+using Unity.Mathematics;
 using UnityEngine;
 
 namespace Ecosystem.Logging
@@ -181,9 +182,19 @@ namespace Ecosystem.Logging
       duration = SessionTime.NowSinceSceneStart();
       MatchGenomeToTime();
       _workInProgressGenomes = new List<GenomeInfo>();
-      boxFreqFactor = 2; //might need changes if simulation is too long.  
+      DetermineBoxFreqFactor();
       AssignAverages();
       AssignBoxes();
+      Debug.Log("N of rabbit hr boxes:" + rabbitBoxGenomes.HungerRate.Count);
+    }
+
+    private void DetermineBoxFreqFactor()
+    {
+      boxFreqFactor = 1;
+      for (int i = 0; i < duration; i += 1000 * 50)
+      {
+        boxFreqFactor++;
+      }
     }
 
     /// Sets the minimum FPS associated with the simulation.
