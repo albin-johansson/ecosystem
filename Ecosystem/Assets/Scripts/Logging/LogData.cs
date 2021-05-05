@@ -116,7 +116,7 @@ namespace Ecosystem.Logging
     /// <summary>
     ///   List of the genomes that count
     /// </summary>
-    [SerializeField] private List<GenomeInfo> genomes = new List<GenomeInfo>(64);
+    [NonSerialized] private List<GenomeInfo> genomes = new List<GenomeInfo>(64);
 
     /// <summary>
     ///   Maps death of genome by key to the death time. 
@@ -190,11 +190,14 @@ namespace Ecosystem.Logging
 
     private void DetermineBoxFreqFactor()
     {
+      boxFreqFactor = 1 + (duration/1000/100);
+      /*
       boxFreqFactor = 1;
       for (int i = 0; i < duration; i += 1000 * 50)
       {
         boxFreqFactor++;
       }
+      */
     }
 
     /// Sets the minimum FPS associated with the simulation.
