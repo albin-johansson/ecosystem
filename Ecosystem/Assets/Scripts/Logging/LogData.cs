@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Linq;
 using Ecosystem.Genes;
 using Ecosystem.Util;
-using Unity.Mathematics;
 using UnityEngine;
 
 namespace Ecosystem.Logging
@@ -114,7 +113,7 @@ namespace Ecosystem.Logging
     [SerializeField] private List<Death> deaths = new List<Death>(64);
 
     /// <summary>
-    ///   List of the genomes that count
+    ///   List of the genomes that count, currently not included in log file since not visualisation uses them.
     /// </summary>
     [NonSerialized] private List<GenomeInfo> genomes = new List<GenomeInfo>(64);
 
@@ -181,23 +180,9 @@ namespace Ecosystem.Logging
     {
       duration = SessionTime.NowSinceSceneStart();
       MatchGenomeToTime();
-      _workInProgressGenomes = new List<GenomeInfo>();
-      DetermineBoxFreqFactor();
+      boxFreqFactor = 1 + (duration / 1000 / 100);
       AssignAverages();
       AssignBoxes();
-      Debug.Log("N of rabbit hr boxes:" + rabbitBoxGenomes.HungerRate.Count);
-    }
-
-    private void DetermineBoxFreqFactor()
-    {
-      boxFreqFactor = 1 + (duration/1000/100);
-      /*
-      boxFreqFactor = 1;
-      for (int i = 0; i < duration; i += 1000 * 50)
-      {
-        boxFreqFactor++;
-      }
-      */
     }
 
     /// Sets the minimum FPS associated with the simulation.
