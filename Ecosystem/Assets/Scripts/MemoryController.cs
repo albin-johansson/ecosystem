@@ -26,6 +26,15 @@ namespace Ecosystem
       }
     }
 
+    public void ClearMemory()
+    {
+      if (_memory != null)
+      {
+        _memory.Clear();
+        _nextMemoryLocation = 0;
+      }
+    }
+
     /// <summary>
     ///   Returns the GameObject from memory that is closest one to position,
     ///   from the objects that return true for the filter function.

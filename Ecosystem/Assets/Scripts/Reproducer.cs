@@ -123,9 +123,11 @@ namespace Ecosystem
 
       var childConsumer = child.GetComponentInChildren<IConsumer>();
       var childWaterConsumer = child.GetComponentInChildren<WaterConsumer>();
+      var childMemoryController = child.GetComponentInChildren<MemoryController>();
 
       childWaterConsumer.SetHydration(_childHydration);
       childConsumer.SetSaturation(_childSaturation);
+      childMemoryController.ClearMemory();
 
       OnBirth?.Invoke(child);
     }
