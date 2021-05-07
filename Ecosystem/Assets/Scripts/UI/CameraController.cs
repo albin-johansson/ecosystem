@@ -7,6 +7,7 @@ namespace Ecosystem.UI
   {
     [SerializeField] private float speed = 8;
     [SerializeField] private Rigidbody cameraRigidBody;
+    [SerializeField] private GameObject controlsInstruction;
 
     private const KeyCode QuitKey = KeyCode.Escape;
     private const KeyCode QuitTrackKey = KeyCode.Q;
@@ -18,6 +19,7 @@ namespace Ecosystem.UI
     private const KeyCode RightKey = KeyCode.D;
     private const KeyCode AscendKey = KeyCode.R;
     private const KeyCode DescendKey = KeyCode.F;
+    private const KeyCode ControlsKey = KeyCode.C;
     private const float BoostFactor = 2;
 
     private Vector3 _rotateValue;
@@ -55,6 +57,11 @@ namespace Ecosystem.UI
       if (Input.GetKeyUp(QuitKey))
       {
         Application.Quit();
+      }
+
+      if (Input.GetKeyUp(ControlsKey))
+      {
+        controlsInstruction.SetActive(!controlsInstruction.activeSelf);
       }
 
       cameraRigidBody.velocity = cameraRigidBody.velocity.normalized * speed;
