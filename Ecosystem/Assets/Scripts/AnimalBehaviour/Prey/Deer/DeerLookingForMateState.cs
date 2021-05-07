@@ -5,6 +5,7 @@ namespace Ecosystem.AnimalBehaviour.Prey.Deer
 {
   internal sealed class DeerLookingForMateState : AbstractAnimalState
   {
+    private float _timer;
     internal DeerLookingForMateState(StateData data) : base(data)
     {
     }
@@ -26,6 +27,7 @@ namespace Ecosystem.AnimalBehaviour.Prey.Deer
     {
       if (Target)
       {
+        _timer = 0;
         if (Tags.IsPredator(Target))
         {
           return AnimalState.Fleeing;
@@ -33,23 +35,27 @@ namespace Ecosystem.AnimalBehaviour.Prey.Deer
 
         if (!Target.activeInHierarchy || !MovementController.IsWithinSphere(Target.transform.position))
         {
-          Target = GetClosestMateInVision(Layers.DeerMask);
-          if (!Target)
-          {
-            return base.Tick();
-          }
+          Target = null;
         }
-        else if (Reproducer.CompatibleAsParents(Target) && Reproducer.CanMate)
+        else if (Reproducer.CompatibleAsParents(Target))
         {
           MovementController.SetDestination(Target.transform.position);
+          return Type();
         }
         else
         {
-          Target = GetClosestMateInVision(Layers.DeerMask);
+          Target = null;
+          MovementController.StartWander();
         }
       }
       else
       {
+        _timer += Time.deltaTime;
+        if (_timer > 1)
+        {
+          Target = GetClosestMateInVision(Layers.DeerMask);
+          _timer = 0;
+        }
         MovementController.UpdateWander();
       }
 

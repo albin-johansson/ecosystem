@@ -6,6 +6,7 @@ namespace Ecosystem.AnimalBehaviour.Prey.Rabbit
 {
   public class RabbitLookingForMateState : AbstractAnimalState
   {
+    private float _timer;
     internal RabbitLookingForMateState(StateData data) : base(data)
     {
     }
@@ -27,6 +28,7 @@ namespace Ecosystem.AnimalBehaviour.Prey.Rabbit
     {
       if (Target)
       {
+        _timer = 0;
         if (Tags.IsPredator(Target))
         {
           return AnimalState.Fleeing;
@@ -34,23 +36,27 @@ namespace Ecosystem.AnimalBehaviour.Prey.Rabbit
 
         if (!Target.activeInHierarchy || !MovementController.IsWithinSphere(Target.transform.position))
         {
-          Target = GetClosestMateInVision(Layers.RabbitMask);
-          if (!Target)
-          {
-            return base.Tick();
-          }
+          Target = null;
         }
-        else if (Reproducer.CompatibleAsParents(Target) && Reproducer.CanMate)
+        else if (Reproducer.CompatibleAsParents(Target))
         {
-          MovementController.SetDestinationIfValid(Target.transform.position);
+          MovementController.SetDestination(Target.transform.position);
+          return Type();
         }
         else
         {
-          Target = GetClosestMateInVision(Layers.RabbitMask);
+          Target = null;
+          MovementController.StartWander();
         }
       }
       else
       {
+        _timer += Time.deltaTime;
+        if (_timer > 1)
+        {
+          Target = GetClosestMateInVision(Layers.RabbitMask);
+          _timer = 0;
+        }
         MovementController.UpdateWander();
       }
 
