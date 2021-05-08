@@ -84,6 +84,8 @@ def make_gene_pop_plot(data: list[BoxGenomeEntry], directory: Path, animal: str,
   value_list: [float] = list(value_set)
   value_list.sort()
 
+  # total_r: list[int] = [len(entry.values) for entry in r_data]
+
   # Populate with tuples of values and zeros. (list comprehension)
   pop_lists: [(float, [int])] = [(value, [0] * len(r_data)) for value in value_list]
 
@@ -94,10 +96,18 @@ def make_gene_pop_plot(data: list[BoxGenomeEntry], directory: Path, animal: str,
         if pop[0] == entry:
           pop[1][i] += 1
 
+  # total_calc: list[int] = [1] * len(r_data)
+
+  # for pop in pop_lists:
+  # for i in range(0, len(pop[1])):
+  # total_calc[i] += pop[1][i]
+
   # plot each line/gene_pop
   figure, axes = plot.subplots()
   for pop in pop_lists:
     axes.plot(times, pop[1], label="value: " + str(pop[0]))
+  # axes.plot(times, total_r, label="Total")
+  # axes.plot(times, total_calc, label="sum of vals+1")
   axes.legend(loc=0)
   axes.set_xlabel("Time (seconds)")
   axes.set_ylabel("Number of active genes")
@@ -145,7 +155,8 @@ def visualise_genome_changes(data: LogData, directory: Path):
   :param data: the simulation data to read from.
   :param directory: the directory to which the plot will be saved.
   make_gene_pop_plot(data.box_speed("rabbit"), directory, "rabbit", "speed")
-
+  make_gene_pop_plot(data.box_vision("rabbit"), directory, "rabbit", "vision")
+  make_gene_pop_plot(data.box_hunger_rate("rabbit"), directory, "rabbit", "hunger_rate")
   """
   plot_data(data, Path(os.path.join(directory, "rabbit")), "rabbit")
   plot_data(data, Path(os.path.join(directory, "deer")), "deer")
