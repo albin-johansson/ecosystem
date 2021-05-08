@@ -194,8 +194,6 @@ namespace Ecosystem.Logging
       boxFreqFactor = 1 + (duration / 1000 / 100);
       AssignAverages();
       AssignBoxes();
-      //Debug.Log("Total genomes found: " + genomes.Count);
-      //Debug.Log("_workinprogress:" + _workInProgressGenomes.Count);
     }
 
     /// Sets the minimum FPS associated with the simulation.
@@ -385,7 +383,6 @@ namespace Ecosystem.Logging
         else
         {
           tmp.Add(abstractGenome.key, t++);
-          //Debug.Log("Added new animal: " + abstractGenome.key);
           pass = false;
         }
       }
@@ -425,7 +422,6 @@ namespace Ecosystem.Logging
       // Animals die multiple times :/. So the key might already exist.
       if (!keyEnd.ContainsKey(key))
       {
-        //Debug.Log("Something died, adding to keyEnd");
         keyEnd.Add(key, SessionTime.NowSinceSceneStart());
 
         events.Add(new SimulationEvent

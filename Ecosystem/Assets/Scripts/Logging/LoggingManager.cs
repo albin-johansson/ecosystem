@@ -73,33 +73,7 @@ namespace Ecosystem.Logging
         var seconds = milliseconds / 1_000;
         timePassedText.text = seconds.ToString();
         _nextUpdateTime = milliseconds + 1_000;
-
-        //Debug.Log(_data.test());
-        //Debug.Log(_data.test2());
       }
-
-      /*
-      if (Input.GetKeyUp(KeyCode.K))
-      {
-        //kill a rabbit. for testing extinction. 
-
-        var rabbits = GameObject.FindGameObjectsWithTag("Rabbit");
-
-        bool killed = false;
-        int i = 0;
-        while (!killed)
-        {
-          if (rabbits[i].TryGetComponent(out AbstractGenome g))
-          {
-            rabbits[i].GetComponent<DeathHandler>().Die(CauseOfDeath.Starvation);
-            killed = true;
-            Debug.Log("killed a rabbit");
-          }
-
-          i++;
-        }
-        
-      }*/
     }
 
     private void OnApplicationQuit()

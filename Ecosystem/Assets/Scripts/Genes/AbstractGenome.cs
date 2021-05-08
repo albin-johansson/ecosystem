@@ -1,7 +1,5 @@
 using System.Linq;
 using System.Collections.Generic;
-using System.Runtime.CompilerServices;
-using NUnit.Framework;
 using UnityEngine;
 using UnityEngine.AI;
 using Random = System.Random;
@@ -101,7 +99,6 @@ namespace Ecosystem.Genes
     public void Initialize(IGenome first, IGenome second)
     {
       key = GenerateKey(10);
-      //Debug.Log("Initialize new genome: " + key);
       Data = Genomes.Merge(first, second);
       ConvertGenesToAttributes();
     }
