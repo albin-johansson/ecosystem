@@ -379,7 +379,7 @@ namespace Ecosystem.Logging
       {
         if (tmp.ContainsKey(abstractGenome.key))
         {
-          Debug.Log("Found key that was duplicated! " + abstractGenome.key);
+          Debug.Log("Found key that was duplicated! This should not happen! " + abstractGenome.key);
           abstractGenome.ResetKey();
         }
         else
