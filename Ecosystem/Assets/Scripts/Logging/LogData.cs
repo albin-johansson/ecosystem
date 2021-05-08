@@ -113,7 +113,7 @@ namespace Ecosystem.Logging
     [SerializeField] private List<Death> deaths = new List<Death>(64);
 
     /// <summary>
-    ///   List of the genomes that count, currently not included in log file since not visualisation uses them.
+    ///   List of the genomes that count, currently not included in log file since no visualisation uses them.
     /// </summary>
     [NonSerialized] private List<GenomeInfo> genomes = new List<GenomeInfo>(64);
 
@@ -141,17 +141,6 @@ namespace Ecosystem.Logging
     [NonSerialized] private List<GenomeInfo> _workInProgressGenomes = new List<GenomeInfo>(64);
 
     #endregion
-
-
-    public string test()
-    {
-      return "Tracked genomes total: " + _workInProgressGenomes.Count;
-    }
-
-    public string test2()
-    {
-      return "Key ended size: " + keyEnd.Count;
-    }
 
     /// <summary>
     ///   Prepares the data with the initial simulation state. Used to determine the
@@ -422,10 +411,6 @@ namespace Ecosystem.Logging
 
         --aliveCount;
         ++deadCount;
-      }
-      else
-      {
-        Debug.Log("Previously dead thing dies again");
       }
     }
 
