@@ -116,7 +116,7 @@ namespace Ecosystem
       childTransform.parent = _directoryOfAnimal;
       child.SetActive(true);
 
-      if (TryGetComponent(out AbstractGenome childGenome))
+      if (child.TryGetComponent(out AbstractGenome childGenome))
       {
         childGenome.Initialize(genome, _mateGenome);
       }
