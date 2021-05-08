@@ -1,4 +1,3 @@
-using Ecosystem.Components;
 using Ecosystem.Spawning;
 using Ecosystem.Consumer;
 using Ecosystem.Genes;

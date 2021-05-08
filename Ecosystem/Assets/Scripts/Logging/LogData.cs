@@ -360,33 +360,14 @@ namespace Ecosystem.Logging
       ++matingCount;
     }
 
-    private Dictionary<string, int> tmp = new Dictionary<string, int>();
-
-    private int t = 0;
-
     /// <summary>
     ///   Adds a simulation event that represents the birth of an animal.
     /// </summary>
     /// <param name="animal">the game object associated with the animal that was born.</param>
     public void AddBirth(GameObject animal)
     {
+      //Due to GenerateKey in Abstract genome, each key should be unique. 
       var abstractGenome = animal.GetComponent<AbstractGenome>();
-      bool pass = true;
-
-      while (pass)
-      {
-        if (tmp.ContainsKey(abstractGenome.key))
-        {
-          Debug.Log("Found key that was duplicated! This should not happen! " + abstractGenome.key);
-          abstractGenome.ResetKey();
-        }
-        else
-        {
-          tmp.Add(abstractGenome.key, t++);
-          pass = false;
-        }
-      }
-
       _workInProgressGenomes.Add(new GenomeInfo
       {
         tag = animal.tag,
