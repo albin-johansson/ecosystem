@@ -15,13 +15,6 @@ namespace Ecosystem.Consumer
     /// </summary>
     public static event PreyConsumedEvent OnPreyConsumed;
 
-    public delegate void FoodEatenEvent(GameObject food);
-
-    /// <summary>
-    /// This event is emitted every time a food resource is consumed.
-    /// </summary>
-    public static event FoodEatenEvent OnFoodEaten;
-
     [SerializeField] private AbstractGenome genome;
     [SerializeField] private ResourceBar resourceBar;
     [SerializeField] private DeathHandler deathHandler;
@@ -95,9 +88,11 @@ namespace Ecosystem.Consumer
         var otherDeathHandler = otherObject.GetComponentInParent<DeathHandler>();
         if (!otherDeathHandler.isDead)
         {
-          var nutritionController = otherDeathHandler.Die(CauseOfDeath.Eaten);
           IsConsuming = true;
+
+          var nutritionController = otherDeathHandler.Die(CauseOfDeath.Eaten);
           Hunger -= nutritionController.Consume(Hunger);
+
           OnPreyConsumed?.Invoke();
         }
       }
@@ -110,7 +105,6 @@ namespace Ecosystem.Consumer
       }
       else if (Tags.IsStaticFood(otherObject))
       {
-        OnFoodEaten?.Invoke(otherObject);
         EatingFromGameObject = otherObject;
       }
     }
@@ -129,6 +123,14 @@ namespace Ecosystem.Consumer
         }
       }
     }
+    
+    private void OnTriggerExit(Collider other)
+    {
+      if (other.gameObject == EatingFromGameObject)
+      {
+        EatingFromGameObject = null;
+      }
+    }
 
     public bool IsHungry()
     {
@@ -138,6 +140,11 @@ namespace Ecosystem.Consumer
     public void SetSaturation(float value)
     {
       Hunger = maxHunger - value;
+      if (Hunger < 0)
+      {
+        Hunger = 0;
+      }
+      _isDead = false;
       resourceBar.SetSaturationValue(value);
     }
   }

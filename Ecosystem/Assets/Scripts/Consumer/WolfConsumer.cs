@@ -10,9 +10,7 @@ namespace Ecosystem.Consumer
   {
     public delegate void PreyConsumedEvent();
 
-    /// <summary>
     /// This event is emitted every time a prey is consumed.
-    /// </summary>
     public static event PreyConsumedEvent OnPreyConsumed;
 
     [SerializeField] private AbstractGenome genome;
@@ -66,15 +64,18 @@ namespace Ecosystem.Consumer
       {
         return;
       }
+
       var otherObject = other.gameObject;
       if (Tags.IsPrey(otherObject))
       {
         var otherDeathHandler = otherObject.GetComponentInParent<DeathHandler>();
         if (!otherDeathHandler.isDead)
         {
-          var nutritionController = otherDeathHandler.Die(CauseOfDeath.Eaten);
           IsConsuming = true;
+
+          var nutritionController = otherDeathHandler.Die(CauseOfDeath.Eaten);
           Hunger -= nutritionController.Consume(Hunger);
+
           OnPreyConsumed?.Invoke();
         }
       }
@@ -110,6 +111,11 @@ namespace Ecosystem.Consumer
     public void SetSaturation(float value)
     {
       Hunger = maxHunger - value;
+      if (Hunger < 0)
+      {
+        Hunger = 0;
+      }
+      _isDead = false;
       resourceBar.SetSaturationValue(value);
     }
   }

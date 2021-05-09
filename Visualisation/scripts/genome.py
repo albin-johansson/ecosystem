@@ -11,6 +11,9 @@ from logdata import *
 
 
 def make_averages(data: list[AverageGenomeEntry], directory: Path, animal: str, gene: str):
+  if len(data) == 0:
+    return
+
   figure, axes = plot.subplots()
 
   values: list[float] = []
@@ -30,6 +33,9 @@ def make_averages(data: list[AverageGenomeEntry], directory: Path, animal: str, 
 
 
 def make_boxplot(data: list[BoxGenomeEntry], directory: Path, animal: str, gene: str):
+  if len(data) == 0:
+    return
+
   # reduce number of entries until max is not exceeded:
   max_entries: int = 10
   i: int = 0
@@ -58,6 +64,9 @@ def make_boxplot(data: list[BoxGenomeEntry], directory: Path, animal: str, gene:
 
 
 def make_gene_pop_plot(data: list[BoxGenomeEntry], directory: Path, animal: str, gene: str):
+  if len(data) == 0:
+    return
+
   # decimal precision:
   deci: int = 1
 

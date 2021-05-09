@@ -26,7 +26,7 @@ namespace Ecosystem.AnimalBehaviour.Predators.Bear
       {
         return base.Tick();
       }
-      else if (!Target.activeInHierarchy || 
+      else if (!Target.activeInHierarchy ||
                !MovementController.IsWithinSphere(Target.transform.position))
       {
         Target = GetClosestInVision(Layers.PreyMask);

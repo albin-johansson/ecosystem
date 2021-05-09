@@ -24,7 +24,6 @@ namespace Ecosystem.Genes
     /// </summary>
     /// <returns>the metabolism value, based on the associated genes.</returns>
     float Metabolism { get; }
-    
 
     /// <summary>
     ///   Indicates whether or not the specimen is male or not.

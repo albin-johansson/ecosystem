@@ -12,9 +12,11 @@ namespace Ecosystem.Logging
   ///   when the simulation has finished.
   /// </summary>
   [Serializable]
-  public sealed partial class LogData
+  public sealed class LogData
   {
     private static readonly int GeneCount = Enum.GetValues(typeof(GeneType)).Length;
+
+    #region Fields
 
     /// <summary>
     ///   Duration of simulation, in milliseconds.
@@ -91,6 +93,10 @@ namespace Ecosystem.Logging
     /// </summary>
     [SerializeField] private int preyConsumedCount;
 
+    [SerializeField] private float minimumFps;
+    [SerializeField] private float maximumFps;
+    [SerializeField] private float averageFps;
+
     /// <summary>
     ///   The history of simulation events, stored in chronological order. 
     /// </summary>
@@ -134,6 +140,8 @@ namespace Ecosystem.Logging
     /// Only used for constructing the finished product (due to the immutability of serializable structs)
     [NonSerialized] private List<GenomeInfo> _workInProgressGenomes = new List<GenomeInfo>(64);
 
+    #endregion
+
     /// <summary>
     ///   Prepares the data with the initial simulation state. Used to determine the
     ///   initial population sizes, etc.
@@ -141,22 +149,6 @@ namespace Ecosystem.Logging
     public void PrepareData()
     {
       CaptureInitialGenomes();
-    }
-
-    private void CaptureInitialGenomes()
-    {
-      initialAliveRabbitsCount = CaptureByTag("Rabbit");
-      initialAliveDeerCount = CaptureByTag("Deer");
-      initialAliveWolvesCount = CaptureByTag("Wolf");
-      initialAliveBearsCount = CaptureByTag("Bear");
-      initialAlivePredatorCount = initialAliveBearsCount + initialAliveWolvesCount;
-      initialAlivePreyCount = initialAliveRabbitsCount + initialAliveDeerCount;
-      initialAliveCount = initialAlivePredatorCount + initialAlivePreyCount;
-
-      initialFoodCount = Tags.CountFood();
-
-      aliveCount = initialAliveCount;
-      foodCount = initialFoodCount;
     }
 
     private int CaptureByTag(string tag)
@@ -186,12 +178,30 @@ namespace Ecosystem.Logging
     /// </summary>
     public void MarkAsDone()
     {
-      duration = SessionTime.Now();
+      duration = SessionTime.NowSinceSceneStart();
       MatchGenomeToTime();
       _workInProgressGenomes = new List<GenomeInfo>();
       boxFreqFactor = 2; //might need changes if simulation is too long.  
       AssignAverages();
       AssignBoxes();
+    }
+
+    /// Sets the minimum FPS associated with the simulation.
+    public void SetMinFPS(float fps)
+    {
+      minimumFps = fps;
+    }
+
+    /// Sets the maximum FPS associated with the simulation.
+    public void SetMaxFPS(float fps)
+    {
+      maximumFps = fps;
+    }
+
+    /// Sets the average FPS associated with the simulation.
+    public void SetAverageFPS(float fps)
+    {
+      averageFps = fps;
     }
 
     private AverageGenomes CreateAverageGenomes(string animal) => new AverageGenomes
@@ -315,6 +325,8 @@ namespace Ecosystem.Logging
       }
     }
 
+    #region Event recording functions
+
     /// <summary>
     ///   Adds a simulation event that represents the mating of two animals.
     /// </summary>
@@ -326,7 +338,7 @@ namespace Ecosystem.Logging
     {
       events.Add(new SimulationEvent
       {
-        time = SessionTime.Now(),
+        time = SessionTime.NowSinceSceneStart(),
         type = "mating",
         tag = animalTag,
         position = position,
@@ -346,7 +358,7 @@ namespace Ecosystem.Logging
     {
       events.Add(new SimulationEvent
       {
-        time = SessionTime.Now(),
+        time = SessionTime.NowSinceSceneStart(),
         type = "birth",
         tag = animal.tag,
         position = animal.transform.position,
@@ -361,7 +373,7 @@ namespace Ecosystem.Logging
       _workInProgressGenomes.Add(new GenomeInfo
       {
         tag = animal.tag,
-        time = SessionTime.Now(),
+        time = SessionTime.NowSinceSceneStart(),
         endTime = -1,
         key = abstractGenome.key,
         genes = GenomeDataToList(abstractGenome.Data)
@@ -377,7 +389,7 @@ namespace Ecosystem.Logging
     {
       events.Add(new SimulationEvent
       {
-        time = SessionTime.Now(),
+        time = SessionTime.NowSinceSceneStart(),
         type = "death",
         tag = deadObject.tag,
         position = deadObject.transform.position,
@@ -406,11 +418,11 @@ namespace Ecosystem.Logging
     ///   Adds a simulation event that represents a food item being consumed.
     /// </summary>
     /// <param name="food">the game object associated with the food item that was consumed.</param>
-    public void AddConsumption(GameObject food)
+    public void AddFoodConsumption(GameObject food)
     {
       events.Add(new SimulationEvent
       {
-        time = SessionTime.Now(),
+        time = SessionTime.NowSinceSceneStart(),
         type = "consumption",
         tag = food.tag,
         position = food.transform.position,
@@ -419,6 +431,44 @@ namespace Ecosystem.Logging
       });
 
       --foodCount;
+    }
+
+    /// <summary>
+    ///   Adds a simulation event that represents a food item decaying.
+    /// </summary>
+    /// <param name="food">the game object associated with the food item that decayed.</param>
+    public void AddFoodDecayed(GameObject food)
+    {
+      events.Add(new SimulationEvent
+      {
+        time = SessionTime.NowSinceSceneStart(),
+        type = "food_decay",
+        tag = food.tag,
+        position = food.transform.position,
+        matingIndex = -1,
+        deathIndex = -1
+      });
+
+      --foodCount;
+    }
+
+    /// <summary>
+    ///   Adds a simulation event that represents a food item being generated.
+    /// </summary>
+    /// <param name="food">the game object associated with the food item that was generated.</param>
+    public void AddFoodGeneration(GameObject food)
+    {
+      events.Add(new SimulationEvent
+      {
+        time = SessionTime.NowSinceSceneStart(),
+        type = "food_generation",
+        tag = food.tag,
+        position = food.transform.position,
+        matingIndex = -1,
+        deathIndex = -1
+      });
+
+      ++foodCount;
     }
 
     /// <summary>
@@ -432,6 +482,10 @@ namespace Ecosystem.Logging
     {
       ++preyConsumedCount;
     }
+
+    #endregion
+
+    #region Public count queries
 
     /// <summary>
     ///   Returns the current count of alive animals.
@@ -469,6 +523,38 @@ namespace Ecosystem.Logging
     /// <returns>the amount of consumed prey.</returns>
     public int PreyConsumedCount() => preyConsumedCount;
 
+    #endregion
+
+    #region Genome functions
+
+    private void CaptureInitialGenomes()
+    {
+      initialAliveRabbitsCount = CaptureByTag("Rabbit");
+      initialAliveDeerCount = CaptureByTag("Deer");
+      initialAliveWolvesCount = CaptureByTag("Wolf");
+      initialAliveBearsCount = CaptureByTag("Bear");
+      initialAlivePredatorCount = initialAliveBearsCount + initialAliveWolvesCount;
+      initialAlivePreyCount = initialAliveRabbitsCount + initialAliveDeerCount;
+      initialAliveCount = initialAlivePredatorCount + initialAlivePreyCount;
+
+      initialFoodCount = Tags.CountFood();
+
+      aliveCount = initialAliveCount;
+      foodCount = initialFoodCount;
+    }
+
+    private GenomeInfo CaptureGenome(Dictionary<GeneType, Gene> genes)
+    {
+      var info = new GenomeInfo {genes = new List<GeneInfo>()};
+
+      foreach (var pair in genes)
+      {
+        info.genes.Add(CreateGeneInfo(pair.Key, pair.Value));
+      }
+
+      return info;
+    }
+
     //not used, remove?
     private static void AddGene(ICollection<GeneInfo> genes, KeyValuePair<GeneType, Gene> pair)
     {
@@ -498,6 +584,8 @@ namespace Ecosystem.Logging
       geneType = type,
       value = gene.Value
     };
+
+    #endregion
 
     private static List<GeneInfo> GenomeDataToList(GenomeData data) => new List<GeneInfo>
     {

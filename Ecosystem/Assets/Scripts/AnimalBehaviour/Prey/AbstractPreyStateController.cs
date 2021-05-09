@@ -7,7 +7,7 @@ namespace Ecosystem.AnimalBehaviour.Prey
     private IAnimalState _drinking;
     private IAnimalState _runningTowardsWater;
     private IAnimalState _fleeing;
-    
+
     protected IAnimalState Eating;
     protected IAnimalState RunningTowardsFood;
     protected IAnimalState LookingForMate;
@@ -41,7 +41,7 @@ namespace Ecosystem.AnimalBehaviour.Prey
 
       State = _idle;
       stateText.SetText(State.Type());
-      
+
       genderIcon.SetGenderIcon();
     }
 

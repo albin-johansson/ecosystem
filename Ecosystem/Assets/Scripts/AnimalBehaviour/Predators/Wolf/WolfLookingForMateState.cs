@@ -5,6 +5,8 @@ namespace Ecosystem.AnimalBehaviour.Predators.Wolf
 {
   public class WolfLookingForMateState : AbstractAnimalState
   {
+    private float _timer;
+
     internal WolfLookingForMateState(StateData data) : base(data)
     {
     }
@@ -26,28 +28,31 @@ namespace Ecosystem.AnimalBehaviour.Predators.Wolf
     {
       if (Target)
       {
-        if (!Target.activeInHierarchy)
+        _timer = 0;
+        
+        if (!Target.activeInHierarchy || !MovementController.IsWithinSphere(Target.transform.position))
         {
-          Target = GetClosestMateInVision(Layers.WolfMask);
-          if (!Target)
-          {
-            return base.Tick();
-          }
-        }
-        if (Reproducer.CompatibleAsParents(Target) &&
-            Reproducer.CanMate &&
-            MovementController.IsWithinSphere(Target.transform.position))
+          Target = null;
+        } 
+        else if (Reproducer.CompatibleAsParents(Target))
         {
-          MovementController.SetDestinationIfValid(Target.transform.position);
+          MovementController.SetDestination(Target.transform.position);
           return Type();
         }
         else
         {
-          Target = GetClosestMateInVision(Layers.WolfMask);
+          Target = null;
+          MovementController.StartWander();
         }
       }
       else
       {
+        _timer += Time.deltaTime;
+        if (_timer > 1)
+        {
+          Target = GetClosestMateInVision(Layers.WolfMask);
+          _timer = 0;
+        }
         MovementController.UpdateWander();
       }
 

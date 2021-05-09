@@ -1,3 +1,4 @@
+using Ecosystem.Util;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
@@ -6,6 +7,8 @@ namespace Ecosystem.Spawning
   // Will spawn a given prefab inside a radius if it hits something with a ground tag.
   public sealed class RadiusPrefabSpawner : MonoBehaviour
   {
+    public static event StationaryFoodGeneration.GeneratedFood OnGeneratedFood;
+
     [SerializeField] private GameObject prefab;
     [SerializeField] private float radius;
 
@@ -38,7 +41,11 @@ namespace Ecosystem.Spawning
 
         if (hit.transform.CompareTag("Terrain"))
         {
-          Instantiate(prefab, hit.point, Quaternion.identity);
+          var spawnedObject = Instantiate(prefab, hit.point, Quaternion.identity);
+          if (Tags.IsFood(prefab))
+          {
+            OnGeneratedFood?.Invoke(spawnedObject);
+          }
         }
 
         _nextSpawnTime = Time.unscaledTime + _spawnRateRatio;

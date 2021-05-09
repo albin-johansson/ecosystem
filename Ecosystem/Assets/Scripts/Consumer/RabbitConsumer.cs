@@ -9,13 +9,6 @@ namespace Ecosystem.Consumer
 {
   public sealed class RabbitConsumer : MonoBehaviour, IConsumer
   {
-    public delegate void FoodEatenEvent(GameObject food);
-
-    /// <summary>
-    /// This event is emitted every time a food resource is consumed.
-    /// </summary>
-    public static event FoodEatenEvent OnFoodEaten;
-
     [SerializeField] private AbstractGenome genome;
     [SerializeField] private ResourceBar resourceBar;
     [SerializeField] private DeathHandler deathHandler;
@@ -73,7 +66,7 @@ namespace Ecosystem.Consumer
       }
 
       resourceBar.SetValue(Hunger);
-      if (Hunger > maxHunger)
+      if (Hunger >= maxHunger)
       {
         _isDead = true;
         deathHandler.Die(CauseOfDeath.Starvation);
@@ -86,18 +79,24 @@ namespace Ecosystem.Consumer
 
       if (Tags.IsStaticFood(otherObject))
       {
-        OnFoodEaten?.Invoke(otherObject);
         EatingFromGameObject = otherObject;
       }
       else if (Tags.IsFood(otherObject))
       {
-        OnFoodEaten?.Invoke(otherObject);
-        ObjectPoolHandler.Instance.ReturnOrDestroy(otherObject.tag, otherObject);
-
         if (other.TryGetComponent(out NutritionController nutritionController))
         {
           Hunger -= nutritionController.Consume(Hunger);
         }
+
+        ObjectPoolHandler.Instance.ReturnOrDestroy(otherObject.tag, otherObject);
+      }
+    }
+
+    private void OnTriggerExit(Collider other)
+    {
+      if (other.gameObject == EatingFromGameObject)
+      {
+        EatingFromGameObject = null;
       }
     }
 
@@ -109,6 +108,11 @@ namespace Ecosystem.Consumer
     public void SetSaturation(float value)
     {
       Hunger = maxHunger - value;
+      if (Hunger < 0)
+      {
+        Hunger = 0;
+      }
+      _isDead = false;
       resourceBar.SetSaturationValue(value);
     }
   }

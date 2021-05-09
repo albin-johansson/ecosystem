@@ -53,6 +53,7 @@ namespace Ecosystem.Consumer
           _limit = Random.Range(30, 50);
           IsConsuming = false;
         }
+
         resourceBar.SetValue(Hunger);
         return;
       }
@@ -82,6 +83,11 @@ namespace Ecosystem.Consumer
     public void SetSaturation(float value)
     {
       Hunger = maxHunger - value;
+      if (Hunger < 0)
+      {
+        Hunger = 0;
+      }
+      _isDead = false;
       resourceBar.SetSaturationValue(value);
     }
   }
