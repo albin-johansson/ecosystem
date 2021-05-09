@@ -72,6 +72,19 @@ namespace Ecosystem.UI
         ToggleMutateBear(bearMutate);
         AssignChanges();
       });
+
+      /*
+      rabbitMutate.isOn = false;
+      deerMutate.isOn = false;
+      wolfMutate.isOn = false;
+      bearMutate.isOn = false;
+
+      ToggleMutateRabbit(rabbitMutate);
+      ToggleMutateDear(deerMutate);
+      ToggleMutateWolf(wolfMutate);
+      ToggleMutateBear(bearMutate);
+      AssignChanges();
+      */
     }
 
     /// <summary>
@@ -112,7 +125,8 @@ namespace Ecosystem.UI
 
     private void ToggleMutateRabbit(Toggle toggle)
     {
-      _rabbitMutateChance = GetMutateChance(toggle);
+      _rabbitMutateChance = GetMutateChance(toggle.isOn);
+      Debug.Log("Rabbit mutate: " + _rabbitMutateChance);
     }
 
     private void ToggleMutateWolf(Toggle toggle)
