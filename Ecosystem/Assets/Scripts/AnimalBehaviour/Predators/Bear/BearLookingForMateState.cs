@@ -6,6 +6,7 @@ namespace Ecosystem.AnimalBehaviour.Predators.Bear
   internal sealed class BearLookingForMateState : AbstractAnimalState
   {
     private float _timer;
+
     internal BearLookingForMateState(StateData data) : base(data)
     {
     }
