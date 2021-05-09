@@ -117,7 +117,6 @@ namespace Ecosystem.UI
     private void ToggleMutateRabbit(Toggle toggle)
     {
       _rabbitMutateChance = GetMutateChance(toggle.isOn);
-      Debug.Log("Rabbit mutate: " + _rabbitMutateChance);
     }
 
     private void ToggleMutateWolf(Toggle toggle)
