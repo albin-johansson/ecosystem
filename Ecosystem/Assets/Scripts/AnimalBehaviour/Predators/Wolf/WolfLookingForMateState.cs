@@ -6,6 +6,7 @@ namespace Ecosystem.AnimalBehaviour.Predators.Wolf
   public class WolfLookingForMateState : AbstractAnimalState
   {
     private float _timer;
+
     internal WolfLookingForMateState(StateData data) : base(data)
     {
     }
