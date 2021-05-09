@@ -5,6 +5,8 @@ namespace Ecosystem.AnimalBehaviour.Predators.Bear
 {
   internal sealed class BearLookingForMateState : AbstractAnimalState
   {
+    private float _timer;
+
     internal BearLookingForMateState(StateData data) : base(data)
     {
     }
@@ -26,29 +28,31 @@ namespace Ecosystem.AnimalBehaviour.Predators.Bear
     {
       if (Target)
       {
-        if (!Target.activeInHierarchy)
+        _timer = 0;
+        
+        if (!Target.activeInHierarchy || !MovementController.IsWithinSphere(Target.transform.position))
         {
-          Target = GetClosestMateInVision(Layers.BearMask);
-          if (!Target)
-          {
-            return base.Tick();
-          }
-        }
-
-        if (Reproducer.CompatibleAsParents(Target) &&
-            Reproducer.CanMate &&
-            MovementController.IsWithinSphere(Target.transform.position))
+          Target = null;
+        } 
+        else if (Reproducer.CompatibleAsParents(Target))
         {
           MovementController.SetDestination(Target.transform.position);
           return Type();
         }
         else
         {
-          Target = GetClosestInVision(Layers.BearMask);
+          Target = null;
+          MovementController.StartWander();
         }
       }
       else
       {
+        _timer += Time.deltaTime;
+        if (_timer > 1)
+        {
+          Target = GetClosestMateInVision(Layers.BearMask);
+          _timer = 0;
+        }
         MovementController.UpdateWander();
       }
 
