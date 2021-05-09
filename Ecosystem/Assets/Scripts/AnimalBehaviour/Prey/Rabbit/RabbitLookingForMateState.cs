@@ -7,6 +7,7 @@ namespace Ecosystem.AnimalBehaviour.Prey.Rabbit
   public class RabbitLookingForMateState : AbstractAnimalState
   {
     private float _timer;
+
     internal RabbitLookingForMateState(StateData data) : base(data)
     {
     }
