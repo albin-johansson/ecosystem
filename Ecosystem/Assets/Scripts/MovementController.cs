@@ -45,7 +45,7 @@ namespace Ecosystem
     {
       if (IsReachable(position))
       {
-        return sphereCollider.radius >= Math.Floor(Vector3.Distance(GetPosition(), position));
+        return sphereCollider.radius + 1 >= Math.Floor(Vector3.Distance(GetPosition(), position));
       }
       else
       {
