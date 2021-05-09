@@ -90,5 +90,10 @@ namespace Ecosystem.Consumer
       _isDead = false;
       resourceBar.SetSaturationValue(value);
     }
+
+    public void CheckLastCollision()
+    {
+      throw new System.NotImplementedException();
+    }
   }
 }

@@ -18,5 +18,7 @@ namespace Ecosystem.Consumer
     bool IsHungry();
 
     void SetSaturation(float value);
+
+    void CheckLastCollision();
   }
 }

@@ -21,6 +21,8 @@ namespace Ecosystem.Consumer
     [SerializeField] private Reproducer reproducer;
     [SerializeField] private float maxHunger = 100;
 
+    private Collider _lastCollision;
+
     private bool _isDead;
     private const int Scaler = 4;
 
@@ -79,6 +81,7 @@ namespace Ecosystem.Consumer
     {
       if (!ColliderActive || IsConsuming)
       {
+        _lastCollision = other;
         return;
       }
 
@@ -108,21 +111,53 @@ namespace Ecosystem.Consumer
         EatingFromGameObject = otherObject;
       }
     }
-
+    
+    public void CheckLastCollision()
+    {
+      if (!_lastCollision)
+      {
+        return;
+      }
+      var temp = Vector3.Distance(_lastCollision.transform.position, gameObject.transform.position);
+      if (temp > 5)
+      {
+        Debug.Log(temp + " distance away");
+        return;
+      }
+      OnTriggerEnter(_lastCollision);
+    }
+    
+    /*
     private void OnTriggerStay(Collider other)
     {
       var otherObject = other.gameObject;
-      if (ColliderActive)
+      if (!ColliderActive || IsConsuming)
+      { 
+        Debug.Log("bear redundant");
+        return;
+      }
+      if (Tags.IsPrey(otherObject))
       {
-        if (Tags.IsMeat(otherObject))
+        var otherDeathHandler = otherObject.GetComponentInParent<DeathHandler>();
+        if (!otherDeathHandler.isDead)
         {
-          if (otherObject.TryGetComponent(out NutritionController otherNutritionController))
-          {
-            Hunger -= otherNutritionController.Consume(Hunger);
-          }
+          IsConsuming = true;
+
+          var nutritionController = otherDeathHandler.Die(CauseOfDeath.Eaten);
+          Hunger -= nutritionController.Consume(Hunger);
+
+          OnPreyConsumed?.Invoke();
+        }
+      }
+      else if (Tags.IsMeat(otherObject))
+      {
+        if (otherObject.TryGetComponent(out NutritionController otherNutritionController))
+        {
+          Hunger -= otherNutritionController.Consume(Hunger);
         }
       }
     }
+    */
     
     private void OnTriggerExit(Collider other)
     {
@@ -131,6 +166,7 @@ namespace Ecosystem.Consumer
         EatingFromGameObject = null;
       }
     }
+
 
     public bool IsHungry()
     {
