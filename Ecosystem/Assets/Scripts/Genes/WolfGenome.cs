@@ -4,12 +4,12 @@ namespace Ecosystem.Genes
 {
   public sealed class WolfGenome : AbstractGenome
   {
-    private static float _mutateChance = 0.05f;
+    private static float _mutateChance = 0f;
     private static Dictionary<GeneType, Preset> _preset;
 
     public static readonly Dictionary<GeneType, Preset> DefaultSet = new Dictionary<GeneType, Preset>()
     {
-      {GeneType.HungerRate, new Preset(0.2f, 0.5f, new[] {0.15f})},
+      {GeneType.HungerRate, new Preset(0.2f, 0.5f, new[] {0.2f, 0.3f, 0.4f})},
       {GeneType.HungerThreshold, new Preset(30, 40, new[] {30f, 35f, 40f})},
       {GeneType.ThirstRate, new Preset(0.3f, 0.5f, new[] {0.3f})},
       {GeneType.ThirstThreshold, new Preset(25, 40, new[] {25f, 35f, 40f})},
@@ -43,10 +43,10 @@ namespace Ecosystem.Genes
       ConvertGenesToAttributes();
     }
 
-    public static void SetPreset(Dictionary<GeneType, Preset> presets, float mutateChance = 0.05f)
+    public static void SetPreset(Dictionary<GeneType, Preset> presets, float mutateChance = 0f)
     {
       _preset = presets;
-      _mutateChance = mutateChance;
+      //_mutateChance = mutateChance;
     }
 
     protected override Dictionary<GeneType, Preset> GetPresets()
