@@ -144,8 +144,6 @@ def visualise_genome_changes(data: LogData, directory: Path):
 
   :param data: the simulation data to read from.
   :param directory: the directory to which the plot will be saved.
-  make_gene_pop_plot(data.box_speed("rabbit"), directory, "rabbit", "speed")
-
   """
   plot_data(data, Path(os.path.join(directory, "rabbit")), "rabbit")
   plot_data(data, Path(os.path.join(directory, "deer")), "deer")

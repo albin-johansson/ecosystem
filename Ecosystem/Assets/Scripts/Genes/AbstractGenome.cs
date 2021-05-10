@@ -1,6 +1,5 @@
 using System.Linq;
 using System.Collections.Generic;
-using System.Runtime.CompilerServices;
 using UnityEngine;
 using UnityEngine.AI;
 using Random = System.Random;
@@ -15,11 +14,26 @@ namespace Ecosystem.Genes
     public string key;
     private static Random _random = new Random();
     private const string _chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
+    private static List<string> _allKeys = new List<string>();
 
     protected static string GenerateKey(int length)
     {
-      return new string(Enumerable.Repeat(_chars, length)
-        .Select(s => s[_random.Next(s.Length)]).ToArray());
+      while (true)
+      {
+        string s = new string(Enumerable.Repeat(_chars, length)
+          .Select(s => s[_random.Next(s.Length)]).ToArray());
+
+        if (!_allKeys.Contains(s))
+        {
+          _allKeys.Add(s);
+          return s;
+        }
+      }
+    }
+
+    public void ResetKey()
+    {
+      key = GenerateKey(10);
     }
 
     private static readonly Dictionary<GeneType, Preset> DefaultPresets = new Dictionary<GeneType, Preset>()

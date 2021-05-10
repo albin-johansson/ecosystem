@@ -113,14 +113,14 @@ namespace Ecosystem.Logging
     [SerializeField] private List<Death> deaths = new List<Death>(64);
 
     /// <summary>
-    ///   List of the genomes that count
+    ///   List of the genomes that count, currently not included in log file since no visualisation uses them.
     /// </summary>
-    [SerializeField] private List<GenomeInfo> genomes = new List<GenomeInfo>(64);
+    [NonSerialized] private List<GenomeInfo> genomes = new List<GenomeInfo>(64);
 
     /// <summary>
     ///   Maps death of genome by key to the death time. 
     /// </summary>
-    [SerializeField] private Dictionary<string, long> keyEnd = new Dictionary<string, long>();
+    private Dictionary<string, long> keyEnd = new Dictionary<string, long>();
 
     //   Saved averages for python 
     [SerializeField] private AverageGenomes rabbitAverageGenomes;
@@ -134,7 +134,7 @@ namespace Ecosystem.Logging
     [SerializeField] private BoxGenomes deerBoxGenomes;
     [SerializeField] private BoxGenomes bearBoxGenomes;
 
-    [SerializeField] private long freq = 1000; // 1 update per second
+    [SerializeField] private long freq = 5 * 1000; // 1 update per 5 second
     [SerializeField] private long boxFreqFactor; // Because to many boxes are bad. 
 
     /// Only used for constructing the finished product (due to the immutability of serializable structs)
@@ -180,8 +180,7 @@ namespace Ecosystem.Logging
     {
       duration = SessionTime.NowSinceSceneStart();
       MatchGenomeToTime();
-      _workInProgressGenomes = new List<GenomeInfo>();
-      boxFreqFactor = 2; //might need changes if simulation is too long.  
+      boxFreqFactor = 1 + (duration / 1000 / 100);
       AssignAverages();
       AssignBoxes();
     }
@@ -356,6 +355,18 @@ namespace Ecosystem.Logging
     /// <param name="animal">the game object associated with the animal that was born.</param>
     public void AddBirth(GameObject animal)
     {
+      //Due to GenerateKey in Abstract genome, each key should be unique. 
+      var abstractGenome = animal.GetComponent<AbstractGenome>();
+      _workInProgressGenomes.Add(new GenomeInfo
+      {
+        tag = animal.tag,
+        time = SessionTime.NowSinceSceneStart(),
+        endTime = -1,
+        key = abstractGenome.key,
+        genes = GenomeDataToList(abstractGenome.Data)
+      });
+
+
       events.Add(new SimulationEvent
       {
         time = SessionTime.NowSinceSceneStart(),
@@ -368,16 +379,6 @@ namespace Ecosystem.Logging
 
       ++birthCount;
       ++aliveCount;
-
-      var abstractGenome = animal.GetComponent<AbstractGenome>();
-      _workInProgressGenomes.Add(new GenomeInfo
-      {
-        tag = animal.tag,
-        time = SessionTime.NowSinceSceneStart(),
-        endTime = -1,
-        key = abstractGenome.key,
-        genes = GenomeDataToList(abstractGenome.Data)
-      });
     }
 
     /// <summary>
@@ -387,30 +388,29 @@ namespace Ecosystem.Logging
     /// <param name="cause">the cause of death for the animal.</param>
     public void AddDeath(GameObject deadObject, CauseOfDeath cause)
     {
-      events.Add(new SimulationEvent
-      {
-        time = SessionTime.NowSinceSceneStart(),
-        type = "death",
-        tag = deadObject.tag,
-        position = deadObject.transform.position,
-        matingIndex = -1,
-        deathIndex = deaths.Count
-      });
-
-      deaths.Add(new Death
-      {
-        cause = cause
-      });
-
-      --aliveCount;
-      ++deadCount;
-
       var key = deadObject.GetComponent<AbstractGenome>().key;
-
       // Animals die multiple times :/. So the key might already exist.
       if (!keyEnd.ContainsKey(key))
       {
-        keyEnd.Add(key, SessionTime.Now());
+        keyEnd.Add(key, SessionTime.NowSinceSceneStart());
+
+        events.Add(new SimulationEvent
+        {
+          time = SessionTime.NowSinceSceneStart(),
+          type = "death",
+          tag = deadObject.tag,
+          position = deadObject.transform.position,
+          matingIndex = -1,
+          deathIndex = deaths.Count
+        });
+
+        deaths.Add(new Death
+        {
+          cause = cause
+        });
+
+        --aliveCount;
+        ++deadCount;
       }
     }
 
