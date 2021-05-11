@@ -10,7 +10,7 @@ namespace Ecosystem.Genes
   {
     internal GenomeData Data;
     private const float MetabolismFactor = 1.495f;
-    public const float ChildFoodConsumptionFactor = 4f / 3f;
+    public const float ChildFoodConsumptionFactor = 3f;
     public string key;
     private static Random _random = new Random();
     private const string _chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
