@@ -6,6 +6,7 @@ import os
 from pathlib import Path
 
 import matplotlib.pyplot as plot
+from cycler import cycler
 
 from logdata import *
 
@@ -23,7 +24,7 @@ def make_averages(data: list[AverageGenomeEntry], directory: Path, animal: str, 
     values.append(entry.value)
     times.append(int(entry.time / 1000))
 
-  plot.plot(times, values, label=animal + "_" + gene, color="green")
+  plot.plot(times, values, label=animal + "_" + gene, color="green", linestyle='-', marker=',')
   axes.set_xlabel("Time (seconds)")
   axes.set_ylabel("Average value")
   axes.set_title("Average value for the gene: " + gene)
@@ -96,11 +97,16 @@ def make_gene_pop_plot(data: list[BoxGenomeEntry], directory: Path, animal: str,
 
   # plot each line/gene_pop
   figure, axes = plot.subplots()
+  monochrome = (cycler('color', ['k']) * cycler('linestyle', ['-', '--', ':']) * cycler('marker', ['^', ',', '.']))
+  plot.rcParams['axes.grid'] = True
+  plot.rcParams['axes.prop_cycle'] = monochrome
+  axes.set_prop_cycle(monochrome)
   for pop in pop_lists:
     axes.plot(times, pop[1], label="value: " + str(pop[0]))
   axes.legend(loc=0)
   axes.set_xlabel("Time (seconds)")
   axes.set_ylabel("Number of active genes")
+  axes.set_title("Gene populations for the gene: " + gene)
   plot.savefig(directory / Path("gene_pop_" + animal + "_" + gene + ".png"))
   plot.close()
 

@@ -7,6 +7,7 @@ from pathlib import Path
 
 import matplotlib.pyplot as plot
 import numpy
+from cycler import cycler
 
 from logdata import *
 
@@ -82,11 +83,13 @@ def create_grouped_bar_chart(stats: dict[str, list[int]]):
   bar_width = 0.15
   max_value = 0
 
+  b_c = (cycler('hatch', ['///', '--', '...', '\///', 'xxx', '\\\\']) * cycler('color', 'w') * cycler('zorder', [10]))
+  styles = b_c()
   rects = []
   i = 0
   for label, values in stats.items():
     max_value = max(max_value, max(values))
-    rects.append(axes.bar(x + (i * bar_width), values, bar_width, label=label))
+    rects.append(axes.bar(x + (i * bar_width), values, bar_width, label=label, **next(styles)))
     i = i + 1
 
   axes.set_title("Deaths arranged by cause and animal type")

@@ -5,6 +5,7 @@ This module is responsible for visualising changes in the animal populations.
 from pathlib import Path
 
 import matplotlib.pyplot as plot
+from cycler import cycler
 
 from logdata import *
 
@@ -29,12 +30,18 @@ def visualise_animal_populations_standard(data: LogData, directory: Path):
 
   figure, axes = plot.subplots()
 
-  axes.plot(rabbit_history.keys(), rabbit_history.values(), label="Rabbits", color=rabbit_color, **{"ls": "-."})
-  axes.plot(deer_history.keys(), deer_history.values(), label="Deer", color=deer_color, **{"ls": "--"})
-  axes.plot(wolf_history.keys(), wolf_history.values(), label="Wolves", color=wolf_color, **{"ls": "-."})
-  axes.plot(bear_history.keys(), bear_history.values(), label="Bears", color=bear_color, **{"ls": "--"})
+  monochrome = (cycler('color', ['k']) * cycler('linestyle', ['-', '--', ':', '-.']))
+  plot.rcParams['axes.grid'] = False
+  plot.rcParams['axes.prop_cycle'] = monochrome
 
-  axes.legend(loc="lower left")
+  axes.set_prop_cycle(monochrome)
+
+  axes.plot(rabbit_history.keys(), rabbit_history.values(), label="Rabbits", color=rabbit_color)
+  axes.plot(deer_history.keys(), deer_history.values(), label="Deer", color=deer_color)
+  axes.plot(wolf_history.keys(), wolf_history.values(), label="Wolves", color=wolf_color)
+  axes.plot(bear_history.keys(), bear_history.values(), label="Bears", color=bear_color)
+
+  axes.legend(loc=0)
   axes.set_xlim(0, data.duration_secs())
   axes.set_xlabel("Time (seconds)")
   axes.set_ylabel("Population size")
