@@ -83,7 +83,7 @@ def create_grouped_bar_chart(stats: dict[str, list[int]]):
   bar_width = 0.15
   max_value = 0
 
-  b_c = (cycler('hatch', ['///', '--', '...', '\///', 'xxx', '\\\\']) * cycler('color', 'w') * cycler('zorder', [10]))
+  b_c = (cycler('hatch', ['///', '--', '...', 'xxx', '\\\\']) * cycler('zorder', [10]))
   styles = b_c()
   rects = []
   i = 0

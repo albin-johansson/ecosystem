@@ -22,7 +22,7 @@ def visualise_food_consumption(data: LogData, directory: Path):
 
   food_history = get_food_history(data)
 
-  axes.plot(food_history.keys(), food_history.values(), label="Food", color="blue", **{"ls": "--"})
+  axes.plot(food_history.keys(), food_history.values(), label="Food", color="blue", **{"ls": "-"})
 
   axes.legend(loc="upper left")
   axes.set_xlim(0, data.duration_secs())

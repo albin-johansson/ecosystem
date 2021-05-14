@@ -97,12 +97,13 @@ def make_gene_pop_plot(data: list[BoxGenomeEntry], directory: Path, animal: str,
 
   # plot each line/gene_pop
   figure, axes = plot.subplots()
-  monochrome = (cycler('color', ['k']) * cycler('linestyle', ['-', '--', ':']) * cycler('marker', ['^', ',', '.']))
+  monochrome = (cycler('linestyle', ['-', '--', ':']) * cycler('marker', ['^', ',', '.']))
+  colours = cycler('color', ['b', 'g', 'r', 'c', 'm', 'y', 'k', 'w'])()
   plot.rcParams['axes.grid'] = True
   plot.rcParams['axes.prop_cycle'] = monochrome
   axes.set_prop_cycle(monochrome)
   for pop in pop_lists:
-    axes.plot(times, pop[1], label="value: " + str(pop[0]))
+    axes.plot(times, pop[1], label="value: " + str(pop[0]), **next(colours))
   axes.legend(loc=0)
   axes.set_xlabel("Time (seconds)")
   axes.set_ylabel("Number of active genes")
