@@ -21,6 +21,7 @@
 
 Ecosystem/UserSettings
 Ecosystem/SimulationLogs
+Ecosystem/ECSLogs
 
 # Ignore compiled Python files 
 *.pyc
@@ -67,3 +68,4 @@ sysinfo.txt
 # Crashlytics generated file
 crashlytics-build.properties
 
+Ecosystem/.vscode/settings.json

@@ -8,6 +8,27 @@ TimePoint = int
 Amount = int
 
 
+class BoxGenomeEntry:
+  time: int = 0
+  values: list[float] = []
+
+  def merge(self, other):
+    self.values.append(other.values)
+
+  def __init__(self, time: int, values: list[float]):
+    self.time = time
+    self.values = values
+
+
+class AverageGenomeEntry:
+  time: int = 0
+  value: float = 0
+
+  def __init__(self, time: int, value: float):
+    self.time = time
+    self.value = value
+
+
 class LogData:
   """
   A wrapper around simulation data obtained from a JSON file.
@@ -65,8 +86,89 @@ class LogData:
   def mating_info(self, index: int):
     return self.data["matings"][index]
 
+  def genome_info(self):
+    return self.data["genomes"]
+
   def __getitem__(self, item):  # operator[]
     return self.data[item]
+
+  def average_genomes(self, animal: str, gene: str) -> list[AverageGenomeEntry]:
+    obj = self.data[animal][gene]
+    result: list[AverageGenomeEntry] = []
+
+    for entry in obj:
+      result.append(AverageGenomeEntry(entry["entryTime"], entry["value"]))
+
+    return result
+
+  def box_genomes(self, animal: str, gene: str) -> list[BoxGenomeEntry]:
+    data = self.data[animal][gene]
+
+    result = []
+    for entry in data:
+      result.append(BoxGenomeEntry(entry["entryTime"], entry["value"]))
+
+    return result
+
+  def average_hunger_rate(self, animal: str) -> list[AverageGenomeEntry]:
+    return self.average_genomes(animal + "AverageGenomes", "HungerRate")
+
+  def average_hunger_threshold(self, animal: str) -> list[AverageGenomeEntry]:
+    return self.average_genomes(animal + "AverageGenomes", "HungerThreshold")
+
+  def average_thirst_rate(self, animal: str) -> list[AverageGenomeEntry]:
+    return self.average_genomes(animal + "AverageGenomes", "ThirstRate")
+
+  def average_thirst_threshold(self, animal: str) -> list[AverageGenomeEntry]:
+    return self.average_genomes(animal + "AverageGenomes", "ThirstThreshold")
+
+  def average_vision(self, animal: str) -> list[AverageGenomeEntry]:
+    return self.average_genomes(animal + "AverageGenomes", "Vision")
+
+  def average_speed(self, animal: str) -> list[AverageGenomeEntry]:
+    return self.average_genomes(animal + "AverageGenomes", "Speed")
+
+  def average_size_factor(self, animal: str) -> list[AverageGenomeEntry]:
+    return self.average_genomes(animal + "AverageGenomes", "SizeFactor")
+
+  def average_desirability_score(self, animal: str) -> list[AverageGenomeEntry]:
+    return self.average_genomes(animal + "AverageGenomes", "DesirabilityScore")
+
+  def average_gestation_period(self, animal: str) -> list[AverageGenomeEntry]:
+    return self.average_genomes(animal + "AverageGenomes", "GestationPeriod")
+
+  def average_sexual_maturity_time(self, animal: str) -> list[AverageGenomeEntry]:
+    return self.average_genomes(animal + "AverageGenomes", "SexualMaturityTime")
+
+  def box_hunger_rate(self, animal: str) -> list[BoxGenomeEntry]:
+    return self.box_genomes(animal + "BoxGenomes", "HungerRate")
+
+  def box_hunger_threshold(self, animal: str) -> list[BoxGenomeEntry]:
+    return self.box_genomes(animal + "BoxGenomes", "HungerThreshold")
+
+  def box_thirst_rate(self, animal: str) -> list[BoxGenomeEntry]:
+    return self.box_genomes(animal + "BoxGenomes", "ThirstRate")
+
+  def box_thirst_threshold(self, animal: str) -> list[BoxGenomeEntry]:
+    return self.box_genomes(animal + "BoxGenomes", "ThirstThreshold")
+
+  def box_vision(self, animal: str) -> list[BoxGenomeEntry]:
+    return self.box_genomes(animal + "BoxGenomes", "Vision")
+
+  def box_speed(self, animal: str) -> list[BoxGenomeEntry]:
+    return self.box_genomes(animal + "BoxGenomes", "Speed")
+
+  def box_size_factor(self, animal: str) -> list[BoxGenomeEntry]:
+    return self.box_genomes(animal + "BoxGenomes", "SizeFactor")
+
+  def box_desirability_score(self, animal: str) -> list[BoxGenomeEntry]:
+    return self.box_genomes(animal + "BoxGenomes", "DesirabilityScore")
+
+  def box_gestation_period(self, animal: str) -> list[BoxGenomeEntry]:
+    return self.box_genomes(animal + "BoxGenomes", "GestationPeriod")
+
+  def box_sexual_maturity_time(self, animal: str) -> list[BoxGenomeEntry]:
+    return self.box_genomes(animal + "BoxGenomes", "SexualMaturityTime")
 
 
 def get_population_history(data: LogData, tags: list[str], initial_count: Amount) -> dict[TimePoint, Amount]:
@@ -116,8 +218,14 @@ def get_food_history(data: LogData) -> dict[TimePoint, Amount]:
 
   for event in data.events():
     time: TimePoint = event["time"] / 1_000
+    event_type: str = event["type"]
 
-    food_count = food_count - 1
+    if event_type == "consumption" or event_type == "food_decay":
+      food_count = food_count - 1
+
+    elif event_type == "food_generation":
+      food_count = food_count + 1
+
     food_history[time] = food_count
 
   food_history[data.duration_secs()] = food_count

@@ -1,6 +1,7 @@
 using Ecosystem.Genes;
 using Ecosystem.Logging;
 using Ecosystem.UI;
+using Ecosystem.Util;
 using UnityEngine;
 
 namespace Ecosystem
@@ -12,13 +13,25 @@ namespace Ecosystem
     [SerializeField] private DeathHandler deathHandler;
     [SerializeField] private float maxThirst = 100;
 
+    private int _waterSourcesAvailable;
     private bool _isDead;
+
     public bool IsDrinking { get; private set; }
+
     public float Thirst { get; private set; }
 
-    private void Start()
+    public bool CanDrink => _waterSourcesAvailable > 0;
+
+    private void OnEnable()
     {
       resourceBar.SetMaxValue(maxThirst);
+      _waterSourcesAvailable = 0;
+    }
+
+    private void OnDisable()
+    {
+      Thirst = 0;
+      IsDrinking = false;
     }
 
     private void Update()
@@ -30,9 +43,10 @@ namespace Ecosystem
 
       Thirst += genome.GetThirstRate().Value * Time.deltaTime;
       resourceBar.SetValue(Thirst);
+
       if (IsDrinking)
       {
-        Thirst -= 10f * Time.deltaTime; //TODO Add drinkrate
+        Thirst -= 10f * Time.deltaTime; //TODO Add drink rate
         if (Thirst <= 0)
         {
           Thirst = 0;
@@ -49,15 +63,42 @@ namespace Ecosystem
 
     private void OnTriggerEnter(Collider other)
     {
-      if (other.gameObject.CompareTag("Water") && IsThirsty())
+      if (Tags.IsWater(other.gameObject))
       {
-        IsDrinking = true;
+        ++_waterSourcesAvailable;
+      }
+    }
+
+    private void OnTriggerExit(Collider other)
+    {
+      if (Tags.IsWater(other.gameObject))
+      {
+        --_waterSourcesAvailable;
       }
     }
 
     public void StopDrinking()
     {
       IsDrinking = false;
+    }
+
+    public void SetHydration(float hydration)
+    {
+      Thirst = maxThirst - hydration;
+      if (Thirst < 0)
+      {
+        Thirst = 0;
+      }
+      resourceBar.SetValue(Thirst);
+      _isDead = false;
+    }
+
+    public void StartDrinking()
+    {
+      if (CanDrink)
+      {
+        IsDrinking = true;
+      }
     }
 
     internal bool IsThirsty()

@@ -4,7 +4,6 @@
 TagManager:
   serializedVersion: 2
   tags:
-  - Food
   - Water
   - Ground
   - Reproducer
@@ -13,6 +12,10 @@ TagManager:
   - Rabbit
   - Deer
   - Carrot
+  - Terrain
+  - Berry
+  - StaticFood
+  - Meat
   layers:
   - Default
   - TransparentFX
@@ -22,9 +25,17 @@ TagManager:
   - UI
   - Food
   - Wolf
-  - Prey
+  - Rabbit
   - Post-processing
   - Bear
+  - Camera
+  - Deer
+  - Meat
+  - StaticFood
+  - BearCollision
+  - DeerCollision
+  - RabbitCollision
+  - WolfCollision
   - 
   - 
   - 
@@ -35,17 +46,9 @@ TagManager:
   - 
   - 
   - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
+  - Surface
+  - Obstacle
+  - Collider
   m_SortingLayers:
   - name: Default
     uniqueID: 0

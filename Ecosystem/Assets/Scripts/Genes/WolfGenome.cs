@@ -4,34 +4,64 @@ namespace Ecosystem.Genes
 {
   public sealed class WolfGenome : AbstractGenome
   {
-    private static readonly Gene HungerRate = new Gene(3, 0.5f, 10);
-    private static readonly Gene HungerThreshold = new Gene(5, 0, 10);
-    private static readonly Gene ThirstRate = new Gene(2, 0.5f, 10);
-    private static readonly Gene ThirstThreshold = new Gene(5, 0, 10);
-    private static readonly Gene Vision = new Gene(20, 1, 50);
-    private static readonly Gene SpeedFactor = new Gene(15, 1, 25);
-    private static readonly Gene SizeFactor = new Gene(0.5f, 0.1f, 1);
-    private static readonly Gene DesirabilityFactor = new Gene(1, 1, 10);
-    private static readonly Gene GestationPeriod = new Gene(10, 10, 120);
-    private static readonly Gene SexualMaturityTime = new Gene(10, 10, 120);
+    private static float _mutateChance = 0f;
+    private static Dictionary<GeneType, Preset> _preset;
 
-    public static readonly Dictionary<GeneType, Gene> DefaultGenes = new Dictionary<GeneType, Gene>
+    public static readonly Dictionary<GeneType, Preset> DefaultSet = new Dictionary<GeneType, Preset>()
     {
-            {GeneType.HungerRate, HungerRate},
-            {GeneType.HungerThreshold, HungerThreshold},
-            {GeneType.ThirstRate, ThirstRate},
-            {GeneType.ThirstThreshold, ThirstThreshold},
-            {GeneType.Vision, Vision},
-            {GeneType.SpeedFactor, SpeedFactor},
-            {GeneType.SizeFactor, SizeFactor},
-            {GeneType.DesirabilityScore, DesirabilityFactor},
-            {GeneType.GestationPeriod, GestationPeriod},
-            {GeneType.SexualMaturityTime, SexualMaturityTime},
+      {GeneType.HungerRate, new Preset(0.2f, 0.5f, new[] {0.15f})},
+      {GeneType.HungerThreshold, new Preset(30, 40, new[] {30f, 35f, 40f})},
+      {GeneType.ThirstRate, new Preset(0.3f, 0.5f, new[] {0.3f})},
+      {GeneType.ThirstThreshold, new Preset(25, 40, new[] {25f, 35f, 40f})},
+      {GeneType.Vision, new Preset(5, 15, new[] {5f, 7f, 9f, 11f})},
+      {GeneType.Speed, new Preset(2, 4, new[] {2f, 3f, 4f})},
+      {GeneType.GestationPeriod, new Preset(10, 120, new[] {12f, 20f, 50f, 70f, 90f, 110f})},
+      {GeneType.SexualMaturityTime, new Preset(10, 50, new[] {10f, 20f, 30f, 40f, 50f})}
     };
+
+    public static readonly Dictionary<GeneType, Preset> DefaultSingular = new Dictionary<GeneType, Preset>()
+    {
+      {GeneType.HungerRate, new Preset(0.2f, 0.5f, new[] {0.2f})},
+      {GeneType.HungerThreshold, new Preset(30, 40, new[] {35f})},
+      {GeneType.ThirstRate, new Preset(0.3f, 0.5f, new[] {0.4f})},
+      {GeneType.ThirstThreshold, new Preset(25, 40, new[] {30f})},
+      {GeneType.Vision, new Preset(10, 15, new[] {12.5f})},
+      {GeneType.Speed, new Preset(2, 4, new[] {3f})},
+      {GeneType.GestationPeriod, new Preset(10, 120, new[] {12f})},
+      {GeneType.SexualMaturityTime, new Preset(10, 150, new[] {20f})}
+    };
+
+    static WolfGenome()
+    {
+      _preset = DefaultSet;
+    }
 
     protected override void Initialize()
     {
-      Data = GenomeData.Create(DefaultGenes);
+      key = GenerateKey(10);
+      Data = CreateData();
+      ConvertGenesToAttributes();
+    }
+
+    public static void SetPreset(Dictionary<GeneType, Preset> presets, float mutateChance = 0f)
+    {
+      _preset = presets;
+      _mutateChance = mutateChance;
+    }
+
+    protected override Dictionary<GeneType, Preset> GetPresets()
+    {
+      return _preset;
+    }
+
+    protected override float GetClassMutateChance()
+    {
+      return _mutateChance;
+    }
+
+    public override string GetTag()
+    {
+      return "Wolf";
     }
   }
 }

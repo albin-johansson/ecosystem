@@ -1,4 +1,7 @@
+using Ecosystem.Consumer;
 using Ecosystem.Genes;
+using Ecosystem.Spawning;
+using Ecosystem.UI;
 using UnityEngine;
 
 namespace Ecosystem
@@ -32,23 +35,35 @@ namespace Ecosystem
 
     [SerializeField] private AbstractGenome genome;
     [SerializeField] private GameObject prefab;
+    [SerializeField] private string keyToPool;
+    [SerializeField] private GameObject animalModel;
+    [SerializeField] private GenderIcon _genderIcon;
 
     private Transform _directoryOfAnimal;
-    private bool _isPregnant;
-    private bool _isSexuallyMature;
-    private double _gestationPeriod;
-    private double _sexualMaturityTime;
-    private double _pregnancyElapsedTime;
-    private double _maturityElapsedTime;
     private IGenome _mateGenome;
+    private float _gestationPeriod;
+    private float _sexualMaturityTime;
+    private float _pregnancyElapsedTime;
+    private float _maturityElapsedTime;
+    private float _childSaturation;
+    private float _childHydration;
+    private bool _isSexuallyMature;
+    private static readonly Vector3 ChildSize = new Vector3(0.7f, 0.7f, 0.7f);
 
-    public bool CanMate => !_isPregnant && _isSexuallyMature;
+    public bool IsWilling { get; set; }
+
+    public bool IsPregnant { get; private set; }
+
+    public bool IsFertile => !IsPregnant && _isSexuallyMature;
+
+    public bool CanMate => IsFertile && IsWilling;
 
     private void Start()
     {
       _sexualMaturityTime = genome.GetSexualMaturityTime().Value;
       _gestationPeriod = genome.GetGestationPeriod().Value;
       _directoryOfAnimal = gameObject.transform.parent.parent;
+      animalModel.transform.localScale = ChildSize;
     }
 
     private void Update()
@@ -56,59 +71,88 @@ namespace Ecosystem
       if (!_isSexuallyMature)
       {
         _maturityElapsedTime += Time.deltaTime;
-        if (_maturityElapsedTime >= _sexualMaturityTime)
+        if (_maturityElapsedTime >= _sexualMaturityTime && !_isSexuallyMature)
         {
           _isSexuallyMature = true;
+          animalModel.transform.localScale = Vector3.one;
         }
       }
 
-      if (_isPregnant)
+      if (IsPregnant)
       {
+        _childSaturation += genome.Metabolism * AbstractGenome.ChildFoodConsumptionFactor * Time.deltaTime;
+        _childHydration += genome.GetThirstRate().Value * Time.deltaTime;
         _pregnancyElapsedTime += Time.deltaTime;
         if (_pregnancyElapsedTime >= _gestationPeriod)
         {
           GiveBirth();
+          _childSaturation = 0;
+          _childHydration = 0;
         }
       }
+    }
+
+    public bool CompatibleAsParents(GameObject other)
+    {
+      return CanMate && 
+             other.TryGetComponent(out Reproducer otherReproducer) &&
+             otherReproducer.CanMate &&
+             Genomes.CompatibleAsParents(genome, otherReproducer.genome);
     }
 
     private void GiveBirth()
     {
       var currentTransform = transform;
 
-      _isPregnant = false;
+      IsPregnant = false;
       _pregnancyElapsedTime = 0;
 
-      var child = Instantiate(prefab, currentTransform.position, currentTransform.rotation, _directoryOfAnimal);
-      var childGenome = child.GetComponent<AbstractGenome>();
-      childGenome.Initialize(genome, _mateGenome);
+      _genderIcon.SetPregnancyIcon(false);
+
+      var child = ObjectPoolHandler.Instance.Construct(keyToPool);
+      var childTransform = child.transform;
+
+      childTransform.position = currentTransform.position;
+      childTransform.rotation = currentTransform.rotation;
+      childTransform.parent = _directoryOfAnimal;
+      child.SetActive(true);
+
+      if (child.TryGetComponent(out AbstractGenome childGenome))
+      {
+        childGenome.Initialize(genome, _mateGenome);
+      }
+
+      var childConsumer = child.GetComponentInChildren<IConsumer>();
+      var childWaterConsumer = child.GetComponentInChildren<WaterConsumer>();
+      var childMemoryController = child.GetComponentInChildren<MemoryController>();
+
+      childWaterConsumer.SetHydration(_childHydration);
+      childConsumer.SetSaturation(_childSaturation);
+      childMemoryController.ClearMemory();
 
       OnBirth?.Invoke(child);
     }
 
     private void StartPregnancy(IGenome mateGenome)
     {
-      _isPregnant = true;
+      IsPregnant = true;
       _mateGenome = mateGenome;
+
+      _genderIcon.SetPregnancyIcon(true);
 
       OnMating?.Invoke(gameObject.transform.position, prefab.tag, mateGenome, genome);
     }
 
     private void OnTriggerEnter(Collider other)
     {
-      if (other.CompareTag("Reproducer") &&
+      if (!genome.IsMale &&
+          CanMate &&
           other.TryGetComponent(out Reproducer otherReproducer) &&
           Genomes.CompatibleAsParents(genome, otherReproducer.genome) &&
-          otherReproducer.CanMate && CanMate)
+          otherReproducer.CanMate
+      )
       {
-        if (genome.IsMale && !otherReproducer._isPregnant)
-        {
-          otherReproducer.StartPregnancy(genome);
-        }
-        else if (!_isPregnant)
-        {
-          StartPregnancy(otherReproducer.genome);
-        }
+        StartPregnancy(otherReproducer.genome);
       }
     }
   }

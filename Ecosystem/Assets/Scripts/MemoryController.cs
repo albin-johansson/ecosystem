@@ -1,71 +1,67 @@
+using System;
 using System.Collections.Generic;
-using Ecosystem.Util;
 using UnityEngine;
 
 namespace Ecosystem
 {
   public sealed class MemoryController : MonoBehaviour
   {
-    private const int Capacity = 5;
+    private const int MemoryCapacity = 5;
 
-    private List<(AnimalState, Vector3)> _memory;
+    private List<GameObject> _memory;
     private int _nextMemoryLocation;
 
     private void Start()
     {
-      _memory = new List<(AnimalState, Vector3)>(Capacity);
+      _memory = new List<GameObject>(MemoryCapacity);
     }
 
-    //Saves a game objects position and its desire to memory
     public void SaveToMemory(GameObject other)
     {
-      _memory.Insert(_nextMemoryLocation, (GetAnimalState(other), other.gameObject.transform.position));
+      _memory.Insert(_nextMemoryLocation, other.gameObject);
       ++_nextMemoryLocation;
-      if (_nextMemoryLocation >= Capacity)
+      if (_nextMemoryLocation >= MemoryCapacity)
       {
         _nextMemoryLocation = 0;
       }
     }
 
-    private static AnimalState GetAnimalState(GameObject other)
+    public void ClearMemory()
     {
-      if (other.gameObject.layer == Layers.FoodLayer)
+      if (_memory != null)
       {
-        return AnimalState.LookingForFood;
+        _memory.Clear();
+        _nextMemoryLocation = 0;
       }
-      else if (other.gameObject.layer == Layers.PreyLayer)
-      {
-        return AnimalState.LookingForPrey;
-      }
-      else if (other.gameObject.layer == Layers.WaterLayer)
-      {
-        return AnimalState.LookingForWater;
-      }
-
-      return AnimalState.Idle;
     }
 
-    //Get a position of an object with the same Type as the Desire asked for in currentDesire
-    public (bool, Vector3) GetFromMemory(AnimalState currentDesire)
+    /// <summary>
+    ///   Returns the GameObject from memory that is closest one to position,
+    ///   from the objects that return true for the filter function.
+    /// </summary>
+    public GameObject GetClosestInMemory(Func<GameObject, bool> predicate, Vector3 position)
     {
-      int i = 0;
-      foreach (var (desire, position) in _memory)
+      GameObject closest = null;
+      _memory.RemoveAll(o => !o);
+      foreach (var memoryObject in _memory)
       {
-        if (desire == currentDesire)
+        if (!predicate(memoryObject))
         {
-          if (currentDesire != AnimalState.LookingForWater)
-          {
-            //Removes food resource from memory to prevent animal from wandering back to food that has already been consumed. 
-            _memory.Insert(i, (AnimalState.Idle, new Vector3()));
-          }
-
-          return (true, position);
+          continue;
         }
 
-        i++;
+        if (!closest)
+        {
+          closest = memoryObject;
+        }
+        else if (Vector3.Distance(position, closest.transform.position) >
+                 Vector3.Distance(position, memoryObject.transform.position))
+        {
+          closest = memoryObject;
+        }
       }
 
-      return (false, Vector3.zero);
+      return closest;
     }
   }
 }

@@ -6,7 +6,6 @@ namespace Ecosystem.UI
   {
     [SerializeField] private Light sun;
     [SerializeField] private ParticleSystem particles;
-    [SerializeField] private MenuColorManager menuColorManager;
 
     private bool _isNight;
     private float _rotation;
@@ -23,7 +22,7 @@ namespace Ecosystem.UI
     /// it´s location to turn on stars when the sun has passed the horizon.
     /// Possible improvement is to make the sun traverse the sky and be visible all the way to the horizon. 
     /// </summary>
-    void Update()
+    private void Update()
     {
       sun.transform.Rotate(CycleSpeed, 0, 0, Space.Self);
       particles.transform.Rotate(0, 0, CycleSpeed * 0.25f, Space.Self);
@@ -52,26 +51,28 @@ namespace Ecosystem.UI
     /// </summary>
     private void AdjustStarBrightness()
     {
-      if (_isNight && particles.lights.light.intensity < 0.4f)
+      var lights = particles.lights.light;
+      var intensity = lights.intensity;
+      switch (_isNight)
       {
-        particles.lights.light.intensity += 0.01f;
-      }
-      else if (!_isNight && particles.lights.light.intensity > 0)
-      {
-        particles.lights.light.intensity -= 0.01f;
+        case true when intensity < 0.4f:
+          lights.intensity += 0.01f;
+          break;
+
+        case false when intensity > 0:
+          lights.intensity -= 0.01f;
+          break;
       }
     }
 
     private void TransformToNight()
     {
-      menuColorManager.ChangeColor(Color.white);
       particles.Play();
       _isNight = true;
     }
 
     private void TransformToDay()
     {
-      menuColorManager.ChangeColor(Color.black);
       particles.Clear();
       particles.Stop();
       _isNight = false;

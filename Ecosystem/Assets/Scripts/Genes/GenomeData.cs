@@ -10,27 +10,27 @@ namespace Ecosystem.Genes
     internal Gene ThirstRate;
     internal Gene ThirstThreshold;
     internal Gene Vision;
-    internal Gene SpeedFactor;
-    internal Gene SizeFactor;
-    internal Gene DesirabilityScore;
+    internal Gene Speed;
     internal Gene GestationPeriod;
     internal Gene SexualMaturityTime;
 
     internal double MutateChance = 0.05;
     internal readonly bool IsMale = Random.value > 0.5;
 
-    internal static GenomeData Create(Dictionary<GeneType, Gene> initial) => new GenomeData
+    internal static GenomeData Create(Dictionary<GeneType, Gene> initial, float mutateChance = 0.05f)
     {
-            HungerRate = initial[GeneType.HungerRate],
-            HungerThreshold = initial[GeneType.HungerThreshold],
-            ThirstRate = initial[GeneType.ThirstRate],
-            ThirstThreshold = initial[GeneType.ThirstThreshold],
-            Vision = initial[GeneType.Vision],
-            SpeedFactor = initial[GeneType.SpeedFactor],
-            SizeFactor = initial[GeneType.SizeFactor],
-            DesirabilityScore = initial[GeneType.DesirabilityScore],
-            GestationPeriod = initial[GeneType.GestationPeriod],
-            SexualMaturityTime = initial[GeneType.SexualMaturityTime]
-    };
+      return new GenomeData
+      {
+        HungerRate = initial[GeneType.HungerRate],
+        HungerThreshold = initial[GeneType.HungerThreshold],
+        ThirstRate = initial[GeneType.ThirstRate],
+        ThirstThreshold = initial[GeneType.ThirstThreshold],
+        Vision = initial[GeneType.Vision],
+        Speed = initial[GeneType.Speed],
+        GestationPeriod = initial[GeneType.GestationPeriod],
+        SexualMaturityTime = initial[GeneType.SexualMaturityTime],
+        MutateChance = mutateChance
+      };
+    }
   }
 }

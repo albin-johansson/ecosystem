@@ -17,19 +17,13 @@ namespace Ecosystem.Genes
     ///   genes.
     /// </summary>
     /// <returns>the speed value, based on the associated genes.</returns>
-    float Speed { get; }
+    float WalkingSpeed { get; }
 
     /// <summary>
     ///   Returns the metabolism value. This value depends on the hunger rate, and size genes.
     /// </summary>
     /// <returns>the metabolism value, based on the associated genes.</returns>
     float Metabolism { get; }
-
-    /// <summary>
-    ///   Returns the attractiveness value.
-    /// </summary>
-    /// <returns>the attractiveness value, based on the associated genes.</returns>
-    float Attractiveness { get; }
 
     /// <summary>
     ///   Indicates whether or not the specimen is male or not.
@@ -47,11 +41,7 @@ namespace Ecosystem.Genes
 
     Gene GetVision();
 
-    Gene GetSpeedFactor();
-
-    Gene GetSizeFactor();
-
-    Gene GetDesirabilityScore();
+    Gene GetSpeed();
 
     Gene GetGestationPeriod();
 

@@ -1,4 +1,7 @@
-﻿using Ecosystem.Genes;
+using Ecosystem.Spawning;
+using Ecosystem.Consumer;
+using Ecosystem.Genes;
+using Ecosystem.UI;
 using Ecosystem.Util;
 using UnityEngine;
 using UnityEngine.UI;
@@ -25,15 +28,35 @@ namespace Ecosystem.Logging
 
     private readonly LogData _data = new LogData();
     private long _nextUpdateTime;
+    private long _startTime;
 
     private void Start()
     {
+      _startTime = SessionTime.Now();
+      SessionTime.SetSceneStart(_startTime);
+
       // Yes, these are allocated once, it's fine
       DeathHandler.OnDeath += LogDeath;
-      FoodConsumer.OnFoodEaten += LogFoodEaten;
-      PreyConsumer.OnPreyConsumed += LogPreyConsumed;
+
+      // Food consumption
+      NutritionController.OnFoodEaten += LogFoodEaten;
+      StationaryFoodGeneration.OnFoodEaten += LogFoodEaten;
+
+      // Prey consumption
+      WolfConsumer.OnPreyConsumed += LogPreyConsumed;
+      BearConsumer.OnPreyConsumed += LogPreyConsumed;
+
+      // Mating and births
       Reproducer.OnBirth += LogBirth;
       Reproducer.OnMating += LogMating;
+
+      // Food generation
+      StationaryFoodGeneration.OnGeneratedFood += LogFoodGenerated;
+      RadiusPrefabSpawner.OnGeneratedFood += LogFoodGenerated;
+      RayPrefabSpawner.OnGeneratedFood += LogFoodGenerated;
+
+      // Food decay
+      NutritionController.OnFoodDecayed += LogFoodDecayed;
 
       _data.PrepareData();
 
@@ -43,7 +66,7 @@ namespace Ecosystem.Logging
 
     private void Update()
     {
-      var milliseconds = SessionTime.Now();
+      var milliseconds = SessionTime.NowSinceSceneStart();
       if (milliseconds > _nextUpdateTime)
       {
         var seconds = milliseconds / 1_000;
@@ -55,6 +78,11 @@ namespace Ecosystem.Logging
     private void OnApplicationQuit()
     {
       _data.MarkAsDone();
+
+      _data.SetMinFPS(FPSCounter.GetMinimumFPS());
+      _data.SetMaxFPS(FPSCounter.GetMaximumFPS());
+      _data.SetAverageFPS(FPSCounter.GetAverageFPS());
+
       LogFileWriter.Save(_data);
     }
 
@@ -69,7 +97,7 @@ namespace Ecosystem.Logging
     private void LogMating(Vector3 position, string animalTag, IGenome male, IGenome female)
     {
       _data.AddMating(position, animalTag, male, female);
-      
+
       matingCountText.text = _data.MatingCount().ToString();
     }
 
@@ -83,15 +111,25 @@ namespace Ecosystem.Logging
 
     private void LogFoodEaten(GameObject food)
     {
-      _data.AddConsumption(food);
+      _data.AddFoodConsumption(food);
+      foodCountText.text = _data.FoodCount().ToString();
+    }
 
+    private void LogFoodDecayed(GameObject food)
+    {
+      _data.AddFoodDecayed(food);
+      foodCountText.text = _data.FoodCount().ToString();
+    }
+
+    private void LogFoodGenerated(GameObject food)
+    {
+      _data.AddFoodGeneration(food);
       foodCountText.text = _data.FoodCount().ToString();
     }
 
     private void LogPreyConsumed()
     {
       _data.AddPreyConsumption();
-
       preyConsumedCountText.text = _data.PreyConsumedCount().ToString();
     }
   }
