@@ -1,5 +1,4 @@
-﻿using System.Collections.Generic;
-using Ecosystem.Genes;
+﻿using Ecosystem.Genes;
 using UnityEngine;
 using UnityEngine.UI;
 using PresetMap = System.Collections.Generic.Dictionary<Ecosystem.Genes.GeneType, Ecosystem.Genes.Preset>;
@@ -72,6 +71,11 @@ namespace Ecosystem.UI
         ToggleMutateBear(bearMutate);
         AssignChanges();
       });
+
+      rabbitMutate.isOn = false;
+      deerMutate.isOn = false;
+      wolfMutate.isOn = false;
+      bearMutate.isOn = false;
     }
 
     /// <summary>
@@ -112,22 +116,22 @@ namespace Ecosystem.UI
 
     private void ToggleMutateRabbit(Toggle toggle)
     {
-      _rabbitMutateChance = GetMutateChance(toggle);
+      _rabbitMutateChance = GetMutateChance(toggle.isOn);
     }
 
     private void ToggleMutateWolf(Toggle toggle)
     {
-      _wolfMutateChance = GetMutateChance(toggle);
+      _wolfMutateChance = GetMutateChance(toggle.isOn);
     }
 
     private void ToggleMutateDear(Toggle toggle)
     {
-      _deerMutateChance = GetMutateChance(toggle);
+      _deerMutateChance = GetMutateChance(toggle.isOn);
     }
 
     private void ToggleMutateBear(Toggle toggle)
     {
-      _bearMutateChance = GetMutateChance(toggle);
+      _bearMutateChance = GetMutateChance(toggle.isOn);
     }
 
     private static float GetMutateChance(bool isOn)
